@@ -1,0 +1,10 @@
+@use "util" as utils;
+
+$border-radius: (
+  none: 0,
+  small: utils.rem(3),
+  medium: utils.rem(5),
+  large: utils.rem(10),
+  default: utils.rem(2),
+  circular: 50%,
+);

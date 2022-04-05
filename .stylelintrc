@@ -1,0 +1,51 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "rule-empty-line-before": "always",
+    "number-leading-zero": "never",
+    "selector-no-vendor-prefix": null,
+    "property-no-vendor-prefix": null,
+    "color-function-notation": "legacy",
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "use",
+          "function",
+          "if",
+          "each",
+          "include",
+          "mixin",
+          "return",
+          "error",
+          "else"
+        ]
+      }
+    ],
+    "block-closing-brace-newline-after": [
+      "always",
+      {
+        "ignoreAtRules": [
+          "if",
+          "else"
+        ]
+      }
+    ],
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "ignoreAtRules": [
+          "use",
+          "return",
+          "error",
+          "import",
+          "function",
+          "mixin",
+          "include",
+          "if",
+          "else"
+        ]
+      }
+    ]
+  }
+}

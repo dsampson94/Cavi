@@ -3,25 +3,113 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@reduxjs/toolkit": "^1.6.2",
+    "axios": "^0.24.0",
+    "react": "^17.0.2",
+    "react-datepicker": "^4.3.0",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "^5.0.0",
+    "recharts": "^2.1.9",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-saga": "^1.1.3",
+    "sass": "^1.44.0",
+    "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "history": "^5.1.0",
+    "prop-types": "^15.7.2",
+    "react-modal": "^3.14.4",
+    "react-select-event": "^5.3.0",
+    "redux-mock-store": "^1.5.4",
+    "stylelint": "^14.1.0",
+    "stylelint-config-standard-scss": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:hosted": "env-cmd -f .env.hosted npm run build",
     "test": "react-scripts test",
+    "test:ci": "react-scripts test --watchAll=false --coverage",
+    "lint": "npm run lint:js && npm run lint:scss",
+    "lint:js": "eslint src/**/*.{js,jsx}",
+    "lint:scss": "stylelint --config=.stylelintrc src/**/*.scss",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/index.{js,jsx}",
+      "!src/reportWebVitals.js",
+      "!src/setupTests.js",
+      "!src/tools/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!src/**/*.stories.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 75,
+        "functions": 75,
+        "lines": 75,
+        "statements": 75
+      }
+    }
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "semi": "error",
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "comma-spacing": [
+        "error",
+        {
+          "after": true
+        }
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 140
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "no-unused-vars": "error",
+      "no-console": "error",
+      "react/self-closing-comp": "error",
+      "react/jsx-tag-spacing": [
+        "error",
+        {
+          "beforeSelfClosing": "always"
+        }
+      ],
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ]
+    }
   },
   "browserslist": {
     "production": [

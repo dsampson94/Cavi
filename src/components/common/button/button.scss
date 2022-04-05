@@ -1,0 +1,58 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.button {
+  color: map.get(color.$colorMap, white);
+  background-color: map.get(color.$colorMap, pulse-blue);
+  border-radius: map.get(radius.$border-radius, default);
+  box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-2),
+  inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
+  height: util.rem(40);
+  width: 100%;
+
+  label {
+    font-size: util.bu(2);
+  }
+
+  &:hover {
+    background-color: map.get(color.$colorMap, hover-blue);
+  }
+
+  &:active {
+    position: relative;
+    top: 0.8px;
+  }
+
+  & label:hover {
+    cursor: pointer;
+  }
+
+  &--disabled {
+    background-color: map.get(color.$colorMap, disabled);
+
+    &:hover, label:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  &--login {
+    margin: util.rem(10) util.rem(0) util.rem(10) util.rem(0);
+    height: util.rem(50);
+  }
+
+  &--blue {
+    background-color: map.get(color.$colorMap, pulse-blue);
+  }
+
+  &--white {
+    background-color: map.get(color.$colorMap, white);
+
+    label {
+      color: map.get(color.$colorMap, black); ;
+    }
+  }
+}

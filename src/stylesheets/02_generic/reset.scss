@@ -1,0 +1,92 @@
+@use "../00_settings/config" as config;
+@use "../01_tools/mixin" as mixins;
+@use "../00_settings/util" as util;
+@use "../00_settings/color" as color;
+
+html {
+  @include mixins.set-font-family;
+  font-size: config.$base-font-size-px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+svg {
+  display: block;
+}
+
+textarea, select, input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+  background: inherit;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: util.rem(8);
+  height: util.rem(8);
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  border-radius: util.rem(20);
+  background-color: transparent;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  border-radius: util.rem(20);
+}

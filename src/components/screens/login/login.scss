@@ -1,0 +1,21 @@
+@use "sass:map";
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+
+.login {
+  display: flex;
+  flex-direction: column;
+  font-family: Aller, serif;
+  width: 30%;
+
+  &__button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: util.rem(30);
+    border: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
+  }
+}
