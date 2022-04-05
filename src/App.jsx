@@ -22,6 +22,6 @@ const App = () => {
   );
 };
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = () => {};
 
 export default connect(mapStateToProps)(App);
