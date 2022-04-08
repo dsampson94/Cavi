@@ -6,7 +6,6 @@ import { removeSystemNotice } from './redux/actions/system.action';
 
 import SnackBar from './components/common/snack-bar/SnackBar';
 import AuthContainer from './routes/auth/Auth.container';
-import RecommendationContainer from './routes/recommendation/Recommendation.container';
 import Spinner from './components/common/spinner/Spinner';
 
 const App = ({ notices, dispatch, spinnerText }) => {
@@ -23,7 +22,6 @@ const App = ({ notices, dispatch, spinnerText }) => {
   return (
     <div className="app" style={ style }>
       <Route path="/" component={ AuthContainer } />
-      <Route path="/recommendation" component={ RecommendationContainer } />
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
       <Spinner centered spinnerText={ spinnerText } />
     </div>
