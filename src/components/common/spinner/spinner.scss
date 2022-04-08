@@ -1,0 +1,230 @@
+@use "sass:map";
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+
+.spinner {
+
+  &__overlay {
+    position: fixed;
+    z-index: 99;
+    background-color: map.get(color.$colorMap, grey);
+    opacity: 0.1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &__container {
+    position: absolute;
+    width: util.rem(100);
+    background-color: map.get(color.$colorMap, white);
+    box-shadow: util.rem(0) util.rem(0) util.rem(15) util.rem(15) map.get(color.$colorMap, white);
+    border-radius: map.get(radius.$border-radius, spinner);
+    border: util.rem(1) solid map.get(color.$colorMap, white);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(map.get(color.$colorMap, white)), to(transparent));
+    background-image: -webkit-linear-gradient(map.get(color.$colorMap, white), transparent);
+    background-image: -moz-linear-gradient(map.get(color.$colorMap, white), transparent),
+    -moz-linear-gradient(map.get(color.$colorMap, white), transparent);
+    background-image: -o-linear-gradient(map.get(color.$colorMap, white), transparent),
+    -o-linear-gradient(map.get(color.$colorMap, white), transparent);
+    background-image: linear-gradient(map.get(color.$colorMap, white), transparent),
+    linear-gradient(map.get(color.$colorMap, white), transparent);
+    -webkit-animation: spinnerFadeIn 0.3s;
+    -moz-animation: spinnerFadeIn 0.3s;
+    -ms-animation: spinnerFadeIn 0.3s;
+    -o-animation: spinnerFadeIn 0.3s;
+    animation: spinnerFadeIn 0.3s;
+    line-height: 100%;
+
+    &--content {
+      top: 45%;
+      left: 55%;
+    }
+
+    &--centered {
+      top: 40%;
+      left: 41%;
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        top: 40%;
+        left: 44.6%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        top: 40%;
+        left: 45.8%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        top: 40%;
+        left: 46.6%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        top: 40%;
+        left: 47.3%;
+      }
+    }
+  }
+
+  &__ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: util.rem(100);
+    height: util.rem(100);
+  }
+
+  &__ring div {
+    position: absolute;
+    width: util.rem(80);
+    height: util.rem(80);
+    border: util.rem(15) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: 50%;
+    animation: spinner__ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: map.get(color.$colorMap, pulse-blue) map.get(color.$colorMap, pulse-blue) map.get(color.$colorMap, tertiary-orange) map.get(color.$colorMap, tertiary-orange);
+  }
+
+  &__ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  &__ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  &__ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+
+  @keyframes spinner__ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120%;
+    font-weight: 700;
+    color: map.get(color.$colorMap, greyish);
+    margin-left: 10%
+  }
+
+  @keyframes overlayFadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.2;
+    }
+  }
+
+  @-moz-keyframes overlayFadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.2;
+    }
+  }
+
+  @-webkit-keyframes overlayFadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.2;
+    }
+  }
+
+  @-ms-keyframes overlayFadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes overlayFadeOut {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-moz-keyframes overlayFadeOut {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes overlayFadeOut {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-ms-keyframes overlayFadeOut {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes spinnerFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes spinnerFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes spinnerFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes spinnerFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

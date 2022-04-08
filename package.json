@@ -7,6 +7,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@redux-saga/core": "^1.1.3",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.24.0",
     "react": "^17.0.2",
@@ -95,8 +96,8 @@
         "error",
         "always"
       ],
-      "no-unused-vars": "error",
-      "no-console": "error",
+      "no-unused-vars": "warn",
+      "no-console": 0,
       "react/self-closing-comp": "error",
       "react/jsx-tag-spacing": [
         "error",

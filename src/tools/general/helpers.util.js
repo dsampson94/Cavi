@@ -11,14 +11,34 @@
  * getClassNames('button', { hollow: true })
  * returns 'button button--hollow'
  */
-export function getClassNames(baseClassName, modifiers = {}) {
+export const getClassNames = (baseClassName, modifiers = {}) => {
   const classes = [baseClassName];
   Object.entries(modifiers).forEach(([name, active]) => {
     if (!active) return;
     classes.push(`${ baseClassName }--${ name }`);
   });
   return classes.join(' ');
-}
+};
+
+export const toBase64String = (url, callback) => {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    };
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+};
+
+export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;
+
+export const isEmptyStr = (value) => !value || value.trim().length === 0;
+
+export const isUndefined = (value) => typeof value === 'undefined';
 
 export const noOp = () => {
 };

@@ -8,8 +8,11 @@
 .login {
   display: flex;
   flex-direction: column;
+  padding-top: util.rem(80);
   font-family: Aller, serif;
-  width: 30%;
+  max-width: util.rem(550);
+  min-width: util.rem(320);
+  width: 40%;
 
   &__button-group {
     display: flex;

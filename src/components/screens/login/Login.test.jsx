@@ -1,0 +1,71 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+
+import { createMemoryHistory } from 'history';
+
+import { noOp } from '../../../tools/general/helpers.util';
+
+import Login from './Login';
+
+describe('Login Screen', () => {
+
+  const history = createMemoryHistory();
+
+  const setup = (mockLoginFn = noOp) => {
+    return render(
+      <Router history={ history }>
+        <Login onLoginClick={ mockLoginFn } />
+      </Router>
+    );
+  };
+
+  test('should render the login screen', () => {
+    const { container } = setup();
+
+    const usernameInput = container.querySelectorAll('.input__wrapper input')[0];
+    expect(usernameInput).toBeInTheDocument();
+
+    const passwordInput = container.querySelectorAll('.input__wrapper input')[1];
+    expect(passwordInput).toBeInTheDocument();
+
+    const usernameText = screen.getByText('Username:');
+    expect(usernameText).toBeInTheDocument();
+
+    const passwordText = screen.getByText('Password:');
+    expect(passwordText).toBeInTheDocument();
+
+    const loginButton = screen.getByText('Log in');
+    expect(loginButton).toBeInTheDocument();
+
+    const logOutButton = screen.getByText('Log out of Pulse');
+    expect(logOutButton).toBeInTheDocument();
+
+    const EnglishButton = screen.getByText('English');
+    expect(EnglishButton).toBeInTheDocument();
+
+    const spanishButton = screen.getByText('Spanish');
+    expect(spanishButton).toBeInTheDocument();
+
+    const frenchButton = screen.getByText('French');
+    expect(frenchButton).toBeInTheDocument();
+  });
+
+  test('should call login function with values', () => {
+    const mockLoginFn = jest.fn();
+
+    const { container, getByText } = setup(mockLoginFn);
+
+    const usernameInput = container.querySelectorAll('.input__wrapper input')[0];
+    expect(usernameInput).toBeInTheDocument();
+    fireEvent.change(usernameInput, { target: { value: 'testUsername' } });
+
+    const passwordInput = container.querySelectorAll('.input__wrapper input')[1];
+    expect(passwordInput).toBeInTheDocument();
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    const loginBtn = getByText('Log in');
+    fireEvent.click(loginBtn);
+
+    expect(mockLoginFn).toHaveBeenCalledWith({ user: { username: 'testUsername', password: 'testPassword' } });
+  });
+});

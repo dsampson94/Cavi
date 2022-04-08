@@ -1,0 +1,78 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/00_settings/color" as colors;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/00_settings/util" as utils;
+@use "../../../stylesheets/01_tools/mixin" as mixins;
+
+$success-color: map.get(colors.$colorMap, success);
+$error-color: map.get(colors.$colorMap, error);
+$info-color: map.get(colors.$colorMap, info);
+
+@keyframes enter-snack {
+
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes leave-snack {
+
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.snack {
+  padding: utils.bu(1.5);
+  background-color: map.get(colors.$colorMap, white);
+  border-radius: map.get(radius.$border-radius, small);
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    padding: utils.rem(23);
+  }
+
+  &--entering {
+    animation: enter-snack .2s;
+  }
+
+  &--closing {
+    animation: leave-snack .2s;
+    animation-fill-mode: forwards;
+  }
+
+  &__title > p {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &--success {
+    border: utils.rem(1) solid $success-color;
+    color: $success-color;
+  }
+
+  &--critical {
+    border: utils.rem(1) solid $error-color;
+    color: $error-color;
+  }
+
+  &--info {
+    border: utils.rem(1) solid $info-color;
+    color: $info-color;
+  }
+
+  & + & {
+    margin-top: utils.bu(1);
+  }
+}

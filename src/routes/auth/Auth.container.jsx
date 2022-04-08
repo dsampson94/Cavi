@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import LoginContainer from '../../components/screens/login/login.container';
+import LoginContainer from '../../components/screens/login/Login.container';
 
 const AuthContainer = () => (
   <Switch>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, func, string } from 'prop-types';
 
-import { getClassNames } from '../../../tools/general/helpers';
+import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './button.scss';
 

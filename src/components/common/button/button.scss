@@ -9,7 +9,7 @@
   color: map.get(color.$colorMap, white);
   background-color: map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
-  box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-2),
+  box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, pulse-blue),
   inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
   height: util.rem(40);
   width: 100%;

@@ -15,8 +15,12 @@ import App from './App';
 
 import './stylesheets/app.scss';
 
+import authSaga from './redux/sagas/auth.saga';
+
 const sagaMiddleware = createSagaMiddleWare();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+sagaMiddleware.run(authSaga);
 
 ReactDOM.render(
   <React.StrictMode>
