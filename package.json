@@ -42,7 +42,6 @@
     "test": "react-scripts test",
     "test:ci": "react-scripts test --watchAll=false --coverage",
     "lint": "npm run lint:js && npm run lint:scss",
-    "lint:js": "eslint src/**/*.{js,jsx}",
     "lint:scss": "stylelint --config=.stylelintrc src/**/*.scss",
     "eject": "react-scripts eject"
   },
