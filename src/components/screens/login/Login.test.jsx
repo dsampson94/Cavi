@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 
@@ -53,7 +54,7 @@ describe('Login Screen', () => {
   test('should call login function with values', () => {
     const mockLoginFn = jest.fn();
 
-    const { container, getByText } = setup(mockLoginFn);
+    const { container } = setup(mockLoginFn);
 
     const usernameInput = container.querySelectorAll('.input__wrapper input')[0];
     expect(usernameInput).toBeInTheDocument();
@@ -63,7 +64,7 @@ describe('Login Screen', () => {
     expect(passwordInput).toBeInTheDocument();
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
 
-    const loginBtn = getByText('Log in');
+    const loginBtn = screen.getByText('Log in');
     fireEvent.click(loginBtn);
 
     expect(mockLoginFn).toHaveBeenCalledWith({ user: { username: 'testUsername', password: 'testPassword' } });
