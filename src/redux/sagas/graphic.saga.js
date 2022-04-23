@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { all, call, takeLatest } from '@redux-saga/core/effects';
 
-import { saveGraphicOneToLocalStorage } from '../../tools/general/graphic.util';
+import { saveGraphicOneToLocalStorage } from '../../tools/storage/localStorage';
 
 import { responseStatus } from '../endpoints';
 import { getRetrieveGraphicOneRequest } from '../endpoints/graphic.endpoints';

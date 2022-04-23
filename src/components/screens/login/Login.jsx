@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
-import TextInput from '../../common/input/TextInput';
+import { func } from 'prop-types';
+
+import TextInput from '../../common/input/text/TextInput';
 import Button from '../../common/button/Button';
+import Graphic from '../../common/graphic/Graphic';
 
 import './login.scss';
-import { func } from 'prop-types';
-import Graphic from '../../common/graphic/Graphic';
+import background from '../../../tools/images/irricheckbackground.jpg';
 
 const Login = ({ onLoginClick, graphic }) => {
 
@@ -20,31 +22,43 @@ const Login = ({ onLoginClick, graphic }) => {
   });
 
   return (
-    <div className="login">
-      <Graphic login graphic={ graphic } />
-      <TextInput label={ 'Username:' }
-                 onChange={ ({ target }) => setUsername(target.value) }
-                 login />
+    <div style={ style }>
+      <div className="login">
+        <Graphic login graphic={ graphic } />
+        <TextInput label={ 'Username:' }
+                   onChange={ ({ target }) => setUsername(target.value) }
+                   login />
 
-      <TextInput label={ 'Password:' }
-                 type={ 'password' }
-                 onChange={ ({ target }) => setPassword(target.value) }
-                 login />
+        <TextInput label={ 'Password:' }
+                   type={ 'password' }
+                   onChange={ ({ target }) => setPassword(target.value) }
+                   login />
 
-      <Button label={ 'Log in' }
-              type="submit"
-              onClick={ handleLoginClick }
-              login />
+        <Button label={ 'Log in' }
+                type={ 'submit' }
+                onClick={ handleLoginClick }
+                login />
 
-      <Button label={ 'Log out of Pulse' } />
+        <Button label={ 'Log out of Pulse' } />
 
-      <div className="login__button-group">
-        <Button label={ 'English' } flex white />
-        <Button label={ 'Spanish' } flex white />
-        <Button label={ 'French' } flex white />
+        <div className="login__button-group">
+          <Button label={ 'English' } flex white />
+          <Button label={ 'Spanish' } flex white />
+          <Button label={ 'French' } flex white />
+        </div>
       </div>
     </div>
   );
+};
+
+const style = {
+  display: 'flex',
+  height: '100vh',
+  width: '100%',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundImage: `url(${ background })`
 };
 
 Login.defaultProps = {};

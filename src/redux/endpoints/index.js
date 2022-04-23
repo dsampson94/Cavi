@@ -28,10 +28,10 @@ export const getHttpGetOptions = (params = null, headers = null) => ({
   headers
 });
 
-export const getHttpGetPNGOptions = (headers = null, params = null) => ({
+export const getHttpGetPNGOptions = (params = null, headers = null) => ({
   method: GET,
   responseType: 'arraybuffer',
-  headers,
-  params
+  params,
+  headers
 });
 

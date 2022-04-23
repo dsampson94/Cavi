@@ -23,10 +23,10 @@ describe('Login Screen', () => {
   test('should render the login screen', () => {
     const { container } = setup();
 
-    const usernameInput = container.querySelectorAll('.input__wrapper input')[0];
+    const usernameInput = container.querySelectorAll('input')[0];
     expect(usernameInput).toBeInTheDocument();
 
-    const passwordInput = container.querySelectorAll('.input__wrapper input')[1];
+    const passwordInput = container.querySelectorAll('input')[1];
     expect(passwordInput).toBeInTheDocument();
 
     const usernameText = screen.getByText('Username:');
@@ -56,11 +56,11 @@ describe('Login Screen', () => {
 
     const { container } = setup(mockLoginFn);
 
-    const usernameInput = container.querySelectorAll('.input__wrapper input')[0];
+    const usernameInput = container.querySelectorAll('input')[0];
     expect(usernameInput).toBeInTheDocument();
     fireEvent.change(usernameInput, { target: { value: 'testUsername' } });
 
-    const passwordInput = container.querySelectorAll('.input__wrapper input')[1];
+    const passwordInput = container.querySelectorAll('input')[1];
     expect(passwordInput).toBeInTheDocument();
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
 

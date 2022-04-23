@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { string } from 'prop-types';
+import { bool, string } from 'prop-types';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 
@@ -23,18 +23,21 @@ const Spinner = ({ spinnerText, content, centered }) => {
           <div className="spinner__ring-4" />
         </div>
         <div className="spinner__text">{ spinnerText }</div>
-
       </div>
     </div>
   );
 };
 
 Spinner.defaultProps = {
-  spinnerText: undefined
+  spinnerText: undefined,
+  content: undefined,
+  centered: undefined
 };
 
 Spinner.propTypes = {
-  spinnerText: string
+  spinnerText: string,
+  content: bool,
+  centered: bool
 };
 
 export default Spinner;

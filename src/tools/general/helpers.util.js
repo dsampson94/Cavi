@@ -34,9 +34,30 @@ export const toBase64String = (url, callback) => {
   xhr.send();
 };
 
+export const removeCamelCase = (key) => {
+  let copyOfKey = key.repeat(1);
+  copyOfKey = copyOfKey.replace(/([A-Z]+)/g, ' $1').replace(/([A-Z][a-z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+  return copyOfKey;
+};
+
+export const deepClone = (object) => {
+  if (!object) return;
+  return JSON.parse(JSON.stringify(object));
+};
+
+export const objectToBase64 = (object) => {
+  if (!object) return;
+  return btoa(JSON.stringify(object));
+};
+
+export const base64ToObject = (base64String) => {
+  if (!base64String) return;
+  return JSON.parse(atob(base64String));
+};
+
 export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;
 
-export const isEmptyStr = (value) => !value || value.trim().length === 0;
+export const isEmpty = (value) => !value || value.length === 0;
 
 export const isUndefined = (value) => typeof value === 'undefined';
 

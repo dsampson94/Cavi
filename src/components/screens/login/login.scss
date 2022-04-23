@@ -8,17 +8,22 @@
 .login {
   display: flex;
   flex-direction: column;
-  padding-top: util.rem(80);
+  padding-bottom: util.rem(160);
   font-family: Aller, serif;
   max-width: util.rem(550);
   min-width: util.rem(320);
   width: 40%;
 
+  @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+    padding-top: util.rem(0);
+    padding-bottom: util.rem(0);
+  }
+
   &__button-group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: util.rem(30);
+    margin-top: util.rem(18);
     border: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
   }
 }

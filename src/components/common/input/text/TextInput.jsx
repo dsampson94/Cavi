@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bool, func, string } from 'prop-types';
 
-import { getClassNames, noOp } from '../../../tools/general/helpers.util';
+import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
 
 import './text-input.scss';
 
@@ -14,25 +14,24 @@ const TextInput = ({
                      placeholder,
                      onChange,
                      disabled,
-                     login
+                     login,
+                     sidebar
                    }) => {
 
   return (
-    <div className={ getClassNames('input', { disabled }) }>
+    <div className={ getClassNames('input', { disabled, login }) }>
 
-      <div className={ getClassNames('input__label-container', { login }) }>
+      <div className={ getClassNames('input__label-container', { login, sidebar }) }>
         <label>{ label }</label>
       </div>
 
-      <div className={ 'input__wrapper' }>
-        <input name={ name }
-               value={ value }
-               type={ type }
-               placeholder={ placeholder }
-               onChange={ onChange }
-               disabled={ disabled }
-               className={ getClassNames('input__wrapper', { login }) } />
-      </div>
+      <input name={ name }
+             value={ value }
+             type={ type }
+             placeholder={ placeholder }
+             onChange={ onChange }
+             disabled={ disabled }
+             className={ getClassNames('input__input', { login, sidebar }) } />
 
     </div>
   );
@@ -46,7 +45,8 @@ TextInput.defaultProps = {
   placeholder: undefined,
   onChange: noOp,
   disabled: false,
-  login: false
+  login: false,
+  sidebar: false
 };
 
 TextInput.propTypes = {
@@ -57,7 +57,8 @@ TextInput.propTypes = {
   placeholder: string,
   onChange: func,
   disabled: bool,
-  login: bool
+  login: bool,
+  sidebar: bool
 };
 
 export default TextInput;

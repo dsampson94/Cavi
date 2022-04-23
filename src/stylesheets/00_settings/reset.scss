@@ -1,0 +1,178 @@
+@use "sass:map" as map;
+@use "../00_settings/config" as config;
+@use "../01_tools/mixin" as mixins;
+@use "../00_settings/util" as util;
+@use "../00_settings/color" as color;
+
+html {
+  @include mixins.set-font-family;
+  font-size: config.$base-font-size-px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body.light-mode {
+  transition: 0.7s;
+
+  .recommendation-overview {
+    transition: 0.7s;
+  }
+
+  .input__input {
+    transition: 1s;
+    background-color: map.get(color.$colorMap, white);
+  }
+
+  .input__wrapper input {
+    transition: 1s;
+  }
+
+  .table__header-row {
+    transition: 0.7s;
+    background-color: map.get(color.$colorMap, white);
+  }
+}
+
+body.dark-mode {
+  transition: 0.7s;
+  color: map.get(color.$colorMap, white);
+  background-color: map.get(color.$colorMap, dark-mode-grey);
+
+  .side-bar {
+  }
+
+  .table__body__row__td-upper--deficit {
+    color: map.get(color.$colorMap, black);
+  }
+
+  .table__body__row__td-lower--deficit {
+    color: map.get(color.$colorMap, black);
+  }
+
+  .table__header-row {
+    transition: 0.7s;
+    background-color: map.get(color.$colorMap, dark-mode-grey);
+  }
+
+  .input__input {
+    transition: 1s;
+    background-color: map.get(color.$colorMap, grey);
+  }
+
+  .input__label-container--login {
+    color: map.get(color.$colorMap, white);
+  }
+
+  .snack {
+    background-color: map.get(color.$colorMap, dark-mode-grey);
+  }
+
+  .recommendation-overview {
+    transition: 0.6s;
+    background-color: map.get(color.$colorMap, shadow);
+  }
+
+  .input__wrapper input {
+    transition: 0.6s;
+    border: util.rem(2) solid map.get(color.$colorMap, black-alt);
+    background-color: map.get(color.$colorMap, shadow);
+  }
+
+  .input__wrapper input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 util.rem(100) map.get(color.$colorMap, grey);
+  }
+
+  .login__button-group button {
+    transition: 0.6s;
+    background-color: map.get(color.$colorMap, pulse-blue);
+  }
+
+  .button--white {
+    background-color: map.get(color.$colorMap, pulse-blue);
+
+    & label {
+      color: map.get(color.$colorMap, white);
+    }
+  }
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+svg {
+  display: block;
+}
+
+textarea, select, input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+  background: inherit;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: util.rem(8);
+  height: util.rem(8);
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  border-radius: util.rem(20);
+  background-color: transparent;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  border-radius: util.rem(20);
+}

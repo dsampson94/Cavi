@@ -1,0 +1,125 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.table {
+  display: table;
+  border-collapse: collapse;
+  margin: util.rem(5);
+
+  &__header {
+    position: sticky;
+    border: util.rem(2) solid map.get(color.$colorMap, primary);
+    background-color: map.get(color.$colorMap, white);;
+    top: 0;
+
+    &-row {
+
+      th {
+        padding: 0 util.rem(8);
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      &__text {
+        font-size: util.rem(12);
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          font-size: util.rem(16);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          font-size: util.rem(20);
+        }
+      }
+    }
+  }
+
+  &__body {
+    flex-direction: column;
+
+    &__row {
+      border-bottom: util.rem(1) solid map.get(color.$colorMap, primary);
+
+      td {
+        text-align: center;
+        padding: util.rem(0);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: util.rem(8);
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          height: util.rem(30);
+          font-size: util.rem(10);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+          height: util.rem(35);
+          font-size: util.rem(12);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+          height: util.rem(45);
+          font-size: util.rem(16);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          height: util.rem(48);
+          font-size: util.rem(18);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          height: util.rem(50);
+          font-size: util.rem(20);
+        }
+      }
+
+      &__td {
+
+        &-container {
+          display: flex;
+          flex-direction: column;
+          margin-left: util.rem(2);
+          height: 100%;
+
+          &--centered {
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        &-upper {
+          display: flex;
+          height: 50%;
+
+          &--deficit {
+            font-weight: 800;
+            margin-top: util.rem(3);
+            border-top-left-radius: map.get(radius.$border-radius, medium);
+            border-top-right-radius: map.get(radius.$border-radius, medium);
+            text-align: center;
+          }
+        }
+
+        &-lower {
+          display: flex;
+          height: 50%;
+
+          &--deficit {
+            font-weight: 800;
+            text-align: center;
+            border-bottom-left-radius: map.get(radius.$border-radius, medium);
+            border-bottom-right-radius: map.get(radius.$border-radius, medium);
+          }
+        }
+      }
+
+      &:hover {
+        cursor: pointer
+      }
+    }
+  }
+}

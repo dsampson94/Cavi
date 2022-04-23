@@ -6,8 +6,26 @@
 @use "../../../stylesheets/00_settings/config" as config;
 
 .graphic {
+  display: flex;
+  justify-content: center;
 
   &__img {
     max-width: 100%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      height: util.rem(70);
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+      height: util.rem(80);
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+      height: util.rem(130);
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+      height: util.rem(160);
+    }
   }
 }

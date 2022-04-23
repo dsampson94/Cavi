@@ -6,16 +6,18 @@
 @use "../../../stylesheets/00_settings/config" as config;
 
 .button {
+  white-space: nowrap;
   color: map.get(color.$colorMap, white);
   background-color: map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
   box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, pulse-blue),
   inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
-  height: util.rem(40);
+  height: util.rem(30);
+  padding: util.rem(2);
   width: 100%;
 
   label {
-    font-size: util.bu(2);
+    font-size: util.bu(1.3);
   }
 
   &:hover {
@@ -42,6 +44,10 @@
   &--login {
     margin: util.rem(10) util.rem(0) util.rem(10) util.rem(0);
     height: util.rem(50);
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      height: util.rem(45);
+    }
   }
 
   &--blue {
@@ -52,7 +58,21 @@
     background-color: map.get(color.$colorMap, white);
 
     label {
-      color: map.get(color.$colorMap, black); ;
+      color: map.get(color.$colorMap, black);
+    }
+  }
+
+  &--icon {
+    padding: util.rem(1);
+    width: 60%;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    label {
+      color: map.get(color.$colorMap, black);
     }
   }
 }

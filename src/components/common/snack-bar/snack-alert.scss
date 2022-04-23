@@ -9,28 +9,6 @@ $success-color: map.get(colors.$colorMap, success);
 $error-color: map.get(colors.$colorMap, error);
 $info-color: map.get(colors.$colorMap, info);
 
-@keyframes enter-snack {
-
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(0%);
-  }
-}
-
-@keyframes leave-snack {
-
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 .snack {
   padding: utils.bu(1.5);
   background-color: map.get(colors.$colorMap, white);
@@ -74,5 +52,27 @@ $info-color: map.get(colors.$colorMap, info);
 
   & + & {
     margin-top: utils.bu(1);
+  }
+}
+
+@keyframes enter-snack {
+
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes leave-snack {
+
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
   }
 }

@@ -1,0 +1,70 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  border: util.rem(1) solid;
+  transition: 0.4s;
+  height: 100%;
+  width: 0;
+
+  &--show {
+    width: 30%;
+  }
+
+  &__lower-container {
+    display: flex;
+    white-space: nowrap;
+    flex-direction: column;
+    margin-left: util.rem(5);
+    height: 100%;
+
+    &__client-lists {
+      height: 100%;
+
+      & h5 {
+        color: map.get(color.$colorMap, secondary-blue-3);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    border-top: util.rem(1) solid;
+    border-bottom: util.rem(1) solid;
+    padding: util.rem(2) util.rem(0) util.rem(2) util.rem(2);
+    height: 96%;
+    width: 100%;
+
+    &__item {
+    }
+
+    &__item-header {
+      font-weight: bold;
+      border-bottom: util.rem(1) solid;
+    }
+
+    &__item-subheader {
+      display: flex;
+      flex-direction: row;
+      font-size: util.rem(13);
+      height: util.rem(20);
+      cursor: pointer;
+
+      & p {
+        min-width: 88%;
+      }
+    }
+  }
+
+  &__lower-button {
+    display: flex;
+    padding: util.rem(0) util.rem(5) util.rem(8) util.rem(5);
+  }
+}

@@ -2,8 +2,8 @@ import axios from 'axios';
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import { SNACK_CRITICAL, SNACK_SUCCESS, SPINNER_TEXT } from '../../tools/general/system-variables.util';
-import { saveUserAccountToLocalStorage } from '../../tools/auth/auth.util';
 
+import { saveUserToLocalStorage } from '../../tools/storage/localStorage';
 import { getResponseMetaData, responseStatus } from '../endpoints/index';
 import { getLoginRequest } from '../endpoints/auth.endpoints';
 
@@ -36,7 +36,7 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
         yield put(addSystemNotice(responseMessage, responseColor, SNACK_SUCCESS));
         delete data.success; delete data.snackbartext; delete data.snackbarcolor;
         yield put({ type: SET_LOGGED_IN_USER, user: data });
-        yield call(saveUserAccountToLocalStorage, data);
+        yield call(saveUserToLocalStorage, data);
 
         if (onSuccess) {
           yield call(onSuccess, data);

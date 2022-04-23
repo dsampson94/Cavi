@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { retrieveGraphicOneFromLocalStorage } from '../../../tools/general/graphic.util';
+import { retrieveGraphicOneFromLocalStorage, saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestLogin } from '../../../redux/actions/auth.action';
 import { requestRetrieveGraphicOne } from '../../../redux/actions/graphic.action';
@@ -21,9 +21,12 @@ const LoginContainer = ({ dispatch, spinnerText, errors }) => {
     }
   }, [dispatch, graphicOne]);
 
-  const onLoginSuccess = () => history.push('/');
+  const onLoginSuccess = (user) => {
+    saveUserLoginToLocalStorage(user);
+    history.push('/recommendation/overview');
+  };
 
-  const onLoginClick = (user) => dispatch(requestLogin(user, onLoginSuccess));
+  const onLoginClick = (user) => dispatch(requestLogin(user, () => onLoginSuccess(user)));
 
   return <Login graphic={ graphicOne }
                 onLoginClick={ onLoginClick }

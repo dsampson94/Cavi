@@ -1,0 +1,39 @@
+@use "sass:map";
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+
+  &__screen {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      height: 81%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+      height: 89%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+      height: 79%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+      height: 85.5%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+      height: 88.8%;
+    }
+  }
+}

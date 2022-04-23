@@ -6,7 +6,7 @@ import SnackAlert from './SnackAlert';
 
 import './snack-bar.scss';
 
-const NOTICE_REMOVAL_TIMEOUT = 5000;
+const NOTICE_REMOVAL_TIMEOUT = 1600;
 
 class SnackBar extends Component {
   constructor(props) {

@@ -17,3 +17,16 @@ export const setSpinnerText = (spinnerText) => ({
   type: SET_SPINNER_TEXT,
   spinnerText
 });
+
+export const SET_THEME = '[SYSTEM_STORE] Set theme';
+export const setTheme = (theme) => ({
+  type: SET_THEME,
+  theme
+});
+
+export const GET_THEME = '[SYSTEM_STORE] Get theme';
+export const getTheme = (onSuccess, onError) => ({
+  type: GET_THEME,
+  onSuccess,
+  onError
+});

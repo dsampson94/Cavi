@@ -2,22 +2,33 @@
 @use "../../../stylesheets/00_settings/util" as utils;
 @use "../../../stylesheets/01_tools/mixin" as mixins;
 
-$header-height: utils.rem(100);
-$snack-bar-width: utils.rem(350);
-$snack-bar-vert-offset: utils.bu(-1.5);
-
 .snack-bar {
   min-width: utils.rem(300);
   max-width: utils.rem(300);
   position: fixed;
   top: utils.rem(50);
   right: utils.bu(.5);
-  transform: translateY($snack-bar-vert-offset);
+  transform: translateY(utils.bu(1));
   z-index: 999;
 
   @include mixins.breakpoint(map-get(config.$breakpoints, small)) {
-    top: $header-height;
-    min-width: $snack-bar-width;
+    top: utils.rem(100);
+    min-width: utils.rem(350);
+    max-width: utils.rem(450);
+    right: utils.bu(1.5);
+  }
+
+  @include mixins.breakpoint(map-get(config.$breakpoints, large)) {
+    transform: translateY(utils.bu(4));
+  }
+
+  @include mixins.breakpoint(map-get(config.$breakpoints, x-large)) {
+    transform: translateY(utils.bu(5));
+  }
+
+  @include mixins.breakpoint(map-get(config.$breakpoints, small)) {
+    top: utils.rem(100);
+    min-width: utils.rem(350);
     max-width: utils.rem(450);
     right: utils.bu(1.5);
   }

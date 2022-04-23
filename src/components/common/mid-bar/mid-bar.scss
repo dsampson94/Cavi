@@ -1,0 +1,27 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.mid-bar {
+  display: flex;
+  flex-direction: row;
+  height: util.rem(58);
+  background-color: #f9b959;
+
+  &__nav-link {
+    display: flex;
+    flex-direction: row;
+    background-color: map.get(color.$colorMap, white);
+
+    &--active {
+      background-color: map.get(color.$colorMap, pulse-blue);
+    }
+  }
+
+  & button {
+    height: util.rem(58);
+  }
+}

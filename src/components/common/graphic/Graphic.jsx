@@ -10,7 +10,7 @@ const Graphic = ({ graphic, login }) => {
 
   return (
     <div className={ getClassNames('graphic', { login }) }>
-      <img src={ graphic } alt="Pulse Logo" className={'graphic__img'}  />
+      <img src={ graphic } alt={ 'Pulse Logo' } className={ 'graphic__img' } />
     </div>
   );
 };
