@@ -18,6 +18,7 @@ html, body {
 }
 
 body.light-mode {
+  background-color: map.get(color.$colorMap, light-mode-white);
   transition: 0.7s;
 
   .recommendation-overview {
@@ -41,7 +42,7 @@ body.light-mode {
 
 body.dark-mode {
   transition: 0.7s;
-  color: map.get(color.$colorMap, white);
+  color: map.get(color.$colorMap, light-mode-white);
   background-color: map.get(color.$colorMap, dark-mode-grey);
 
   .side-bar {
@@ -97,7 +98,15 @@ body.dark-mode {
     background-color: map.get(color.$colorMap, pulse-blue);
 
     & label {
-      color: map.get(color.$colorMap, white);
+      color: map.get(color.$colorMap, shadow);
+    }
+  }
+
+  .button--blue {
+    background-color: map.get(color.$colorMap, pulse-blue);
+
+    & label {
+      color: map.get(color.$colorMap, shadow);
     }
   }
 }

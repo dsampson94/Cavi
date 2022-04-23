@@ -34,7 +34,7 @@ const SVGIcon = ({
            onMouseLeave={ hoverEnabled ? () => setHover(false) : null }
            width={ width }
            height={ height }
-           fill={ (activeTheme === 'dark') ? 'white' : fill }
+           fill={ (activeTheme === 'dark') ? '#757575' : fill }
            viewBox={ getViewBox(name) }>
         { getPath(name) }
       </svg>

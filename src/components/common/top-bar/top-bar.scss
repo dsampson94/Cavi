@@ -29,8 +29,9 @@
   &__text {
     display: flex;
     align-items: flex-end;
-    margin-bottom: util.rem(20);
-    height: 40%;
+    font-size: util.rem(20);
+    margin-bottom: util.rem(15);
+    height: 60%;
     width: 100%;
   }
 

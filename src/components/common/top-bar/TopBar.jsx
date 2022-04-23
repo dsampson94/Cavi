@@ -15,7 +15,7 @@ const TopBar = ({ showSideBar, setShowSideBar }) => {
     <div className="top-bar">
       <div className="top-bar__left">
         <div className="top-bar__text">
-          <img src={ '/favicon-irricheck.ico' } alt={ 'icon' } height={ 20 } />
+          <img src={ '/favicon-irricheck.ico' } alt={ 'icon' } height={ 30 } />
           IrriCheck Pulse
         </div>
         <div className="top-bar__lower-left">
