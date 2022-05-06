@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import { bool, string } from 'prop-types';
@@ -13,12 +13,8 @@ const SVGIcon = ({
                    width,
                    height,
                    fill,
-                   hoverEnabled,
-                   hoverText,
                    activeTheme
                  }) => {
-
-  const [hover, setHover] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -30,24 +26,20 @@ const SVGIcon = ({
     <div className={ 'svg-icon' }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
-           onMouseEnter={ hoverEnabled ? () => setHover(true) : null }
-           onMouseLeave={ hoverEnabled ? () => setHover(false) : null }
            width={ width }
            height={ height }
            fill={ (activeTheme === 'dark') ? '#757575' : fill }
            viewBox={ getViewBox(name) }>
         { getPath(name) }
       </svg>
-      { hover &&
-        <div className={ 'svg-icon__tooltip' }>
-          { hoverText }
-        </div> }
     </div>
   );
 };
 
 const getViewBox = name => {
   switch (name) {
+    case 'settings_gear':
+      return '-10 0 40 40';
     default:
       return '-6 0 36 24';
   }

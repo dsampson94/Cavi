@@ -6,6 +6,7 @@ import { noOp, removeCamelCase } from '../../../tools/general/helpers.util';
 import { handleColumnHeaderClick, hideColumnHeader } from './table-functions.util';
 
 import SVGIcon from '../../../tools/icons/SVGIcon';
+import ToolTip from '../tool-tip/ToolTip';
 
 import './table.scss';
 
@@ -75,8 +76,9 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
+                  <ToolTip tableData={ value } />
                   <SVGIcon name={ 'warning' }
-                           hoverEnabled />
+                           fill={ '#EE9A94' } />
                 </div>
               </td>;
             }
@@ -84,8 +86,7 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
-                  <SVGIcon name={ 'dropdown' }
-                           hoverEnabled />
+                  <SVGIcon name={ 'dropdown' } />
                 </div>
               </td>;
             }
@@ -93,15 +94,15 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
-                  <SVGIcon name={ 'camera' }
-                           hoverEnabled />
+                  <ToolTip tableData={ value } />
+                  <SVGIcon name={ 'camera' } />
                 </div>
               </td>;
             }
             case 4: {
               return <td onClick={ noOp() }
                          key={ index }>
-                <div className={ 'table__body__row__td-container--centered' }>
+                <div className={ 'table__body__row__td-container--centered-last' }>
                   { value }
                 </div>
               </td>;
@@ -110,8 +111,8 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
-                  <SVGIcon name={ 'pencil' }
-                           hoverEnabled />
+                  <ToolTip tableData={ 'Click to capture irrigation, rainfall or a note' } />
+                  <SVGIcon name={ 'pencil' } />
                 </div>
               </td>;
             }
@@ -119,8 +120,8 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
-                  <SVGIcon name={ 'charts' }
-                           hoverEnabled />
+                  <ToolTip tableData={ 'Quick view' } />
+                  <SVGIcon name={ 'charts' } />
                 </div>
               </td>;
             }
@@ -159,7 +160,15 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                 </div>
               </td>;
             }
-            case [16, 17, 18, 19, 20, 21, 22]: {
+            case 16: {
+              return <td onClick={ noOp() }
+                         key={ index }>
+                <div className={ 'table__body__row__td-container' }>
+                  <ToolTip tableData={ 'Unit:' } />
+                </div>
+              </td>;
+            }
+            case [17, 18, 19, 20, 21, 22]: {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>

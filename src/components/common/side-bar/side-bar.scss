@@ -14,7 +14,7 @@
   width: 0;
 
   &--show {
-    width: 30%;
+    width: 24%;
   }
 
   &__lower-container {
@@ -56,6 +56,10 @@
       font-size: util.rem(13);
       height: util.rem(20);
       cursor: pointer;
+
+      &--selected {
+        background-color: map.get(color.$colorMap, selected-blue);
+      }
 
       & p {
         min-width: 88%;

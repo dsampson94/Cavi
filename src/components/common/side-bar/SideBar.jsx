@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { bool } from 'prop-types';
+import { bool, func } from 'prop-types';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
-import { retrieveUserFromLocalStorage, saveLastSelectedUserToLocalStorage } from '../../../tools/storage/localStorage';
+import {
+  retrieveLastSelectedUserFromLocalStorage,
+  retrieveUserFromLocalStorage,
+  saveLastSelectedUserToLocalStorage
+} from '../../../tools/storage/localStorage';
 
 import { SET_CLIENT_NAME } from '../../../redux/actions/client.action';
 
@@ -15,7 +19,7 @@ import TableSearch from '../table-search/TableSearch';
 
 import './side-bar.scss';
 
-const SideBar = ({ show }) => {
+const SideBar = ({ show, setShowSideBar }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -26,6 +30,7 @@ const SideBar = ({ show }) => {
     dispatch({ type: SET_CLIENT_NAME, groupName, clientName });
     saveLastSelectedUserToLocalStorage({ groupName, clientName });
     history.push('/recommendation/client');
+    setShowSideBar(!show);
   };
 
   const mappedUserData = () => {
@@ -43,14 +48,17 @@ const SideBar = ({ show }) => {
   };
 
   const renderSideBarList = () => {
+    const lastSelectedUser = retrieveLastSelectedUserFromLocalStorage()?.clientName;
     let listItem = mappedUserData().map((item, index) => {
       return (
         <div className="side-bar__list__item" key={ index }>
           <div className="side-bar__list__item-header">
             { item.objectKey }
           </div>
-          <div className="side-bar__list__item-subheader">
-            <p onClick={ () => handleSubHeaderClick(item.objectKey, item.innerObjectKey) }> { item.innerObjectKey } </p>
+          <div className={ getClassNames('side-bar__list__item-subheader', { selected: (lastSelectedUser === item.innerObjectKey) }) }>
+            <p onClick={ () => handleSubHeaderClick(item.objectKey, item.innerObjectKey) }>
+              { item.innerObjectKey }
+            </p>
             <SVGIcon name={ 'settings_gear' } />
           </div>
         </div>
@@ -85,7 +93,8 @@ const SideBar = ({ show }) => {
 SideBar.defaultProps = {};
 
 SideBar.propTypes = {
-  show: bool.isRequired
+  show: bool.isRequired,
+  setShowSideBar: func.isRequired
 };
 
 export default SideBar;

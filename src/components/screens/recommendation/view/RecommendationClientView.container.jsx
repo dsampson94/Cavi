@@ -62,15 +62,19 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
           field: listItem?.fieldname,
           type: listItem?.gewas
         },
-        wa: '',
+        wa: listItem?.warning,
         bl: '',
-        ph: '',
+        ph: listItem?.fotots,
         lr: listItem?.last_reading,
         ca: '',
         qv: '',
         deficit: {
-          top: listItem?.tekbo, colorTop: listItem?.colorBotHex,
-          bottom: listItem?.tekonder, colorBot: listItem?.colorTopHex
+          top: listItem?.tekbo,
+          colorTop: (listItem?.colorTopHex === '#FFFFFFFF')
+            ? '#000000' : `#${ listItem?.colorTopHex?.slice(3) }`,
+          bottom: listItem?.tekonder,
+          colorBot: (listItem?.colorBotHex === '#FFFFFFFF')
+            ? '#000000' : `#${ listItem?.colorBotHex?.slice(3) }`
         },
         unit: listItem?.eenheid,
         [weatherDataKeys[0]]: listItem?.['aanboud 1'],

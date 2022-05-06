@@ -9,17 +9,19 @@
   display: table;
   border-collapse: collapse;
   margin: util.rem(5);
+  width: 98.9%;
 
   &__header {
     position: sticky;
-    border: util.rem(2) solid map.get(color.$colorMap, primary);
-    background-color: map.get(color.$colorMap, white);;
+    border: util.rem(1) solid map.get(color.$colorMap, primary);
+    background-color: map.get(color.$colorMap, white);
+    z-index: 99;
     top: 0;
 
     &-row {
 
       th {
-        padding: 0 util.rem(8);
+        padding: 0 util.rem(7);
         white-space: nowrap;
         cursor: pointer;
       }
@@ -28,11 +30,11 @@
         font-size: util.rem(12);
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          font-size: util.rem(16);
+          font-size: util.rem(12);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          font-size: util.rem(20);
+          font-size: util.rem(16);
         }
       }
     }
@@ -42,38 +44,37 @@
     flex-direction: column;
 
     &__row {
-      border-bottom: util.rem(1) solid map.get(color.$colorMap, primary);
+      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, primary);
 
       td {
+        position: relative;
+        display: table-cell;
         text-align: center;
-        padding: util.rem(0);
         white-space: nowrap;
-        text-overflow: ellipsis;
-        font-size: util.rem(8);
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-          height: util.rem(30);
-          font-size: util.rem(10);
+          max-height: util.rem(30);
+          font-size: util.rem(11);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-          height: util.rem(35);
+          max-height: util.rem(31);
           font-size: util.rem(12);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-          height: util.rem(45);
-          font-size: util.rem(16);
+          max-height: util.rem(32);
+          font-size: util.rem(13);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          height: util.rem(48);
-          font-size: util.rem(18);
+          max-height: util.rem(33);
+          font-size: util.rem(14);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          height: util.rem(50);
-          font-size: util.rem(20);
+          max-height: util.rem(34);
+          font-size: util.rem(15);
         }
       }
 
@@ -82,35 +83,41 @@
         &-container {
           display: flex;
           flex-direction: column;
-          margin-left: util.rem(2);
-          height: 100%;
+          margin: util.rem(1) 0 util.rem(1.5) 0;
 
           &--centered {
             display: flex;
             justify-content: center;
+
+            &-last {
+              color: map.get(color.$colorMap, secondary-blue-3);
+            }
           }
         }
 
         &-upper {
           display: flex;
+          color: map.get(color.$colorMap, secondary-blue-3);
           height: 50%;
 
           &--deficit {
-            font-weight: 800;
-            margin-top: util.rem(3);
+            font-weight: 500;
+            color: map.get(color.$colorMap, light-mode-white);
             border-top-left-radius: map.get(radius.$border-radius, medium);
             border-top-right-radius: map.get(radius.$border-radius, medium);
-            text-align: center;
           }
         }
 
         &-lower {
           display: flex;
+          color: map.get(color.$colorMap, grey);
+          font-size: util.rem(9);
           height: 50%;
 
           &--deficit {
-            font-weight: 800;
-            text-align: center;
+            font-weight: 500;
+            border-top: util.rem(0.1) solid map.get(color.$colorMap, shadow);
+            color: map.get(color.$colorMap, light-mode-white);
             border-bottom-left-radius: map.get(radius.$border-radius, medium);
             border-bottom-right-radius: map.get(radius.$border-radius, medium);
           }
@@ -118,7 +125,7 @@
       }
 
       &:hover {
-        cursor: pointer
+        cursor: pointer;
       }
     }
   }

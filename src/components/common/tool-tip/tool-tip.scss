@@ -1,0 +1,29 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.tooltip {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  &__popup {
+    z-index: 99;
+    position: absolute;
+    word-wrap: normal;
+    font-size: util.rem(12);
+    margin-left: util.rem(28);
+    margin-top: util.rem(18);
+    border-radius: map.get(radius.$border-radius, medium);
+    padding: util.rem(4);
+    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, grey),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
+    background-color: map.get(color.$colorMap, light-mode-tooltip-white);
+  }
+}

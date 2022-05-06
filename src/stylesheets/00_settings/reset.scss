@@ -38,6 +38,21 @@ body.light-mode {
     transition: 0.7s;
     background-color: map.get(color.$colorMap, white);
   }
+
+  .table__body__row__td-upper {
+    transition: 0.7s;
+    color: map.get(color.$colorMap, secondary-blue-3);
+  }
+
+  .table__body__row__td-container--centered-last {
+    transition: 0.7s;
+    color: map.get(color.$colorMap, secondary-blue-3);
+  }
+
+  .side-bar__list__item-subheader--selected {
+    transition: 0.9s;
+    background-color: map.get(color.$colorMap, selected-blue);
+  }
 }
 
 body.dark-mode {
@@ -48,12 +63,26 @@ body.dark-mode {
   .side-bar {
   }
 
+  .spinner__text {
+    color: map.get(color.$colorMap, black);
+  }
+
   .table__body__row__td-upper--deficit {
     color: map.get(color.$colorMap, black);
   }
 
   .table__body__row__td-lower--deficit {
     color: map.get(color.$colorMap, black);
+  }
+
+  .table__body__row__td-upper {
+    transition: 0.7s;
+    color: map.get(color.$colorMap, light-mode-white);
+  }
+
+  .table__body__row__td-container--centered-last {
+    transition: 0.7s;
+    color: map.get(color.$colorMap, light-mode-white);
   }
 
   .table__header-row {
@@ -72,6 +101,15 @@ body.dark-mode {
 
   .snack {
     background-color: map.get(color.$colorMap, dark-mode-grey);
+  }
+
+  .tooltip__popup {
+    color: map.get(color.$colorMap, grey);
+  }
+
+  .side-bar__list__item-subheader--selected {
+    transition: 0.9s;
+    background-color: map.get(color.$colorMap, pulse-blue);
   }
 
   .recommendation-overview {
