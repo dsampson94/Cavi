@@ -42,12 +42,17 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
         </div>
         <div className="recommendation-client-view__topbar-right">
           <Button icon={ BULLSEYE }
-                  tooltip={ ACCURACY_ANALYSIS } />
-          <Button label={ 'Reports' } />
+                  tooltip={ ACCURACY_ANALYSIS }
+                  spaced />
+          <Button label={ 'Reports' }
+                  spaced />
           <Button icon={ PREVIOUS }
-                  tooltip={ PREVIOUS_RECOMMENDATIONS } />
-          <Button label={ 'Show Archives' } />
-          <Button label={ 'Reload' } />
+                  tooltip={ PREVIOUS_RECOMMENDATIONS }
+                  spaced />
+          <Button label={ 'Show Archives' }
+                  spaced />
+          <Button label={ 'Reload' }
+                  spaced />
         </div>
       </div>
     );
@@ -56,7 +61,7 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
   const TableSearchBar = () => {
     return (
       <div className="recommendation-client-view__search">
-        <TextInput placeholder={'Search field or probe number'} />
+        <TextInput placeholder={ 'Search field or probe number' } />
       </div>
     );
   };

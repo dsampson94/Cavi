@@ -15,7 +15,6 @@
   inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
   height: util.rem(30);
   padding: util.rem(2);
-  margin: 0 util.rem(6) 0 util.rem(2);
   width: 100%;
 
   label {
@@ -62,6 +61,10 @@
     label {
       color: map.get(color.$colorMap, black);
     }
+  }
+
+  &--spaced {
+    margin: 0 util.rem(6) 0 util.rem(2);
   }
 
   &--icon {

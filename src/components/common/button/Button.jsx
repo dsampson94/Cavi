@@ -19,10 +19,11 @@ const Button = ({
                   white,
                   icon,
                   tooltip,
-                  leftAlignedTooltip
+                  leftAlignedTooltip,
+                  spaced
                 }) => {
   return (
-    <button className={ getClassNames('button', { disabled, flex, login, blue, white, icon }) }
+    <button className={ getClassNames('button', { disabled, flex, login, blue, white, icon, spaced }) }
             name={ name }
             type={ type }
             onClick={ onClick }
@@ -46,7 +47,9 @@ Button.defaultProps = {
   login: false,
   blue: false,
   white: false,
-  icon: undefined
+  icon: undefined,
+  leftAlignedTooltip: undefined,
+  spaced: undefined
 };
 
 Button.propTypes = {
@@ -60,7 +63,9 @@ Button.propTypes = {
   blue: bool,
   white: bool,
   icon: string,
-  active: bool
+  active: bool,
+  leftAlignedTooltip: bool,
+  spaced: bool
 };
 
 export default Button;
