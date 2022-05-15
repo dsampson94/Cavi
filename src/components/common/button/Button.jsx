@@ -3,6 +3,7 @@ import { bool, func, string } from 'prop-types';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import SVGIcon from '../../../tools/icons/SVGIcon';
+import ToolTip from '../tool-tip/ToolTip';
 
 import './button.scss';
 
@@ -16,7 +17,9 @@ const Button = ({
                   login,
                   blue,
                   white,
-                  icon
+                  icon,
+                  tooltip,
+                  leftAlignedTooltip
                 }) => {
   return (
     <button className={ getClassNames('button', { disabled, flex, login, blue, white, icon }) }
@@ -25,7 +28,10 @@ const Button = ({
             onClick={ onClick }
             disabled={ disabled }>
       <label>{ label } </label>
-      { icon && <SVGIcon name={ icon } fill={ '#043b6e' } /> }
+      { tooltip && <ToolTip text={ tooltip }
+                            left={ leftAlignedTooltip } /> }
+      { icon && <SVGIcon name={ icon }
+                         fill={ '#043b6e' } /> }
     </button>
   );
 };

@@ -8,26 +8,23 @@
 .side-bar {
   display: flex;
   flex-direction: column;
-  border: util.rem(1) solid;
+  border-right: util.rem(1) solid;
   transition: 0.4s;
   height: 100%;
   width: 0;
 
-  &--show {
-    width: 24%;
-  }
-
-  &__lower-container {
+  &__list-container {
     display: flex;
     white-space: nowrap;
     flex-direction: column;
     margin-left: util.rem(5);
     height: 100%;
 
-    &__client-lists {
+    &__client-list {
       height: 100%;
 
       & h5 {
+        font-size: util.rem(12);
         color: map.get(color.$colorMap, secondary-blue-3);
       }
     }
@@ -38,23 +35,20 @@
     flex-direction: column;
     border-top: util.rem(1) solid;
     border-bottom: util.rem(1) solid;
-    padding: util.rem(2) util.rem(0) util.rem(2) util.rem(2);
+    padding: util.rem(2) util.rem(0) util.rem(0) util.rem(2);
     height: 96%;
     width: 100%;
 
-    &__item {
-    }
-
     &__item-header {
       font-weight: bold;
+      font-size: util.rem(13);
       border-bottom: util.rem(1) solid;
     }
 
     &__item-subheader {
       display: flex;
       flex-direction: row;
-      font-size: util.rem(13);
-      height: util.rem(20);
+      height: util.rem(17);
       cursor: pointer;
 
       &--selected {
@@ -62,9 +56,14 @@
       }
 
       & p {
+        font-size: util.rem(12);
         min-width: 88%;
       }
     }
+  }
+
+  &--show {
+    width: 20%;
   }
 
   &__lower-button {

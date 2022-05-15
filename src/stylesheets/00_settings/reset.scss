@@ -53,6 +53,21 @@ body.light-mode {
     transition: 0.9s;
     background-color: map.get(color.$colorMap, selected-blue);
   }
+
+  .table__body__row__td--dark {
+    transition: 1.5s;
+    background-color: map.get(color.$colorMap, table-yellow-dark);
+  }
+
+  .table__body__row__td--light {
+    transition: 1.5s;
+    background-color: map.get(color.$colorMap, table-yellow-light);
+  }
+
+  .table__body__row__td--fade {
+    transition: 1.5s;
+    background-color: map.get(color.$colorMap, table-yellow-fade);
+  }
 }
 
 body.dark-mode {
@@ -67,12 +82,23 @@ body.dark-mode {
     color: map.get(color.$colorMap, black);
   }
 
-  .table__body__row__td-upper--deficit {
-    color: map.get(color.$colorMap, black);
+  .table__body__row:hover {
+    background-color: map.get(color.$colorMap, pulse-blue);
   }
 
-  .table__body__row__td-lower--deficit {
-    color: map.get(color.$colorMap, black);
+  .table__body__row__td--dark {
+    transition: 1s;
+    background-color: map.get(color.$colorMap, blur);
+  }
+
+  .table__body__row__td--light {
+    transition: 1s;
+    background-color: map.get(color.$colorMap, shadow);
+  }
+
+  .table__body__row__td--fade {
+    transition: 1s;
+    background-color: map.get(color.$colorMap, blur-lighter);
   }
 
   .table__body__row__td-upper {

@@ -2,17 +2,17 @@ import { noOp } from '../../../tools/general/helpers.util';
 
 export const hideColumnHeader = (tableName, key) => {
   switch (key) {
-    case 'wa':
+    case 'w':
       return 'transparent';
-    case 'bl':
+    case 'b':
       return 'transparent';
-    case 'ph':
+    case 'p':
       return 'transparent';
-    case 'lr':
+    case 'l':
       return 'transparent';
-    case 'ca':
+    case 'c':
       return 'transparent';
-    case 'qv':
+    case 'q':
       return 'transparent';
     default:
       return noOp();

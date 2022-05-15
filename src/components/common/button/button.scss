@@ -7,6 +7,7 @@
 
 .button {
   white-space: nowrap;
+  position: relative;
   color: map.get(color.$colorMap, white);
   background-color: map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
@@ -14,6 +15,7 @@
   inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
   height: util.rem(30);
   padding: util.rem(2);
+  margin: 0 util.rem(6) 0 util.rem(2);
   width: 100%;
 
   label {
@@ -64,7 +66,8 @@
 
   &--icon {
     padding: util.rem(1);
-    width: 60%;
+    box-shadow: none;
+    width: 40%;
     background-color: transparent;
 
     &:hover {

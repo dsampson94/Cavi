@@ -2,13 +2,19 @@ import React from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 import { tableTemplateData } from '../../../common/table/table-functions.util';
+import { ACCURACY_ANALYSIS, BULLSEYE, PREVIOUS, PREVIOUS_RECOMMENDATIONS } from '../../../../tools/general/system-variables.util';
+import { retrieveLastSelectedUserFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 import Table from '../../../common/table/Table';
+import TextInput from '../../../common/input/text/TextInput';
+import Button from '../../../common/button/Button';
 
 import './recommendation-client-view.scss';
 
 const RecommendationClientView = ({ fieldList, fieldRainData }) => {
+
+  const activeUser = retrieveLastSelectedUserFromLocalStorage();
 
   const getHiddenDateColumns = () => {
     const columnList = [];
@@ -27,13 +33,45 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
     }
   };
 
+  const TableTopBar = () => {
+    return (
+      <div className="recommendation-client-view__topbar">
+        <div className="recommendation-client-view__topbar-left">
+          <p>{ `Recommendations: ${ activeUser?.groupName?.toUpperCase() } -
+            ${ activeUser?.clientName?.toUpperCase() }` }</p>
+        </div>
+        <div className="recommendation-client-view__topbar-right">
+          <Button icon={ BULLSEYE }
+                  tooltip={ ACCURACY_ANALYSIS } />
+          <Button label={ 'Reports' } />
+          <Button icon={ PREVIOUS }
+                  tooltip={ PREVIOUS_RECOMMENDATIONS } />
+          <Button label={ 'Show Archives' } />
+          <Button label={ 'Reload' } />
+        </div>
+      </div>
+    );
+  };
+
+  const TableSearchBar = () => {
+    return (
+      <div className="recommendation-client-view__search">
+        <TextInput placeholder={'Search field or probe number'} />
+      </div>
+    );
+  };
+
   return (
     <ContentContainer>
       <div className="recommendation-client-view">
-        <Table tableName={ 'recommendationClientFieldView' }
-               tableData={ fieldList }
-               hiddenColumns={ ['id', '30dL', 'TotalL'].concat(getHiddenDateColumns()) }
-               tableDataTemplate={ tableTemplateData } />
+        <TableTopBar />
+        <TableSearchBar />
+        <div className="recommendation-client-view__scroll">
+          <Table tableName={ 'recommendationClientFieldView' }
+                 tableData={ fieldList }
+                 hiddenColumns={ ['id', '30dL', 'TotalL'].concat(getHiddenDateColumns()) }
+                 tableDataTemplate={ tableTemplateData } />
+        </div>
       </div>
     </ContentContainer>
   );

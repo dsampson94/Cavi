@@ -15,7 +15,8 @@ const TextInput = ({
                      onChange,
                      disabled,
                      login,
-                     sidebar
+                     sidebar,
+                     table
                    }) => {
 
   return (
@@ -31,7 +32,7 @@ const TextInput = ({
              placeholder={ placeholder }
              onChange={ onChange }
              disabled={ disabled }
-             className={ getClassNames('input__input', { login, sidebar }) } />
+             className={ getClassNames('input__input', { login, sidebar, table }) } />
 
     </div>
   );

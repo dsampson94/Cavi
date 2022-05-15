@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape, string } from 'prop-types';
+import { CAMERA, CHARTS, DROPDOWN, PENCIL, RAIN_CLOUDS, UNIT, WARNING, WATCH } from '../../../tools/general/system-variables.util';
 
-import { noOp, removeCamelCase } from '../../../tools/general/helpers.util';
+import { getClassNames, noOp, removeCamelCase } from '../../../tools/general/helpers.util';
 import { handleColumnHeaderClick, hideColumnHeader } from './table-functions.util';
 
 import SVGIcon from '../../../tools/icons/SVGIcon';
@@ -14,10 +15,10 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
 
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [ascendingSort, setAscendingSort] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-      const copyOfTableData = [...tableData];
-      setFilteredTableData(copyOfTableData);
+      setFilteredTableData([...tableData]);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [tableData]);
@@ -52,6 +53,9 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
 
   const buildTableBody = () => {
     const rows = filteredTableData?.map((object, index) => {
+      let objectLocationName = object?.fieldName?.locationName;
+      let isHeaderRow = (objectLocationName?.includes('-forecast') || objectLocationName?.includes('-landGroup'));
+
       const objectValues = [];
       for (const property in object) {
         if (!hiddenColumns.includes(property)) {
@@ -64,66 +68,105 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
         tableDataElements = objectValues?.map((value, index) => {
           switch (index) {
             case 0: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <div className={ 'table__body__row__td-upper' }>{ value?.field }</div>
-                  <div className={ 'table__body__row__td-lower' }>{ value?.type }</div>
-                </div>
-              </td>;
+              if (value?.locationName?.includes('-forecast')) {
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container-forecast' }>
+                    <div className={ 'table__body__row__td-container-forecast-upper' }>{ value?.locationName?.slice(0, -9) }</div>
+                    <div className={ 'table__body__row__td-container-forecast-lower' }>{ 'mock climate text' }</div>
+                  </div>
+                </td>;
+              } else if (value?.locationName?.includes('-landGroup')) {
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container-landgroup' }>
+                    { value?.locationName?.slice(0, -10) }
+                  </div>
+                </td>;
+              } else {
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <div className={ 'table__body__row__td-upper' }>{ value?.locationName }</div>
+                    <div className={ 'table__body__row__td-lower' }>{ value?.type }</div>
+                  </div>
+                </td>;
+              }
             }
             case 1: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <ToolTip tableData={ value } />
-                  <SVGIcon name={ 'warning' }
-                           fill={ '#EE9A94' } />
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <ToolTip text={ value } />
+                    <SVGIcon name={ WARNING }
+                             fill={ '#EE9A94' } />
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 2: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <SVGIcon name={ 'dropdown' } />
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }
+                       onClick={ () => setShowDropdown(!showDropdown) }>
+                    <ToolTip text={ value } />
+                    <SVGIcon name={ DROPDOWN } />
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 3: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <ToolTip tableData={ value } />
-                  <SVGIcon name={ 'camera' } />
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <ToolTip text={ value } />
+                    <SVGIcon name={ CAMERA }
+                             fill={ '#043b6e' } />
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 4: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container--centered-last' }>
-                  { value }
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container--centered-last' }>
+                    <ToolTip text={ value?.tooltip } />
+                    { (value?.lastReading.includes('1970/')) ? '---' : value?.lastReading }
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 5: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <ToolTip tableData={ 'Click to capture irrigation, rainfall or a note' } />
-                  <SVGIcon name={ 'pencil' } />
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <ToolTip text={ value } />
+                    <SVGIcon name={ PENCIL } />
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 6: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <ToolTip tableData={ 'Quick view' } />
-                  <SVGIcon name={ 'charts' } />
-                </div>
-              </td>;
+              if (value)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <ToolTip text={ value } />
+                    <SVGIcon name={ CHARTS } />
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 7: {
               return <td onClick={ noOp() }
@@ -135,7 +178,7 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                        } }>
                     { value?.top }
                   </div>
-                  <div className={ 'table__body__row__td-lower--deficit' }
+                  <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
                        style={ {
                          backgroundColor: value?.colorBot
                        } }>
@@ -148,44 +191,69 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container--centered' }>
-                  { value }
+                  { value?.slice(0, 2) }
                 </div>
               </td>;
             }
-            case [9, 10, 11, 12, 13, 14, 15]: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container--centered' }>
-                  { (value === 0) ? '' : value }
-                </div>
-              </td>;
+            case 9:
+            case 11:
+            case 13:
+            case 15: {
+              if (!isHeaderRow)
+                return <td onClick={ noOp() }
+                           key={ index }
+                           className={ 'table__body__row__td--dark' }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <p> { (value === 0) ? '' : value }</p>
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
+            }
+            case 10:
+            case 12:
+            case 14: {
+              if (!isHeaderRow)
+                return <td onClick={ noOp() }
+                           key={ index }
+                           className={ 'table__body__row__td--light' }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <p> { (value === 0) ? '' : value }</p>
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
             }
             case 16: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <ToolTip tableData={ 'Unit:' } />
-                </div>
-              </td>;
+              if (!isHeaderRow)
+                return <td onClick={ noOp() }
+                           key={ index }
+                           className={ 'table__body__row__td--fade' }>
+                  <ToolTip text={ UNIT } />
+                  <SVGIcon name={ RAIN_CLOUDS }
+                           fill={ '#043b6e' } />
+                  <SVGIcon name={ WATCH }
+                           fill={ '#043b6e' } />
+                </td>;
+              else
+                return <td key={ index } />;
             }
-            case [17, 18, 19, 20, 21, 22]: {
-              return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  <div className={ 'table__body__row__td-upper--deficit' }
-                       style={ {
-                         backgroundColor: value?.colorTop
-                       } }>
-                    { value?.top }
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+            case 21:
+            case 22: {
+              if (!isHeaderRow)
+                return <td onClick={ noOp() }
+                           key={ index }
+                           className={ 'table__body__row__td--fade' }>
+                  <div className={ 'table__body__row__td-container' }>
+                    <p> { (value === 0) ? '' : value }</p>
                   </div>
-                  <div className={ 'table__body__row__td-lower--deficit' }
-                       style={ {
-                         backgroundColor: value?.colorBot
-                       } }>
-                    { value?.bottom }
-                  </div>
-                </div>
-              </td>;
+                </td>;
+              else
+                return <td key={ index } />;
             }
             default: {
               return <td onClick={ noOp() }
@@ -200,7 +268,7 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
       }
 
       return (
-        <tr className="table__body__row"
+        <tr className={ getClassNames('table__body__row', { header: isHeaderRow }) }
             key={ index }>
           { tableDataElements }
         </tr>

@@ -8,9 +8,7 @@ import './spinner.scss';
 
 const Spinner = ({ spinnerText, content, centered }) => {
 
-  if (!spinnerText) {
-    return null;
-  }
+  if (!spinnerText) return null;
 
   return (
     <div className="spinner">

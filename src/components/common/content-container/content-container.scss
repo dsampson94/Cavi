@@ -8,32 +8,14 @@
 .content-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  overflow-y: hidden;
+  height: calc(100vh - 10px);
   width: 100%;
 
   &__screen {
     display: flex;
     flex-direction: row;
     width: 100%;
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      height: 81%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      height: 89%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      height: 79%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-      height: 85.5%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-      height: 88.8%;
-    }
+    height: calc(100vh - 80px);
   }
 }

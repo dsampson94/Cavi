@@ -60,5 +60,13 @@
     &--sidebar {
       height: util.rem(35);
     }
+
+    &--table {
+      margin-left: util.rem(2);
+    }
+  }
+
+  ::placeholder {
+    font-size: util.rem(10);
   }
 }

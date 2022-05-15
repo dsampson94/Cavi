@@ -16,7 +16,7 @@ const ContentContainer = ({ children }) => {
               setShowSideBar={ setShowSideBar } />
 
       <div className="content-container__screen">
-        <SideBar show={ showSideBar }
+        <SideBar showSideBar={ showSideBar }
                  setShowSideBar={ setShowSideBar } />
         { children }
       </div>

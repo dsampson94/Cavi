@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { bool, func } from 'prop-types';
 
+import { SETTINGS_GEAR } from '../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
 import {
   retrieveLastSelectedUserFromLocalStorage,
@@ -19,7 +20,7 @@ import TableSearch from '../table-search/TableSearch';
 
 import './side-bar.scss';
 
-const SideBar = ({ show, setShowSideBar }) => {
+const SideBar = ({ showSideBar, setShowSideBar }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const SideBar = ({ show, setShowSideBar }) => {
     dispatch({ type: SET_CLIENT_NAME, groupName, clientName });
     saveLastSelectedUserToLocalStorage({ groupName, clientName });
     history.push('/recommendation/client');
-    setShowSideBar(!show);
+    setShowSideBar(!showSideBar);
   };
 
   const mappedUserData = () => {
@@ -59,7 +60,7 @@ const SideBar = ({ show, setShowSideBar }) => {
             <p onClick={ () => handleSubHeaderClick(item.objectKey, item.innerObjectKey) }>
               { item.innerObjectKey }
             </p>
-            <SVGIcon name={ 'settings_gear' } />
+            <SVGIcon name={ SETTINGS_GEAR } />
           </div>
         </div>
       );
@@ -73,17 +74,17 @@ const SideBar = ({ show, setShowSideBar }) => {
   };
 
   return (
-    <div className={ getClassNames('side-bar', { show }) }>
-      { show && <TableSearch dataToFilter={ filteredTableData }
-                             setFilteredData={ setFilteredTableData } /> }
-      <div className="side-bar__lower-container">
-        { show && <div className="side-bar__lower-container__client-lists">
+    <div className={ getClassNames('side-bar', { show: showSideBar }) }>
+      { showSideBar && <TableSearch dataToFilter={ filteredTableData }
+                                    setFilteredData={ setFilteredTableData } /> }
+      <div className="side-bar__list-container">
+        { showSideBar && <div className="side-bar__list-container__client-list">
           <h5>MY CLIENTS</h5>
           { renderSideBarList() }
         </div> }
       </div>
 
-      { show && <div className="side-bar__lower-button">
+      { showSideBar && <div className="side-bar__lower-button">
         <Button label={ 'Add new client database' } />
       </div> }
     </div>
@@ -93,7 +94,7 @@ const SideBar = ({ show, setShowSideBar }) => {
 SideBar.defaultProps = {};
 
 SideBar.propTypes = {
-  show: bool.isRequired,
+  showSideBar: bool.isRequired,
   setShowSideBar: func.isRequired
 };
 
