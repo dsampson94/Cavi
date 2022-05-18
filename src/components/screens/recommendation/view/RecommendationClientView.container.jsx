@@ -168,6 +168,7 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
         c: CAPTURE,
         q: QUICK_VIEW,
         deficit: {
+          tooltip: listItem?.kleurhint,
           top: listItem?.tekbo,
           colorTop: (listItem?.colorTopHex === '#FFFFFFFF')
             ? '#000000' : `#${ listItem?.colorTopHex?.slice(3) }`,
