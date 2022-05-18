@@ -18,12 +18,12 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
 
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    const { responseMessage, responseColor } = getResponseMetaData(data);
+    const { responseMessage } = getResponseMetaData(data);
 
     switch (data.success) {
       case responseStatus.ERROR:
         yield put({ type: SET_LOGGED_IN_USER, user: undefined });
-        yield put(addSystemNotice(responseMessage, responseColor, SNACK_CRITICAL));
+        yield put(addSystemNotice(responseMessage, SNACK_CRITICAL));
 
         if (onError) {
           yield call(onError);
@@ -33,7 +33,7 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
 
         return;
       case responseStatus.SUCCESS:
-        yield put(addSystemNotice(responseMessage, responseColor, SNACK_SUCCESS));
+        yield put(addSystemNotice(responseMessage, SNACK_SUCCESS));
         delete data.success; delete data.snackbartext; delete data.snackbarcolor;
         yield put({ type: SET_LOGGED_IN_USER, user: data });
         yield call(saveUserToLocalStorage, data);
@@ -46,8 +46,7 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
     }
   } catch ({ response }) {
     yield put({ type: SET_LOGGED_IN_USER, user: undefined });
-    const { responseMessage, responseColor } = getResponseMetaData(response);
-    yield put(addSystemNotice(responseMessage, responseColor, SNACK_CRITICAL));
+    yield put(addSystemNotice(getResponseMetaData(response), SNACK_CRITICAL));
     yield put(setSpinnerText(null));
 
     if (onError) {

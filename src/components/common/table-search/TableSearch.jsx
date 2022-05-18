@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
 import { array } from 'prop-types';
-import { isEmpty } from '../../../tools/general/helpers.util';
+import { SEARCH } from '../../../tools/general/system-variables.util';
+import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 
-import TextInput from '../input/text/TextInput';
+import SVGIcon from '../../../tools/icons/SVGIcon';
 
-const TableSearch = ({ dataToFilter, setFilteredData }) => {
+import './table-search.scss';
+
+const TableSearch = ({
+                       name,
+                       value,
+                       type,
+                       label,
+                       dataToFilter,
+                       setFilteredData,
+                       onChange,
+                       placeholder,
+                       disabled,
+                       sidebar,
+                       table
+                     }) => {
 
   const [searchString, setSearchString] = useState('');
 
@@ -41,8 +56,18 @@ const TableSearch = ({ dataToFilter, setFilteredData }) => {
   const handleChange = ({ target }) => setSearchString(target.value);
 
   return (
-    <TextInput onChange={ handleChange }
-               table />
+    <div className={ 'search' }>
+      <div className={ 'search__icon' }>
+        <SVGIcon name={ SEARCH } />
+      </div>
+      <input name={ name }
+             value={ value }
+             type={ type }
+             placeholder={ placeholder }
+             onChange={ onChange }
+             disabled={ disabled }
+             className={ getClassNames('search__input', { sidebar, table }) } />
+    </div>
   );
 };
 

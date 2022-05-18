@@ -7,7 +7,7 @@ import { retrieveLastSelectedUserFromLocalStorage } from '../../../../tools/stor
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 import Table from '../../../common/table/Table';
-import TextInput from '../../../common/input/text/TextInput';
+import TableSearch from '../../../common/table-search/TableSearch';
 import Button from '../../../common/button/Button';
 
 import './recommendation-client-view.scss';
@@ -42,6 +42,7 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
         </div>
         <div className="recommendation-client-view__topbar-right">
           <Button icon={ BULLSEYE }
+                  iconFill={'#C24C41'}
                   tooltip={ ACCURACY_ANALYSIS }
                   spaced />
           <Button label={ 'Reports' }
@@ -51,7 +52,7 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
                   spaced />
           <Button label={ 'Show Archives' }
                   spaced />
-          <Button label={ 'Reload' }
+          <Button label={ 'Reload Recommendations' }
                   spaced />
         </div>
       </div>
@@ -61,7 +62,7 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
   const TableSearchBar = () => {
     return (
       <div className="recommendation-client-view__search">
-        <TextInput placeholder={ 'Search field or probe number' } />
+        <TableSearch placeholder={ 'Search field or probe number' } />
       </div>
     );
   };

@@ -25,7 +25,9 @@ body.light-mode {
     transition: 0.7s;
   }
 
-  .input__input {
+  .input__input,
+  .search__input,
+  .search__icon{
     transition: 1s;
     background-color: map.get(color.$colorMap, white);
   }
@@ -111,12 +113,18 @@ body.dark-mode {
     color: map.get(color.$colorMap, light-mode-white);
   }
 
+  .input__label-container--login label  {
+    color: map.get(color.$colorMap, black);
+  }
+
   .table__header-row {
     transition: 0.7s;
     background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
-  .input__input {
+  .input__input,
+  .search__input,
+  .search__icon {
     transition: 1s;
     background-color: map.get(color.$colorMap, grey);
   }
@@ -133,7 +141,7 @@ body.dark-mode {
     color: map.get(color.$colorMap, grey);
   }
 
-  .side-bar__list__item-subheader--selected {
+  .side-bar__list__item__subheader--selected {
     transition: 0.9s;
     background-color: map.get(color.$colorMap, pulse-blue);
   }

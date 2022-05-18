@@ -14,26 +14,22 @@ const TextInput = ({
                      placeholder,
                      onChange,
                      disabled,
-                     login,
-                     sidebar,
-                     table
+                     login
                    }) => {
 
   return (
     <div className={ getClassNames('input', { disabled, login }) }>
 
-      <div className={ getClassNames('input__label-container', { login, sidebar }) }>
+      <div className={ getClassNames('input__label-container', { login }) }>
         <label>{ label }</label>
       </div>
-
       <input name={ name }
              value={ value }
              type={ type }
              placeholder={ placeholder }
              onChange={ onChange }
              disabled={ disabled }
-             className={ getClassNames('input__input', { login, sidebar, table }) } />
-
+             className={ getClassNames('input__input', { login }) } />
     </div>
   );
 };
@@ -46,8 +42,7 @@ TextInput.defaultProps = {
   placeholder: undefined,
   onChange: noOp,
   disabled: false,
-  login: false,
-  sidebar: false
+  login: false
 };
 
 TextInput.propTypes = {
@@ -58,8 +53,7 @@ TextInput.propTypes = {
   placeholder: string,
   onChange: func,
   disabled: bool,
-  login: bool,
-  sidebar: bool
+  login: bool
 };
 
 export default TextInput;

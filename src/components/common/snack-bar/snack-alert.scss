@@ -10,16 +10,12 @@ $error-color: map.get(colors.$colorMap, error);
 $info-color: map.get(colors.$colorMap, info);
 
 .snack {
-  padding: utils.bu(1.5);
+  display: flex;
+  padding: utils.rem(15);
   background-color: map.get(colors.$colorMap, white);
   border-radius: map.get(radius.$border-radius, small);
-  display: flex;
   align-items: center;
   font-weight: bold;
-
-  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
-    padding: utils.rem(23);
-  }
 
   &--entering {
     animation: enter-snack .2s;
@@ -31,7 +27,8 @@ $info-color: map.get(colors.$colorMap, info);
   }
 
   &__title > p {
-    font-weight: 600;
+    font-size: utils.rem(12);
+    font-weight: 500;
     margin: 0;
   }
 

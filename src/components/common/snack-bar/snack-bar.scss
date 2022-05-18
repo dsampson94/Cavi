@@ -3,12 +3,12 @@
 @use "../../../stylesheets/01_tools/mixin" as mixins;
 
 .snack-bar {
-  min-width: utils.rem(300);
-  max-width: utils.rem(300);
   position: fixed;
-  top: utils.rem(50);
+  top: utils.rem(60);
   right: utils.bu(.5);
   transform: translateY(utils.bu(1));
+  min-width: utils.rem(300);
+  max-width: utils.rem(300);
   z-index: 999;
 
   @include mixins.breakpoint(map-get(config.$breakpoints, small)) {

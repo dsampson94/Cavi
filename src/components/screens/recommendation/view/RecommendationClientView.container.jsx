@@ -15,15 +15,9 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
 
   useEffect(() => {
     dispatch(requestClientFieldList(mockClientData));
+    dispatch(requestSelectedClient());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedClient]);
-
-  useEffect(() => {
-    dispatch(requestSelectedClient());
-    dispatch(requestClientFieldList(mockClientData));
-    dispatch(requestClientFieldRainData(mockClientData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
 
   const mockClientData = {
     username: user?.username,

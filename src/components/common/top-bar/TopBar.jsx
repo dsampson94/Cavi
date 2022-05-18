@@ -33,26 +33,25 @@ const TopBar = ({ showSideBar, setShowSideBar }) => {
           IrriCheck Pulse
         </div>
         <div className="top-bar__lower-left">
+          <Button icon={ PRINT_ICON }
+                  tooltip={ PRINT } />
           <Button icon={ EMAIL_RECOMMENDATIONS }
                   tooltip={ EMAIL } />
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
+          <Button label={ 'Field Setup' } />
           <Button icon={ WEATHER_STATION_ICON }
                   tooltip={ WEATHER_STATION } />
           <Button icon={ MAPS_ICON }
                   tooltip={ MAPS } />
-          <Button icon={ PRINT_ICON }
-                  tooltip={ PRINT } />
-          <Button label={ 'Field Setup' } />
         </div>
       </div>
       <div className="top-bar__right">
-        <Button label={ 'Probes Monitor' } />
         <ThemeToggle />
-        <TextInput placeholder={ 'Probes on Google Maps' } />
+        <Button label={ 'Probes Monitor' } />
         <Button icon={ REPORT_PROBLEM_ICON }
-                tooltip={ REPORT_PROBLEM }
-                leftAlignedTooltip />
+                tooltip={ REPORT_PROBLEM } />
+        <TextInput placeholder={ 'Find Last Readings' } />
         <Button icon={ LOG_OUT_ICON }
                 tooltip={ LOG_OUT }
                 onClick={ () => history.push('/') }

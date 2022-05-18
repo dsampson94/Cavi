@@ -29,28 +29,28 @@
 
       &__text {
         user-select: none;
-        font-size: util.rem(11);
+        font-size: util.rem(9);
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          font-size: util.rem(12);
+          font-size: util.rem(10);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          font-size: util.rem(16);
+          font-size: util.rem(14);
         }
       }
     }
   }
 
   &__body {
-    flex-direction: column;
 
     &__row {
-      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, pulse-blue);
+      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, grey);
 
       td {
         position: relative;
         display: table-cell;
+        background-clip: padding-box;
         text-align: center;
         white-space: nowrap;
 
@@ -88,8 +88,8 @@
           margin: util.rem(0.5) 0 util.rem(1) 0;
 
           p {
-            padding: 0 util.rem(6) 0 util.rem(6);
-            font-size: util.rem(12);
+            padding: 0 util.rem(2) 0 util.rem(2);
+            font-size: util.rem(10);
           }
 
           &--centered {
@@ -99,6 +99,18 @@
             &-last {
               font-size: util.rem(10);
               color: map.get(color.$colorMap, secondary-blue-3);
+            }
+          }
+
+          &__icon {
+            position: absolute;
+            margin-top: util.rem(1);
+            right: 0;
+
+            &-right {
+              position: absolute;
+              margin-top: util.rem(-5.5);
+              right: 0;
             }
           }
 
@@ -148,7 +160,7 @@
         &-lower {
           display: flex;
           color: map.get(color.$colorMap, grey);
-          font-size: util.rem(7);
+          font-size: util.rem(8.5);
           height: 50%;
 
           &--deficit {
@@ -161,24 +173,21 @@
         }
 
         &--dark {
-          opacity: 0.85;
           background-color: map.get(color.$colorMap, table-yellow-dark);
-          border-left: util.rem(1) solid #607CB1;
-          border-right: util.rem(1) solid #607CB1;
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
         }
 
         &--light {
-          opacity: 0.85;
           background-color: map.get(color.$colorMap, table-yellow-light);
-          border-left: util.rem(1) solid #607CB1;
-          border-right: util.rem(1) solid #607CB1;
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
         }
 
         &--fade {
-          opacity: 0.85;
           background-color: map.get(color.$colorMap, table-yellow-fade);
-          border-left: util.rem(1) solid #607CB1;
-          border-right: util.rem(1) solid #607CB1;
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
         }
       }
 

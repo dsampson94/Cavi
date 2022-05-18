@@ -3,7 +3,10 @@ export const SNACK_CRITICAL = 'snack--critical';
 export const SNACK_INFO = 'snack--info';
 
 export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
+
 export const SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Not Retrieved';
 
 export const MID_BAR_OVERVIEW = 'Overview';
 export const MID_BAR_MONITOR = 'Monitor Probes';
@@ -30,6 +33,7 @@ export const PREVIOUS_RECOMMENDATIONS = 'Show Previous Recommendations';
 export const CAPTURE = 'Click to capture irrigation, rainfall or a note';
 export const QUICK_VIEW = 'Quick view';
 export const UNIT = 'Unit:';
+export const HARVEST = 'Harvest date is today ';
 
 //SVGS
 //TOPBAR
@@ -45,6 +49,7 @@ export const PREVIOUS = 'previous';
 export const BULLSEYE = 'bullseye';
 
 //SIDEBAR
+export const SEARCH = 'search';
 export const SETTINGS_GEAR = 'settings_gear';
 
 //TABLE
@@ -55,3 +60,5 @@ export const PENCIL = 'pencil';
 export const CHARTS = 'charts';
 export const RAIN_CLOUDS = 'rain_clouds';
 export const WATCH = 'watch';
+export const HARVEST_ICON = 'harvest_tractor';
+

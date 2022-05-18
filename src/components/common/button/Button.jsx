@@ -20,6 +20,7 @@ const Button = ({
                   icon,
                   tooltip,
                   leftAlignedTooltip,
+                  iconFill,
                   spaced
                 }) => {
   return (
@@ -32,7 +33,7 @@ const Button = ({
       { tooltip && <ToolTip text={ tooltip }
                             left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }
-                         fill={ '#043b6e' } /> }
+                         fill={ (iconFill) ? iconFill : '#53A5DF' } /> }
     </button>
   );
 };

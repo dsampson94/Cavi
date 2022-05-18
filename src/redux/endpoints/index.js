@@ -8,8 +8,7 @@ export const responseStatus = Object.freeze({
 
 export function getResponseMetaData(data) {
   return {
-    responseMessage: data.snackbartext,
-    responseColor: data.snackbarcolor
+    responseMessage: data?.snackbartext
   };
 }
 

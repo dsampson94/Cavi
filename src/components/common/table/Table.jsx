@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape, string } from 'prop-types';
-import { CAMERA, CHARTS, DROPDOWN, PENCIL, RAIN_CLOUDS, UNIT, WARNING, WATCH } from '../../../tools/general/system-variables.util';
 
-import { getClassNames, noOp, removeCamelCase } from '../../../tools/general/helpers.util';
+import {
+  CAMERA,
+  CHARTS,
+  DROPDOWN,
+  HARVEST,
+  HARVEST_ICON,
+  PENCIL,
+  RAIN_CLOUDS,
+  UNIT,
+  WARNING,
+  WATCH
+} from '../../../tools/general/system-variables.util';
+import { getClassNames, isEmpty, noOp, removeCamelCase } from '../../../tools/general/helpers.util';
 import { handleColumnHeaderClick, hideColumnHeader } from './table-functions.util';
+
+import { retrieveLastSelectedUserFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import SVGIcon from '../../../tools/icons/SVGIcon';
 import ToolTip from '../tool-tip/ToolTip';
@@ -12,6 +25,8 @@ import ToolTip from '../tool-tip/ToolTip';
 import './table.scss';
 
 const Table = ({ tableName, tableData, hiddenColumns }) => {
+
+  const activeUser = retrieveLastSelectedUserFromLocalStorage();
 
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [ascendingSort, setAscendingSort] = useState(true);
@@ -172,6 +187,7 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               return <td onClick={ noOp() }
                          key={ index }>
                 <div className={ 'table__body__row__td-container' }>
+                  { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
                   <div className={ 'table__body__row__td-upper--deficit' }
                        style={ {
                          backgroundColor: value?.colorTop
@@ -203,9 +219,26 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                 return <td onClick={ noOp() }
                            key={ index }
                            className={ 'table__body__row__td--dark' }>
-                  <div className={ 'table__body__row__td-container' }>
-                    <p> { (value === 0) ? '' : value }</p>
-                  </div>
+
+                  { (!value?.harvest) &&
+                    <div className={ 'table__body__row__td-container' }>
+                      <div> { (value?.data === 0) ? '' : value?.data }</div>
+                    </div> }
+
+                  { (value?.harvest && (value?.data === 0)) &&
+                    <div className={ 'table__body__row__td-container__icon-right' }>
+                      <ToolTip text={ HARVEST } />
+                      <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
+                    </div> }
+
+                  { (value?.harvest && value?.data !== 0) &&
+                    <div className={ 'table__body__row__td-container' }>
+                      { (value?.data === 0) ? '' : value?.data }
+                      <div className={ 'table__body__row__td-container__icon' }>
+                        <ToolTip text={ HARVEST } />
+                        <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
+                      </div>
+                    </div> }
                 </td>;
               else
                 return <td key={ index } />;
@@ -218,7 +251,7 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                            key={ index }
                            className={ 'table__body__row__td--light' }>
                   <div className={ 'table__body__row__td-container' }>
-                    <p> { (value === 0) ? '' : value }</p>
+                    <p> { (value?.data === 0) ? '' : value?.data }</p>
                   </div>
                 </td>;
               else
@@ -255,6 +288,19 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
               else
                 return <td key={ index } />;
             }
+            case 23:
+            case 24:
+            case 25: {
+              if (!isHeaderRow)
+                return <td onClick={ noOp() }
+                           key={ index }>
+                  <div className={ 'table__body__row__td-container--centered' }>
+                    { (value === 0) ? '' : value }
+                  </div>
+                </td>;
+              else
+                return <td key={ index } />;
+            }
             default: {
               return <td onClick={ noOp() }
                          key={ index }>
@@ -277,7 +323,9 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
 
     return (
       <tbody className="table__body">
-      { rows }
+      { (!isEmpty(rows)) ? rows :
+        <tr>{ `No active fields currently set up on ${ activeUser?.groupName?.toUpperCase() } -
+            ${ activeUser?.clientName?.toUpperCase() }` }</tr> }
       </tbody>
     );
   };

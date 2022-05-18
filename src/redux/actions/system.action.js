@@ -1,8 +1,7 @@
 export const ADD_SYSTEM_NOTICE = '[SYSTEM_STORE] Add system notice';
-export const addSystemNotice = (message, color, alertType) => ({
+export const addSystemNotice = (message, alertType) => ({
   type: ADD_SYSTEM_NOTICE,
   message,
-  color,
   alertType
 });
 

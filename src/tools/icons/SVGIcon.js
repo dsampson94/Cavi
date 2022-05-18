@@ -9,6 +9,7 @@ import {
   CHARTS,
   DROPDOWN,
   EMAIL_RECOMMENDATIONS,
+  HARVEST_ICON,
   LOG_OUT_ICON,
   MAPS_ICON,
   PENCIL,
@@ -16,6 +17,7 @@ import {
   PRINT_ICON,
   RAIN_CLOUDS,
   REPORT_PROBLEM_ICON,
+  SEARCH,
   SETTINGS_GEAR,
   WARNING,
   WATCH,
@@ -27,13 +29,7 @@ import { getTheme } from '../../redux/actions/system.action';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({
-                   name,
-                   width,
-                   height,
-                   fill,
-                   activeTheme
-                 }) => {
+const SVGIcon = ({ name, fill, activeTheme, height, width }) => {
 
   const dispatch = useDispatch();
 
@@ -45,11 +41,12 @@ const SVGIcon = ({
     <div className={ getClassNames('svg-icon', { tiny: (name === WATCH || name === RAIN_CLOUDS) }) }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
-           width={ width }
            height={ height }
+           width={ width }
            fill={ (activeTheme === 'dark') ?
              (name === WATCH || name === RAIN_CLOUDS) ?
-               'white' : '#757575' : fill }
+               'white' : (name === WARNING || name === CAMERA || name === HARVEST_ICON || name === SEARCH ) ?
+                 fill : '#757575' : fill }
            viewBox={ getViewBox(name) }>
         { getPath(name) }
       </svg>
@@ -77,6 +74,10 @@ const getViewBox = name => {
       return '0 -9 50 60';
     case BULLSEYE:
       return '0 -9 50 60';
+    case HARVEST_ICON:
+      return '0 -4 50 60';
+    case SEARCH:
+      return '-6 -5 70 75';
     default:
       return '-6 0 36 24';
   }
@@ -142,6 +143,11 @@ const getPath = (name) => {
           <path
             d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" />
         </g>
+      );
+    case HARVEST_ICON:
+      return (
+        <path
+          d="M7.25 18.05Q6.7 18.05 6.3 17.6Q5.9 17.15 5.9 16.55Q5.9 15.95 6.3 15.5Q6.7 15.05 7.25 15.05H14.7Q16.15 15.05 16.95 15.95Q17.75 16.85 18 18.05ZM11.5 37Q14.2 37 16.1 35.1Q18 33.2 18 30.5Q18 27.8 16.1 25.9Q14.2 24 11.5 24Q8.8 24 6.9 25.9Q5 27.8 5 30.5Q5 33.2 6.9 35.1Q8.8 37 11.5 37ZM39.25 37Q40.8 37 41.9 35.9Q43 34.8 43 33.25Q43 31.7 41.9 30.6Q40.8 29.5 39.25 29.5Q37.7 29.5 36.6 30.6Q35.5 31.7 35.5 33.25Q35.5 34.8 36.6 35.9Q37.7 37 39.25 37ZM11.5 34Q10.05 34 9.025 32.975Q8 31.95 8 30.5Q8 29.05 9.025 28.025Q10.05 27 11.5 27Q12.95 27 13.975 28.025Q15 29.05 15 30.5Q15 31.95 13.975 32.975Q12.95 34 11.5 34ZM40.5 26.6Q41.45 26.85 42.075 27.15Q42.7 27.45 43.5 28.05V15.05Q43.5 13.75 42.65 12.9Q41.8 12.05 40.5 12.05H26.9L24.45 9.6L27.55 6.5L26.65 5.6L19.55 12.7L20.5 13.6L23.55 10.55L26 12.95V18.15Q26 20.25 24.575 21.725Q23.15 23.2 21.05 23.2H17.6Q18.45 23.9 18.925 24.55Q19.4 25.2 20 26.2H21.05Q24.3 26.2 26.65 23.8Q29 21.4 29 18.15V15.05H40.5Q40.5 15.05 40.5 15.05Q40.5 15.05 40.5 15.05ZM32.65 32Q32.95 30.9 33.275 30.275Q33.6 29.65 34.2 28.95H20.9Q21 29.85 21 30.475Q21 31.1 20.9 32ZM39.25 40Q36.45 40 34.475 38.1Q32.5 36.2 32.5 33.4Q32.5 30.6 34.55 28.55Q36.6 26.5 39.4 26.5Q42.2 26.5 44.1 28.475Q46 30.45 46 33.25Q46 36.05 44.025 38.025Q42.05 40 39.25 40ZM11.4 40Q7.45 40 4.725 37.225Q2 34.45 2 30.5Q2 26.55 4.775 23.775Q7.55 21 11.5 21Q15.45 21 18.225 23.775Q21 26.55 21 30.5Q21 34.45 18.225 37.225Q15.45 40 11.4 40ZM31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Q31.1 22 31.1 22Z" />
       );
     case SETTINGS_GEAR:
       return (
@@ -214,6 +220,11 @@ const getPath = (name) => {
         <path
           d="M18.3 44 15.95 35.45Q13.2 33.7 11.6 30.7Q10 27.7 10 24Q10 20.3 11.6 17.275Q13.2 14.25 15.95 12.55L18.3 4H29.7L32.05 12.55Q34.8 14.25 36.4 17.275Q38 20.3 38 24Q38 27.7 36.4 30.7Q34.8 33.7 32.05 35.45L29.7 44ZM24 35Q28.6 35 31.8 31.8Q35 28.6 35 24Q35 19.4 31.8 16.2Q28.6 13 24 13Q19.4 13 16.2 16.2Q13 19.4 13 24Q13 28.6 16.2 31.8Q19.4 35 24 35ZM19.65 10.8Q22 10.1 24.025 10.1Q26.05 10.1 28.35 10.8L27.45 7H20.55ZM20.55 41H27.45L28.35 37.2Q26 37.85 24 37.85Q22 37.85 19.65 37.2ZM19.65 7H20.55H27.45H28.35Q26.05 7 24.025 7Q22 7 19.65 7ZM20.55 41H19.65Q22 41 24 41Q26 41 28.35 41H27.45Z" />
       );
+    case SEARCH:
+      return (
+        <path
+          d="M39.8 41.95 26.65 28.8Q25.15 30.1 23.15 30.825Q21.15 31.55 18.9 31.55Q13.5 31.55 9.75 27.8Q6 24.05 6 18.75Q6 13.45 9.75 9.7Q13.5 5.95 18.85 5.95Q24.15 5.95 27.875 9.7Q31.6 13.45 31.6 18.75Q31.6 20.9 30.9 22.9Q30.2 24.9 28.8 26.65L42 39.75ZM18.85 28.55Q22.9 28.55 25.75 25.675Q28.6 22.8 28.6 18.75Q28.6 14.7 25.75 11.825Q22.9 8.95 18.85 8.95Q14.75 8.95 11.875 11.825Q9 14.7 9 18.75Q9 22.8 11.875 25.675Q14.75 28.55 18.85 28.55Z" />
+      );
     default:
       return <path />;
   }
@@ -221,20 +232,20 @@ const getPath = (name) => {
 
 SVGIcon.defaultProps = {
   name: undefined,
-  width: undefined,
-  height: undefined,
   fill: 'black',
   hoverEnabled: undefined,
-  hoverText: undefined
+  hoverText: undefined,
+  height: '40px',
+  width: '40px'
 };
 
 SVGIcon.propTypes = {
   name: string,
-  width: string,
-  height: string,
   fill: string,
   hoverEnabled: bool,
-  hoverText: string
+  hoverText: string,
+  height: string,
+  width: string
 };
 
 const mapStateToProps = ({ system }) => ({
