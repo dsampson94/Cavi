@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { array } from 'prop-types';
 import { SEARCH } from '../../../tools/general/system-variables.util';
@@ -12,10 +12,8 @@ const TableSearch = ({
                        name,
                        value,
                        type,
-                       label,
                        dataToFilter,
                        setFilteredData,
-                       onChange,
                        placeholder,
                        disabled,
                        sidebar,
@@ -24,27 +22,17 @@ const TableSearch = ({
 
   const [searchString, setSearchString] = useState('');
 
-  useEffect(() => {
-    if (!isEmpty(dataToFilter)) {
-      if (searchString.length > 2) {
-        filter();
-      } else {
-        setFilteredData(dataToFilter);
-      }
-    }
-  });
-
   const filter = () => {
     const filteredData = [];
-    dataToFilter.forEach((object) => {
-      let string = '';
-      for (const property in object) {
-        string = string + object[property];
-      }
-      if (string.toLowerCase().includes(searchString.toLowerCase())) {
-        filteredData.push(object);
-      }
-    });
+    if (table) {
+      dataToFilter.forEach((object) => {
+        if (object?.fieldName?.locationName?.toLowerCase()?.includes(searchString?.toLowerCase())) {
+          filteredData.push(object);
+        } else if (object?.fieldName?.type?.toLowerCase()?.includes(searchString?.toLowerCase())) {
+          filteredData.push(object);
+        }
+      });
+    }
 
     if (isEmpty(filteredData)) {
       setFilteredData(dataToFilter);
@@ -52,8 +40,6 @@ const TableSearch = ({
       setFilteredData(filteredData);
     }
   };
-
-  const handleChange = ({ target }) => setSearchString(target.value);
 
   return (
     <div className={ 'search' }>
@@ -64,7 +50,13 @@ const TableSearch = ({
              value={ value }
              type={ type }
              placeholder={ placeholder }
-             onChange={ onChange }
+             onChange={ ({ target }) => setSearchString(target.value) }
+             onKeyPress={ event => {
+               if (event.key === 'Enter') {
+                 filter();
+               }
+             } }
+             autoFocus
              disabled={ disabled }
              className={ getClassNames('search__input', { sidebar, table }) } />
     </div>

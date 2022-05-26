@@ -2,12 +2,13 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
-import { bool, string } from 'prop-types';
+import { string } from 'prop-types';
 import {
   BULLSEYE,
   CAMERA,
   CHARTS,
   DROPDOWN,
+  DROPDOWN_ALL,
   EMAIL_RECOMMENDATIONS,
   HARVEST_ICON,
   LOG_OUT_ICON,
@@ -29,7 +30,7 @@ import { getTheme } from '../../redux/actions/system.action';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, activeTheme, height, width }) => {
+const SVGIcon = ({ name, fill, activeTheme, height, width, onClick }) => {
 
   const dispatch = useDispatch();
 
@@ -38,14 +39,15 @@ const SVGIcon = ({ name, fill, activeTheme, height, width }) => {
   });
 
   return (
-    <div className={ getClassNames('svg-icon', { tiny: (name === WATCH || name === RAIN_CLOUDS) }) }>
+    <div className={ getClassNames('svg-icon', { tiny: (name === WATCH || name === RAIN_CLOUDS) }) }
+         onClick={ onClick }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
            height={ height }
            width={ width }
            fill={ (activeTheme === 'dark') ?
              (name === WATCH || name === RAIN_CLOUDS) ?
-               'white' : (name === WARNING || name === CAMERA || name === HARVEST_ICON || name === SEARCH ) ?
+               'white' : (name === WARNING || name === CAMERA || name === HARVEST_ICON || name === SEARCH) ?
                  fill : '#757575' : fill }
            viewBox={ getViewBox(name) }>
         { getPath(name) }
@@ -78,6 +80,8 @@ const getViewBox = name => {
       return '0 -4 50 60';
     case SEARCH:
       return '-6 -5 70 75';
+    case DROPDOWN_ALL:
+      return '1 3 18 18';
     default:
       return '-6 0 36 24';
   }
@@ -164,6 +168,7 @@ const getPath = (name) => {
             d="M11 15h2v2h-2v-2zm0-8h2v6h-2V7zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
         </g>
       );
+    case DROPDOWN_ALL:
     case DROPDOWN:
       return (
         <g>
@@ -233,8 +238,6 @@ const getPath = (name) => {
 SVGIcon.defaultProps = {
   name: undefined,
   fill: 'black',
-  hoverEnabled: undefined,
-  hoverText: undefined,
   height: '40px',
   width: '40px'
 };
@@ -242,8 +245,6 @@ SVGIcon.defaultProps = {
 SVGIcon.propTypes = {
   name: string,
   fill: string,
-  hoverEnabled: bool,
-  hoverText: string,
   height: string,
   width: string
 };

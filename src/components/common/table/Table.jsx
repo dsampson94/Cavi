@@ -2,54 +2,49 @@ import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape, string } from 'prop-types';
 
-import {
-  CAMERA,
-  CHARTS,
-  DROPDOWN,
-  HARVEST,
-  HARVEST_ICON,
-  PENCIL,
-  RAIN_CLOUDS,
-  UNIT,
-  WARNING,
-  WATCH
-} from '../../../tools/general/system-variables.util';
+import { CAMERA, CHARTS, DROPDOWN, PENCIL, RAIN_CLOUDS, UNIT, WARNING, WATCH } from '../../../tools/general/system-variables.util';
 import { getClassNames, isEmpty, noOp, removeCamelCase } from '../../../tools/general/helpers.util';
-import { handleColumnHeaderClick, hideColumnHeader } from './table-functions.util';
 
 import { retrieveLastSelectedUserFromLocalStorage } from '../../../tools/storage/localStorage';
 
+import { handleColumnHeaderClick, hideColumnHeader } from './table-functions.util';
+import { DarkenedColumn, DropDown, LightenedColumn } from './table-components.util';
+
 import SVGIcon from '../../../tools/icons/SVGIcon';
 import ToolTip from '../tool-tip/ToolTip';
-
-import './table.scss';
 
 const Table = ({ tableName, tableData, hiddenColumns }) => {
 
   const activeUser = retrieveLastSelectedUserFromLocalStorage();
 
-  const [filteredTableData, setFilteredTableData] = useState([]);
+  const [activeTableData, setActiveTableData] = useState([]);
   const [ascendingSort, setAscendingSort] = useState(true);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(undefined);
 
   useEffect(() => {
-      setFilteredTableData([...tableData]);
+      setActiveTableData(tableData);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [tableData]);
 
+  useEffect(() => {
+      if (!selectedRowIndex) return;
+      const copyOfActiveList = [...tableData];
+      tableData.splice(selectedRowIndex, 1,
+        { ...copyOfActiveList[selectedRowIndex], expanded: !tableData[selectedRowIndex].expanded });
+      setActiveTableData([...tableData]);
+      setSelectedRowIndex(undefined);
+    }
+  );
+
   const buildTableHeader = () => {
     let headers;
-    if (filteredTableData?.length !== 0) {
-      const objectKeys = Object.keys(filteredTableData[0]);
+    if (activeTableData?.length !== 0) {
+      const objectKeys = Object.keys(activeTableData[0]);
       headers = objectKeys.filter((key) => !hiddenColumns.includes(key)).map((key, index) => (
-        <th style={ {
-          color: hideColumnHeader(tableName, key)
-        } }
-            key={ index }
-            onClick={ () => {
-              handleColumnHeaderClick(key, ascendingSort, setAscendingSort, filteredTableData, setFilteredTableData);
-            } }>
+        <th key={ index }
+            style={ { color: hideColumnHeader(tableName, key) } }
+            onClick={ () => handleColumnHeaderClick(key, ascendingSort, setAscendingSort, activeTableData, setActiveTableData) }>
           <div className="table__header-row__text">
             { removeCamelCase(key) }
           </div>
@@ -67,9 +62,10 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
   };
 
   const buildTableBody = () => {
-    const rows = filteredTableData?.map((object, index) => {
+    const rows = activeTableData?.map((object, rowIndex) => {
       let objectLocationName = object?.fieldName?.locationName;
       let isHeaderRow = (objectLocationName?.includes('-forecast') || objectLocationName?.includes('-landGroup'));
+      let isDropdownRow = object?.b?.sublande;
 
       const objectValues = [];
       for (const property in object) {
@@ -79,13 +75,13 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
       }
 
       let tableDataElements = [];
-      if (filteredTableData?.length > 0) {
-        tableDataElements = objectValues?.map((value, index) => {
-          switch (index) {
+      if (activeTableData?.length > 0) {
+        tableDataElements = objectValues?.map((value, dataIndex) => {
+          switch (dataIndex) {
             case 0: {
               if (value?.locationName?.includes('-forecast')) {
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container-forecast' }>
                     <div className={ 'table__body__row__td-container-forecast-upper' }>{ value?.locationName?.slice(0, -9) }</div>
                     <div className={ 'table__body__row__td-container-forecast-lower' }>{ 'mock climate text' }</div>
@@ -93,25 +89,27 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                 </td>;
               } else if (value?.locationName?.includes('-landGroup')) {
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container-landgroup' }>
                     { value?.locationName?.slice(0, -10) }
                   </div>
                 </td>;
               } else {
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container' }>
                     <div className={ 'table__body__row__td-upper' }>{ value?.locationName }</div>
                     <div className={ 'table__body__row__td-lower' }>{ value?.type }</div>
                   </div>
+                  <DropDown value={ value }
+                            columnNumber={ 0 } />
                 </td>;
               }
             }
             case 1: {
               if (value)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container' }>
                     <ToolTip text={ value } />
                     <SVGIcon name={ WARNING }
@@ -119,25 +117,27 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 2: {
               if (value)
-                return <td onClick={ noOp() }
-                           key={ index }>
-                  <div className={ 'table__body__row__td-container' }
-                       onClick={ () => setShowDropdown(!showDropdown) }>
-                    <ToolTip text={ value } />
-                    <SVGIcon name={ DROPDOWN } />
-                  </div>
+                return <td onClick={ () => setSelectedRowIndex(rowIndex + 1) }
+                           key={ dataIndex }>
+                  { (value?.tooltip) &&
+                    <div className={ 'table__body__row__td-container' }>
+                      <ToolTip text={ value?.tooltip } />
+                      <SVGIcon name={ DROPDOWN } />
+                    </div> }
+                  <DropDown value={ value }
+                            columnNumber={ 2 } />
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 3: {
               if (value)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container' }>
                     <ToolTip text={ value } />
                     <SVGIcon name={ CAMERA }
@@ -145,131 +145,146 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 4: {
               if (value)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container--centered-last' }>
                     <ToolTip text={ value?.tooltip } />
                     { (value?.lastReading.includes('1970/')) ? '---' : value?.lastReading }
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 5: {
               if (value)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container' }>
                     <ToolTip text={ value } />
                     <SVGIcon name={ PENCIL } />
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 6: {
               if (value)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container' }>
                     <ToolTip text={ value } />
                     <SVGIcon name={ CHARTS } />
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 7: {
               return <td onClick={ noOp() }
-                         key={ index }>
-                <div className={ 'table__body__row__td-container' }>
-                  { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
-                  <div className={ 'table__body__row__td-upper--deficit' }
-                       style={ {
-                         backgroundColor: value?.colorTop
-                       } }>
-                    { value?.top }
-                  </div>
-                  <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
-                       style={ {
-                         backgroundColor: value?.colorBot
-                       } }>
-                    { value?.bottom }
-                  </div>
-                </div>
+                         key={ dataIndex }>
+                { !isDropdownRow &&
+                  <div className={ 'table__body__row__td-container' }>
+                    { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
+                    <div className={ 'table__body__row__td-upper--deficit' }
+                         style={ {
+                           backgroundColor: value?.colorTop
+                         } }>
+                      { value?.top }
+                    </div>
+                    <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
+                         style={ {
+                           backgroundColor: value?.colorBot
+                         } }>
+                      { value?.bottom }
+                    </div>
+                  </div> }
               </td>;
             }
             case 8: {
               return <td onClick={ noOp() }
-                         key={ index }>
+                         key={ dataIndex }>
                 <div className={ 'table__body__row__td-container--centered' }>
                   { value?.slice(0, 2) }
                 </div>
               </td>;
             }
-            case 9:
-            case 11:
-            case 13:
+            case 9: {
+              if (!isHeaderRow)
+                return <DarkenedColumn dataIndex={ dataIndex }
+                                       columnNumber={ 9 }
+                                       value={ value } />;
+              else
+                return <td key={ dataIndex } />;
+            }
+            case 11: {
+              if (!isHeaderRow)
+                return <DarkenedColumn dataIndex={ dataIndex }
+                                       columnNumber={ 11 }
+                                       value={ value } />;
+              else
+                return <td key={ dataIndex } />;
+            }
+            case 13: {
+              if (!isHeaderRow)
+                return <DarkenedColumn dataIndex={ dataIndex }
+                                       columnNumber={ 13 }
+                                       value={ value } />;
+              else
+                return <td key={ dataIndex } />;
+            }
             case 15: {
               if (!isHeaderRow)
-                return <td onClick={ noOp() }
-                           key={ index }
-                           className={ 'table__body__row__td--dark' }>
-
-                  { (!value?.harvest) &&
-                    <div className={ 'table__body__row__td-container' }>
-                      <div> { (value?.data === 0) ? '' : value?.data }</div>
-                    </div> }
-
-                  { (value?.harvest && (value?.data === 0)) &&
-                    <div className={ 'table__body__row__td-container__icon-right' }>
-                      <ToolTip text={ HARVEST } />
-                      <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-                    </div> }
-
-                  { (value?.harvest && value?.data !== 0) &&
-                    <div className={ 'table__body__row__td-container' }>
-                      { (value?.data === 0) ? '' : value?.data }
-                      <div className={ 'table__body__row__td-container__icon' }>
-                        <ToolTip text={ HARVEST } />
-                        <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-                      </div>
-                    </div> }
-                </td>;
+                return <DarkenedColumn dataIndex={ dataIndex }
+                                       columnNumber={ 15 }
+                                       value={ value } />;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
-            case 10:
-            case 12:
+            case 10: {
+              if (!isHeaderRow)
+                return <LightenedColumn dataIndex={ dataIndex }
+                                        columnNumber={ 10 }
+                                        value={ value } />;
+              else
+                return <td key={ dataIndex } />;
+            }
+            case 12: {
+              if (!isHeaderRow)
+                return <LightenedColumn dataIndex={ dataIndex }
+                                        columnNumber={ 12 }
+                                        value={ value } />;
+              else
+                return <td key={ dataIndex } />;
+            }
             case 14: {
               if (!isHeaderRow)
-                return <td onClick={ noOp() }
-                           key={ index }
-                           className={ 'table__body__row__td--light' }>
-                  <div className={ 'table__body__row__td-container' }>
-                    <p> { (value?.data === 0) ? '' : value?.data }</p>
-                  </div>
-                </td>;
+                return <LightenedColumn dataIndex={ dataIndex }
+                                        columnNumber={ 14 }
+                                        value={ value } />;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 16: {
               if (!isHeaderRow)
                 return <td onClick={ noOp() }
-                           key={ index }
+                           key={ dataIndex }
                            className={ 'table__body__row__td--fade' }>
-                  <ToolTip text={ UNIT } />
-                  <SVGIcon name={ RAIN_CLOUDS }
-                           fill={ '#043b6e' } />
-                  <SVGIcon name={ WATCH }
-                           fill={ '#043b6e' } />
+                  { !value?.dropdown &&
+                    <>
+                      <ToolTip text={ UNIT } />
+                      <SVGIcon name={ RAIN_CLOUDS }
+                               fill={ '#043b6e' } />
+                      <SVGIcon name={ WATCH }
+                               fill={ '#043b6e' } />
+                    </>
+                  }
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 17:
             case 18:
@@ -279,31 +294,32 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
             case 22: {
               if (!isHeaderRow)
                 return <td onClick={ noOp() }
-                           key={ index }
+                           key={ dataIndex }
                            className={ 'table__body__row__td--fade' }>
                   <div className={ 'table__body__row__td-container' }>
-                    <p> { (value === 0) ? '' : value }</p>
+                    <p> { (value?.upper === 0) ? '' : value?.upper }</p>
+                    <p> { (value?.lower === 0) ? '' : value?.lower }</p>
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             case 23:
             case 24:
             case 25: {
               if (!isHeaderRow)
                 return <td onClick={ noOp() }
-                           key={ index }>
+                           key={ dataIndex }>
                   <div className={ 'table__body__row__td-container--centered' }>
-                    { (value === 0) ? '' : value }
+                    { value }
                   </div>
                 </td>;
               else
-                return <td key={ index } />;
+                return <td key={ dataIndex } />;
             }
             default: {
               return <td onClick={ noOp() }
-                         key={ index }>
+                         key={ dataIndex }>
                 <div className={ 'table__body__row__td-container--centered' }>
                   { (value === 0) ? '' : value }
                 </div>
@@ -314,18 +330,28 @@ const Table = ({ tableName, tableData, hiddenColumns }) => {
       }
 
       return (
-        <tr className={ getClassNames('table__body__row', { header: isHeaderRow }) }
-            key={ index }>
-          { tableDataElements }
-        </tr>
+        <>
+          { !isDropdownRow &&
+            <tr className={ getClassNames('table__body__row', { header: isHeaderRow }) }
+                key={ rowIndex }>
+              { tableDataElements }
+            </tr> }
+
+          { object.expanded && isDropdownRow &&
+            <tr className={ 'table__body__row' }
+                key={ rowIndex }>
+              { tableDataElements }
+            </tr> }
+        </>
       );
     });
 
     return (
       <tbody className="table__body">
       { (!isEmpty(rows)) ? rows :
-        <tr>{ `No active fields currently set up on ${ activeUser?.groupName?.toUpperCase() } -
-            ${ activeUser?.clientName?.toUpperCase() }` }</tr> }
+        <tr>
+          { `No active fields currently set up on ${ activeUser?.groupName?.toUpperCase() } - ${ activeUser?.clientName?.toUpperCase() }` }
+        </tr> }
       </tbody>
     );
   };

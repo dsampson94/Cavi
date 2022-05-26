@@ -7,6 +7,8 @@
 
 .search {
   display: flex;
+  position: relative;
+  z-index: 6;
   flex-direction: row;
   margin: util.rem(4);
   height: util.rem(25);
@@ -15,12 +17,16 @@
 
   &__icon {
     position: relative;
+    z-index: 6;
     width: util.rem(20);
-    height: util.rem(19);
+    height: 100%;
   }
 
   &__input {
     width: 100%;
+    position: relative;
+    z-index: 9;
+    max-height: 100%;
     text-align: left;
     border: none;
     padding-top: util.rem(1);
@@ -42,10 +48,6 @@
 
     &--sidebar {
       height: util.rem(35);
-    }
-
-    &--table {
-      margin-left: util.rem(2);
     }
   }
 

@@ -18,7 +18,7 @@
     position: absolute;
     word-wrap: normal;
     font-size: util.rem(12);
-    margin-left: util.rem(18);
+    margin-left: util.rem(35);
     margin-top: util.rem(18);
     border-radius: map.get(radius.$border-radius, medium);
     padding: util.rem(4);
@@ -28,7 +28,7 @@
     background-color: map.get(color.$colorMap, light-mode-tooltip-white);
 
     &--left {
-      margin-left: util.rem(-130);
+      margin-left: util.rem(-125);
     }
   }
 }

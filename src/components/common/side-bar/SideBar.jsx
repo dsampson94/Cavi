@@ -28,7 +28,7 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
   const userAccount = retrieveUserFromLocalStorage();
   const lastSelectedUser = retrieveLastSelectedUserFromLocalStorage()?.clientName;
 
-  const [filteredTableData, setFilteredTableData] = useState([]);
+  const [filteredSideBarData, setFilteredSideBarData] = useState(undefined);
 
   const handleSubHeaderClick = (groupName, clientName) => {
     dispatch({ type: SET_CLIENT_NAME, groupName, clientName });
@@ -40,7 +40,7 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
   const mappedUserData = () => {
     let mappedClients = [];
     delete userAccount.access;
-    for (const [{}, listValues] of new Map(Object.entries(userAccount)).entries()) {
+    for (const [{}, listValues] of new Map(Object.entries((filteredSideBarData) ? filteredSideBarData : userAccount)).entries()) {
       for (const [objectKey, objectValue] of new Map(Object.entries(listValues)).entries()) {
         const innerObjectValueList = [];
         for (const [iok, iov] of new Map(Object.entries(objectValue)).entries()) {
@@ -86,8 +86,8 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
   return (
     <div className={ getClassNames('side-bar', { show: showSideBar }) }>
       { showSideBar &&
-        <TableSearch dataToFilter={ filteredTableData }
-                     setFilteredData={ setFilteredTableData } /> }
+        <TableSearch dataToFilter={ (filteredSideBarData) ? filteredSideBarData : userAccount }
+                     setFilteredData={ setFilteredSideBarData } sidebar /> }
 
       { showSideBar &&
         <div className="side-bar__list__header">MY CLIENTS</div> }

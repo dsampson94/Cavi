@@ -52,7 +52,12 @@
 
         &__text {
           font-size: util.rem(12);
-          width: 90%;
+          overflow-x: hidden;
+          width: 89%;
+        }
+
+        &__icon {
+          width: util.rem(18);
         }
 
         &--selected {
@@ -63,7 +68,7 @@
   }
 
   &--show {
-    width: 15%;
+    width: 14%;
   }
 
   &__lower-button {

@@ -14,7 +14,7 @@
   &__header {
     position: sticky;
     box-shadow: 0 util.rem(0.9);
-    background-color: map.get(color.$colorMap, white);
+    background-color: map.get(color.$colorMap, light-mode-white);
     z-index: 9;
     top: 0;
 
@@ -45,6 +45,7 @@
   &__body {
 
     &__row {
+      transition: 1s;
       border-bottom: util.rem(0.5) solid map.get(color.$colorMap, grey);
 
       td {
@@ -85,7 +86,6 @@
         &-container {
           display: flex;
           flex-direction: column;
-          margin: util.rem(0.5) 0 util.rem(1) 0;
 
           p {
             padding: 0 util.rem(2) 0 util.rem(2);
@@ -193,6 +193,20 @@
 
       &--header {
         border-bottom: none;
+      }
+
+      &--dropdown {
+        font-size: util.rem(11);
+
+        &__icon {
+
+          &--left {
+            padding-left: util.rem(6);
+            text-align: left;
+          }
+
+        }
+
       }
 
       &:hover {

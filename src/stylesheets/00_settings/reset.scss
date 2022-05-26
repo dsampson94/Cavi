@@ -14,7 +14,6 @@ html {
 html, body {
   height: 100%;
   margin: 0;
-  overflow-x: hidden;
 }
 
 body.light-mode {
@@ -29,7 +28,7 @@ body.light-mode {
   .search__input,
   .search__icon{
     transition: 1s;
-    background-color: map.get(color.$colorMap, white);
+    background-color: map.get(color.$colorMap, light-mode-white);
   }
 
   .input__wrapper input {
@@ -38,7 +37,7 @@ body.light-mode {
 
   .table__header-row {
     transition: 0.7s;
-    background-color: map.get(color.$colorMap, white);
+    background-color: map.get(color.$colorMap, light-mode-white);
   }
 
   .table__body__row__td-upper {
@@ -130,7 +129,7 @@ body.dark-mode {
   }
 
   .input__label-container--login {
-    color: map.get(color.$colorMap, white);
+    background-color: map.get(color.$colorMap, light-mode-white);
   }
 
   .snack {

@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 import { tableTemplateData } from '../../../common/table/table-functions.util';
-import { ACCURACY_ANALYSIS, BULLSEYE, PREVIOUS, PREVIOUS_RECOMMENDATIONS } from '../../../../tools/general/system-variables.util';
+import {
+  ACCURACY_ANALYSIS,
+  BULLSEYE,
+  DROPDOWN_ALL,
+  PREVIOUS,
+  PREVIOUS_RECOMMENDATIONS
+} from '../../../../tools/general/system-variables.util';
 import { retrieveLastSelectedUserFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
@@ -12,37 +18,35 @@ import Button from '../../../common/button/Button';
 
 import './recommendation-client-view.scss';
 
-const RecommendationClientView = ({ fieldList, fieldRainData }) => {
+const RecommendationClientView = ({ fieldList }) => {
 
   const activeUser = retrieveLastSelectedUserFromLocalStorage();
 
-  const getHiddenDateColumns = () => {
-    const columnList = [];
-    if (fieldRainData) {
-      let KeyOne = Object.keys(fieldRainData)[0];
-      columnList.push(`${ KeyOne }L`);
-      let KeyTwo = Object.keys(fieldRainData)[1];
-      columnList.push(`${ KeyTwo }L`);
-      let KeyThree = Object.keys(fieldRainData)[2];
-      columnList.push(`${ KeyThree }L`);
-      let KeyFour = Object.keys(fieldRainData)[3];
-      columnList.push(`${ KeyFour }L`);
-      return columnList;
-    } else {
-      return columnList;
-    }
+  const [filteredTableData, setFilteredTableData] = useState(undefined);
+  const [allDropdownsExpanded, setAllDropdownsExpanded] = useState(false);
+
+  useEffect(() => {
+    setFilteredTableData(undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fieldList]);
+
+  const allDropdownsToggle = () => {
+    setAllDropdownsExpanded(!allDropdownsExpanded);
   };
 
   const TableTopBar = () => {
     return (
       <div className="recommendation-client-view__topbar">
         <div className="recommendation-client-view__topbar-left">
+          <div className="recommendation-client-view__topbar-left-button">
+            <Button icon={ DROPDOWN_ALL } onClick={ allDropdownsToggle } />
+          </div>
           <p>{ `Recommendations: ${ activeUser?.groupName?.toUpperCase() } -
             ${ activeUser?.clientName?.toUpperCase() }` }</p>
         </div>
         <div className="recommendation-client-view__topbar-right">
           <Button icon={ BULLSEYE }
-                  iconFill={'#C24C41'}
+                  iconFill={ '#C24C41' }
                   tooltip={ ACCURACY_ANALYSIS }
                   spaced />
           <Button label={ 'Reports' }
@@ -53,6 +57,9 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
           <Button label={ 'Show Archives' }
                   spaced />
           <Button label={ 'Reload Recommendations' }
+                  onClick={ () => {
+                    setFilteredTableData(undefined);
+                  } }
                   spaced />
         </div>
       </div>
@@ -62,7 +69,10 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
   const TableSearchBar = () => {
     return (
       <div className="recommendation-client-view__search">
-        <TableSearch placeholder={ 'Search field or probe number' } />
+        { (fieldList.length > 10) &&
+          <TableSearch placeholder={ 'Search field or probe number' }
+                       dataToFilter={ (filteredTableData) ? filteredTableData : fieldList }
+                       setFilteredData={ setFilteredTableData } table /> }
       </div>
     );
   };
@@ -74,8 +84,8 @@ const RecommendationClientView = ({ fieldList, fieldRainData }) => {
         <TableSearchBar />
         <div className="recommendation-client-view__scroll">
           <Table tableName={ 'recommendationClientFieldView' }
-                 tableData={ fieldList }
-                 hiddenColumns={ ['id', '30dL', 'TotalL'].concat(getHiddenDateColumns()) }
+                 tableData={ (filteredTableData) ? filteredTableData : fieldList }
+                 hiddenColumns={ ['expanded'] }
                  tableDataTemplate={ tableTemplateData } />
         </div>
       </div>

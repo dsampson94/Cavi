@@ -5,7 +5,7 @@ import { arrayOf, shape } from 'prop-types';
 import { CAPTURE, QUICK_VIEW } from '../../../../tools/general/system-variables.util';
 
 import { retrieveLastSelectedUserFromLocalStorage, retrieveUserLoginFromLocalStorage } from '../../../../tools/storage/localStorage';
-import { requestClientFieldList, requestClientFieldRainData, requestSelectedClient } from '../../../../redux/actions/client.action';
+import { requestClientFieldList, requestSelectedClient } from '../../../../redux/actions/client.action';
 
 import RecommendationClientView from './RecommendationClientView';
 
@@ -40,6 +40,11 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
 
   const mappedFieldList = () => {
     const rainData = [];
+    let rainDataUpper = [];
+    let rainDataLower = [];
+    const tableList = [];
+    const mappedList = [];
+
     for (let field in fieldRainData[1]) {
       rainData?.push({ upper: fieldRainData[1][field] });
     }
@@ -50,8 +55,6 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
       }
     }
 
-    let rainDataUpper = [];
-    let rainDataLower = [];
     for (let index in rainData) {
       if (Object.keys(rainData[index])[0].includes('upper')) {
         rainDataUpper.push(rainData[index]);
@@ -60,12 +63,10 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
       }
     }
 
-    const tableList = [];
     for (let field in fieldList) {
       tableList?.push(fieldList[field]);
     }
 
-    const mappedList = [];
     tableList.forEach((listItem, index) => {
       const rainDataKeys = Object.keys(fieldRainData['days'] ?? []);
       const weatherDataKeys = Object.keys(listItem?.weervoorspelling);
@@ -93,20 +94,14 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
           [weatherDataKeys[6]]: undefined,
           ' ': ' ',
           [rainDataKeys[0]]: undefined,
-          [`${ rainDataKeys[0] }L`]: undefined,
           [rainDataKeys[1]]: undefined,
-          [`${ rainDataKeys[1] }L`]: undefined,
           [rainDataKeys[2]]: undefined,
-          [`${ rainDataKeys[2] }L`]: undefined,
           [`${ rainDataKeys[3] } `]: undefined,
-          [`${ rainDataKeys[3] }L`]: undefined,
           '30d': undefined,
-          '30dL': undefined,
           Total: undefined,
-          TotalL: undefined,
-          trans: undefined,
-          evap: undefined,
-          total: undefined
+          ...(listItem?.showtransp === '1' ? { trans: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { evap: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { total: undefined } : {})
         });
       }
 
@@ -134,20 +129,14 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
           [weatherDataKeys[6]]: undefined,
           ' ': ' ',
           [rainDataKeys[0]]: undefined,
-          [`${ rainDataKeys[0] }L`]: undefined,
           [rainDataKeys[1]]: undefined,
-          [`${ rainDataKeys[1] }L`]: undefined,
           [rainDataKeys[2]]: undefined,
-          [`${ rainDataKeys[2] }L`]: undefined,
           [`${ rainDataKeys[3] } `]: undefined,
-          [`${ rainDataKeys[3] }L`]: undefined,
           '30d': undefined,
-          '30dL': undefined,
           Total: undefined,
-          TotalL: undefined,
-          trans: undefined,
-          evap: undefined,
-          total: undefined
+          ...(listItem?.showtransp === '1' ? { trans: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { evap: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { total: undefined } : {})
         });
       }
 
@@ -157,8 +146,9 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
           type: listItem?.gewas
         },
         w: (listItem?.warning === '0') ? undefined : listItem?.warning,
-        b: (listItem?.split === 1) ?
-          `Click to view seperate blocks for ${ listItem?.fieldname }` : undefined,
+        b: (listItem?.split === 1) ? {
+          tooltip: `Click to view seperate blocks for ${ listItem?.fieldname }`
+        } : undefined,
         p: listItem?.fotots,
         l: {
           lastReading: listItem?.last_reading,
@@ -177,32 +167,89 @@ const RecommendationClientViewContainer = ({ fieldList, fieldRainData, selectedC
             ? '#000000' : `#${ listItem?.colorBotHex?.slice(3) }`
         },
         unit: listItem?.eenheid,
-        [weatherDataKeys[0]]: listItem?.recommend1,
-        [weatherDataKeys[1]]: listItem?.recommend2,
-        [weatherDataKeys[2]]: listItem?.recommend3,
-        [weatherDataKeys[3]]: listItem?.recommend4,
-        [weatherDataKeys[4]]: listItem?.recommend5,
-        [weatherDataKeys[5]]: listItem?.recommend6,
-        [weatherDataKeys[6]]: listItem?.recommend7,
+        [weatherDataKeys[0]]: {
+          data: listItem?.recommend1,
+          harvest: !!(listItem?.oes?.includes('1'))
+        },
+        [weatherDataKeys[1]]: {
+          data: listItem?.recommend2,
+          harvest: !!(listItem?.oes?.includes('2'))
+        },
+        [weatherDataKeys[2]]: {
+          data: listItem?.recommend3,
+          harvest: !!(listItem?.oes?.includes('3'))
+        },
+        [weatherDataKeys[3]]: {
+          data: listItem?.recommend4,
+          harvest: !!(listItem?.oes?.includes('4'))
+        },
+        [weatherDataKeys[4]]: {
+          data: listItem?.recommend5,
+          harvest: !!(listItem?.oes?.includes('5'))
+        },
+        [weatherDataKeys[5]]: {
+          data: listItem?.recommend6,
+          harvest: !!(listItem?.oes?.includes('6'))
+        },
+        [weatherDataKeys[6]]: {
+          data: listItem?.recommend7,
+          harvest: !!(listItem?.oes?.includes('7'))
+        },
         ' ': ' ',
-        [rainDataKeys[0]]: rainDataUpper[index]?.upper[1],
-        [`${ rainDataKeys[0] }L`]: rainDataLower[index]?.lower[1],
-        [rainDataKeys[1]]: rainDataUpper[index]?.upper[2],
-        [`${ rainDataKeys[1] }L`]: rainDataLower[index]?.lower[2],
-        [rainDataKeys[2]]: rainDataUpper[index]?.upper[3],
-        [`${ rainDataKeys[2] }L`]: rainDataLower[index]?.lower[3],
-        [`${ rainDataKeys[3] } `]: rainDataUpper[index]?.upper[4],
-        [`${ rainDataKeys[3] }L`]: rainDataLower[index]?.lower[4],
-        '30d': rainDataUpper[index]?.upper[6],
-        '30dL': rainDataLower[index]?.lower[6],
-        Total: rainDataUpper[index]?.upper[5],
-        TotalL: rainDataLower[index]?.lower[5],
-        trans: listItem?.gw,
-        evap: listItem?.vw,
-        total: listItem?.tw
+        [rainDataKeys[0]]: { upper: rainDataUpper[index]?.upper[1], lower: rainDataLower[index]?.lower[1] },
+        [rainDataKeys[1]]: { upper: rainDataUpper[index]?.upper[2], lower: rainDataLower[index]?.lower[2] },
+        [rainDataKeys[2]]: { upper: rainDataUpper[index]?.upper[3], lower: rainDataLower[index]?.lower[3] },
+        [`${ rainDataKeys[3] } `]: { upper: rainDataUpper[index]?.upper[4], lower: rainDataLower[index]?.lower[4] },
+        '30d': { upper: rainDataUpper[index]?.upper[6], lower: rainDataLower[index]?.lower[6] },
+        Total: { upper: rainDataUpper[index]?.upper[5], lower: rainDataLower[index]?.lower[5] },
+        ...(listItem?.showtransp === '1' ? { trans: listItem?.gw } : {}),
+        ...(listItem?.showtransp === '1' ? { evap: listItem?.vw } : {}),
+        ...(listItem?.showtransp === '1' ? { total: listItem?.tw } : {})
       });
-    });
 
+      if (listItem?.split === 1) {
+
+        const subGroupData = {
+          ...(listItem?.sublande ? {
+            sublande: Object.keys(listItem?.sublande).map(function(key) {
+              return { ...listItem?.sublande[key], name: key };
+            })
+          } : {})
+        };
+
+        mappedList.push({
+          fieldName: subGroupData,
+          w: undefined,
+          b: subGroupData,
+          p: undefined,
+          l: undefined,
+          c: undefined,
+          q: undefined,
+          deficit: {
+            undefined
+          },
+          unit: undefined,
+          [weatherDataKeys[0]]: subGroupData,
+          [weatherDataKeys[1]]: subGroupData,
+          [weatherDataKeys[2]]: subGroupData,
+          [weatherDataKeys[3]]: subGroupData,
+          [weatherDataKeys[4]]: subGroupData,
+          [weatherDataKeys[5]]: subGroupData,
+          [weatherDataKeys[6]]: subGroupData,
+          ' ': { dropdown: true },
+          [rainDataKeys[0]]: undefined,
+          [rainDataKeys[1]]: undefined,
+          [rainDataKeys[2]]: undefined,
+          [`${ rainDataKeys[3] } `]: undefined,
+          '30d': undefined,
+          Total: undefined,
+          ...(listItem?.showtransp === '1' ? { trans: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { evap: undefined } : {}),
+          ...(listItem?.showtransp === '1' ? { total: undefined } : {}),
+          expanded: false
+        });
+      }
+    });
     return mappedList;
   };
 

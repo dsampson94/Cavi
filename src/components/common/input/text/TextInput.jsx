@@ -14,7 +14,8 @@ const TextInput = ({
                      placeholder,
                      onChange,
                      disabled,
-                     login
+                     login,
+                     onKeyPress
                    }) => {
 
   return (
@@ -28,6 +29,7 @@ const TextInput = ({
              type={ type }
              placeholder={ placeholder }
              onChange={ onChange }
+             onKeyPress={ onKeyPress }
              disabled={ disabled }
              className={ getClassNames('input__input', { login }) } />
     </div>

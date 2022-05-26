@@ -55,6 +55,7 @@ export const SETTINGS_GEAR = 'settings_gear';
 //TABLE
 export const WARNING = 'warning';
 export const DROPDOWN = 'dropdown';
+export const DROPDOWN_ALL = 'dropdown_all';
 export const CAMERA = 'camera';
 export const PENCIL = 'pencil';
 export const CHARTS = 'charts';

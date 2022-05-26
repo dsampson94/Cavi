@@ -5,19 +5,26 @@
 @use "../../../../stylesheets/01_tools/mixin" as mixin;
 @use "../../../../stylesheets/00_settings/config" as config;
 
-
 .recommendation-client-view {
   width: 100%;
+  height: 90%;
 
   &__topbar {
     display: flex;
     margin-top: util.rem(5);
+    margin-bottom: util.rem(5);
     flex-direction: row;
     align-items: center;
 
     &-left {
+      display: flex;
+      flex-direction: row;
       width: 70%;
       height: 100%;
+
+      &-icon {
+        cursor: pointer;
+      }
 
       p {
         margin: util.rem(5) 0 0 util.rem(5);
