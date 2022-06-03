@@ -20,6 +20,7 @@
 
   &__container {
     position: absolute;
+    z-index: 11;
     width: util.rem(100);
     background-color: map.get(color.$colorMap, white);
     box-shadow: util.rem(0) util.rem(0) util.rem(15) util.rem(15) map.get(color.$colorMap, white);

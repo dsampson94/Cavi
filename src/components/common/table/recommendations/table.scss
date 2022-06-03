@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/util" as util;
-@use "../../../stylesheets/00_settings/color" as color;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../../stylesheets/00_settings/util" as util;
+@use "../../../../stylesheets/00_settings/color" as color;
+@use "../../../../stylesheets/00_settings/radius" as radius;
+@use "../../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../../stylesheets/00_settings/config" as config;
 
 .table {
   display: table;
@@ -53,31 +53,30 @@
         display: table-cell;
         background-clip: padding-box;
         text-align: center;
-        white-space: nowrap;
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
           max-height: util.rem(24);
-          font-size: util.rem(9);
+          font-size: util.rem(7);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
           max-height: util.rem(26);
-          font-size: util.rem(10);
+          font-size: util.rem(8);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
           max-height: util.rem(28);
-          font-size: util.rem(11);
+          font-size: util.rem(9);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
           max-height: util.rem(30);
-          font-size: util.rem(12);
+          font-size: util.rem(10);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
           max-height: util.rem(32);
-          font-size: util.rem(13);
+          font-size: util.rem(11);
         }
       }
 
@@ -118,6 +117,7 @@
             display: flex;
             flex-direction: column;
             justify-content: left;
+            white-space: nowrap;
             font-size: util.rem(12);
             height: util.rem(30);
 
@@ -141,12 +141,14 @@
             font-size: util.rem(12);
             width: util.rem(145);
             justify-content: left;
+            white-space: nowrap;
           }
         }
 
         &-upper {
           display: flex;
           color: map.get(color.$colorMap, secondary-blue-3);
+          white-space: nowrap;
           height: 50%;
 
           &--deficit {
@@ -188,6 +190,11 @@
           background-color: map.get(color.$colorMap, table-yellow-fade);
           border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
           border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
+
+          &--thin {
+            background-color: map.get(color.$colorMap, table-yellow-fade);
+            max-width: util.rem(15);
+          }
         }
       }
 
@@ -195,8 +202,12 @@
         border-bottom: none;
       }
 
+      &--hidden {
+        display: none;
+      }
+
       &--dropdown {
-        font-size: util.rem(11);
+        font-size: 100%;
 
         &__icon {
 

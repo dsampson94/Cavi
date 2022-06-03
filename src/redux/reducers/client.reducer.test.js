@@ -1,4 +1,4 @@
-import { mockTableData } from '../../components/common/table/table-functions.util';
+import { mockTableData } from '../../components/common/table/recommendations/TableFunctions.util';
 
 import { initialState } from './client.reducer';
 import { clientReducer } from './client.reducer';

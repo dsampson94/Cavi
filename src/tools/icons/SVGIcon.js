@@ -1,6 +1,6 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { string } from 'prop-types';
 import {
@@ -26,17 +26,11 @@ import {
 } from '../general/system-variables.util';
 import { getClassNames } from '../general/helpers.util';
 
-import { getTheme } from '../../redux/actions/system.action';
-
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, activeTheme, height, width, onClick }) => {
+const SVGIcon = ({ name, fill, height, width, onClick }) => {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTheme());
-  });
+  const activeTheme = useSelector(state => state.system.theme);
 
   return (
     <div className={ getClassNames('svg-icon', { tiny: (name === WATCH || name === RAIN_CLOUDS) }) }
@@ -249,8 +243,4 @@ SVGIcon.propTypes = {
   width: string
 };
 
-const mapStateToProps = ({ system }) => ({
-  activeTheme: system.theme
-});
-
-export default connect(mapStateToProps)(SVGIcon);
+export default SVGIcon;

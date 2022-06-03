@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 
-import { retrieveGraphicOneFromLocalStorage, saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
+import { saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestLogin } from '../../../redux/actions/auth.action';
-import { requestRetrieveGraphicOne } from '../../../redux/actions/graphic.action';
 
 import Login from './Login';
 
-const LoginContainer = ({ dispatch, spinnerText, errors }) => {
-
-  const [graphicOne] = useState(retrieveGraphicOneFromLocalStorage());
+const LoginContainer = () => {
 
   const history = useHistory();
-
-  useEffect(() => {
-    if (!graphicOne) {
-      dispatch(requestRetrieveGraphicOne());
-    }
-  }, [dispatch, graphicOne]);
+  const dispatch = useDispatch();
 
   const onLoginSuccess = (user) => {
     saveUserLoginToLocalStorage(user);
@@ -28,14 +20,7 @@ const LoginContainer = ({ dispatch, spinnerText, errors }) => {
 
   const onLoginClick = (user) => dispatch(requestLogin(user, () => onLoginSuccess(user)));
 
-  return <Login graphic={ graphicOne }
-                onLoginClick={ onLoginClick }
-                spinnerText={ spinnerText }
-                errors={ errors } />;
+  return <Login onLoginClick={ onLoginClick } />;
 };
 
-const mapStateToProps = ({ system }) => ({
-  spinnerText: system.spinnerText
-});
-
-export default connect(mapStateToProps)(LoginContainer);
+export default LoginContainer;

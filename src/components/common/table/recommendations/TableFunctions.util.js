@@ -1,4 +1,4 @@
-import { noOp } from '../../../tools/general/helpers.util';
+import { noOp } from '../../../../tools/general/helpers.util';
 
 export const hideColumnHeader = (tableName, key) => {
   switch (key) {
@@ -19,20 +19,6 @@ export const hideColumnHeader = (tableName, key) => {
   }
 };
 
-export const handleColumnHeaderClick = (key, ascendingSort, setAscendingSort, filteredTableData, setFilteredTableData) => {
-  const copyOfFilteredTableData = [...filteredTableData];
-  let sortedTableData = sort(copyOfFilteredTableData, key);
-
-  if (ascendingSort) {
-    setAscendingSort(false);
-  } else {
-    sortedTableData = sortedTableData.reverse();
-    setAscendingSort(true);
-  }
-
-  return setFilteredTableData([...sortedTableData]);
-};
-
 export const sort = (data, key) => {
   return data.sort((objectOne, objectTwo) => {
     let valueOne = objectOne[key];
@@ -51,9 +37,40 @@ export const sort = (data, key) => {
   });
 };
 
+export const pushEmptyRow = (filteredData, weatherDataKeys, rainDataKeys, tableList, i ) => {
+  filteredData.push({
+    fieldName: { locationName: undefined },
+    w: undefined,
+    b: undefined,
+    p: undefined,
+    l: undefined,
+    c: undefined,
+    q: undefined,
+    deficit: undefined,
+    unit: undefined,
+    [weatherDataKeys[0]]: undefined,
+    [weatherDataKeys[1]]: undefined,
+    [weatherDataKeys[2]]: undefined,
+    [weatherDataKeys[3]]: undefined,
+    [weatherDataKeys[4]]: undefined,
+    [weatherDataKeys[5]]: undefined,
+    [weatherDataKeys[6]]: undefined,
+    ' ': ' ',
+    [rainDataKeys[0]]: undefined,
+    [rainDataKeys[1]]: undefined,
+    [rainDataKeys[2]]: undefined,
+    [`${ rainDataKeys[3] } `]: undefined,
+    '30d': undefined,
+    Total: undefined,
+    ...(tableList[i]?.showtransp === '1' ? { trans: undefined } : undefined),
+    ...(tableList[i]?.showtransp === '1' ? { evap: undefined } : undefined),
+    ...(tableList[i]?.showtransp === '1' ? { total: undefined } : undefined)
+  });
+};
+
 export const tableTemplateData = [
   {
-    id: '', fieldName: '', deficit: '', unit: '',
+    fieldName: '', deficit: '', unit: '',
     mon11: '', tues12: '', wed13: '', thur14: '', fri15: '', sat16: '', sun17: '',
     '': '', fri8: '', sat9: '', sun10: '', mon10: '', d30: '', total1: '',
     trans: '', evap: '', total2: ''

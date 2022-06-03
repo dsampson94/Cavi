@@ -3,14 +3,20 @@ import React, { useState } from 'react';
 import { func } from 'prop-types';
 
 import background from '../../../tools/images/irricheckbackground.jpg';
+import logo from '../../../tools/images/pulselogo.png';
 
 import TextInput from '../../common/input/text/TextInput';
 import Button from '../../common/button/Button';
 import Graphic from '../../common/graphic/Graphic';
 
 import './login.scss';
+import Spinner from '../../common/spinner/Spinner';
+import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
-const Login = ({ onLoginClick, graphic }) => {
+const Login = ({ onLoginClick }) => {
+
+  const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -25,7 +31,7 @@ const Login = ({ onLoginClick, graphic }) => {
   return (
     <div style={ style }>
       <div className="login">
-        <Graphic login graphic={ graphic } />
+        <Graphic login graphic={ logo } />
         <TextInput label={ 'Username:' }
                    onChange={ ({ target }) => setUsername(target.value) }
                    onKeyPress={ event => {
@@ -58,6 +64,7 @@ const Login = ({ onLoginClick, graphic }) => {
           <Button label={ 'French' } flex white />
         </div>
       </div>
+      <Spinner centered spinnerText={ spinnerText } />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { removeSystemNotice } from './redux/actions/system.action';
 
@@ -9,7 +10,12 @@ import AuthContainer from './routes/auth/Auth.container';
 import Spinner from './components/common/spinner/Spinner';
 import RecommendationContainer from './routes/recommendation/Recommendation.container';
 
-const App = ({ notices, dispatch, spinnerText }) => {
+const App = () => {
+
+  const dispatch = useDispatch();
+
+  const notices = useSelector(createSelector([state => state.system], system => system?.notices));
+  const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
 
   const style = {
     display: 'flex',
@@ -32,9 +38,4 @@ const App = ({ notices, dispatch, spinnerText }) => {
   );
 };
 
-const mapStateToProps = ({ system }) => ({
-  notices: system.notices,
-  spinnerText: system.spinnerText
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

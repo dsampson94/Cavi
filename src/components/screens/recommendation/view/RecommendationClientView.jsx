@@ -1,92 +1,60 @@
 import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
-import { tableTemplateData } from '../../../common/table/table-functions.util';
-import {
-  ACCURACY_ANALYSIS,
-  BULLSEYE,
-  DROPDOWN_ALL,
-  PREVIOUS,
-  PREVIOUS_RECOMMENDATIONS
-} from '../../../../tools/general/system-variables.util';
-import { retrieveLastSelectedUserFromLocalStorage } from '../../../../tools/storage/localStorage';
 
+import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './RecommendationClientView.util';
+import { TableSearchBar, TableTopBar } from '../../../common/table/recommendations/TableComponents.util';
 import ContentContainer from '../../../common/content-container/ContentContainer';
-import Table from '../../../common/table/Table';
-import TableSearch from '../../../common/table-search/TableSearch';
-import Button from '../../../common/button/Button';
+import Table from '../../../common/table/recommendations/Table';
 
 import './recommendation-client-view.scss';
 
-const RecommendationClientView = ({ fieldList }) => {
+const RecommendationClientView = ({ fieldList, hasSubGroups, clientRequestFields }) => {
 
-  const activeUser = retrieveLastSelectedUserFromLocalStorage();
-
+  const [activeTableData, setActiveTableData] = useState([]);
   const [filteredTableData, setFilteredTableData] = useState(undefined);
   const [allDropdownsExpanded, setAllDropdownsExpanded] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(undefined);
+  const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
 
   useEffect(() => {
-    setFilteredTableData(undefined);
+      setActiveTableData(fieldList);
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fieldList]);
+    [fieldList]);
 
-  const allDropdownsToggle = () => {
-    setAllDropdownsExpanded(!allDropdownsExpanded);
-  };
+  useEffect(() => {
+    if (!selectedIndex) return;
+    if (filteredTableData) {
+      toggleDropdownAfterSearch(fieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
+    } else {
+      toggleDropdown(fieldList, filteredTableData, selectedIndex, setActiveTableData);
+    }
+    setSelectedIndex(undefined);
+  });
 
-  const TableTopBar = () => {
-    return (
-      <div className="recommendation-client-view__topbar">
-        <div className="recommendation-client-view__topbar-left">
-          <div className="recommendation-client-view__topbar-left-button">
-            <Button icon={ DROPDOWN_ALL } onClick={ allDropdownsToggle } />
-          </div>
-          <p>{ `Recommendations: ${ activeUser?.groupName?.toUpperCase() } -
-            ${ activeUser?.clientName?.toUpperCase() }` }</p>
-        </div>
-        <div className="recommendation-client-view__topbar-right">
-          <Button icon={ BULLSEYE }
-                  iconFill={ '#C24C41' }
-                  tooltip={ ACCURACY_ANALYSIS }
-                  spaced />
-          <Button label={ 'Reports' }
-                  spaced />
-          <Button icon={ PREVIOUS }
-                  tooltip={ PREVIOUS_RECOMMENDATIONS }
-                  spaced />
-          <Button label={ 'Show Archives' }
-                  spaced />
-          <Button label={ 'Reload Recommendations' }
-                  onClick={ () => {
-                    setFilteredTableData(undefined);
-                  } }
-                  spaced />
-        </div>
-      </div>
-    );
-  };
-
-  const TableSearchBar = () => {
-    return (
-      <div className="recommendation-client-view__search">
-        { (fieldList.length > 10) &&
-          <TableSearch placeholder={ 'Search field or probe number' }
-                       dataToFilter={ (filteredTableData) ? filteredTableData : fieldList }
-                       setFilteredData={ setFilteredTableData } table /> }
-      </div>
-    );
-  };
+  useEffect(() => {
+    toggleAllDropdowns(allDropdownsExpanded, fieldList, activeTableData, setActiveTableData);
+  }, [allDropdownsExpanded]);
 
   return (
     <ContentContainer>
       <div className="recommendation-client-view">
-        <TableTopBar />
-        <TableSearchBar />
+        <TableTopBar filteredTableData={ filteredTableData }
+                     hasSubGroups={ hasSubGroups }
+                     setFilteredTableData={ setFilteredTableData }
+                     setActiveTableData={ setActiveTableData }
+                     clientRequestFields={ clientRequestFields }
+                     toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+        <TableSearchBar fieldList={ fieldList }
+                        setFilteredTableData={ setFilteredTableData } />
         <div className="recommendation-client-view__scroll">
           <Table tableName={ 'recommendationClientFieldView' }
-                 tableData={ (filteredTableData) ? filteredTableData : fieldList }
+                 activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
                  hiddenColumns={ ['expanded'] }
-                 tableDataTemplate={ tableTemplateData } />
+                 setSelectedIndex={ setSelectedIndex }
+                 setSelectedDropdownObject={ setSelectedDropdownObject }
+                 setActiveTableData={ setActiveTableData } />
         </div>
       </div>
     </ContentContainer>

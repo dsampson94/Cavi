@@ -11,7 +11,7 @@ const RecommendationContainer = () => {
   return (
     <Switch>
       <Route exact path={ `${ path }/overview` } component={ RecommendationOverviewContainer } />
-      <Route exact path={ `${ path }/client` } component={ RecommendationClientViewContainer } />
+      <Route exact path={ `${ path }/:groupName/:clientName` } component={ RecommendationClientViewContainer } />
     </Switch>
   );
 };

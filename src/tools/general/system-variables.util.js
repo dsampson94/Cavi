@@ -8,6 +8,10 @@ export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
 export const SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Not Retrieved';
 
+export const SUCCESSFUL_SEARCH = 'Fields Retrieved Successfully ';
+export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
+export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
+
 export const MID_BAR_OVERVIEW = 'Overview';
 export const MID_BAR_MONITOR = 'Monitor Probes';
 export const MID_BAR_LAST_READINGS = 'Find Last Readings';

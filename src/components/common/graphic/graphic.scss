@@ -12,20 +12,24 @@
   &__img {
     max-width: 100%;
 
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      height: util.rem(80);
+    }
+
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       height: util.rem(70);
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      height: util.rem(80);
+      height: util.rem(90);
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      height: util.rem(130);
+      height: util.rem(120);
     }
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      height: util.rem(160);
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+      height: util.rem(140);
     }
   }
 }

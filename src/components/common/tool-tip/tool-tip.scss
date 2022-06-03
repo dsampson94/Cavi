@@ -16,7 +16,6 @@
   &__popup {
     z-index: 10;
     position: absolute;
-    word-wrap: normal;
     font-size: util.rem(12);
     margin-left: util.rem(35);
     margin-top: util.rem(18);
@@ -26,6 +25,7 @@
     box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, grey),
     inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
     background-color: map.get(color.$colorMap, light-mode-tooltip-white);
+    white-space: nowrap;
 
     &--left {
       margin-left: util.rem(-125);

@@ -18,66 +18,64 @@ html, body {
 
 body.light-mode {
   background-color: map.get(color.$colorMap, light-mode-white);
-  transition: 0.7s;
+  transition: 0.3s;
 
   .recommendation-overview {
-    transition: 0.7s;
+    transition: 0.3s;
   }
 
   .input__input,
   .search__input,
-  .search__icon{
-    transition: 1s;
+  .search__icon {
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, light-mode-white);
   }
 
   .input__wrapper input {
-    transition: 1s;
+    transition: 0.3s;
   }
 
   .table__header-row {
-    transition: 0.7s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, light-mode-white);
   }
 
   .table__body__row__td-upper {
-    transition: 0.7s;
+    transition: 0.3s;
     color: map.get(color.$colorMap, secondary-blue-3);
   }
 
   .table__body__row__td-container--centered-last {
-    transition: 0.7s;
+    transition: 0.3s;
     color: map.get(color.$colorMap, secondary-blue-3);
   }
 
   .side-bar__list__item-subheader--selected {
-    transition: 0.9s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, selected-blue);
   }
 
   .table__body__row__td--dark {
-    transition: 1.5s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, table-yellow-dark);
   }
 
   .table__body__row__td--light {
-    transition: 1.5s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, table-yellow-light);
   }
 
+  .table__body__row__td--fade--thin,
   .table__body__row__td--fade {
-    transition: 1.5s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, table-yellow-fade);
   }
 }
 
 body.dark-mode {
-  transition: 0.7s;
+  transition: 0.3s;
   color: map.get(color.$colorMap, light-mode-white);
   background-color: map.get(color.$colorMap, dark-mode-grey);
-
-  .side-bar {
-  }
 
   .spinner__text {
     color: map.get(color.$colorMap, black);
@@ -88,47 +86,46 @@ body.dark-mode {
   }
 
   .table__body__row__td--dark {
-    transition: 1s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, blur);
   }
 
   .table__body__row__td--light {
-    transition: 1s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, shadow);
   }
 
+  .table__body__row__td--fade--thin,
   .table__body__row__td--fade {
-    transition: 1s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, blur-lighter);
   }
 
-  .table__body__row__td-upper {
-    transition: 0.7s;
-    color: map.get(color.$colorMap, light-mode-white);
-  }
-
+  .table__body__row--header,
+  .table__body__row__td-upper,
+  .table__body__row__td-container--centered,
   .table__body__row__td-container--centered-last {
-    transition: 0.7s;
+    transition: 0.3s;
     color: map.get(color.$colorMap, light-mode-white);
   }
 
-  .input__label-container--login label  {
+  .input__label-container--login label {
     color: map.get(color.$colorMap, black);
   }
 
   .table__header-row {
-    transition: 0.7s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
   .input__input,
   .search__input,
   .search__icon {
-    transition: 1s;
-    background-color: map.get(color.$colorMap, grey);
+    transition: 0.3s;
+    background-color: map.get(color.$colorMap, light-grey);
   }
 
-  .input__label-container--login {
+  .input__input--login {
     background-color: map.get(color.$colorMap, light-mode-white);
   }
 
@@ -141,7 +138,7 @@ body.dark-mode {
   }
 
   .side-bar__list__item__subheader--selected {
-    transition: 0.9s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, pulse-blue);
   }
 
@@ -161,7 +158,7 @@ body.dark-mode {
   }
 
   .login__button-group button {
-    transition: 0.6s;
+    transition: 0.3s;
     background-color: map.get(color.$colorMap, pulse-blue);
   }
 

@@ -11,31 +11,38 @@
 
   &__topbar {
     display: flex;
+    flex-direction: row;
     margin-top: util.rem(5);
     margin-bottom: util.rem(5);
-    flex-direction: row;
+    max-width: 100%;
     align-items: center;
 
     &-left {
       display: flex;
       flex-direction: row;
-      width: 70%;
+      width: 60%;
       height: 100%;
 
-      &-icon {
+      &-button {
+        transform: translateX(10%);
         cursor: pointer;
       }
 
+      &-no-button {
+        width: util.rem(30);
+        margin: 0 0 util.rem(32) util.rem(12);
+      }
+
       p {
-        margin: util.rem(5) 0 0 util.rem(5);
-        font-size: util.rem(15);
+        margin: util.rem(6) 0 0 util.rem(-10);
+        font-size: util.rem(14);
         font-weight: bold;
       }
     }
 
     &-right {
       display: flex;
-      width: 30%;
+      width: 40%;
       height: 100%;
     }
 
