@@ -78,32 +78,7 @@ const InputSearch = ({
     }
   };
 
-  const filterSideBar = () => {
-    let mappedClients = [];
-    for (const [{}, listValues] of new Map(Object.entries(dataToFilter)).entries()) {
-      for (const [objectKey, objectValue] of new Map(Object.entries(listValues)).entries()) {
-        const innerObjectValueList = [];
-        const filteredInnerObjectValueList = [];
-        for (const [iok, iov] of new Map(Object.entries(objectValue)).entries()) {
-          innerObjectValueList.push({ iok, iov });
-          if (objectKey?.toLowerCase()?.includes(searchString?.toLowerCase())) {
-            mappedClients.push({ objectKey, innerObjectValueList });
-          } else if (iok?.toLowerCase()?.includes(searchString?.toLowerCase())) {
-            filteredInnerObjectValueList.push({ iok, iov });
-            mappedClients.push({ objectKey, filteredInnerObjectValueList });
-          }
-        }
-      }
-    }
-
-    if (isEmpty(mappedClients)) {
-      dispatch(addSystemNotice(UNSUCCESSFUL_CLIENT_SEARCH, SNACK_CRITICAL));
-      setFilteredData(undefined);
-    } else {
-      setFilteredData(mappedClients.filter((v, i, a) =>
-        a.findIndex(v2 => (JSON.stringify(v2) === JSON.stringify(v))) === i));
-    }
-  };
+  const filterSideBar = () => {};
 
   return (
     <div className={ 'search' }>
