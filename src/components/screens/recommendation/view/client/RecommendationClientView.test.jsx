@@ -3,13 +3,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import RecommendationClientView from './RecommendationClientView';
 
-import { mockTableData } from '../../../common/table/recommendations/TableFunctions.util';
+import { mockTableData } from '../../../../common/table/recommendations/TableFunctions.util';
 
 xdescribe('Contact Details Screen', () => {
 
   const setUp = () => {
     return render(
-        <RecommendationClientView fieldList={mockTableData} />
+        <RecommendationClientView mappedFieldList={mockTableData} />
     );
   };
 

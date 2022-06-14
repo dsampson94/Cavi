@@ -1,9 +1,9 @@
 export const API_HOST = process.env.REACT_APP_API_ENDPOINT; // api endpoint provided in .env
 export const SERVER_HOST = process.env.REACT_APP_HOST; // host provided in .env
 
-export const responseStatus = Object.freeze({
-  SUCCESS: 1,
-  ERROR: 0
+export const responseStatus = (data) => Object.freeze({
+  SUCCESS: (data),
+  ERROR: (!data)
 });
 
 export function getResponseMetaData(data) {
@@ -27,9 +27,9 @@ export const getHttpGetOptions = (params = null, headers = null) => ({
   headers
 });
 
-export const getHttpGetPNGOptions = (params = null, headers = null) => ({
+export const getHttpGetPDFOptions = (params = null, headers = null) => ({
   method: GET,
-  responseType: 'arraybuffer',
+  responseType: 'blob',
   params,
   headers
 });

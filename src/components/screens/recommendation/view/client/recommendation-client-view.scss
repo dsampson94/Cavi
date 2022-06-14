@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../../stylesheets/00_settings/color" as color;
-@use "../../../../stylesheets/00_settings/util" as util;
-@use "../../../../stylesheets/00_settings/radius" as radius;
-@use "../../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../../stylesheets/00_settings/config" as config;
+@use "../../../../../stylesheets/00_settings/color" as color;
+@use "../../../../../stylesheets/00_settings/util" as util;
+@use "../../../../../stylesheets/00_settings/radius" as radius;
+@use "../../../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../../../stylesheets/00_settings/config" as config;
 
 .recommendation-client-view {
   width: 100%;
@@ -20,16 +20,18 @@
     &-left {
       display: flex;
       flex-direction: row;
+      margin-left: util.rem(5);
       width: 60%;
       height: 100%;
 
       &-button {
-        transform: translateX(10%);
+        width: util.rem(20);
+        margin-right: util.rem(13);
         cursor: pointer;
       }
 
       &-no-button {
-        width: util.rem(30);
+        width: util.rem(10);
         margin: 0 0 util.rem(32) util.rem(12);
       }
 

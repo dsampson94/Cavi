@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
-import { bool, func } from 'prop-types';
+import { bool, func, shape } from 'prop-types';
 
 import {
-  EMAIL, EMAIL_RECOMMENDATIONS, LOG_OUT, LOG_OUT_ICON,
+  EMAIL,
+  EMAIL_RECOMMENDATIONS,
+  LOG_OUT,
+  LOG_OUT_ICON,
   MAPS,
   MAPS_ICON,
   PRINT,
-  PRINT_ICON, REPORT_PROBLEM, REPORT_PROBLEM_ICON,
+  PRINT_ICON,
+  REPORT_PROBLEM,
+  REPORT_PROBLEM_ICON,
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
@@ -17,11 +24,41 @@ import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
 import ThemeToggle from '../theme-toggle/ThemeToggle';
 
+import { requestClientPDF } from '../../../redux/actions/client.action';
+import { requestLogout } from '../../../redux/actions/auth.action';
+
 import './top-bar.scss';
 
-const TopBar = ({ showSideBar, setShowSideBar }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
+
+  useEffect(() => {
+    downloadPDF();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clientPDF]);
+
+  const downloadPDF = () => {
+    if (!clientRequestFields) return;
+    if (!clientPDF) return;
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(clientPDF);
+    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.click();
+  };
+
+  const getPDF = () => {
+    if (clientRequestFields)
+      dispatch(requestClientPDF(clientRequestFields));
+  };
+
+  const logout = () => {
+    dispatch(requestLogout());
+    history.push('/');
+  };
 
   return (
     <div className="top-bar">
@@ -34,6 +71,7 @@ const TopBar = ({ showSideBar, setShowSideBar }) => {
         </div>
         <div className="top-bar__lower-left">
           <Button icon={ PRINT_ICON }
+                  onClick={ getPDF }
                   tooltip={ PRINT } />
           <Button icon={ EMAIL_RECOMMENDATIONS }
                   tooltip={ EMAIL } />
@@ -54,7 +92,7 @@ const TopBar = ({ showSideBar, setShowSideBar }) => {
         <TextInput placeholder={ 'Find Last Readings' } />
         <Button icon={ LOG_OUT_ICON }
                 tooltip={ LOG_OUT }
-                onClick={ () => history.push('/') }
+                onClick={ logout }
                 leftAlignedTooltip />
       </div>
     </div>
@@ -65,7 +103,8 @@ TopBar.defaultProps = {};
 
 TopBar.propTypes = {
   showSideBar: bool.isRequired,
-  setShowSideBar: func.isRequired
+  setShowSideBar: func.isRequired,
+  clientRequestFields: shape({})
 };
 
 export default TopBar;

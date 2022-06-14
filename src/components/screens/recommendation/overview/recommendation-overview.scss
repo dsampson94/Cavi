@@ -6,7 +6,110 @@
 @use "../../../../stylesheets/00_settings/config" as config;
 
 .recommendation-overview {
-  height: 100%;
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
   width: 100%;
-  overflow-y: auto;
+  height: 98%;
+
+  &__top-button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: util.rem(45);
+    cursor: pointer;
+    padding: util.rem(7);
+
+    &__left {
+      width: 78%;
+      display: flex;
+      flex-direction: column;
+      white-space: nowrap;
+
+      &-header {
+        font-weight: bold;
+        font-size: util.rem(20);
+      }
+
+      &-subheader {
+        font-size: util.rem(12);
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: row;
+      padding-top: util.rem(4);
+      width: 10%;
+    }
+  }
+
+  &__menu {
+    cursor: pointer;
+    padding: util.rem(5);
+
+    > div {
+      font-size: util.rem(14);
+      padding: util.rem(2);
+    }
+
+    &-one {
+      &:hover {
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+    }
+
+    &-two {
+      &:hover {
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+    }
+
+    &-three {
+      &:hover {
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+    padding: util.rem(3);
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin-left: util.rem(5);
+
+      &__header {
+        display: flex;
+        font-size: util.rem(16);
+        padding-top: util.rem(2);
+        border-bottom: util.rem(0.5) solid map.get(color.$colorMap, light-grey);;
+      }
+
+      &__subheader {
+        display: flex;
+        flex-direction: row;
+        height: util.rem(20);
+        width: 20%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: map.get(color.$colorMap, row-hover-blue);
+        }
+
+        &__text {
+          font-size: util.rem(16);
+          width: 100%;
+        }
+
+        &__icon {
+          width: util.rem(18);
+        }
+      }
+    }
+  }
 }

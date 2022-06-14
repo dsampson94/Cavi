@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Button from '../button/Button';
 import {
@@ -15,7 +15,6 @@ import {
 import './mid-bar.scss';
 
 const MidBar = ({
-                  activeButton,
                   activePath,
                   handleOverviewClick,
                   handleMonitorProbesClick,
@@ -27,49 +26,40 @@ const MidBar = ({
                   handleIrricomsClick
                 }) => {
 
-  const [overviewActive, setOverviewActive] = useState(true);
-  const [monitorProbesActive, setMonitorProbesActive] = useState(false);
-  const [findLastRecordingsActive, setFindLastRecordingsActive] = useState(false);
-  const [assistantActive, setAssistantActive] = useState(false);
-  const [neglectedActive, setNeglectedActive] = useState(false);
-  const [emailReadingsActive, setEmailReadingsActive] = useState(false);
-  const [chartActive, setChartActive] = useState(false);
-  const [irricomsActive, setIrricomsActive] = useState(false);
-
   return (
     <div className="mid-bar">
 
       <Button label={ MID_BAR_OVERVIEW }
               onClick={ handleOverviewClick }
-              white={ !overviewActive } />
+              white={ !activePath.includes('overview') } />
 
       <Button label={ MID_BAR_MONITOR }
               onClick={ handleMonitorProbesClick }
-              white={ !monitorProbesActive } />
+              white={ !activePath.includes('monitor') } />
 
       <Button label={ MID_BAR_LAST_READINGS }
               onClick={ handleFindLastRecordingsClick }
-              white={ !findLastRecordingsActive } />
+              white={ !activePath.includes('recordings') } />
 
       <Button label={ MID_BAR_ASSISTANT }
               onClick={ handleAssistantClick }
-              white={ !assistantActive } />
+              white={ !activePath.includes('assistant') } />
 
       <Button label={ MID_BAR_NEGLECTED_FIELDS }
               onClick={ handleNeglectedClick }
-              white={ !neglectedActive } />
+              white={ !activePath.includes('neglected') } />
 
       <Button label={ MID_BAR_EMAIL_READINGS }
               onClick={ handleEmailReadingsClick }
-              white={ !emailReadingsActive } />
+              white={ !activePath.includes('email') } />
 
       <Button label={ MID_BAR_CHART }
               onClick={ handleChartClick }
-              white={ !chartActive } />
+              white={ !activePath.includes('chart') } />
 
       <Button label={ MID_BAR_IRRICOMS }
               onClick={ handleIrricomsClick }
-              white={ !irricomsActive } />
+              white={ !activePath.includes('irricoms') } />
     </div>
   );
 };

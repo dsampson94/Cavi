@@ -16,6 +16,10 @@
     max-height: util.rem(10);
   }
 
+  &--small {
+    max-width: util.rem(30);
+  }
+
   & svg {
     min-height: util.rem(24);
     max-height: util.rem(24);

@@ -1,7 +1,7 @@
 import { SET_LOGGED_IN_USER } from '../actions/auth.action';
 
 export const initialState = {
-  loggedInUser: null
+  loggedInUser: undefined
 };
 
 export const authReducer = (state = initialState, action) => {

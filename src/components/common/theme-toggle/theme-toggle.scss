@@ -5,21 +5,6 @@
 @use "../../../stylesheets/01_tools/mixin" as mixin;
 @use "../../../stylesheets/00_settings/config" as config;
 
-.mid-bar {
-  display: flex;
-  flex-direction: row;
-
-  &__nav-link {
-    display: flex;
-    flex-direction: row;
-    background-color: map.get(color.$colorMap, white);
-
-    &--active {
-      background-color: map.get(color.$colorMap, pulse-blue);
-    }
-  }
-
-  & button {
-    height: util.rem(45);
-  }
+.theme-toggle {
+  transform: translateX(-20%) translateY(-8%);
 }

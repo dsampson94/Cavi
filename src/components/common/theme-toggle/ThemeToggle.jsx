@@ -6,6 +6,8 @@ import { retrieveActiveThemeFromLocalStorage, saveActiveThemeToLocalStorage } fr
 
 import { SET_THEME } from '../../../redux/actions/system.action';
 
+import './theme-toggle.scss';
+
 const ThemeToggle = () => {
 
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ const ThemeToggle = () => {
       <DarkModeToggle className="theme-toggle"
                       onChange={ handleChange }
                       checked={ !isDarkMode }
-                      size={ 60 } />
+                      size={ 50 } />
     </div>
   );
 };

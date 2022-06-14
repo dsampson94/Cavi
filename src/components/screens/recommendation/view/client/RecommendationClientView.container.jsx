@@ -12,11 +12,12 @@ import {
   pushDropdownRow,
   pushFieldRow,
   pushForecastRegionRow,
-  pushLandGroupRow, setHasSubGroups
+  pushLandGroupRow,
+  setHasSubGroups
 } from './RecommendationClientView.container.util.js';
 
-import { retrieveUserLoginFromLocalStorage } from '../../../../tools/storage/localStorage';
-import { requestClientFieldList } from '../../../../redux/actions/client.action';
+import { retrieveUserLoginFromLocalStorage } from '../../../../../tools/storage/localStorage';
+import { requestClientFieldList } from '../../../../../redux/actions/client.action';
 
 import RecommendationClientView from './RecommendationClientView';
 
@@ -49,6 +50,7 @@ const RecommendationClientViewContainer = () => {
 
     const tableList = [];
     const mappedList = [];
+    const subGroupSplitList = [];
 
     const rainData = getRainDataList(fieldList, fieldRainData);
     let rainDataUpper = getRainDataUpperList(rainData);
@@ -59,7 +61,7 @@ const RecommendationClientViewContainer = () => {
 
     tableList.forEach((listItem, index) => {
       const weatherDataKeys = Object.keys(listItem?.weervoorspelling);
-      hasSubGroups = setHasSubGroups(listItem);
+      hasSubGroups = setHasSubGroups(listItem, subGroupSplitList);
       pushForecastRegionRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
       pushLandGroupRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
       pushFieldRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, rainDataUpper, rainDataLower);
@@ -70,21 +72,19 @@ const RecommendationClientViewContainer = () => {
     return mappedList;
   };
 
-  return <RecommendationClientView fieldList={ mappedFieldList() }
-                                   hasSubGroups={ hasSubGroups }
-                                   clientRequestFields={ clientRequestFields } />;
+  return <RecommendationClientView mappedFieldList={ mappedFieldList() }
+                                   clientRequestFields={ clientRequestFields }
+                                   hasSubGroups={ hasSubGroups } />;
 };
 
 RecommendationClientViewContainer.defaultProps = {
   fieldList: {},
-  fieldRainData: {},
-  selectedClient: undefined
+  fieldRainData: {}
 };
 
 RecommendationClientViewContainer.propTypes = {
   fieldList: shape({}),
-  fieldRainData: shape({}),
-  selectedClient: shape({})
+  fieldRainData: shape({})
 };
 
 export default RecommendationClientViewContainer;

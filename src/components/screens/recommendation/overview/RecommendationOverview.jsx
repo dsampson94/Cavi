@@ -1,46 +1,48 @@
-import React from 'react';
-import { useHistory, useRouteMatch } from 'react-router';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
-import { MID_BAR_OVERVIEW } from '../../../../tools/general/system-variables.util';
+import { arrayOf, shape, string } from 'prop-types';
 
+import { ActiveHeader, OverviewList } from './RecommendationOverview.util';
 import ContentContainer from '../../../common/content-container/ContentContainer';
 import MidBar from '../../../common/mid-bar/MidBar';
+import InputSearch from '../../../common/input-search/InputSearch';
 
 import './recommendation-overview.scss';
 
-const RecommendationOverview = () => {
+const RecommendationOverview = ({ userAccount, ownClientsList, activePath }) => {
 
   const history = useHistory();
 
+  const [filteredClientData, setFilteredClientData] = useState(undefined);
+  const [overviewOptionSelected, setOverviewOptionSelected] = useState(1);
+
   const handleOverviewClick = () => history.push('/recommendation/overview');
-  const handleMonitorProbesClick = () => history.push('/recommendation/client');
+  const handleMonitorProbesClick = () => history.push('/recommendation/monitor');
 
-  const { path } = useRouteMatch();
-
-  // const getActiveButton = () => {
-  //   console.log((activePath.toLowerCase()));
-  //   console.log(activePath.includes(activeRoute.toLowerCase()));
-  //   if (path.includes(activeButton.toLowerCase())) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
-
-  // const getActiveButton = () => {
-  //   console.log((activeButton.toLowerCase()));
-  //   if (path.includes(activeButton.toLowerCase())) {
-  //     return true;
-  //   } else return false;
-  // };
+  const handleSubHeaderClick = (groupName, clientName) => {
+    history.push(`/recommendation/${ groupName }/${ clientName }`);
+  };
 
   return (
     <ContentContainer>
       <div className="recommendation-overview">
-        <MidBar activeButton={ MID_BAR_OVERVIEW }
-                activePath={ path }
+        <MidBar activePath={ activePath }
                 handleOverviewClick={ handleOverviewClick }
                 handleMonitorProbesClick={ handleMonitorProbesClick } />
+
+        <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
+                      setOverviewOptionSelected={ setOverviewOptionSelected } />
+
+        <InputSearch dataToFilter={ userAccount }
+                     setFilteredData={ setFilteredClientData }
+                     placeholder={ 'Filter clients' }
+                     sidebar />
+
+        <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
+                      overviewOptionSelected={ overviewOptionSelected }
+                      setOverviewOptionSelected={ setOverviewOptionSelected }
+                      handleSubHeaderClick={ handleSubHeaderClick } />
       </div>
     </ContentContainer>
   );
@@ -48,6 +50,10 @@ const RecommendationOverview = () => {
 
 RecommendationOverview.defaultProps = {};
 
-RecommendationOverview.propTypes = {};
+RecommendationOverview.propTypes = {
+  userAccount: shape({}).isRequired,
+  ownClientsList: arrayOf(shape({})).isRequired,
+  activePath: string.isRequired
+};
 
 export default RecommendationOverview;

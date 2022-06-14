@@ -137,7 +137,7 @@ InputSearch.defaultProps = {
 };
 
 InputSearch.propTypes = {
-  dataToFilter: arrayOf(shape({})),
+  dataToFilter: shape({}),
   name: string,
   value: shape({}),
   type: string,

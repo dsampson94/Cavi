@@ -21,13 +21,15 @@ const Button = ({
                   tooltip,
                   leftAlignedTooltip,
                   iconFill,
-                  spaced
+                  spaced,
+                  onMouseEnter
                 }) => {
   return (
     <button className={ getClassNames('button', { disabled, flex, login, blue, white, icon, spaced }) }
             name={ name }
             type={ type }
             onClick={ onClick }
+            onMouseEnter={ onMouseEnter }
             disabled={ disabled }>
       <label>{ label } </label>
       { tooltip && <ToolTip text={ tooltip }

@@ -4,18 +4,16 @@ import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 
-import { getMockStore } from '../../../../tools/testing/testing.util';
-import { initialState as authState } from '../../../../redux/reducers/auth.reducer';
-import { initialState as systemState } from '../../../../redux/reducers/system.reducer';
-import { initialState as graphicState } from '../../../../redux/reducers/graphic.reducer';
-import { initialState as clientState } from '../../../../redux/reducers/client.reducer';
+import { getMockStore } from '../../../../../tools/testing/testing.util';
+import { initialState as authState } from '../../../../../redux/reducers/auth.reducer';
+import { initialState as systemState } from '../../../../../redux/reducers/system.reducer';
+import { initialState as clientState } from '../../../../../redux/reducers/client.reducer';
 
 import RecommendationClientViewContainer from './RecommendationClientView.container';
 
 const mockState = {
   material: authState,
   supplier: systemState,
-  contact: graphicState,
   client: clientState
 };
 

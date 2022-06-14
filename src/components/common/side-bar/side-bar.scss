@@ -15,24 +15,24 @@
 
   &__list {
     display: flex;
+    white-space: nowrap;
     flex-direction: column;
-    border-top: util.rem(1) solid;
-    padding: util.rem(2) util.rem(6) util.rem(0) util.rem(2);
+    overflow-y: scroll;
+    height: calc(100% - 80px);
+    margin-left: util.rem(5);
 
     &__header {
       display: flex;
       font-size: util.rem(12);
       padding: util.rem(2);
-      color: map.get(color.$colorMap, secondary-blue-3);
+      color: map.get(color.$colorMap, field-name-blue);
     }
 
     &__container {
       display: flex;
-      white-space: nowrap;
       flex-direction: column;
-      overflow-y: scroll;
-      height: calc(100% - 80px);
-      margin-left: util.rem(5);
+      border-top: util.rem(1) solid;
+      padding: util.rem(2) util.rem(6) util.rem(0) util.rem(2);
     }
 
     &__item {

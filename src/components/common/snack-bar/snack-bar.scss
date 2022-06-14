@@ -6,7 +6,7 @@
   position: fixed;
   top: utils.rem(60);
   right: utils.bu(.5);
-  transform: translateY(utils.bu(1));
+  transform: translateY(utils.bu(-3));
   min-width: utils.rem(300);
   max-width: utils.rem(300);
   z-index: 999;
@@ -19,11 +19,11 @@
   }
 
   @include mixins.breakpoint(map-get(config.$breakpoints, large)) {
-    transform: translateY(utils.bu(4));
+    transform: translateY(utils.bu(-4));
   }
 
   @include mixins.breakpoint(map-get(config.$breakpoints, x-large)) {
-    transform: translateY(utils.bu(5));
+    transform: translateY(utils.bu(-3));
   }
 
   @include mixins.breakpoint(map-get(config.$breakpoints, small)) {

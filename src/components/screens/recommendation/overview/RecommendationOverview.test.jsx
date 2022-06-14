@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React from 'react';
 import { render } from '@testing-library/react';
-import RecommendationClientView from '../view/RecommendationClientView';
+import RecommendationClientView from '../view/client/RecommendationClientView';
 import { mockTableData } from '../../../common/table/recommendations/TableFunctions.util';
 
 xdescribe('RecommendationClientView', () => {
 
   const setUp = () => {
     return render(
-      <RecommendationClientView fieldList={ mockTableData } />
+      <RecommendationClientView mappedFieldList={ mockTableData } />
     );
   };
 

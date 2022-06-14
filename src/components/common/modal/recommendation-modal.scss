@@ -1,0 +1,48 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/00_settings/util" as util;
+@use "../../../stylesheets/00_settings/color" as color;
+@use "../../../stylesheets/00_settings/radius" as radius;
+@use "../../../stylesheets/01_tools/mixin" as mixin;
+@use "../../../stylesheets/00_settings/config" as config;
+
+.recommendation-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+  z-index: 12;
+  border: util.rem(0.5) solid map.get(color.$colorMap, shadow);
+  border-radius: map.get(radius.$border-radius, modal);
+  background-color: map.get(color.$colorMap, white);
+  box-shadow: util.rem(0) util.rem(0) util.rem(25) map.get(color.$colorMap, dark-mode-grey);
+  margin-left: auto;
+  margin-right: auto;
+  width: util.rem(970);
+  height: util.rem(380);
+  bottom: 5%;
+  left: 0;
+  right: 0;
+
+  &__header {
+    font-weight: bold;
+    margin: util.rem(20) 0 util.rem(25) 0;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+  }
+
+  &__vertical-label {
+    margin: 0 util.rem(10) util.rem(30) util.rem(-28);
+    font-size: util.rem(13);
+    width: util.rem(30);
+  }
+
+  &__chart {
+    margin: 0 0 0 util.rem(-40);
+  }
+}

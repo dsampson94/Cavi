@@ -1,4 +1,4 @@
-import { CAPTURE, QUICK_VIEW } from '../../../../tools/general/system-variables.util';
+import { CAPTURE, QUICK_VIEW } from '../../../../../tools/general/system-variables.util';
 
 export const getRainDataList = (fieldList, fieldRainData) => {
   const rainData = [];
@@ -16,8 +16,8 @@ export const getRainDataList = (fieldList, fieldRainData) => {
 
   if (fieldRainData[2]) {
     for (let field in fieldRainData[2]) {
-      rainData.splice((Object.keys(fieldList).indexOf(field)),
-        1, { lower: fieldRainData[2][field] });
+      rainData.splice((Object.keys(fieldList).indexOf(field) + 1),
+        0, { lower: fieldRainData[2][field] });
     }
   }
   return rainData;
@@ -117,7 +117,8 @@ export const pushFieldRow = (tableList, listItem, index, mappedList, weatherData
   mappedList.push({
     fieldName: {
       locationName: listItem?.fieldname,
-      type: listItem?.gewas
+      type: listItem?.gewas,
+      color: listItem?.kleurland
     },
     w: (listItem?.warning === '0') ? undefined : listItem?.warning,
     b: (listItem?.split === 1) ? {
@@ -144,31 +145,38 @@ export const pushFieldRow = (tableList, listItem, index, mappedList, weatherData
     unit: listItem?.eenheid,
     [weatherDataKeys[0]]: {
       data: listItem?.recommend1,
-      harvest: !!(listItem?.oes?.includes('1'))
+      harvest: !!(listItem?.oes?.includes('1')),
+      comment: listItem?.['aanb 1 comment'] ? listItem?.['aanb 1 comment'] : undefined
     },
     [weatherDataKeys[1]]: {
       data: listItem?.recommend2,
-      harvest: !!(listItem?.oes?.includes('2'))
+      harvest: !!(listItem?.oes?.includes('2')),
+      comment: listItem?.['aanb 2 comment'] ? listItem?.['aanb 2 comment'] : undefined
     },
     [weatherDataKeys[2]]: {
       data: listItem?.recommend3,
-      harvest: !!(listItem?.oes?.includes('3'))
+      harvest: !!(listItem?.oes?.includes('3')),
+      comment: listItem?.['aanb 3 comment'] ? listItem?.['aanb 3 comment'] : undefined
     },
     [weatherDataKeys[3]]: {
       data: listItem?.recommend4,
-      harvest: !!(listItem?.oes?.includes('4'))
+      harvest: !!(listItem?.oes?.includes('4')),
+      comment: listItem?.['aanb 4 comment'] ? listItem?.['aanb 4 comment'] : undefined
     },
     [weatherDataKeys[4]]: {
       data: listItem?.recommend5,
-      harvest: !!(listItem?.oes?.includes('5'))
+      harvest: !!(listItem?.oes?.includes('5')),
+      comment: listItem?.['aanb 5 comment'] ? listItem?.['aanb 5 comment'] : undefined
     },
     [weatherDataKeys[5]]: {
       data: listItem?.recommend6,
-      harvest: !!(listItem?.oes?.includes('6'))
+      harvest: !!(listItem?.oes?.includes('6')),
+      comment: listItem?.['aanb 6 comment'] ? listItem?.['aanb 6 comment'] : undefined
     },
     [weatherDataKeys[6]]: {
       data: listItem?.recommend7,
-      harvest: !!(listItem?.oes?.includes('7'))
+      harvest: !!(listItem?.oes?.includes('7')),
+      comment: listItem?.['aanb 7 comment'] ? listItem?.['aanb 7 comment'] : undefined
     },
     ' ': ' ',
     [rainDataKeys[0]]: {
@@ -255,8 +263,7 @@ const getSubGroupDataForDropdown = (listItem, fieldRainData) => {
   };
 };
 
-export const setHasSubGroups = (listItem) => {
-  const subGroupSplitList = [];
+export const setHasSubGroups = (listItem, subGroupSplitList) => {
   subGroupSplitList.push(listItem?.split);
   return subGroupSplitList.includes(1);
 };

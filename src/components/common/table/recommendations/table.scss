@@ -78,6 +78,30 @@
           max-height: util.rem(32);
           font-size: util.rem(11);
         }
+
+        &--warning {
+          background-color: #6fb2df;
+          max-width: util.rem(40);
+        }
+
+        &--camera {
+          background-color: #6fb2df;
+        }
+
+        &--reading {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
+
+        &--pencil {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
+
+        &--chart {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
       }
 
       &__td {
@@ -89,16 +113,6 @@
           p {
             padding: 0 util.rem(2) 0 util.rem(2);
             font-size: util.rem(10);
-          }
-
-          &--centered {
-            display: flex;
-            justify-content: center;
-
-            &-last {
-              font-size: util.rem(10);
-              color: map.get(color.$colorMap, secondary-blue-3);
-            }
           }
 
           &__icon {
@@ -147,7 +161,6 @@
 
         &-upper {
           display: flex;
-          color: map.get(color.$colorMap, secondary-blue-3);
           white-space: nowrap;
           height: 50%;
 
@@ -204,6 +217,10 @@
 
       &--hidden {
         display: none;
+      }
+
+      &--selected {
+        background-color: map.get(color.$colorMap, row-hover-blue);
       }
 
       &--dropdown {

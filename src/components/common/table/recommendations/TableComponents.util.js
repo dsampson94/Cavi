@@ -7,13 +7,18 @@ import { arrayOf, bool, func, number, shape, string } from 'prop-types';
 import {
   ACCURACY_ANALYSIS,
   BULLSEYE,
+  CAMERA,
+  CHARTS,
+  DROPDOWN,
   DROPDOWN_ALL,
   HARVEST,
   HARVEST_ICON,
+  PENCIL,
   PREVIOUS,
   PREVIOUS_RECOMMENDATIONS,
   RAIN_CLOUDS,
   UNIT,
+  WARNING,
   WATCH
 } from '../../../../tools/general/system-variables.util';
 import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
@@ -42,12 +47,17 @@ export const TableTopBar = ({
   return (
     <div className="recommendation-client-view__topbar">
       <div className="recommendation-client-view__topbar-left">
-        { !filteredTableData &&
-          <div className="recommendation-client-view__topbar-left-button">
-            <Button icon={ DROPDOWN_ALL }
-                    onClick={ toggleDropdowns } />
-          </div> }
-        { filteredTableData &&
+        { hasSubGroups &&
+          <>
+            { !filteredTableData &&
+              <div className="recommendation-client-view__topbar-left-button">
+                <Button icon={ DROPDOWN_ALL }
+                        onClick={ toggleDropdowns } />
+              </div> }
+            { filteredTableData &&
+              <div className="recommendation-client-view__topbar-left-no-button" /> }
+          </> }
+        { !hasSubGroups &&
           <div className="recommendation-client-view__topbar-left-no-button" /> }
         <p>{ `Recommendations: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
       </div>
@@ -80,25 +90,34 @@ TableTopBar.defaultProps = {};
 TableTopBar.propTypes = {};
 
 export const TableSearchBar = ({ fieldList, setFilteredTableData }) => {
-  return (
-    <div className="recommendation-client-view__search">
-      { (fieldList.length > 10) &&
-        <InputSearch placeholder={ 'Search field or probe number' }
-                     dataToFilter={ fieldList }
-                     setFilteredData={ setFilteredTableData }
-                     table /> }
-    </div>
-  );
+  return <div className="recommendation-client-view__search">
+    { (fieldList.length > 10) &&
+      <InputSearch placeholder={ 'Search field or probe number' }
+                   dataToFilter={ fieldList }
+                   setFilteredData={ setFilteredTableData }
+                   table /> }
+  </div>;
 };
 
 TableSearchBar.defaultProps = {};
 
 TableSearchBar.propTypes = {
-  fieldList: arrayOf(shape({})).isRequired,
+  fieldList: arrayOf(shape({})) || shape({}),
   setFilteredTableData: func.isRequired
 };
 
 export const FieldNameColumn = ({ dataIndex, value }) => {
+
+  const getColor = (color) => {
+    switch (color) {
+      case '4278190080':
+        return undefined;
+      case '4294901760':
+        return '#FF0000';
+      case '4278190335':
+        return '#0081ff';
+    }
+  };
 
   if (value?.locationName?.includes('-forecast')) {
     return <td onClick={ noOp() }
@@ -119,7 +138,9 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
     return <td onClick={ noOp() }
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }>
-        <div className={ 'table__body__row__td-upper' }>{ value?.locationName }</div>
+        <div className={ 'table__body__row__td-upper' }
+             style={ { color: getColor(value?.color) } }>
+          { value?.locationName }</div>
         <div className={ 'table__body__row__td-lower' }>{ value?.type }</div>
       </div>
       <DropDown value={ value }
@@ -134,32 +155,175 @@ FieldNameColumn.defaultProps = {
 
 FieldNameColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: shape({})
+  value: string || shape({})
+};
+
+export const WarningIconColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }>
+        <ToolTip text={ value } />
+        <SVGIcon name={ WARNING }
+                 fill={ '#EE9A94' } />
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+WarningIconColumn.defaultProps = {
+  value: undefined
+};
+
+WarningIconColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
+export const DropdownIconColumn = ({ dataIndex, value, setSelectedIndex, setSelectedDropdownObject, rowIndex, object }) => {
+  if (value)
+    return <td key={ dataIndex }>
+      { (value?.tooltip) &&
+        <div className={ 'table__body__row__td-container' }
+             onClick={ () => {
+               setSelectedIndex(rowIndex);
+               setSelectedDropdownObject(object);
+             } }>
+          <ToolTip text={ value?.tooltip } />
+          <SVGIcon name={ DROPDOWN }
+                   fill={ '#53A5DF' } />
+        </div> }
+      <DropDown value={ value }
+                columnNumber={ 2 } />
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+DropdownIconColumn.defaultProps = {
+  value: undefined
+};
+
+DropdownIconColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({}),
+  setSelectedIndex: func.isRequired,
+  setSelectedDropdownObject: func.isRequired,
+  rowIndex: number.isRequired,
+  object: shape({}).isRequired
+};
+
+export const PhotoIconColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }>
+        <ToolTip text={ value } />
+        <SVGIcon name={ CAMERA }
+                 fill={ '#043b6e' } />
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+PhotoIconColumn.defaultProps = {
+  value: undefined
+};
+
+PhotoIconColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
+export const LastReadingColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }
+           style={ { color: '#0090ff' } }>
+        <ToolTip text={ value?.tooltip } />
+        { (value?.lastReading.includes('1970/')) ? '---' : value?.lastReading }
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+LastReadingColumn.defaultProps = {
+  value: undefined
+};
+
+LastReadingColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
+export const CaptureNoteColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }>
+        <ToolTip text={ value } />
+        <SVGIcon name={ PENCIL } />
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+CaptureNoteColumn.defaultProps = {
+  value: undefined
+};
+
+CaptureNoteColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
+export const ChartColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }>
+        <ToolTip text={ value } />
+        <SVGIcon name={ CHARTS } />
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+ChartColumn.defaultProps = {
+  value: undefined
+};
+
+ChartColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
 };
 
 export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) => {
-
-  return (
-    <td onClick={ noOp() }
-        key={ dataIndex }>
-      { !isDropdownRow &&
-        <div className={ 'table__body__row__td-container' }>
-          { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
-          <div className={ 'table__body__row__td-upper--deficit' }
-               style={ {
-                 backgroundColor: value?.colorTop
-               } }>
-            { value?.top }
-          </div>
-          <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
-               style={ {
-                 backgroundColor: value?.colorBot
-               } }>
-            { value?.bottom }
-          </div>
-        </div> }
-    </td>
-  );
+  return <td onClick={ noOp() }
+             key={ dataIndex }>
+    { !isDropdownRow &&
+      <div className={ 'table__body__row__td-container' }>
+        { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
+        <div className={ 'table__body__row__td-upper--deficit' }
+             style={ {
+               backgroundColor: value?.colorTop
+             } }>
+          { value?.top }
+        </div>
+        <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
+             style={ {
+               backgroundColor: value?.colorBot
+             } }>
+          { value?.bottom }
+        </div>
+      </div> }
+  </td>;
 };
 
 DeficitColumn.defaultProps = {
@@ -170,17 +334,43 @@ DeficitColumn.defaultProps = {
 
 DeficitColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: shape({}),
+  value: string || shape({}),
   isDropdownRow: bool,
   isHeaderRow: bool
 };
 
-export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
+export const UnitColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+      <div className={ 'table__body__row__td-container' }>
+        { value?.slice(0, 2) }
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
 
-  return (
-    <td onClick={ noOp() }
-        key={ dataIndex }
-        className={ 'table__body__row__td--dark' }>
+UnitColumn.defaultProps = {
+  value: undefined
+};
+
+UnitColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
+export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }
+               className={ 'table__body__row__td--dark' }>
+
+      { (value?.comment) &&
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+          <div> { value?.comment ? value?.comment : '' }</div>
+        </div> }
 
       { (!value?.harvest) &&
         <div className={ 'table__body__row__td-container' }>
@@ -203,8 +393,9 @@ export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
         </div> }
       <DropDown value={ value }
                 columnNumber={ columnNumber } />
-    </td>
-  );
+    </td>;
+  else
+    return <td key={ dataIndex } />;
 };
 
 PrimaryForecastColumn.defaultProps = {
@@ -213,16 +404,21 @@ PrimaryForecastColumn.defaultProps = {
 
 PrimaryForecastColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: shape({}),
+  value: string || shape({}),
   columnNumber: number.isRequired
 };
 
 export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }
+               className={ 'table__body__row__td--light' }>
 
-  return (
-    <td onClick={ noOp() }
-        key={ dataIndex }
-        className={ 'table__body__row__td--light' }>
+      { (value?.comment) &&
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+          <div> { value?.comment ? value?.comment : '' }</div>
+        </div> }
 
       { (!value?.harvest) &&
         <div className={ 'table__body__row__td-container' }>
@@ -245,8 +441,9 @@ export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
         </div> }
       <DropDown value={ value }
                 columnNumber={ columnNumber } />
-    </td>
-  );
+    </td>;
+  else
+    return <td key={ dataIndex } />;
 };
 
 SecondaryForecastColumn.defaultProps = {
@@ -255,62 +452,115 @@ SecondaryForecastColumn.defaultProps = {
 
 SecondaryForecastColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: shape({}),
+  value: string || shape({}),
   columnNumber: number.isRequired
 };
 
-export const ForecastTimeIconsColumn = ({ dataIndex, value }) => {
-
-  return (
-    <td onClick={ noOp() }
-        key={ dataIndex }
-        className={ 'table__body__row__td--fade--thin' }>
+export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
+  if (value && !isHeaderRow)
+    return <td onClick={ noOp() }
+               key={ dataIndex }
+               className={ 'table__body__row__td--fade--thin' }>
       { !value?.dropdown &&
         <>
           <ToolTip text={ UNIT } />
-          <SVGIcon name={ RAIN_CLOUDS }
-                   fill={ '#043b6e' } />
-          <SVGIcon name={ WATCH }
-                   fill={ '#043b6e' } />
+          <SVGIcon name={ RAIN_CLOUDS } fill={ '#043b6e' } tiny />
+          <SVGIcon name={ WATCH } fill={ '#043b6e' } tiny />
         </>
       }
-    </td>
-  );
+    </td>;
+  else
+    return <td key={ dataIndex } />;
 };
 
 ForecastTimeIconsColumn.defaultProps = {
-  value: undefined
+  value: undefined,
+  isHeaderRow: undefined
 };
 
 ForecastTimeIconsColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string
+  value: string || shape({}),
+  isHeaderRow: bool
 };
 
-export const RainDataColumn = ({ dataIndex, value, columnNumber }) => {
+export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, columnNumber, setShowModal, isHeaderRow }) => {
 
-  return (
-    <td onClick={ noOp() }
-        key={ dataIndex }
-        className={ 'table__body__row__td--fade' }>
+  const openModal = (sensor) => {
+    setHoveredRowObject({
+      ...object,
+      sensor: sensor,
+      day: (() => {
+        switch (columnNumber) {
+          case 21:
+            return 6;
+          case 22:
+            return 5;
+          default:
+            return (columnNumber - 16);
+        }
+      })()
+    });
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setHoveredRowObject(undefined);
+    setShowModal(false);
+  };
+
+  if (!isHeaderRow)
+    return <td onClick={ noOp() }
+               key={ dataIndex }
+               className={ 'table__body__row__td--fade' }>
       <div className={ 'table__body__row__td-container' }>
-        <p> { (value?.upper === 0) ? '' : value?.upper }</p>
-        <p> { (value?.lower === 0) ? '' : value?.lower }</p>
+        <div onMouseEnter={ () => openModal(1) }
+             onMouseLeave={ () => closeModal() }>
+          { (value?.upper === 0) ? '' : value?.upper }
+        </div>
+        <div style={ { height: '2px' } } />
+        <div onMouseEnter={ () => openModal(2) }
+             onMouseLeave={ () => closeModal() }>
+          { (value?.lower === 0) ? '' : value?.lower }
+        </div>
       </div>
       <DropDown value={ value }
                 columnNumber={ columnNumber } />
-    </td>
-  );
+    </td>;
+  else
+    return <td key={ dataIndex } />;
 };
 
 RainDataColumn.defaultProps = {
-  value: undefined
+  value: undefined,
+  object: undefined
 };
 
 RainDataColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string,
-  columnNumber: number.isRequired
+  value: string || shape({}),
+  object: shape({}),
+  setHoveredRowObject: func.isRequired,
+  columnNumber: number,
+  setShowModal: func.isRequired
+};
+
+export const TransEvapTotalsColumn = ({ dataIndex, value }) => {
+  return <td onClick={ noOp() }
+             key={ dataIndex }>
+    <div className={ 'table__body__row__td-container--centered' }>
+      { value }
+    </div>
+  </td>;
+};
+
+TransEvapTotalsColumn.defaultProps = {
+  value: undefined
+};
+
+TransEvapTotalsColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
 };
 
 export const DropDown = ({ value, columnNumber, onClick }) => {
@@ -369,7 +619,7 @@ DropDown.defaultProps = {
 };
 
 DropDown.propTypes = {
-  value: shape({}).isRequired,
+  value: string || shape({}),
   columnNumber: number,
   onClick: func
 };

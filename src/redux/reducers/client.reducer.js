@@ -1,9 +1,15 @@
-import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_NAME } from '../actions/client.action';
+import {
+  SET_CLIENT_FIELD_LIST,
+  SET_CLIENT_FIELD_RAIN_DATA,
+  SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_PDF
+} from '../actions/client.action';
 
 export const initialState = {
-  fieldList: [],
-  fieldRainData: [],
-  selectedClient: { groupName: '', clientName: '' }
+  fieldList: undefined,
+  fieldRainData: undefined,
+  fieldRainDataForChart: undefined,
+  clientPDF: undefined
 };
 
 export const clientReducer = (state = initialState, action) => {
@@ -22,11 +28,18 @@ export const clientReducer = (state = initialState, action) => {
         fieldRainData
       };
     }
-    case SET_CLIENT_NAME: {
-      const { clientName, groupName } = action;
+    case SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART: {
+      const { fieldRainDataForChart } = action;
       return {
         ...state,
-        selectedClient: { groupName, clientName }
+        fieldRainDataForChart
+      };
+    }
+    case SET_CLIENT_PDF: {
+      const { clientPDF } = action;
+      return {
+        ...state,
+        clientPDF
       };
     }
     default:
