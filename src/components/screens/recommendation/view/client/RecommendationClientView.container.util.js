@@ -47,7 +47,8 @@ export const pushForecastRegionRow = (tableList, listItem, index, mappedList, we
   if (checkForecastArea(index, tableList)) {
     mappedList.push({
       fieldName: {
-        locationName: `${ listItem?.forecastArea.toUpperCase() }-forecast`
+        locationName: `${ listItem?.forecastArea.toUpperCase() }-forecast`,
+        summary: listItem?.weervoorspelling?.[weatherDataKeys[0]].opsomming
       },
       w: undefined,
       b: undefined,
@@ -57,13 +58,13 @@ export const pushForecastRegionRow = (tableList, listItem, index, mappedList, we
       q: undefined,
       deficit: undefined,
       unit: undefined,
-      [weatherDataKeys[0]]: undefined,
-      [weatherDataKeys[1]]: undefined,
-      [weatherDataKeys[2]]: undefined,
-      [weatherDataKeys[3]]: undefined,
-      [weatherDataKeys[4]]: undefined,
-      [weatherDataKeys[5]]: undefined,
-      [weatherDataKeys[6]]: undefined,
+      [weatherDataKeys[0]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[0]] },
+      [weatherDataKeys[1]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[1]] },
+      [weatherDataKeys[2]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[2]] },
+      [weatherDataKeys[3]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[3]] },
+      [weatherDataKeys[4]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[4]] },
+      [weatherDataKeys[5]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[5]] },
+      [weatherDataKeys[6]]: { weather: listItem?.weervoorspelling?.[weatherDataKeys[6]] },
       ' ': ' ',
       [rainDataKeys[0]]: undefined,
       [rainDataKeys[1]]: undefined,

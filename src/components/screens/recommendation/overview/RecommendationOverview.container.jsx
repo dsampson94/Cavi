@@ -1,34 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 import { useRouteMatch } from 'react-router';
 
-import { retrieveUserFromLocalStorage } from '../../../../tools/storage/localStorage';
+import { mappedUserData } from '../../../common/side-bar/Sidebar.util';
+import { retrieveUserLoginFromLocalStorage } from '../../../../tools/storage/localStorage';
+import { requestClientOverviewList } from '../../../../redux/actions/client.action';
 
 import RecommendationOverview from './RecommendationOverview';
 
 const RecommendationOverviewContainer = () => {
 
+  const dispatch = useDispatch();
   const { path } = useRouteMatch();
 
-  const userAccount = retrieveUserFromLocalStorage();
+  const [filteredClientData, setFilteredClientData] = useState(undefined);
+  const [overviewOptionSelected, setOverviewOptionSelected] = useState(1);
 
-  const ownClientsList = () => {
-    let mappedClients = [];
-    delete userAccount.access;
-    delete userAccount.clientsOther;
-    for (const [{}, listValues] of new Map(Object.entries(userAccount)).entries()) {
-      for (const [objectKey, objectValue] of new Map(Object.entries(listValues)).entries()) {
-        const innerObjectValueList = [];
-        for (const [iok, iov] of new Map(Object.entries(objectValue)).entries()) {
-          innerObjectValueList.push({ iok, iov });
-        }
-        mappedClients.push({ objectKey, innerObjectValueList });
-      }
-    }
-    return mappedClients;
+  const user = retrieveUserLoginFromLocalStorage();
+  const userOverviewList = useSelector(createSelector([state => state.client], client => client?.overviewList));
+  const mappedClientsList = mappedUserData(userOverviewList, true);
+
+  useEffect(() => {
+    dispatch(requestClientOverviewList(overviewRequestFields));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overviewOptionSelected]);
+
+  const overviewRequestFields = {
+    username: user?.username,
+    password: user?.password,
+    getwhat: overviewOptionSelected
   };
 
-  return <RecommendationOverview userAccount={ userAccount }
-                                 ownClientsList={ ownClientsList() }
+  return <RecommendationOverview ownClientsList={ mappedClientsList }
+                                 filteredClientData={ filteredClientData }
+                                 setFilteredClientData={ setFilteredClientData }
+                                 overviewOptionSelected={ overviewOptionSelected }
+                                 setOverviewOptionSelected={ setOverviewOptionSelected }
                                  activePath={ path } />;
 };
 

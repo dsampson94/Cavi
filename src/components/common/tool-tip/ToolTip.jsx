@@ -6,7 +6,7 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './tool-tip.scss';
 
-const ToolTip = ({ text, left }) => {
+const ToolTip = ({ text, left, mid }) => {
 
   const [showToolTip, setShowToolTip] = useState(false);
 
@@ -17,7 +17,7 @@ const ToolTip = ({ text, left }) => {
          onMouseLeave={ () => setShowToolTip(false) }>
 
       { showToolTip &&
-        <div className={ getClassNames('tooltip__popup', { left }) }>
+        <div className={ getClassNames('tooltip__popup', { left, mid }) }>
           { text }
         </div> }
     </div>

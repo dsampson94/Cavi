@@ -2,10 +2,12 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_OVERVIEW_LIST,
   SET_CLIENT_PDF
 } from '../actions/client.action';
 
 export const initialState = {
+  overviewList: undefined,
   fieldList: undefined,
   fieldRainData: undefined,
   fieldRainDataForChart: undefined,
@@ -14,6 +16,13 @@ export const initialState = {
 
 export const clientReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_CLIENT_OVERVIEW_LIST: {
+      const { overviewList } = action;
+      return {
+        ...state,
+        overviewList
+      };
+    }
     case SET_CLIENT_FIELD_LIST: {
       const { fieldList } = action;
       return {

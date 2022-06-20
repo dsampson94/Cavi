@@ -1,16 +1,24 @@
-import { SET_LOGGED_IN_USER } from '../actions/auth.action';
+import { SET_USER_CLIENT_LIST, SET_USER_LOGIN_DETAILS } from '../actions/auth.action';
 
 export const initialState = {
-  loggedInUser: undefined
+  userLoginDetails: undefined,
+  userClientList: undefined
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LOGGED_IN_USER: {
-      const { user } = action;
+    case SET_USER_LOGIN_DETAILS: {
+      const { userLoginDetails } = action;
       return {
         ...state,
-        loggedInUser: user
+        userLoginDetails
+      };
+    }
+    case SET_USER_CLIENT_LIST: {
+      const { userClientList } = action;
+      return {
+        ...state,
+        userClientList
       };
     }
     default:

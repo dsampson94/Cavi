@@ -12,11 +12,11 @@ export const retrieveUserLoginFromLocalStorage = () => {
   return base64ToObject(localStorage.getItem(USER_LOGIN));
 };
 
-export const saveUserToLocalStorage = (account) => {
+export const saveUserClientListToLocalStorage = (account) => {
   localStorage.setItem(USER_ACCOUNT, objectToBase64(account));
 };
 
-export const retrieveUserFromLocalStorage = () => {
+export const retrieveUserClientListFromLocalStorage = () => {
   return base64ToObject(localStorage.getItem(USER_ACCOUNT));
 };
 

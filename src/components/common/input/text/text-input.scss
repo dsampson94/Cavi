@@ -13,6 +13,10 @@
     padding: util.rem(0);
   }
 
+  &--left{
+    display: flex;
+  }
+
   &__label-container {
 
     &--login {
@@ -22,6 +26,14 @@
       color: map.get(color.$colorMap, pulse-blue);
       margin-top: util.rem(6);
       min-width: util.rem(100);
+    }
+
+    &--left {
+      display: flex;
+      min-width: util.rem(160);
+      text-align: left;
+      margin-top: util.rem(5);
+      flex-direction: row;
     }
   }
 

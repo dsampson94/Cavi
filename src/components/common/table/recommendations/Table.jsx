@@ -12,6 +12,7 @@ import {
   DropdownIconColumn,
   FieldNameColumn,
   ForecastTimeIconsColumn,
+  LandGroupForecastColumn,
   LastReadingColumn,
   PhotoIconColumn,
   PrimaryForecastColumn,
@@ -108,34 +109,62 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
               return <UnitColumn dataIndex={ dataIndex }
                                  value={ value } />;
             case 9:
-              return <PrimaryForecastColumn dataIndex={ dataIndex }
-                                            columnNumber={ 9 }
-                                            value={ value } />;
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <PrimaryForecastColumn dataIndex={ dataIndex }
+                                              columnNumber={ 9 }
+                                              value={ value } />;
             case 10:
-              return <SecondaryForecastColumn dataIndex={ dataIndex }
-                                              columnNumber={ 10 }
-                                              value={ value } />;
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <SecondaryForecastColumn dataIndex={ dataIndex }
+                                                columnNumber={ 10 }
+                                                value={ value } />;
             case 11:
-              return <PrimaryForecastColumn dataIndex={ dataIndex }
-                                            columnNumber={ 11 }
-                                            value={ value } />;
-            case 12:
-              return <SecondaryForecastColumn dataIndex={ dataIndex }
-                                              columnNumber={ 12 }
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <PrimaryForecastColumn dataIndex={ dataIndex }
+                                              columnNumber={ 11 }
                                               value={ value } />;
+            case 12:
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <SecondaryForecastColumn dataIndex={ dataIndex }
+                                                columnNumber={ 12 }
+                                                value={ value } />;
             case 13:
-              return <PrimaryForecastColumn dataIndex={ dataIndex }
-                                            columnNumber={ 13 }
-                                            value={ value } />;
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <PrimaryForecastColumn dataIndex={ dataIndex }
+                                              columnNumber={ 13 }
+                                              value={ value } />;
 
             case 14:
-              return <SecondaryForecastColumn dataIndex={ dataIndex }
-                                              columnNumber={ 14 }
-                                              value={ value } />;
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <SecondaryForecastColumn dataIndex={ dataIndex }
+                                                columnNumber={ 14 }
+                                                value={ value } />;
             case 15:
-              return <PrimaryForecastColumn dataIndex={ dataIndex }
-                                            columnNumber={ 15 }
-                                            value={ value } />;
+              if (value?.weather)
+                return <LandGroupForecastColumn dataIndex={ dataIndex }
+                                                value={ value?.weather } />;
+              else
+                return <PrimaryForecastColumn dataIndex={ dataIndex }
+                                              columnNumber={ 15 }
+                                              value={ value } />;
             case 16:
               return <ForecastTimeIconsColumn dataIndex={ dataIndex }
                                               value={ value }
@@ -145,7 +174,8 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 17 }
+                                     columnNumber={ 16 }
+                                     showModal={ showModal }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 18:
@@ -153,7 +183,8 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 18 }
+                                     columnNumber={ 17 }
+                                     showModal={ showModal }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 19:
@@ -161,7 +192,8 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 19 }
+                                     columnNumber={ 18 }
+                                     showModal={ showModal }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 20:
@@ -169,7 +201,8 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 20 }
+                                     columnNumber={ 19 }
+                                     showModal={ showModal }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 21:
@@ -177,7 +210,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 21 }
+                                     columnNumber={ 20 }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 22:
@@ -185,7 +218,8 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                      value={ value }
                                      object={ object }
                                      setHoveredRowObject={ setHoveredRowObject }
-                                     columnNumber={ 22 }
+                                     columnNumber={ 21 }
+                                     showModal={ showModal }
                                      setShowModal={ setShowModal }
                                      isHeaderRow={ isHeaderRow } />;
             case 23:

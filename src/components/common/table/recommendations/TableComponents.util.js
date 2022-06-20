@@ -9,14 +9,18 @@ import {
   BULLSEYE,
   CAMERA,
   CHARTS,
+  CLOUDED,
   DROPDOWN,
   DROPDOWN_ALL,
   HARVEST,
   HARVEST_ICON,
+  PARTLY_CLOUDED,
   PENCIL,
   PREVIOUS,
   PREVIOUS_RECOMMENDATIONS,
+  RAIN,
   RAIN_CLOUDS,
+  SUNNY,
   UNIT,
   WARNING,
   WATCH
@@ -124,7 +128,7 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container-forecast' }>
         <div className={ 'table__body__row__td-container-forecast-upper' }>{ value?.locationName?.slice(0, -9) }</div>
-        <div className={ 'table__body__row__td-container-forecast-lower' }>{ 'mock climate text' }</div>
+        <div className={ 'table__body__row__td-container-forecast-lower' }>{ value?.summary }</div>
       </div>
     </td>;
   } else if (value?.locationName?.includes('-landGroup')) {
@@ -456,6 +460,63 @@ SecondaryForecastColumn.propTypes = {
   columnNumber: number.isRequired
 };
 
+export const LandGroupForecastColumn = ({ dataIndex, value }) => {
+  if (value)
+    return <td onClick={ noOp() }
+               key={ dataIndex }>
+
+      <div className={ 'table__body__row__td-weather' }>
+        <div className={ 'table__body__row__td-weather-left' }>
+          <div className={ 'table__body__row__td-weather-left--icon' }>
+            <div className={ 'table__body__row__td-weather-left--icon-container' }>
+              { (() => {
+                switch (value?.sid) {
+                  case 1:
+                    return <SVGIcon name={ SUNNY } fill={ '#FDC633' } />;
+                  case 9:
+                  case 10:
+                  case 41:
+                  case 46:
+                    return <SVGIcon name={ RAIN } fill={ '#6495ED' } />;
+                  case 2:
+                    return <SVGIcon name={ PARTLY_CLOUDED } fill={ '#C2C2C1' } />;
+                  case 3:
+                  case 4:
+                    return <SVGIcon name={ CLOUDED } fill={ '#C2C2C1' } />;
+                }
+              })() }
+            </div>
+          </div>
+          <div className={ 'table__body__row__td-weather-left--wind' }>
+            { value?.wind }
+          </div>
+        </div>
+        <div className={ 'table__body__row__td-weather-right' }>
+          <div className={ 'table__body__row__td-weather-right--max' }>
+            { `${ value?.maks }°C` }
+          </div>
+          <div className={ 'table__body__row__td-weather-right--min' }>
+            { `${ value?.min }°C` }
+          </div>
+          <div className={ 'table__body__row__td-weather-right--weer' }>
+            { value?.weer }
+          </div>
+        </div>
+      </div>
+    </td>;
+  else
+    return <td key={ dataIndex } />;
+};
+
+LandGroupForecastColumn.defaultProps = {
+  value: undefined
+};
+
+LandGroupForecastColumn.propTypes = {
+  dataIndex: number.isRequired,
+  value: string || shape({})
+};
+
 export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
   if (value && !isHeaderRow)
     return <td onClick={ noOp() }
@@ -492,12 +553,12 @@ export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, 
       sensor: sensor,
       day: (() => {
         switch (columnNumber) {
-          case 21:
+          case 20:
             return 6;
-          case 22:
+          case 21:
             return 5;
           default:
-            return (columnNumber - 16);
+            return (columnNumber - 15);
         }
       })()
     });

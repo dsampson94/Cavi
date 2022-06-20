@@ -168,6 +168,7 @@ body.dark-mode {
     }
   }
 
+  .email-modal,
   .recommendation-modal {
     box-shadow: util.rem(0) util.rem(0) util.rem(100) map.get(color.$colorMap, black-alt);
     background-color: map.get(color.$colorMap, dark-mode-grey-modal);

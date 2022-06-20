@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
@@ -10,12 +10,16 @@ import InputSearch from '../../../common/input-search/InputSearch';
 
 import './recommendation-overview.scss';
 
-const RecommendationOverview = ({ userAccount, ownClientsList, activePath }) => {
+const RecommendationOverview = ({
+                                  ownClientsList,
+                                  filteredClientData,
+                                  setFilteredClientData,
+                                  overviewOptionSelected,
+                                  setOverviewOptionSelected,
+                                  activePath
+                                }) => {
 
   const history = useHistory();
-
-  const [filteredClientData, setFilteredClientData] = useState(undefined);
-  const [overviewOptionSelected, setOverviewOptionSelected] = useState(1);
 
   const handleOverviewClick = () => history.push('/recommendation/overview');
   const handleMonitorProbesClick = () => history.push('/recommendation/monitor');
@@ -34,10 +38,10 @@ const RecommendationOverview = ({ userAccount, ownClientsList, activePath }) => 
         <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
                       setOverviewOptionSelected={ setOverviewOptionSelected } />
 
-        <InputSearch dataToFilter={ userAccount }
+        <InputSearch dataToFilter={ ownClientsList }
                      setFilteredData={ setFilteredClientData }
                      placeholder={ 'Filter clients' }
-                     sidebar />
+                     overview />
 
         <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
                       overviewOptionSelected={ overviewOptionSelected }
@@ -51,7 +55,6 @@ const RecommendationOverview = ({ userAccount, ownClientsList, activePath }) => 
 RecommendationOverview.defaultProps = {};
 
 RecommendationOverview.propTypes = {
-  userAccount: shape({}).isRequired,
   ownClientsList: arrayOf(shape({})).isRequired,
   activePath: string.isRequired
 };

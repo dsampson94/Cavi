@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { func } from 'prop-types';
 
@@ -8,11 +10,9 @@ import logo from '../../../tools/images/pulselogo.png';
 import TextInput from '../../common/input/text/TextInput';
 import Button from '../../common/button/Button';
 import Graphic from '../../common/graphic/Graphic';
+import Spinner from '../../common/spinner/Spinner';
 
 import './login.scss';
-import Spinner from '../../common/spinner/Spinner';
-import { useSelector } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
 
 const Login = ({ onLoginClick }) => {
 
@@ -35,9 +35,7 @@ const Login = ({ onLoginClick }) => {
         <TextInput label={ 'Username:' }
                    onChange={ ({ target }) => setUsername(target.value) }
                    onKeyPress={ event => {
-                     if (event.key === 'Enter') {
-                       handleLoginClick();
-                     }
+                     if (event.key === 'Enter') handleLoginClick();
                    } }
                    login />
 
@@ -45,9 +43,7 @@ const Login = ({ onLoginClick }) => {
                    type={ 'password' }
                    onChange={ ({ target }) => setPassword(target.value) }
                    onKeyPress={ event => {
-                     if (event.key === 'Enter') {
-                       handleLoginClick();
-                     }
+                     if (event.key === 'Enter') handleLoginClick();
                    } }
                    login />
 

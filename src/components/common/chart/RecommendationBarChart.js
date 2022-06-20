@@ -18,12 +18,18 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
   };
 
   const formatDates = (tickItem) => {
-    const date = new Date(tickItem).toUTCString().split(' ');
-    return `${ date[1] } ${ date[2] }`;
+    if (!tickItem) return;
+    if (tickItem?.includes(':')) {
+      const date = new Date(tickItem)?.toUTCString()?.split(' ');
+      return `${ date[4] } `;
+    } else {
+      const date = new Date(tickItem)?.toUTCString()?.split(' ');
+      return `${ date[1] } ${ date[2] }`;
+    }
   };
 
   return (
-    <BarChart width={ 900 } height={ 300 } data={ mappedData() }>
+    <BarChart width={ 750 } height={ 300 } data={ mappedData() }>
       <CartesianGrid strokeDasharray="3 1" />
       <YAxis tick={ { fill: (activeTheme === 'dark') ? 'white' : 'black' } }
              tickCount={ 10 } />

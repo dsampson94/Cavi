@@ -25,8 +25,8 @@ const RecommendationClientViewContainer = () => {
 
   const dispatch = useDispatch();
   const { groupName, clientName } = useParams();
-  const { user } = retrieveUserLoginFromLocalStorage();
 
+  const user = retrieveUserLoginFromLocalStorage();
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 

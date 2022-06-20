@@ -38,9 +38,17 @@
 
     &__right {
       display: flex;
+      position: relative;
       flex-direction: row;
-      padding-top: util.rem(4);
       width: 10%;
+
+      &__very-satisfied,
+      &__satisfied,
+      &__neutral,
+      &__dissatisfied,
+      &__very-dissatisfied {
+        position: relative;
+      }
     }
   }
 
@@ -108,8 +116,53 @@
 
         &__icon {
           width: util.rem(18);
+          position: relative;
         }
       }
     }
+  }
+}
+
+.deficit-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  color: map.get(color.$colorMap, light-mode-white);
+  height: 100%;
+
+  &__upper {
+    display: flex;
+    justify-content: center;
+    border-top-left-radius: map.get(radius.$border-radius, small);
+    border-top-right-radius: map.get(radius.$border-radius, small);
+    font-size: util.rem(9);
+    height: 50%;
+  }
+
+  &__lower {
+    display: flex;
+    justify-content: center;
+    border-bottom-left-radius: map.get(radius.$border-radius, small);
+    border-bottom-right-radius: map.get(radius.$border-radius, small);
+    font-size: util.rem(9);
+    height: 50%;
+  }
+}
+
+.last-reading {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 90%;
+
+  &__container {
+    margin-top: util.rem(2);
+    border-radius: map.get(radius.$border-radius, large);
+  }
+
+  &__text {
+    font-size: util.rem(10);
+    padding: util.rem(3);
   }
 }

@@ -16,7 +16,7 @@ const RecommendationModal = ({ activeObject, clientRequestFields, showModal }) =
 
   const fieldRainDataForChart = useSelector(createSelector([state => state.client], client => client?.fieldRainDataForChart));
 
-  const clientRequestFieldsForChart = {
+  let clientRequestFieldsForChart = {
     ...clientRequestFields,
     sensor: activeObject?.sensor,
     day: activeObject?.day,

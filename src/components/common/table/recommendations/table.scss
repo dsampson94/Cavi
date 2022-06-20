@@ -159,6 +159,62 @@
           }
         }
 
+        &-weather {
+          display: flex;
+          flex-direction: row;
+          padding: util.rem(4);
+
+          &-left {
+            display: flex;
+            flex-direction: column;
+            margin-right: util.rem(2);
+            min-width: 50%;
+
+            &--icon {
+
+              &-container {
+                padding: util.rem(1);
+                height: util.rem(20);
+                width: util.rem(25);
+              }
+            }
+
+            &--wind {
+              font-weight: bold;
+              position: absolute;
+              font-size: util.rem(9);
+              text-align: left;
+              bottom: 0;
+            }
+          }
+
+
+          &-right {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: util.rem(-2);
+            margin-right: util.rem(2);
+            min-width: 50%;
+
+            &--max {
+              text-align: right;
+              font-weight: bold;
+              font-size: util.rem(12);
+            }
+
+            &--min {
+              text-align: right;
+              font-size: util.rem(11);
+            }
+
+            &--weer {
+              margin-bottom: util.rem(-1);
+              font-size: util.rem(9);
+              text-align: right;
+            }
+          }
+        }
+
         &-upper {
           display: flex;
           white-space: nowrap;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { arrayOf, bool, func, shape, string } from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 
 import {
   SEARCH,
@@ -21,18 +21,20 @@ import './input-search.scss';
 
 const InputSearch = ({
                        name,
-                       value,
                        type,
                        dataToFilter,
                        setFilteredData,
+                       persistSearchString,
+                       setPersistSearchString,
                        placeholder,
                        sidebar,
-                       table
+                       table,
+                       overview
                      }) => {
 
   const dispatch = useDispatch();
 
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState(persistSearchString ? persistSearchString : '');
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
@@ -43,10 +45,13 @@ const InputSearch = ({
   }, [searchString]);
 
   const filter = () => {
-    if (table) {
+    if (table)
       filterTable();
-    } else if (sidebar) {
-      filterSideBar();
+    else if (overview)
+      filterClientList();
+    else if (sidebar) {
+      filterClientList();
+      setPersistSearchString(searchString);
     }
   };
 
@@ -78,7 +83,43 @@ const InputSearch = ({
     }
   };
 
-  const filterSideBar = () => {};
+  const filterClientList = () => {
+    if (searchString.length < 2) return;
+
+    let mappedClientsInner = [];
+    let filteredClientsInner = [];
+    let mappedFilteredClientsInner = [];
+
+    dataToFilter.forEach((item) => {
+      item.innerObjectValueList.forEach((innerItem) => {
+        mappedClientsInner.push({ key: item.objectKey, iok: innerItem.iok, iov: { color: innerItem.iov.color } });
+      });
+    });
+
+    filteredClientsInner = mappedClientsInner.filter((item) => {
+      if (item.iok.toLowerCase()?.includes(searchString?.toLowerCase())) {
+        return item !== -1;
+      }
+    });
+
+    dataToFilter.forEach((outerItem) => {
+      outerItem.innerObjectValueList.forEach((innerItem) => {
+        for (const item of filteredClientsInner) {
+          if (innerItem.iok.toLowerCase().includes(item.iok.toLowerCase())) {
+            mappedFilteredClientsInner.push({ objectKey: outerItem?.objectKey, innerObjectValueList: [innerItem] });
+          }
+        }
+      });
+    });
+
+    if (isEmpty(mappedFilteredClientsInner)) {
+      dispatch(addSystemNotice(UNSUCCESSFUL_CLIENT_SEARCH, SNACK_CRITICAL));
+      setFilteredData(undefined);
+    } else {
+      setFilteredData(mappedFilteredClientsInner.filter((v, i, a) =>
+        a.findIndex(v2 => (JSON.stringify(v2) === JSON.stringify(v))) === i));
+    }
+  };
 
   return (
     <div className={ 'search' }>
@@ -87,15 +128,13 @@ const InputSearch = ({
       </div>
       <input autoFocus
              name={ name }
-             value={ value }
+             value={ persistSearchString }
              type={ type }
              placeholder={ placeholder }
              className={ getClassNames('search__input', { sidebar, table }) }
              onChange={ ({ target }) => setSearchString(target.value) }
-             onKeyPress={ event => {
-               if (event.key === 'Enter') {
-                 (searchString) ? filter() : setFilteredData(undefined);
-               }
+             onKeyDown={ event => {
+               if (event.key === 'Enter') searchString ? filter() : setFilteredData(undefined);
              } } />
     </div>
   );

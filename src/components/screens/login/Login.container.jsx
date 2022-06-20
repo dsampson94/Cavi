@@ -13,7 +13,7 @@ const LoginContainer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const onLoginSuccess = (user) => {
+  const onLoginSuccess = ({ user }) => {
     saveUserLoginToLocalStorage(user);
     history.push('/recommendation/overview');
   };

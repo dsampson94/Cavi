@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { arrayOf, node, oneOfType } from 'prop-types';
 
+import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
+import { mappedUserData } from '../side-bar/Sidebar.util';
+
 import TopBar from '../top-bar/TopBar';
 import SideBar from '../side-bar/SideBar';
 
@@ -10,6 +13,9 @@ const ContentContainer = ({ children, clientRequestFields }) => {
 
   const [showSideBar, setShowSideBar] = useState(true);
 
+  const userAccount = retrieveUserClientListFromLocalStorage();
+  const mappedUser = mappedUserData(userAccount);
+
   return (
     <div className="content-container">
       <TopBar showSideBar={ showSideBar }
@@ -17,7 +23,8 @@ const ContentContainer = ({ children, clientRequestFields }) => {
               clientRequestFields={ clientRequestFields } />
 
       <div className="content-container__screen">
-        <SideBar showSideBar={ showSideBar }
+        <SideBar mappedUserData={ mappedUser }
+                 showSideBar={ showSideBar }
                  setShowSideBar={ setShowSideBar } />
         { children }
       </div>

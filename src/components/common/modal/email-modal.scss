@@ -5,7 +5,7 @@
 @use "../../../stylesheets/01_tools/mixin" as mixin;
 @use "../../../stylesheets/00_settings/config" as config;
 
-.recommendation-modal {
+.email-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,33 +17,40 @@
   background-color: map.get(color.$colorMap, white);
   box-shadow: util.rem(0) util.rem(0) util.rem(25) map.get(color.$colorMap, dark-mode-grey);
   margin-left: auto;
-  transform: translateX(-9%);
   margin-right: auto;
-  width: util.rem(840);
-  height: util.rem(380);
-  bottom: 5%;
+  width: util.rem(500);
+  height: util.rem(155);
+  padding: 0 util.rem(20) 0 util.rem(20);
+  bottom: 40%;
   left: 0;
   right: 0;
 
-  &__header {
-    font-weight: bold;
-    margin: util.rem(20) 0 util.rem(25) 0;
+  &__header-container {
+    display: flex;
+    flex-direction: row;
+    height: util.rem(40);
   }
 
-  &__container {
+  &__header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-items: center;
+    font-weight: bold;
   }
 
-  &__vertical-label {
-    margin: 0 util.rem(10) util.rem(30) util.rem(-28);
-    font-size: util.rem(13);
-    width: util.rem(30);
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
   }
 
-  &__chart {
-    margin: 0 0 0 util.rem(-40);
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    width: util.rem(220);
+    margin-top: util.rem(14);
   }
 }

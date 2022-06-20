@@ -14,8 +14,8 @@
   right: 0;
 
   &__popup {
-    z-index: 10;
     position: absolute;
+    z-index: 10;
     font-size: util.rem(12);
     margin-left: util.rem(35);
     margin-top: util.rem(18);
@@ -29,6 +29,10 @@
 
     &--left {
       margin-left: util.rem(-125);
+    }
+
+    &--mid {
+      margin-top: util.rem(0.5);
     }
   }
 }

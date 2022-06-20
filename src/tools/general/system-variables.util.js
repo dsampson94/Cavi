@@ -3,6 +3,9 @@ export const SNACK_SUCCESS = 'snack--success';
 export const SNACK_CRITICAL = 'snack--critical';
 export const SNACK_INFO = 'snack--info';
 
+export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Overview Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'Overview Not Retrieved';
+
 export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
 
@@ -11,6 +14,8 @@ export const UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Not Retrieved
 
 export const SUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Not Retrieved';
+
+export const SUCCESSFULLY_EMAILED_PDF = 'Client PDF Emailed Successfully';
 
 export const SUCCESSFUL_SEARCH = 'Fields Retrieved Successfully ';
 export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
@@ -45,6 +50,12 @@ export const QUICK_VIEW = 'Quick view';
 export const UNIT = 'Unit:';
 export const HARVEST = 'Harvest date is today ';
 
+export const TODAY = 'Viewed today';
+export const GREEN = 'Viewed in less than 7 days ';
+export const YELLOW = 'Viewed in less than 14 days';
+export const ORANGE = 'Viewed in less than 30 days';
+export const RED = 'Viewed in MORE than 30 days!';
+
 //TOPBAR
 export const EMAIL_RECOMMENDATIONS = 'email_recommendations';
 export const PRINT_ICON = 'Print';
@@ -78,6 +89,12 @@ export const SATISFIED = 'satisfied';
 export const NEUTRAL = 'neutral';
 export const DISSATISFIED = 'dissatisfied';
 export const VERY_DISSATISFIED = 'very_dissatisfied';
+
+//WEATHER
+export const SUNNY = 'sunny';
+export const RAIN = 'raining';
+export const PARTLY_CLOUDED = 'party_clouded';
+export const CLOUDED = 'clouded';
 
 //OVERVIEW OPTIONS
 export const FIELDS_LAST_VIEWED_QUESTION = 'When is the last time that you viewed your fields?';

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
@@ -20,12 +20,13 @@ import {
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
 
+import { requestClientPDF } from '../../../redux/actions/client.action';
+import { requestLogout } from '../../../redux/actions/auth.action';
+
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
 import ThemeToggle from '../theme-toggle/ThemeToggle';
-
-import { requestClientPDF } from '../../../redux/actions/client.action';
-import { requestLogout } from '../../../redux/actions/auth.action';
+import EmailModal from '../modal/EmailModal';
 
 import './top-bar.scss';
 
@@ -34,10 +35,15 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [emailAddress, setEmailAddress] = useState(undefined);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
 
   useEffect(() => {
-    downloadPDF();
+    if (!emailAddress) {
+      downloadPDF();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientPDF]);
 
@@ -53,6 +59,10 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
   const getPDF = () => {
     if (clientRequestFields)
       dispatch(requestClientPDF(clientRequestFields));
+  };
+
+  const getPDFAndEmail = () => {
+    setShowEmailModal(true);
   };
 
   const logout = () => {
@@ -74,6 +84,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
                   onClick={ getPDF }
                   tooltip={ PRINT } />
           <Button icon={ EMAIL_RECOMMENDATIONS }
+                  onClick={ getPDFAndEmail }
                   tooltip={ EMAIL } />
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
@@ -95,6 +106,12 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
                 onClick={ logout }
                 leftAlignedTooltip />
       </div>
+
+      { showEmailModal &&
+        <EmailModal setShowEmailModal={ setShowEmailModal }
+                    emailAddress={ emailAddress }
+                    setEmailAddress={ setEmailAddress }
+                    clientRequestFields={ clientRequestFields } /> }
     </div>
   );
 };
