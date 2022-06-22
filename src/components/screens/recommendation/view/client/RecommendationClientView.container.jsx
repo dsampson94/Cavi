@@ -77,11 +77,6 @@ const RecommendationClientViewContainer = () => {
                                    hasSubGroups={ hasSubGroups } />;
 };
 
-RecommendationClientViewContainer.defaultProps = {
-  fieldList: {},
-  fieldRainData: {}
-};
-
 RecommendationClientViewContainer.propTypes = {
   fieldList: shape({}),
   fieldRainData: shape({})

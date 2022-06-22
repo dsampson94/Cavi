@@ -4,44 +4,35 @@ import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 
-import { getMockStore } from '../../../../../tools/testing/testing.util';
-import { initialState as authState } from '../../../../../redux/reducers/auth.reducer';
-import { initialState as systemState } from '../../../../../redux/reducers/system.reducer';
+import { getMockStore } from '../../../../../tools/testing/test.util';
 import { initialState as clientState } from '../../../../../redux/reducers/client.reducer';
-
 import RecommendationClientViewContainer from './RecommendationClientView.container';
 
-const mockState = {
-  material: authState,
-  supplier: systemState,
-  client: clientState
-};
+const mockState = { client: clientState };
+
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useParams: () => ({
+    groupName: 'mockGroupName',
+    clientName: 'mockClientName'
+  })
+}));
 
 xdescribe('RecommendationClientViewContainer', () => {
   const setUp = () => {
-
     return render(
       <Provider store={ getMockStore(mockState) }>
-        <MemoryRouter initialEntries={ ['/recommendation/client'] }>
+        <MemoryRouter initialEntries={ ['/recommendation/mockGroupName/mockClientName'] }>
           <RecommendationClientViewContainer />
         </MemoryRouter>
       </Provider>
     );
   };
 
-  xtest('should render the RecommendationClientViewContainer screen', () => {
-    const { container, getByText } = setUp();
+  test('should render/contain the RecommendationClientView screen', () => {
+    const { container } = setUp();
 
-    const contentContainer = container.querySelector('.content-container');
-    expect(contentContainer).toBeInTheDocument();
-
-    const midBar = container.querySelector('.mid-bar');
-    expect(midBar).toBeInTheDocument();
-
-    const table = container.querySelector('.table');
-    expect(table).toBeInTheDocument();
-
-    const text = getByText('Field Name');
-    expect(text).toBeInTheDocument();
+    const recommendationClientViewScreen = container.querySelector('.recommendation-client-view');
+    expect(recommendationClientViewScreen).toBeInTheDocument();
   });
 });

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { func, string } from 'prop-types';
+
 import Button from '../button/Button';
 import {
   MID_BAR_ASSISTANT,
@@ -64,8 +66,16 @@ const MidBar = ({
   );
 };
 
-MidBar.defaultProps = {};
-
-MidBar.propTypes = {};
+MidBar.propTypes = {
+  activePath: string,
+  handleOverviewClick: func,
+  handleMonitorProbesClick: func,
+  handleFindLastRecordingsClick: func,
+  handleAssistantClick: func,
+  handleNeglectedClick: func,
+  handleEmailReadingsClick: func,
+  handleChartClick: func,
+  handleIrricomsClick: func
+};
 
 export default MidBar;

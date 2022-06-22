@@ -24,13 +24,10 @@ const ToolTip = ({ text, left, mid }) => {
   );
 };
 
-ToolTip.defaultProps = {
-  left: undefined
-};
-
 ToolTip.propTypes = {
   text: string.isRequired,
-  left: bool
+  left: bool,
+  mid: bool
 };
 
 export default ToolTip;

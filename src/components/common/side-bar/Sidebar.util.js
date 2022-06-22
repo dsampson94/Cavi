@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import { getClassNames, noOp } from '../../../tools/general/helpers.util';
+import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
 import { SETTINGS_GEAR } from '../../../tools/general/system-variables.util';
 
 import SVGIcon from '../../../tools/icons/SVGIcon';
@@ -12,17 +12,17 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
   const history = useHistory();
   const { groupName, clientName } = useParams();
 
-  let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item, index) => {
+  let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item) => {
     return (
-      <div className="side-bar__list__item" key={ index }>
+      <div className="side-bar__list__item" key={ generateId() }>
         <div className="side-bar__list__item__header">
           { item.objectKey?.toUpperCase() }
         </div>
-        { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value, index) => {
+        { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
           return (
             <div className={ getClassNames('side-bar__list__item__subheader',
               { selected: (clientName === value.iok && groupName === item.objectKey) }) }
-                 key={ index }>
+                 key={ generateId() }>
               <div className="side-bar__list__item__subheader__text"
                    style={ {
                      color: (() => {

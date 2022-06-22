@@ -1,12 +1,18 @@
 /* eslint-disable */
+import React from 'react';
+import { Provider } from 'react-redux';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
-
 import { createMemoryHistory } from 'history';
 
 import { noOp } from '../../../tools/general/helpers.util';
 
+import { getMockStore } from '../../../tools/testing/test.util';
+import { initialState as authState } from '../../../redux/reducers/auth.reducer';
+
 import Login from './Login';
+
+const mockState = { auth: authState };
 
 describe('Login Screen', () => {
 
@@ -14,9 +20,11 @@ describe('Login Screen', () => {
 
   const setup = (mockLoginFn = noOp) => {
     return render(
-      <Router history={ history }>
-        <Login onLoginClick={ mockLoginFn } />
-      </Router>
+      <Provider store={ getMockStore(mockState) }>
+        <Router history={ history }>
+          <Login onLoginClick={ mockLoginFn } />
+        </Router>
+      </Provider>
     );
   };
 

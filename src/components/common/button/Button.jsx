@@ -40,21 +40,6 @@ const Button = ({
   );
 };
 
-Button.defaultProps = {
-  name: undefined,
-  type: 'button',
-  label: undefined,
-  onClick: undefined,
-  disabled: false,
-  flex: false,
-  login: false,
-  blue: false,
-  white: false,
-  icon: undefined,
-  leftAlignedTooltip: undefined,
-  spaced: undefined
-};
-
 Button.propTypes = {
   name: string,
   type: string,

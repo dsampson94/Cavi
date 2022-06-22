@@ -14,7 +14,6 @@ const RecommendationOverviewContainer = () => {
   const dispatch = useDispatch();
   const { path } = useRouteMatch();
 
-  const [filteredClientData, setFilteredClientData] = useState(undefined);
   const [overviewOptionSelected, setOverviewOptionSelected] = useState(1);
 
   const user = retrieveUserLoginFromLocalStorage();
@@ -33,8 +32,6 @@ const RecommendationOverviewContainer = () => {
   };
 
   return <RecommendationOverview ownClientsList={ mappedClientsList }
-                                 filteredClientData={ filteredClientData }
-                                 setFilteredClientData={ setFilteredClientData }
                                  overviewOptionSelected={ overviewOptionSelected }
                                  setOverviewOptionSelected={ setOverviewOptionSelected }
                                  activePath={ path } />;

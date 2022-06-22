@@ -26,12 +26,6 @@ const Spinner = ({ spinnerText, content, centered }) => {
   );
 };
 
-Spinner.defaultProps = {
-  spinnerText: undefined,
-  content: undefined,
-  centered: undefined
-};
-
 Spinner.propTypes = {
   spinnerText: string,
   content: bool,

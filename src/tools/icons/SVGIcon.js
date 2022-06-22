@@ -39,7 +39,7 @@ import './svg-icon.scss';
 
 const SVGIcon = ({ name, fill, height, width, onClick, tiny }) => {
 
-  const activeTheme = useSelector(state => state.system.theme);
+  const activeTheme = useSelector(state => state?.system?.theme);
 
   return (
     <div className={ getClassNames('svg-icon',

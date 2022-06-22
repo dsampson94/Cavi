@@ -19,24 +19,6 @@ export const hideColumnHeader = (tableName, key) => {
   }
 };
 
-export const sort = (data, key) => {
-  return data.sort((objectOne, objectTwo) => {
-    let valueOne = objectOne[key];
-    let valueTwo = objectTwo[key];
-    if (typeof valueOne === 'string') {
-      valueOne = valueOne.toLowerCase();
-      valueTwo = valueTwo.toLowerCase();
-    }
-    if (valueOne < valueTwo) {
-      return -1;
-    }
-    if (valueOne > valueTwo) {
-      return 1;
-    }
-    return 0;
-  });
-};
-
 export const pushEmptyRow = (filteredData, weatherDataKeys, rainDataKeys, tableList, i ) => {
   filteredData.push({
     fieldName: { locationName: undefined },
@@ -67,14 +49,6 @@ export const pushEmptyRow = (filteredData, weatherDataKeys, rainDataKeys, tableL
     ...(tableList[i]?.showtransp === '1' ? { total: undefined } : undefined)
   });
 };
-
-export const tableTemplateData = [
-  {
-    fieldName: '', deficit: '', unit: '',
-    mon11: '', tues12: '', wed13: '', thur14: '', fri15: '', sat16: '', sun17: '',
-    '': '', fri8: '', sat9: '', sun10: '', mon10: '', d30: '', total1: '',
-    trans: '', evap: '', total2: ''
-  }];
 
 export const mockTableData = [
   {

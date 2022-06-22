@@ -48,8 +48,6 @@ const EmailModal = ({ setShowEmailModal, emailAddress, setEmailAddress, clientRe
   );
 };
 
-EmailModal.defaultProps = {};
-
 EmailModal.propTypes = {
   emailAddress: string.isRequired,
   setShowEmailModal: func.isRequired,

@@ -48,7 +48,7 @@ const RecommendationClientView = ({ mappedFieldList, clientRequestFields, hasSub
                      clientRequestFields={ clientRequestFields }
                      toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
 
-        <TableSearchBar fieldList={ mappedFieldList }
+        <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />
 
         <div className="recommendation-client-view__scroll">
@@ -64,11 +64,6 @@ const RecommendationClientView = ({ mappedFieldList, clientRequestFields, hasSub
       </div>
     </ContentContainer>
   );
-};
-
-RecommendationClientView.defaultProps = {
-  mappedFieldList: [],
-  fieldRainData: undefined
 };
 
 RecommendationClientView.propTypes = {

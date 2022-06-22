@@ -1,24 +1,26 @@
-export const toggleAllDropdowns = (allDropdownsExpanded, fieldList, activeTableData, setActiveTableData) => {
+export const toggleAllDropdowns = (allDropdownsExpanded, mappedFieldList, activeTableData, setActiveTableData) => {
+  if (!mappedFieldList) return;
   if (allDropdownsExpanded) {
-    const copyOfActiveList = [...fieldList];
+    const copyOfActiveList = [...mappedFieldList];
     activeTableData?.forEach((listItem, index) => {
-      fieldList?.splice(index + 1, 1,
+      mappedFieldList?.splice(index + 1, 1,
         { ...copyOfActiveList[index + 1], expanded: false });
     });
-    setActiveTableData([...fieldList]);
+    setActiveTableData([...mappedFieldList]);
   } else {
-    const copyOfActiveList = [...fieldList];
+    const copyOfActiveList = [...mappedFieldList];
     activeTableData?.forEach((listItem, index) => {
-      fieldList?.splice(index + 1, 1,
+      mappedFieldList?.splice(index + 1, 1,
         { ...copyOfActiveList[index + 1], expanded: true });
     });
-    setActiveTableData([...fieldList]);
+    setActiveTableData([...mappedFieldList]);
   }
 };
 
-export const toggleDropdownAfterSearch = (fieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData) => {
-  const copyOfActiveList = [...fieldList];
-  fieldList?.forEach((listItem, index) => {
+export const toggleDropdownAfterSearch = (mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData) => {
+  if (!mappedFieldList) return;
+  const copyOfActiveList = [...mappedFieldList];
+  mappedFieldList?.forEach((listItem, index) => {
     if (selectedDropdownObject?.fieldName?.locationName === listItem?.fieldName?.locationName) {
       if (filteredTableData[selectedIndex + 1].expanded) {
         filteredTableData?.splice(selectedIndex + 1, 1,
@@ -33,9 +35,10 @@ export const toggleDropdownAfterSearch = (fieldList, selectedDropdownObject, fil
   });
 };
 
-export const toggleDropdown = (fieldList, filteredTableData, selectedIndex, setActiveTableData) => {
-  const copyOfActiveList = [...fieldList];
-  fieldList?.splice(selectedIndex + 1, 1,
-    { ...copyOfActiveList[selectedIndex + 1], expanded: !fieldList[selectedIndex + 1].expanded });
-  setActiveTableData([...fieldList]);
+export const toggleDropdown = (mappedFieldList, filteredTableData, selectedIndex, setActiveTableData) => {
+  if (!mappedFieldList) return;
+  const copyOfActiveList = [...mappedFieldList];
+  mappedFieldList?.splice(selectedIndex + 1, 1,
+    { ...copyOfActiveList[selectedIndex + 1], expanded: !mappedFieldList[selectedIndex + 1].expanded });
+  setActiveTableData([...mappedFieldList]);
 };

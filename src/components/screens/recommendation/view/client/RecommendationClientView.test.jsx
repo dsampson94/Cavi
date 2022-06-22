@@ -1,28 +1,59 @@
 /* eslint-disable */
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+
+import { getMockStore } from '../../../../../tools/testing/test.util';
+import { initialState as clientState } from '../../../../../redux/reducers/client.reducer';
+
 import RecommendationClientView from './RecommendationClientView';
 
-import { mockTableData } from '../../../../common/table/recommendations/TableFunctions.util';
+const mockState = { client: clientState };
+const mockHasSubGroups = true;
+const mockClientRequestFields = {
+  username: 'username',
+  password: 'password',
+  groupname: 'groupname',
+  clientname: 'clientname'
+};
 
-xdescribe('Contact Details Screen', () => {
+describe('RecommendationClientView', () => {
+
+  const history = createMemoryHistory();
 
   const setUp = () => {
     return render(
-        <RecommendationClientView mappedFieldList={mockTableData} />
+      <Provider store={ getMockStore(mockState) }>
+        <Router history={ history }>
+          <RecommendationClientView mappedFieldList={ [] }
+                                    clientRequestFields={ mockClientRequestFields }
+                                    hasSubGroups={ mockHasSubGroups } />
+        </Router>
+      </Provider>
     );
   };
 
-  xtest('should render the RecommendationClientView screen', () => {
+  test('should render the RecommendationClientView screen', () => {
     const { container } = setUp();
 
-    const contactDetails = container.querySelector('.content-container');
-    expect(contactDetails).toBeInTheDocument();
+    const contentContainer = container.querySelector('.content-container');
+    expect(contentContainer).toBeInTheDocument();
 
-    const midBar = container.querySelector('.mid-bar');
-    expect(midBar).toBeInTheDocument();
+    const tableTopBar = container.querySelector('.recommendation-client-view__topbar');
+    expect(tableTopBar).toBeInTheDocument();
+
+    const tableSearchBar = container.querySelector('.recommendation-client-view__search');
+    expect(tableSearchBar).toBeInTheDocument();
 
     const table = container.querySelector('.table');
     expect(table).toBeInTheDocument();
+
+    const tableHeader = container.querySelector('.table__header');
+    expect(tableHeader).toBeInTheDocument();
+
+    const tableBody = container.querySelector('.table__body');
+    expect(tableBody).toBeInTheDocument();
   });
 });

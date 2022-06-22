@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 
-import { getMockStore } from '../../../tools/testing/testing.util';
+import { getMockStore } from '../../../tools/testing/test.util';
 
 import { initialState as authState } from '../../../redux/reducers/auth.reducer';
 import { initialState as systemState } from '../../../redux/reducers/system.reducer';

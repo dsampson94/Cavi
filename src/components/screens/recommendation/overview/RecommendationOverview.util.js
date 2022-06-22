@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
+import { generateId, getClassNames } from '../../../../tools/general/helpers.util';
 import {
   DISSATISFIED,
   FIELD_UP_TO_DATE_QUESTION,
@@ -75,11 +75,9 @@ export const ActiveHeader = ({ setOverviewOptionSelected, overviewOptionSelected
   );
 };
 
-ActiveHeader.defaultProps = {};
-
 ActiveHeader.propTypes = {
-  setOverviewOptionSelected: func.isRequired,
-  overviewOptionSelected: number.isRequired
+  setOverviewOptionSelected: func,
+  overviewOptionSelected: number
 };
 
 export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOverviewOptionSelected, handleSubHeaderClick }) => {
@@ -103,21 +101,20 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
 
       { overviewOptionSelected &&
         <div className="recommendation-overview__list">
-          { ownClientsList?.map((item, index) => {
+          { ownClientsList?.map((item) => {
             return (
-              <div className="recommendation-overview__list__item" key={ index }>
+              <div className="recommendation-overview__list__item" key={ generateId() }>
                 <div className="recommendation-overview__list__item__header">
                   { item.objectKey?.toUpperCase() }
                 </div>
-                { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value, index) => {
+                { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
                   return (
-                    <div className={ getClassNames('recommendation-overview__list__item__subheader', {}) } key={ index }>
+                    <div className={ getClassNames('recommendation-overview__list__item__subheader', {}) } key={ generateId() }>
                       <div className="recommendation-overview__list__item__subheader__text"
                            onClick={ () => handleSubHeaderClick(item.objectKey, value.iok) }>
                         { value.iok }
                       </div>
-                      <div className="recommendation-overview__list__item__subheader__icon"
-                           onClick={ noOp() }>
+                      <div className="recommendation-overview__list__item__subheader__icon">
                         { overviewOptionSelected === 1 &&
                           <FrequencyIndicator value={ value } /> }
                         { overviewOptionSelected === 2 &&
@@ -135,13 +132,11 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
   );
 };
 
-OverviewList.defaultProps = {};
-
 OverviewList.propTypes = {
-  setOverviewOptionSelected: func.isRequired,
-  overviewOptionSelected: number.isRequired,
-  handleSubHeaderClick: func.isRequired,
-  ownClientsList: arrayOf(shape({})).isRequired
+  setOverviewOptionSelected: func,
+  overviewOptionSelected: number,
+  handleSubHeaderClick: func,
+  ownClientsList: arrayOf(shape({}))
 };
 
 const FrequencyIndicator = ({ value }) => {
@@ -154,27 +149,27 @@ const FrequencyIndicator = ({ value }) => {
     case 'green':
       return <>
         <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ SATISFIED } fill={ '#00FF21' } tiny />;
+        <SVGIcon name={ SATISFIED } fill={ '#00FF21' } tiny />
       </>;
     case 'yellow':
       return <>
         <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />;
+        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />
       </>;
     case 'orange':
       return <>
         <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ DISSATISFIED } fill={ '#FF8019' } tiny />;
+        <SVGIcon name={ DISSATISFIED } fill={ '#FF8019' } tiny />
       </>;
     case 'red':
       return <>
         <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ VERY_DISSATISFIED } fill={ '#FF0000' } tiny />;
+        <SVGIcon name={ VERY_DISSATISFIED } fill={ '#FF0000' } tiny />
       </>;
     default:
       return <>
         <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />;
+        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />
       </>;
   }
 };

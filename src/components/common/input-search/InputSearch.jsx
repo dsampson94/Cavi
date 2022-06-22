@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { bool, func, shape, string } from 'prop-types';
+import { arrayOf, bool, func, shape, string } from 'prop-types';
 
 import {
   SEARCH,
@@ -10,6 +10,7 @@ import {
   UNSUCCESSFUL_CLIENT_SEARCH,
   UNSUCCESSFUL_FIELD_SEARCH
 } from '../../../tools/general/system-variables.util';
+
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 import { pushEmptyRow } from '../table/recommendations/TableFunctions.util';
 
@@ -140,18 +141,8 @@ const InputSearch = ({
   );
 };
 
-InputSearch.defaultProps = {
-  dataToFilter: undefined,
-  sidebar: undefined,
-  table: undefined,
-  name: undefined,
-  value: undefined,
-  type: undefined,
-  placeholder: undefined
-};
-
 InputSearch.propTypes = {
-  dataToFilter: shape({}),
+  dataToFilter: arrayOf(shape({})),
   name: string,
   value: shape({}),
   type: string,

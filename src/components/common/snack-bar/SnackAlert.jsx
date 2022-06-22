@@ -7,7 +7,6 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 import './snack-alert.scss';
 
 const renderIcon = (status) => {
-  // TODO: Insert icons once defined.
   // switch (status) {
   //   case SNACK_SUCCESS:
   //     return (
@@ -30,7 +29,7 @@ const renderIcon = (status) => {
   // }
 };
 
-const SnackAlert = ({ status = SNACK_SUCCESS, message, color, closing }) => {
+const SnackAlert = ({ status = SNACK_SUCCESS, message, closing }) => {
 
   const [entering, setEntering] = useState(true);
 

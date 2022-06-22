@@ -3,15 +3,12 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 
-import { getMockStore } from './tools/testing/testing.util';
-
+import { getMockStore } from './tools/testing/test.util';
 import { initialState as systemState } from './redux/reducers/system.reducer';
 
 import App from './App';
 
-const mockState = {
-  system: systemState
-};
+const mockState = { system: systemState };
 
 describe('App', () => {
 

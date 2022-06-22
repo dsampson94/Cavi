@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, func, number, shape, string } from 'prop-types';
 
 import { ActiveHeader, OverviewList } from './RecommendationOverview.util';
 import ContentContainer from '../../../common/content-container/ContentContainer';
@@ -12,8 +12,6 @@ import './recommendation-overview.scss';
 
 const RecommendationOverview = ({
                                   ownClientsList,
-                                  filteredClientData,
-                                  setFilteredClientData,
                                   overviewOptionSelected,
                                   setOverviewOptionSelected,
                                   activePath
@@ -21,12 +19,12 @@ const RecommendationOverview = ({
 
   const history = useHistory();
 
+  const [filteredClientData, setFilteredClientData] = useState(undefined);
+
   const handleOverviewClick = () => history.push('/recommendation/overview');
   const handleMonitorProbesClick = () => history.push('/recommendation/monitor');
 
-  const handleSubHeaderClick = (groupName, clientName) => {
-    history.push(`/recommendation/${ groupName }/${ clientName }`);
-  };
+  const handleSubHeaderClick = (groupName, clientName) => history.push(`/recommendation/${ groupName }/${ clientName }`);
 
   return (
     <ContentContainer>
@@ -52,10 +50,10 @@ const RecommendationOverview = ({
   );
 };
 
-RecommendationOverview.defaultProps = {};
-
 RecommendationOverview.propTypes = {
-  ownClientsList: arrayOf(shape({})).isRequired,
+  ownClientsList: arrayOf(shape({})),
+  overviewOptionSelected: number || undefined,
+  setOverviewOptionSelected: func,
   activePath: string.isRequired
 };
 

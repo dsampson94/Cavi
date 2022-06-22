@@ -9,8 +9,7 @@ import SnackAlert from './SnackAlert';
 describe('SnackAlert', () => {
 
   test('should output the correct classes for each status', () => {
-    let wrapper;
-    wrapper = render(<SnackAlert message={ 'test' } status={ SNACK_CRITICAL } />);
+    let wrapper = render(<SnackAlert message={ 'test' } status={ SNACK_CRITICAL } />);
     expect(wrapper.container.querySelector('.snack')).toHaveClass('snack--critical');
 
     wrapper = render(<SnackAlert message={ 'test' } status={ SNACK_SUCCESS } />);

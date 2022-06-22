@@ -116,8 +116,6 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
   );
 };
 
-TopBar.defaultProps = {};
-
 TopBar.propTypes = {
   showSideBar: bool.isRequired,
   setShowSideBar: func.isRequired,

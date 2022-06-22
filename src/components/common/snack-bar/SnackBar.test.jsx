@@ -24,14 +24,11 @@ describe('SnackBar', () => {
     expect(container).toHaveTextContent('test 2');
 
     rerender(<SnackBar notices={ [...notices, { id: '_awd12', message: 'newly added' }] } />);
-
     expect(container).toHaveTextContent('newly added');
   });
 
   test('should remove stale notices when updated', () => {
-    const { container, rerender } = render(
-      <SnackBar notices={ notices } />
-    );
+    const { container, rerender } = render(<SnackBar notices={ notices } />);
 
     expect(container).toHaveTextContent('test 1');
     expect(container).toHaveTextContent('test 2');

@@ -35,8 +35,6 @@ const SideBar = ({ mappedUserData, showSideBar, setShowSideBar }) => {
   );
 };
 
-SideBar.defaultProps = {};
-
 SideBar.propTypes = {
   showSideBar: bool.isRequired,
   setShowSideBar: func.isRequired

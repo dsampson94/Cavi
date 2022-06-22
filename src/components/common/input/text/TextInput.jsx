@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bool, func, string } from 'prop-types';
 
-import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
+import { getClassNames } from '../../../../tools/general/helpers.util';
 
 import './text-input.scss';
 
@@ -35,17 +35,6 @@ const TextInput = ({
              className={ getClassNames('input__input', { login }) } />
     </div>
   );
-};
-
-TextInput.defaultProps = {
-  name: undefined,
-  value: undefined,
-  type: undefined,
-  label: undefined,
-  placeholder: undefined,
-  onChange: noOp,
-  disabled: false,
-  login: false
 };
 
 TextInput.propTypes = {

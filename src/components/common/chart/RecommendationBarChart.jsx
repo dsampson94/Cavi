@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { shape } from 'prop-types';
+
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
 
 const RecommendationBarChart = ({ fieldRainDataForChart }) => {
@@ -44,8 +46,8 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
   );
 };
 
-RecommendationBarChart.defaultProps = {};
-
-RecommendationBarChart.propTypes = {};
+RecommendationBarChart.propTypes = {
+  fieldRainDataForChart: shape({})
+};
 
 export default RecommendationBarChart;

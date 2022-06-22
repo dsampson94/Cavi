@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
+import { shape } from 'prop-types';
+
 import { isEmpty } from '../../../tools/general/helpers.util';
 
 import { requestClientFieldRainDataForChart } from '../../../redux/actions/client.action';
@@ -10,7 +12,7 @@ import RecommendationBarChart from '../chart/RecommendationBarChart';
 
 import './recommendation-modal.scss';
 
-const RecommendationModal = ({ activeObject, clientRequestFields, showModal }) => {
+const RecommendationModal = ({ activeObject, clientRequestFields }) => {
 
   const dispatch = useDispatch();
 
@@ -48,8 +50,9 @@ const RecommendationModal = ({ activeObject, clientRequestFields, showModal }) =
   );
 };
 
-RecommendationModal.defaultProps = {};
-
-RecommendationModal.propTypes = {};
+RecommendationModal.propTypes = {
+  activeObject: shape({}),
+  clientRequestFields: shape({})
+};
 
 export default RecommendationModal;

@@ -75,8 +75,6 @@ const style = {
   backgroundImage: `url(${ background })`
 };
 
-Login.defaultProps = {};
-
 Login.propTypes = {
   onLoginClick: func.isRequired
 };

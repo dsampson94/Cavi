@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
-import { getClassNames, isEmpty, removeCamelCase } from '../../../../tools/general/helpers.util';
+import { generateId, getClassNames, isEmpty, removeCamelCase } from '../../../../tools/general/helpers.util';
 import { hideColumnHeader } from './TableFunctions.util';
 
 import {
@@ -22,6 +22,7 @@ import {
   UnitColumn,
   WarningIconColumn
 } from './TableComponents.util';
+
 import RecommendationModal from '../../modal/RecommendationModal';
 
 import './table.scss';
@@ -35,11 +36,12 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
   const [hoveredRowObject, setHoveredRowObject] = useState(undefined);
 
   const buildTableHeader = () => {
+    if (!activeTableData) return;
     let headers;
     if (activeTableData?.length !== 0) {
       const objectKeys = Object.keys(activeTableData[0]);
-      headers = objectKeys.filter((key) => !hiddenColumns.includes(key)).map((key, index) => (
-        <th key={ index }
+      headers = objectKeys.filter((key) => !hiddenColumns.includes(key)).map((key) => (
+        <th key={ generateId() }
             style={ { color: hideColumnHeader(tableName, key) } }>
           <div className="table__header-row__text">
             { removeCamelCase(key) }
@@ -58,6 +60,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
   };
 
   const buildTableBody = () => {
+    if (!activeTableData) return;
     const rows = activeTableData?.map((object, rowIndex) => {
       let objectLocationName = object?.fieldName?.locationName;
       let isHeaderRow = (objectLocationName?.includes('-forecast') || objectLocationName?.includes('-landGroup'));
@@ -239,13 +242,13 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
             <tr className={ getClassNames('table__body__row',
               { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
                 onClick={ () => setSelectedRow(object) }
-                key={ rowIndex }>
+                key={ generateId() }>
               { tableDataElements }
             </tr> }
 
           { object.expanded && isDropdownRow &&
             <tr className={ 'table__body__row' }
-                key={ rowIndex }>
+                key={ generateId() }>
               { tableDataElements }
             </tr> }
         </>
@@ -255,7 +258,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
     return (
       <tbody className="table__body">
       { (!isEmpty(rows)) ? rows :
-        <tr>
+        <tr key={ generateId() }>
           <td>{ `No active fields currently set up on ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</td>
         </tr> }
 
@@ -275,11 +278,9 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
   );
 };
 
-Table.defaultProps = {};
-
 Table.propTypes = {
   tableName: string.isRequired,
-  activeTableData: arrayOf(shape({})).isRequired,
+  activeTableData: arrayOf(shape({})),
   hiddenColumns: arrayOf(string).isRequired
 };
 

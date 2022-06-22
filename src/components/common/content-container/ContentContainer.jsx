@@ -32,8 +32,6 @@ const ContentContainer = ({ children, clientRequestFields }) => {
   );
 };
 
-ContentContainer.defaultProps = {};
-
 ContentContainer.propTypes = {
   children: oneOfType([arrayOf(node), node]).isRequired
 };

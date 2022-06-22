@@ -15,11 +15,6 @@ const Graphic = ({ graphic, login }) => {
   );
 };
 
-Graphic.defaultProps = {
-  graphic: undefined,
-  login: undefined
-};
-
 Graphic.propTypes = {
   graphic: string,
   login: bool

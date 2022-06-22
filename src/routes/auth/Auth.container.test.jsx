@@ -3,19 +3,13 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 
-import { getMockStore } from '../../tools/testing/testing.util';
+import { getMockStore } from '../../tools/testing/test.util';
 
 import { initialState as authState } from '../../redux/reducers/auth.reducer';
-import { initialState as systemState } from '../../redux/reducers/system.reducer';
-import { initialState as graphicState } from '../../redux/reducers/graphic.reducer';
 
 import AuthContainer from './Auth.container';
 
-const mockState = {
-  auth: authState,
-  system: systemState,
-  graphic: graphicState
-};
+const mockState = { auth: authState };
 
 describe('AuthContainer', () => {
   const setup = () => {
@@ -30,8 +24,8 @@ describe('AuthContainer', () => {
 
   test('should render the login page', () => {
     const { getByText } = setup();
-    const loginButton = getByText('Log in');
 
+    const loginButton = getByText('Log in');
     expect(loginButton).toBeInTheDocument();
   });
 });

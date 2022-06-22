@@ -89,24 +89,27 @@ export const TableTopBar = ({
   );
 };
 
-TableTopBar.defaultProps = {};
+TableTopBar.propTypes = {
+  filteredTableData: arrayOf(shape({})),
+  hasSubGroups: bool,
+  setFilteredTableData: func,
+  setActiveTableData: func,
+  clientRequestFields: shape({}),
+  toggleDropdowns: func
+};
 
-TableTopBar.propTypes = {};
-
-export const TableSearchBar = ({ fieldList, setFilteredTableData }) => {
+export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="recommendation-client-view__search">
-    { (fieldList.length > 10) &&
+    { (mappedFieldList?.length > 10) &&
       <InputSearch placeholder={ 'Search field or probe number' }
-                   dataToFilter={ fieldList }
+                   dataToFilter={ mappedFieldList }
                    setFilteredData={ setFilteredTableData }
                    table /> }
   </div>;
 };
 
-TableSearchBar.defaultProps = {};
-
 TableSearchBar.propTypes = {
-  fieldList: arrayOf(shape({})) || shape({}),
+  mappedFieldList: arrayOf(shape({})) || shape({}),
   setFilteredTableData: func.isRequired
 };
 
@@ -153,13 +156,9 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
   }
 };
 
-FieldNameColumn.defaultProps = {
-  value: undefined
-};
-
 FieldNameColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({})
+  value: shape({})
 };
 
 export const WarningIconColumn = ({ dataIndex, value }) => {
@@ -176,13 +175,9 @@ export const WarningIconColumn = ({ dataIndex, value }) => {
     return <td key={ dataIndex } />;
 };
 
-WarningIconColumn.defaultProps = {
-  value: undefined
-};
-
 WarningIconColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({})
+  value: string
 };
 
 export const DropdownIconColumn = ({ dataIndex, value, setSelectedIndex, setSelectedDropdownObject, rowIndex, object }) => {
@@ -203,10 +198,6 @@ export const DropdownIconColumn = ({ dataIndex, value, setSelectedIndex, setSele
     </td>;
   else
     return <td key={ dataIndex } />;
-};
-
-DropdownIconColumn.defaultProps = {
-  value: undefined
 };
 
 DropdownIconColumn.propTypes = {
@@ -232,10 +223,6 @@ export const PhotoIconColumn = ({ dataIndex, value }) => {
     return <td key={ dataIndex } />;
 };
 
-PhotoIconColumn.defaultProps = {
-  value: undefined
-};
-
 PhotoIconColumn.propTypes = {
   dataIndex: number.isRequired,
   value: string || shape({})
@@ -255,13 +242,9 @@ export const LastReadingColumn = ({ dataIndex, value }) => {
     return <td key={ dataIndex } />;
 };
 
-LastReadingColumn.defaultProps = {
-  value: undefined
-};
-
 LastReadingColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({})
+  value: shape({})
 };
 
 export const CaptureNoteColumn = ({ dataIndex, value }) => {
@@ -275,10 +258,6 @@ export const CaptureNoteColumn = ({ dataIndex, value }) => {
     </td>;
   else
     return <td key={ dataIndex } />;
-};
-
-CaptureNoteColumn.defaultProps = {
-  value: undefined
 };
 
 CaptureNoteColumn.propTypes = {
@@ -297,10 +276,6 @@ export const ChartColumn = ({ dataIndex, value }) => {
     </td>;
   else
     return <td key={ dataIndex } />;
-};
-
-ChartColumn.defaultProps = {
-  value: undefined
 };
 
 ChartColumn.propTypes = {
@@ -330,15 +305,9 @@ export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) 
   </td>;
 };
 
-DeficitColumn.defaultProps = {
-  isDropdownRow: undefined,
-  isHeaderRow: undefined,
-  value: undefined
-};
-
 DeficitColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({}),
+  value: shape({}),
   isDropdownRow: bool,
   isHeaderRow: bool
 };
@@ -353,10 +322,6 @@ export const UnitColumn = ({ dataIndex, value }) => {
     </td>;
   else
     return <td key={ dataIndex } />;
-};
-
-UnitColumn.defaultProps = {
-  value: undefined
 };
 
 UnitColumn.propTypes = {
@@ -402,13 +367,9 @@ export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
     return <td key={ dataIndex } />;
 };
 
-PrimaryForecastColumn.defaultProps = {
-  value: undefined
-};
-
 PrimaryForecastColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({}),
+  value: shape({}),
   columnNumber: number.isRequired
 };
 
@@ -450,13 +411,9 @@ export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
     return <td key={ dataIndex } />;
 };
 
-SecondaryForecastColumn.defaultProps = {
-  value: undefined
-};
-
 SecondaryForecastColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({}),
+  value: shape({}),
   columnNumber: number.isRequired
 };
 
@@ -508,13 +465,9 @@ export const LandGroupForecastColumn = ({ dataIndex, value }) => {
     return <td key={ dataIndex } />;
 };
 
-LandGroupForecastColumn.defaultProps = {
-  value: undefined
-};
-
 LandGroupForecastColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({})
+  value: shape({})
 };
 
 export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
@@ -534,14 +487,9 @@ export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
     return <td key={ dataIndex } />;
 };
 
-ForecastTimeIconsColumn.defaultProps = {
-  value: undefined,
-  isHeaderRow: undefined
-};
-
 ForecastTimeIconsColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({}),
+  value: string,
   isHeaderRow: bool
 };
 
@@ -592,14 +540,9 @@ export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, 
     return <td key={ dataIndex } />;
 };
 
-RainDataColumn.defaultProps = {
-  value: undefined,
-  object: undefined
-};
-
 RainDataColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({}),
+  value: shape({}),
   object: shape({}),
   setHoveredRowObject: func.isRequired,
   columnNumber: number,
@@ -615,17 +558,12 @@ export const TransEvapTotalsColumn = ({ dataIndex, value }) => {
   </td>;
 };
 
-TransEvapTotalsColumn.defaultProps = {
-  value: undefined
-};
-
 TransEvapTotalsColumn.propTypes = {
   dataIndex: number.isRequired,
-  value: string || shape({})
+  value: number
 };
 
 export const DropDown = ({ value, columnNumber, onClick }) => {
-
   return (
     <div className="table__body__row--dropdown">
       { value?.sublande?.map((item) => {
@@ -675,12 +613,8 @@ export const DropDown = ({ value, columnNumber, onClick }) => {
   );
 };
 
-DropDown.defaultProps = {
-  value: undefined
-};
-
 DropDown.propTypes = {
-  value: string || shape({}),
+  value: shape({}),
   columnNumber: number,
   onClick: func
 };

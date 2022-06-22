@@ -4,13 +4,11 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 
-import { initialState as authState } from '../../redux/reducers/auth.reducer';
-import { initialState as systemState } from '../../redux/reducers/system.reducer';
-import { initialState as graphicState } from '../../redux/reducers/graphic.reducer';
 import { initialState as clientState } from '../../redux/reducers/client.reducer';
 
+import { getMockStore } from '../../tools/testing/test.util';
+
 import RecommendationContainer from './Recommendation.container';
-import { getMockStore, mockLoginSuccessData } from '../../tools/testing/testing.util';
 
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
@@ -19,20 +17,10 @@ jest.mock('react-router', () => ({
   })
 }));
 
-const mockState = {
-  material: authState,
-  supplier: systemState,
-  contact: graphicState,
-  client: clientState
-};
+const mockState = { client: clientState };
 
-const mockAuthUtil = require('../../tools/storage/localStorage');
-
-xdescribe('Recommendation Container', () => {
-
+describe('Recommendation Container', () => {
   const setUp = (path) => {
-    jest.spyOn(mockAuthUtil, 'retrieveUserFromLocalStorage').mockReturnValue(mockLoginSuccessData);
-
     return render(
       <Provider store={ getMockStore(mockState) }>
         <MemoryRouter initialEntries={ [path] }>
@@ -42,24 +30,17 @@ xdescribe('Recommendation Container', () => {
     );
   };
 
-  xtest('should render /recommendation', () => {
-    const { container } = setUp('/recommendation');
-
-    const recommendationScreen = container.querySelector('.content-container');
-    expect(recommendationScreen).toBeInTheDocument();
-  });
-
-  xtest('should render /recommendation/overview', () => {
+  test('should render /recommendation/overview', () => {
     const { container } = setUp('/recommendation/overview');
 
-    const recommendationOverviewScreen = container.querySelector('.content-container');
+    const recommendationOverviewScreen = container.querySelector('.recommendation-overview');
     expect(recommendationOverviewScreen).toBeInTheDocument();
   });
 
-  xtest('should render /recommendation/client', () => {
-    const { container } = setUp('/recommendation/client');
+  test('should render /recommendation/clientName/groupName', () => {
+    const { container } = setUp('/recommendation/clientName/groupName');
 
-    const recommendationClientFieldListScreen = container.querySelector('.content-container');
-    expect(recommendationClientFieldListScreen).toBeInTheDocument();
+    const recommendationClientViewScreen = container.querySelector('.recommendation-client-view');
+    expect(recommendationClientViewScreen).toBeInTheDocument();
   });
 });
