@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
-import { SETTINGS_GEAR } from '../../../tools/general/system-variables.util';
+import {
+  CHARTS,
+  FOUR_WEEKS,
+  FULL_VIEW,
+  RADIO_GROUP,
+  SETTINGS_GEAR,
+  SIX_MONTHS,
+  THREE_MONTHS,
+  TWELVE_MONTHS,
+  TWO_MONTHS,
+  TWO_WEEKS
+} from '../../../tools/general/system-variables.util';
 
 import SVGIcon from '../../../tools/icons/SVGIcon';
 import Button from '../button/Button';
+import RadioInput from '../input/radio/RadioInput';
+import ToolTip from '../tool-tip/ToolTip';
 
 export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBar, showSideBar }) => {
 
@@ -14,16 +27,16 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
 
   let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item) => {
     return (
-      <div className="side-bar__list__item" key={ generateId() }>
-        <div className="side-bar__list__item__header">
+      <div className="client-fields-side-bar__list__item" key={ generateId() }>
+        <div className="client-fields-side-bar__list__item__header">
           { item.objectKey?.toUpperCase() }
         </div>
         { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
           return (
-            <div className={ getClassNames('side-bar__list__item__subheader',
+            <div className={ getClassNames('client-fields-side-bar__list__item__subheader',
               { selected: (clientName === value.iok && groupName === item.objectKey) }) }
                  key={ generateId() }>
-              <div className="side-bar__list__item__subheader__text"
+              <div className="client-fields-side-bar__list__item__subheader__text"
                    style={ {
                      color: (() => {
                        switch (value.iov.color) {
@@ -36,10 +49,10 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
                        }
                      })()
                    } }
-                   onClick={ () => handleSubHeaderClick(item.objectKey, value.iok, setShowSideBar, showSideBar, history) }>
+                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, setShowSideBar, showSideBar) }>
                 { value.iok }
               </div>
-              <div className="side-bar__list__item__subheader__icon"
+              <div className="client-fields-side-bar__list__item__subheader__icon"
                    onClick={ noOp() }>
                 <SVGIcon name={ SETTINGS_GEAR } />
               </div>
@@ -51,17 +64,17 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
   });
 
   return (
-    <div className="side-bar__list">
-      <div className="side-bar__list__header">{ 'MY CLIENTS' }</div>
-      <div className="side-bar__list__container">
+    <div className="client-fields-side-bar__list">
+      <div className="client-fields-side-bar__list__header">{ 'MY CLIENTS' }</div>
+      <div className="client-fields-side-bar__list__container">
         { listItem }
       </div>
     </div>
   );
 };
 
-const handleSubHeaderClick = (groupName, clientName, setShowSideBar, showSideBar, history) => {
-  history.push(`/recommendation/${ groupName }/${ clientName }`);
+const handleSubHeaderClick = (history, groupName, clientName, setShowSideBar, showSideBar) => {
+  history.push(`/client/${ groupName }/${ clientName }`);
   setShowSideBar(!showSideBar);
 };
 
@@ -83,7 +96,125 @@ export const mappedUserData = (userAccount, overview) => {
 };
 
 export const SideBarButton = () => {
-  return <div className="side-bar__lower-button">
+  return <div className="client-fields-side-bar__lower-button">
     <Button label={ 'Add new client database' } />
   </div>;
+};
+
+export const ViewDataBar = ({ setLoadPeriod }) => {
+
+  const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS);
+
+  useEffect(() => {
+    setLoadPeriod(selectedPeriod);
+  }, [selectedPeriod]);
+
+  return (
+    <div className="field-charts-side-bar__view-mode">
+      <div className="field-charts-side-bar__view-mode__header">
+        { 'View Data' }
+      </div>
+
+      <div className="field-charts-side-bar__view-mode__options">
+        <RadioInput constant={ TWO_WEEKS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === TWO_WEEKS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput constant={ FOUR_WEEKS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === FOUR_WEEKS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput label={ TWO_MONTHS }
+                    constant={ TWO_MONTHS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === TWO_MONTHS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput constant={ THREE_MONTHS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === THREE_MONTHS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput constant={ SIX_MONTHS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === SIX_MONTHS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput constant={ TWELVE_MONTHS }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === TWELVE_MONTHS }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+        <RadioInput constant={ FULL_VIEW }
+                    name={ RADIO_GROUP }
+                    checked={ selectedPeriod === FULL_VIEW }
+                    onClick={ ({ target }) => setSelectedPeriod(target.value) } />
+      </div>
+    </div>
+  );
+};
+
+ViewDataBar.propTypes = {};
+
+export const SideBarFieldList = ({ mappedFieldList }) => {
+
+  const history = useHistory();
+  const { groupName, clientName, fieldName } = useParams();
+
+  return (
+    <div className="field-charts-side-bar__field-list">
+      { mappedFieldList?.map((listItem) => {
+        const field = listItem?.fieldName;
+        return ((() => {
+          if (field?.locationName?.includes('-landGroup')) {
+            return (
+              <div className="field-charts-side-bar__field-list__header"
+                   key={ generateId() }>
+                { field?.locationName?.slice(0, -10) }
+              </div>
+            );
+          } else if (field?.locationName?.includes('-forecast')) {
+            return (
+              <div className="field-charts-side-bar__field-list__header"
+                   key={ generateId() }>
+                { field?.locationName?.slice(0, -9) }
+              </div>
+            );
+          } else {
+            return (
+              <div className="field-charts-side-bar__field-list__item"
+                   key={ generateId() }>
+                <div className="field-charts-side-bar__field-list__item__container"
+                     onClick={ () => handleFieldClick(history, groupName, clientName, field) }>
+
+                  <div className="field-charts-side-bar__field-list__item__container--upper"
+                       style={ {
+                         backgroundColor: field?.colorTop
+                       } } />
+
+                  <div className="field-charts-side-bar__field-list__item__container--lower"
+                       style={ {
+                         backgroundColor: field?.colorBot
+                       } } />
+
+                  <div className={ getClassNames('field-charts-side-bar__field-list__item__container--text',
+                    { bold: (field?.locationName === fieldName) }) }>
+                    { field?.locationName }
+                  </div>
+                </div>
+
+                <div className="field-charts-side-bar__field-list__item__icon">
+                  <SVGIcon name={ CHARTS } chart />
+                  <ToolTip text={ 'follow up' } />
+                </div>
+
+              </div>
+            );
+          }
+        })());
+      }) }
+    </div>
+  );
+};
+
+SideBarFieldList.propTypes = {};
+
+const handleFieldClick = (history, groupName, clientName, field) => {
+  history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
 };

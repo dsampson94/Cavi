@@ -1,17 +1,17 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/color" as color;
-@use "../../../stylesheets/00_settings/util" as util;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
-.top-bar {
+.client-fields-top-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
   border-bottom: util.rem(1) solid;
-  height: util.rem(70);
-  max-width: 100%;
+  height: util.rem(58);
+  max-width: 99.9%;
 
   & button {
     margin: util.rem(4);
@@ -21,7 +21,6 @@
     display: flex;
     flex-direction: column;
     margin-right: 10%;
-    margin-bottom: util.rem(16);
     width: 50%;
     height: 100%;
 
@@ -44,31 +43,32 @@
     @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
       margin-right: 20%;
     }
-  }
 
-  &__text {
-    display: flex;
-    align-items: flex-end;
-    font-size: util.rem(15);
-    margin-bottom: util.rem(5);
-    height: 60%;
-    width: 100%;
-  }
+    &-header {
+      display: flex;
+      margin-top: util.rem(2);
+      margin-left: util.rem(2);
+      width: 100%;
 
-  &__lower-left {
-    display: flex;
-    align-items: flex-end;
+      & p {
+        display: flex;
+        align-items: center;
+        margin-top: util.rem(2);
+        font-size: util.rem(11);
+      }
+    }
 
-    &-pdf {}
+    &-lower {
+      display: flex;
+    }
   }
 
   &__right {
     display: flex;
     align-items: flex-end;
-    margin-bottom: util.rem(20);
     margin-left: 10%;
     width: 40%;
-    height: 100%;
+    height: 96%;
 
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       margin-left: 2%;
@@ -89,5 +89,35 @@
     @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
       margin-left: 20%;
     }
+  }
+}
+
+.field-charts-top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: util.rem(1) solid;
+  height: util.rem(58);
+  max-width: 99.9%;
+
+  &__header {
+    display: flex;
+    margin-top: util.rem(2);
+    margin-left: util.rem(2);
+    width: 100%;
+
+    & p {
+      display: flex;
+      align-items: center;
+      margin-top: util.rem(2);
+      font-size: util.rem(11);
+    }
+  }
+
+  &__lower {
+    display: flex;
+    justify-content: start;
+    margin-top: util.rem(3);
+    width: 100%;
   }
 }

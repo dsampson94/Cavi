@@ -1,11 +1,11 @@
 @use "sass:map" as map;
-@use "../../../../stylesheets/00_settings/util" as util;
-@use "../../../../stylesheets/00_settings/color" as color;
-@use "../../../../stylesheets/00_settings/radius" as radius;
-@use "../../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../../stylesheets/00_settings/config" as config;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
 
-.input {
+.text-input {
   width: 100%;
   padding: util.rem(4) util.rem(5) util.rem(2) util.rem(3);
 
@@ -47,6 +47,10 @@
     font-family: Aller, serif;
     font-size: util.bu(2);
 
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     input:-webkit-autofill {
       -webkit-box-shadow: inset 0 0 0 util.rem(100) map.get(color.$colorMap, autofill-blue);
     }
@@ -54,10 +58,6 @@
     input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
-    }
-
-    input[type=number] {
-      -moz-appearance: textfield;
     }
 
     &--login {

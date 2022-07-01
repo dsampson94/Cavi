@@ -1,0 +1,303 @@
+@use "sass:map" as map;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
+
+.table {
+  display: table;
+  border-collapse: collapse;
+  margin: 0 util.rem(5) util.rem(5) util.rem(5);
+  width: 98.9%;
+
+  &__header {
+    position: sticky;
+    box-shadow: 0 util.rem(0.9);
+    background-color: map.get(color.$colorMap, light-mode-white);
+    z-index: 9;
+    top: 0;
+
+    &-row {
+
+      th {
+        height: util.rem(26);
+        padding: util.rem(5);
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      &__text {
+        user-select: none;
+        font-size: util.rem(9);
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          font-size: util.rem(10);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          font-size: util.rem(14);
+        }
+      }
+    }
+  }
+
+  &__body {
+
+    &__row {
+      transition: 1s;
+      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, grey);
+
+      td {
+        position: relative;
+        display: table-cell;
+        background-clip: padding-box;
+        text-align: center;
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          max-height: util.rem(24);
+          font-size: util.rem(7);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+          max-height: util.rem(26);
+          font-size: util.rem(8);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+          max-height: util.rem(28);
+          font-size: util.rem(9);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          max-height: util.rem(30);
+          font-size: util.rem(10);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          max-height: util.rem(32);
+          font-size: util.rem(11);
+        }
+
+        &--warning {
+          background-color: #6fb2df;
+          max-width: util.rem(40);
+        }
+
+        &--camera {
+          background-color: #6fb2df;
+        }
+
+        &--reading {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
+
+        &--pencil {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
+
+        &--chart {
+          max-width: util.rem(40);
+          background-color: #6fb2df;
+        }
+      }
+
+      &__td {
+
+        &-container {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            padding: 0 util.rem(2) 0 util.rem(2);
+            font-size: util.rem(10);
+          }
+
+          &__icon {
+            position: absolute;
+            margin-top: util.rem(1);
+            right: 0;
+
+            &-right {
+              position: absolute;
+              margin-top: util.rem(-5.5);
+              right: 0;
+            }
+          }
+
+          &-forecast {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            white-space: nowrap;
+            font-size: util.rem(12);
+            height: util.rem(30);
+
+            &-upper {
+              height: 50%;
+              padding-top: util.rem(5);
+              display: flex;
+            }
+
+            &-lower {
+              height: 50%;
+              display: flex;
+              padding-top: util.rem(2);
+              color: map.get(color.$colorMap, climate-text-blue);
+            }
+          }
+
+          &-landgroup {
+            display: flex;
+            margin-top: util.rem(4);
+            font-size: util.rem(12);
+            width: util.rem(145);
+            justify-content: left;
+            white-space: nowrap;
+          }
+        }
+
+        &-weather {
+          display: flex;
+          flex-direction: row;
+          padding: util.rem(4);
+
+          &-left {
+            display: flex;
+            flex-direction: column;
+            margin-right: util.rem(2);
+            min-width: 50%;
+
+            &--icon {
+
+              &-container {
+                padding: util.rem(1);
+                height: util.rem(20);
+                width: util.rem(25);
+              }
+            }
+
+            &--wind {
+              font-weight: bold;
+              position: absolute;
+              font-size: util.rem(9);
+              text-align: left;
+              bottom: 0;
+            }
+          }
+
+
+          &-right {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: util.rem(-2);
+            margin-right: util.rem(2);
+            min-width: 50%;
+
+            &--max {
+              text-align: right;
+              font-weight: bold;
+              font-size: util.rem(12);
+            }
+
+            &--min {
+              text-align: right;
+              font-size: util.rem(11);
+            }
+
+            &--weer {
+              margin-bottom: util.rem(-1);
+              font-size: util.rem(9);
+              text-align: right;
+            }
+          }
+        }
+
+        &-upper {
+          display: flex;
+          white-space: nowrap;
+          height: 50%;
+
+          &--deficit {
+            font-weight: 500;
+            color: map.get(color.$colorMap, light-mode-white);
+            border-top-left-radius: map.get(radius.$border-radius, medium);
+            border-top-right-radius: map.get(radius.$border-radius, medium);
+          }
+        }
+
+        &-lower {
+          display: flex;
+          color: map.get(color.$colorMap, grey);
+          font-size: util.rem(8.5);
+          height: 50%;
+
+          &--deficit {
+            font-weight: 500;
+            border-top: util.rem(0.1) solid map.get(color.$colorMap, shadow);
+            color: map.get(color.$colorMap, light-mode-white);
+            border-bottom-left-radius: map.get(radius.$border-radius, medium);
+            border-bottom-right-radius: map.get(radius.$border-radius, medium);
+          }
+        }
+
+        &--dark {
+          background-color: map.get(color.$colorMap, table-yellow-dark);
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
+        }
+
+        &--light {
+          background-color: map.get(color.$colorMap, table-yellow-light);
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
+        }
+
+        &--fade {
+          background-color: map.get(color.$colorMap, table-yellow-fade);
+          border-left: util.rem(0.5) solid map.get(color.$colorMap, grey);
+          border-right: util.rem(0.5) solid map.get(color.$colorMap, grey);
+
+          &--thin {
+            background-color: map.get(color.$colorMap, table-yellow-fade);
+            max-width: util.rem(15);
+          }
+        }
+      }
+
+      &--header {
+        border-bottom: none;
+      }
+
+      &--hidden {
+        display: none;
+      }
+
+      &--selected {
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+
+      &--dropdown {
+        font-size: 100%;
+
+        &__icon {
+
+          &--left {
+            padding-left: util.rem(6);
+            text-align: left;
+          }
+
+        }
+
+      }
+
+      &:hover {
+        cursor: pointer;
+        transition: 0.15s;
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+    }
+  }
+}

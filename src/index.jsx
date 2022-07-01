@@ -17,12 +17,14 @@ import './stylesheets/app.scss';
 
 import authSaga from './redux/sagas/auth.saga';
 import clientSaga from './redux/sagas/client.saga';
+import fieldSaga from './redux/sagas/field.saga';
 
 const sagaMiddleware = createSagaMiddleWare();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(authSaga);
 sagaMiddleware.run(clientSaga);
+sagaMiddleware.run(fieldSaga);
 
 ReactDOM.render(
   <React.StrictMode>

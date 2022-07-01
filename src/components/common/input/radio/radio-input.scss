@@ -1,0 +1,59 @@
+@use "sass:map" as map;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
+
+.radio-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  padding: util.rem(1);
+  width: 100%;
+
+  &__label-container {
+    padding-left: util.rem(3);
+    font-size: util.rem(11);
+
+    & label {
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    display: flex;
+    cursor: pointer;
+    width: util.rem(12);
+    height: util.rem(11);
+    border: util.rem(1.2) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: map.get(radius.$border-radius, medium);
+  }
+
+  input[type="radio"] {
+
+    &:checked {
+      animation: ripple 0.2s linear forwards;
+      background-color: map.get(color.$colorMap, pulse-blue);
+    }
+
+    &:hover {
+      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+  }
+}
+
+@keyframes ripple {
+
+  0% {
+    box-shadow: 0 0 0 util.rem(1) rgba(0, 0, 0, 0.0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 util.rem(5) rgba(0, 0, 0, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 util.rem(5) rgba(0, 0, 0, 0);
+  }
+}

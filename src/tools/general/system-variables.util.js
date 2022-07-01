@@ -3,8 +3,8 @@ export const SNACK_SUCCESS = 'snack--success';
 export const SNACK_CRITICAL = 'snack--critical';
 export const SNACK_INFO = 'snack--info';
 
-export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Overview Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'Overview Not Retrieved';
+export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'FieldsOverview Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'FieldsOverview Not Retrieved';
 
 export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
@@ -20,6 +20,9 @@ export const SUCCESSFULLY_EMAILED_PDF = 'Client PDF Emailed Successfully';
 export const SUCCESSFUL_SEARCH = 'Fields Retrieved Successfully ';
 export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
 export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
 
 //MIDBAR
 export const MID_BAR_OVERVIEW = 'Overview';
@@ -71,6 +74,7 @@ export const BULLSEYE = 'bullseye';
 //SIDEBAR
 export const SEARCH = 'search';
 export const SETTINGS_GEAR = 'settings_gear';
+export const SEARCH_PLACEHOLDER = 'Filter clients';
 
 //TABLE
 export const WARNING = 'warning';
@@ -82,6 +86,7 @@ export const CHARTS = 'charts';
 export const RAIN_CLOUDS = 'rain_clouds';
 export const WATCH = 'watch';
 export const HARVEST_ICON = 'harvest_tractor';
+export const TABLE_SEARCH_PLACEHOLDER = 'Search field or probe number';
 
 //EMOJI
 export const VERY_SATISFIED = 'very_satisfied';
@@ -100,3 +105,17 @@ export const CLOUDED = 'clouded';
 export const FIELDS_LAST_VIEWED_QUESTION = 'When is the last time that you viewed your fields?';
 export const FIELDS_MOISTURE_QUESTION = 'Are your fields too wet or too dry currently?';
 export const FIELD_UP_TO_DATE_QUESTION = 'Which fields are up to date?';
+
+//RADIO LABELS
+export const TWO_WEEKS = '2 weeks (fastest)';
+export const FOUR_WEEKS = '4 weeks (fast)';
+export const TWO_MONTHS = '2 months';
+export const THREE_MONTHS = '3 months';
+export const SIX_MONTHS = '6 months';
+export const TWELVE_MONTHS = '12 months';
+export const FULL_VIEW = 'Full View';
+export const RADIO_GROUP = 'viewPeriod';
+
+//OTHER STRINGS
+export const CLIENT_FIELDS = 'ClientFields';
+export const FIELD_CHARTS = 'FieldCharts';

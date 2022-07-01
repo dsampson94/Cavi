@@ -34,8 +34,8 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
 
   } catch ({ response }) {
     yield put(addSystemNotice(getResponseMetaData(response), SNACK_CRITICAL));
-    yield put(setSpinnerText(null));
     if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
   }
 }
 

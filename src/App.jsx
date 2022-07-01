@@ -6,9 +6,11 @@ import { createSelector } from '@reduxjs/toolkit';
 import { removeSystemNotice } from './redux/actions/system.action';
 
 import SnackBar from './components/common/snack-bar/SnackBar';
-import AuthContainer from './routes/auth/Auth.container';
 import Spinner from './components/common/spinner/Spinner';
-import RecommendationContainer from './routes/recommendation/Recommendation.container';
+
+import AuthContainer from './routes/auth/Auth.container';
+import OverviewContainer from './routes/overview/Overview.container';
+import ClientContainer from './routes/client/Client.container';
 
 const App = () => {
 
@@ -31,7 +33,8 @@ const App = () => {
   return (
     <div className="app" style={ style }>
       <Route path="/" component={ AuthContainer } />
-      <Route path="/recommendation" component={ RecommendationContainer } />
+      <Route path="/overview" component={ OverviewContainer } />
+      <Route path="/client" component={ ClientContainer } />
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
       <Spinner centered spinnerText={ spinnerText } />
     </div>

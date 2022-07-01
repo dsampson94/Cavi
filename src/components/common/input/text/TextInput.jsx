@@ -7,44 +7,45 @@ import { getClassNames } from '../../../../tools/general/helpers.util';
 import './text-input.scss';
 
 const TextInput = ({
+                     label,
                      name,
                      value,
-                     type,
-                     label,
                      placeholder,
                      onChange,
-                     disabled,
-                     login,
                      onKeyPress,
+                     disabled,
+                     type,
+                     login,
                      left
                    }) => {
 
   return (
-    <div className={ getClassNames('input', { disabled, login, left }) }>
+    <div className={ getClassNames('text-input', { disabled, login, left }) }>
 
-      <div className={ getClassNames('input__label-container', { login, left }) }>
+      <div className={ getClassNames('text-input__label-container', { login, left }) }>
         <label>{ label }</label>
       </div>
       <input name={ name }
              value={ value }
-             type={ type }
              placeholder={ placeholder }
              onChange={ onChange }
              onKeyDown={ onKeyPress }
              disabled={ disabled }
-             className={ getClassNames('input__input', { login }) } />
+             type={ type }
+             className={ getClassNames('text-input__input', { login }) } />
     </div>
   );
 };
 
 TextInput.propTypes = {
+  label: string,
   name: string,
   value: string,
-  type: string,
-  label: string,
   placeholder: string,
   onChange: func,
+  onKeyPress: func,
   disabled: bool,
+  type: string,
   login: bool
 };
 

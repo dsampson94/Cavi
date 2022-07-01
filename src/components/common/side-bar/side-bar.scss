@@ -1,11 +1,11 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/color" as color;
-@use "../../../stylesheets/00_settings/util" as util;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
-.side-bar {
+.client-fields-side-bar {
   display: flex;
   flex-direction: column;
   border-right: util.rem(1) solid;
@@ -75,5 +75,103 @@
     display: flex;
     border-top: util.rem(1) solid;
     padding: util.rem(10) util.rem(5) util.rem(8) util.rem(5);
+  }
+}
+
+.field-charts-side-bar {
+  display: flex;
+  flex-direction: column;
+  border-right: util.rem(1) solid;
+  transition: 0.4s;
+  height: 100%;
+  width: 0;
+
+  &__view-mode {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      display: flex;
+      font-size: util.rem(12);
+      font-weight: bold;
+      justify-content: center;
+    }
+
+    &__options {
+      display: flex;
+      font-size: util.rem(12);
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  &__field-list {
+    padding: util.rem(10) util.rem(5) util.rem(0) util.rem(0);
+    font-size: util.rem(12);
+    overflow-y: scroll;
+
+    &__header {
+      white-space: nowrap;
+      overflow-x: scroll;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      cursor: pointer;
+      width: 98%;
+      font-weight: bold;
+      padding: util.rem(1) util.rem(0) util.rem(1) util.rem(2);
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      cursor: pointer;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &__container {
+        z-index: 9;
+        min-width: 78%;
+        height: util.rem(18);
+        margin-left: util.rem(3);
+
+        &--upper {
+          opacity: 0.4;
+          height: util.rem(8);
+          border-top-right-radius: map.get(radius.$border-radius, small);
+        }
+
+        &--lower {
+          opacity: 0.4;
+          height: util.rem(8);
+          border-bottom-right-radius: map.get(radius.$border-radius, small);
+        }
+
+        &--text {
+          white-space: nowrap;
+          position: relative;
+          overflow-x: scroll;
+          padding: util.rem(0) util.rem(0) util.rem(0) util.rem(2);
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+          transform: translateY(-110%);
+
+          &--bold {
+            font-weight: bold;
+          }
+        }
+      }
+
+      &__icon {
+        position: relative;
+        width: 22%;
+        height: util.rem(16);
+      }
+    }
+  }
+
+  &--show {
+    width: 9%;
   }
 }

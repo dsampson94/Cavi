@@ -2,14 +2,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { MemoryRouter } from 'react-router';
 
 import { getMockStore } from '../../../tools/testing/test.util';
 import { initialState as clientState } from '../../../redux/reducers/client.reducer';
 
 import ContentContainer from './ContentContainer';
-import RecommendationOverviewContainer from '../../screens/recommendation/overview/RecommendationOverview.container';
+import OverviewContainer from '../../screens/overview/FieldsOverview.container';
+import { CLIENT_FIELDS } from '../../../tools/general/system-variables.util';
 
 const mockState = { client: clientState };
 const mockClientRequestFields = {
@@ -26,10 +27,12 @@ describe('ContentContainer', () => {
   const setUp = () => {
     return render(
       <Provider store={ getMockStore(mockState) }>
-        <Router history={ history }>
-          <ContentContainer children={ <RecommendationOverviewContainer /> }
+        <MemoryRouter history={ history }>
+          <ContentContainer children={ <OverviewContainer /> }
+                            view={ CLIENT_FIELDS }
+                            setShowClientsSideBar={ true }
                             clientRequestFields={ mockClientRequestFields } />
-        </Router>
+        </MemoryRouter>
       </Provider>
     );
   };

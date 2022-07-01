@@ -55,6 +55,11 @@ export const base64ToObject = (base64String) => {
   return JSON.parse(atob(base64String));
 };
 
+export const daysFromToday = (daysFromToday) => {
+  const dateList = new Date(Date.now() + 1000 * 60 * 60 * 24 * daysFromToday).toString().split(' ');
+  return `${ dateList[0] } ${ dateList[2] }`;
+};
+
 export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;
 
 export const isEmpty = (value) => !value || value.length === 0;

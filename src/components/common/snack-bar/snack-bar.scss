@@ -1,6 +1,6 @@
-@use "../../../stylesheets/00_settings/config" as config;
-@use "../../../stylesheets/00_settings/util" as utils;
-@use "../../../stylesheets/01_tools/mixin" as mixins;
+@use "../../../stylesheets/config" as config;
+@use "../../../stylesheets/util" as utils;
+@use "../../../stylesheets/mixin" as mixins;
 
 .snack-bar {
   position: fixed;

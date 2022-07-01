@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/util" as util;
-@use "../../../stylesheets/00_settings/color" as color;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
 .recommendation-modal {
   display: flex;

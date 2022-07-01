@@ -12,7 +12,7 @@ import {
 } from '../../../tools/general/system-variables.util';
 
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
-import { pushEmptyRow } from '../table/recommendations/TableFunctions.util';
+import { pushEmptyRow } from '../table/client-fields/TableFunctions.util';
 
 import { addSystemNotice } from '../../../redux/actions/system.action';
 

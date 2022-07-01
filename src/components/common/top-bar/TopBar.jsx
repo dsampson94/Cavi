@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { bool, func, shape } from 'prop-types';
 
 import {
+  CLIENT_FIELDS,
   EMAIL,
   EMAIL_RECOMMENDATIONS,
+  FIELD_CHARTS,
   LOG_OUT,
   LOG_OUT_ICON,
   MAPS,
@@ -19,6 +21,7 @@ import {
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
+import { daysFromToday } from '../../../tools/general/helpers.util';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
@@ -30,7 +33,26 @@ import EmailModal from '../modal/EmailModal';
 
 import './top-bar.scss';
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields, view }) => {
+  switch (view) {
+    case CLIENT_FIELDS:
+      return <ClientFieldsTopBar showSideBar={ showSideBar }
+                                 setShowSideBar={ setShowSideBar }
+                                 clientRequestFields={ clientRequestFields } />;
+    case FIELD_CHARTS:
+      return <FieldChartsTopBar clientRequestFields={ clientRequestFields } />;
+  }
+};
+
+TopBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func,
+  clientRequestFields: shape({})
+};
+
+export default TopBar;
+
+const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -71,15 +93,15 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
   };
 
   return (
-    <div className="top-bar">
-      <div className="top-bar__left">
-        <div className="top-bar__text">
+    <div className="client-fields-top-bar">
+      <div className="client-fields-top-bar__left">
+        <div className="client-fields-top-bar__left-header">
           <img src={ '/favicon-irricheck.ico' }
                alt={ 'icon' }
-               height={ 20 } />
-          IrriCheck Pulse
+               height={ 14 } />
+          <p>{ 'IrriCheck Pulse' }</p>
         </div>
-        <div className="top-bar__lower-left">
+        <div className="client-fields-top-bar__left-lower">
           <Button icon={ PRINT_ICON }
                   onClick={ getPDF }
                   tooltip={ PRINT } />
@@ -95,7 +117,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
                   tooltip={ MAPS } />
         </div>
       </div>
-      <div className="top-bar__right">
+      <div className="client-fields-top-bar__right">
         <ThemeToggle />
         <Button label={ 'Probes Monitor' } />
         <Button icon={ REPORT_PROBLEM_ICON }
@@ -116,10 +138,89 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
   );
 };
 
-TopBar.propTypes = {
-  showSideBar: bool.isRequired,
-  setShowSideBar: func.isRequired,
+ClientFieldsTopBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func,
   clientRequestFields: shape({})
 };
 
-export default TopBar;
+const FieldChartsTopBar = ({ clientRequestFields }) => {
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { groupName, clientName } = useParams();
+
+  const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
+
+  useEffect(() => {
+    downloadPDF();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clientPDF]);
+
+  const downloadPDF = () => {
+    if (!clientRequestFields) return;
+    if (!clientPDF) return;
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(clientPDF);
+    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.click();
+  };
+
+  const getPDF = () => {
+    if (clientRequestFields)
+      dispatch(requestClientPDF(clientRequestFields));
+  };
+
+  const logout = () => {
+    dispatch(requestLogout());
+    history.push('/');
+  };
+
+  return (
+    <div className="field-charts-top-bar">
+      <div className="field-charts-top-bar__header">
+        <img src={ '/favicon-irricheck.ico' }
+             alt={ 'icon' }
+             height={ 14 } />
+        <p>{ 'IrriCheck Pulse' }</p>
+      </div>
+      <div className="field-charts-top-bar__lower">
+        <Button icon={ PRINT_ICON }
+                onClick={ getPDF }
+                tooltip={ PRINT }
+                spaced
+                small />
+        <Button label={ 'Recommendations' }
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
+                spaced />
+        <Button label={ 'Field Setup' } spaced />
+        <Button label={ 'Temperatures' } spaced />
+
+        <Button label={ daysFromToday(0) } datebar />
+        <Button label={ daysFromToday(1) } datebar />
+        <Button label={ daysFromToday(2) } datebar />
+        <Button label={ daysFromToday(3) } datebar />
+        <Button label={ daysFromToday(4) } datebar />
+        <Button label={ daysFromToday(5) } datebar />
+        <Button label={ daysFromToday(6) } datebar />
+        <Button label={ daysFromToday(7) } datebar spaced />
+
+        <Button label={ 'Probes Monitor' }
+                spaced />
+        <Button icon={ REPORT_PROBLEM_ICON }
+                tooltip={ REPORT_PROBLEM }
+                spaced />
+        <TextInput placeholder={ 'Last Readings' } />
+        <Button icon={ LOG_OUT_ICON }
+                tooltip={ LOG_OUT }
+                onClick={ logout }
+                leftAlignedTooltip
+                spaced />
+      </div>
+    </div>
+  );
+};
+
+FieldChartsTopBar.propTypes = {
+  clientRequestFields: shape({})
+};

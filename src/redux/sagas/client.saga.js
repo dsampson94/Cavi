@@ -28,6 +28,7 @@ import {
   GET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
   GET_CLIENT_OVERVIEW_LIST,
   GET_CLIENT_PDF,
+  GET_FULL_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
@@ -63,7 +64,7 @@ export function* watchForRetrieveClientOverviewRequest() {
   yield takeLatest(GET_CLIENT_OVERVIEW_LIST, performRetrieveClientOverviewRequest);
 }
 
-export function* performRetrieveClientFieldListRequest({ client, onSuccess, onError }) {
+export function* performRetrieveFullClientFieldListRequest({ client, onSuccess, onError }) {
   try {
     yield put(setSpinnerText(SPINNER_TEXT));
     const [endpoint, requestOptions] = getClientFieldListRequest(client);
@@ -103,8 +104,8 @@ export function* performRetrieveClientFieldListRequest({ client, onSuccess, onEr
         } catch (response) {
           yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
           yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_CRITICAL));
-          yield put(setSpinnerText(null));
           if (onError) yield call(onError);
+          yield put(setSpinnerText(null));
         }
 
         if (onSuccess) yield call(onSuccess, data);
@@ -114,8 +115,41 @@ export function* performRetrieveClientFieldListRequest({ client, onSuccess, onEr
   } catch (response) {
     yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
-    yield put(setSpinnerText(null));
     if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
+  }
+}
+
+export function* watchForRetrieveFullClientFieldListRequest() {
+  yield takeLatest(GET_FULL_CLIENT_FIELD_LIST, performRetrieveFullClientFieldListRequest);
+}
+
+export function* performRetrieveClientFieldListRequest({ client, onSuccess, onError }) {
+  try {
+    yield put(setSpinnerText(SPINNER_TEXT));
+    const [endpoint, requestOptions] = getClientFieldListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+        if (onError) yield call(onError);
+        yield put(setSpinnerText(null));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_FIELD_LIST, fieldList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
+        if (onSuccess) yield call(onSuccess, data);
+        yield put(setSpinnerText(null));
+    }
+
+  } catch (response) {
+    yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+    if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
   }
 }
 
@@ -180,8 +214,8 @@ export function* performRetrieveClientPDFRequest({ client, onSuccess, onError })
   } catch ({ response }) {
     yield put({ type: SET_CLIENT_PDF, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_PDF, SNACK_CRITICAL));
-    yield put(setSpinnerText(null));
     if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
   }
 }
 
@@ -192,6 +226,7 @@ export function* watchForRetrieveClientPDFRequest() {
 export default function* clientSaga() {
   yield all([
     watchForRetrieveClientOverviewRequest(),
+    watchForRetrieveFullClientFieldListRequest(),
     watchForRetrieveClientFieldListRequest(),
     watchForRetrieveRainDataForChartRequest(),
     watchForRetrieveClientPDFRequest()

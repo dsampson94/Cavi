@@ -14,7 +14,7 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
     if (reen) return Object.entries(reen).map(([key, value]) => {
       return {
         'name': key,
-        'uv': value
+        'val': value
       };
     });
   };
@@ -31,17 +31,21 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
   };
 
   return (
-    <BarChart width={ 750 } height={ 300 } data={ mappedData() }>
-      <CartesianGrid strokeDasharray="3 1" />
+    <BarChart width={ 750 }
+              height={ 300 }
+              data={ mappedData() }>
+      <CartesianGrid strokeDasharray={ '3 1' } />
       <YAxis tick={ { fill: (activeTheme === 'dark') ? 'white' : 'black' } }
              tickCount={ 10 } />
       <XAxis tick={ { fill: (activeTheme === 'dark') ? 'white' : 'black' } }
              tickFormatter={ (date) => formatDates(date) }
              interval={ 3 }
              fontSize={ 11 }
-             dataKey="name" />
+             dataKey={ 'name' } />
       <Tooltip />
-      <Bar dataKey="uv" fill="#54a4d9" isAnimationActive={ false } />
+      <Bar dataKey={ 'val' }
+           fill={ '#54a4d9' }
+           isAnimationActive={ false } />
     </BarChart>
   );
 };

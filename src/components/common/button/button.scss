@@ -1,23 +1,26 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/util" as util;
-@use "../../../stylesheets/00_settings/color" as color;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/01_tools/mixin" as mixin;
-@use "../../../stylesheets/00_settings/config" as config;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
 .button {
-  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  white-space: nowrap;
   color: map.get(color.$colorMap, white);
   background-color: map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
   box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, pulse-blue),
   inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
   height: util.rem(30);
-  padding: util.rem(2);
+  padding: util.rem(0) util.rem(4) util.rem(0) util.rem(4);
   width: 100%;
 
-  label {
+  & label {
     font-size: util.bu(1.3);
   }
 
@@ -34,11 +37,23 @@
     cursor: pointer;
   }
 
-  &--disabled {
-    background-color: map.get(color.$colorMap, disabled);
+  &--datebar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: bold;
 
-    &:hover, label:hover {
-      cursor: not-allowed;
+    &:hover {
+      cursor: default;
+      background-color: map.get(color.$colorMap, pulse-blue);
+    }
+
+    & label:hover {
+      cursor: default;
+    }
+
+    &:active {
+      top: 0;
     }
   }
 
@@ -64,7 +79,11 @@
   }
 
   &--spaced {
-    margin: 0 util.rem(6) 0 util.rem(2);
+    margin: 0 util.rem(6) 0 util.rem(0);
+  }
+
+  &--small {
+    max-width: util.rem(40);
   }
 
   &--icon {
@@ -80,5 +99,24 @@
     label {
       color: map.get(color.$colorMap, black);
     }
+  }
+
+  &--chart {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: util.rem(2) util.rem(2) 0 util.rem(2);
+    height: util.rem(12);
+    width: util.rem(18);
+    padding: util.rem(0);
+    box-shadow: none;
+
+    &:hover {
+      background-color: map.get(color.$colorMap, white);
+    }
+  }
+
+  &--chartbar {
+    height: util.rem(20);
   }
 }

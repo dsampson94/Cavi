@@ -6,7 +6,7 @@
 // The config needs to be loaded in this order to ensure style rules are applied
 // correctly and predictably.
 
-@import "00_settings/font";
-@import "00_settings/reset";
-@import "00_settings/themes";
-@import "00_settings/typography";
+@import "../stylesheets/font";
+@import "../stylesheets/reset";
+@import "../stylesheets/themes";
+@import "../stylesheets/typography";

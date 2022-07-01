@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/00_settings/config" as config;
-@use "../../../stylesheets/00_settings/color" as colors;
-@use "../../../stylesheets/00_settings/radius" as radius;
-@use "../../../stylesheets/00_settings/util" as utils;
-@use "../../../stylesheets/01_tools/mixin" as mixins;
+@use "../../../stylesheets/config" as config;
+@use "../../../stylesheets/color" as colors;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/util" as utils;
+@use "../../../stylesheets/mixin" as mixins;
 
 $success-color: map.get(colors.$colorMap, success);
 $error-color: map.get(colors.$colorMap, error);

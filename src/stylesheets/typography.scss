@@ -1,0 +1,79 @@
+@use "sass:map";
+@use "../stylesheets/config" as config;
+@use "../stylesheets/util" as utils;
+@use "../stylesheets/mixin" as mixins;
+
+h1 {
+  font-size: utils.rem(20);
+  font-weight: 700;
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    font-size: utils.rem(24);
+  }
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, large)) {
+    font-size: utils.rem(28);
+  }
+}
+
+h2 {
+  font-size: utils.rem(18);
+  font-weight: 900;
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    font-size: utils.rem(22);
+  }
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, large)) {
+    font-size: utils.rem(32);
+  }
+}
+
+h3 {
+  font-size: utils.rem(16);
+  font-weight: 900;
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    font-size: utils.rem(20);
+  }
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, large)) {
+    font-size: utils.rem(26);
+  }
+}
+
+h4 {
+  font-size: utils.rem(20);
+  font-weight: 600;
+}
+
+h5 {
+  font-size: utils.rem(14);
+  font-weight: 600;
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, large)) {
+    font-size: utils.rem(18);
+  }
+}
+
+p {
+  font-weight: 400;
+  font-size: utils.rem(12);
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    font-size: utils.rem(14);
+  }
+}
+
+a {
+  font-weight: 400;
+  font-size: utils.rem(14);
+
+  @include mixins.breakpoint(map.get(config.$breakpoints, small)) {
+    font-size: utils.rem(16);
+  }
+}
+
+small {
+  font-size: utils.rem(12);
+}

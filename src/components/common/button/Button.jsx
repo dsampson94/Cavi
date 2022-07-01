@@ -12,20 +12,24 @@ const Button = ({
                   type,
                   label,
                   onClick,
+                  onMouseEnter,
                   disabled,
-                  flex,
+                  icon,
+                  iconFill,
+                  tooltip,
+                  leftAlignedTooltip,
+                  spaced,
                   login,
                   blue,
                   white,
-                  icon,
-                  tooltip,
-                  leftAlignedTooltip,
-                  iconFill,
-                  spaced,
-                  onMouseEnter
+                  small,
+                  chart,
+                  chartbar,
+                  datebar
                 }) => {
   return (
-    <button className={ getClassNames('button', { disabled, flex, login, blue, white, icon, spaced }) }
+    <button className={ getClassNames('button',
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar }) }
             name={ name }
             type={ type }
             onClick={ onClick }
@@ -35,6 +39,7 @@ const Button = ({
       { tooltip && <ToolTip text={ tooltip }
                             left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }
+                         chart={ chart }
                          fill={ (iconFill) ? iconFill : '#53A5DF' } /> }
     </button>
   );

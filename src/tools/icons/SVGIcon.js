@@ -37,7 +37,7 @@ import { getClassNames } from '../general/helpers.util';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
 
   const activeTheme = useSelector(state => state?.system?.theme);
 
@@ -50,17 +50,18 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny }) => {
            height={ height }
            width={ width }
            fill={ getIconFill(activeTheme, fill, name) }
-           viewBox={ getViewBox(name, tiny) }>
+           viewBox={ getViewBox(name, tiny, chart) }>
         { getPath(name) }
       </svg>
     </div>
   );
 };
 
-const getViewBox = (name, tiny) => {
+const getViewBox = (name, tiny, chart) => {
   switch (name) {
     case SETTINGS_GEAR:
-      return '3 -1 20 50';
+      if (chart) return '3 3 20 60';
+      else return '3 -1 20 50';
     case WARNING:
       return '-5 -9 1 42';
     case DROPDOWN:
@@ -70,7 +71,8 @@ const getViewBox = (name, tiny) => {
     case PENCIL:
       return '-1 -9 1 42';
     case CHARTS:
-      return '5 -9 1 42';
+      if (chart) return '16 1 1 42';
+      else return '5 -9 1 42';
     case RAIN_CLOUDS:
       return '0 1 50 120';
     case WATCH:
