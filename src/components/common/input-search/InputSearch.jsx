@@ -16,7 +16,7 @@ import { pushEmptyRow } from '../table/client-fields/TableFunctions.util';
 
 import { addSystemNotice } from '../../../redux/actions/system.action';
 
-import SVGIcon from '../../../tools/icons/SVGIcon';
+import SVGIcon from '../icon/SVGIcon';
 
 import './input-search.scss';
 

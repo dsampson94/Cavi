@@ -31,7 +31,7 @@ import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
 
 import { requestClientFieldList } from '../../../../redux/actions/client.action';
 
-import SVGIcon from '../../../../tools/icons/SVGIcon';
+import SVGIcon from '../../icon/SVGIcon';
 import ToolTip from '../../tool-tip/ToolTip';
 import Button from '../../button/Button';
 import InputSearch from '../../input-search/InputSearch';

@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { SETTINGS_GEAR } from '../../../tools/general/system-variables.util';
 
-import SVGIcon from '../../../tools/icons/SVGIcon';
+import SVGIcon from '../icon/SVGIcon';
 import CheckboxInput from '../input/checkbox/CheckboxInput';
 import Button from '../button/Button';
 

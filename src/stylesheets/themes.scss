@@ -43,18 +43,18 @@ body.light-mode {
   }
 
   .table__body__row__td--dark {
-    transition: 0.3s;
+    transition: 1s;
     background-color: map.get(color.$colorMap, table-yellow-dark);
   }
 
   .table__body__row__td--light {
-    transition: 0.3s;
+    transition: 1s;
     background-color: map.get(color.$colorMap, table-yellow-light);
   }
 
   .table__body__row__td--fade--thin,
   .table__body__row__td--fade {
-    transition: 0.3s;
+    transition: 1s;
     background-color: map.get(color.$colorMap, table-yellow-fade);
   }
 }
@@ -174,5 +174,9 @@ body.dark-mode {
     background-color: map.get(color.$colorMap, dark-mode-grey-modal);
     color: map.get(color.$colorMap, dark-mode-white);
     border: util.rem(0.5) solid transparent;
+  }
+
+  .radio-input__input {
+    border: util.rem(1.2) solid map.get(color.$colorMap, topbar-icon-blue);
   }
 }

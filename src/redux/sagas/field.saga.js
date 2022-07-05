@@ -8,6 +8,7 @@ import {
   SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST
 } from '../../tools/general/system-variables.util';
+import { saveChartDepthsToLocalStorage } from '../../tools/storage/localStorage';
 
 import { responseStatus } from '../endpoints/index';
 
@@ -32,6 +33,7 @@ export function* performRetrieveFieldChartListRequest({ field, onSuccess, onErro
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
+        saveChartDepthsToLocalStorage(data.dieptes);
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
         yield put(setSpinnerText(null));

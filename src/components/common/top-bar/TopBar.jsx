@@ -22,6 +22,7 @@ import {
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
 import { daysFromToday } from '../../../tools/general/helpers.util';
+import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
@@ -151,6 +152,13 @@ const FieldChartsTopBar = ({ clientRequestFields }) => {
   const { groupName, clientName } = useParams();
 
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
+
+  const getTheme = retrieveActiveThemeFromLocalStorage();
+  const [isDarkMode] = useState(!(getTheme === 'dark'));
+
+  useEffect(() => {
+    if (getTheme === 'dark') return document.body.classList.add('dark-mode');
+  }, [isDarkMode]);
 
   useEffect(() => {
     downloadPDF();

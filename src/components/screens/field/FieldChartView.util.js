@@ -1,37 +1,39 @@
 import React from 'react';
 import { useParams } from 'react-router';
 
+import { AGGREGATE, DAILY_ETO, DEFICIT, USAGE_ETC } from '../../../tools/general/system-variables.util';
+import { getClassNames } from '../../../tools/general/helpers.util';
+import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
+
 import Button from '../../common/button/Button';
-import DeficitPerLayerLineChart from '../../common/chart/DeficitPerLayerLineChart';
-import ETCBarChart from '../../common/chart/ETCBarChart';
-import AggregateDeficitLineChart from '../../common/chart/AggregateDeficitLineChart';
-import DailyETOLineChart from '../../common/chart/DailyETOLineChart';
+import FieldLineChart from '../../common/chart/FieldLineChart';
 
 export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) => {
 
   const { fieldName } = useParams();
+  const getTheme = retrieveActiveThemeFromLocalStorage();
 
   return (
-    <div className="field-chart__top-bar">
+    <div className={ getClassNames('field-chart__top-bar', { dark: (getTheme === 'dark') }) }>
 
       <div className="field-chart__top-bar--left">
-        <Button label={ 'Fields' }
-                onClick={ () => setShowChartsSideBar(!showChartsSideBar) }
-                spaced />
-        <div>{ 'Deficit per layer (mm)' }</div>
-        <div>{ '+' }</div>
-        <div>{ '-' }</div>
-        <div>{ '0 to middle' }</div>
-        <div>{ 'reset zoom' }</div>
-        <Button label={ 'square' }
-                spaced
-                white />
-        <Button label={ '<' }
-                spaced
-                white />
-        <Button label={ '>' }
-                spaced
-                white />
+        <div className="field-chart__top-bar--left-inner">
+          <Button label={ 'Fields' }
+                  onClick={ () => setShowChartsSideBar(!showChartsSideBar) }
+                  chartbar
+                  spaced />
+          <Button label={ '<' }
+                  spaced
+                  small
+                  chartbar
+                  white />
+          <Button label={ '>' }
+                  spaced
+                  small
+                  chartbar
+                  white />
+        </div>
+        <p>{ 'Deficit per layer (mm)' }</p>
       </div>
 
       <div className="field-chart__top-bar--center">
@@ -40,7 +42,9 @@ export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) =>
 
       <div className="field-chart__top-bar--right">
         <Button label={ '>' }
-                white small />
+                white
+                small
+                chartbar />
         <div>{ 'All readings' }</div>
         <div>{ '100' }</div>
         <div>{ '56' }</div>
@@ -57,28 +61,35 @@ export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) =>
 
 FieldChartTopBar.propTypes = {};
 
-export const LeftSideCharts = ({ mappedChartList }) => {
+export const LeftSideCharts = ({ mappedChartList, mappedDepthList }) => {
 
   return (
     <div className="field-chart__left">
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[0] }
-                                chart={ '1' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[0] }
+                      chart={ mappedDepthList?.[1] }
+                      type={ DEFICIT }
+                      hasToolbar />
 
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[1] }
-                                chart={ '2' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[1] }
+                      type={ DEFICIT }
+                      chart={ mappedDepthList?.[2] } />
 
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[2] }
-                                chart={ '3' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[2] }
+                      type={ DEFICIT }
+                      chart={ mappedDepthList?.[3] } />
 
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[3] }
-                                chart={ '4' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[3] }
+                      type={ DEFICIT }
+                      chart={ mappedDepthList?.[4] } />
 
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[4] }
-                                chart={ '5' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[4] }
+                      type={ DEFICIT }
+                      chart={ mappedDepthList?.[5] } />
 
-      <DeficitPerLayerLineChart mappedChartList={ mappedChartList?.[5] }
-                                chart={ '6' }
-                                hasXAxis={ true } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[5] }
+                      type={ DEFICIT }
+                      chart={ mappedDepthList?.[6] }
+                      hasXAxis />
     </div>
   );
 };
@@ -89,17 +100,22 @@ export const RightSideCharts = ({ mappedChartList }) => {
 
   return (
     <div className="field-chart__right">
-      <AggregateDeficitLineChart mappedChartList={ mappedChartList?.[6] }
-                                 chart={ 'Topsoil' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[6] }
+                      type={ AGGREGATE }
+                      chart={ '0 - 400mm' } />
 
-      <AggregateDeficitLineChart mappedChartList={ mappedChartList?.[7] }
-                                 chart={ 'Bottomsoil' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[7] }
+                      type={ AGGREGATE }
+                      chart={ '400 - 800mm' } />
 
-      <ETCBarChart mappedChartList={ [] }
-                   chart={ 'eto1' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[7] }
+                      type={ USAGE_ETC }
+                      chart={ 'Usage ETc' } />
 
-      <DailyETOLineChart mappedChartList={ mappedChartList?.[8] }
-                         chart={ 'eto2' } />
+      <FieldLineChart mappedChartList={ mappedChartList?.[8] }
+                      type={ DAILY_ETO }
+                      chart={ 'Daily ETo' }
+                      hasXAxis />
     </div>
   );
 };

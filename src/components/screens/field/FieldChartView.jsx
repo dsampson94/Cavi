@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 
+import { getClassNames } from '../../../tools/general/helpers.util';
 import { FIELD_CHARTS } from '../../../tools/general/system-variables.util';
 import { FieldChartTopBar, LeftSideCharts, RightSideCharts } from './FieldChartView.util';
+import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 
 import './field-chart-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, mappedChartList, setLoadPeriod }) => {
+const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedDepthList, setLoadPeriod }) => {
 
+  const getTheme = retrieveActiveThemeFromLocalStorage();
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
 
   return (
@@ -23,11 +26,11 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, setLoadPeriod }) =
         <FieldChartTopBar showChartsSideBar={ showChartsSideBar }
                           setShowChartsSideBar={ setShowChartsSideBar } />
 
-        <div className="field-chart__container">
-          <LeftSideCharts mappedChartList={ mappedChartList } />
+        <div className={ getClassNames('field-chart__container', { dark: (getTheme === 'dark') }) }>
+          <LeftSideCharts mappedChartList={ mappedChartList }
+                          mappedDepthList={ mappedDepthList } />
 
           <RightSideCharts mappedChartList={ mappedChartList } />
-
         </div>
 
         <div className="field-chart__lower" />

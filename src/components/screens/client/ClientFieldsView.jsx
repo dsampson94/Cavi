@@ -4,13 +4,13 @@ import { arrayOf, shape } from 'prop-types';
 
 import { CLIENT_FIELDS } from '../../../tools/general/system-variables.util';
 
+import { getClassNames } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
 import { TableSearchBar, TableTopBar } from '../../common/table/client-fields/TableComponents.util';
 import ContentContainer from '../../common/content-container/ContentContainer';
 import Table from '../../common/table/client-fields/Table';
 
 import './client-fields-view.scss';
-import { getClassNames } from '../../../tools/general/helpers.util';
 
 const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }) => {
 

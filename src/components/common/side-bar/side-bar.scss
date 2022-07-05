@@ -93,6 +93,7 @@
     &__header {
       display: flex;
       font-size: util.rem(12);
+      margin-bottom: util.rem(4);
       font-weight: bold;
       justify-content: center;
     }
@@ -106,7 +107,7 @@
   }
 
   &__field-list {
-    padding: util.rem(10) util.rem(5) util.rem(0) util.rem(0);
+    padding: util.rem(20) util.rem(5) util.rem(0) util.rem(0);
     font-size: util.rem(12);
     overflow-y: scroll;
 

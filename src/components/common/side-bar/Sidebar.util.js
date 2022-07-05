@@ -15,7 +15,7 @@ import {
   TWO_WEEKS
 } from '../../../tools/general/system-variables.util';
 
-import SVGIcon from '../../../tools/icons/SVGIcon';
+import SVGIcon from '../icon/SVGIcon';
 import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
 import ToolTip from '../tool-tip/ToolTip';

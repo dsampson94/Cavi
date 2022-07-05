@@ -4,7 +4,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
 import { pushFieldRow, pushForecastRegionRow, pushLandGroupRow } from './FieldChartView.container.util';
-import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
+import { retrieveChartDepthsFromLocalStorage, retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestFieldChartList } from '../../../redux/actions/field.action';
 import { requestClientFieldList } from '../../../redux/actions/client.action';
@@ -17,6 +17,7 @@ const FieldChartViewContainer = () => {
   const { groupName, clientName, fieldName, probeNumber } = useParams();
 
   const user = retrieveUserLoginFromLocalStorage();
+  const mappedDepthList = retrieveChartDepthsFromLocalStorage();
   const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
 
@@ -76,6 +77,7 @@ const FieldChartViewContainer = () => {
     const topSoilMmList = [];
     const bottomSoilMmList = [];
     const dailyETOList = [];
+    const depthList = [];
 
     Object.entries(fieldChartList?.[probeNumber])?.forEach(([key, value]) => {
       Object.keys(value).forEach((innerKey) => {
@@ -125,6 +127,10 @@ const FieldChartViewContainer = () => {
       dailyETOList.push({ x: key, y: value.f });
     });
 
+    Object.entries(fieldChartList?.dieptes)?.forEach((value) => {
+      depthList.push(value[1]);
+    });
+
     mappedChartList.push(oneHundredMmList);
     mappedChartList.push(twoHundredMmList);
     mappedChartList.push(threeHundredMmList);
@@ -134,11 +140,13 @@ const FieldChartViewContainer = () => {
     mappedChartList.push(topSoilMmList);
     mappedChartList.push(bottomSoilMmList);
     mappedChartList.push(dailyETOList);
+    mappedChartList.push(depthList);
     return mappedChartList;
   };
 
   return <FieldChartView mappedFieldList={ mappedFieldList() }
                          mappedChartList={ mappedChartList() }
+                         mappedDepthList={ mappedDepthList}
                          setLoadPeriod={ setLoadPeriod } />;
 };
 

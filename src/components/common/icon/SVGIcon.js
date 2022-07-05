@@ -32,8 +32,8 @@ import {
   WARNING,
   WATCH,
   WEATHER_STATION_ICON
-} from '../general/system-variables.util';
-import { getClassNames } from '../general/helpers.util';
+} from '../../../tools/general/system-variables.util';
+import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './svg-icon.scss';
 

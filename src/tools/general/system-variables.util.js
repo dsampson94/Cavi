@@ -119,3 +119,9 @@ export const RADIO_GROUP = 'viewPeriod';
 //OTHER STRINGS
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
+
+//CHARTS
+export const DEFICIT = 'deficit';
+export const AGGREGATE = 'aggregate';
+export const USAGE_ETC = 'usage ETc';
+export const DAILY_ETO = 'daily ETo';
