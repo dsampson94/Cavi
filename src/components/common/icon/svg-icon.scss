@@ -21,6 +21,7 @@
   }
 
   & svg {
+    cursor: pointer;
     min-height: util.rem(24);
     max-height: util.rem(24);
     margin-top: util.rem(2);

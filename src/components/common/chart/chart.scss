@@ -21,7 +21,10 @@
 
     &__zoom-options {
       display: flex;
+      position: relative;
+      margin-left: util.rem(5);
       flex-direction: row;
+      z-index: 5;
       width: 20%;
 
       &--left {
@@ -40,11 +43,23 @@
             margin-left: util.rem(4);
             width: util.rem(15);
           }
+
+          &__options {
+            position: relative;
+            margin-left: util.rem(4);
+            width: util.rem(20);
+          }
+
+          &-buttons {
+            display: flex;
+            width: util.rem(30);
+            flex-direction: row;
+          }
         }
 
         &-bottom {
           display: flex;
-          margin-top: util.rem(1);
+          margin-top: 1%;
           width: util.rem(30);
           flex-direction: row;
           cursor: pointer;
@@ -132,26 +147,23 @@
 
 .apexcharts-toolbar {
   flex-direction: row-reverse;
+  margin-left: util.rem(106);
+  padding-left: 0 !important;
+  margin-top: util.rem(-5);
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.apexcharts-reset-icon {
+  margin-left: 0 !important;
+}
+
+.apexcharts-pan-icon.apexcharts-selected {
+  transform: scale(0.60) !important;
+  margin-left: util.rem(-1);
 }
 
 .apexcharts-menu-icon {
   display: none;
-}
-
-.apexcharts-menu-item.exportPNG {
-  display: none;
-}
-
-.apexcharts-menu-item.exportSVG {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: util.rem(18);
-}
-
-.apexcharts-menu-item.exportCSV {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: util.rem(18);
 }

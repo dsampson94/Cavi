@@ -152,7 +152,7 @@ export const ViewDataBar = ({ setLoadPeriod }) => {
 
 ViewDataBar.propTypes = {};
 
-export const SideBarFieldList = ({ mappedFieldList }) => {
+export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName }) => {
 
   const history = useHistory();
   const { groupName, clientName, fieldName } = useParams();
@@ -181,7 +181,7 @@ export const SideBarFieldList = ({ mappedFieldList }) => {
               <div className="field-charts-side-bar__field-list__item"
                    key={ generateId() }>
                 <div className="field-charts-side-bar__field-list__item__container"
-                     onClick={ () => handleFieldClick(history, groupName, clientName, field) }>
+                     onClick={ () => handleFieldClick(history, groupName, clientName, field, setActiveFieldName) }>
 
                   <div className="field-charts-side-bar__field-list__item__container--upper"
                        style={ {
@@ -215,6 +215,7 @@ export const SideBarFieldList = ({ mappedFieldList }) => {
 
 SideBarFieldList.propTypes = {};
 
-const handleFieldClick = (history, groupName, clientName, field) => {
+const handleFieldClick = (history, groupName, clientName, field, setActiveFieldName) => {
+  setActiveFieldName(field.locationName);
   history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
 };

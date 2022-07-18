@@ -59,6 +59,22 @@ export const YELLOW = 'Viewed in less than 14 days';
 export const ORANGE = 'Viewed in less than 30 days';
 export const RED = 'Viewed in MORE than 30 days!';
 
+//DROPDOWN
+export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
+export const CHART_USAGE_MENU = 'chart_usage_menu';
+export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
+
+export const DEFICIT_OPTION = 'Deficit / ETo';
+export const VOLT_READINGS_OPTION = 'Volt Readings';
+export const FLOW_DAILY_OPTION = 'Flow Meter Daily Total';
+export const FLOW_DETAILED_OPTION = 'Flow Meter Detailed';
+export const RAIN_OPTION = 'Rain';
+export const EC_OPTION = 'EC Readings';
+export const VPD_OPTION = 'VPD Readings';
+export const ACTUAL_IRRIGATION_OPTION = 'Actual Irrigation Data';
+export const EXCEL_OPTION = 'Excel Report';
+export const ANALYSE_FIELD_OPTION = 'Analyse Field';
+
 //TOPBAR
 export const EMAIL_RECOMMENDATIONS = 'email_recommendations';
 export const PRINT_ICON = 'Print';
@@ -120,8 +136,24 @@ export const RADIO_GROUP = 'viewPeriod';
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
 
-//CHARTS
+//CHART TYPES
 export const DEFICIT = 'deficit';
 export const AGGREGATE = 'aggregate';
-export const USAGE_ETC = 'usage ETc';
-export const DAILY_ETO = 'daily ETo';
+
+//CHART NAMES
+export const DEFICIT_100MM = '100mm';
+export const DEFICIT_200MM = '200mm';
+export const DEFICIT_300MM = '300mm';
+export const DEFICIT_400MM = '400mm';
+export const DEFICIT_600MM = '600mm';
+export const DEFICIT_800MM = '800mm';
+
+export const AGGREGATE_TOP_SOIL = '0 - 400mm';
+export const AGGREGATE_BOTTOM_SOIL = '400 - 800mm';
+
+export const USAGE_ETC = 'Usage ETc';
+export const DAILY_ETO = 'Daily ETo';
+
+//CHART ICONS
+export const DOWN_ARROW = 'down_arrow';
+export const OPEN_MENU = 'open_menu';

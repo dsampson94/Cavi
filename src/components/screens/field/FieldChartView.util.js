@@ -1,21 +1,62 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
-import { AGGREGATE, DAILY_ETO, DEFICIT, USAGE_ETC } from '../../../tools/general/system-variables.util';
+import {
+  AGGREGATE,
+  AGGREGATE_BOTTOM_SOIL,
+  AGGREGATE_TOP_SOIL,
+  CHART_TOP_BAR_MENU,
+  DAILY_ETO,
+  DEFICIT,
+  DEFICIT_100MM,
+  DEFICIT_200MM,
+  DEFICIT_300MM,
+  DEFICIT_400MM,
+  DEFICIT_600MM,
+  DEFICIT_800MM,
+  SETTINGS_GEAR,
+  USAGE_ETC
+} from '../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import Button from '../../common/button/Button';
 import FieldLineChart from '../../common/chart/FieldLineChart';
+import SVGIcon from '../../common/icon/SVGIcon';
+import DropDownMenu from '../../common/drop-down/DropDownMenu';
+import FieldLineChartD3 from '../../common/chart/FieldLineChart.d3';
 
-export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) => {
+export const FieldChartTopBar = ({
+                                   showChartsSideBar,
+                                   setShowChartsSideBar,
+                                   mappedChartList,
+                                   mappedFieldList,
+                                   mappedMenuList,
+                                   setActiveFieldName
+                                 }) => {
 
-  const { fieldName } = useParams();
+  const history = useHistory();
+  const { groupName, clientName, fieldName } = useParams();
   const getTheme = retrieveActiveThemeFromLocalStorage();
+
+  if (!mappedChartList) return null;
+
+  const viewClient = (direction) => {
+    mappedFieldList.forEach((item, index) => {
+      if (item.fieldName.locationName === fieldName) {
+        const field = mappedFieldList[index + direction].fieldName;
+        setActiveFieldName(field.locationName);
+        handleFieldClick(history, groupName, clientName, field);
+      }
+    });
+  };
+
+  const handleFieldClick = (history, groupName, clientName, field) => {
+    history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+  };
 
   return (
     <div className={ getClassNames('field-chart__top-bar', { dark: (getTheme === 'dark') }) }>
-
       <div className="field-chart__top-bar--left">
         <div className="field-chart__top-bar--left-inner">
           <Button label={ 'Fields' }
@@ -23,17 +64,23 @@ export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) =>
                   chartbar
                   spaced />
           <Button label={ '<' }
+                  onClick={ () => viewClient(-1) }
                   spaced
-                  small
+                  tiny
                   chartbar
                   white />
           <Button label={ '>' }
+                  onClick={ () => viewClient(1) }
                   spaced
-                  small
+                  tiny
                   chartbar
                   white />
+          <div className="field-chart__top-bar--left__settings">
+            <DropDownMenu menu={ CHART_TOP_BAR_MENU } menuData={ mappedMenuList } />
+            <SVGIcon name={ SETTINGS_GEAR } tiny fill={ '#6E8192' } />
+          </div>
+          <p>{ 'Deficit per layer (mm)' }</p>
         </div>
-        <p>{ 'Deficit per layer (mm)' }</p>
       </div>
 
       <div className="field-chart__top-bar--center">
@@ -61,34 +108,42 @@ export const FieldChartTopBar = ({ showChartsSideBar, setShowChartsSideBar }) =>
 
 FieldChartTopBar.propTypes = {};
 
-export const LeftSideCharts = ({ mappedChartList, mappedDepthList }) => {
+export const LeftSideCharts = ({ mappedChartList }) => {
+
+  if (!mappedChartList) return null;
 
   return (
     <div className="field-chart__left">
       <FieldLineChart mappedChartList={ mappedChartList?.[0] }
-                      chart={ mappedDepthList?.[1] }
-                      type={ DEFICIT }
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_100MM }
+                      chartInfo={ mappedChartList?.[10][1] }
                       hasToolbar />
 
       <FieldLineChart mappedChartList={ mappedChartList?.[1] }
-                      type={ DEFICIT }
-                      chart={ mappedDepthList?.[2] } />
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_200MM }
+                      chartInfo={ mappedChartList?.[10][2] } />
 
       <FieldLineChart mappedChartList={ mappedChartList?.[2] }
-                      type={ DEFICIT }
-                      chart={ mappedDepthList?.[3] } />
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_300MM }
+                      chartInfo={ mappedChartList?.[10][3] } />
 
       <FieldLineChart mappedChartList={ mappedChartList?.[3] }
-                      type={ DEFICIT }
-                      chart={ mappedDepthList?.[4] } />
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_400MM }
+                      chartInfo={ mappedChartList?.[10][4] } />
 
       <FieldLineChart mappedChartList={ mappedChartList?.[4] }
-                      type={ DEFICIT }
-                      chart={ mappedDepthList?.[5] } />
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_600MM }
+                      chartInfo={ mappedChartList?.[10][5] } />
 
       <FieldLineChart mappedChartList={ mappedChartList?.[5] }
-                      type={ DEFICIT }
-                      chart={ mappedDepthList?.[6] }
+                      chartType={ DEFICIT }
+                      chartName={ DEFICIT_800MM }
+                      chartInfo={ mappedChartList?.[10][6] }
                       hasXAxis />
     </div>
   );
@@ -98,24 +153,32 @@ LeftSideCharts.propTypes = {};
 
 export const RightSideCharts = ({ mappedChartList }) => {
 
+  if (!mappedChartList) return null;
+
   return (
     <div className="field-chart__right">
-      <FieldLineChart mappedChartList={ mappedChartList?.[6] }
-                      type={ AGGREGATE }
-                      chart={ '0 - 400mm' } />
+      <div className="field-chart__right__top">
+        <FieldLineChart mappedChartList={ mappedChartList?.[6] }
+                        recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[6]?.length * 100) }
+                        chartType={ AGGREGATE }
+                        chartName={ AGGREGATE_TOP_SOIL } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[7] }
-                      type={ AGGREGATE }
-                      chart={ '400 - 800mm' } />
+        <FieldLineChart mappedChartList={ mappedChartList?.[7] }
+                        recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[7]?.length * 100) }
+                        chartType={ AGGREGATE }
+                        chartName={ AGGREGATE_BOTTOM_SOIL } />
+      </div>
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[7] }
-                      type={ USAGE_ETC }
-                      chart={ 'Usage ETc' } />
+      <div className="field-chart__right__bottom">
+        <FieldLineChart mappedChartList={ mappedChartList?.[9] }
+                        chartType={ USAGE_ETC }
+                        chartName={ USAGE_ETC } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[8] }
-                      type={ DAILY_ETO }
-                      chart={ 'Daily ETo' }
-                      hasXAxis />
+        <FieldLineChart mappedChartList={ mappedChartList?.[9] }
+                        chartType={ DAILY_ETO }
+                        chartName={ DAILY_ETO }
+                        hasXAxis />
+      </div>
     </div>
   );
 };

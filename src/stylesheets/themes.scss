@@ -179,4 +179,47 @@ body.dark-mode {
   .radio-input__input {
     border: util.rem(1.2) solid map.get(color.$colorMap, topbar-icon-blue);
   }
+
+  .apexcharts-tooltip.apexcharts-theme-light {
+    border: none;
+    box-shadow: 0 0 util.rem(1) util.rem(1) map.get(color.$colorMap, dark-mode-grey-modal);
+  }
+
+  .custom_tooltip {
+
+    &--deficit {
+      background-color: map.get(color.$colorMap, chart-tooltip-silver);
+
+      & span {
+        color: map.get(color.$colorMap, white);
+      }
+    }
+
+    &--aggregate {
+      background-color: map.get(color.$colorMap, chart-tooltip-silver);
+
+      & span {
+        color: map.get(color.$colorMap, white);
+      }
+    }
+  }
+
+  .chart__header__rain {
+    color: map.get(color.$colorMap, black);
+  }
+
+  .button--white {
+
+    &:hover {
+      background-color: map.get(color.$colorMap, hover-blue);
+    }
+
+    label {
+      color: map.get(color.$colorMap, white);
+    }
+  }
+
+  .field-chart__lower {
+    background-color: map.get(color.$colorMap, chart-background-grey);
+  }
 }

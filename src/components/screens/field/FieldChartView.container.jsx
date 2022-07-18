@@ -3,8 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
-import { pushFieldRow, pushForecastRegionRow, pushLandGroupRow } from './FieldChartView.container.util';
-import { retrieveChartDepthsFromLocalStorage, retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
+import {
+  mapAggregateLists,
+  mapDeficitLists,
+  mapMenuData,
+  mappedDailyETOList,
+  pushFieldRow,
+  pushForecastRegionRow,
+  pushLandGroupRow,
+  pushMappedLists
+} from './FieldChartView.container.util';
+import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestFieldChartList } from '../../../redux/actions/field.action';
 import { requestClientFieldList } from '../../../redux/actions/client.action';
@@ -17,11 +26,11 @@ const FieldChartViewContainer = () => {
   const { groupName, clientName, fieldName, probeNumber } = useParams();
 
   const user = retrieveUserLoginFromLocalStorage();
-  const mappedDepthList = retrieveChartDepthsFromLocalStorage();
   const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
 
-  const [loadPeriod, setLoadPeriod] = useState('2 weeks');
+  const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
+  const [activeFieldName, setActiveFieldName] = useState(fieldName);
 
   useEffect(() => {
     dispatch(requestFieldChartList(fieldRequestFields));
@@ -33,7 +42,7 @@ const FieldChartViewContainer = () => {
   useEffect(() => {
     dispatch(requestFieldChartList(fieldRequestFields));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fieldName, loadPeriod]);
+  }, [activeFieldName, activeLoadPeriod]);
 
   const clientRequestFields = {
     username: user?.username,
@@ -47,8 +56,8 @@ const FieldChartViewContainer = () => {
     password: user?.password,
     groupname: groupName,
     clientname: clientName,
-    field: fieldName,
-    load: loadPeriod
+    field: activeFieldName,
+    load: activeLoadPeriod
   };
 
   const mappedFieldList = () => {
@@ -65,89 +74,30 @@ const FieldChartViewContainer = () => {
     return mappedList;
   };
 
+  const mappedMenuList = () => {
+    if (!fieldChartList) return;
+    return mapMenuData(fieldChartList);
+  };
+
   const mappedChartList = () => {
     if (!fieldChartList?.[probeNumber]) return;
-    const mappedChartList = [];
-    const oneHundredMmList = [];
-    const twoHundredMmList = [];
-    const threeHundredMmList = [];
-    const fourHundredMmList = [];
-    const sixHundredMmList = [];
-    const eightHundredMmList = [];
-    const topSoilMmList = [];
-    const bottomSoilMmList = [];
-    const dailyETOList = [];
-    const depthList = [];
+    const mappedChartList = [], oneHundredMmList = [], twoHundredMmList = [], threeHundredMmList = [], fourHundredMmList = [],
+      sixHundredMmList = [], eightHundredMmList = [], topSoilMmList = [], bottomSoilMmList = [], recommendationsSizeList = [];
 
-    Object.entries(fieldChartList?.[probeNumber])?.forEach(([key, value]) => {
-      Object.keys(value).forEach((innerKey) => {
-        switch (innerKey) {
-          case 'D1':
-            oneHundredMmList.push({ x: key, y: value.D1 });
-            return;
-          case 'D2':
-            twoHundredMmList.push({ x: key, y: value.D2 });
-            return;
-          case 'D3':
-            threeHundredMmList.push({ x: key, y: value.D3 });
-            return;
-          case 'D4':
-            fourHundredMmList.push({ x: key, y: value.D4 });
-            return;
-          case 'D5':
-            sixHundredMmList.push({ x: key, y: value.D5 });
-            return;
-          case 'D6':
-            eightHundredMmList.push({ x: key, y: value.D6 });
-            return;
-        }
-      });
-    });
-
-    Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
-      Object.keys(value).forEach((innerKey) => {
-        switch (innerKey) {
-          case 'TB':
-            topSoilMmList.push({ x: key, y: value.TB });
-            return;
-          case 'TBSim':
-            topSoilMmList.push({ x: key, y: value.TBSim });
-            return;
-          case 'TO':
-            bottomSoilMmList.push({ x: key, y: value.TO });
-            return;
-          case 'TOSim':
-            bottomSoilMmList.push({ x: key, y: value.TOSim });
-            return;
-        }
-      });
-    });
-
-    Object.entries(fieldChartList?.eto)?.forEach(([key, value]) => {
-      dailyETOList.push({ x: key, y: value.f });
-    });
-
-    Object.entries(fieldChartList?.dieptes)?.forEach((value) => {
-      depthList.push(value[1]);
-    });
-
-    mappedChartList.push(oneHundredMmList);
-    mappedChartList.push(twoHundredMmList);
-    mappedChartList.push(threeHundredMmList);
-    mappedChartList.push(fourHundredMmList);
-    mappedChartList.push(sixHundredMmList);
-    mappedChartList.push(eightHundredMmList);
-    mappedChartList.push(topSoilMmList);
-    mappedChartList.push(bottomSoilMmList);
-    mappedChartList.push(dailyETOList);
-    mappedChartList.push(depthList);
+    mapDeficitLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList,
+      sixHundredMmList, eightHundredMmList, fieldChartList, probeNumber);
+    mapAggregateLists(topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList);
+    pushMappedLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList, sixHundredMmList, eightHundredMmList,
+      topSoilMmList, recommendationsSizeList, bottomSoilMmList, mappedDailyETOList(fieldChartList, probeNumber),
+      mappedChartList, fieldChartList);
     return mappedChartList;
   };
 
   return <FieldChartView mappedFieldList={ mappedFieldList() }
                          mappedChartList={ mappedChartList() }
-                         mappedDepthList={ mappedDepthList}
-                         setLoadPeriod={ setLoadPeriod } />;
+                         mappedMenuList={ mappedMenuList() }
+                         setActiveLoadPeriod={ setActiveLoadPeriod }
+                         setActiveFieldName={ setActiveFieldName } />;
 };
 
 export default FieldChartViewContainer;

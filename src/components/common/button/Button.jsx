@@ -23,13 +23,14 @@ const Button = ({
                   blue,
                   white,
                   small,
+                  tiny,
                   chart,
                   chartbar,
                   datebar
                 }) => {
   return (
     <button className={ getClassNames('button',
-      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar }) }
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny }) }
             name={ name }
             type={ type }
             onClick={ onClick }

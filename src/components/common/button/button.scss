@@ -86,6 +86,10 @@
     max-width: util.rem(40);
   }
 
+  &--tiny {
+    max-width: util.rem(20);
+  }
+
   &--icon {
     padding: util.rem(1);
     box-shadow: none;
@@ -118,5 +122,6 @@
 
   &--chartbar {
     height: util.rem(15);
+    margin-left: util.rem(2);
   }
 }

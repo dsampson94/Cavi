@@ -81,6 +81,8 @@
 .field-charts-side-bar {
   display: flex;
   flex-direction: column;
+  resize: horizontal;
+  overflow: auto;
   border-right: util.rem(1) solid;
   transition: 0.4s;
   height: 100%;
@@ -114,8 +116,8 @@
     &__header {
       white-space: nowrap;
       overflow-x: scroll;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
       cursor: pointer;
       width: 98%;
       font-weight: bold;
@@ -154,9 +156,9 @@
           position: relative;
           overflow-x: scroll;
           padding: util.rem(0) util.rem(0) util.rem(0) util.rem(2);
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-          transform: translateY(-110%);
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          transform: translateY(-15.5px);
 
           &--bold {
             font-weight: bold;

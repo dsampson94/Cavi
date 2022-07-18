@@ -10,7 +10,7 @@ import InputSearch from '../input-search/InputSearch';
 
 import './side-bar.scss';
 
-const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList, setLoadPeriod, view }) => {
+const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList, setLoadPeriod, setActiveFieldName, view }) => {
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsSideBar showSideBar={ showSideBar }
@@ -20,7 +20,8 @@ const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList,
       return <FieldChartsSideBar showSideBar={ showSideBar }
                                  setShowSideBar={ setShowSideBar }
                                  mappedFieldList={ mappedFieldList }
-                                 setLoadPeriod={ setLoadPeriod } />;
+                                 setLoadPeriod={ setLoadPeriod }
+                                 setActiveFieldName={ setActiveFieldName } />;
   }
 };
 
@@ -62,7 +63,7 @@ ClientFieldsSideBar.propTypes = {
   setShowSideBar: func
 };
 
-const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setLoadPeriod }) => {
+const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setLoadPeriod, setActiveFieldName }) => {
 
   return (
     <div className={ getClassNames('field-charts-side-bar', { show: showSideBar }) }>
@@ -70,7 +71,8 @@ const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields,
         <ViewDataBar setLoadPeriod={ setLoadPeriod } />
 
         <SideBarFieldList mappedFieldList={ mappedFieldList }
-                          clientRequestFields={ clientRequestFields } />
+                          clientRequestFields={ clientRequestFields }
+                          setActiveFieldName={ setActiveFieldName } />
       </> }
     </div>
   );

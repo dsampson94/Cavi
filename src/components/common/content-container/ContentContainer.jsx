@@ -16,6 +16,7 @@ const ContentContainer = ({
                             clientRequestFields,
                             mappedFieldList,
                             setLoadPeriod,
+                            setActiveFieldName,
                             showChartsSideBar,
                             showClientsSideBar,
                             setShowClientsSideBar
@@ -33,7 +34,8 @@ const ContentContainer = ({
                                           showChartsSideBar={ showChartsSideBar }
                                           mappedFieldList={ mappedFieldList }
                                           clientRequestFields={ clientRequestFields }
-                                          setLoadPeriod={ setLoadPeriod } />;
+                                          setLoadPeriod={ setLoadPeriod }
+                                          setActiveFieldName={ setActiveFieldName } />;
   }
 };
 
@@ -70,7 +72,15 @@ ClientFieldsContentContainer.propTypes = {
   children: oneOfType([arrayOf(node), node]).isRequired
 };
 
-const FieldChartsContentContainer = ({ children, view, showChartsSideBar, clientRequestFields, mappedFieldList, setLoadPeriod }) => {
+const FieldChartsContentContainer = ({
+                                       children,
+                                       view,
+                                       showChartsSideBar,
+                                       clientRequestFields,
+                                       mappedFieldList,
+                                       setLoadPeriod,
+                                       setActiveFieldName
+                                     }) => {
 
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
@@ -85,6 +95,7 @@ const FieldChartsContentContainer = ({ children, view, showChartsSideBar, client
                  mappedUserData={ mappedUser }
                  mappedFieldList={ mappedFieldList }
                  setLoadPeriod={ setLoadPeriod }
+                 setActiveFieldName={ setActiveFieldName }
                  view={ view } />
         { children }
       </div>

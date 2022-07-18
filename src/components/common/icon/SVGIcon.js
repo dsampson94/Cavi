@@ -9,6 +9,7 @@ import {
   CHARTS,
   CLOUDED,
   DISSATISFIED,
+  DOWN_ARROW,
   DROPDOWN,
   DROPDOWN_ALL,
   EMAIL_RECOMMENDATIONS,
@@ -16,6 +17,7 @@ import {
   LOG_OUT_ICON,
   MAPS_ICON,
   NEUTRAL,
+  OPEN_MENU,
   PARTLY_CLOUDED,
   PENCIL,
   PREVIOUS,
@@ -59,8 +61,13 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
 
 const getViewBox = (name, tiny, chart) => {
   switch (name) {
+    case DOWN_ARROW:
+      return '10 -1 50 100';
+    case OPEN_MENU:
+      return '10 -3 50 100';
     case SETTINGS_GEAR:
       if (chart) return '3 3 20 60';
+      else if (tiny) return '4 1 15 34';
       else return '3 -1 20 50';
     case WARNING:
       return '-5 -9 1 42';
@@ -135,18 +142,16 @@ const getIconFill = (activeTheme, fill, name) => {
     return fill;
   } else {
     switch (name) {
+      case DOWN_ARROW:
+      case OPEN_MENU:
       case SETTINGS_GEAR:
-        return 'white';
       case PENCIL:
+      case CHARTS:
+      case RAIN_CLOUDS:
+      case WATCH:
         return 'white';
       case CAMERA:
         return '#607CB1';
-      case CHARTS:
-        return 'white';
-      case RAIN_CLOUDS:
-        return 'white';
-      case WATCH:
-        return 'white';
       case CLOUDED:
         return '#C2C2C1';
       default:
@@ -342,6 +347,14 @@ const getPath = (name) => {
       return (
         <path
           d="M12.55 40Q8.15 40 5.075 36.925Q2 33.85 2 29.45Q2 25.55 4.5 22.6Q7 19.65 10.85 19.05Q11.85 14.2 15.55 11.125Q19.25 8.05 24.1 8.05Q29.7 8.05 33.55 12.125Q37.4 16.2 37.4 21.9V23.1Q41 23 43.5 25.425Q46 27.85 46 31.55Q46 35 43.5 37.5Q41 40 37.55 40ZM12.55 37H37.55Q39.8 37 41.4 35.4Q43 33.8 43 31.55Q43 29.3 41.4 27.7Q39.8 26.1 37.55 26.1H34.4V21.9Q34.4 17.35 31.35 14.2Q28.3 11.05 23.9 11.05Q19.5 11.05 16.425 14.2Q13.35 17.35 13.35 21.9H12.4Q9.3 21.9 7.15 24.075Q5 26.25 5 29.45Q5 32.6 7.2 34.8Q9.4 37 12.55 37ZM24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Z" />
+      );
+    case DOWN_ARROW:
+      return (
+        <path d="M8 42v-3h32v3Zm16-6-9.7-9.7 2.15-2.15 6.05 6.05V6h3v24.2l5.85-5.85 2.15 2.15Z" />
+      );
+    case OPEN_MENU:
+      return (
+        <path d="M6 36v-3h26v3Zm33.9-2.6-9.45-9.45 9.4-9.4L42 16.7l-7.25 7.25 7.3 7.3ZM6 25.4v-3h20v3ZM6 15v-3h26v3Z" />
       );
     default:
       return <path />;

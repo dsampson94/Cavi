@@ -28,11 +28,3 @@ export const retrieveActiveThemeFromLocalStorage = () => {
 export const saveActiveThemeToLocalStorage = (theme) => {
   localStorage.setItem(THEME, objectToBase64(theme));
 };
-
-export const retrieveChartDepthsFromLocalStorage = () => {
-  return base64ToObject(localStorage.getItem(DEPTHS));
-};
-
-export const saveChartDepthsToLocalStorage = (depths) => {
-  localStorage.setItem(DEPTHS, objectToBase64(depths));
-};
