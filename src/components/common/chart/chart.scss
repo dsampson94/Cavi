@@ -6,6 +6,8 @@
 @use "../../../stylesheets/config" as config;
 
 .chart {
+  border-bottom-left-radius: map.get(radius.$border-radius, medium);
+  border-bottom-right-radius: map.get(radius.$border-radius, medium);
 
   &__container {
     height: auto;
@@ -17,7 +19,6 @@
     flex-direction: row;
     font-size: util.rem(10);
     white-space: nowrap;
-    align-items: center;
 
     &__zoom-options {
       display: flex;
@@ -31,10 +32,8 @@
 
         &-top {
           display: flex;
-          margin-top: util.rem(1);
           flex-direction: row;
           cursor: pointer;
-          height: util.rem(15);
           justify-content: center;
           font-size: util.rem(15);
           font-weight: bold;
@@ -42,6 +41,7 @@
           &__settings {
             margin-left: util.rem(4);
             width: util.rem(15);
+            max-height: util.rem(10)
           }
 
           &__options {
@@ -59,11 +59,11 @@
 
         &-bottom {
           display: flex;
-          margin-top: 1%;
           width: util.rem(30);
+          margin-top: -1%;
+          margin-bottom: 1.8%;
           flex-direction: row;
           cursor: pointer;
-          height: util.rem(15);
           justify-content: center;
           font-size: util.rem(15);
           font-weight: bold;
@@ -98,8 +98,6 @@
 
   &--top {
     background-color: map.get(color.$colorMap, chart-background-blue);
-    border-bottom-left-radius: map.get(radius.$border-radius, medium);
-    border-bottom-right-radius: map.get(radius.$border-radius, medium);
     margin-bottom: util.rem(5);
   }
 
@@ -108,62 +106,4 @@
     border-bottom-left-radius: map.get(radius.$border-radius, medium);
     border-bottom-right-radius: map.get(radius.$border-radius, medium);
   }
-}
-
-.apexcharts-tooltip.apexcharts-theme-light {
-  background-color: transparent !important;
-  font-size: util.rem(11);
-  max-width: util.rem(186);
-  text-align: right;
-  color: map.get(color.$colorMap, black);
-}
-
-.custom_tooltip {
-
-  &--deficit {
-    width: util.rem(186);
-    background-color: map.get(color.$colorMap, white);
-    box-shadow: none !important;
-    border: util.rem(1);
-
-    & span {
-      margin-right: util.rem(4);
-      color: map.get(color.$colorMap, black);
-    }
-  }
-
-  &--aggregate {
-    width: util.rem(150);
-    background-color: map.get(color.$colorMap, white);
-    box-shadow: none !important;
-    border: util.rem(1);
-
-    & span {
-      margin-right: util.rem(4);
-      color: map.get(color.$colorMap, black);
-    }
-  }
-}
-
-.apexcharts-toolbar {
-  flex-direction: row-reverse;
-  margin-left: util.rem(106);
-  padding-left: 0 !important;
-  margin-top: util.rem(-5);
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.apexcharts-reset-icon {
-  margin-left: 0 !important;
-}
-
-.apexcharts-pan-icon.apexcharts-selected {
-  transform: scale(0.60) !important;
-  margin-left: util.rem(-1);
-}
-
-.apexcharts-menu-icon {
-  display: none;
 }

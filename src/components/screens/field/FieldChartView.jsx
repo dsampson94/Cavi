@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
+
 import { FIELD_CHARTS } from '../../../tools/general/system-variables.util';
+import { getClassNames } from '../../../tools/general/helpers.util';
 import { FieldChartTopBar, LeftSideCharts, RightSideCharts } from './FieldChartView.util';
 import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
-import FieldLineChartD3 from '../../common/chart/FieldLineChart.d3';
 
 import './field-chart-view.scss';
-import { getClassNames } from '../../../tools/general/helpers.util';
 
 const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, setActiveLoadPeriod, setActiveFieldName }) => {
 

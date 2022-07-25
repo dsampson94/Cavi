@@ -35,14 +35,18 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
               height={ 300 }
               data={ mappedData() }>
       <CartesianGrid strokeDasharray={ '3 1' } />
+
       <YAxis tick={ { fill: (activeTheme === 'dark') ? 'white' : 'black' } }
              tickCount={ 10 } />
+
       <XAxis tick={ { fill: (activeTheme === 'dark') ? 'white' : 'black' } }
              tickFormatter={ (date) => formatDates(date) }
              interval={ 3 }
              fontSize={ 11 }
              dataKey={ 'name' } />
+
       <Tooltip />
+
       <Bar dataKey={ 'val' }
            fill={ '#54a4d9' }
            isAnimationActive={ false } />

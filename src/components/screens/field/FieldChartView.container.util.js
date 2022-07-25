@@ -115,18 +115,12 @@ export const mapAggregateLists = (topSoilMmList, bottomSoilMmList, fieldChartLis
   });
 };
 
-export const mappedDailyETOList = (fieldChartList, probeNumber) => {
+export const mappedDailyETOList = (fieldChartList) => {
   const dailyETOList = [];
-
-  for (let i = 0; i < 12; i++)
-    dailyETOList.push({ x: Object.keys(fieldChartList?.[probeNumber])[i], y: null });
 
   Object.entries(fieldChartList?.eto)?.forEach(([key, value]) => {
     dailyETOList.push({ x: key, y: value.f });
   });
-
-  for (let i = 4; i > 0; i--)
-    dailyETOList.push({ x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i], y: null });
 
   return dailyETOList;
 };

@@ -13,12 +13,13 @@
 
   &__label-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding-left: util.rem(1);
     margin-top: util.rem(2);
     font-size: util.rem(8);
 
     & label {
+      margin-top: util.rem(2);
       cursor: pointer;
     }
   }

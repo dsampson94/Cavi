@@ -141,15 +141,15 @@ export const DEFICIT = 'deficit';
 export const AGGREGATE = 'aggregate';
 
 //CHART NAMES
-export const DEFICIT_100MM = '100mm';
-export const DEFICIT_200MM = '200mm';
-export const DEFICIT_300MM = '300mm';
-export const DEFICIT_400MM = '400mm';
-export const DEFICIT_600MM = '600mm';
-export const DEFICIT_800MM = '800mm';
+export const DEFICIT_100MM = 'deficit_100mm';
+export const DEFICIT_200MM = 'deficit_200mm';
+export const DEFICIT_300MM = 'deficit_300mm';
+export const DEFICIT_400MM = 'deficit_400mm';
+export const DEFICIT_600MM = 'deficit_600mm';
+export const DEFICIT_800MM = 'deficit_800mm';
 
-export const AGGREGATE_TOP_SOIL = '0 - 400mm';
-export const AGGREGATE_BOTTOM_SOIL = '400 - 800mm';
+export const AGGREGATE_TOP_SOIL = 'aggregate_0 - 400mm';
+export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
 
 export const USAGE_ETC = 'Usage ETc';
 export const DAILY_ETO = 'Daily ETo';

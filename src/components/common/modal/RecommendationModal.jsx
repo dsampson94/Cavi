@@ -8,7 +8,7 @@ import { isEmpty } from '../../../tools/general/helpers.util';
 
 import { requestClientFieldRainDataForChart } from '../../../redux/actions/client.action';
 
-import RecommendationBarChart from '../chart/RecommendationBarChart';
+import RecommendationBarChart from '../chart/recommendation/RecommendationBarChart';
 
 import './recommendation-modal.scss';
 

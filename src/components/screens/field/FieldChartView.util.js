@@ -21,10 +21,9 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import Button from '../../common/button/Button';
-import FieldLineChart from '../../common/chart/FieldLineChart';
 import SVGIcon from '../../common/icon/SVGIcon';
 import DropDownMenu from '../../common/drop-down/DropDownMenu';
-import FieldLineChartD3 from '../../common/chart/FieldLineChart.d3';
+import FieldLineChartD3 from '../../common/chart/field-line-chart/FieldLineChart.d3';
 
 export const FieldChartTopBar = ({
                                    showChartsSideBar,
@@ -36,8 +35,8 @@ export const FieldChartTopBar = ({
                                  }) => {
 
   const history = useHistory();
-  const { groupName, clientName, fieldName } = useParams();
   const getTheme = retrieveActiveThemeFromLocalStorage();
+  const { groupName, clientName, fieldName } = useParams();
 
   if (!mappedChartList) return null;
 
@@ -114,37 +113,36 @@ export const LeftSideCharts = ({ mappedChartList }) => {
 
   return (
     <div className="field-chart__left">
-      <FieldLineChart mappedChartList={ mappedChartList?.[0] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_100MM }
-                      chartInfo={ mappedChartList?.[10][1] }
-                      hasToolbar />
+      <FieldLineChartD3 data={ mappedChartList?.[0] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_100MM }
+                        chartInfo={ mappedChartList?.[10][1] } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[1] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_200MM }
-                      chartInfo={ mappedChartList?.[10][2] } />
+      <FieldLineChartD3 data={ mappedChartList?.[1] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_200MM }
+                        chartInfo={ mappedChartList?.[10][2] } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[2] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_300MM }
-                      chartInfo={ mappedChartList?.[10][3] } />
+      <FieldLineChartD3 data={ mappedChartList?.[2] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_300MM }
+                        chartInfo={ mappedChartList?.[10][3] } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[3] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_400MM }
-                      chartInfo={ mappedChartList?.[10][4] } />
+      <FieldLineChartD3 data={ mappedChartList?.[3] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_400MM }
+                        chartInfo={ mappedChartList?.[10][4] } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[4] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_600MM }
-                      chartInfo={ mappedChartList?.[10][5] } />
+      <FieldLineChartD3 data={ mappedChartList?.[4] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_600MM }
+                        chartInfo={ mappedChartList?.[10][5] } />
 
-      <FieldLineChart mappedChartList={ mappedChartList?.[5] }
-                      chartType={ DEFICIT }
-                      chartName={ DEFICIT_800MM }
-                      chartInfo={ mappedChartList?.[10][6] }
-                      hasXAxis />
+      <FieldLineChartD3 data={ mappedChartList?.[5] }
+                        chartType={ DEFICIT }
+                        chartName={ DEFICIT_800MM }
+                        chartInfo={ mappedChartList?.[10][6] }
+                        hasXAxis />
     </div>
   );
 };
@@ -158,26 +156,26 @@ export const RightSideCharts = ({ mappedChartList }) => {
   return (
     <div className="field-chart__right">
       <div className="field-chart__right__top">
-        <FieldLineChart mappedChartList={ mappedChartList?.[6] }
-                        recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[6]?.length * 100) }
-                        chartType={ AGGREGATE }
-                        chartName={ AGGREGATE_TOP_SOIL } />
+        <FieldLineChartD3 data={ mappedChartList?.[6] }
+                          recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[6]?.length * 100) }
+                          chartType={ AGGREGATE }
+                          chartName={ AGGREGATE_TOP_SOIL } />
 
-        <FieldLineChart mappedChartList={ mappedChartList?.[7] }
-                        recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[7]?.length * 100) }
-                        chartType={ AGGREGATE }
-                        chartName={ AGGREGATE_BOTTOM_SOIL } />
+        <FieldLineChartD3 data={ mappedChartList?.[7] }
+                          recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[7]?.length * 100) }
+                          chartType={ AGGREGATE }
+                          chartName={ AGGREGATE_BOTTOM_SOIL } />
       </div>
 
       <div className="field-chart__right__bottom">
-        <FieldLineChart mappedChartList={ mappedChartList?.[9] }
-                        chartType={ USAGE_ETC }
-                        chartName={ USAGE_ETC } />
+        <FieldLineChartD3 data={ mappedChartList?.[9] }
+                          chartType={ USAGE_ETC }
+                          chartName={ USAGE_ETC } />
 
-        <FieldLineChart mappedChartList={ mappedChartList?.[9] }
-                        chartType={ DAILY_ETO }
-                        chartName={ DAILY_ETO }
-                        hasXAxis />
+        <FieldLineChartD3 data={ mappedChartList?.[9] }
+                          chartType={ DAILY_ETO }
+                          chartName={ DAILY_ETO }
+                          hasXAxis />
       </div>
     </div>
   );

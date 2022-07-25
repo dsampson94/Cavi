@@ -7,6 +7,12 @@ import {
   CHART_USAGE_MENU,
   CHART_USAGE_SASRI_MENU,
   DAILY_ETO,
+  DEFICIT_100MM,
+  DEFICIT_200MM,
+  DEFICIT_300MM,
+  DEFICIT_400MM,
+  DEFICIT_600MM,
+  DEFICIT_800MM,
   DOWN_ARROW,
   OPEN_MENU,
   SETTINGS_GEAR,
@@ -23,7 +29,8 @@ import './chart.scss';
 export const ChartHeader = ({ header, chartName, zoomOut, zoomIn }) => {
   return (
     <div className={ getClassNames('chart__header',
-      { top: chartName === AGGREGATE_TOP_SOIL, bottom: chartName === AGGREGATE_BOTTOM_SOIL }) }>
+      { top: chartName === AGGREGATE_TOP_SOIL, bottom: chartName === AGGREGATE_BOTTOM_SOIL }) }
+         style={ { marginTop: chartByName(chartName).marginTop } }>
       <div className="chart__header__zoom-options">
 
         { chartName === AGGREGATE_TOP_SOIL &&
@@ -74,4 +81,29 @@ export const ChartHeader = ({ header, chartName, zoomOut, zoomIn }) => {
         </div> }
     </div>
   );
+};
+
+export const chartByName = (chartName) => {
+  switch (chartName) {
+    case DEFICIT_100MM :
+      return { height: '15.8%' };
+    case DEFICIT_200MM :
+      return { height: '15.8%' };
+    case DEFICIT_300MM :
+      return { height: '15.8%' };
+    case DEFICIT_400MM :
+      return { height: '15.8%' };
+    case DEFICIT_600MM :
+      return { height: '16%' };
+    case DEFICIT_800MM :
+      return { height: '16%' };
+    case AGGREGATE_TOP_SOIL :
+      return { header: 'Topsoil', height: '40%', backgroundColor: '#ABD4EF' };
+    case AGGREGATE_BOTTOM_SOIL :
+      return { header: 'Bottomsoil', height: '40%', marginTop: '2.5%', backgroundColor: '#C1EAC7' };
+    case USAGE_ETC :
+      return { header: USAGE_ETC, height: '36%' };
+    case DAILY_ETO :
+      return { header: DAILY_ETO, height: '38%' };
+  }
 };
