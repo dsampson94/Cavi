@@ -3,12 +3,12 @@ import React from 'react';
 import { chartByName } from '../Chart.util';
 import { AGGREGATE } from '../../../../tools/general/system-variables.util';
 
-import { useDimensionsContext } from './Chart';
+import { useDimensionsContext } from './Chart.d3';
 
-const XAxis = ({ scale: xScale, hasXAxis, chartName, chartType }) => {
+const XAxis = ({ xScale, hasXAxis, chartName, chartType }) => {
 
   const dimensions = useDimensionsContext();
-  const ticks = xScale.ticks(6);
+  const ticks = xScale.ticks(5);
 
   return (
     <g className="x-axis"
@@ -22,10 +22,9 @@ const XAxis = ({ scale: xScale, hasXAxis, chartName, chartType }) => {
             stroke="#252529" />
 
       { ticks.map((date, index) => (
-        <React.Fragment key={ `x-${ index }-${ date }-container` }>
+        <React.Fragment key={ `x-${ chartName }-${ date }-${ index }-container` }>
 
           <line className="x-axis__tick"
-                key={ `x-axis__tick-${ index }-${ date }` }
                 stroke="#bdc3c7"
                 x1={ xScale(date) }
                 x2={ xScale(date) }
@@ -33,8 +32,6 @@ const XAxis = ({ scale: xScale, hasXAxis, chartName, chartType }) => {
                 y2={ 10 } />
 
           <line className="x-axis__tick"
-                style={ { position: 'relative', zIndex: 2 } }
-                key={ `x-axis__tick-${ index }-${ date }` }
                 stroke="#dad9d5"
                 x1={ xScale(date) }
                 x2={ xScale(date) }
@@ -42,10 +39,9 @@ const XAxis = ({ scale: xScale, hasXAxis, chartName, chartType }) => {
                 y2={ -dimensions.boundedHeight - -10 } />
 
           { hasXAxis &&
-            <text key={ `x-axis__tick__label-${ index }-${ date }` }
-                  className="x-axis__tick__label"
+            <text className="x-axis__tick__label"
                   style={ { fontSize: 12 } }
-                  transform={ `translate(${ xScale(date) -26 }, 23)` }>
+                  transform={ `translate(${ xScale(date) - 26 }, 23)` }>
               { date.toLocaleDateString() }
             </text> }
 

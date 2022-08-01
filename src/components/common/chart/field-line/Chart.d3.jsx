@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+
 import { chartByName } from '../Chart.util';
 
 const ChartContext = createContext();
@@ -9,7 +10,6 @@ const Chart = ({ svgRef, dimensions, chartName, children }) => {
 
   return (
     <ChartContext.Provider value={ dimensions }>
-
       <svg className="chart"
            ref={ svgRef }
            style={ {
@@ -17,7 +17,6 @@ const Chart = ({ svgRef, dimensions, chartName, children }) => {
              height: '110%',
              backgroundColor: chartByName(chartName).backgroundColor
            } }>
-
         <g transform={ `translate(${ dimensions.marginLeft }, ${ dimensions.marginTop })` }>
           <defs>
             <clipPath id="clipDeficit">
@@ -42,7 +41,6 @@ const Chart = ({ svgRef, dimensions, chartName, children }) => {
           { children }
         </g>
       </svg>
-
     </ChartContext.Provider>
   );
 };

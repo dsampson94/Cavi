@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { zoomIdentity } from 'd3';
 
 import { arrayOf, shape } from 'prop-types';
 
@@ -15,6 +16,11 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
 
   const getTheme = retrieveActiveThemeFromLocalStorage();
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
+  const [currentGlobalZoomState, setCurrentGlobalZoomState] = useState(zoomIdentity);
+  const [currentYZoomState, setCurrentYZoomState] = useState(zoomIdentity);
+  const [currentXZoomState, setCurrentXZoomState] = useState(zoomIdentity);
+  const [hoverActive, setHoverActive] = useState(false);
+  const [date, setDate] = useState(null);
 
   return (
     <ContentContainer view={ FIELD_CHARTS }
@@ -32,9 +38,29 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
                           setActiveFieldName={ setActiveFieldName } />
 
         <div className={ getClassNames('field-chart__container', { dark: (getTheme === 'dark') }) }>
-          <LeftSideCharts mappedChartList={ mappedChartList } />
+          <LeftSideCharts mappedChartList={ mappedChartList }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          date={ date }
+                          setDate={ setDate } />
 
-          <RightSideCharts mappedChartList={ mappedChartList } />
+          <RightSideCharts mappedChartList={ mappedChartList }
+                           currentGlobalZoomState={ currentGlobalZoomState }
+                           setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                           currentYZoomState={ currentYZoomState }
+                           setCurrentYZoomState={ setCurrentYZoomState }
+                           currentXZoomState={ currentXZoomState }
+                           setCurrentXZoomState={ setCurrentXZoomState }
+                           hoverActive={ hoverActive }
+                           setHoverActive={ setHoverActive }
+                           date={ date }
+                           setDate={ setDate } />
         </div>
 
         <div className="field-chart__lower" />

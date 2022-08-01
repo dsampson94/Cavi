@@ -56,22 +56,22 @@ export const mapDeficitLists = (
     Object.keys(value).forEach((innerKey) => {
       switch (innerKey) {
         case 'D1':
-          oneHundredMmList.push({ x: key, y: value.D1 });
+          oneHundredMmList.push({ x: key, y: value.D1, percent: value.P1, temp: value.T1 });
           return;
         case 'D2':
-          twoHundredMmList.push({ x: key, y: value.D2 });
+          twoHundredMmList.push({ x: key, y: value.D2, percent: value.P2, temp: value.T2 });
           return;
         case 'D3':
-          threeHundredMmList.push({ x: key, y: value.D3 });
+          threeHundredMmList.push({ x: key, y: value.D3, percent: value.P3, temp: value.T3 });
           return;
         case 'D4':
-          fourHundredMmList.push({ x: key, y: value.D4 });
+          fourHundredMmList.push({ x: key, y: value.D4, percent: value.P4, temp: value.T4 });
           return;
         case 'D5':
-          sixHundredMmList.push({ x: key, y: value.D5 });
+          sixHundredMmList.push({ x: key, y: value.D5, percent: value.P5, temp: value.T5 });
           return;
         case 'D6':
-          eightHundredMmList.push({ x: key, y: value.D6 });
+          eightHundredMmList.push({ x: key, y: value.D6, percent: value.P6, temp: value.T6 });
           return;
       }
     });

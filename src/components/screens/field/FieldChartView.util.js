@@ -23,7 +23,7 @@ import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/loca
 import Button from '../../common/button/Button';
 import SVGIcon from '../../common/icon/SVGIcon';
 import DropDownMenu from '../../common/drop-down/DropDownMenu';
-import FieldLineChartD3 from '../../common/chart/field-line-chart/FieldLineChart.d3';
+import FieldLineChartD3 from '../../common/chart/field-line/FieldLineChart.d3';
 
 export const FieldChartTopBar = ({
                                    showChartsSideBar,
@@ -107,41 +107,113 @@ export const FieldChartTopBar = ({
 
 FieldChartTopBar.propTypes = {};
 
-export const LeftSideCharts = ({ mappedChartList }) => {
+export const LeftSideCharts = ({
+                                 mappedChartList,
+                                 hoverActive,
+                                 setHoverActive,
+                                 currentGlobalZoomState,
+                                 setCurrentGlobalZoomState,
+                                 currentYZoomState,
+                                 setCurrentYZoomState,
+                                 currentXZoomState,
+                                 setCurrentXZoomState,
+                                 date,
+                                 setDate
+                               }) => {
 
   if (!mappedChartList) return null;
 
   return (
     <div className="field-chart__left">
-      <FieldLineChartD3 data={ mappedChartList?.[0] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_100MM }
-                        chartInfo={ mappedChartList?.[10][1] } />
+                        data={ mappedChartList?.[0] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartInfo={ mappedChartList?.[10][1] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate } />
 
-      <FieldLineChartD3 data={ mappedChartList?.[1] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_200MM }
-                        chartInfo={ mappedChartList?.[10][2] } />
+                        data={ mappedChartList?.[1] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartInfo={ mappedChartList?.[10][2] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate } />
 
-      <FieldLineChartD3 data={ mappedChartList?.[2] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_300MM }
-                        chartInfo={ mappedChartList?.[10][3] } />
+                        data={ mappedChartList?.[2] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartInfo={ mappedChartList?.[10][3] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate } />
 
-      <FieldLineChartD3 data={ mappedChartList?.[3] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_400MM }
-                        chartInfo={ mappedChartList?.[10][4] } />
+                        data={ mappedChartList?.[3] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartInfo={ mappedChartList?.[10][4] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate } />
 
-      <FieldLineChartD3 data={ mappedChartList?.[4] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_600MM }
-                        chartInfo={ mappedChartList?.[10][5] } />
+                        data={ mappedChartList?.[4] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartInfo={ mappedChartList?.[10][5] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate } />
 
-      <FieldLineChartD3 data={ mappedChartList?.[5] }
-                        chartType={ DEFICIT }
+      <FieldLineChartD3 chartType={ DEFICIT }
                         chartName={ DEFICIT_800MM }
+                        data={ mappedChartList?.[5] }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
                         chartInfo={ mappedChartList?.[10][6] }
+                        currentGlobalZoomState={ currentGlobalZoomState }
+                        setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                        currentYZoomState={ currentYZoomState }
+                        setCurrentYZoomState={ setCurrentYZoomState }
+                        currentXZoomState={ currentXZoomState }
+                        setCurrentXZoomState={ setCurrentXZoomState }
+                        date={ date }
+                        setDate={ setDate }
                         hasXAxis />
     </div>
   );
@@ -149,32 +221,84 @@ export const LeftSideCharts = ({ mappedChartList }) => {
 
 LeftSideCharts.propTypes = {};
 
-export const RightSideCharts = ({ mappedChartList }) => {
+export const RightSideCharts = ({
+                                  mappedChartList,
+                                  hoverActive,
+                                  setHoverActive,
+                                  currentGlobalZoomState,
+                                  setCurrentGlobalZoomState,
+                                  currentYZoomState,
+                                  setCurrentYZoomState,
+                                  currentXZoomState,
+                                  setCurrentXZoomState,
+                                  date,
+                                  setDate
+                                }) => {
 
   if (!mappedChartList) return null;
 
   return (
     <div className="field-chart__right">
       <div className="field-chart__right__top">
-        <FieldLineChartD3 data={ mappedChartList?.[6] }
+        <FieldLineChartD3 chartType={ AGGREGATE }
+                          chartName={ AGGREGATE_TOP_SOIL }
+                          data={ mappedChartList?.[6] }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
                           recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[6]?.length * 100) }
-                          chartType={ AGGREGATE }
-                          chartName={ AGGREGATE_TOP_SOIL } />
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          date={ date }
+                          setDate={ setDate } />
 
-        <FieldLineChartD3 data={ mappedChartList?.[7] }
+        <FieldLineChartD3 chartType={ AGGREGATE }
+                          chartName={ AGGREGATE_BOTTOM_SOIL }
+                          data={ mappedChartList?.[7] }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
                           recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[7]?.length * 100) }
-                          chartType={ AGGREGATE }
-                          chartName={ AGGREGATE_BOTTOM_SOIL } />
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          date={ date }
+                          setDate={ setDate } />
       </div>
 
       <div className="field-chart__right__bottom">
-        <FieldLineChartD3 data={ mappedChartList?.[9] }
-                          chartType={ USAGE_ETC }
-                          chartName={ USAGE_ETC } />
+        <FieldLineChartD3 chartType={ USAGE_ETC }
+                          chartName={ USAGE_ETC }
+                          data={ mappedChartList?.[9] }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          date={ date }
+                          setDate={ setDate } />
 
-        <FieldLineChartD3 data={ mappedChartList?.[9] }
-                          chartType={ DAILY_ETO }
+        <FieldLineChartD3 chartType={ DAILY_ETO }
                           chartName={ DAILY_ETO }
+                          data={ mappedChartList?.[9] }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          date={ date }
+                          setDate={ setDate }
                           hasXAxis />
       </div>
     </div>

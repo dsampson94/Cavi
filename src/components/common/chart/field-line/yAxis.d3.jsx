@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useDimensionsContext } from './Chart';
+import { useDimensionsContext } from './Chart.d3';
 
-const YAxis = ({ scale: yScale }) => {
+const YAxis = ({ yScale, chartName }) => {
 
   const dimensions = useDimensionsContext();
   const ticks = yScale.ticks(5);
@@ -16,25 +16,21 @@ const YAxis = ({ scale: yScale }) => {
             stroke="#252529" />
 
       { ticks.map((t, index) => (
-        <React.Fragment key={ `y-${ t }-container-${ index }` }>
+        <React.Fragment key={ `y-${ chartName }-${ t }-${ index }-container` }>
 
           <line className="y-axis__tick"
-                key={ `y-axis__tick-${ index }-${ t }` }
                 x2={ -10 }
                 y1={ yScale(t) }
                 y2={ yScale(t) }
                 stroke="#bdc3c7" />
 
           <line className="y-axis__tick"
-                key={ `y-axis__tick-${ index }-${ t }` }
-                style={ { position: 'relative', zIndex: 2 } }
                 x2={ dimensions.boundedWidth }
                 y1={ yScale(t) }
                 y2={ yScale(t) }
                 stroke="#dad9d5" />
 
-          <text key={ `y-axis__tick__label-${ index }-${ t }` }
-                className="y-axis__tick__label"
+          <text className="y-axis__tick__label"
                 style={ { fontSize: 12 } }
                 transform={ `translate(-28, ${ yScale(t) + 3 })` }>
             { t }

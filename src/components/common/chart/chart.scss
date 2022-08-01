@@ -107,3 +107,12 @@
     border-bottom-right-radius: map.get(radius.$border-radius, medium);
   }
 }
+
+.tooltip-container {
+
+  &__rect {
+    border-radius: map.get(radius.$border-radius, large);
+    -webkit-filter: drop-shadow(util.rem(1) util.rem(1) util.rem(1) rgba(0, 0, 0, .7));
+    filter: drop-shadow(util.rem(1) util.rem(1) util.rem(1) rgba(0, 0, 0, .7));
+  }
+}
