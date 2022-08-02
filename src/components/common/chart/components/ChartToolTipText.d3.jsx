@@ -2,6 +2,8 @@ import React from 'react';
 
 import { bisector } from 'd3';
 
+import { USAGE_ETC } from '../../../../tools/general/system-variables.util';
+
 import '../chart.scss';
 
 const ChartTooltipText = ({
@@ -38,9 +40,15 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
 
   let hoveredObject = data[dateBisector(data, date)];
 
-  let toolTipText = chartName.includes('deficit')
-    ? `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`
-    : `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
+  let toolTipText = () => {
+    if (chartName.includes('deficit')) {
+      return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
+    } else if (chartName === USAGE_ETC) {
+      return `Set: ${ hoveredObject?.lineY } Etc: ${ hoveredObject?.barY } @ ${ hoveredObject?.x }`;
+    } else {
+      return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
+    }
+  };
 
   return (<>
       { hoverActive && hoveredObject?.y &&
@@ -51,16 +59,16 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
                 x={ x + 10 }
                 y={ y - 25 }
                 height={ 15 }
-                width={ chartName.includes('deficit') ? 215 : 140 }
+                width={ chartName.includes('deficit') ? 235 : chartName === USAGE_ETC ? 210 : 145 }
                 rx={ '5' }
                 ry={ '5' } />
 
           <text className="tooltip-container__text"
                 x={ x + 15 }
                 y={ y - 13 }
-                fontSize={ '10' }
+                fontSize={ '11' }
                 fill={ 'blue' }>
-            { toolTipText }
+            { toolTipText() }
           </text>
         </g> }
     </>

@@ -6,7 +6,7 @@ const ChartContext = createContext();
 
 export const useDimensionsContext = () => useContext(ChartContext);
 
-const Chart = ({ svgRef, dimensions, chartName, children }) => {
+const Chart = ({ svgRef, dimensions, chartName, chartInfo, children }) => {
 
   return (
     <ChartContext.Provider value={ dimensions }>
@@ -26,14 +26,14 @@ const Chart = ({ svgRef, dimensions, chartName, children }) => {
                     y="0" />
             </clipPath>
             <clipPath id="clipAggregate">
-              <rect width={ dimensions.boundedWidth + 30 }
-                    height={ dimensions.boundedHeight + 26 }
+              <rect width={ '130%' }
+                    height={ '118%' }
                     x="0"
                     y="0" />
             </clipPath>
             <clipPath id="clipDaily">
-              <rect width={ dimensions.boundedWidth + 30 }
-                    height={ dimensions.boundedHeight + 10 }
+              <rect width={ '130%' }
+                    height={ '102%' }
                     x="0"
                     y="0" />
             </clipPath>
@@ -41,6 +41,9 @@ const Chart = ({ svgRef, dimensions, chartName, children }) => {
           { children }
         </g>
       </svg>
+      <div className="chart__info">
+        { chartInfo }
+      </div>
     </ChartContext.Provider>
   );
 };

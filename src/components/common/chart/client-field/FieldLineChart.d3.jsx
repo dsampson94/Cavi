@@ -6,12 +6,12 @@ import { AGGREGATE, DEFICIT } from '../../../../tools/general/system-variables.u
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
 
-import Chart from './Chart.d3.jsx';
-import YAxis from './yAxis.d3';
-import XAxis from './xAxis.d3';
-import Line from './Line.d3';
-import ChartTooltipDot from './ChartToolTipDot.d3';
-import ChartTooltipText from './ChartToolTipText.d3';
+import Chart from '../components/Chart.d3.jsx';
+import YAxis from '../components/yAxis.d3';
+import XAxis from '../components/xAxis.d3';
+import Line from '../components/Line.d3';
+import ChartTooltipDot from '../components/ChartToolTipDot.d3';
+import ChartTooltipText from '../components/ChartToolTipText.d3';
 
 const FieldLineChartD3 = ({
                             data,
@@ -34,7 +34,13 @@ const FieldLineChartD3 = ({
 
   const svgRef = useRef();
   const [wrapperRef, dimensions] = useDimensions();
-  const DIMENSIONS = { marginTop: 1, marginRight: 1, marginBottom: 1, marginLeft: 40, innerPadding: 10 };
+  const DIMENSIONS = {
+    marginTop: 0,
+    marginRight: 1,
+    marginBottom: chartType === DEFICIT ? 0 : 1,
+    marginLeft: 40,
+    innerPadding: 10
+  };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
     boundedHeight: dimensions.height - DIMENSIONS.marginTop - DIMENSIONS.marginBottom,
@@ -106,14 +112,16 @@ const FieldLineChartD3 = ({
 
         <Chart svgRef={ svgRef }
                dimensions={ updatedDimensions }
-               chartName={ chartName }>
+               chartName={ chartName }
+               chartInfo={ chartInfo }>
 
           { chartType === AGGREGATE &&
-            <rect width={ '92%' }
+            <rect width={ '100%' }
                   height={ '90%' }
                   fill={ 'white' } /> }
 
           <YAxis yScale={ yScale }
+                 data={ data }
                  chartName={ chartName } />
 
           <XAxis xScale={ xScale }
@@ -123,6 +131,7 @@ const FieldLineChartD3 = ({
 
           <Line data={ data }
                 recommendationOffset={ recommendationOffset }
+                chartName={ chartName }
                 chartType={ chartType }
                 xAccessor={ xAccessor }
                 yAccessor={ yAccessor }

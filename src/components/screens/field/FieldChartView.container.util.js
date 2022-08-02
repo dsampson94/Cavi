@@ -94,29 +94,101 @@ export const mapDeficitLists = (
 };
 
 export const mapAggregateLists = (topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList) => {
+  const idealTop = fieldChartList?.Grafieke[Object.keys(fieldChartList?.Grafieke)[0]].BB;
+  const idealBottom = fieldChartList?.Grafieke[Object.keys(fieldChartList?.Grafieke)[0]].BO;
   Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
     Object.keys(value).forEach((innerKey) => {
       switch (innerKey) {
         case 'TB':
-          topSoilMmList.push({ x: key, y: value.TB });
+          topSoilMmList.push({
+            x: key, y: value.TB,
+            ideal: parseInt(idealTop),
+            stress: parseInt(value?.stress),
+            wither: parseInt(value?.verwelp)
+          });
           recommendationsSizeList.push({ x: key, y: value.TB });
           return;
         case 'TBSim':
-          topSoilMmList.push({ x: key, y: value.TBSim });
+          topSoilMmList.push({
+            x: key, y: value.TBSim,
+            ideal: parseInt(idealTop),
+            stress: parseInt(value?.stress),
+            wither: parseInt(value?.verwelp)
+          });
           return;
         case 'TO':
-          bottomSoilMmList.push({ x: key, y: value.TO });
+          bottomSoilMmList.push({
+            x: key, y: value?.TO,
+            ideal: parseInt(idealBottom),
+            stress: parseInt(value?.stressonder),
+            wither: parseInt(value?.verwelponder)
+          });
           return;
         case 'TOSim':
-          bottomSoilMmList.push({ x: key, y: value.TOSim });
+          bottomSoilMmList.push({
+            x: key, y: value?.TOSim,
+            ideal: parseInt(idealBottom),
+            stress: parseInt(value?.stressonder),
+            wither: parseInt(value?.verwelponder)
+          });
           return;
       }
     });
   });
 };
 
+export const mapUsageETCList = (usageETCList, fieldChartList) => {
+  let initialLineY;
+  Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
+    Object.keys(value).forEach((innerKey, index) => {
+      if (index === 0) {
+        switch (innerKey) {
+          case 'GF':
+            initialLineY = value.GF;
+        }
+      }
+    });
+  });
+
+  for (let i = 0; i < 12; i++) usageETCList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], lineY: initialLineY, barY: null });
+
+  Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
+    Object.keys(value).forEach((innerKey) => {
+      switch (innerKey) {
+        case 'U':
+          usageETCList.push({
+            x: key,
+            y: 1,
+            barY: parseFloat(value?.U),
+            lineY: parseFloat(value?.GF),
+            geb: parseFloat(value.Geb),
+            gef: parseFloat(value?.Gef),
+            bla: parseFloat(value?.Bla)
+          });
+          return;
+      }
+    });
+  });
+  for (let i = 10; i > 0; i--)
+    usageETCList.push({
+      x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
+      barY: null
+    });
+
+  console.log(usageETCList);
+};
+
 export const mappedDailyETOList = (fieldChartList) => {
   const dailyETOList = [];
+
+  let initialLineY;
+  Object.entries(fieldChartList?.eto)?.forEach(([key, value], index) => {
+    if (index === 0) {
+      initialLineY = value.f;
+    }
+  });
+
+  for (let i = 0; i < 12; i++) dailyETOList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], y: initialLineY });
 
   Object.entries(fieldChartList?.eto)?.forEach(([key, value]) => {
     dailyETOList.push({ x: key, y: value.f });
@@ -135,6 +207,7 @@ export const pushMappedLists = (
   topSoilMmList,
   recommendationsSizeList,
   bottomSoilMmList,
+  usageETCList,
   mappedDailyETOList,
   mappedChartList,
   fieldChartList) => {
@@ -148,6 +221,7 @@ export const pushMappedLists = (
   mappedChartList.push(topSoilMmList);
   mappedChartList.push(bottomSoilMmList);
   mappedChartList.push(recommendationsSizeList);
+  mappedChartList.push(usageETCList);
   mappedChartList.push(mappedDailyETOList);
   mappedChartList.push(fieldChartList?.dieptes);
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { chartByName } from '../Chart.util';
-import { AGGREGATE } from '../../../../tools/general/system-variables.util';
 
 import { useDimensionsContext } from './Chart.d3';
 
-const XAxis = ({ xScale, hasXAxis, chartName, chartType }) => {
+const XAxis = ({ xScale, hasXAxis, chartName }) => {
 
   const dimensions = useDimensionsContext();
   const ticks = xScale.ticks(5);
@@ -17,7 +16,13 @@ const XAxis = ({ xScale, hasXAxis, chartName, chartType }) => {
          backgroundColor: chartByName(chartName).backgroundColor
        } }>
 
-      <line x2={ chartType === AGGREGATE ? '92%' : dimensions.boundedWidth }
+      <line x2={ dimensions.boundedWidth }
+            className="x-axis__line"
+            stroke="#252529" />
+
+      <line x2={ dimensions.boundedWidth }
+            y1={ -dimensions.boundedHeight }
+            y2={ -dimensions.boundedHeight }
             className="x-axis__line"
             stroke="#252529" />
 
@@ -36,7 +41,7 @@ const XAxis = ({ xScale, hasXAxis, chartName, chartType }) => {
                 x1={ xScale(date) }
                 x2={ xScale(date) }
                 y1={ 0 }
-                y2={ -dimensions.boundedHeight - -10 } />
+                y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
             <text className="x-axis__tick__label"

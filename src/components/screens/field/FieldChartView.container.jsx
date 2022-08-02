@@ -8,6 +8,7 @@ import {
   mapDeficitLists,
   mapMenuData,
   mappedDailyETOList,
+  mapUsageETCList,
   pushFieldRow,
   pushForecastRegionRow,
   pushLandGroupRow,
@@ -82,13 +83,15 @@ const FieldChartViewContainer = () => {
   const mappedChartList = () => {
     if (!fieldChartList?.[probeNumber]) return;
     const mappedChartList = [], oneHundredMmList = [], twoHundredMmList = [], threeHundredMmList = [], fourHundredMmList = [],
-      sixHundredMmList = [], eightHundredMmList = [], topSoilMmList = [], bottomSoilMmList = [], recommendationsSizeList = [];
+      sixHundredMmList = [], eightHundredMmList = [], topSoilMmList = [], bottomSoilMmList = [], recommendationsSizeList = [],
+      usageETCList = [];
 
     mapDeficitLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList,
       sixHundredMmList, eightHundredMmList, fieldChartList, probeNumber);
     mapAggregateLists(topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList);
+    mapUsageETCList(usageETCList, fieldChartList);
     pushMappedLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList, sixHundredMmList, eightHundredMmList,
-      topSoilMmList, recommendationsSizeList, bottomSoilMmList, mappedDailyETOList(fieldChartList, probeNumber),
+      topSoilMmList, recommendationsSizeList, bottomSoilMmList, usageETCList, mappedDailyETOList(fieldChartList, probeNumber),
       mappedChartList, fieldChartList);
     return mappedChartList;
   };

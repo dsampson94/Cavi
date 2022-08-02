@@ -15,6 +15,13 @@ const YAxis = ({ yScale, chartName }) => {
             y2={ dimensions.boundedHeight }
             stroke="#252529" />
 
+      <line key="y-axis__line"
+            className="y-axis__line"
+            x1={ dimensions.boundedWidth }
+            x2={ dimensions.boundedWidth }
+            y2={ dimensions.boundedHeight }
+            stroke="#252529" />
+
       { ticks.map((t, index) => (
         <React.Fragment key={ `y-${ chartName }-${ t }-${ index }-container` }>
 
@@ -23,6 +30,14 @@ const YAxis = ({ yScale, chartName }) => {
                 y1={ yScale(t) }
                 y2={ yScale(t) }
                 stroke="#bdc3c7" />
+
+          { t === 0 &&
+            <line className="y-axis__tick"
+                  x2={ dimensions.boundedWidth }
+                  y1={ yScale(t) }
+                  y2={ yScale(t) }
+                  stroke={ 'black' }
+                  opacity={ 0.8 } /> }
 
           <line className="y-axis__tick"
                 x2={ dimensions.boundedWidth }

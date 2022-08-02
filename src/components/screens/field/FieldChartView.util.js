@@ -23,7 +23,8 @@ import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/loca
 import Button from '../../common/button/Button';
 import SVGIcon from '../../common/icon/SVGIcon';
 import DropDownMenu from '../../common/drop-down/DropDownMenu';
-import FieldLineChartD3 from '../../common/chart/field-line/FieldLineChart.d3';
+import FieldLineChartD3 from '../../common/chart/client-field/FieldLineChart.d3';
+import FieldCombinationChart from '../../common/chart/client-field/FieldCombinationChart.d3';
 
 export const FieldChartTopBar = ({
                                    showChartsSideBar,
@@ -130,7 +131,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[0] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][1] }
+                        chartInfo={ mappedChartList?.[11][1] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -145,7 +146,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[1] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][2] }
+                        chartInfo={ mappedChartList?.[11][2] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -160,7 +161,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[2] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][3] }
+                        chartInfo={ mappedChartList?.[11][3] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -175,7 +176,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[3] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][4] }
+                        chartInfo={ mappedChartList?.[11][4] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -190,7 +191,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[4] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][5] }
+                        chartInfo={ mappedChartList?.[11][5] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -205,7 +206,7 @@ export const LeftSideCharts = ({
                         data={ mappedChartList?.[5] }
                         hoverActive={ hoverActive }
                         setHoverActive={ setHoverActive }
-                        chartInfo={ mappedChartList?.[10][6] }
+                        chartInfo={ mappedChartList?.[11][6] }
                         currentGlobalZoomState={ currentGlobalZoomState }
                         setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                         currentYZoomState={ currentYZoomState }
@@ -245,6 +246,7 @@ export const RightSideCharts = ({
                           data={ mappedChartList?.[6] }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
+                          chartInfo={ AGGREGATE_TOP_SOIL.slice(10) }
                           recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[6]?.length * 100) }
                           currentGlobalZoomState={ currentGlobalZoomState }
                           setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
@@ -260,6 +262,7 @@ export const RightSideCharts = ({
                           data={ mappedChartList?.[7] }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
+                          chartInfo={ AGGREGATE_BOTTOM_SOIL.slice(10) }
                           recommendationOffset={ (mappedChartList?.[8]?.length / mappedChartList?.[7]?.length * 100) }
                           currentGlobalZoomState={ currentGlobalZoomState }
                           setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
@@ -272,23 +275,23 @@ export const RightSideCharts = ({
       </div>
 
       <div className="field-chart__right__bottom">
-        <FieldLineChartD3 chartType={ USAGE_ETC }
-                          chartName={ USAGE_ETC }
-                          data={ mappedChartList?.[9] }
-                          hoverActive={ hoverActive }
-                          setHoverActive={ setHoverActive }
-                          currentGlobalZoomState={ currentGlobalZoomState }
-                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
-                          currentYZoomState={ currentYZoomState }
-                          setCurrentYZoomState={ setCurrentYZoomState }
-                          currentXZoomState={ currentXZoomState }
-                          setCurrentXZoomState={ setCurrentXZoomState }
-                          date={ date }
-                          setDate={ setDate } />
+        <FieldCombinationChart chartType={ USAGE_ETC }
+                               chartName={ USAGE_ETC }
+                               data={ mappedChartList?.[9] }
+                               hoverActive={ hoverActive }
+                               setHoverActive={ setHoverActive }
+                               currentGlobalZoomState={ currentGlobalZoomState }
+                               setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                               currentYZoomState={ currentYZoomState }
+                               setCurrentYZoomState={ setCurrentYZoomState }
+                               currentXZoomState={ currentXZoomState }
+                               setCurrentXZoomState={ setCurrentXZoomState }
+                               date={ date }
+                               setDate={ setDate } />
 
         <FieldLineChartD3 chartType={ DAILY_ETO }
                           chartName={ DAILY_ETO }
-                          data={ mappedChartList?.[9] }
+                          data={ mappedChartList?.[10] }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
                           currentGlobalZoomState={ currentGlobalZoomState }
