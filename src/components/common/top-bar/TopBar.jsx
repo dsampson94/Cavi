@@ -34,14 +34,15 @@ import EmailModal from '../modal/EmailModal';
 
 import './top-bar.scss';
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields, view }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields, mappedFieldList, view }) => {
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsTopBar showSideBar={ showSideBar }
                                  setShowSideBar={ setShowSideBar }
                                  clientRequestFields={ clientRequestFields } />;
     case FIELD_CHARTS:
-      return <FieldChartsTopBar clientRequestFields={ clientRequestFields } />;
+      return <FieldChartsTopBar clientRequestFields={ clientRequestFields }
+                                mappedFieldList={ mappedFieldList } />;
   }
 };
 
@@ -145,11 +146,11 @@ ClientFieldsTopBar.propTypes = {
   clientRequestFields: shape({})
 };
 
-const FieldChartsTopBar = ({ clientRequestFields }) => {
+const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const { groupName, clientName } = useParams();
+  const { groupName, clientName, fieldName } = useParams();
 
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
 
@@ -184,6 +185,23 @@ const FieldChartsTopBar = ({ clientRequestFields }) => {
     history.push('/');
   };
 
+  const getTopBarValue = () => {
+    const recommendations = [];
+    mappedFieldList?.forEach(item => {
+      if (fieldName === item.fieldName.locationName) {
+        recommendations.push(item.fieldName.recommend1);
+        recommendations.push(item.fieldName.recommend2);
+        recommendations.push(item.fieldName.recommend3);
+        recommendations.push(item.fieldName.recommend4);
+        recommendations.push(item.fieldName.recommend5);
+        recommendations.push(item.fieldName.recommend6);
+        recommendations.push(item.fieldName.recommend7);
+        recommendations.push(item.fieldName.recommend8);
+      }
+    });
+    return recommendations;
+  };
+
   return (
     <div className="field-charts-top-bar">
       <div className="field-charts-top-bar__header">
@@ -204,14 +222,22 @@ const FieldChartsTopBar = ({ clientRequestFields }) => {
         <Button label={ 'Field Setup' } spaced />
         <Button label={ 'Temperatures' } spaced />
 
-        <Button label={ daysFromToday(0) } datebar />
-        <Button label={ daysFromToday(1) } datebar />
-        <Button label={ daysFromToday(2) } datebar />
-        <Button label={ daysFromToday(3) } datebar />
-        <Button label={ daysFromToday(4) } datebar />
-        <Button label={ daysFromToday(5) } datebar />
-        <Button label={ daysFromToday(6) } datebar />
-        <Button label={ daysFromToday(7) } datebar spaced />
+        <Button label={ daysFromToday(0) }
+                lowerLabel={ getTopBarValue()[0] } datebar />
+        <Button label={ daysFromToday(1) }
+                lowerLabel={ getTopBarValue()[1] } datebar />
+        <Button label={ daysFromToday(2) }
+                lowerLabel={ getTopBarValue()[2] } datebar />
+        <Button label={ daysFromToday(3) }
+                lowerLabel={ getTopBarValue()[3] } datebar />
+        <Button label={ daysFromToday(4) }
+                lowerLabel={ getTopBarValue()[4] } datebar />
+        <Button label={ daysFromToday(5) }
+                lowerLabel={ getTopBarValue()[5] } datebar />
+        <Button label={ daysFromToday(6) }
+                lowerLabel={ getTopBarValue()[6] } datebar />
+        <Button label={ daysFromToday(7) }
+                lowerLabel={ getTopBarValue()[7] } datebar spaced />
 
         <Button label={ 'Probes Monitor' }
                 spaced />

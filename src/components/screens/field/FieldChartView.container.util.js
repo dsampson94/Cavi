@@ -26,7 +26,15 @@ export const pushFieldRow = (tableList, listItem, index, mappedList) => {
       colorTop: (listItem?.colorTopHex === '#FFFFFFFF')
         ? '#000000' : `#${ listItem?.colorTopHex?.slice(3) }`,
       colorBot: (listItem?.colorBotHex === '#FFFFFFFF')
-        ? '#000000' : `#${ listItem?.colorBotHex?.slice(3) }`
+        ? '#000000' : `#${ listItem?.colorBotHex?.slice(3) }`,
+      recommend1: listItem?.recommend1,
+      recommend2: listItem?.recommend2,
+      recommend3: listItem?.recommend3,
+      recommend4: listItem?.recommend4,
+      recommend5: listItem?.recommend5,
+      recommend6: listItem?.recommend6,
+      recommend7: listItem?.recommend7,
+      recommend8: listItem?.recommend8
     }
   });
 };
@@ -174,8 +182,6 @@ export const mapUsageETCList = (usageETCList, fieldChartList) => {
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       barY: null
     });
-
-  console.log(usageETCList);
 };
 
 export const mappedDailyETOList = (fieldChartList) => {

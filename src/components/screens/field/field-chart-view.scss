@@ -115,19 +115,38 @@
   &__right {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 51.5%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      height: 79%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+      height: 86%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+      height: 93%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+      height: 97.5%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+      height: 100%;
+    }
 
     svg {
       overflow: visible;
     }
 
     &__top {
-      height: 51%;
+      height: 50%;
     }
 
     &__bottom {
-      height: 49%;
+      height: 50%;
     }
   }
 

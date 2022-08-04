@@ -103,9 +103,8 @@ const FieldLineChartD3 = ({
 
   return (
     <>
-      { chartType !== DEFICIT && <div style={ { marginTop: '1.8%' } }>
-        <ChartHeader chartName={ chartName } />
-      </div> }
+      { chartType !== DEFICIT &&
+        <ChartHeader chartName={ chartName } /> }
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }>

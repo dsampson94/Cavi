@@ -11,6 +11,7 @@ const Button = ({
                   name,
                   type,
                   label,
+                  lowerLabel,
                   onClick,
                   onMouseEnter,
                   disabled,
@@ -36,7 +37,11 @@ const Button = ({
             onClick={ onClick }
             onMouseEnter={ onMouseEnter }
             disabled={ disabled }>
-      <label>{ label } </label>
+      { !datebar && <label>{ label }</label> }
+      { datebar && <div>
+          <div className={ 'button__label--upper' }><label>{ label }</label></div>
+          <div className={ 'button__label--lower' }><label>{ lowerLabel !== 0 && lowerLabel }</label></div>
+        </div> }
       { tooltip && <ToolTip text={ tooltip }
                             left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }

@@ -124,4 +124,18 @@
     height: util.rem(15);
     margin-left: util.rem(2);
   }
+
+  &__label {
+
+    &--upper {
+      margin-top: -5%;
+      height: 50%;
+    }
+
+    &--lower {
+      font-weight: normal;
+      font-size: util.rem(8);
+      height: 50%;
+    }
+  }
 }

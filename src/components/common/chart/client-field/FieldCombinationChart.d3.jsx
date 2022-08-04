@@ -98,9 +98,7 @@ const FieldCombinationChart = ({
 
   return (
     <>
-      { chartType !== DEFICIT && <div style={ { marginTop: '1.8%' } }>
-        <ChartHeader chartName={ chartName } />
-      </div> }
+      <ChartHeader chartName={ chartName } />
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }>

@@ -15,7 +15,7 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
   return (
     <g>
       { chartType !== DEFICIT && <defs>
-        <linearGradient id="line-gradient">
+        <linearGradient id="line-gradient-aggregate">
           <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: 'black', stopOpacity: '1' } } />
           <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: '#00B8B0', stopOpacity: '1' } } />
         </linearGradient>
@@ -23,26 +23,26 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
 
       <path d={ lineGenerator(data) }
             clipPath={ clipPath }
-            stroke={ chartType === AGGREGATE ? 'url(#line-gradient)' : chartName === USAGE_ETC ? 'black' : '#0000FF' }
+            stroke={ chartType === AGGREGATE ? 'url(#line-gradient-aggregate)' : chartName === USAGE_ETC ? 'black' : '#0000FF' }
             style={ {
               fill: 'none',
               strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
               strokeLinecap: 'round'
             } } />
 
-      <WarningLine xScale={ xScale }
-                   yScale={ yScale }
-                   xAccessor={ xAccessor }
-                   clipPath={ clipPath }
-                   data={ data }
-                   chartName={ chartName } />
+      <ReferenceLine xScale={ xScale }
+                     yScale={ yScale }
+                     xAccessor={ xAccessor }
+                     clipPath={ clipPath }
+                     data={ data }
+                     chartName={ chartName } />
     </g>
   );
 };
 
 export default Line;
 
-const WarningLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName }) => {
+const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName }) => {
 
   const width = 1.5;
   const opacity = 0.4;

@@ -45,7 +45,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
     <ContentContainer view={ CLIENT_FIELDS }
                       clientRequestFields={ clientRequestFields }
                       showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setClientsShowSideBar }>
+                      setShowClientsSideBar={ setClientsShowSideBar }
+                      mappedFieldList={ mappedFieldList }>
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
         <TableTopBar filteredTableData={ filteredTableData }

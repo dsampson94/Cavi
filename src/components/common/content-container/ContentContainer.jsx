@@ -24,18 +24,19 @@ const ContentContainer = ({
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsContentContainer children={ children }
-                                           view={ view }
                                            showClientsSideBar={ showClientsSideBar }
                                            setShowClientsSideBar={ setShowClientsSideBar }
-                                           clientRequestFields={ clientRequestFields } />;
+                                           clientRequestFields={ clientRequestFields }
+                                           view={ view } />;
+
     case FIELD_CHARTS:
       return <FieldChartsContentContainer children={ children }
-                                          view={ view }
                                           showChartsSideBar={ showChartsSideBar }
                                           mappedFieldList={ mappedFieldList }
                                           clientRequestFields={ clientRequestFields }
                                           setLoadPeriod={ setLoadPeriod }
-                                          setActiveFieldName={ setActiveFieldName } />;
+                                          setActiveFieldName={ setActiveFieldName }
+                                          view={ view } />;
   }
 };
 
@@ -88,6 +89,7 @@ const FieldChartsContentContainer = ({
   return (
     <div className="content-container">
       <TopBar clientRequestFields={ clientRequestFields }
+              mappedFieldList={ mappedFieldList }
               view={ view } />
 
       <div className="content-container__screen">

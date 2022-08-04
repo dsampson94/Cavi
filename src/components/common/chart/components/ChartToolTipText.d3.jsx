@@ -44,7 +44,7 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
     if (chartName.includes('deficit')) {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
     } else if (chartName === USAGE_ETC) {
-      return `Set: ${ hoveredObject?.lineY } Etc: ${ hoveredObject?.barY } @ ${ hoveredObject?.x }`;
+      return `Set: ${ hoveredObject?.lineY.toFixed(3) } Etc: ${ hoveredObject?.barY } @ ${ hoveredObject?.x }`;
     } else {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
     }
