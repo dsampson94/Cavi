@@ -1,9 +1,9 @@
 import React from 'react';
-import { line } from 'd3';
+import { line, selectAll } from 'd3';
 
 import { AGGREGATE, AGGREGATE_BOTTOM_SOIL, AGGREGATE_TOP_SOIL, DEFICIT, USAGE_ETC } from '../../../../tools/general/system-variables.util';
 
-const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName, recommendationOffset, clipPath }) => {
+const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName, recommendationOffset, clipPath, isDarkMode }) => {
 
   let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
 
@@ -12,18 +12,25 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
     lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(lineYAccessor(d)));
   }
 
+  selectAll('.line').on('contextmenu ', event => event.preventDefault());
+
   return (
     <g>
       { chartType !== DEFICIT && <defs>
         <linearGradient id="line-gradient-aggregate">
-          <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: 'black', stopOpacity: '1' } } />
-          <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: '#00B8B0', stopOpacity: '1' } } />
+          <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: isDarkMode ? 'white' : 'black', stopOpacity: '1' } } />
+          <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: isDarkMode ? '#47FFFF' : '#00B8B0', stopOpacity: '1' } } />
         </linearGradient>
       </defs> }
 
-      <path d={ lineGenerator(data) }
+      <path className={ 'line' }
+            d={ lineGenerator(data) }
             clipPath={ clipPath }
-            stroke={ chartType === AGGREGATE ? 'url(#line-gradient-aggregate)' : chartName === USAGE_ETC ? 'black' : '#0000FF' }
+            stroke={ chartType === AGGREGATE
+              ? 'url(#line-gradient-aggregate)'
+              : chartName === USAGE_ETC
+                ? isDarkMode ? 'white' : 'black'
+                : isDarkMode ? '#0090ff' : '#0000FF' }
             style={ {
               fill: 'none',
               strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
@@ -35,17 +42,18 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
                      xAccessor={ xAccessor }
                      clipPath={ clipPath }
                      data={ data }
-                     chartName={ chartName } />
+                     chartName={ chartName }
+                     isDarkMode={ isDarkMode } />
     </g>
   );
 };
 
 export default Line;
 
-const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName }) => {
+const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName, isDarkMode }) => {
 
   const width = 1.5;
-  const opacity = 0.4;
+  const opacity = isDarkMode ? 0.8 : 0.6;
 
   let idealAccessor = d => d?.ideal;
   let stressAccessor = d => d?.stress;
@@ -58,19 +66,22 @@ const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName })
   switch (chartName) {
     case AGGREGATE_TOP_SOIL:
       return <>
-        <path d={ idealLineGenerator(data) }
+        <path className={ 'line' }
+              d={ idealLineGenerator(data) }
               clipPath={ clipPath }
-              stroke={ '#0000FF' }
+              stroke={ isDarkMode ? '#54a4d9' : '#0000FF' }
               strokeWidth={ width }
               opacity={ opacity } />
 
-        <path d={ stressLineGenerator(data) }
+        <path className={ 'line' }
+              d={ stressLineGenerator(data) }
               clipPath={ clipPath }
               stroke={ '#FFA500' }
               strokeWidth={ width }
               opacity={ opacity } />
 
-        <path d={ witherLineGenerator(data) }
+        <path className={ 'line' }
+              d={ witherLineGenerator(data) }
               clipPath={ clipPath }
               stroke={ 'red' }
               strokeWidth={ width }
@@ -78,19 +89,22 @@ const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName })
       </>;
     case AGGREGATE_BOTTOM_SOIL:
       return <>
-        <path d={ idealLineGenerator(data) }
+        <path className={ 'line' }
+              d={ idealLineGenerator(data) }
               clipPath={ clipPath }
-              stroke={ '#0000FF' }
+              stroke={ isDarkMode ? '#54a4d9' : '#0000FF' }
               strokeWidth={ width }
               opacity={ opacity } />
 
-        <path d={ stressLineGenerator(data) }
+        <path className={ 'line' }
+              d={ stressLineGenerator(data) }
               clipPath={ clipPath }
               stroke={ '#FFA500' }
               strokeWidth={ width }
               opacity={ opacity } />
 
-        <path d={ witherLineGenerator(data) }
+        <path className={ 'line' }
+              d={ witherLineGenerator(data) }
               clipPath={ clipPath }
               stroke={ 'red' }
               strokeWidth={ width }

@@ -21,43 +21,35 @@ import {
 
 import SVGIcon from '../icon/SVGIcon';
 import CheckboxInput from '../input/checkbox/CheckboxInput';
-import Button from '../button/Button';
 import DropDownMenu from '../drop-down/DropDownMenu';
 
 import './chart.scss';
 
-export const ChartHeader = ({ chartName, zoomOut, zoomIn }) => {
+export const ChartHeader = ({ chartName, isDarkMode }) => {
 
   return (
     <div className={ getClassNames('chart__header__container', { usage: chartName === USAGE_ETC }) }>
-      <div className={ getClassNames('chart__header',
-        { top: chartName === AGGREGATE_TOP_SOIL, bottom: chartName === AGGREGATE_BOTTOM_SOIL }) }
-           style={ { marginTop: chartByName(chartName).marginTop } }>
+      <div className={ getClassNames('chart__header', {
+        top: chartName === AGGREGATE_TOP_SOIL,
+        bottom: chartName === AGGREGATE_BOTTOM_SOIL
+      }) }
+           style={ {
+             marginTop: chartByName(chartName).marginTop,
+             backgroundColor: chartByName(chartName, isDarkMode).backgroundColor
+           } }>
 
         <div className="chart__header__zoom-options">
 
           { chartName === AGGREGATE_TOP_SOIL &&
             <div className="chart__header__zoom-options--left-top">
-              <Button chart white label={ '-' } />
-              <Button chart white label={ '+' } />
               <div className="chart__header__zoom-options--left-top__settings">
                 <SVGIcon name={ SETTINGS_GEAR } />
               </div>
               <CheckboxInput constant={ 'Hide rain' } />
             </div> }
 
-          { chartName === AGGREGATE_BOTTOM_SOIL &&
-            <div className="chart__header__zoom-options--left-bottom">
-              <Button chart white label={ '-' } onClick={ zoomOut } />
-              <Button chart white label={ '+' } onClick={ zoomIn } />
-            </div> }
-
           { chartName === USAGE_ETC &&
             <div className="chart__header__zoom-options--left-top">
-              <div className="chart__header__zoom-options--left-top-buttons">
-                <Button chart white label={ '-' } onClick={ zoomOut } />
-                <Button chart white label={ '+' } onClick={ zoomIn } />
-              </div>
               <div className="chart__header__zoom-options--left-top__options">
                 <SVGIcon name={ DOWN_ARROW } chart />
                 <DropDownMenu menu={ CHART_USAGE_MENU } />
@@ -105,7 +97,8 @@ export const ChartHeader = ({ chartName, zoomOut, zoomIn }) => {
   );
 };
 
-export const chartByName = (chartName) => {
+export const chartByName = (chartName, isDarkMode) => {
+
   switch (chartName) {
     case DEFICIT_100MM :
       return { height: '15.8%' };
@@ -120,9 +113,9 @@ export const chartByName = (chartName) => {
     case DEFICIT_800MM :
       return { height: '16%' };
     case AGGREGATE_TOP_SOIL :
-      return { header: 'Topsoil', height: '40%', backgroundColor: '#ABD4EF' };
+      return { header: 'Topsoil', height: '40%', backgroundColor: isDarkMode ? '#607CB1' : '#ABD4EF' };
     case AGGREGATE_BOTTOM_SOIL :
-      return { header: 'Bottomsoil', height: '40%', marginTop: '2.5%', backgroundColor: '#C1EAC7' };
+      return { header: 'Bottomsoil', height: '40%', marginTop: '2.5%', backgroundColor: isDarkMode ? '#0C6921' : '#C1EAC7' };
     case USAGE_ETC :
       return { header: USAGE_ETC, height: '35%' };
     case DAILY_ETO :

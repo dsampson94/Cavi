@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { string } from 'prop-types';
 import {
   BULLSEYE,
   CAMERA,
-  CHARTS,
+  CHARTS, CIRCLE_DROPDOWN,
   CLOUDED,
-  DISSATISFIED,
+  DISSATISFIED, DOUBLE_DROPDOWN,
   DOWN_ARROW,
   DROPDOWN,
   DROPDOWN_ALL,
@@ -29,6 +28,7 @@ import {
   SEARCH,
   SETTINGS_GEAR,
   SUNNY,
+  TOGGLE_YAXIS,
   VERY_DISSATISFIED,
   VERY_SATISFIED,
   WARNING,
@@ -37,21 +37,23 @@ import {
 } from '../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
 
+import useDarkMode from '../../../tools/hooks/useDarkMode';
+
 import './svg-icon.scss';
 
 const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
 
-  const activeTheme = useSelector(state => state?.system?.theme);
+  const { storeActiveTheme } = useDarkMode(false);
 
   return (
     <div className={ getClassNames('svg-icon',
-      { tiny: tiny, small: getSmallIcons(name) }) }
+      { tiny: tiny, small: getSmallIcons(name), chart }) }
          onClick={ onClick }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
            height={ height }
            width={ width }
-           fill={ getIconFill(activeTheme, fill, name) }
+           fill={ getIconFill(storeActiveTheme, fill, name) }
            viewBox={ getViewBox(name, tiny, chart) }>
         { getPath(name) }
       </svg>
@@ -65,6 +67,10 @@ const getViewBox = (name, tiny, chart) => {
       return '10 -1 50 100';
     case OPEN_MENU:
       return '10 -3 50 100';
+    case DOUBLE_DROPDOWN:
+      return '9 8 35 70';
+    case TOGGLE_YAXIS:
+      return '6 1.5 25 60';
     case SETTINGS_GEAR:
       if (chart) return '3 3 20 60';
       else if (tiny) return '4 1 15 34';
@@ -144,6 +150,7 @@ const getIconFill = (activeTheme, fill, name) => {
     switch (name) {
       case DOWN_ARROW:
       case OPEN_MENU:
+      case TOGGLE_YAXIS:
       case SETTINGS_GEAR:
       case PENCIL:
       case CHARTS:
@@ -355,6 +362,19 @@ const getPath = (name) => {
     case OPEN_MENU:
       return (
         <path d="M6 36v-3h26v3Zm33.9-2.6-9.45-9.45 9.4-9.4L42 16.7l-7.25 7.25 7.3 7.3ZM6 25.4v-3h20v3ZM6 15v-3h26v3Z" />
+      );
+    case TOGGLE_YAXIS:
+      return (
+        <path d="M6 36v-3h26v3Zm33.9-2.6-9.45-9.45 9.4-9.4L42 16.7l-7.25 7.25 7.3 7.3ZM6 25.4v-3h20v3ZM6 15v-3h26v3Z" />
+      );
+    case CIRCLE_DROPDOWN:
+      return (
+        <path
+          d="m24 31.4 7.3-7.3-2.1-2.1-3.7 3.7v-9.1h-3v9.1L18.8 22l-2.1 2.1ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z" />
+      );
+    case DOUBLE_DROPDOWN:
+      return (
+        <path d="M24 38 12 26l2.1-2.1 9.9 9.9 9.9-9.9L36 26Zm0-12.65-12-12 2.1-2.1 9.9 9.9 9.9-9.9 2.1 2.1Z" />
       );
     default:
       return <path />;

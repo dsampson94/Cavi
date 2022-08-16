@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { extent, max, mean, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
+import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName, ChartHeader } from '../Chart.util';
-import { AGGREGATE, DEFICIT } from '../../../../tools/general/system-variables.util';
+import { AGGREGATE } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
+import useDarkMode from '../../../../tools/hooks/useDarkMode';
 
 import Chart from '../components/Chart.d3';
 import XAxis from '../components/xAxis.d3';
@@ -13,6 +14,7 @@ import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Bars from '../components/Bars';
+import ChartContextMenu from '../components/ChartContextMenu';
 
 const FieldCombinationChart = ({
                                  data,
@@ -29,12 +31,16 @@ const FieldCombinationChart = ({
                                  setCurrentXZoomState,
                                  hoverActive,
                                  setHoverActive,
+                                 activeDataPeriod,
                                  date,
                                  setDate
                                }) => {
 
   const svgRef = useRef();
+
+  const { isDarkMode } = useDarkMode(false);
   const [wrapperRef, dimensions] = useDimensions();
+
   const DIMENSIONS = { marginTop: 1, marginRight: 1, marginBottom: 1, marginLeft: 40, innerPadding: 10 };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
@@ -47,18 +53,21 @@ const FieldCombinationChart = ({
   let xAccessor = d => new Date(d?.x);
 
   const yScale = scaleLinear().
-    domain([0, max(data, yAccessor)]).
-    range([boundedHeight - innerPadding, innerPadding]);
+    domain([0, max(data, yAccessor) + 0.5]).
+    range([boundedHeight, innerPadding]).nice();
+
+  const activeMinDate = () => {
+    if (activeDataPeriod === 'All') return min(data, xAccessor);
+    else return new Date(max(data, xAccessor).setDate(max(data, xAccessor).getDate() - activeDataPeriod));
+  };
 
   const xScale = scaleTime().
-    domain(extent(data, xAccessor)).
+    domain([activeMinDate(), max(data, xAccessor)]).
     range([0, boundedWidth - innerPadding]);
 
-  if (currentYZoomState) yScale.domain(currentYZoomState.rescaleY(yScale).domain());
   if (currentXZoomState) xScale.domain(currentXZoomState.rescaleX(xScale).domain());
 
-  const clipPath = chartName.includes('deficit') ? 'url(#clipDeficit)' :
-    chartName.includes('aggregate') ? 'url(#clipAggregate)' : 'url(#clipDaily)';
+  const clipPath = 'url(#clipUsage)';
 
   useEffect(() => {
     const svg = select(svgRef.current);
@@ -72,28 +81,25 @@ const FieldCombinationChart = ({
     };
 
     const zoomGlobal = zoom().scaleExtent([0.1, 40]).on('zoom', event => {
-      const { k: newK, x: newX, y: newY } = event.transform;
-      const { k: prevK, x: prevX, y: prevY } = currentGlobalZoomState;
+      const { k: newK, x: newX } = event.transform;
+      const { k: prevK, x: prevX } = currentGlobalZoomState;
       const point = center(event, svg);
 
       const isZoomingX = point[0] > DIMENSIONS.marginLeft + 50 && point[0] / 3 < boundedWidth + 200;
-      const isZoomingY = point[1] / 10 < boundedHeight;
 
       isZoomingX && setCurrentXZoomState(currentXZoomState.translate((newX - prevX) / prevK, 0).scale(newK / prevK));
-      isZoomingY && setCurrentYZoomState(currentYZoomState.translate(0, (newY - prevY) / prevK).scale(newK / prevK));
       setCurrentGlobalZoomState(event.transform);
     });
 
-    svg.call(zoomGlobal);
+    svg.call(zoomGlobal).on('dblclick.zoom', null);
 
-    selectAll('.mouse-tracker').on('contextmenu ', e => {
-      e.preventDefault();
+    selectAll('.mouse-tracker').on('contextmenu ', event => event.preventDefault());
+    selectAll('.mouse-tracker').on('dblclick ', () => {
       svg.call(zoomGlobal.transform, zoomIdentity);
       setCurrentGlobalZoomState(zoomIdentity);
       setCurrentXZoomState(zoomIdentity);
       setCurrentYZoomState(zoomIdentity);
     });
-
   }, [boundedWidth, boundedHeight, currentXZoomState, currentYZoomState, currentGlobalZoomState, xScale, yScale]);
 
   return (
@@ -115,12 +121,20 @@ const FieldCombinationChart = ({
 
           <YAxis yScale={ yScale }
                  data={ data }
-                 chartName={ chartName } />
+                 chartName={ chartName }
+                 isDarkMode={ isDarkMode } />
+
+          <Bars data={ data }
+                height={ dimensions.height }
+                xScale={ xScale }
+                yScale={ yScale }
+                clipPath={ clipPath } />
 
           <XAxis xScale={ xScale }
                  hasXAxis={ hasXAxis }
                  chartName={ chartName }
-                 chartType={ chartType } />
+                 chartType={ chartType }
+                 isDarkMode={ isDarkMode } />
 
           <Line data={ data }
                 recommendationOffset={ recommendationOffset }
@@ -130,13 +144,8 @@ const FieldCombinationChart = ({
                 yAccessor={ yAccessor }
                 xScale={ xScale }
                 yScale={ yScale }
-                clipPath={ clipPath } />
-
-          <Bars data={ data }
-                height={ dimensions.height }
-                xScale={ xScale }
-                yScale={ yScale }
-                clipPath={ clipPath } />
+                clipPath={ clipPath }
+                isDarkMode={ isDarkMode } />
 
           <rect className={ 'mouse-tracker' }
                 width={ dimensions.width }
@@ -168,6 +177,16 @@ const FieldCombinationChart = ({
                             chartName={ chartName }
                             clipPath={ clipPath } />
         </Chart>
+
+        <ChartContextMenu xAccessor={ xAccessor }
+                          yAccessor={ yAccessor }
+                          xScale={ xScale }
+                          yScale={ yScale }
+                          data={ data }
+                          date={ date }
+                          hoverActive={ hoverActive }
+                          chartName={ chartName }
+                          setHoverActive={ setHoverActive } />
       </div>
     </>
   );

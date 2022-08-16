@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
+import { func } from 'prop-types';
+
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
 import {
   CHARTS,
@@ -101,12 +103,12 @@ export const SideBarButton = () => {
   </div>;
 };
 
-export const ViewDataBar = ({ setLoadPeriod }) => {
+export const ViewDataBar = ({ setActiveLoadPeriod }) => {
 
   const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS);
 
   useEffect(() => {
-    setLoadPeriod(selectedPeriod);
+    setActiveLoadPeriod(selectedPeriod);
   }, [selectedPeriod]);
 
   return (
@@ -150,7 +152,9 @@ export const ViewDataBar = ({ setLoadPeriod }) => {
   );
 };
 
-ViewDataBar.propTypes = {};
+ViewDataBar.propTypes = {
+  setActiveLoadPeriod: func
+};
 
 export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName }) => {
 

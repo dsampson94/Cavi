@@ -51,6 +51,9 @@
     "eject": "react-scripts eject"
   },
   "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!d3|d3-array|internmap|delaunator|robust-predicates)"
+    ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!src/**/index.{js,jsx}",

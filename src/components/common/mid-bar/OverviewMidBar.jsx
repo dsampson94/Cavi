@@ -29,7 +29,7 @@ const OverviewMidBar = ({
                 }) => {
 
   return (
-    <div className="overview-mid-bar">
+    <div className="overview__mid-bar">
 
       <Button label={ MID_BAR_OVERVIEW }
               onClick={ handleOverviewClick }

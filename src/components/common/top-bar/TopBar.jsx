@@ -22,10 +22,11 @@ import {
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
 import { daysFromToday } from '../../../tools/general/helpers.util';
-import { retrieveActiveThemeFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
+
+import useDarkMode from '../../../tools/hooks/useDarkMode';
 
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
@@ -148,18 +149,13 @@ ClientFieldsTopBar.propTypes = {
 
 const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
 
+  useDarkMode(true);
+
   const history = useHistory();
   const dispatch = useDispatch();
   const { groupName, clientName, fieldName } = useParams();
 
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
-
-  const getTheme = retrieveActiveThemeFromLocalStorage();
-  const [isDarkMode] = useState(!(getTheme === 'dark'));
-
-  useEffect(() => {
-    if (getTheme === 'dark') return document.body.classList.add('dark-mode');
-  }, [isDarkMode]);
 
   useEffect(() => {
     downloadPDF();

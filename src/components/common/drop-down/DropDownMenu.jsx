@@ -4,7 +4,7 @@ import { bool } from 'prop-types';
 
 import {
   ACTUAL_IRRIGATION_OPTION,
-  ANALYSE_FIELD_OPTION,
+  ANALYSE_FIELD_OPTION, CHART_ACTIVE_PERIOD,
   CHART_TOP_BAR_MENU,
   CHART_USAGE_MENU,
   CHART_USAGE_SASRI_MENU,
@@ -22,8 +22,7 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './drop-down-menu.scss';
 
-
-const DropDownMenu = ({ menu, menuData, left, mid }) => {
+const DropDownMenu = ({ menu, menuData, left, mid, period, setActiveDataPeriod }) => {
 
   const [showToolTip, setShowToolTip] = useState(false);
 
@@ -32,7 +31,7 @@ const DropDownMenu = ({ menu, menuData, left, mid }) => {
          onClick={ () => setShowToolTip(!showToolTip) }>
 
       { showToolTip &&
-        <div className={ getClassNames('dropdown__popup', { left, mid }) }>
+        <div className={ getClassNames('dropdown__popup', { left, mid, period }) }>
           { menu === CHART_TOP_BAR_MENU &&
             <div>
               <div>{ 'Probes on field:' }</div>
@@ -61,6 +60,18 @@ const DropDownMenu = ({ menu, menuData, left, mid }) => {
           { menu === CHART_USAGE_SASRI_MENU &&
             <div>
               <div>{ 'SASRI parameters:' }</div>
+            </div> }
+
+          { menu === CHART_ACTIVE_PERIOD &&
+            <div>
+              <div onClick={ () => setActiveDataPeriod('All') }>{ 'All readings' }</div>
+              <div onClick={ () => setActiveDataPeriod(100) }>{ '100' }</div>
+              <div onClick={ () => setActiveDataPeriod(56) }>{ '56' }</div>
+              <div onClick={ () => setActiveDataPeriod(28) }>{ '28' }</div>
+              <div onClick={ () => setActiveDataPeriod(21) }>{ '21' }</div>
+              <div onClick={ () => setActiveDataPeriod(14) }>{ '14' }</div>
+              <div onClick={ () => setActiveDataPeriod(7) }>{ '7' }</div>
+              <div onClick={ () => setActiveDataPeriod(1) }>{ '1' }</div>
             </div> }
         </div> }
     </div>

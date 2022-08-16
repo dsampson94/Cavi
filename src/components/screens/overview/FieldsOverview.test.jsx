@@ -37,7 +37,7 @@ describe('FieldsOverview', () => {
       const contentContainer = container.querySelector('.content-container');
       expect(contentContainer).toBeInTheDocument();
 
-      const overviewMidBar = container.querySelector('.mid-bar');
+      const overviewMidBar = container.querySelector('.overview__mid-bar');
       expect(overviewMidBar).toBeInTheDocument();
 
       const overviewHeaderBar = container.querySelector('.overview__top-button');

@@ -2,51 +2,51 @@ import React from 'react';
 
 import { useDimensionsContext } from './Chart.d3';
 
-const YAxis = ({ yScale, chartName }) => {
+const YAxis = ({ yScale, chartName, isDarkMode }) => {
 
   const dimensions = useDimensionsContext();
-  const ticks = yScale.ticks(5);
+  let ticks = yScale.ticks(5);
 
   return (
-    <g className="y-axis">
+    <g className="y-axis"
+       style={ { userSelect: 'none' } }>
 
-      <line key="y-axis__line"
-            className="y-axis__line"
+      <line className="y-axis__line"
             y2={ dimensions.boundedHeight }
-            stroke="#252529" />
+            stroke={ isDarkMode ? 'white' : '#252529' } />
 
-      <line key="y-axis__line"
-            className="y-axis__line"
+      <line className="y-axis__line"
             x1={ dimensions.boundedWidth }
             x2={ dimensions.boundedWidth }
             y2={ dimensions.boundedHeight }
-            stroke="#252529" />
+            stroke={ isDarkMode ? 'white' : '#252529' } />
 
       { ticks.map((t, index) => (
         <React.Fragment key={ `y-${ chartName }-${ t }-${ index }-container` }>
 
           <line className="y-axis__tick"
+                stroke={ isDarkMode ? 'grey' : '#bdc3c7' }
                 x2={ -10 }
                 y1={ yScale(t) }
-                y2={ yScale(t) }
-                stroke="#bdc3c7" />
+                y2={ yScale(t) } />
 
           { t === 0 &&
             <line className="y-axis__tick"
+                  stroke={ isDarkMode ? 'white' : 'black' }
                   x2={ dimensions.boundedWidth }
                   y1={ yScale(t) }
                   y2={ yScale(t) }
-                  stroke={ 'black' }
                   opacity={ 0.8 } /> }
 
           <line className="y-axis__tick"
+                stroke={ isDarkMode ? 'grey' : '#dad9d5' }
                 x2={ dimensions.boundedWidth }
                 y1={ yScale(t) }
-                y2={ yScale(t) }
-                stroke="#dad9d5" />
+                y2={ yScale(t) } />
 
           <text className="y-axis__tick__label"
-                style={ { fontSize: 12 } }
+                style={ { fontSize: 11 } }
+                fill={ isDarkMode ? 'white' : 'black' }
                 transform={ `translate(-28, ${ yScale(t) + 3 })` }>
             { t }
           </text>

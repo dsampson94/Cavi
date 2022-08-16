@@ -63,6 +63,7 @@ export const RED = 'Viewed in MORE than 30 days!';
 export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
 export const CHART_USAGE_MENU = 'chart_usage_menu';
 export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
+export const CHART_ACTIVE_PERIOD = 'chart_active_period';
 
 export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';
@@ -157,3 +158,6 @@ export const DAILY_ETO = 'Daily ETo';
 //CHART ICONS
 export const DOWN_ARROW = 'down_arrow';
 export const OPEN_MENU = 'open_menu';
+export const TOGGLE_YAXIS = 'toggle_y';
+export const CIRCLE_DROPDOWN = 'circle_dropdown';
+export const DOUBLE_DROPDOWN = 'double_dropdown';

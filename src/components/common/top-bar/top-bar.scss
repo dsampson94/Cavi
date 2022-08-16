@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  user-select: none;
   border-bottom: util.rem(1) solid;
   height: util.rem(58);
   max-width: 99.9%;
@@ -96,6 +97,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  user-select: none;
   border-bottom: util.rem(1) solid;
   height: util.rem(58);
   max-width: 99.9%;

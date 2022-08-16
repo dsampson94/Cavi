@@ -6,6 +6,7 @@
   position: fixed;
   top: utils.rem(60);
   right: utils.bu(.5);
+  user-select: none;
   transform: translateY(utils.bu(-3));
   min-width: utils.rem(300);
   max-width: utils.rem(300);

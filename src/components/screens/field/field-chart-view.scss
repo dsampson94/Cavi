@@ -18,6 +18,7 @@
     margin-top: util.rem(2);
     height: util.rem(15);
     white-space: nowrap;
+    user-select: none;
 
     &--dark {
       background-color: map.get(color.$colorMap, dark-mode-grey);
@@ -38,6 +39,11 @@
         margin-top: util.rem(0.5);
         width: util.rem(22);
         height: util.rem(16);
+
+        &:active {
+          position: relative;
+          top: 0.9px;
+        }
       }
 
       &-inner {
@@ -49,7 +55,7 @@
 
         & p {
           margin-top: util.rem(3.4);
-          margin-left: util.rem(105);
+          margin-left: util.rem(8);
           font-size: util.rem(10);
         }
       }
@@ -75,14 +81,57 @@
       flex-direction: row-reverse;
       align-items: center;
       font-size: util.rem(10);
+      margin-right: util.rem(10);
       width: 50%;
-      margin-right: util.rem(11);
 
-      & div {
+      &-days-container {
+        display: flex;
+        flex-direction: row-reverse;
+        margin: util.rem(5.5) util.rem(8) util.rem(4) util.rem(4);
+
+        & div {
+          position: relative;
+          z-index: 11;
+          margin: util.rem(5.5) util.rem(2) util.rem(4) util.rem(4);
+          user-select: none;
+          cursor: pointer;
+
+          &:active {
+            position: relative;
+            top: 0.9px;
+          }
+        }
+
+        & p {
+          position: relative;
+          z-index: 11;
+          user-select: none;
+        }
+      }
+
+      &-tool-container {
+        display: flex;
+        justify-content: left;
+        flex-direction: row-reverse;
+        width: util.rem(42);
+      }
+
+      &-icon-container {
+        display: flex;
         position: relative;
-        z-index: 5;
-        margin: util.rem(5.5) util.rem(4) util.rem(4) util.rem(4);
-        cursor: pointer;
+        z-index: 11;
+        width: util.rem(14);
+        height: util.rem(16);
+        margin: util.rem(9) util.rem(0) util.rem(4) util.rem(5);
+        border-top-right-radius: map.get(radius.$border-radius, medium);
+        border-bottom-right-radius: map.get(radius.$border-radius, medium);
+        border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+        background-color: white;
+
+        &:active {
+          position: relative;
+          top: 0.9px;
+        }
       }
     }
 
@@ -117,16 +166,20 @@
     flex-direction: column;
     width: 51.5%;
 
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      height: 103%;
+    }
+
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      height: 79%;
+      height: 92%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      height: 86%;
+      height: 96%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      height: 93%;
+      height: 95.8%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {

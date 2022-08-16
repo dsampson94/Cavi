@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   border-right: util.rem(1) solid;
+  user-select: none;
   transition: 0.4s;
   height: 100%;
   width: 0;
@@ -61,7 +62,8 @@
         }
 
         &--selected {
-          background-color: map.get(color.$colorMap, selected-blue);
+          border-top-right-radius: map.get(radius.$border-radius, medium);
+          border-bottom-right-radius: map.get(radius.$border-radius, medium);
         }
       }
     }
@@ -83,6 +85,7 @@
   flex-direction: column;
   resize: horizontal;
   overflow: auto;
+  user-select: none;
   border-right: util.rem(1) solid;
   transition: 0.4s;
   height: 100%;

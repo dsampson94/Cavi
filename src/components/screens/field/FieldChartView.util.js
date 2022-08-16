@@ -4,8 +4,8 @@ import { useHistory, useParams } from 'react-router';
 import {
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
-  AGGREGATE_TOP_SOIL,
-  CHART_TOP_BAR_MENU,
+  AGGREGATE_TOP_SOIL, CHART_ACTIVE_PERIOD,
+  CHART_TOP_BAR_MENU, CIRCLE_DROPDOWN,
   DAILY_ETO,
   DEFICIT,
   DEFICIT_100MM,
@@ -13,8 +13,9 @@ import {
   DEFICIT_300MM,
   DEFICIT_400MM,
   DEFICIT_600MM,
-  DEFICIT_800MM,
+  DEFICIT_800MM, DOUBLE_DROPDOWN,
   SETTINGS_GEAR,
+  TOGGLE_YAXIS,
   USAGE_ETC
 } from '../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
@@ -25,14 +26,19 @@ import SVGIcon from '../../common/icon/SVGIcon';
 import DropDownMenu from '../../common/drop-down/DropDownMenu';
 import FieldLineChartD3 from '../../common/chart/client-field/FieldLineChart.d3';
 import FieldCombinationChart from '../../common/chart/client-field/FieldCombinationChart.d3';
+import TextInput from '../../common/input/text/TextInput';
 
 export const FieldChartTopBar = ({
+                                   mappedChartList,
+                                   activeDataPeriod,
+                                   setActiveDataPeriod,
                                    showChartsSideBar,
                                    setShowChartsSideBar,
-                                   mappedChartList,
                                    mappedFieldList,
                                    mappedMenuList,
-                                   setActiveFieldName
+                                   setActiveFieldName,
+                                   yAxisShared,
+                                   setYAxisShared
                                  }) => {
 
   const history = useHistory();
@@ -53,6 +59,10 @@ export const FieldChartTopBar = ({
 
   const handleFieldClick = (history, groupName, clientName, field) => {
     history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+  };
+
+  const onHandleChangeNumeric = (event) => {
+    if (Number(event.target.value)) setActiveDataPeriod(event.target.value);
   };
 
   return (
@@ -79,6 +89,10 @@ export const FieldChartTopBar = ({
             <DropDownMenu menu={ CHART_TOP_BAR_MENU } menuData={ mappedMenuList } />
             <SVGIcon name={ SETTINGS_GEAR } tiny fill={ '#6E8192' } />
           </div>
+          <div className="field-chart__top-bar--left__settings"
+               onClick={ () => setYAxisShared(!yAxisShared) }>
+            <SVGIcon name={ TOGGLE_YAXIS } tiny fill={ '#6E8192' } />
+          </div>
           <p>{ 'Deficit per layer (mm)' }</p>
         </div>
       </div>
@@ -88,19 +102,29 @@ export const FieldChartTopBar = ({
       </div>
 
       <div className="field-chart__top-bar--right">
-        <Button label={ '>' }
-                white
-                small
-                chartbar />
-        <div>{ 'All readings' }</div>
-        <div>{ '100' }</div>
-        <div>{ '56' }</div>
-        <div>{ '28' }</div>
-        <div>{ '21' }</div>
-        <div>{ '14' }</div>
-        <div>{ '7' }</div>
-        <div>{ '1' }</div>
-        <div>{ 'Days:' }</div>
+        <div className="field-chart__top-bar--right-tool-container">
+          <div className="field-chart__top-bar--right-icon-container">
+            <SVGIcon name={ DOUBLE_DROPDOWN } />
+            <DropDownMenu menu={ CHART_ACTIVE_PERIOD }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          period />
+          </div>
+          <TextInput placeholder={ activeDataPeriod }
+                     onChange={ onHandleChangeNumeric }
+                     chartbar />
+        </div>
+
+        <div className="field-chart__top-bar--right-days-container">
+          <div onClick={ () => setActiveDataPeriod('All') }>{ 'All readings' }</div>
+          <div onClick={ () => setActiveDataPeriod(100) }>{ '100' }</div>
+          <div onClick={ () => setActiveDataPeriod(56) }>{ '56' }</div>
+          <div onClick={ () => setActiveDataPeriod(28) }>{ '28' }</div>
+          <div onClick={ () => setActiveDataPeriod(21) }>{ '21' }</div>
+          <div onClick={ () => setActiveDataPeriod(14) }>{ '14' }</div>
+          <div onClick={ () => setActiveDataPeriod(7) }>{ '7' }</div>
+          <div onClick={ () => setActiveDataPeriod(1) }>{ '1' }</div>
+          <p style={ { fontSize: '10px', marginTop: '5px' } }>{ 'Days:' }</p>
+        </div>
       </div>
     </div>
   );
@@ -118,6 +142,8 @@ export const LeftSideCharts = ({
                                  setCurrentYZoomState,
                                  currentXZoomState,
                                  setCurrentXZoomState,
+                                 yAxisShared,
+                                 activeDataPeriod,
                                  date,
                                  setDate
                                }) => {
@@ -138,6 +164,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
 
@@ -153,6 +182,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
 
@@ -168,6 +200,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
 
@@ -183,6 +218,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
 
@@ -198,6 +236,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
 
@@ -213,6 +254,9 @@ export const LeftSideCharts = ({
                         setCurrentYZoomState={ setCurrentYZoomState }
                         currentXZoomState={ currentXZoomState }
                         setCurrentXZoomState={ setCurrentXZoomState }
+                        sharedYScaleData={ mappedChartList?.[0] }
+                        yAxisShared={ yAxisShared }
+                        activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate }
                         hasXAxis />
@@ -232,6 +276,8 @@ export const RightSideCharts = ({
                                   setCurrentYZoomState,
                                   currentXZoomState,
                                   setCurrentXZoomState,
+                                  yAxisShared,
+                                  activeDataPeriod,
                                   date,
                                   setDate
                                 }) => {
@@ -254,6 +300,9 @@ export const RightSideCharts = ({
                           setCurrentYZoomState={ setCurrentYZoomState }
                           currentXZoomState={ currentXZoomState }
                           setCurrentXZoomState={ setCurrentXZoomState }
+                          sharedYScaleData={ mappedChartList?.[6] }
+                          yAxisShared={ yAxisShared }
+                          activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
 
@@ -270,6 +319,9 @@ export const RightSideCharts = ({
                           setCurrentYZoomState={ setCurrentYZoomState }
                           currentXZoomState={ currentXZoomState }
                           setCurrentXZoomState={ setCurrentXZoomState }
+                          sharedYScaleData={ mappedChartList?.[6] }
+                          yAxisShared={ yAxisShared }
+                          activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
       </div>
@@ -286,6 +338,7 @@ export const RightSideCharts = ({
                                setCurrentYZoomState={ setCurrentYZoomState }
                                currentXZoomState={ currentXZoomState }
                                setCurrentXZoomState={ setCurrentXZoomState }
+                               activeDataPeriod={ activeDataPeriod }
                                date={ date }
                                setDate={ setDate } />
 
@@ -300,6 +353,7 @@ export const RightSideCharts = ({
                           setCurrentYZoomState={ setCurrentYZoomState }
                           currentXZoomState={ currentXZoomState }
                           setCurrentXZoomState={ setCurrentXZoomState }
+                          activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate }
                           hasXAxis />

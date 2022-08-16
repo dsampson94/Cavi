@@ -1,6 +1,8 @@
 import React from 'react';
 import { bisector, pointer, selectAll } from 'd3';
 
+import useContextMenu from '../../../../tools/hooks/useContextMenu';
+
 import '../chart.scss';
 
 const ChartTooltipDot = ({
@@ -34,6 +36,8 @@ export default ChartTooltipDot;
 
 const LineDot = ({ setHoverActive, setDate, xScale, xAccessor, data, date, yScale, yAccessor, hoverActive, clipPath }) => {
 
+  const { showDropDown } = useContextMenu();
+
   let dateBisector = bisector(xAccessor).center;
 
   let x = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
@@ -42,13 +46,14 @@ const LineDot = ({ setHoverActive, setDate, xScale, xAccessor, data, date, yScal
   selectAll('.mouse-tracker').
     on('touchmouse mousemove', event => {
       setHoverActive(true);
-      setDate(xScale.invert(pointer(event)[0]));
+      setDate(xScale.invert(pointer(event)[0] + 15));
+      if (showDropDown) setDate(date);
     }).on('mouseleave', () => {
     setHoverActive(false);
   });
 
   return (<>
-    { hoverActive && x && y &&
+    { hoverActive && y &&
       <circle className={ 'tool-tip-dot' }
               clipPath={ clipPath }
               cx={ x + 1.5 }

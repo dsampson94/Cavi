@@ -13,8 +13,13 @@
     padding: util.rem(0);
   }
 
-  &--left{
+  &--left {
     display: flex;
+  }
+
+  &--chartbar {
+    padding: 0;
+    max-width: util.rem(20);
   }
 
   &__label-container {
@@ -47,17 +52,8 @@
     font-family: Aller, serif;
     font-size: util.bu(2);
 
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-
     input:-webkit-autofill {
       -webkit-box-shadow: inset 0 0 0 util.rem(100) map.get(color.$colorMap, autofill-blue);
-    }
-
-    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
     }
 
     &--login {
@@ -67,6 +63,15 @@
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
         height: util.rem(35);
       }
+    }
+
+    &--chartbar {
+      margin: util.rem(9) util.rem(0) util.rem(4) util.rem(0);
+      border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+      height: util.rem(16);
+      width: util.rem(28);
+      font-size: util.bu(1.1);
+      padding: 0 0 0 util.rem(1.8);
     }
   }
 

@@ -37,7 +37,7 @@ body.light-mode {
     color: map.get(color.$colorMap, secondary-blue-3);
   }
 
-  .side-bar__list__item-subheader--selected {
+  .client-fields-side-bar__list__item__subheader--selected {
     transition: 0.3s;
     background-color: map.get(color.$colorMap, selected-blue);
   }
@@ -125,9 +125,9 @@ body.dark-mode {
     color: map.get(color.$colorMap, grey);
   }
 
-  .side-bar__list__item__subheader--selected {
+  .client-fields-side-bar__list__item__subheader--selected {
     transition: 0.3s;
-    background-color: map.get(color.$colorMap, pulse-blue);
+    background-color: map.get(color.$colorMap, hover-blue);
   }
 
   .input__wrapper input {
@@ -197,5 +197,11 @@ body.dark-mode {
 
   .field-chart__lower {
     background-color: map.get(color.$colorMap, chart-background-grey);
+  }
+
+  .chart__info {
+    white-space: nowrap;
+    width: 1%;
+    opacity: 0.6;
   }
 }

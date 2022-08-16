@@ -12,6 +12,7 @@ $info-color: map.get(colors.$colorMap, info);
 .snack {
   display: flex;
   padding: utils.rem(15);
+  user-select: none;
   background-color: map.get(colors.$colorMap, white);
   border-radius: map.get(radius.$border-radius, small);
   align-items: center;

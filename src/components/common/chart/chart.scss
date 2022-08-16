@@ -10,13 +10,13 @@
 
   &--usage {
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      height: 15%;
-      margin-top: 10%;
+      height: 12%;
+      margin-top: 8%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
       height: 10%;
-      margin-top: 6.5%;
+      margin-top: 5.5%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
@@ -46,6 +46,7 @@
     flex-direction: row;
     font-size: util.rem(10);
     white-space: nowrap;
+    user-select: none;
 
     &__zoom-options {
       display: flex;
@@ -133,6 +134,7 @@
   }
 
   &__info {
+    user-select: none;
     width: 100%;
     height: util.rem(10);
     margin: -4.5% 0 0 6.5%;
@@ -141,12 +143,12 @@
 
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       font-size: util.rem(7);
-      margin: -4.5% 0 0 15%;
+      margin: -8% 0 0 15%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
       font-size: util.rem(9);
-      margin: -4.5% 0 0 12%;
+      margin: -7% 0 0 13%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, large)) {

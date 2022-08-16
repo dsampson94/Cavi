@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bisector } from 'd3';
 
-import { USAGE_ETC } from '../../../../tools/general/system-variables.util';
+import { DAILY_ETO, USAGE_ETC } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
 
@@ -14,6 +14,7 @@ const ChartTooltipText = ({
                             xScale,
                             yScale,
                             hoverActive,
+                            setHoverActive,
                             chartName,
                             clipPath
                           }) => {
@@ -25,13 +26,14 @@ const ChartTooltipText = ({
                       xAccessor={ xAccessor }
                       yAccessor={ yAccessor }
                       hoverActive={ hoverActive }
+                      setHoverActive={ setHoverActive }
                       chartName={ chartName }
                       clipPath={ clipPath } />;
 };
 
 export default ChartTooltipText;
 
-const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverActive, chartName, clipPath }) => {
+const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverActive, setHoverActive, chartName, clipPath }) => {
 
   let dateBisector = bisector(xAccessor).center;
 
@@ -44,7 +46,9 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
     if (chartName.includes('deficit')) {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
     } else if (chartName === USAGE_ETC) {
-      return `Set: ${ hoveredObject?.lineY.toFixed(3) } Etc: ${ hoveredObject?.barY } @ ${ hoveredObject?.x }`;
+      return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY.toFixed(3) } @ ${ hoveredObject?.x }`;
+    } else if (chartName === DAILY_ETO) {
+      return `Forecast: ${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
     } else {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
     }
@@ -59,7 +63,7 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
                 x={ x + 10 }
                 y={ y - 25 }
                 height={ 15 }
-                width={ chartName.includes('deficit') ? 235 : chartName === USAGE_ETC ? 210 : 145 }
+                width={ chartName.includes('deficit') ? 235 : chartName === USAGE_ETC ? 210 : chartName === DAILY_ETO ? 180 : 145 }
                 rx={ '5' }
                 ry={ '5' } />
 

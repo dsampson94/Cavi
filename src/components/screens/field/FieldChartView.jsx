@@ -20,22 +20,28 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
   const [currentYZoomState, setCurrentYZoomState] = useState(zoomIdentity);
   const [currentXZoomState, setCurrentXZoomState] = useState(zoomIdentity);
   const [hoverActive, setHoverActive] = useState(false);
+  const [yAxisShared, setYAxisShared] = useState(false);
   const [date, setDate] = useState(null);
+  const [activeDataPeriod, setActiveDataPeriod] = useState('All');
 
   return (
     <ContentContainer view={ FIELD_CHARTS }
                       mappedFieldList={ mappedFieldList }
-                      setLoadPeriod={ setActiveLoadPeriod }
+                      setActiveLoadPeriod={ setActiveLoadPeriod }
                       setActiveFieldName={ setActiveFieldName }
                       showChartsSideBar={ showChartsSideBar }>
 
       <div className="field-chart">
-        <FieldChartTopBar showChartsSideBar={ showChartsSideBar }
+        <FieldChartTopBar mappedChartList={ mappedChartList }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          showChartsSideBar={ showChartsSideBar }
                           setShowChartsSideBar={ setShowChartsSideBar }
-                          mappedChartList={ mappedChartList }
                           mappedFieldList={ mappedFieldList }
                           mappedMenuList={ mappedMenuList }
-                          setActiveFieldName={ setActiveFieldName } />
+                          setActiveFieldName={ setActiveFieldName }
+                          yAxisShared={ yAxisShared }
+                          setYAxisShared={ setYAxisShared } />
 
         <div className={ getClassNames('field-chart__container', { dark: (getTheme === 'dark') }) }>
           <LeftSideCharts mappedChartList={ mappedChartList }
@@ -45,8 +51,10 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
                           setCurrentYZoomState={ setCurrentYZoomState }
                           currentXZoomState={ currentXZoomState }
                           setCurrentXZoomState={ setCurrentXZoomState }
+                          yAxisShared={ yAxisShared }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
+                          activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
 
@@ -57,8 +65,10 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
                            setCurrentYZoomState={ setCurrentYZoomState }
                            currentXZoomState={ currentXZoomState }
                            setCurrentXZoomState={ setCurrentXZoomState }
+                           yAxisShared={ yAxisShared }
                            hoverActive={ hoverActive }
                            setHoverActive={ setHoverActive }
+                           activeDataPeriod={ activeDataPeriod }
                            date={ date }
                            setDate={ setDate } />
         </div>

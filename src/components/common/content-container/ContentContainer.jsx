@@ -15,7 +15,7 @@ const ContentContainer = ({
                             view,
                             clientRequestFields,
                             mappedFieldList,
-                            setLoadPeriod,
+                            setActiveLoadPeriod,
                             setActiveFieldName,
                             showChartsSideBar,
                             showClientsSideBar,
@@ -34,7 +34,7 @@ const ContentContainer = ({
                                           showChartsSideBar={ showChartsSideBar }
                                           mappedFieldList={ mappedFieldList }
                                           clientRequestFields={ clientRequestFields }
-                                          setLoadPeriod={ setLoadPeriod }
+                                          setActiveLoadPeriod={ setActiveLoadPeriod }
                                           setActiveFieldName={ setActiveFieldName }
                                           view={ view } />;
   }
@@ -79,7 +79,7 @@ const FieldChartsContentContainer = ({
                                        showChartsSideBar,
                                        clientRequestFields,
                                        mappedFieldList,
-                                       setLoadPeriod,
+                                       setActiveLoadPeriod,
                                        setActiveFieldName
                                      }) => {
 
@@ -96,7 +96,7 @@ const FieldChartsContentContainer = ({
         <SideBar showSideBar={ showChartsSideBar }
                  mappedUserData={ mappedUser }
                  mappedFieldList={ mappedFieldList }
-                 setLoadPeriod={ setLoadPeriod }
+                 setActiveLoadPeriod={ setActiveLoadPeriod }
                  setActiveFieldName={ setActiveFieldName }
                  view={ view } />
         { children }
