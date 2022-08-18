@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { retrieveActiveThemeFromLocalStorage } from '../storage/localStorage';
+import { retrieveActiveThemeFromLocalStorage, saveActiveThemeToLocalStorage } from '../storage/localStorage';
 
-const useDarkMode = (activate) => {
+const useTheme = (activate) => {
 
   const storeActiveTheme = useSelector(state => state?.system?.theme);
   const localActiveTheme = retrieveActiveThemeFromLocalStorage();
@@ -10,12 +10,16 @@ const useDarkMode = (activate) => {
 
   useEffect(() => {
     if (activate) {
-      if (localActiveTheme === 'dark') return document.body.classList.add('dark-mode');
-      else return document.body.classList.add('light-mode');
+      if (localActiveTheme === 'dark') {
+        return document.body.classList.add('dark-mode');
+      } else {
+        saveActiveThemeToLocalStorage('light');
+        return document.body.classList.add('light-mode');
+      }
     }
   }, [isDarkMode]);
 
   return { storeActiveTheme, localActiveTheme, isDarkMode };
 };
 
-export default useDarkMode;
+export default useTheme;

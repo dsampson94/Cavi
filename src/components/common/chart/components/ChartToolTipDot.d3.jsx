@@ -56,7 +56,7 @@ const LineDot = ({ setHoverActive, setDate, xScale, xAccessor, data, date, yScal
     { hoverActive && y &&
       <circle className={ 'tool-tip-dot' }
               clipPath={ clipPath }
-              cx={ x + 1.5 }
+              cx={ x }
               cy={ y }
               fill={ '#0081ff' }
               stroke={ 'white' }

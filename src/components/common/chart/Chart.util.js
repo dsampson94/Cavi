@@ -6,6 +6,7 @@ import {
   AGGREGATE_TOP_SOIL,
   CHART_USAGE_MENU,
   CHART_USAGE_SASRI_MENU,
+  CIRCLE_DROPDOWN,
   DAILY_ETO,
   DEFICIT_100MM,
   DEFICIT_200MM,
@@ -13,9 +14,8 @@ import {
   DEFICIT_400MM,
   DEFICIT_600MM,
   DEFICIT_800MM,
-  DOWN_ARROW,
-  OPEN_MENU,
   SETTINGS_GEAR,
+  SINGLE_DROPDOWN,
   USAGE_ETC
 } from '../../../tools/general/system-variables.util';
 
@@ -51,11 +51,11 @@ export const ChartHeader = ({ chartName, isDarkMode }) => {
           { chartName === USAGE_ETC &&
             <div className="chart__header__zoom-options--left-top">
               <div className="chart__header__zoom-options--left-top__options">
-                <SVGIcon name={ DOWN_ARROW } chart />
+                <SVGIcon name={ CIRCLE_DROPDOWN } />
                 <DropDownMenu menu={ CHART_USAGE_MENU } />
               </div>
               <div className="chart__header__zoom-options--left-top__options">
-                <SVGIcon name={ OPEN_MENU } chart />
+                <SVGIcon name={ SINGLE_DROPDOWN } />
                 <DropDownMenu menu={ CHART_USAGE_SASRI_MENU } />
               </div>
             </div> }

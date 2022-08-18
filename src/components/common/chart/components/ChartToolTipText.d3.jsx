@@ -54,22 +54,31 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
     }
   };
 
+  const getXPos = () => {
+    return { rect: x + 15, text: x + 20 };
+  };
+
+  const getYPos = () => {
+    if (y < 40) return { rect: y, text: y + 11 };
+    else return { rect: y - 20, text: y - 9 };
+  };
+
   return (<>
       { hoverActive && hoveredObject?.y &&
         <g className="tooltip-container"
            clipPath={ clipPath }>
           <rect className="tooltip-container__rect"
                 fill={ 'white' }
-                x={ x + 10 }
-                y={ y - 25 }
+                x={ getXPos().rect }
+                y={ getYPos().rect }
                 height={ 15 }
-                width={ chartName.includes('deficit') ? 235 : chartName === USAGE_ETC ? 210 : chartName === DAILY_ETO ? 180 : 145 }
+                width={ chartName.includes('deficit') ? 236 : chartName === USAGE_ETC ? 212 : chartName === DAILY_ETO ? 182 : 149 }
                 rx={ '5' }
                 ry={ '5' } />
 
           <text className="tooltip-container__text"
-                x={ x + 15 }
-                y={ y - 13 }
+                x={ getXPos().text }
+                y={ getYPos().text }
                 fontSize={ '11' }
                 fill={ 'blue' }>
             { toolTipText() }

@@ -14,23 +14,35 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
 
   selectAll('.line').on('contextmenu ', event => event.preventDefault());
 
+  const getLineColor = () => {
+    if (chartName === AGGREGATE_TOP_SOIL) return 'url(#lineGradientAggregateTop)';
+    else if (chartName === AGGREGATE_BOTTOM_SOIL) return 'url(#lineGradientAggregateBottom)';
+    else if (chartName === USAGE_ETC && isDarkMode) return 'white';
+    else if (chartName === USAGE_ETC && !isDarkMode) return 'black';
+    else if (isDarkMode) return '#0090ff';
+    else if (!isDarkMode) return '#0000FF';
+  };
+
   return (
     <g>
-      { chartType !== DEFICIT && <defs>
-        <linearGradient id="line-gradient-aggregate">
-          <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: isDarkMode ? 'white' : 'black', stopOpacity: '1' } } />
-          <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: isDarkMode ? '#47FFFF' : '#00B8B0', stopOpacity: '1' } } />
+      { chartName === AGGREGATE_TOP_SOIL && <defs>
+        <linearGradient id="lineGradientAggregateTop">
+          <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: isDarkMode ? 'white' : 'black' } } />
+          <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: isDarkMode ? '#47FFFF' : '#00B8B0' } } />
+        </linearGradient>
+      </defs> }
+
+      { chartName === AGGREGATE_BOTTOM_SOIL && <defs>
+        <linearGradient id="lineGradientAggregateBottom">
+          <stop offset={ `${ recommendationOffset }%` } style={ { stopColor: isDarkMode ? 'white' : 'black' } } />
+          <stop offset={ `${ recommendationOffset - 1 }%` } style={ { stopColor: isDarkMode ? '#47FFFF' : '#00B8B0' } } />
         </linearGradient>
       </defs> }
 
       <path className={ 'line' }
             d={ lineGenerator(data) }
             clipPath={ clipPath }
-            stroke={ chartType === AGGREGATE
-              ? 'url(#line-gradient-aggregate)'
-              : chartName === USAGE_ETC
-                ? isDarkMode ? 'white' : 'black'
-                : isDarkMode ? '#0090ff' : '#0000FF' }
+            stroke={ getLineColor() }
             style={ {
               fill: 'none',
               strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',

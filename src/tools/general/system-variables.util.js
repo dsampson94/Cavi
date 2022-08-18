@@ -161,3 +161,4 @@ export const OPEN_MENU = 'open_menu';
 export const TOGGLE_YAXIS = 'toggle_y';
 export const CIRCLE_DROPDOWN = 'circle_dropdown';
 export const DOUBLE_DROPDOWN = 'double_dropdown';
+export const SINGLE_DROPDOWN = 'single_dropdown';

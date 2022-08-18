@@ -99,6 +99,7 @@ const FieldChartViewContainer = () => {
   return <FieldChartView mappedFieldList={ mappedFieldList() }
                          mappedChartList={ mappedChartList() }
                          mappedMenuList={ mappedMenuList() }
+                         activeLoadPeriod={ activeLoadPeriod }
                          setActiveLoadPeriod={ setActiveLoadPeriod }
                          setActiveFieldName={ setActiveFieldName } />;
 };

@@ -143,6 +143,7 @@ export const LeftSideCharts = ({
                                  currentXZoomState,
                                  setCurrentXZoomState,
                                  yAxisShared,
+                                 activeLoadPeriod,
                                  activeDataPeriod,
                                  date,
                                  setDate
@@ -166,6 +167,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
@@ -184,6 +186,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
@@ -202,6 +205,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
@@ -220,6 +224,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
@@ -238,6 +243,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate } />
@@ -256,6 +262,7 @@ export const LeftSideCharts = ({
                         setCurrentXZoomState={ setCurrentXZoomState }
                         sharedYScaleData={ mappedChartList?.[0] }
                         yAxisShared={ yAxisShared }
+                        activeLoadPeriod={ activeLoadPeriod }
                         activeDataPeriod={ activeDataPeriod }
                         date={ date }
                         setDate={ setDate }
@@ -277,6 +284,7 @@ export const RightSideCharts = ({
                                   currentXZoomState,
                                   setCurrentXZoomState,
                                   yAxisShared,
+                                  activeLoadPeriod,
                                   activeDataPeriod,
                                   date,
                                   setDate
@@ -302,6 +310,7 @@ export const RightSideCharts = ({
                           setCurrentXZoomState={ setCurrentXZoomState }
                           sharedYScaleData={ mappedChartList?.[6] }
                           yAxisShared={ yAxisShared }
+                          activeLoadPeriod={ activeLoadPeriod }
                           activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
@@ -321,6 +330,7 @@ export const RightSideCharts = ({
                           setCurrentXZoomState={ setCurrentXZoomState }
                           sharedYScaleData={ mappedChartList?.[6] }
                           yAxisShared={ yAxisShared }
+                          activeLoadPeriod={ activeLoadPeriod }
                           activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
@@ -338,6 +348,7 @@ export const RightSideCharts = ({
                                setCurrentYZoomState={ setCurrentYZoomState }
                                currentXZoomState={ currentXZoomState }
                                setCurrentXZoomState={ setCurrentXZoomState }
+                               activeLoadPeriod={ activeLoadPeriod }
                                activeDataPeriod={ activeDataPeriod }
                                date={ date }
                                setDate={ setDate } />
@@ -353,6 +364,7 @@ export const RightSideCharts = ({
                           setCurrentYZoomState={ setCurrentYZoomState }
                           currentXZoomState={ currentXZoomState }
                           setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
                           activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate }

@@ -26,7 +26,7 @@ import {
   REPORT_PROBLEM_ICON,
   SATISFIED,
   SEARCH,
-  SETTINGS_GEAR,
+  SETTINGS_GEAR, SINGLE_DROPDOWN,
   SUNNY,
   TOGGLE_YAXIS,
   VERY_DISSATISFIED,
@@ -37,13 +37,13 @@ import {
 } from '../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
 
-import useDarkMode from '../../../tools/hooks/useDarkMode';
+import useTheme from '../../../tools/hooks/useTheme';
 
 import './svg-icon.scss';
 
 const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
 
-  const { storeActiveTheme } = useDarkMode(false);
+  const { localActiveTheme } = useTheme(false);
 
   return (
     <div className={ getClassNames('svg-icon',
@@ -53,7 +53,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
            xmlnsXlink="http://www.w3.org/1999/xlink"
            height={ height }
            width={ width }
-           fill={ getIconFill(storeActiveTheme, fill, name) }
+           fill={ getIconFill(localActiveTheme, fill, name) }
            viewBox={ getViewBox(name, tiny, chart) }>
         { getPath(name) }
       </svg>
@@ -67,6 +67,10 @@ const getViewBox = (name, tiny, chart) => {
       return '10 -1 50 100';
     case OPEN_MENU:
       return '10 -3 50 100';
+    case SINGLE_DROPDOWN:
+      return '9 0 35 80';
+    case CIRCLE_DROPDOWN:
+      return '9 1 35 80';
     case DOUBLE_DROPDOWN:
       return '9 8 35 70';
     case TOGGLE_YAXIS:
@@ -144,11 +148,13 @@ const getSmallIcons = (name) => {
 };
 
 const getIconFill = (activeTheme, fill, name) => {
-  if (activeTheme === 'light') {
+  if (activeTheme === 'light')
     return fill;
-  } else {
+  else if (activeTheme === 'dark')
     switch (name) {
       case DOWN_ARROW:
+      case SINGLE_DROPDOWN:
+      case CIRCLE_DROPDOWN:
       case OPEN_MENU:
       case TOGGLE_YAXIS:
       case SETTINGS_GEAR:
@@ -164,7 +170,6 @@ const getIconFill = (activeTheme, fill, name) => {
       default:
         return fill;
     }
-  }
 };
 
 const getPath = (name) => {
@@ -375,6 +380,10 @@ const getPath = (name) => {
     case DOUBLE_DROPDOWN:
       return (
         <path d="M24 38 12 26l2.1-2.1 9.9 9.9 9.9-9.9L36 26Zm0-12.65-12-12 2.1-2.1 9.9 9.9 9.9-9.9 2.1 2.1Z" />
+      );
+    case SINGLE_DROPDOWN:
+      return (
+        <path d="m24 30.75-12-12 2.15-2.15L24 26.5l9.85-9.85L36 18.8Z" />
       );
     default:
       return <path />;

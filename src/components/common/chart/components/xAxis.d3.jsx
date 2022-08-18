@@ -53,12 +53,14 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                 y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
-            <text className="x-axis__tick__label"
-                  style={ { fontSize: 11 } }
-                  fill={ isDarkMode ? 'white' : 'black' }
-                  transform={ `translate(${ xScale(date) - 26 }, 23)` }>
-              { date.toLocaleDateString() }
-            </text> }
+            <g className="x-axis__tick__label"
+               style={ { fontSize: 11 } }
+               fill={ isDarkMode ? 'white' : 'black' }
+               transform={ `translate(${ xScale(date) - 26 }, 23)` }>
+              <text>
+                { date.toLocaleDateString() }
+              </text>
+            </g> }
 
         </React.Fragment>
       )) }

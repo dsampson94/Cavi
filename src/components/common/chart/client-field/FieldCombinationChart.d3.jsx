@@ -5,7 +5,7 @@ import { chartByName, ChartHeader } from '../Chart.util';
 import { AGGREGATE } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
-import useDarkMode from '../../../../tools/hooks/useDarkMode';
+import useTheme from '../../../../tools/hooks/useTheme';
 
 import Chart from '../components/Chart.d3';
 import XAxis from '../components/xAxis.d3';
@@ -31,6 +31,7 @@ const FieldCombinationChart = ({
                                  setCurrentXZoomState,
                                  hoverActive,
                                  setHoverActive,
+                                 activeLoadPeriod,
                                  activeDataPeriod,
                                  date,
                                  setDate
@@ -38,7 +39,7 @@ const FieldCombinationChart = ({
 
   const svgRef = useRef();
 
-  const { isDarkMode } = useDarkMode(false);
+  const { isDarkMode } = useTheme(false);
   const [wrapperRef, dimensions] = useDimensions();
 
   const DIMENSIONS = { marginTop: 1, marginRight: 1, marginBottom: 1, marginLeft: 40, innerPadding: 10 };
@@ -80,7 +81,7 @@ const FieldCombinationChart = ({
       return [boundedWidth / 2, boundedHeight / 2];
     };
 
-    const zoomGlobal = zoom().scaleExtent([0.1, 40]).on('zoom', event => {
+    const zoomGlobal = zoom().scaleExtent([0.1, 40]).on('end', event => {
       const { k: newK, x: newX } = event.transform;
       const { k: prevK, x: prevX } = currentGlobalZoomState;
       const point = center(event, svg);
@@ -93,13 +94,14 @@ const FieldCombinationChart = ({
 
     svg.call(zoomGlobal).on('dblclick.zoom', null);
 
-    selectAll('.mouse-tracker').on('contextmenu ', event => event.preventDefault());
-    selectAll('.mouse-tracker').on('dblclick ', () => {
-      svg.call(zoomGlobal.transform, zoomIdentity);
-      setCurrentGlobalZoomState(zoomIdentity);
-      setCurrentXZoomState(zoomIdentity);
-      setCurrentYZoomState(zoomIdentity);
-    });
+    selectAll('.mouse-tracker').
+      on('contextmenu ', event => event.preventDefault()).
+      on('dblclick ', () => {
+        svg.call(zoomGlobal.transform, zoomIdentity);
+        setCurrentGlobalZoomState(zoomIdentity);
+        setCurrentXZoomState(zoomIdentity);
+        setCurrentYZoomState(zoomIdentity);
+      });
   }, [boundedWidth, boundedHeight, currentXZoomState, currentYZoomState, currentGlobalZoomState, xScale, yScale]);
 
   return (

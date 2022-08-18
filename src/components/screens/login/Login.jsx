@@ -4,6 +4,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { func } from 'prop-types';
 
+import useTheme from '../../../tools/hooks/useTheme';
+
 import background from '../../../tools/images/irricheckbackground.jpg';
 import logo from '../../../tools/images/pulselogo.png';
 
@@ -17,6 +19,8 @@ import './login.scss';
 const Login = ({ onLoginClick }) => {
 
   const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
+
+  useTheme(true);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);

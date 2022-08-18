@@ -67,7 +67,7 @@ const ContextMenu = ({
            style={ { top: anchorPoint.y - 20, left: anchorPoint.x } }>
 
         { (anchorPoint.x > screenMidWidth && anchorPoint.y < screenMidHeight) ?
-          <>
+          <div>
             <div>{ 'Start here and show...' }</div>
             <div>{ 'Calibrate Visually' }</div>
             <div>{ 'Irrigations...' }</div>
@@ -76,13 +76,13 @@ const ContextMenu = ({
             <div>{ 'Seasonal Reflection...' }</div>
             <div>{ 'Show last year also' }</div>
             <div>{ 'Fix Spikes (ML)' }</div>
-          </>
+          </div>
           :
-          <>
+          <div>
             <div>{ 'Start here and show...' }</div>
             <div>{ 'Delete readings...' }</div>
             <div>{ 'Check for new readings from here...' }</div>
-          </> }
+          </div> }
       </div> }
     </>
   );

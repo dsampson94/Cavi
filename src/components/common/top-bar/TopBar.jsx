@@ -26,7 +26,7 @@ import { daysFromToday } from '../../../tools/general/helpers.util';
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
 
-import useDarkMode from '../../../tools/hooks/useDarkMode';
+import useTheme from '../../../tools/hooks/useTheme';
 
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
@@ -149,7 +149,7 @@ ClientFieldsTopBar.propTypes = {
 
 const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
 
-  useDarkMode(true);
+  useTheme(true);
 
   const history = useHistory();
   const dispatch = useDispatch();

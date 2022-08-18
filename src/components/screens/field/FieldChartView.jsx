@@ -12,7 +12,14 @@ import ContentContainer from '../../common/content-container/ContentContainer';
 
 import './field-chart-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, setActiveLoadPeriod, setActiveFieldName }) => {
+const ClientFieldsView = ({
+                            mappedFieldList,
+                            mappedChartList,
+                            mappedMenuList,
+                            activeLoadPeriod,
+                            setActiveLoadPeriod,
+                            setActiveFieldName
+                          }) => {
 
   const getTheme = retrieveActiveThemeFromLocalStorage();
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
@@ -54,6 +61,7 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
                           yAxisShared={ yAxisShared }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
+                          activeLoadPeriod={ activeLoadPeriod }
                           activeDataPeriod={ activeDataPeriod }
                           date={ date }
                           setDate={ setDate } />
@@ -68,6 +76,7 @@ const ClientFieldsView = ({ mappedFieldList, mappedChartList, mappedMenuList, se
                            yAxisShared={ yAxisShared }
                            hoverActive={ hoverActive }
                            setHoverActive={ setHoverActive }
+                           activeLoadPeriod={ activeLoadPeriod }
                            activeDataPeriod={ activeDataPeriod }
                            date={ date }
                            setDate={ setDate } />
