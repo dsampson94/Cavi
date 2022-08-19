@@ -8,6 +8,7 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
 
   const dimensions = useDimensionsContext();
   const ticks = xScale.ticks(5);
+  console.log(ticks);
 
   return (
     <g className="x-axis"
@@ -53,14 +54,12 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                 y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
-            <g className="x-axis__tick__label"
-               style={ { fontSize: 11 } }
-               fill={ isDarkMode ? 'white' : 'black' }
-               transform={ `translate(${ xScale(date) - 26 }, 23)` }>
-              <text>
-                { date.toLocaleDateString() }
-              </text>
-            </g> }
+            <text className="x-axis__tick__label"
+                  style={ { fontSize: 11 } }
+                  fill={ isDarkMode ? 'white' : 'black' }
+                  transform={ `translate(${ xScale(date) - 26 }, 23)` }>
+              { date?.toLocaleString()?.slice(0, 10) }
+            </text> }
 
         </React.Fragment>
       )) }

@@ -44,14 +44,12 @@ const YAxis = ({ yScale, chartName, isDarkMode }) => {
                 y1={ yScale(t) }
                 y2={ yScale(t) } />
 
-          <g className="y-axis__tick__label"
-             style={ { fontSize: 11 } }
-             fill={ isDarkMode ? 'white' : 'black' }
-             transform={ `translate(-28, ${ yScale(t) + 3 })` }>
-            <text>
-              { t }
-            </text>
-          </g>
+          <text className="y-axis__tick__label"
+                style={ { fontSize: 11 } }
+                fill={ isDarkMode ? 'white' : 'black' }
+                transform={ `translate(-28, ${ yScale(t) + 3 })` }>
+            { t }
+          </text>
 
         </React.Fragment>
       )) }
