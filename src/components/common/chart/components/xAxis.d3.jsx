@@ -53,12 +53,11 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                 y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
-            <g className="x-axis__tick__label">
-              <text
-                style={ { fontSize: 11 } }
-                fill={ isDarkMode ? 'white' : 'black' }
-                x={ xScale(date) - 22 }
-                y={ 23 }>
+            <g className="x-axis__tick__label"
+               style={ { fontSize: 11 } }
+               transform={ `translate(${ xScale(date) - 23 }, 23)` }
+               fill={ isDarkMode ? 'white' : 'black' }>
+              <text>
                 { `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` }
               </text>
             </g> }
