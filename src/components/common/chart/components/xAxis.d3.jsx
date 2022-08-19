@@ -8,7 +8,6 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
 
   const dimensions = useDimensionsContext();
   const ticks = xScale.ticks(5);
-  console.log(ticks);
 
   return (
     <g className="x-axis"
@@ -58,7 +57,7 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                   style={ { fontSize: 11 } }
                   fill={ isDarkMode ? 'white' : 'black' }
                   transform={ `translate(${ xScale(date) - 26 }, 23)` }>
-              { date?.toLocaleString()?.slice(0, 10) }
+              { `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` }
             </text> }
 
         </React.Fragment>

@@ -14,6 +14,7 @@ import {
   pushLandGroupRow,
   pushMappedLists
 } from './FieldChartView.container.util';
+
 import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestFieldChartList } from '../../../redux/actions/field.action';

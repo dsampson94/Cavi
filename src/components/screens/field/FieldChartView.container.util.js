@@ -158,7 +158,7 @@ export const mapUsageETCList = (usageETCList, fieldChartList) => {
     });
   });
 
-  for (let i = 0; i < 12; i++) usageETCList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], lineY: initialLineY, barY: null });
+  for (let i = 0; i < 12; i++) usageETCList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], lineY: initialLineY, barY: -0.1 });
 
   Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
     Object.keys(value).forEach((innerKey) => {
@@ -180,7 +180,7 @@ export const mapUsageETCList = (usageETCList, fieldChartList) => {
   for (let i = 10; i > 0; i--)
     usageETCList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
-      barY: null
+      barY: -0.1
     });
 };
 
