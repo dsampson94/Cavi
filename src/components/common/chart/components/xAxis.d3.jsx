@@ -53,13 +53,15 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                 y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
-            <text className="x-axis__tick__label"
-                  style={ { fontSize: 11 } }
-                  fill={ isDarkMode ? 'white' : 'black' }
-                  x={ xScale(date) - 22 }
-                  y={ 23 }>
-              { `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` }
-            </text> }
+            <g className="x-axis__tick__label">
+              <text
+                style={ { fontSize: 11 } }
+                fill={ isDarkMode ? 'white' : 'black' }
+                x={ xScale(date) - 22 }
+                y={ 23 }>
+                { `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` }
+              </text>
+            </g> }
 
         </React.Fragment>
       )) }
