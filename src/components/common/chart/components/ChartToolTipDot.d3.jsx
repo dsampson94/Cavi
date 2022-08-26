@@ -1,8 +1,6 @@
 import React from 'react';
 import { bisector, pointer, selectAll } from 'd3';
 
-import useContextMenu from '../../../../tools/hooks/useContextMenu';
-
 import '../chart.scss';
 
 const ChartTooltipDot = ({
@@ -16,7 +14,9 @@ const ChartTooltipDot = ({
                            hoverActive,
                            setHoverActive,
                            chartName,
-                           clipPath
+                           clipPath,
+                           showPrimaryDropDown,
+                           xAxisViewMode
                          }) => {
 
   return <LineDot data={ data }
@@ -29,34 +29,50 @@ const ChartTooltipDot = ({
                   hoverActive={ hoverActive }
                   setHoverActive={ setHoverActive }
                   chartName={ chartName }
-                  clipPath={ clipPath } />;
+                  clipPath={ clipPath }
+                  showPrimaryDropDown={ showPrimaryDropDown }
+                  xAxisViewMode={ xAxisViewMode } />;
 };
 
 export default ChartTooltipDot;
 
-const LineDot = ({ setHoverActive, setDate, xScale, xAccessor, data, date, yScale, yAccessor, hoverActive, clipPath }) => {
-
-  const { showDropDown } = useContextMenu();
-
-  let dateBisector = bisector(xAccessor).center;
-
-  let x = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
-  let y = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
+const LineDot = ({
+                   setHoverActive,
+                   setDate,
+                   xScale,
+                   xAccessor,
+                   data,
+                   date,
+                   yScale,
+                   yAccessor,
+                   hoverActive,
+                   clipPath,
+                   showPrimaryDropDown,
+                   xAxisViewMode
+                 }) => {
 
   selectAll('.mouse-tracker').
     on('touchmouse mousemove', event => {
       setHoverActive(true);
-      setDate(xScale.invert(pointer(event)[0] + 15));
-      if (showDropDown) setDate(date);
-    }).on('mouseleave', () => {
+      if (showPrimaryDropDown) return setDate(date);
+      if (xAxisViewMode === 'topBar') setDate(xScale.invert(pointer(event)[0] + 10));
+    }).on('contextmenu', (event) => {
+    if (showPrimaryDropDown) {
+      setDate(xScale.invert(pointer(event)[0] + 10));
+    }
+  }).on('mouseleave', () => {
     setHoverActive(false);
   });
 
+  let dateBisector = bisector(xAccessor).center;
+  let x = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
+  let y = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
+
   return (<>
-    { hoverActive && y &&
+    { hoverActive && y && (data[dateBisector(data, date)]?.barY !== -0.1) &&
       <circle className={ 'tool-tip-dot' }
               clipPath={ clipPath }
-              cx={ x }
+              cx={ x + 1.5 }
               cy={ y }
               fill={ '#0081ff' }
               stroke={ 'white' }

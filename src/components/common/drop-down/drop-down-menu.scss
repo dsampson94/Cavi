@@ -15,13 +15,15 @@
 
   &__popup {
     position: absolute;
+    user-select: none;
     z-index: 10;
     font-size: util.rem(12);
     font-weight: normal;
     margin-left: util.rem(20);
     margin-top: util.rem(18);
-    border-radius: map.get(radius.$border-radius, medium);
-    padding: util.rem(4);
+    min-width: util.rem(80);
+    border-radius: map.get(radius.$border-radius, small);
+    padding: util.rem(10);
     color: map.get(color.$colorMap, black);
     box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, grey),
     inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
@@ -31,10 +33,16 @@
     & div {
 
       > div {
+        padding: util.rem(4);
 
         &:hover {
           background-color: map.get(color.$colorMap, row-hover-blue);
         }
+      }
+
+      > hr {
+        color: map.get(color.$colorMap, very-light-grey);
+        margin: util.rem(3);
       }
     }
 

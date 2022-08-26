@@ -57,9 +57,7 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                style={ { fontSize: 11 } }
                transform={ `translate(${ xScale(date) - 23 }, 23)` }
                fill={ isDarkMode ? 'white' : 'black' }>
-              <text>
-                { `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` }
-              </text>
+              <text children={ `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` } />
             </g> }
 
         </React.Fragment>

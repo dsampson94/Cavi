@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName, ChartHeader } from '../Chart.util';
@@ -31,8 +31,11 @@ const FieldCombinationChart = ({
                                  setCurrentXZoomState,
                                  hoverActive,
                                  setHoverActive,
-                                 activeLoadPeriod,
                                  activeDataPeriod,
+                                 activeLoadPeriod,
+                                 setActiveDataPeriod,
+                                 xAxisViewMode,
+                                 setXAxisViewMode,
                                  date,
                                  setDate
                                }) => {
@@ -41,6 +44,9 @@ const FieldCombinationChart = ({
 
   const { isDarkMode } = useTheme(false);
   const [wrapperRef, dimensions] = useDimensions();
+
+  const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
+  const [showSecondaryDropDown, setShowSecondaryDropDown] = useState(false);
 
   const DIMENSIONS = { marginTop: 1, marginRight: 1, marginBottom: 1, marginLeft: 40, innerPadding: 10 };
   const updatedDimensions = {
@@ -53,20 +59,36 @@ const FieldCombinationChart = ({
   let yAccessor = d => d?.barY;
   let xAccessor = d => new Date(d?.x);
 
-  const yScale = scaleLinear().
-    domain([0, max(data, yAccessor) + 0.5]).
-    range([boundedHeight, innerPadding]).nice();
+  const yScale = scaleLinear().domain([0, max(data, yAccessor) + 0.6]).range([boundedHeight, innerPadding]).nice();
 
   const activeMinDate = () => {
     if (activeDataPeriod === 'All') return min(data, xAccessor);
     else return new Date(max(data, xAccessor).setDate(max(data, xAccessor).getDate() - activeDataPeriod));
   };
 
-  const xScale = scaleTime().
-    domain([activeMinDate(), max(data, xAccessor)]).
-    range([0, boundedWidth - innerPadding]);
+  const getXAxisViewMode = () => {
+    if (xAxisViewMode === 'contextMenu') {
+      return [
+        new Date(date.getTime() - ((activeDataPeriod / 2) * 24 * 60 * 60 * 1000)),
+        new Date(date.getTime() + ((activeDataPeriod / 2) * 24 * 60 * 60 * 1000))];
+    } else if (xAxisViewMode === 'topBar') {
+      return [activeMinDate(), max(data, xAccessor)];
+    }
+  };
+
+  const xScale = scaleTime().domain(getXAxisViewMode()).range([0, boundedWidth - innerPadding]);
 
   if (currentXZoomState) xScale.domain(currentXZoomState.rescaleX(xScale).domain());
+
+  const zoomMode = () => {
+    switch (activeLoadPeriod) {
+      case '12 months':
+      case 'Full View':
+        return 'end';
+      default:
+        return 'zoom';
+    }
+  };
 
   const clipPath = 'url(#clipUsage)';
 
@@ -81,7 +103,9 @@ const FieldCombinationChart = ({
       return [boundedWidth / 2, boundedHeight / 2];
     };
 
-    const zoomGlobal = zoom().scaleExtent([0.1, 40]).on('end', event => {
+    const zoomGlobal = zoom().scaleExtent([0.1, 50]).on('start', () => {
+      setHoverActive(false);
+    }).on(zoomMode(), event => {
       const { k: newK, x: newX } = event.transform;
       const { k: prevK, x: prevX } = currentGlobalZoomState;
       const point = center(event, svg);
@@ -94,14 +118,12 @@ const FieldCombinationChart = ({
 
     svg.call(zoomGlobal).on('dblclick.zoom', null);
 
-    selectAll('.mouse-tracker').
-      on('contextmenu ', event => event.preventDefault()).
-      on('dblclick ', () => {
-        svg.call(zoomGlobal.transform, zoomIdentity);
-        setCurrentGlobalZoomState(zoomIdentity);
-        setCurrentXZoomState(zoomIdentity);
-        setCurrentYZoomState(zoomIdentity);
-      });
+    selectAll('.mouse-tracker').on('dblclick ', () => {
+      svg.call(zoomGlobal.transform, zoomIdentity);
+      setCurrentGlobalZoomState(zoomIdentity);
+      setCurrentXZoomState(zoomIdentity);
+      setCurrentYZoomState(zoomIdentity);
+    });
   }, [boundedWidth, boundedHeight, currentXZoomState, currentYZoomState, currentGlobalZoomState, xScale, yScale]);
 
   return (
@@ -166,8 +188,10 @@ const FieldCombinationChart = ({
                            setDate={ setDate }
                            hoverActive={ hoverActive }
                            setHoverActive={ setHoverActive }
+                           showPrimaryDropDown={ showPrimaryDropDown }
                            chartName={ chartName }
-                           clipPath={ clipPath } />
+                           clipPath={ clipPath }
+                           xAxisViewMode={ xAxisViewMode } />
 
           <ChartTooltipText xAccessor={ xAccessor }
                             yAccessor={ yAccessor }
@@ -180,15 +204,19 @@ const FieldCombinationChart = ({
                             clipPath={ clipPath } />
         </Chart>
 
-        <ChartContextMenu xAccessor={ xAccessor }
-                          yAccessor={ yAccessor }
+        <ChartContextMenu data={ data }
+                          date={ date }
                           xScale={ xScale }
                           yScale={ yScale }
-                          data={ data }
-                          date={ date }
-                          hoverActive={ hoverActive }
-                          chartName={ chartName }
-                          setHoverActive={ setHoverActive } />
+                          xAccessor={ xAccessor }
+                          yAccessor={ yAccessor }
+                          showPrimaryDropDown={ showPrimaryDropDown }
+                          setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                          showSecondaryDropDown={ showSecondaryDropDown }
+                          setShowSecondaryDropDown={ setShowSecondaryDropDown }
+                          setHoverActive={ setHoverActive }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          setXAxisViewMode={ setXAxisViewMode } />
       </div>
     </>
   );

@@ -30,6 +30,7 @@ const ClientFieldsView = ({
   const [yAxisShared, setYAxisShared] = useState(false);
   const [date, setDate] = useState(null);
   const [activeDataPeriod, setActiveDataPeriod] = useState('All');
+  const [xAxisViewMode, setXAxisViewMode] = useState('topBar');
 
   return (
     <ContentContainer view={ FIELD_CHARTS }
@@ -48,7 +49,8 @@ const ClientFieldsView = ({
                           mappedMenuList={ mappedMenuList }
                           setActiveFieldName={ setActiveFieldName }
                           yAxisShared={ yAxisShared }
-                          setYAxisShared={ setYAxisShared } />
+                          setYAxisShared={ setYAxisShared }
+                          setXAxisViewMode={ setXAxisViewMode } />
 
         <div className={ getClassNames('field-chart__container', { dark: (getTheme === 'dark') }) }>
           <LeftSideCharts mappedChartList={ mappedChartList }
@@ -63,6 +65,9 @@ const ClientFieldsView = ({
                           setHoverActive={ setHoverActive }
                           activeLoadPeriod={ activeLoadPeriod }
                           activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
                           date={ date }
                           setDate={ setDate } />
 
@@ -78,6 +83,9 @@ const ClientFieldsView = ({
                            setHoverActive={ setHoverActive }
                            activeLoadPeriod={ activeLoadPeriod }
                            activeDataPeriod={ activeDataPeriod }
+                           setActiveDataPeriod={ setActiveDataPeriod }
+                           xAxisViewMode={ xAxisViewMode }
+                           setXAxisViewMode={ setXAxisViewMode }
                            date={ date }
                            setDate={ setDate } />
         </div>

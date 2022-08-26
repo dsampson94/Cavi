@@ -1,7 +1,7 @@
 import React from 'react';
 import { line, selectAll } from 'd3';
 
-import { AGGREGATE, AGGREGATE_BOTTOM_SOIL, AGGREGATE_TOP_SOIL, DEFICIT, USAGE_ETC } from '../../../../tools/general/system-variables.util';
+import { AGGREGATE, AGGREGATE_BOTTOM_SOIL, AGGREGATE_TOP_SOIL, USAGE_ETC } from '../../../../tools/general/system-variables.util';
 
 const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName, recommendationOffset, clipPath, isDarkMode }) => {
 

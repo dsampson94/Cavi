@@ -180,7 +180,8 @@ export const mapUsageETCList = (usageETCList, fieldChartList) => {
   for (let i = 10; i > 0; i--)
     usageETCList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
-      barY: -0.1
+      barY: -0.1,
+      lineY: initialLineY
     });
 };
 
