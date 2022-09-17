@@ -1,10 +1,11 @@
-import { ADD_SYSTEM_NOTICE, REMOVE_SYSTEM_NOTICE, SET_SPINNER_TEXT, SET_THEME } from '../actions/system.action';
+import { ADD_SYSTEM_NOTICE, REMOVE_SYSTEM_NOTICE, SET_SHOW_SHIMMER, SET_SPINNER_TEXT, SET_THEME } from '../actions/system.action';
 import { generateId } from '../../tools/general/helpers.util';
 import { retrieveActiveThemeFromLocalStorage } from '../../tools/storage/localStorage';
 
 export const initialState = {
   notices: [],
   spinnerText: null,
+  showShimmer: false,
   theme: retrieveActiveThemeFromLocalStorage()
 };
 
@@ -31,6 +32,14 @@ export function systemReducer(state = initialState, action) {
       return {
         ...state,
         spinnerText
+      };
+    }
+    case SET_SHOW_SHIMMER: {
+      const { showShimmer } = action;
+
+      return {
+        ...state,
+        showShimmer
       };
     }
     case SET_THEME: {

@@ -17,19 +17,23 @@ import {
 import './overview-mid-bar.scss';
 
 const OverviewMidBar = ({
-                  activePath,
-                  handleOverviewClick,
-                  handleMonitorProbesClick,
-                  handleFindLastRecordingsClick,
-                  handleAssistantClick,
-                  handleNeglectedClick,
-                  handleEmailReadingsClick,
-                  handleChartClick,
-                  handleIrricomsClick
-                }) => {
+                          activePath,
+                          handleOverviewClick,
+                          handleMonitorProbesClick,
+                          handleFindLastRecordingsClick,
+                          handleAssistantClick,
+                          handleNeglectedClick,
+                          handleEmailReadingsClick,
+                          handleChartClick,
+                          handleIrricomsClick
+                        }) => {
 
   return (
     <div className="overview__mid-bar">
+
+      <Button label={ MID_BAR_ASSISTANT }
+              onClick={ handleAssistantClick }
+              white={ !activePath.includes('assistant') } />
 
       <Button label={ MID_BAR_OVERVIEW }
               onClick={ handleOverviewClick }
@@ -42,10 +46,6 @@ const OverviewMidBar = ({
       <Button label={ MID_BAR_LAST_READINGS }
               onClick={ handleFindLastRecordingsClick }
               white={ !activePath.includes('recordings') } />
-
-      <Button label={ MID_BAR_ASSISTANT }
-              onClick={ handleAssistantClick }
-              white={ !activePath.includes('assistant') } />
 
       <Button label={ MID_BAR_NEGLECTED_FIELDS }
               onClick={ handleNeglectedClick }

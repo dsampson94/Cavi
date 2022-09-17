@@ -36,6 +36,8 @@ const FieldCombinationChart = ({
                                  setActiveDataPeriod,
                                  xAxisViewMode,
                                  setXAxisViewMode,
+                                 activeProbeFactor,
+                                 setActiveProbeFactor,
                                  date,
                                  setDate
                                }) => {
@@ -91,6 +93,14 @@ const FieldCombinationChart = ({
   };
 
   const clipPath = 'url(#clipUsage)';
+
+  useEffect(() => {
+    setXAxisViewMode('topBar');
+    setActiveDataPeriod('All');
+    setCurrentGlobalZoomState(zoomIdentity);
+    setCurrentXZoomState(zoomIdentity);
+    setCurrentYZoomState(zoomIdentity);
+  }, [activeProbeFactor]);
 
   useEffect(() => {
     const svg = select(svgRef.current);
@@ -216,7 +226,9 @@ const FieldCombinationChart = ({
                           setShowSecondaryDropDown={ setShowSecondaryDropDown }
                           setHoverActive={ setHoverActive }
                           setActiveDataPeriod={ setActiveDataPeriod }
-                          setXAxisViewMode={ setXAxisViewMode } />
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor } />
       </div>
     </>
   );

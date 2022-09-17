@@ -66,9 +66,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
 
   useEffect(() => {
-    if (!emailAddress) {
-      downloadPDF();
-    }
+    if (!emailAddress) downloadPDF();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientPDF]);
 
@@ -102,7 +100,9 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
           <img src={ '/favicon-irricheck.ico' }
                alt={ 'icon' }
                height={ 14 } />
-          <p>{ 'IrriCheck Pulse' }</p>
+          <p onClick={ () => history.push('/overview') }>
+            { 'IrriCheck Pulse' }
+          </p>
         </div>
         <div className="client-fields-top-bar__left-lower">
           <Button icon={ PRINT_ICON }
@@ -204,7 +204,9 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
         <img src={ '/favicon-irricheck.ico' }
              alt={ 'icon' }
              height={ 14 } />
-        <p>{ 'IrriCheck Pulse' }</p>
+        <p onClick={ () => history.push('/overview') }>
+          { 'IrriCheck Pulse' }
+        </p>
       </div>
       <div className="field-charts-top-bar__lower">
         <Button icon={ PRINT_ICON }

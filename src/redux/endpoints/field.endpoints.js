@@ -5,3 +5,9 @@ export const getFieldChartListRequest = (field) => [
   getFieldChartListEndpoint(),
   getHttpGetOptions(field)
 ];
+
+const getChartProbeCalibrationEndpoint = () => `${ API_HOST }/calibrateprobe.php`;
+export const getChartProbeCalibrationRequest = (field) => [
+  getChartProbeCalibrationEndpoint(),
+  getHttpGetOptions(field)
+];

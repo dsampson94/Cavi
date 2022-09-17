@@ -24,11 +24,14 @@ export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
 export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
 
+export const SUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibrated Successfully ';
+export const UNSUCCESSFULLY_CALIBRATED_PROBE= 'Probe Calibration Unsuccessful';
+
 //MIDBAR
+export const MID_BAR_ASSISTANT = 'Assistant';
 export const MID_BAR_OVERVIEW = 'Overview';
 export const MID_BAR_MONITOR = 'Monitor Probes';
 export const MID_BAR_LAST_READINGS = 'Find Last Readings';
-export const MID_BAR_ASSISTANT = 'Assistant';
 export const MID_BAR_NEGLECTED_FIELDS = 'Neglected Fields';
 export const MID_BAR_EMAIL_READINGS = 'Email Readings';
 export const MID_BAR_CHART = 'Chart of Raw Readings';
@@ -36,6 +39,9 @@ export const MID_BAR_IRRICOMS = 'Check Irricoms (manual)';
 
 //SPINNER
 export const SPINNER_TEXT = 'Loading..';
+
+//SPINNER
+export const SHOW_SHIMMER = true;
 
 //TOOLTIPS
 export const EMAIL = 'Email Recommendations to any Email Address';

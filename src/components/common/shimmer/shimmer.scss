@@ -1,0 +1,68 @@
+@use "sass:map";
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/config" as config;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/mixin" as mixin;
+
+.shimmer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  z-index: 99;
+  opacity: 0.1;
+
+  &__text {
+    display: flex;
+    padding-top: 2vw;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-size: 120%;
+    font-weight: 700;
+    color: map.get(color.$colorMap, black);
+  }
+
+  &__container {
+    border-radius: map.get(radius.$border-radius, large);
+    height: 100%;
+    padding: 1vw 2.5vw 0 2.5vw;
+    color: #043b6e;
+    animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  }
+
+  &__comment {
+    height: 4%;
+    background-color: #043b6e;
+    border-radius: map.get(radius.$border-radius, medium);
+    margin-top: util.rem(3);
+    width: 100%;
+  }
+}
+
+.animate {
+  background-color: #043b6e;
+  display: inline-block;
+  -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 0.9s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+  100% {
+    -webkit-mask-position: left
+  }
+}
+
+@keyframes fullView {
+  100% {
+    height: 100%;
+    width: 100%;
+  }
+}

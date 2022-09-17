@@ -46,6 +46,8 @@ export const LeftSideCharts = ({
                                  setActiveDataPeriod,
                                  xAxisViewMode,
                                  setXAxisViewMode,
+                                 activeProbeFactor,
+                                 setActiveProbeFactor,
                                  date,
                                  setDate
                                }) => {
@@ -73,6 +75,8 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate } />
 
@@ -95,6 +99,8 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate } />
 
@@ -117,6 +123,8 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate } />
 
@@ -139,6 +147,8 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate } />
 
@@ -161,6 +171,9 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate } />
 
@@ -183,6 +196,8 @@ export const LeftSideCharts = ({
                         setActiveDataPeriod={ setActiveDataPeriod }
                         xAxisViewMode={ xAxisViewMode }
                         setXAxisViewMode={ setXAxisViewMode }
+                        activeProbeFactor={ activeProbeFactor }
+                        setActiveProbeFactor={ setActiveProbeFactor }
                         date={ date }
                         setDate={ setDate }
                         hasXAxis />
@@ -208,6 +223,8 @@ export const RightSideCharts = ({
                                   setActiveDataPeriod,
                                   xAxisViewMode,
                                   setXAxisViewMode,
+                                  activeProbeFactor,
+                                  setActiveProbeFactor,
                                   date,
                                   setDate
                                 }) => {
@@ -237,6 +254,8 @@ export const RightSideCharts = ({
                           setActiveDataPeriod={ setActiveDataPeriod }
                           xAxisViewMode={ xAxisViewMode }
                           setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
                           date={ date }
                           setDate={ setDate } />
 
@@ -260,6 +279,8 @@ export const RightSideCharts = ({
                           setActiveDataPeriod={ setActiveDataPeriod }
                           xAxisViewMode={ xAxisViewMode }
                           setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
                           date={ date }
                           setDate={ setDate } />
       </div>
@@ -281,6 +302,8 @@ export const RightSideCharts = ({
                                setActiveDataPeriod={ setActiveDataPeriod }
                                xAxisViewMode={ xAxisViewMode }
                                setXAxisViewMode={ setXAxisViewMode }
+                               activeProbeFactor={ activeProbeFactor }
+                               setActiveProbeFactor={ setActiveProbeFactor }
                                date={ date }
                                setDate={ setDate } />
 
@@ -300,6 +323,8 @@ export const RightSideCharts = ({
                           setActiveDataPeriod={ setActiveDataPeriod }
                           xAxisViewMode={ xAxisViewMode }
                           setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
                           date={ date }
                           setDate={ setDate }
                           hasXAxis />

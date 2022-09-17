@@ -17,7 +17,7 @@ import {
 
 import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
 
-import { requestFieldChartList } from '../../../redux/actions/field.action';
+import { requestChartProbeCalibration, requestFieldChartList } from '../../../redux/actions/field.action';
 import { requestClientFieldList } from '../../../redux/actions/client.action';
 
 import FieldChartView from './FieldChartView';
@@ -33,6 +33,7 @@ const FieldChartViewContainer = () => {
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
+  const [activeProbeFactor, setActiveProbeFactor] = useState(undefined);
 
   useEffect(() => {
     dispatch(requestFieldChartList(fieldRequestFields));
@@ -45,6 +46,14 @@ const FieldChartViewContainer = () => {
     dispatch(requestFieldChartList(fieldRequestFields));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFieldName, activeLoadPeriod]);
+
+  useEffect(() => {
+    if (activeProbeFactor)
+      dispatch(requestChartProbeCalibration(probeCalibrationRequestFields));
+    dispatch(requestFieldChartList(fieldRequestFields));
+    setActiveProbeFactor(undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFieldName, activeProbeFactor]);
 
   const clientRequestFields = {
     username: user?.username,
@@ -60,6 +69,15 @@ const FieldChartViewContainer = () => {
     clientname: clientName,
     field: activeFieldName,
     load: activeLoadPeriod
+  };
+
+  const probeCalibrationRequestFields = {
+    username: user?.username,
+    password: user?.password,
+    groupname: groupName,
+    clientname: clientName,
+    field: activeFieldName,
+    f: activeProbeFactor
   };
 
   const mappedFieldList = () => {
@@ -102,7 +120,9 @@ const FieldChartViewContainer = () => {
                          mappedMenuList={ mappedMenuList() }
                          activeLoadPeriod={ activeLoadPeriod }
                          setActiveLoadPeriod={ setActiveLoadPeriod }
-                         setActiveFieldName={ setActiveFieldName } />;
+                         setActiveFieldName={ setActiveFieldName }
+                         activeProbeFactor={ activeProbeFactor }
+                         setActiveProbeFactor={ setActiveProbeFactor } />;
 };
 
 export default FieldChartViewContainer;

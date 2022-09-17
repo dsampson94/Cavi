@@ -37,6 +37,8 @@ const FieldLineChartD3 = ({
                             setActiveDataPeriod,
                             xAxisViewMode,
                             setXAxisViewMode,
+                            activeProbeFactor,
+                            setActiveProbeFactor,
                             date,
                             setDate
                           }) => {
@@ -106,6 +108,14 @@ const FieldLineChartD3 = ({
           return 'zoom';
       }
     };
+
+    useEffect(() => {
+      setXAxisViewMode('topBar');
+      setActiveDataPeriod('All');
+      setCurrentGlobalZoomState(zoomIdentity);
+      setCurrentXZoomState(zoomIdentity);
+      setCurrentYZoomState(zoomIdentity);
+    }, [activeProbeFactor]);
 
     useEffect(() => {
       const svg = select(svgRef.current);
@@ -234,7 +244,10 @@ const FieldLineChartD3 = ({
                             setShowSecondaryDropDown={ setShowSecondaryDropDown }
                             setHoverActive={ setHoverActive }
                             setActiveDataPeriod={ setActiveDataPeriod }
-                            setXAxisViewMode={ setXAxisViewMode } />
+                            setXAxisViewMode={ setXAxisViewMode }
+                            activeProbeFactor={ activeProbeFactor }
+                            setActiveProbeFactor={ setActiveProbeFactor }
+                            activeDataPeriod={ activeDataPeriod } />
         </div>
       </>
     );

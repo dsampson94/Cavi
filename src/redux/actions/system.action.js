@@ -17,6 +17,12 @@ export const setSpinnerText = (spinnerText) => ({
   spinnerText
 });
 
+export const SET_SHOW_SHIMMER = '[SYSTEM_STORE] Set show shimmer';
+export const setShowShimmer = (showShimmer) => ({
+  type: SET_SHOW_SHIMMER,
+  showShimmer
+});
+
 export const SET_THEME = '[SYSTEM_STORE] Set theme';
 export const setTheme = (theme) => ({
   type: SET_THEME,

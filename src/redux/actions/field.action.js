@@ -7,3 +7,11 @@ export const requestFieldChartList = (field, onSuccess, onError) => ({
   onSuccess,
   onError
 });
+
+export const REQUEST_PROBE_CALIBRATION = '[FIELD_STORE] Request probe calibration';
+export const requestChartProbeCalibration = (field, onSuccess, onError) => ({
+  type: REQUEST_PROBE_CALIBRATION,
+  field,
+  onSuccess,
+  onError
+});

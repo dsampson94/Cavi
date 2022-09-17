@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { bisector } from 'd3';
 
-import '../chart.scss';
-
 const ChartContextMenu = ({
                             data,
                             date,
@@ -17,7 +15,10 @@ const ChartContextMenu = ({
                             setShowSecondaryDropDown,
                             setHoverActive,
                             setActiveDataPeriod,
-                            setXAxisViewMode
+                            setXAxisViewMode,
+                            activeProbeFactor,
+                            setActiveProbeFactor,
+                            activeDataPeriod
                           }) => {
 
   return <ContextMenu data={ data }
@@ -32,7 +33,10 @@ const ChartContextMenu = ({
                       setShowSecondaryDropDown={ setShowSecondaryDropDown }
                       setHoverActive={ setHoverActive }
                       setActiveDataPeriod={ setActiveDataPeriod }
-                      setXAxisViewMode={ setXAxisViewMode } />;
+                      setXAxisViewMode={ setXAxisViewMode }
+                      activeProbeFactor={ activeProbeFactor }
+                      setActiveProbeFactor={ setActiveProbeFactor }
+                      activeDataPeriod={ activeDataPeriod } />;
 };
 
 export default ChartContextMenu;
@@ -50,7 +54,10 @@ const ContextMenu = ({
                        setShowSecondaryDropDown,
                        setHoverActive,
                        setActiveDataPeriod,
-                       setXAxisViewMode
+                       setXAxisViewMode,
+                       activeProbeFactor,
+                       setActiveProbeFactor,
+                       activeDataPeriod
                      }) => {
 
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
@@ -63,6 +70,12 @@ const ContextMenu = ({
   const screenMidWidth = window.innerWidth / 2 + 50;
   const screenMidHeight = window.screen.height / 2 - 10;
   const isLessThanHalfWidth = (anchorPoint.x > screenMidWidth && anchorPoint.y < screenMidHeight);
+
+  const screenInvertMenuWidth = window.innerWidth * 4 / 5;
+  const screenInvertMenuHeight = window.innerHeight * 3 / 5;
+
+  const shouldDisplayLeft = (anchorPoint.x > screenInvertMenuWidth);
+  const shouldDisplayFurtherUp = (anchorPoint.y > screenInvertMenuHeight);
 
   const handleContextMenu = useCallback((event) => {
       event.preventDefault();
@@ -83,9 +96,14 @@ const ContextMenu = ({
     } else if (event.target.id === 'dropdown-menu-2') {
       setShowSecondaryDropDown(!showSecondaryDropDown);
       setSecondaryMenu(2);
+    } else if (event.target.id === 'dropdown-menu-2-input') {
+      setShowSecondaryDropDown(true);
     } else if (event.target.id === 'dropdown-menu-3') {
       setShowSecondaryDropDown(!showSecondaryDropDown);
       setSecondaryMenu(3);
+    } else if (event.target.id === 'dropdown-menu-4') {
+      setShowSecondaryDropDown(!showSecondaryDropDown);
+      setSecondaryMenu(4);
     }
   };
 
@@ -95,9 +113,16 @@ const ContextMenu = ({
     setActiveDataPeriod(period);
   };
 
+  const handleFactorClick = (factor) => {
+    setShowPrimaryDropDown(false);
+    setXAxisViewMode('contextMenu');
+    setActiveProbeFactor(factor);
+  };
+
   useEffect(() => {
     document.addEventListener('click', handleLeftClick);
     document.addEventListener('contextmenu', handleContextMenu);
+
     return () => {
       document.removeEventListener('click', handleLeftClick);
       document.removeEventListener('contextmenu', handleContextMenu);
@@ -112,16 +137,19 @@ const ContextMenu = ({
       { showPrimaryDropDown &&
         <div className="dropdown__popup"
              onMouseMove={ () => setHoverActive(true) }
-             style={ { top: anchorPoint.y - 20, left: anchorPoint.x } }>
+             style={ {
+               top: shouldDisplayFurtherUp ? anchorPoint.y - 120 : anchorPoint.y - 20,
+               left: shouldDisplayLeft ? anchorPoint.x - 150 : anchorPoint.x
+             } }>
 
           { isLessThanHalfWidth ?
             <div>
               <div id={ 'dropdown-menu-1' } onClick={ handleLeftClick }>{ 'Start here and show...' }</div>
               <hr />
-              <div>{ 'Calibrate Visually' }</div>
-              <div id={ 'dropdown-menu-2' } onClick={ handleLeftClick }>{ 'Irrigations...' }</div>
+              <div id={ 'dropdown-menu-2' } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
+              <div id={ 'dropdown-menu-3' } onClick={ handleLeftClick }>{ 'Irrigations...' }</div>
               <hr />
-              <div id={ 'dropdown-menu-3' } onClick={ handleLeftClick }>{ 'Export...' }</div>
+              <div id={ 'dropdown-menu-4' } onClick={ handleLeftClick }>{ 'Export...' }</div>
               <hr />
               <div>{ 'Upload photo here' }</div>
               <hr />
@@ -142,27 +170,59 @@ const ContextMenu = ({
         <div className="dropdown__popup"
              onMouseMove={ () => setHoverActive(true) }
              style={ {
-               top: anchorPoint.y - 20,
-               left: (isLessThanHalfWidth ? anchorPoint.x + 134 : anchorPoint.x + 202)
+               top: shouldDisplayFurtherUp ? anchorPoint.y - 120 : anchorPoint.y - 20,
+               left: shouldDisplayLeft ? anchorPoint.x - 322 :
+                 (isLessThanHalfWidth ? anchorPoint.x + 134 : anchorPoint.x + 202),
+               width: '170px'
              } }>
 
           { isLessThanHalfWidth ?
             <div>
               { secondaryMenu === 1 && <>
+                <p>{ 'Days:' }</p>
+                <hr />
                 <div id={ 'option' } onClick={ () => handlePeriodClick(1) }>{ '1' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(7) }>{ '7' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(14) }>{ '14' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(28) }>{ '28' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(56) }>{ '56' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(100) }>{ '100' }</div>
+                <hr />
+                <input id={ 'dropdown-menu-2-input' }
+                       type={ 'number' }
+                       autoFocus
+                       value={ activeDataPeriod }
+                       placeholder={ '0' }
+                       min={ '0' }
+                       onChange={ ({ target }) => setActiveDataPeriod(target.value) } />
               </> }
 
               { secondaryMenu === 2 && <>
+                <p>{ 'Recalibrate y-axis:' }</p>
+                <hr />
+                <div id={ 'option' } onClick={ () => handleFactorClick(0.5) }>{ '0.50x' }</div>
+                <div id={ 'option' } onClick={ () => handleFactorClick(0.65) }>{ '0.65x' }</div>
+                <div id={ 'option' } onClick={ () => handleFactorClick(0.8) }>{ '0.80x' }</div>
+                <div id={ 'option' } onClick={ () => handleFactorClick(1.2) }>{ '1.20x' }</div>
+                <div id={ 'option' } onClick={ () => handleFactorClick(2) }>{ '2.00x' }</div>
+                <hr />
+                <input id={ 'dropdown-menu-2-input' }
+                       type={ 'number' }
+                       autoFocus
+                       step={ 0.1 }
+                       min={ '0' }
+                       max={ '5' }
+                       placeholder={'0 - 5'}
+                       value={ activeProbeFactor }
+                       onChange={ ({ target }) => handleFactorClick(target.value) } />
+              </> }
+
+              { secondaryMenu === 3 && <>
                 <div>{ 'Capture new Irrigation' }</div>
                 <div>{ 'View Irrigations' }</div>
               </> }
 
-              { secondaryMenu === 3 && <>
+              { secondaryMenu === 4 && <>
                 <div>{ 'Raingauge readings to Excel' }</div>
                 <div>{ 'Email Readings to myself ' }</div>
               </> }
@@ -171,16 +231,25 @@ const ContextMenu = ({
             :
             <div>
               { secondaryMenu === 1 && <>
+                <p>{ 'Days:' }</p>
+                <hr />
                 <div id={ 'option' } onClick={ () => handlePeriodClick(1) }>{ '1' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(7) }>{ '7' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(14) }>{ '14' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(28) }>{ '28' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(56) }>{ '56' }</div>
                 <div id={ 'option' } onClick={ () => handlePeriodClick(100) }>{ '100' }</div>
+                <hr />
+                <input id={ 'dropdown-menu-2-input' }
+                       type={ 'number' }
+                       autoFocus
+                       value={ activeDataPeriod }
+                       min={ '0' }
+                       onChange={ ({ target }) => setActiveDataPeriod(target.value) } />
               </> }
 
-              { secondaryMenu === 2 && <>
-                <div id={ 'dropdown-menu-1' } onClick={ handleLeftClick }>{ 'Delete all readins up to this point' }</div>
+              { secondaryMenu === 3 && <>
+                <div id={ 'dropdown-menu-1' } onClick={ handleLeftClick }>{ 'Delete all readings up to this point' }</div>
                 <div>{ 'Set start point to delete readings' }</div>
                 <div>{ 'Delete all readings from start point to here' }</div>
               </> }

@@ -6,9 +6,9 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './spinner.scss';
 
-const Spinner = ({ spinnerText, content, centered, sidebar }) => {
+const Spinner = ({ showSpinnerText, content, centered, sidebar }) => {
 
-  if (!spinnerText) return null;
+  if (!showSpinnerText) return null;
 
   return (
     <div className="spinner">
@@ -20,14 +20,14 @@ const Spinner = ({ spinnerText, content, centered, sidebar }) => {
           <div className="spinner__ring-3" />
           <div className="spinner__ring-4" />
         </div>
-        <div className="spinner__text">{ spinnerText }</div>
+        <div className="spinner__text">{ showSpinnerText }</div>
       </div>
     </div>
   );
 };
 
 Spinner.propTypes = {
-  spinnerText: string,
+  showSpinnerText: string,
   content: bool,
   centered: bool
 };

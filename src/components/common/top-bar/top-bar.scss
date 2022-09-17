@@ -56,6 +56,11 @@
         align-items: center;
         margin-top: util.rem(2);
         font-size: util.rem(11);
+        cursor: pointer;
+
+        &:hover {
+          color: map.get(color.$colorMap, secondary-blue-2)
+        }
       }
     }
 
@@ -113,6 +118,11 @@
       align-items: center;
       margin-top: util.rem(2);
       font-size: util.rem(11);
+      cursor: pointer;
+
+      &:hover {
+        color: map.get(color.$colorMap, secondary-blue-2)
+      }
     }
   }
 

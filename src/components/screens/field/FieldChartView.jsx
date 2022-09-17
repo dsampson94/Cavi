@@ -18,7 +18,9 @@ const ClientFieldsView = ({
                             mappedMenuList,
                             activeLoadPeriod,
                             setActiveLoadPeriod,
-                            setActiveFieldName
+                            setActiveFieldName,
+                            activeProbeFactor,
+                            setActiveProbeFactor
                           }) => {
 
   const getTheme = retrieveActiveThemeFromLocalStorage();
@@ -68,6 +70,8 @@ const ClientFieldsView = ({
                           setActiveDataPeriod={ setActiveDataPeriod }
                           xAxisViewMode={ xAxisViewMode }
                           setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
                           date={ date }
                           setDate={ setDate } />
 
@@ -86,6 +90,8 @@ const ClientFieldsView = ({
                            setActiveDataPeriod={ setActiveDataPeriod }
                            xAxisViewMode={ xAxisViewMode }
                            setXAxisViewMode={ setXAxisViewMode }
+                           activeProbeFactor={ activeProbeFactor }
+                           setActiveProbeFactor={ setActiveProbeFactor }
                            date={ date }
                            setDate={ setDate } />
         </div>

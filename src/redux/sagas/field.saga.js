@@ -5,17 +5,18 @@ import {
   SNACK_CRITICAL,
   SNACK_SUCCESS,
   SPINNER_TEXT,
+  SUCCESSFULLY_CALIBRATED_PROBE,
   SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST,
+  UNSUCCESSFULLY_CALIBRATED_PROBE,
   UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST
 } from '../../tools/general/system-variables.util';
-import { saveChartDepthsToLocalStorage } from '../../tools/storage/localStorage';
 
 import { responseStatus } from '../endpoints/index';
 
-import { getFieldChartListRequest } from '../endpoints/field.endpoints';
+import { getChartProbeCalibrationRequest, getFieldChartListRequest } from '../endpoints/field.endpoints';
 
 import { addSystemNotice, setSpinnerText } from '../actions/system.action';
-import { GET_FIELD_CHART_LIST, SET_FIELD_CHART_LIST } from '../actions/field.action';
+import { GET_FIELD_CHART_LIST, REQUEST_PROBE_CALIBRATION, SET_FIELD_CHART_LIST } from '../actions/field.action';
 
 export function* performRetrieveFieldChartListRequest({ field, onSuccess, onError }) {
   try {
@@ -50,8 +51,39 @@ export function* watchForRetrieveFieldChartListRequest() {
   yield takeLatest(GET_FIELD_CHART_LIST, performRetrieveFieldChartListRequest);
 }
 
+export function* performChartCalibrateProbeRequest({ field, onSuccess, onError }) {
+  try {
+    yield put(setSpinnerText(SPINNER_TEXT));
+    const [endpoint, requestOptions] = getChartProbeCalibrationRequest(field);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
+        if (onError) yield call(onError);
+        yield put(setSpinnerText(null));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put(addSystemNotice(SUCCESSFULLY_CALIBRATED_PROBE, SNACK_SUCCESS));
+        if (onSuccess) yield call(onSuccess, data);
+        yield put(setSpinnerText(null));
+    }
+
+  } catch ({ response }) {
+    yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
+    if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
+  }
+}
+
+export function* watchForChartCalibrateProbeRequest() {
+  yield takeLatest(REQUEST_PROBE_CALIBRATION, performChartCalibrateProbeRequest);
+}
+
 export default function* fieldSaga() {
   yield all([
-    watchForRetrieveFieldChartListRequest()
+    watchForRetrieveFieldChartListRequest(),
+    watchForChartCalibrateProbeRequest()
   ]);
 }
