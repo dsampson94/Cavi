@@ -70,6 +70,31 @@
         left: 47.3%;
       }
     }
+
+    &--sidebar {
+      top: 40%;
+      left: 50%;
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        top: 40%;
+        left: 49%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        top: 40%;
+        left: 51%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        top: 40%;
+        left: 51%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        top: 40%;
+        left: 51.5%;
+      }
+    }
   }
 
   &__ring {

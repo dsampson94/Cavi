@@ -26,19 +26,19 @@ const Chart = ({ svgRef, dimensions, chartName, chartInfo, children, isDarkMode 
                     y="0" />
             </clipPath>
             <clipPath id="clipAggregate">
-              <rect width={ '130%' }
+              <rect width={ '94%' }
                     height={ '115%' }
                     x="0"
                     y="0" />
             </clipPath>
             <clipPath id="clipUsage">
-              <rect width={ '130%' }
+              <rect width={ '94%' }
                     height={ dimensions.width }
                     x="0"
                     y="0" />
             </clipPath>
             <clipPath id="clipDaily">
-              <rect width={ '130%' }
+              <rect width={ '94%' }
                     height={ '98%' }
                     x="0"
                     y="0" />

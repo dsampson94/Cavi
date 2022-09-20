@@ -168,3 +168,12 @@ export const TOGGLE_YAXIS = 'toggle_y';
 export const CIRCLE_DROPDOWN = 'circle_dropdown';
 export const DOUBLE_DROPDOWN = 'double_dropdown';
 export const SINGLE_DROPDOWN = 'single_dropdown';
+
+
+//CONTEXT MENU
+export const CONTEXT_MENU = 'contextMenu';
+
+export const PERIOD_OPTION = 1;
+export const CALIBRATE_OPTION = 2;
+export const IRRIGATION_OR_DELETE_OPTION = 3;
+export const EXPORT_OPTION = 4;

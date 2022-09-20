@@ -353,8 +353,6 @@ export const FieldChartTopBar = ({
   const getTheme = retrieveActiveThemeFromLocalStorage();
   const { groupName, clientName, fieldName } = useParams();
 
-  if (!mappedChartList) return null;
-
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
       if (item.fieldName.locationName === fieldName) {
