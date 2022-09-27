@@ -6,6 +6,8 @@ import { func } from 'prop-types';
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
 import {
   CHARTS,
+  FIELD_CHARTS,
+  FIELD_TEMPERATURES,
   FOUR_WEEKS,
   FULL_VIEW,
   RADIO_GROUP,
@@ -22,7 +24,7 @@ import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
 import ToolTip from '../tool-tip/ToolTip';
 
-export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBar, showSideBar }) => {
+export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -51,7 +53,7 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
                        }
                      })()
                    } }
-                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, setShowSideBar, showSideBar) }>
+                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok) }>
                 { value.iok }
               </div>
               <div className="client-fields-side-bar__list__item__subheader__icon"
@@ -75,9 +77,8 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData, setShowSideBa
   );
 };
 
-const handleSubHeaderClick = (history, groupName, clientName, setShowSideBar, showSideBar) => {
+const handleSubHeaderClick = (history, groupName, clientName) => {
   history.push(`/client/${ groupName }/${ clientName }`);
-  setShowSideBar(!showSideBar);
 };
 
 export const mappedUserData = (userAccount, overview) => {
@@ -156,7 +157,7 @@ ViewDataBar.propTypes = {
   setActiveLoadPeriod: func
 };
 
-export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName }) => {
+export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) => {
 
   const history = useHistory();
   const { groupName, clientName, fieldName } = useParams();
@@ -185,7 +186,7 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName }) => {
               <div className="field-charts-side-bar__field-list__item"
                    key={ generateId() }>
                 <div className="field-charts-side-bar__field-list__item__container"
-                     onClick={ () => handleFieldClick(history, groupName, clientName, field, setActiveFieldName) }>
+                     onClick={ () => handleFieldClick(history, groupName, clientName, field, setActiveFieldName, view) }>
 
                   <div className="field-charts-side-bar__field-list__item__container--upper"
                        style={ {
@@ -219,7 +220,14 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName }) => {
 
 SideBarFieldList.propTypes = {};
 
-const handleFieldClick = (history, groupName, clientName, field, setActiveFieldName) => {
+const handleFieldClick = (history, groupName, clientName, field, setActiveFieldName, view) => {
   setActiveFieldName(field.locationName);
-  history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+  switch (view) {
+    case FIELD_CHARTS :
+      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+      break;
+    case FIELD_TEMPERATURES :
+      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
+      break;
+  }
 };

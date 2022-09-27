@@ -5,9 +5,11 @@ import { string } from 'prop-types';
 import {
   BULLSEYE,
   CAMERA,
-  CHARTS, CIRCLE_DROPDOWN,
+  CHARTS,
+  CIRCLE_DROPDOWN,
   CLOUDED,
-  DISSATISFIED, DOUBLE_DROPDOWN,
+  DISSATISFIED,
+  DOUBLE_DROPDOWN,
   DOWN_ARROW,
   DROPDOWN,
   DROPDOWN_ALL,
@@ -21,12 +23,14 @@ import {
   PENCIL,
   PREVIOUS,
   PRINT_ICON,
+  PROFILE_ICON,
   RAIN,
   RAIN_CLOUDS,
   REPORT_PROBLEM_ICON,
   SATISFIED,
   SEARCH,
-  SETTINGS_GEAR, SINGLE_DROPDOWN,
+  SETTINGS_GEAR,
+  SINGLE_DROPDOWN,
   SUNNY,
   TOGGLE_YAXIS,
   VERY_DISSATISFIED,
@@ -125,6 +129,8 @@ const getViewBox = (name, tiny, chart) => {
     case PARTLY_CLOUDED:
     case CLOUDED:
       return '1 13 46 30';
+    case LOG_OUT_ICON:
+      return '-3 -3 40 50';
     default:
       return '-6 0 36 24';
   }
@@ -156,7 +162,6 @@ const getIconFill = (activeTheme, fill, name) => {
       case SINGLE_DROPDOWN:
       case CIRCLE_DROPDOWN:
       case OPEN_MENU:
-      case TOGGLE_YAXIS:
       case SETTINGS_GEAR:
       case PENCIL:
       case CHARTS:
@@ -207,7 +212,7 @@ const getPath = (name) => {
             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
         </g>
       );
-    case LOG_OUT_ICON:
+    case PROFILE_ICON:
       return (
         <g>
           <path d="M0 0h24v24H0V0z" fill="none" />
@@ -384,6 +389,11 @@ const getPath = (name) => {
     case SINGLE_DROPDOWN:
       return (
         <path d="m24 30.75-12-12 2.15-2.15L24 26.5l9.85-9.85L36 18.8Z" />
+      );
+    case LOG_OUT_ICON:
+      return (
+        <path
+          d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h14.55v3H9v30h14.55v3Zm24.3-9.25-2.15-2.15 5.1-5.1h-17.5v-3h17.4l-5.1-5.1 2.15-2.15 8.8 8.8Z" />
       );
     default:
       return <path />;

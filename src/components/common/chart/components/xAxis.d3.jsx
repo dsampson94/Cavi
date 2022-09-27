@@ -29,7 +29,7 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
 
       { hasXAxis &&
         <line className="x-axis__tick"
-              stroke={ isDarkMode ? 'white' : '#bdc3c7' }
+              stroke={ isDarkMode ? 'white' : 'black' }
               x1={ xScale(new Date()) }
               x2={ xScale(new Date()) }
               y1={ 1 }

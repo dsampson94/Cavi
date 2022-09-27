@@ -8,10 +8,6 @@ body.light-mode {
   background-color: map.get(color.$colorMap, light-mode-white);
   transition: 0.3s;
 
-  .fields-overview {
-    transition: 0.3s;
-  }
-
   .input__input,
   .search__input,
   .search__icon {
@@ -19,15 +15,8 @@ body.light-mode {
     background-color: map.get(color.$colorMap, light-mode-white);
   }
 
-  .input__wrapper input {
-    transition: 0.3s;
-  }
-
-  .table__header-row {
-    transition: 0.3s;
-    background-color: map.get(color.$colorMap, light-mode-white);
-  }
-
+  .input__wrapper input,
+  .fields-overview,
   .table__body__row__td-upper {
     transition: 0.3s;
   }
@@ -62,7 +51,7 @@ body.light-mode {
 body.dark-mode {
   transition: 0.3s;
   color: map.get(color.$colorMap, light-mode-white);
-  background-color: map.get(color.$colorMap, dark-mode-grey);
+  background-color: map.get(color.$colorMap, dark-mode-grey-modal);
 
   .spinner__text {
     color: map.get(color.$colorMap, black);
@@ -99,11 +88,6 @@ body.dark-mode {
 
   .input__label-container--login label {
     color: map.get(color.$colorMap, black);
-  }
-
-  .table__header-row {
-    transition: 0.3s;
-    background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
   .input__input,
@@ -211,5 +195,11 @@ body.dark-mode {
 
   .shimmer__text {
     color: map.get(color.$colorMap, very-light-grey);
+  }
+
+  .dropdown__popup--logout {
+    transition: 0.3s;
+    color: map.get(color.$colorMap, light-mode-white);
+    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
   }
 }

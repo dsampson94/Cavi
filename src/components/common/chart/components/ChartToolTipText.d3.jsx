@@ -59,8 +59,8 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
   };
 
   const getYPos = () => {
-    if (y < 40) return { rect: y, text: y + 11 };
-    else return { rect: y - 20, text: y - 9 };
+    if (y < 40) return { rect: y, text: y + 13 };
+    else return { rect: y - 20, text: y - 7 };
   };
 
   return (<>
@@ -71,16 +71,16 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
                 fill={ 'white' }
                 x={ getXPos().rect }
                 y={ getYPos().rect }
-                height={ 15 }
-                width={ chartName.includes('deficit') ? 236 : chartName === USAGE_ETC ? 212 : chartName === DAILY_ETO ? 182 : 149 }
+                height={ 18 }
+                width={ chartName.includes('deficit') ? 260 : chartName === USAGE_ETC ? 232 : chartName === DAILY_ETO ? 200 : 169 }
                 rx={ '5' }
                 ry={ '5' } />
 
           <text className="tooltip-container__text"
                 x={ getXPos().text }
                 y={ getYPos().text }
-                fontSize={ '11' }
-                fill={ 'blue' }>
+                fontSize={ '12' }
+                fontWeight={ 800 }>
             { toolTipText() }
           </text>
         </g> }

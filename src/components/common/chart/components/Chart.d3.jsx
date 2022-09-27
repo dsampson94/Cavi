@@ -43,15 +43,23 @@ const Chart = ({ svgRef, dimensions, chartName, chartInfo, children, isDarkMode 
                     x="0"
                     y="0" />
             </clipPath>
+            <clipPath id="clipTemperaturesMulti">
+              <rect width={ '99%' }
+                    height={ '76%' }
+                    x="0"
+                    y="0" />
+            </clipPath>
           </defs>
           { children }
         </g>
       </svg>
+
       { !chartName.includes('ET') &&
         <div className="chart__info"
              onContextMenu={ event => event.preventDefault() }>
           { chartInfo }
         </div> }
+
     </ChartContext.Provider>
   );
 };

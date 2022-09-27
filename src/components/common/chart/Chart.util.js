@@ -13,15 +13,15 @@ import {
   DEFICIT_300MM,
   DEFICIT_400MM,
   DEFICIT_600MM,
-  DEFICIT_800MM,
+  DEFICIT_800MM, LOG_OUT_ICON,
   SETTINGS_GEAR,
-  SINGLE_DROPDOWN,
+  SINGLE_DROPDOWN, TEMPERATURE_MULTILINE, TOPBAR_OPTIONS,
   USAGE_ETC
 } from '../../../tools/general/system-variables.util';
 
 import SVGIcon from '../icon/SVGIcon';
 import CheckboxInput from '../input/checkbox/CheckboxInput';
-import DropDownMenu from '../drop-down/DropDownMenu';
+import DropDownButton from '../drop-down/DropDownButton';
 
 import './chart.scss';
 
@@ -50,14 +50,13 @@ export const ChartHeader = ({ chartName, isDarkMode }) => {
 
           { chartName === USAGE_ETC &&
             <div className="chart__header__zoom-options--left-top">
-              <div className="chart__header__zoom-options--left-top__options">
-                <SVGIcon name={ CIRCLE_DROPDOWN } />
-                <DropDownMenu menu={ CHART_USAGE_MENU } />
-              </div>
-              <div className="chart__header__zoom-options--left-top__options">
-                <SVGIcon name={ SINGLE_DROPDOWN } />
-                <DropDownMenu menu={ CHART_USAGE_SASRI_MENU } />
-              </div>
+              <DropDownButton name={ CIRCLE_DROPDOWN }
+                              className={ 'chart__header__zoom-options--left-top__options' }
+                              menu={ CHART_USAGE_MENU } />
+
+              <DropDownButton name={ SINGLE_DROPDOWN }
+                              className={ 'chart__header__zoom-options--left-top__options' }
+                              menu={ CHART_USAGE_SASRI_MENU } />
             </div> }
 
           { chartName === DAILY_ETO &&
@@ -120,5 +119,7 @@ export const chartByName = (chartName, isDarkMode) => {
       return { header: USAGE_ETC, height: '35%' };
     case DAILY_ETO :
       return { header: DAILY_ETO, height: '35%' };
+    case TEMPERATURE_MULTILINE :
+      return { height: '33.3%' };
   }
 };

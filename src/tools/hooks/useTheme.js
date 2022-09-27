@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { retrieveActiveThemeFromLocalStorage, saveActiveThemeToLocalStorage } from '../storage/localStorage';
 
@@ -6,7 +6,7 @@ const useTheme = (activate) => {
 
   const storeActiveTheme = useSelector(state => state?.system?.theme);
   const localActiveTheme = retrieveActiveThemeFromLocalStorage();
-  const [isDarkMode] = useState(localActiveTheme === 'dark');
+  const isDarkMode = (localActiveTheme === 'dark');
 
   useEffect(() => {
     if (activate) {

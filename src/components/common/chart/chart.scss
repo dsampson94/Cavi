@@ -107,6 +107,7 @@
     &__center-text {
 
       & p {
+        font-weight: bold;
         font-size: util.rem(10) !important;
         margin-top: util.rem(2);
       }
@@ -116,6 +117,7 @@
       padding-left: util.rem(104);
 
       &--top {
+        font-weight: bold;
         padding-right: util.rem(10);
       }
 

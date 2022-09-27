@@ -19,7 +19,12 @@
 
   &--chartbar {
     padding: 0;
-    max-width: util.rem(20);
+    min-width: util.rem(50);
+  }
+
+  &--topbar {
+    min-width: 120px;
+    width: 120px;
   }
 
   &__label-container {
@@ -66,10 +71,10 @@
     }
 
     &--chartbar {
-      margin: util.rem(9) util.rem(0) util.rem(4) util.rem(0);
+      margin: util.rem(9) util.rem(0) util.rem(4) util.rem(21);
       border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
-      height: util.rem(16);
-      width: util.rem(28);
+      height: util.rem(18);
+      width: util.rem(50);
       font-size: util.bu(1.1);
       padding: 0 0 0 util.rem(1.8);
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { bool, func } from 'prop-types';
 
-import { CLIENT_FIELDS, FIELD_CHARTS, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, FIELD_CHARTS, FIELD_TEMPERATURES, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
 import { SideBarButton, SideBarFieldList, SideBarList, ViewDataBar } from './Sidebar.util';
 import { getClassNames } from '../../../tools/general/helpers.util';
 
@@ -23,6 +23,13 @@ const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList,
                                  mappedFieldList={ mappedFieldList }
                                  setActiveLoadPeriod={ setActiveLoadPeriod }
                                  setActiveFieldName={ setActiveFieldName } />;
+
+    case FIELD_TEMPERATURES:
+      return <FieldTemperaturesChartsSideBar showSideBar={ showSideBar }
+                                             setShowSideBar={ setShowSideBar }
+                                             mappedFieldList={ mappedFieldList }
+                                             setActiveLoadPeriod={ setActiveLoadPeriod }
+                                             setActiveFieldName={ setActiveFieldName } />;
   }
 };
 
@@ -49,9 +56,7 @@ const ClientFieldsSideBar = ({ showSideBar, mappedUserData, setShowSideBar }) =>
                      sidebar />
 
         <SideBarList mappedUserData={ filteredSideBarData ? filteredSideBarData : mappedUserData }
-                     filteredSideBarData={ filteredSideBarData }
-                     setShowSideBar={ setShowSideBar }
-                     showSideBar={ showSideBar } />
+                     filteredSideBarData={ filteredSideBarData } />
 
         <SideBarButton />
       </> }
@@ -71,7 +76,8 @@ const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields,
       { showSideBar && <>
         <ViewDataBar setActiveLoadPeriod={ setActiveLoadPeriod } />
 
-        <SideBarFieldList mappedFieldList={ mappedFieldList }
+        <SideBarFieldList view={ FIELD_CHARTS }
+                          mappedFieldList={ mappedFieldList }
                           clientRequestFields={ clientRequestFields }
                           setActiveFieldName={ setActiveFieldName } />
       </> }
@@ -80,6 +86,27 @@ const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields,
 };
 
 FieldChartsSideBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func
+};
+
+const FieldTemperaturesChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setActiveLoadPeriod, setActiveFieldName }) => {
+
+  return (
+    <div className={ getClassNames('field-charts-side-bar', { show: showSideBar }) }>
+      { showSideBar && <>
+        <ViewDataBar setActiveLoadPeriod={ setActiveLoadPeriod } />
+
+        <SideBarFieldList view={ FIELD_TEMPERATURES }
+                          mappedFieldList={ mappedFieldList }
+                          clientRequestFields={ clientRequestFields }
+                          setActiveFieldName={ setActiveFieldName } />
+      </> }
+    </div>
+  );
+};
+
+FieldTemperaturesChartsSideBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func
 };

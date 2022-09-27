@@ -10,14 +10,13 @@ import {
   EMAIL,
   EMAIL_RECOMMENDATIONS,
   FIELD_CHARTS,
-  LOG_OUT,
-  LOG_OUT_ICON,
+  FIELD_TEMPERATURES,
   MAPS,
   MAPS_ICON,
   PRINT,
   PRINT_ICON,
-  REPORT_PROBLEM,
-  REPORT_PROBLEM_ICON,
+  PROFILE_ICON,
+  TOPBAR_OPTIONS,
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
@@ -30,8 +29,8 @@ import useTheme from '../../../tools/hooks/useTheme';
 
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
-import ThemeToggle from '../theme-toggle/ThemeToggle';
 import EmailModal from '../modal/EmailModal';
+import DropDownButton from '../drop-down/DropDownButton';
 
 import './top-bar.scss';
 
@@ -44,6 +43,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields, mappedFieldL
     case FIELD_CHARTS:
       return <FieldChartsTopBar clientRequestFields={ clientRequestFields }
                                 mappedFieldList={ mappedFieldList } />;
+    case FIELD_TEMPERATURES:
+      return <FieldTemperaturesChartsTopBar clientRequestFields={ clientRequestFields } />;
   }
 };
 
@@ -114,6 +115,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
           <Button label={ 'Field Setup' } />
+          <Button label={ 'Probes Monitor' } />
           <Button icon={ WEATHER_STATION_ICON }
                   tooltip={ WEATHER_STATION } />
           <Button icon={ MAPS_ICON }
@@ -121,15 +123,15 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
         </div>
       </div>
       <div className="client-fields-top-bar__right">
-        <ThemeToggle />
-        <Button label={ 'Probes Monitor' } />
-        <Button icon={ REPORT_PROBLEM_ICON }
-                tooltip={ REPORT_PROBLEM } />
-        <TextInput placeholder={ 'Find Last Readings' } />
-        <Button icon={ LOG_OUT_ICON }
-                tooltip={ LOG_OUT }
-                onClick={ logout }
-                leftAlignedTooltip />
+        <TextInput placeholder={ 'Find Last Readings' }
+                   topbar />
+
+        <DropDownButton name={ PROFILE_ICON }
+                        className={ 'client-fields-top-bar__right--menu' }
+                        fill={ '#53a5df' }
+                        onLogOutClick={ () => logout() }
+                        menu={ TOPBAR_OPTIONS }
+                        left />
       </div>
 
       { showEmailModal &&
@@ -153,7 +155,7 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const { groupName, clientName, fieldName } = useParams();
+  const { groupName, clientName, fieldName, probeNumber } = useParams();
 
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
 
@@ -214,11 +216,15 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
                 tooltip={ PRINT }
                 spaced
                 small />
-        <Button label={ 'Recommendations' }
+        <Button label={ 'Fields' }
                 onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
                 spaced />
         <Button label={ 'Field Setup' } spaced />
-        <Button label={ 'Temperatures' } spaced />
+        <Button label={ 'Temperatures' }
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ fieldName }/${ probeNumber }/temperatures`) }
+                spaced />
+        <Button label={ 'Probes Monitor' }
+                spaced />
 
         <Button label={ daysFromToday(0) }
                 lowerLabel={ getTopBarValue()[0] } datebar />
@@ -237,22 +243,106 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
         <Button label={ daysFromToday(7) }
                 lowerLabel={ getTopBarValue()[7] } datebar spaced />
 
-        <Button label={ 'Probes Monitor' }
-                spaced />
-        <Button icon={ REPORT_PROBLEM_ICON }
-                tooltip={ REPORT_PROBLEM }
-                spaced />
-        <TextInput placeholder={ 'Last Readings' } />
-        <Button icon={ LOG_OUT_ICON }
-                tooltip={ LOG_OUT }
-                onClick={ logout }
-                leftAlignedTooltip
-                spaced />
+        <TextInput placeholder={ 'Last Readings' }
+                   topbar />
+
+        <DropDownButton name={ PROFILE_ICON }
+                        className={ 'client-fields-top-bar__right--menu' }
+                        fill={ '#53a5df' }
+                        onLogOutClick={ () => logout() }
+                        menu={ TOPBAR_OPTIONS }
+                        left />
       </div>
     </div>
   );
 };
 
 FieldChartsTopBar.propTypes = {
+  clientRequestFields: shape({})
+};
+
+const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
+
+  useTheme(true);
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { groupName, clientName } = useParams();
+
+  const [emailAddress, setEmailAddress] = useState(undefined);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+
+  const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
+
+  useEffect(() => {
+    if (!emailAddress) downloadPDF();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clientPDF]);
+
+  const downloadPDF = () => {
+    if (!clientRequestFields) return;
+    if (!clientPDF) return;
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(clientPDF);
+    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.click();
+  };
+
+  const getPDF = () => {
+    if (clientRequestFields)
+      dispatch(requestClientPDF(clientRequestFields));
+  };
+
+  const logout = () => {
+    dispatch(requestLogout());
+    history.push('/');
+  };
+
+  return (
+    <div className="field-temperature-top-bar">
+      <div className="field-temperature-top-bar__left">
+        <div className="field-temperature-top-bar__left-header">
+          <img src={ '/favicon-irricheck.ico' }
+               alt={ 'icon' }
+               height={ 14 } />
+          <p onClick={ () => history.push('/overview') }>
+            { 'IrriCheck Pulse' }
+          </p>
+        </div>
+        <div className="field-temperature-top-bar__left-lower">
+          <Button icon={ PRINT_ICON }
+                  onClick={ getPDF }
+                  tooltip={ PRINT } />
+          <Button label={ 'Fields' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
+                  spaced />
+          <Button label={ 'Moisture Graphs' } />
+          <Button label={ 'Probes Monitor' } />
+        </div>
+      </div>
+      <div className="field-temperature-top-bar__right">
+        <TextInput placeholder={ 'Find Last Readings' }
+                   topbar />
+
+        <DropDownButton name={ PROFILE_ICON }
+                        className={ 'client-fields-top-bar__right--menu' }
+                        fill={ '#53a5df' }
+                        onLogOutClick={ () => logout() }
+                        menu={ TOPBAR_OPTIONS }
+                        left />
+      </div>
+
+      { showEmailModal &&
+        <EmailModal setShowEmailModal={ setShowEmailModal }
+                    emailAddress={ emailAddress }
+                    setEmailAddress={ setEmailAddress }
+                    clientRequestFields={ clientRequestFields } /> }
+    </div>
+  );
+};
+
+FieldTemperaturesChartsTopBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func,
   clientRequestFields: shape({})
 };

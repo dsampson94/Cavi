@@ -125,6 +125,10 @@
     margin-left: util.rem(2);
   }
 
+  &--long {
+    min-width: util.rem(180)
+  }
+
   &__label {
 
     &--upper {

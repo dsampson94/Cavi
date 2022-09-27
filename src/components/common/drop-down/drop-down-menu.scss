@@ -34,10 +34,6 @@
 
       > div {
         padding: util.rem(4);
-
-        &:hover {
-          background-color: map.get(color.$colorMap, row-hover-blue);
-        }
       }
 
       > p {
@@ -72,7 +68,31 @@
     }
 
     &--period {
-      margin-left: util.rem(-55);
+      margin-left: util.rem(-60);
+    }
+
+    &--logout {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 11;
+      margin: util.rem(30) util.rem(1) util.rem(0) util.rem(-100);
+
+      &-inner {
+        width: 80%;
+
+        & section {
+          display: flex;
+          justify-content: center;
+          position: relative;
+        }
+
+        & p {
+          display: flex;
+          justify-content: center;
+          font-size: util.rem(2);
+        }
+      }
     }
   }
 }

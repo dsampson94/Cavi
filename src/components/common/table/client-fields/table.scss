@@ -14,7 +14,6 @@
   &__header {
     position: sticky;
     box-shadow: 0 util.rem(0.9);
-    background-color: map.get(color.$colorMap, light-mode-white);
     z-index: 9;
     top: 0;
 

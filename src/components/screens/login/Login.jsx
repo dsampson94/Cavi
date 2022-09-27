@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
 
 import { func } from 'prop-types';
 
@@ -12,13 +10,10 @@ import logo from '../../../tools/images/pulselogo.png';
 import TextInput from '../../common/input/text/TextInput';
 import Button from '../../common/button/Button';
 import Graphic from '../../common/graphic/Graphic';
-import Spinner from '../../common/spinner/Spinner';
 
 import './login.scss';
 
 const Login = ({ onLoginClick }) => {
-
-  const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
 
   useTheme(true);
 
@@ -64,7 +59,6 @@ const Login = ({ onLoginClick }) => {
           <Button label={ 'French' } flex white />
         </div>
       </div>
-      <Spinner centered spinnerText={ spinnerText } />
     </div>
   );
 };

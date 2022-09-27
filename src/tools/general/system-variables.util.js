@@ -49,7 +49,7 @@ export const PRINT = 'Print';
 export const MAPS = 'Show Probes on Google Maps';
 export const WEATHER_STATION = 'Show Weather Station Data';
 export const REPORT_PROBLEM = 'Report a problem to your agent';
-export const LOG_OUT = 'Log out or change settings';
+export const LOG_OUT = 'Log out';
 
 export const ACCURACY_ANALYSIS = 'Show Accuracy Analysis';
 export const PREVIOUS_RECOMMENDATIONS = 'Show Previous Recommendations';
@@ -70,6 +70,7 @@ export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
 export const CHART_USAGE_MENU = 'chart_usage_menu';
 export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
 export const CHART_ACTIVE_PERIOD = 'chart_active_period';
+export const TOPBAR_OPTIONS = 'topbar_options';
 
 export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';
@@ -88,7 +89,15 @@ export const PRINT_ICON = 'Print';
 export const MAPS_ICON = 'maps';
 export const WEATHER_STATION_ICON = 'weather_station';
 export const REPORT_PROBLEM_ICON = 'report_problem';
+export const PROFILE_ICON = 'profile';
 export const LOG_OUT_ICON = 'log_out';
+
+//MIDBAR
+export const OVERVIEW_MIDBAR = 'overview_midbar';
+export const CLIENT_FIELDS_MIDBAR = 'client_fields__midbar';
+export const FIELD_CHART_MIDBAR = 'field_chart_midbar';
+export const FIELD_TEMPERATURES_MIDBAR = 'field_temperatures_midbar';
+
 
 //TABLE_MIDBAR
 export const PREVIOUS = 'previous';
@@ -142,10 +151,12 @@ export const RADIO_GROUP = 'viewPeriod';
 //OTHER STRINGS
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
+export const FIELD_TEMPERATURES= 'FieldTemperatures';
 
 //CHART TYPES
 export const DEFICIT = 'deficit';
 export const AGGREGATE = 'aggregate';
+export const TEMPERATURE_MULTILINE = 'temperatureMultiLine';
 
 //CHART NAMES
 export const DEFICIT_100MM = 'deficit_100mm';
@@ -177,3 +188,12 @@ export const PERIOD_OPTION = 1;
 export const CALIBRATE_OPTION = 2;
 export const IRRIGATION_OR_DELETE_OPTION = 3;
 export const EXPORT_OPTION = 4;
+
+export const MENU_1= 'dropdown-menu-1';
+export const MENU_2= 'dropdown-menu-2';
+export const MENU_3= 'dropdown-menu-3';
+export const MENU_4= 'dropdown-menu-4';
+
+export const MENU_2_INPUT = 'dropdown-menu-2-input';
+export const MENU_2_INPUT_BUTTON = 'dropdown-menu-2-input-button';
+

@@ -9,14 +9,15 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: left;
+  user-select: none;
   width: 100%;
 
   &__label-container {
     display: flex;
     align-items: flex-start;
     padding-left: util.rem(1);
-    margin-top: util.rem(2);
-    font-size: util.rem(8);
+    margin-top: util.rem(0);
+    font-size: util.rem(10);
 
     & label {
       margin-top: util.rem(2);
@@ -32,12 +33,25 @@
     border: util.rem(1.2) solid map.get(color.$colorMap, pulse-blue);
     border-radius: map.get(radius.$border-radius, medium);
   }
+}
 
-  input[type="checkbox"] {
+.checkbox-input__input {
+
+  &:checked {
+    animation: ripple 0.2s linear forwards;
+    background-color: map.get(color.$colorMap, pulse-blue);
+  }
+
+  &:hover {
+    border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+  }
+
+  &--daily {
 
     &:checked {
       animation: ripple 0.2s linear forwards;
-      background-color: map.get(color.$colorMap, pulse-blue);
+      background-color: map.get(color.$colorMap, daily-ETO-green);
+      border: util.rem(1.2) solid map.get(color.$colorMap, daily-ETO-green);
     }
 
     &:hover {
@@ -58,5 +72,79 @@
 
   100% {
     box-shadow: 0 0 0 util.rem(5) rgba(0, 0, 0, 0);
+  }
+}
+
+.chart {
+
+  &__checkbox-filter {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &__inner {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    &--dailyETO {
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        margin-top: -16vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-top: -15vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        margin-top: -16vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-top: -16vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-top: -16vh;
+        margin-left: 5%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        margin-top: -17vh;
+        margin-left: 8%;
+      }
+    }
+
+    &--temperatures {
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        margin-top: -20vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-top: -21vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        margin-top: -22vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-top: -23vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-top: -24vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        margin-top: -25vh;
+      }
+    }
   }
 }

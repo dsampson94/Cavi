@@ -1,9 +1,77 @@
 import React from 'react';
 import { line, selectAll } from 'd3';
 
-import { AGGREGATE, AGGREGATE_BOTTOM_SOIL, AGGREGATE_TOP_SOIL, USAGE_ETC } from '../../../../tools/general/system-variables.util';
+import {
+  AGGREGATE,
+  AGGREGATE_BOTTOM_SOIL,
+  AGGREGATE_TOP_SOIL,
+  DAILY_ETO,
+  DEFICIT,
+  TEMPERATURE_MULTILINE,
+  USAGE_ETC
+} from '../../../../tools/general/system-variables.util';
 
-const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName, recommendationOffset, clipPath, isDarkMode }) => {
+const Line = ({
+                xAccessor,
+                xScale,
+                yAccessor,
+                yScale,
+                data,
+                chartType,
+                chartName,
+                recommendationOffset,
+                clipPath,
+                isDarkMode,
+                hiddenLineList
+              }) => {
+
+  switch (chartType) {
+    case DEFICIT:
+    case AGGREGATE:
+    case USAGE_ETC:
+    case DAILY_ETO:
+      return <FieldChartLine data={ data }
+                             recommendationOffset={ recommendationOffset }
+                             chartName={ chartName }
+                             chartType={ chartType }
+                             xAccessor={ xAccessor }
+                             yAccessor={ yAccessor }
+                             xScale={ xScale }
+                             yScale={ yScale }
+                             clipPath={ clipPath }
+                             isDarkMode={ isDarkMode }
+                             hiddenLineList={ hiddenLineList } />;
+
+    case TEMPERATURE_MULTILINE:
+      return <TemperatureChartLine data={ data }
+                                   recommendationOffset={ recommendationOffset }
+                                   chartName={ chartName }
+                                   chartType={ chartType }
+                                   xAccessor={ xAccessor }
+                                   yAccessor={ yAccessor }
+                                   xScale={ xScale }
+                                   yScale={ yScale }
+                                   clipPath={ clipPath }
+                                   isDarkMode={ isDarkMode }
+                                   hiddenLineList={ hiddenLineList } />;
+  }
+};
+
+export default Line;
+
+const FieldChartLine = ({
+                          xAccessor,
+                          xScale,
+                          yAccessor,
+                          yScale,
+                          data,
+                          chartType,
+                          chartName,
+                          recommendationOffset,
+                          clipPath,
+                          isDarkMode,
+                          hiddenLineList
+                        }) => {
 
   let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
 
@@ -17,8 +85,8 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
   const getLineColor = () => {
     if (chartName === AGGREGATE_TOP_SOIL) return 'url(#lineGradientAggregateTop)';
     else if (chartName === AGGREGATE_BOTTOM_SOIL) return 'url(#lineGradientAggregateBottom)';
-    else if (chartName === USAGE_ETC && isDarkMode) return 'white';
-    else if (chartName === USAGE_ETC && !isDarkMode) return 'black';
+    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && isDarkMode) return 'white';
+    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && !isDarkMode) return 'black';
     else if (isDarkMode) return '#0090ff';
     else if (!isDarkMode) return '#0000FF';
   };
@@ -60,7 +128,76 @@ const Line = ({ xAccessor, xScale, yAccessor, yScale, data, chartType, chartName
   );
 };
 
-export default Line;
+const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, chartName, clipPath, isDarkMode, hiddenLineList }) => {
+
+  let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
+
+  selectAll('.line').on('contextmenu ', event => event.preventDefault());
+
+  return (
+    <g>
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[0]) }
+            clipPath={ clipPath }
+            stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[1]) }
+            clipPath={ clipPath }
+            stroke={ '#f37b2c' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[2]) }
+            clipPath={ clipPath }
+            stroke={ '#ea3a3d' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[3]) }
+            clipPath={ clipPath }
+            stroke={ '#47FFFF' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[4]) }
+            clipPath={ clipPath }
+            stroke={ '#1ad598' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+
+      <path className={ 'line' }
+            d={ lineGenerator(data?.[5]) }
+            clipPath={ clipPath }
+            stroke={ 'green' }
+            style={ {
+              fill: 'none',
+              strokeWidth: '1.2px',
+              strokeLinecap: 'round'
+            } } />
+    </g>
+  );
+};
 
 const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName, isDarkMode }) => {
 

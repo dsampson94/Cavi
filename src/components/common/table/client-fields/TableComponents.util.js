@@ -1,23 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
 
 import { arrayOf, bool, func, number, shape, string } from 'prop-types';
 
 import {
-  ACCURACY_ANALYSIS,
-  BULLSEYE,
   CAMERA,
   CHARTS,
   CLOUDED,
   DROPDOWN,
-  DROPDOWN_ALL,
   HARVEST,
   HARVEST_ICON,
   PARTLY_CLOUDED,
   PENCIL,
-  PREVIOUS,
-  PREVIOUS_RECOMMENDATIONS,
   RAIN,
   RAIN_CLOUDS,
   SUNNY,
@@ -29,75 +22,9 @@ import {
 
 import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
 
-import { requestClientFieldList } from '../../../../redux/actions/client.action';
-
 import SVGIcon from '../../icon/SVGIcon';
 import ToolTip from '../../tool-tip/ToolTip';
-import Button from '../../button/Button';
 import InputSearch from '../../input-search/InputSearch';
-
-export const TableTopBar = ({
-                              filteredTableData,
-                              hasSubGroups,
-                              setFilteredTableData,
-                              setActiveTableData,
-                              clientRequestFields,
-                              toggleDropdowns,
-                              showClientsSideBar
-                            }) => {
-
-  const dispatch = useDispatch();
-  const { groupName, clientName } = useParams();
-
-  return (
-    <div className={ getClassNames('client-fields__top-bar', { show: showClientsSideBar }) }>
-      <div className="client-fields__top-bar-left">
-        { hasSubGroups &&
-          <>
-            { !filteredTableData &&
-              <div className="client-fields__top-bar-left-button">
-                <Button icon={ DROPDOWN_ALL }
-                        onClick={ toggleDropdowns } />
-              </div> }
-            { filteredTableData &&
-              <div className="client-fields__top-bar-left-no-button" /> }
-          </> }
-        { !hasSubGroups &&
-          <div className="client-fields__top-bar-left-no-button" /> }
-        <p>{ `Recommendations: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
-      </div>
-      <div className="client-fields__top-bar-right">
-        <Button icon={ BULLSEYE }
-                iconFill={ '#C24C41' }
-                tooltip={ ACCURACY_ANALYSIS }
-                spaced />
-        <Button label={ 'Reports' }
-                spaced />
-        <Button icon={ PREVIOUS }
-                tooltip={ PREVIOUS_RECOMMENDATIONS }
-                spaced />
-        <Button label={ 'Show Archives' }
-                spaced />
-        <Button label={ 'Reload Recommendations' }
-                spaced
-                onClick={ () => {
-                  setFilteredTableData(undefined);
-                  setActiveTableData([]);
-                  dispatch(requestClientFieldList(clientRequestFields));
-                } } />
-      </div>
-    </div>
-  );
-};
-
-TableTopBar.propTypes = {
-  filteredTableData: arrayOf(shape({})),
-  hasSubGroups: bool,
-  setFilteredTableData: func,
-  setActiveTableData: func,
-  clientRequestFields: shape({}),
-  toggleDropdowns: func
-};
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="client-fields__search">

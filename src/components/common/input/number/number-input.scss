@@ -1,0 +1,52 @@
+@use "sass:map" as map;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
+
+.number-input {
+  display: flex;
+  margin-top: util.rem(5);
+  margin-bottom: util.rem(-5);
+
+  &:hover {
+    background-color: transparent !important;
+  }
+
+  &__input {
+    border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: map.get(radius.$border-radius, default);
+    font-family: Aller, serif;
+
+    &--calibrate {
+      margin-top: util.rem(4);
+      margin-left: util.rem(5);
+      max-width: 95%;
+      border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+      padding: util.rem(3) util.rem(0) util.rem(3) util.rem(4);
+      border-radius: map.get(radius.$border-radius, small);
+      font-size: util.rem(12);
+      margin-right: util.rem(3);
+    }
+
+    &--period {
+      margin-left: util.rem(5);
+      max-width: 95%;
+      border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+      padding: util.rem(3) util.rem(0) util.rem(3) util.rem(4);
+      border-radius: map.get(radius.$border-radius, small);
+      font-size: util.rem(12);
+      margin-right: util.rem(3);
+    }
+
+    &--chartbar {
+      margin: util.rem(4) util.rem(-6) util.rem(4) util.rem(21);
+      border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+      height: util.rem(18);
+      width: util.rem(50);
+      font-size: util.bu(1.1);
+      padding: 0 0 0 util.rem(1.8);
+    }
+  }
+}

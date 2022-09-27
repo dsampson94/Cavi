@@ -17,11 +17,12 @@ const TextInput = ({
                      type,
                      login,
                      left,
-                     chartbar
+                     chartbar,
+                     topbar
                    }) => {
 
   return (
-    <div className={ getClassNames('text-input', { disabled, login, left, chartbar }) }>
+    <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar }) }>
 
       <div className={ getClassNames('text-input__label-container', { login, left }) }>
         <label>{ label }</label>

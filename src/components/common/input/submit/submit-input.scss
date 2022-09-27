@@ -1,0 +1,32 @@
+@use "sass:map" as map;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
+
+.submit-input {
+  display: flex;
+  justify-content: center;
+  margin-top: util.rem(5);
+  margin-bottom: util.rem(-9);
+
+  &:hover {
+    background-color: transparent !important;
+  }
+
+  &__input {
+    border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: map.get(radius.$border-radius, default);
+    font-family: Aller, serif;
+
+    &--calibrate {
+      width: 50%;
+      margin-left: util.rem(5);
+      border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+      padding: util.rem(3) util.rem(0) util.rem(3) util.rem(4);
+      border-radius: map.get(radius.$border-radius, small);
+      font-size: util.rem(11);
+    }
+  }
+}

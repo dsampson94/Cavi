@@ -3,11 +3,11 @@ import { useHistory } from 'react-router';
 
 import { arrayOf, func, number, shape, string } from 'prop-types';
 
-import { CLIENT_FIELDS, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, OVERVIEW_MIDBAR, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
 import { ActiveHeader, OverviewList } from './FieldsOverview.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
-import OverviewMidBar from '../../common/mid-bar/OverviewMidBar';
+import MidBar from '../../common/mid-bar/MidBar';
 import InputSearch from '../../common/input-search/InputSearch';
 
 import './fields-overview.scss';
@@ -34,9 +34,10 @@ const FieldsOverview = ({
                       showClientsSideBar={ showClientsSideBar }
                       setShowClientsSideBar={ setShowClientsSideBar }>
       <div className="fields-overview">
-        <OverviewMidBar activePath={ activePath }
-                        handleOverviewClick={ handleOverviewClick }
-                        handleMonitorProbesClick={ handleMonitorProbesClick } />
+        <MidBar view={ OVERVIEW_MIDBAR }
+                activePath={ activePath }
+                handleOverviewClick={ handleOverviewClick }
+                handleMonitorProbesClick={ handleMonitorProbesClick } />
 
         <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
                       setOverviewOptionSelected={ setOverviewOptionSelected } />

@@ -5,10 +5,21 @@ import {
   CONTEXT_MENU,
   EXPORT_OPTION,
   IRRIGATION_OR_DELETE_OPTION,
+  MENU_1,
+  MENU_2,
+  MENU_2_INPUT,
+  MENU_2_INPUT_BUTTON,
+  MENU_3,
+  MENU_4,
   PERIOD_OPTION
-} from '../../../../tools/general/system-variables.util';
+} from '../../../tools/general/system-variables.util';
 
 import { bisector } from 'd3';
+
+import SubmitInput from '../input/submit/SubmitInput';
+import NumberInput from '../input/number/NumberInput';
+
+import './chart-context-menu.scss';
 
 const ChartContextMenu = ({
                             data,
@@ -26,7 +37,8 @@ const ChartContextMenu = ({
                             setXAxisViewMode,
                             activeProbeFactor,
                             setActiveProbeFactor,
-                            activeDataPeriod
+                            activeDataPeriod,
+                            switchAtMidWidth
                           }) => {
 
   return <ContextMenu data={ data }
@@ -44,7 +56,8 @@ const ChartContextMenu = ({
                       setXAxisViewMode={ setXAxisViewMode }
                       activeProbeFactor={ activeProbeFactor }
                       setActiveProbeFactor={ setActiveProbeFactor }
-                      activeDataPeriod={ activeDataPeriod } />;
+                      activeDataPeriod={ activeDataPeriod }
+                      switchAtMidWidth={ switchAtMidWidth } />;
 };
 
 export default ChartContextMenu;
@@ -65,7 +78,8 @@ const ContextMenu = ({
                        setXAxisViewMode,
                        activeProbeFactor,
                        setActiveProbeFactor,
-                       activeDataPeriod
+                       activeDataPeriod,
+                       switchAtMidWidth
                      }) => {
 
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
@@ -105,18 +119,21 @@ const ContextMenu = ({
   );
 
   const handleLeftClick = (event) => {
-    if (!event.target.id.includes('dropdown')) {
+    let eventId = event.target.id;
+    if (!eventId.includes('dropdown')) {
       setShowPrimaryDropDown(false);
       setShowSecondaryDropDown(false);
-    } else if (event.target.id === 'dropdown-menu-1') {
+    } else if (eventId === MENU_1) {
       handleOptionClick(secondaryMenu, PERIOD_OPTION);
-    } else if (event.target.id === 'dropdown-menu-2') {
+    } else if (eventId === MENU_2) {
       handleOptionClick(secondaryMenu, CALIBRATE_OPTION);
-    } else if (event.target.id === 'dropdown-menu-2-input') {
+    } else if (eventId === MENU_2_INPUT) {
       setShowSecondaryDropDown(true);
-    } else if (event.target.id === 'dropdown-menu-3') {
+    } else if (eventId === MENU_2_INPUT_BUTTON) {
+      setShowSecondaryDropDown(true);
+    } else if (eventId === MENU_3) {
       handleOptionClick(secondaryMenu, IRRIGATION_OR_DELETE_OPTION);
-    } else if (event.target.id === 'dropdown-menu-4') {
+    } else if (eventId === MENU_4) {
       handleOptionClick(secondaryMenu, EXPORT_OPTION);
     }
   };
@@ -138,7 +155,8 @@ const ContextMenu = ({
                      shouldDisplayFurtherUp={ shouldDisplayFurtherUp }
                      isLessThanHalfWidth={ isLessThanHalfWidth }
                      shouldDisplayLeft={ shouldDisplayLeft }
-                     anchorPoint={ anchorPoint } /> }
+                     anchorPoint={ anchorPoint }
+                     switchAtMidWidth={ switchAtMidWidth } /> }
 
       { showSecondaryDropDown &&
         <SecondaryMenu handleLeftClick={ handleLeftClick }
@@ -158,22 +176,30 @@ const ContextMenu = ({
   );
 };
 
-const PrimaryMenu = ({ handleLeftClick, setHoverActive, shouldDisplayFurtherUp, isLessThanHalfWidth, shouldDisplayLeft, anchorPoint }) => {
+const PrimaryMenu = ({
+                       handleLeftClick,
+                       setHoverActive,
+                       shouldDisplayFurtherUp,
+                       isLessThanHalfWidth,
+                       shouldDisplayLeft,
+                       anchorPoint,
+                       switchAtMidWidth
+                     }) => {
   return (
-    <div className="dropdown__popup"
+    <div className="context-menu__popup"
          onMouseMove={ () => setHoverActive(true) }
          style={ {
            top: shouldDisplayFurtherUp ? anchorPoint.y - 120 : anchorPoint.y - 20,
            left: shouldDisplayLeft ? anchorPoint.x - 150 : anchorPoint.x
          } }>
 
-      { isLessThanHalfWidth && <div>
-        <div id={ 'dropdown-menu-1' } onClick={ handleLeftClick }>{ 'Start here and show...' }</div>
+      { switchAtMidWidth && isLessThanHalfWidth && <div>
+        <div id={ MENU_1 } onClick={ handleLeftClick }>{ 'Start here and show...' }</div>
         <hr />
-        <div id={ 'dropdown-menu-2' } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
-        <div id={ 'dropdown-menu-3' } onClick={ handleLeftClick }>{ 'Irrigations...' }</div>
+        <div id={ MENU_2 } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
+        <div id={ MENU_3 } onClick={ handleLeftClick }>{ 'Irrigations...' }</div>
         <hr />
-        <div id={ 'dropdown-menu-4' } onClick={ handleLeftClick }>{ 'Export...' }</div>
+        <div id={ MENU_4 } onClick={ handleLeftClick }>{ 'Export...' }</div>
         <hr />
         <div>{ 'Upload photo here' }</div>
         <hr />
@@ -183,11 +209,15 @@ const PrimaryMenu = ({ handleLeftClick, setHoverActive, shouldDisplayFurtherUp, 
         <div>{ 'Fix Spikes (ML)' }</div>
       </div> }
 
-      { !isLessThanHalfWidth && <div>
-        <div id={ 'dropdown-menu-1' }>{ 'Start here and show...' }</div>
-        <div id={ 'dropdown-menu-2' } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
-        <div id={ 'dropdown-menu-3' }>{ 'Delete readings...' }</div>
+      { switchAtMidWidth && !isLessThanHalfWidth && <div>
+        <div id={ MENU_1 }>{ 'Start here and show...' }</div>
+        <div id={ MENU_2 } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
+        <div id={ MENU_3 }>{ 'Delete readings...' }</div>
         <div>{ 'Check for new readings from here...' }</div>
+      </div> }
+
+      { !switchAtMidWidth && <div>
+        <div id={ MENU_1 }>{ 'Start here and show...' }</div>
       </div> }
     </div>
   );
@@ -209,13 +239,25 @@ const SecondaryMenu = ({
                          secondaryMenu
                        }) => {
 
+  const secondaryMenuXPos = () => {
+    return shouldDisplayLeft ?
+      secondaryMenu === IRRIGATION_OR_DELETE_OPTION
+        ? isLessThanHalfWidth
+          ? anchorPoint.x - 341
+          : anchorPoint.x - 381
+        : anchorPoint.x - 341
+      : isLessThanHalfWidth
+        ? anchorPoint.x + 134
+        : anchorPoint.x + 203;
+  };
+
   return (
-    <div className="dropdown__popup"
+    <div className="context-menu__popup"
          onMouseMove={ () => setHoverActive(true) }
          style={ {
            top: shouldDisplayFurtherUp ? anchorPoint.y - 120 : anchorPoint.y - 20,
-           left: shouldDisplayLeft ? anchorPoint.x - 322 : (isLessThanHalfWidth ? anchorPoint.x + 134 : anchorPoint.x + 202),
-           width: (!isLessThanHalfWidth && secondaryMenu === 2) ? '230px' : '170px'
+           left: secondaryMenuXPos(),
+           width: (!isLessThanHalfWidth && secondaryMenu === IRRIGATION_OR_DELETE_OPTION) ? '230px' : '190px'
          } }>
 
       { isLessThanHalfWidth && <div>
@@ -283,6 +325,7 @@ const PeriodSecondaryMenu = ({
   return (
     <>
       <p>{ 'Days:' }</p>
+
       <hr />
       <div id={ 'option' } onClick={ () => handlePeriodClick(1) }>{ '1' }</div>
       <div id={ 'option' } onClick={ () => handlePeriodClick(7) }>{ '7' }</div>
@@ -291,13 +334,14 @@ const PeriodSecondaryMenu = ({
       <div id={ 'option' } onClick={ () => handlePeriodClick(56) }>{ '56' }</div>
       <div id={ 'option' } onClick={ () => handlePeriodClick(100) }>{ '100' }</div>
       <hr />
-      <input id={ 'dropdown-menu-2-input' }
-             type={ 'number' }
-             autoFocus
-             value={ activeDataPeriod }
-             placeholder={ '1' }
-             min={ '1' }
-             onChange={ ({ target }) => setActiveDataPeriod(target.value) } />
+
+      <NumberInput id={ 'dropdown-menu-2-input' }
+                   autoFocus
+                   period
+                   placeholder={ '1' }
+                   min={ '1' }
+                   value={ activeDataPeriod }
+                   onChange={ ({ target }) => handlePeriodClick(target.value) } />
     </>
   );
 };
@@ -309,7 +353,13 @@ const CalibrateSecondaryMenu = ({
                                   setActiveProbeFactor
                                 }) => {
 
-  const handleFactorClick = (factor) => {
+  const [factorInputValue, setFactorInputValue] = useState(undefined);
+
+  const handleFactorInput = (factor) => {
+    setFactorInputValue(factor);
+  };
+
+  const handleFactorSubmit = (factor) => {
     setShowPrimaryDropDown(false);
     setXAxisViewMode(CONTEXT_MENU);
     setActiveProbeFactor(factor);
@@ -318,22 +368,30 @@ const CalibrateSecondaryMenu = ({
   return (
     <>
       <p>{ 'Calibrate y-axis:' }</p>
+
       <hr />
-      <div id={ 'option' } onClick={ () => handleFactorClick(0.5) }>{ '0.50x' }</div>
-      <div id={ 'option' } onClick={ () => handleFactorClick(0.65) }>{ '0.65x' }</div>
-      <div id={ 'option' } onClick={ () => handleFactorClick(0.8) }>{ '0.80x' }</div>
-      <div id={ 'option' } onClick={ () => handleFactorClick(1.2) }>{ '1.20x' }</div>
-      <div id={ 'option' } onClick={ () => handleFactorClick(2) }>{ '2.00x' }</div>
+      <div id={ 'option' } onClick={ () => handleFactorSubmit(0.5) }>{ '0.50x' }</div>
+      <div id={ 'option' } onClick={ () => handleFactorSubmit(0.65) }>{ '0.65x' }</div>
+      <div id={ 'option' } onClick={ () => handleFactorSubmit(0.8) }>{ '0.80x' }</div>
+      <div id={ 'option' } onClick={ () => handleFactorSubmit(1.2) }>{ '1.20x' }</div>
+      <div id={ 'option' } onClick={ () => handleFactorSubmit(2) }>{ '2.00x' }</div>
       <hr />
-      <input id={ 'dropdown-menu-2-input' }
-             type={ 'number' }
-             autoFocus
-             step={ 0.1 }
-             min={ '0' }
-             max={ '5' }
-             placeholder={ '0 - 5' }
-             value={ activeProbeFactor }
-             onChange={ ({ target }) => handleFactorClick(target.value) } />
+
+      <div className={ 'calibration-container' }>
+        <NumberInput id={ 'dropdown-menu-2-input' }
+                     autoFocus
+                     calibrate
+                     step={ 0.01 }
+                     min={ '0' }
+                     max={ '5' }
+                     placeholder={ '0 - 5' }
+                     value={ activeProbeFactor }
+                     onChange={ ({ target }) => handleFactorInput(target.value) } />
+
+        <SubmitInput value={ 'Calibrate' }
+                     onClick={ () => handleFactorSubmit(factorInputValue) }
+                     calibrate />
+      </div>
     </>
   );
 };

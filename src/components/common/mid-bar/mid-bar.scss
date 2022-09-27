@@ -1,0 +1,11 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
+
+.overview__midbar {
+  display: flex;
+  flex-direction: row;
+}

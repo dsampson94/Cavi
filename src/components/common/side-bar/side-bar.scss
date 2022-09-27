@@ -8,7 +8,6 @@
 .client-fields-side-bar {
   display: flex;
   flex-direction: column;
-  border-right: util.rem(1) solid;
   user-select: none;
   transition: 0.4s;
   height: 100%;
@@ -32,7 +31,6 @@
     &__container {
       display: flex;
       flex-direction: column;
-      border-top: util.rem(1) solid;
       padding: util.rem(2) util.rem(6) util.rem(0) util.rem(2);
     }
 
@@ -86,7 +84,6 @@
   resize: horizontal;
   overflow: auto;
   user-select: none;
-  border-right: util.rem(1) solid;
   transition: 0.4s;
   height: 100%;
   width: 0;
@@ -178,6 +175,6 @@
   }
 
   &--show {
-    width: 9%;
+    width: 12%;
   }
 }

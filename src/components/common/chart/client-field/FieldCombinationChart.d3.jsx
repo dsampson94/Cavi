@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName, ChartHeader } from '../Chart.util';
-import { AGGREGATE } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
 import useTheme from '../../../../tools/hooks/useTheme';
@@ -14,7 +13,7 @@ import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Bars from '../components/Bars';
-import ChartContextMenu from '../components/ChartContextMenu';
+import ChartContextMenu from '../../context-menu/ChartContextMenu';
 
 const FieldCombinationChart = ({
                                  data,
@@ -148,11 +147,6 @@ const FieldCombinationChart = ({
                chartName={ chartName }
                chartInfo={ chartInfo }>
 
-          { chartType === AGGREGATE &&
-            <rect width={ '92%' }
-                  height={ '90%' }
-                  fill={ 'white' } /> }
-
           <YAxis yScale={ yScale }
                  data={ data }
                  chartName={ chartName }
@@ -167,7 +161,6 @@ const FieldCombinationChart = ({
           <XAxis xScale={ xScale }
                  hasXAxis={ hasXAxis }
                  chartName={ chartName }
-                 chartType={ chartType }
                  isDarkMode={ isDarkMode } />
 
           <Line data={ data }
@@ -228,7 +221,8 @@ const FieldCombinationChart = ({
                           setActiveDataPeriod={ setActiveDataPeriod }
                           setXAxisViewMode={ setXAxisViewMode }
                           activeProbeFactor={ activeProbeFactor }
-                          setActiveProbeFactor={ setActiveProbeFactor } />
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          switchAtMidWidth={ true } />
       </div>
     </>
   );

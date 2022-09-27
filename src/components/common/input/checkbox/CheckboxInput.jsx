@@ -7,12 +7,13 @@ import { getClassNames } from '../../../../tools/general/helpers.util';
 import './checkbox-input.scss';
 
 const CheckboxInput = ({
-                      constant,
-                      name,
-                      checked,
-                      onClick,
-                      disabled
-                    }) => {
+                         constant,
+                         name,
+                         checked,
+                         onClick,
+                         disabled,
+                         daily
+                       }) => {
 
   return (
     <div className={ getClassNames('checkbox-input', { disabled }) }>
@@ -26,7 +27,7 @@ const CheckboxInput = ({
              disabled={ disabled }
              onClick={ onClick }
              type={ 'checkbox' }
-             className={ getClassNames('checkbox-input__input') } />
+             className={ getClassNames('checkbox-input__input', { daily }) } />
     </div>
   );
 };

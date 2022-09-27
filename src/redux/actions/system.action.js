@@ -35,3 +35,9 @@ export const getTheme = (onSuccess, onError) => ({
   onSuccess,
   onError
 });
+
+export const CANCEL_REQUEST = '[SYSTEM_STORE] Cancel Request';
+export const cancelRequest = (theme) => ({
+  type: CANCEL_REQUEST,
+  theme
+});

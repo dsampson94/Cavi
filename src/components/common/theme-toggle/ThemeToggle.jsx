@@ -35,17 +35,19 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div style={ style }>
+    <button style={ style }>
       <DarkModeToggle className="theme-toggle"
                       onChange={ handleChange }
                       checked={ !isDarkMode }
+                      id={ 'theme-toggle' }
                       size={ 50 } />
-    </div>
+    </button>
   );
 };
 
 const style = {
-  display: 'flex'
+  display: 'flex',
+  marginLeft: '25px'
 };
 
 export default ThemeToggle;

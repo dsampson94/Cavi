@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 
-import { CLIENT_FIELDS } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR } from '../../../tools/general/system-variables.util';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
-import { TableSearchBar, TableTopBar } from '../../common/table/client-fields/TableComponents.util';
+import { TableSearchBar } from '../../common/table/client-fields/TableComponents.util';
+
 import ContentContainer from '../../common/content-container/ContentContainer';
+import MidBar from '../../common/mid-bar/MidBar';
 import Table from '../../common/table/client-fields/Table';
 
 import './client-fields-view.scss';
@@ -49,13 +51,14 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
                       mappedFieldList={ mappedFieldList }>
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
-        <TableTopBar filteredTableData={ filteredTableData }
-                     hasSubGroups={ hasSubGroups }
-                     showClientsSideBar={ showClientsSideBar }
-                     setFilteredTableData={ setFilteredTableData }
-                     setActiveTableData={ setActiveTableData }
-                     clientRequestFields={ clientRequestFields }
-                     toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+        <MidBar view={ CLIENT_FIELDS_MIDBAR }
+                filteredTableData={ filteredTableData }
+                hasSubGroups={ hasSubGroups }
+                showClientsSideBar={ showClientsSideBar }
+                setFilteredTableData={ setFilteredTableData }
+                setActiveTableData={ setActiveTableData }
+                clientRequestFields={ clientRequestFields }
+                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
 
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />

@@ -1,4 +1,12 @@
-import { ADD_SYSTEM_NOTICE, REMOVE_SYSTEM_NOTICE, SET_SHOW_SHIMMER, SET_SPINNER_TEXT, SET_THEME } from '../actions/system.action';
+import {
+  ADD_SYSTEM_NOTICE,
+  CANCEL_REQUEST,
+  REMOVE_SYSTEM_NOTICE,
+  SET_SHOW_SHIMMER,
+  SET_SPINNER_TEXT,
+  SET_THEME
+} from '../actions/system.action';
+
 import { generateId } from '../../tools/general/helpers.util';
 import { retrieveActiveThemeFromLocalStorage } from '../../tools/storage/localStorage';
 
@@ -48,6 +56,12 @@ export function systemReducer(state = initialState, action) {
       return {
         ...state,
         theme
+      };
+    }
+    case CANCEL_REQUEST: {
+      return {
+        ...state,
+        spinnerText: undefined
       };
     }
     default:
