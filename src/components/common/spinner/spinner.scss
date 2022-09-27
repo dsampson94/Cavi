@@ -6,10 +6,12 @@
 @use "../../../stylesheets/mixin" as mixin;
 
 .spinner {
+  display: flex;
+  justify-content: center;
 
   &__overlay {
     position: fixed;
-    z-index: 99;
+    z-index: 21;
     background-color: map.get(color.$colorMap, grey);
     opacity: 0.1;
     left: 0;
@@ -19,348 +21,77 @@
     cursor: pointer;
   }
 
-  &__container {
-    position: absolute;
-    z-index: 11;
-    width: util.rem(100);
-    background-color: map.get(color.$colorMap, white);
-    box-shadow: util.rem(0) util.rem(0) util.rem(15) util.rem(15) map.get(color.$colorMap, white);
-    border-radius: map.get(radius.$border-radius, spinner);
-    border: util.rem(1) solid map.get(color.$colorMap, white);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(map.get(color.$colorMap, white)), to(transparent));
-    background-image: -webkit-linear-gradient(map.get(color.$colorMap, white), transparent);
-    background-image: -moz-linear-gradient(map.get(color.$colorMap, white), transparent),
-    -moz-linear-gradient(map.get(color.$colorMap, white), transparent);
-    background-image: -o-linear-gradient(map.get(color.$colorMap, white), transparent),
-    -o-linear-gradient(map.get(color.$colorMap, white), transparent);
-    background-image: linear-gradient(map.get(color.$colorMap, white), transparent),
-    linear-gradient(map.get(color.$colorMap, white), transparent);
-    -webkit-animation: spinnerFadeIn 0.3s;
-    -moz-animation: spinnerFadeIn 0.3s;
-    -ms-animation: spinnerFadeIn 0.3s;
-    -o-animation: spinnerFadeIn 0.3s;
-    animation: spinnerFadeIn 0.3s;
-    line-height: 100%;
-
-    &--content {
-      top: 45%;
-      left: 55%;
-    }
-
-    &--centered {
-      top: 40%;
-      left: 41%;
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        top: 40%;
-        left: 44.6%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        top: 40%;
-        left: 45.8%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        top: 40%;
-        left: 46.6%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        top: 40%;
-        left: 47.3%;
-      }
-    }
-
-    &--sidebar {
-      top: 40%;
-      left: 50%;
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        top: 40%;
-        left: 50%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        top: 40%;
-        left: 52%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        top: 40%;
-        left: 52%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        top: 40%;
-        left: 52%;
-      }
-    }
-  }
-
-  &__ring {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: util.rem(100);
-    height: util.rem(100);
-  }
-
-  &__ring div {
-    position: absolute;
-    width: util.rem(80);
-    height: util.rem(80);
-    border: util.rem(15) solid map.get(color.$colorMap, pulse-blue);
-    border-radius: 50%;
-    animation: spinner__ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: map.get(color.$colorMap, pulse-blue) map.get(color.$colorMap, pulse-blue) map.get(color.$colorMap, tertiary-orange) map.get(color.$colorMap, tertiary-orange);
-  }
-
-  &__ring div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-
-  &__ring div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-
-  &__ring div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-
-  @keyframes spinner__ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
   &__text {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    margin-top: util.rem(55);
+    margin-left: util.rem(12);
     user-select: none;
-    font-size: 100%;
-    font-weight: 700;
-    color: map.get(color.$colorMap, greyish);
-    margin-left: 5%;
-    margin-top: 6%;
-  }
-
-  @keyframes overlayFadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 0.2;
-    }
-  }
-
-  @-moz-keyframes overlayFadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 0.2;
-    }
-  }
-
-  @-webkit-keyframes overlayFadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 0.2;
-    }
-  }
-
-  @-ms-keyframes overlayFadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 0.2;
-    }
-  }
-
-  @keyframes overlayFadeOut {
-    from {
-      opacity: 0.2;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @-moz-keyframes overlayFadeOut {
-    from {
-      opacity: 0.2;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @-webkit-keyframes overlayFadeOut {
-    from {
-      opacity: 0.2;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @-ms-keyframes overlayFadeOut {
-    from {
-      opacity: 0.2;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes spinnerFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes spinnerFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes spinnerFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes spinnerFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 }
 
-.lds-roller {
-  display: inline-block;
+.lds-ellipsis {
   position: relative;
+  margin-top: -20px;
   width: 80px;
-  height: 80px;
-  margin-left: 8px;
-  margin-top: 5px;
+  height: 100px;
 }
 
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 40px 40px;
-}
-
-.lds-roller div:after {
-  content: " ";
-  display: block;
+.lds-ellipsis div {
   position: absolute;
-  width: 7px;
-  height: 7px;
+  top: 33px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #043b6e;
-  margin: -4px 0 0 -2px;
+  border: 1px solid white;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
-.lds-roller div:nth-child(1) {
-  animation-delay: -0.036s;
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
 }
 
-.lds-roller div:nth-child(1):after {
-  top: 63px;
-  left: 63px;
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
 }
 
-.lds-roller div:nth-child(2) {
-  animation-delay: -0.072s;
-}
-
-.lds-roller div:nth-child(2):after {
-  top: 68px;
-  left: 56px;
-}
-
-.lds-roller div:nth-child(3) {
-  animation-delay: -0.108s;
-}
-
-.lds-roller div:nth-child(3):after {
-  top: 71px;
-  left: 48px;
-}
-
-.lds-roller div:nth-child(4) {
-  animation-delay: -0.144s;
-}
-
-.lds-roller div:nth-child(4):after {
-  top: 72px;
-  left: 40px;
-}
-
-.lds-roller div:nth-child(5) {
-  animation-delay: -0.18s;
-}
-
-.lds-roller div:nth-child(5):after {
-  top: 71px;
+.lds-ellipsis div:nth-child(3) {
   left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
 }
 
-.lds-roller div:nth-child(6) {
-  animation-delay: -0.216s;
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
 }
 
-.lds-roller div:nth-child(6):after {
-  top: 68px;
-  left: 24px;
-}
-
-.lds-roller div:nth-child(7) {
-  animation-delay: -0.252s;
-}
-
-.lds-roller div:nth-child(7):after {
-  top: 63px;
-  left: 17px;
-}
-
-.lds-roller div:nth-child(8) {
-  animation-delay: -0.288s;
-}
-
-.lds-roller div:nth-child(8):after {
-  top: 56px;
-  left: 12px;
-}
-
-@keyframes lds-roller {
+@keyframes lds-ellipsis1 {
   0% {
-    transform: rotate(0deg);
+    transform: scale(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
   }
 }
 

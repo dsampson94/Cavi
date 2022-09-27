@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
 
-  &__img {
+  img {
     max-width: 100%;
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
@@ -30,6 +30,35 @@
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
       height: util.rem(140);
+    }
+  }
+
+  &--loading {
+
+    img {
+      margin-top: util.rem(20);
+      margin-left: util.rem(10);
+      max-width: 100%;
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        height: util.rem(20);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        height: util.rem(30);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        height: util.rem(40);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        height: util.rem(50);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        height: util.rem(70);
+      }
     }
   }
 }
