@@ -20,6 +20,14 @@
     max-width: util.rem(30);
   }
 
+  &--profile {
+
+    svg {
+      height: 80px !important;
+      width: 80px !important;
+    }
+  }
+
   & svg {
     cursor: pointer;
     min-height: util.rem(24);

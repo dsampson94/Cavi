@@ -5,8 +5,6 @@ import { useHistory, useParams } from 'react-router';
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 
-import { requestClientFieldList } from '../../../redux/actions/client.action';
-
 import {
   ACCURACY_ANALYSIS,
   BULLSEYE,
@@ -58,7 +56,9 @@ const MidBar = ({
                   mappedMenuList,
                   setActiveFieldName,
                   yAxisShared,
-                  setYAxisShared
+                  setYAxisShared,
+                  reloadToggleActive,
+                  setReloadToggleActive
                 }) => {
 
   switch (view) {
@@ -71,9 +71,10 @@ const MidBar = ({
                                       hasSubGroups={ hasSubGroups }
                                       setFilteredTableData={ setFilteredTableData }
                                       setActiveTableData={ setActiveTableData }
-                                      clientRequestFields={ setActiveTableData }
                                       toggleDropdowns={ toggleDropdowns }
-                                      showClientsSideBar={ showClientsSideBar } />;
+                                      showClientsSideBar={ showClientsSideBar }
+                                      reloadToggleActive={ reloadToggleActive }
+                                      setReloadToggleActive={ setReloadToggleActive } />;
     case FIELD_CHART_MIDBAR:
       return <FieldChartsMidBar activeDataPeriod={ activeDataPeriod }
                                 setActiveDataPeriod={ setActiveDataPeriod }
@@ -169,9 +170,10 @@ const ClientFieldsTableMidBar = ({
                                    hasSubGroups,
                                    setFilteredTableData,
                                    setActiveTableData,
-                                   clientRequestFields,
                                    toggleDropdowns,
-                                   showClientsSideBar
+                                   showClientsSideBar,
+                                   reloadToggleActive,
+                                   setReloadToggleActive
                                  }) => {
 
   const dispatch = useDispatch();
@@ -209,9 +211,9 @@ const ClientFieldsTableMidBar = ({
         <Button label={ 'Reload Recommendations' }
                 spaced
                 onClick={ () => {
-                  setFilteredTableData(undefined);
                   setActiveTableData([]);
-                  dispatch(requestClientFieldList(clientRequestFields));
+                  setFilteredTableData(undefined);
+                  setReloadToggleActive(!reloadToggleActive);
                 } } />
       </div>
     </div>

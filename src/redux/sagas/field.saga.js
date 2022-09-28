@@ -29,15 +29,15 @@ export function* performRetrieveFieldChartListRequest({ field, onSuccess, onErro
         yield put({ type: SET_FIELD_CHART_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
         if (onError) yield call(onError);
-        yield put(setSpinnerText(null));
         return;
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put({ type: SET_FIELD_CHART_LIST, undefined });
@@ -61,14 +61,14 @@ export function* performChartCalibrateProbeRequest({ field, onSuccess, onError }
       case responseStatus(data).ERROR:
         yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
         if (onError) yield call(onError);
-        yield put(setSpinnerText(null));
         return;
 
       case responseStatus(data).SUCCESS:
         yield put(addSystemNotice(SUCCESSFULLY_CALIBRATED_PROBE, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));

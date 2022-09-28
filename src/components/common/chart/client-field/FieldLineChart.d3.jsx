@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName, ChartHeader } from '../Chart.util';
-import { AGGREGATE, DEFICIT } from '../../../../tools/general/system-variables.util';
+import { AGGREGATE, DAILY_ETO, DEFICIT } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
 import useTheme from '../../../../tools/hooks/useTheme';
@@ -59,7 +59,7 @@ const FieldLineChartD3 = ({
     marginRight: 1,
     marginBottom: chartType === DEFICIT ? 0 : 1,
     marginLeft: 40,
-    innerPadding: 8
+    innerPadding: chartType === DAILY_ETO ? 24 : 10
   };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,

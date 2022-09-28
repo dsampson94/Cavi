@@ -46,7 +46,8 @@ const DropDownButton = ({
                           period,
                           mid,
                           tiny,
-                          onDivClick
+                          onDivClick,
+                          profile
                         }) => {
   return (
     <div className={ className }
@@ -54,7 +55,8 @@ const DropDownButton = ({
 
       <SVGIcon name={ name }
                fill={ fill }
-               tiny={ tiny } />
+               tiny={ tiny }
+               profile={ profile } />
 
       <DropDownMenu menu={ menu }
                     menuData={ menuData }

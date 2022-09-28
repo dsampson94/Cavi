@@ -45,13 +45,13 @@ import useTheme from '../../../tools/hooks/useTheme';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile }) => {
 
   const { localActiveTheme } = useTheme(false);
 
   return (
     <div className={ getClassNames('svg-icon',
-      { tiny: tiny, small: getSmallIcons(name), chart }) }
+      { tiny: tiny, small: getSmallIcons(name), chart, profile: profile }) }
          onClick={ onClick }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -131,6 +131,8 @@ const getViewBox = (name, tiny, chart) => {
       return '1 13 46 30';
     case LOG_OUT_ICON:
       return '-3 -3 40 50';
+    case PROFILE_ICON:
+      return '-6 0 36 23';
     default:
       return '-6 0 36 24';
   }

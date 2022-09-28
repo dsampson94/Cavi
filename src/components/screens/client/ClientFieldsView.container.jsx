@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
@@ -30,12 +30,14 @@ const ClientFieldsViewContainer = () => {
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
+  const [reloadToggleActive, setReloadToggleActive] = useState(false);
+
   let hasSubGroups = false;
 
   useEffect(() => {
     dispatch(requestFullClientFieldList(clientRequestFields));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groupName, clientName]);
+  }, [groupName, clientName, reloadToggleActive]);
 
   const clientRequestFields = {
     username: user?.username,
@@ -73,6 +75,8 @@ const ClientFieldsViewContainer = () => {
 
   return <ClientFieldsView mappedFieldList={ mappedFieldList() }
                            clientRequestFields={ clientRequestFields }
+                           reloadToggleActive={ reloadToggleActive }
+                           setReloadToggleActive={ setReloadToggleActive }
                            hasSubGroups={ hasSubGroups } />;
 };
 

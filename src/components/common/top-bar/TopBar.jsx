@@ -131,6 +131,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
                         fill={ '#53a5df' }
                         onLogOutClick={ () => logout() }
                         menu={ TOPBAR_OPTIONS }
+                        profile
                         left />
       </div>
 
@@ -251,6 +252,7 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
                         fill={ '#53a5df' }
                         onLogOutClick={ () => logout() }
                         menu={ TOPBAR_OPTIONS }
+                        profile
                         left />
       </div>
     </div>
@@ -329,6 +331,7 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
                         fill={ '#53a5df' }
                         onLogOutClick={ () => logout() }
                         menu={ TOPBAR_OPTIONS }
+                        profile
                         left />
       </div>
 

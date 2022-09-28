@@ -21,7 +21,6 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
       case responseStatus(data).ERROR:
         yield put(addSystemNotice(responseMessage, SNACK_CRITICAL));
         if (onError) yield call(onError);
-        yield put(setSpinnerText(null));
         return;
 
       case responseStatus(data).SUCCESS:
@@ -29,8 +28,9 @@ export function* performLoginRequest({ user, onSuccess, onError }) {
         yield call(saveUserClientListToLocalStorage, data);
         yield put(addSystemNotice(responseMessage, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put(addSystemNotice(getResponseMetaData(response), SNACK_CRITICAL));

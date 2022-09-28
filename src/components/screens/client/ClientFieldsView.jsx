@@ -14,7 +14,7 @@ import Table from '../../common/table/client-fields/Table';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }) => {
+const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -58,7 +58,9 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
                 setFilteredTableData={ setFilteredTableData }
                 setActiveTableData={ setActiveTableData }
                 clientRequestFields={ clientRequestFields }
-                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
+                reloadToggleActive={ reloadToggleActive }
+                setReloadToggleActive={ setReloadToggleActive } />
 
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />

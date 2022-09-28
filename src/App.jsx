@@ -37,9 +37,7 @@ const App = () => {
       <Route path="/overview" component={ OverviewContainer } />
       <Route path="/client" component={ ClientContainer } />
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
-      <Spinner sidebar={activeURL.pathname !== '/'}
-               centered={activeURL.pathname === '/'}
-               showSpinnerText={ spinnerText } />
+      <Spinner showSpinnerText={ spinnerText } />
     </div>
   );
 };

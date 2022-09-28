@@ -80,7 +80,8 @@
       position: relative;
       z-index: 11;
       cursor: pointer;
-      margin: util.rem(5) util.rem(5) util.rem(5) util.rem(5);
+      height: util.rem(40);
+      margin: 0 util.rem(5) 0 util.rem(5);
 
       &:active {
         position: relative;

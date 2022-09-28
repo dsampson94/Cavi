@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { bool, string } from 'prop-types';
+
+import { getClassNames } from '../../../tools/general/helpers.util';
 
 import { cancelRequest } from '../../../redux/actions/system.action';
 
@@ -12,14 +14,29 @@ import background from '../../../tools/images/irricheckbackground.jpg';
 
 import './spinner.scss';
 
-const Spinner = ({ showSpinnerText, content, centered, sidebar }) => {
+const Spinner = ({ showSpinnerText }) => {
 
   const dispatch = useDispatch();
 
-  if (!showSpinnerText) return null;
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    if (showSpinnerText) {
+      setTimeout(() => setShowSpinner(false), 1000);
+      setShowSpinner(true);
+    }
+  });
+
+  if (!background) return null;
 
   return (
-    <div style={ style }>
+    <div className={ getClassNames('spinner__container',
+      { entering: showSpinnerText, closing: !showSpinnerText }) }
+         style={ {
+           display: showSpinner ? 'flex' : 'none',
+           backgroundImage: `url(${ background })`
+         } }>
+
       <div>
         <Graphic loading graphic={ logo } />
         <div className="spinner">
@@ -29,29 +46,12 @@ const Spinner = ({ showSpinnerText, content, centered, sidebar }) => {
             <div></div>
             <div></div>
             <div></div>
-            <p className="spinner__text">{ showSpinnerText }</p>
           </div>
         </div>
+
       </div>
     </div>
   );
-};
-
-const style = {
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'absolute',
-  height: '150px',
-  width: '250px',
-  marginTop: '-50px',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundImage: `url(${ background })`,
-  boxShadow: '0px 0px 10px black,inset 1px 1px 10px grey',
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
-  zIndex: 20,
-  borderRadius: '5px'
 };
 
 Spinner.propTypes = {
