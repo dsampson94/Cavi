@@ -11,3 +11,9 @@ export const getChartProbeCalibrationRequest = (field) => [
   getChartProbeCalibrationEndpoint(),
   getHttpGetOptions(field)
 ];
+
+const getExtendedChartListEndpoint = () => `${ API_HOST }/getGraphsMore.php`;
+export const getExtendedChartList = (field) => [
+  getExtendedChartListEndpoint(),
+  getHttpGetOptions(field)
+];

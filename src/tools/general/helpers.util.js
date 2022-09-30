@@ -60,6 +60,15 @@ export const daysFromToday = (daysFromToday) => {
   return `${ dateList[0] } ${ dateList[2] }`;
 };
 
+export const daysPast = (lastElementDate, daysFromToday) => {
+  const dateList = new Date(lastElementDate - 1000 * 60 * 60 * 24 * daysFromToday).toString().split(' ');
+  return new Date(dateList);
+};
+
+export const hoursBetweenDates = (lastElementDate, days) => {
+  return (Math.abs(lastElementDate - daysPast(lastElementDate, days)) / 36e5).toFixed(0);
+};
+
 export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;
 
 export const isEmpty = (value) => !value || value.length === 0;

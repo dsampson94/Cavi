@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import { DAILY_ETO, TEMPERATURE_MULTILINE } from '../../../../tools/general/system-variables.util';
 import { getClassNames } from '../../../../tools/general/helpers.util';
+
 import CheckboxInput from '../../input/checkbox/CheckboxInput';
+
+import '../chart.scss';
 
 const CheckboxFilter = ({ chartName, hiddenLineList, setHiddenLineList }) => {
 
@@ -32,8 +36,6 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList })
     setHiddenLineList(activeList);
   }, [checked]);
 
-  console.log(activeList);
-
   const hideLineClick = (event) => {
     setChecked(event.target.checked);
     if (activeList.includes(event.target.id))
@@ -42,7 +44,8 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList })
   };
 
   return (
-    <div className={ getClassNames('chart__checkbox-filter', { dailyETO: chartName === DAILY_ETO }) }>
+    <div className={ getClassNames('chart__checkbox-filter',
+      { dailyETO: chartName === DAILY_ETO }) }>
       <div className={ 'chart__checkbox-filter__inner' }>
 
         <CheckboxInput constant={ 'Forecast' }

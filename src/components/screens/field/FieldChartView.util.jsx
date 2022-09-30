@@ -3,7 +3,7 @@ import React from 'react';
 import {
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
-  AGGREGATE_TOP_SOIL,
+  AGGREGATE_TOP_SOIL, DAILY,
   DAILY_ETO,
   DEFICIT,
   DEFICIT_100MM,
@@ -12,11 +12,13 @@ import {
   DEFICIT_400MM,
   DEFICIT_600MM,
   DEFICIT_800MM,
-  USAGE_ETC
+  DEFICIT_ETO,
+  EXTENDED,
+  VOLT_READINGS
 } from '../../../tools/general/system-variables.util';
 
 import FieldLineChartD3 from '../../common/chart/client-field/FieldLineChart.d3';
-import FieldCombinationChart from '../../common/chart/client-field/FieldCombinationChart.d3';
+import FieldDeficitETOChart from '../../common/chart/client-field/FieldDeficitETOChart.d3';
 
 export const DeficitChartsContainer = ({
                                          mappedChartList,
@@ -196,6 +198,7 @@ DeficitChartsContainer.propTypes = {};
 
 export const AggregateChartsContainer = ({
                                            mappedChartList,
+                                           mappedVoltChartList,
                                            hoverActive,
                                            setHoverActive,
                                            currentGlobalZoomState,
@@ -212,6 +215,8 @@ export const AggregateChartsContainer = ({
                                            setXAxisViewMode,
                                            activeProbeFactor,
                                            setActiveProbeFactor,
+                                           activeExtendedChart,
+                                           setActiveExtendedChart,
                                            date,
                                            setDate
                                          }) => {
@@ -273,28 +278,31 @@ export const AggregateChartsContainer = ({
       </div>
 
       <div className="field-chart__right__bottom">
-        <FieldCombinationChart chartType={ USAGE_ETC }
-                               chartName={ USAGE_ETC }
-                               data={ mappedChartList?.[9] }
-                               hoverActive={ hoverActive }
-                               setHoverActive={ setHoverActive }
-                               currentGlobalZoomState={ currentGlobalZoomState }
-                               setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
-                               currentYZoomState={ currentYZoomState }
-                               setCurrentYZoomState={ setCurrentYZoomState }
-                               currentXZoomState={ currentXZoomState }
-                               setCurrentXZoomState={ setCurrentXZoomState }
-                               activeLoadPeriod={ activeLoadPeriod }
-                               activeDataPeriod={ activeDataPeriod }
-                               setActiveDataPeriod={ setActiveDataPeriod }
-                               xAxisViewMode={ xAxisViewMode }
-                               setXAxisViewMode={ setXAxisViewMode }
-                               activeProbeFactor={ activeProbeFactor }
-                               setActiveProbeFactor={ setActiveProbeFactor }
-                               date={ date }
-                               setDate={ setDate } />
+        <ExtendedChartsSelector chartType={ EXTENDED }
+                                chartName={ activeExtendedChart }
+                                mappedChartList={ mappedChartList }
+                                mappedVoltChartList={ mappedVoltChartList }
+                                hoverActive={ hoverActive }
+                                setHoverActive={ setHoverActive }
+                                currentGlobalZoomState={ currentGlobalZoomState }
+                                setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                                currentYZoomState={ currentYZoomState }
+                                setCurrentYZoomState={ setCurrentYZoomState }
+                                currentXZoomState={ currentXZoomState }
+                                setCurrentXZoomState={ setCurrentXZoomState }
+                                activeLoadPeriod={ activeLoadPeriod }
+                                activeDataPeriod={ activeDataPeriod }
+                                setActiveDataPeriod={ setActiveDataPeriod }
+                                xAxisViewMode={ xAxisViewMode }
+                                setXAxisViewMode={ setXAxisViewMode }
+                                activeProbeFactor={ activeProbeFactor }
+                                setActiveProbeFactor={ setActiveProbeFactor }
+                                activeExtendedChart={ activeExtendedChart }
+                                setActiveExtendedChart={ setActiveExtendedChart }
+                                date={ date }
+                                setDate={ setDate } />
 
-        <FieldLineChartD3 chartType={ DAILY_ETO }
+        <FieldLineChartD3 chartType={ DAILY }
                           chartName={ DAILY_ETO }
                           data={ mappedChartList?.[10] }
                           hoverActive={ hoverActive }
@@ -321,3 +329,82 @@ export const AggregateChartsContainer = ({
 };
 
 AggregateChartsContainer.propTypes = {};
+
+const ExtendedChartsSelector = ({
+                                  chartName,
+                                  mappedChartList,
+                                  mappedVoltChartList,
+                                  hoverActive,
+                                  setHoverActive,
+                                  currentGlobalZoomState,
+                                  setCurrentGlobalZoomState,
+                                  currentYZoomState,
+                                  setCurrentYZoomState,
+                                  currentXZoomState,
+                                  setCurrentXZoomState,
+                                  activeLoadPeriod,
+                                  activeDataPeriod,
+                                  setActiveDataPeriod,
+                                  xAxisViewMode,
+                                  setXAxisViewMode,
+                                  activeProbeFactor,
+                                  setActiveProbeFactor,
+                                  activeExtendedChart,
+                                  setActiveExtendedChart,
+                                  date,
+                                  setDate
+                                }) => {
+
+  switch (chartName) {
+    case DEFICIT_ETO :
+      return (
+        <FieldDeficitETOChart chartType={ EXTENDED }
+                              chartName={ DEFICIT_ETO }
+                              data={ mappedChartList?.[9] }
+                              hoverActive={ hoverActive }
+                              setHoverActive={ setHoverActive }
+                              currentGlobalZoomState={ currentGlobalZoomState }
+                              setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                              currentYZoomState={ currentYZoomState }
+                              setCurrentYZoomState={ setCurrentYZoomState }
+                              currentXZoomState={ currentXZoomState }
+                              setCurrentXZoomState={ setCurrentXZoomState }
+                              activeLoadPeriod={ activeLoadPeriod }
+                              activeDataPeriod={ activeDataPeriod }
+                              setActiveDataPeriod={ setActiveDataPeriod }
+                              xAxisViewMode={ xAxisViewMode }
+                              setXAxisViewMode={ setXAxisViewMode }
+                              activeProbeFactor={ activeProbeFactor }
+                              setActiveProbeFactor={ setActiveProbeFactor }
+                              activeExtendedChart={ activeExtendedChart }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              date={ date }
+                              setDate={ setDate } />
+      );
+    case VOLT_READINGS:
+      return (
+        <FieldLineChartD3 chartType={ EXTENDED }
+                          chartName={ VOLT_READINGS }
+                          data={ mappedVoltChartList }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          activeExtendedChart={ activeExtendedChart }
+                          setActiveExtendedChart={ setActiveExtendedChart }
+                          date={ date }
+                          setDate={ setDate } />
+      );
+  }
+};

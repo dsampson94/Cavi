@@ -1,4 +1,20 @@
-export const mapTemperatureLists = (
+//******************************************************************************************************************************************
+
+export const mapTemperaturesList = (fieldChartList, probeNumber) => {
+  if (!fieldChartList?.[probeNumber]) return;
+  const mappedTemperaturesList = [], oneHundredMmList = [], twoHundredMmList = [], threeHundredMmList = [], fourHundredMmList = [],
+    sixHundredMmList = [], eightHundredMmList = [];
+
+  mapTemperatureLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList,
+    sixHundredMmList, eightHundredMmList, fieldChartList, probeNumber);
+  pushMappedTemperatureLists(oneHundredMmList, twoHundredMmList, threeHundredMmList,
+    fourHundredMmList, sixHundredMmList, eightHundredMmList, mappedTemperaturesList);
+  return mappedTemperaturesList;
+};
+
+//******************************************************************************************************************************************
+
+const mapTemperatureLists = (
   oneHundredMmList,
   twoHundredMmList,
   threeHundredMmList,
@@ -48,7 +64,7 @@ export const mapTemperatureLists = (
   });
 };
 
-export const pushMappedTemperatureLists = (
+const pushMappedTemperatureLists = (
   oneHundredMmList,
   twoHundredMmList,
   threeHundredMmList,

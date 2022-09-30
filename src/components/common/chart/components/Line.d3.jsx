@@ -5,10 +5,12 @@ import {
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
   AGGREGATE_TOP_SOIL,
+  DAILY,
   DAILY_ETO,
   DEFICIT,
-  TEMPERATURE_MULTILINE,
-  USAGE_ETC
+  DEFICIT_ETO,
+  EXTENDED,
+  TEMPERATURE_MULTILINE
 } from '../../../../tools/general/system-variables.util';
 
 const Line = ({
@@ -28,8 +30,8 @@ const Line = ({
   switch (chartType) {
     case DEFICIT:
     case AGGREGATE:
-    case USAGE_ETC:
-    case DAILY_ETO:
+    case EXTENDED:
+    case DAILY:
       return <FieldChartLine data={ data }
                              recommendationOffset={ recommendationOffset }
                              chartName={ chartName }
@@ -75,7 +77,7 @@ const FieldChartLine = ({
 
   let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
 
-  if (chartName === USAGE_ETC) {
+  if (chartName === DEFICIT_ETO) {
     let lineYAccessor = d => d?.lineY;
     lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(lineYAccessor(d)));
   }
@@ -85,8 +87,8 @@ const FieldChartLine = ({
   const getLineColor = () => {
     if (chartName === AGGREGATE_TOP_SOIL) return 'url(#lineGradientAggregateTop)';
     else if (chartName === AGGREGATE_BOTTOM_SOIL) return 'url(#lineGradientAggregateBottom)';
-    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && isDarkMode) return 'white';
-    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && !isDarkMode) return 'black';
+    else if ((chartName === DEFICIT_ETO || chartName === DAILY_ETO) && isDarkMode) return 'white';
+    else if ((chartName === DEFICIT_ETO || chartName === DAILY_ETO) && !isDarkMode) return 'black';
     else if (isDarkMode) return '#0090ff';
     else if (!isDarkMode) return '#0000FF';
   };

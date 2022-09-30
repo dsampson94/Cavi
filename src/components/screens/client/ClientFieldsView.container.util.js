@@ -1,6 +1,37 @@
 import { CAPTURE, QUICK_VIEW } from '../../../tools/general/system-variables.util';
 
-export const getRainDataList = (fieldList, fieldRainData) => {
+//*******************************************************************************
+
+export const mapFieldTableList = (fieldList, fieldRainData, hasSubGroups) => {
+  if (!fieldList) return;
+  if (!fieldRainData) return;
+  const tableList = [];
+  const mappedList = [];
+  const subGroupSplitList = [];
+
+  const rainData = getRainDataList(fieldList, fieldRainData);
+  let rainDataUpper = getRainDataUpperList(rainData);
+  let rainDataLower = getRainDataLowerList(rainData);
+  const rainDataKeys = Object.keys(fieldRainData['days'] ?? []);
+
+  for (let field in fieldList) tableList?.push(fieldList[field]);
+
+  tableList.forEach((listItem, index) => {
+    const weatherDataKeys = Object.keys(listItem?.weervoorspelling);
+    hasSubGroups = setHasSubGroups(listItem, subGroupSplitList);
+    pushForecastRegionRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
+    pushLandGroupRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
+    pushFieldRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, rainDataUpper, rainDataLower);
+    if (hasSubGroups) {
+      pushDropdownRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, fieldRainData);
+    }
+  });
+  return mappedList;
+};
+
+//*******************************************************************************
+
+const getRainDataList = (fieldList, fieldRainData) => {
   const rainData = [];
 
   const fieldListIndexList = Object.keys(Object.keys(fieldList));
@@ -23,7 +54,7 @@ export const getRainDataList = (fieldList, fieldRainData) => {
   return rainData;
 };
 
-export const getRainDataUpperList = (rainDataList) => {
+const getRainDataUpperList = (rainDataList) => {
   let rainDataUpper = [];
   for (let index in rainDataList) {
     if (Object.keys(rainDataList[index])[0].includes('upper')) {
@@ -33,7 +64,7 @@ export const getRainDataUpperList = (rainDataList) => {
   return rainDataUpper;
 };
 
-export const getRainDataLowerList = (rainDataList) => {
+const getRainDataLowerList = (rainDataList) => {
   let rainDataLower = [];
   for (let index in rainDataList) {
     if (Object.keys(rainDataList[index])[0].includes('lower')) {
@@ -43,7 +74,7 @@ export const getRainDataLowerList = (rainDataList) => {
   return rainDataLower;
 };
 
-export const pushForecastRegionRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys) => {
+const pushForecastRegionRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys) => {
   if (checkForecastArea(index, tableList)) {
     mappedList.push({
       fieldName: {
@@ -79,7 +110,7 @@ export const pushForecastRegionRow = (tableList, listItem, index, mappedList, we
   }
 };
 
-export const pushLandGroupRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys) => {
+const pushLandGroupRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys) => {
   if (checkLandGroupArea(index, tableList)) {
     mappedList.push({
       fieldName: {
@@ -114,7 +145,7 @@ export const pushLandGroupRow = (tableList, listItem, index, mappedList, weather
   }
 };
 
-export const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, rainDataUpper, rainDataLower) => {
+const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, rainDataUpper, rainDataLower) => {
   mappedList.push({
     fieldName: {
       locationName: listItem?.fieldname,
@@ -211,7 +242,7 @@ export const pushFieldRow = (tableList, listItem, index, mappedList, weatherData
   });
 };
 
-export const pushDropdownRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, fieldRainData) => {
+const pushDropdownRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, fieldRainData) => {
   const subGroupData = getSubGroupDataForDropdown(listItem, fieldRainData);
   mappedList.push({
     fieldName: subGroupData,
@@ -265,7 +296,7 @@ const getSubGroupDataForDropdown = (listItem, fieldRainData) => {
   };
 };
 
-export const setHasSubGroups = (listItem, subGroupSplitList) => {
+const setHasSubGroups = (listItem, subGroupSplitList) => {
   subGroupSplitList.push(listItem?.split);
   return subGroupSplitList.includes(1);
 };

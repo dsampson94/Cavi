@@ -22,10 +22,13 @@ export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
 export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
 
 export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
 
 export const SUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibrated Successfully ';
-export const UNSUCCESSFULLY_CALIBRATED_PROBE= 'Probe Calibration Unsuccessful';
+export const UNSUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibration Unsuccessful';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
 
 //MIDBAR
 export const MID_BAR_ASSISTANT = 'Assistant';
@@ -39,9 +42,6 @@ export const MID_BAR_IRRICOMS = 'Check Irricoms (manual)';
 
 //SPINNER
 export const SPINNER_TEXT = 'Loading..';
-
-//SPINNER
-export const SHOW_SHIMMER = true;
 
 //TOOLTIPS
 export const EMAIL = 'Email Recommendations to any Email Address';
@@ -98,7 +98,6 @@ export const CLIENT_FIELDS_MIDBAR = 'client_fields__midbar';
 export const FIELD_CHART_MIDBAR = 'field_chart_midbar';
 export const FIELD_TEMPERATURES_MIDBAR = 'field_temperatures_midbar';
 
-
 //TABLE_MIDBAR
 export const PREVIOUS = 'previous';
 export const BULLSEYE = 'bullseye';
@@ -129,7 +128,7 @@ export const VERY_DISSATISFIED = 'very_dissatisfied';
 
 //WEATHER
 export const SUNNY = 'sunny';
-export const RAIN = 'raining';
+export const RAINING = 'raining';
 export const PARTLY_CLOUDED = 'party_clouded';
 export const CLOUDED = 'clouded';
 
@@ -151,12 +150,14 @@ export const RADIO_GROUP = 'viewPeriod';
 //OTHER STRINGS
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
-export const FIELD_TEMPERATURES= 'FieldTemperatures';
+export const FIELD_TEMPERATURES = 'FieldTemperatures';
 
 //CHART TYPES
 export const DEFICIT = 'deficit';
 export const AGGREGATE = 'aggregate';
-export const TEMPERATURE_MULTILINE = 'temperatureMultiLine';
+export const EXTENDED = 'extended';
+export const DAILY = 'daily';
+export const TEMPERATURE_MULTILINE = 'temperature';
 
 //CHART NAMES
 export const DEFICIT_100MM = 'deficit_100mm';
@@ -169,7 +170,17 @@ export const DEFICIT_800MM = 'deficit_800mm';
 export const AGGREGATE_TOP_SOIL = 'aggregate_0 - 400mm';
 export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
 
-export const USAGE_ETC = 'Usage ETc';
+export const DEFICIT_ETO = 'Deficit / ETo';
+export const VOLT_READINGS = 'Volt Readings';
+export const FLOW_DAILY = 'Flow Meter Daily Total';
+export const FLOW_DETAILED = 'Flow Meter Detailed';
+export const RAIN = 'Rain';
+export const EC = 'EC Readings';
+export const VPD = 'VPD Readings';
+export const ACTUAL_IRRIGATION = 'Actual Irrigation Data';
+export const EXCEL = 'Excel Report';
+export const ANALYSE_FIELD = 'Analyse Field';
+
 export const DAILY_ETO = 'Daily ETo';
 
 //CHART ICONS
@@ -180,7 +191,6 @@ export const CIRCLE_DROPDOWN = 'circle_dropdown';
 export const DOUBLE_DROPDOWN = 'double_dropdown';
 export const SINGLE_DROPDOWN = 'single_dropdown';
 
-
 //CONTEXT MENU
 export const CONTEXT_MENU = 'contextMenu';
 
@@ -189,11 +199,16 @@ export const CALIBRATE_OPTION = 2;
 export const IRRIGATION_OR_DELETE_OPTION = 3;
 export const EXPORT_OPTION = 4;
 
-export const MENU_1= 'dropdown-menu-1';
-export const MENU_2= 'dropdown-menu-2';
-export const MENU_3= 'dropdown-menu-3';
-export const MENU_4= 'dropdown-menu-4';
+export const MENU_1 = 'dropdown-menu-1';
+export const MENU_2 = 'dropdown-menu-2';
+export const MENU_3 = 'dropdown-menu-3';
+export const MENU_4 = 'dropdown-menu-4';
 
 export const MENU_2_INPUT = 'dropdown-menu-2-input';
 export const MENU_2_INPUT_BUTTON = 'dropdown-menu-2-input-button';
 
+// REQUEST PARAMS
+export const CLIENT_PARAMS = 'client_request';
+export const LOAD_PERIOD_PARAMS = 'load_period_request';
+export const VOLTS_PARAMS = 'volts_request';
+export const PROBE_CALIBRATION_PARAMS = 'probe_calibration_request';

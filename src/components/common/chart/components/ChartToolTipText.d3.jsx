@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bisector } from 'd3';
 
-import { DAILY_ETO, USAGE_ETC } from '../../../../tools/general/system-variables.util';
+import { DAILY_ETO, DEFICIT_ETO } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
 
@@ -45,7 +45,7 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
   let toolTipText = () => {
     if (chartName.includes('deficit')) {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
-    } else if (chartName === USAGE_ETC) {
+    } else if (chartName === DEFICIT_ETO) {
       return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY.toFixed(3) } @ ${ hoveredObject?.x }`;
     } else if (chartName === DAILY_ETO) {
       return `Forecast: ${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
@@ -72,7 +72,7 @@ const TooltipText = ({ xAccessor, yAccessor, xScale, yScale, data, date, hoverAc
                 x={ getXPos().rect }
                 y={ getYPos().rect }
                 height={ 18 }
-                width={ chartName.includes('deficit') ? 260 : chartName === USAGE_ETC ? 232 : chartName === DAILY_ETO ? 200 : 169 }
+                width={ chartName.includes('deficit') ? 260 : chartName === DEFICIT_ETO ? 232 : chartName === DAILY_ETO ? 200 : 169 }
                 rx={ '5' }
                 ry={ '5' } />
 

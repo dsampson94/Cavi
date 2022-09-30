@@ -11,7 +11,7 @@ import {
   HARVEST_ICON,
   PARTLY_CLOUDED,
   PENCIL,
-  RAIN,
+  RAINING,
   RAIN_CLOUDS,
   SUNNY,
   TABLE_SEARCH_PLACEHOLDER,
@@ -362,7 +362,7 @@ export const LandGroupForecastColumn = ({ dataIndex, value }) => {
                   case 10:
                   case 41:
                   case 46:
-                    return <SVGIcon name={ RAIN } fill={ '#6495ED' } />;
+                    return <SVGIcon name={ RAINING } fill={ '#6495ED' } />;
                   case 2:
                     return <SVGIcon name={ PARTLY_CLOUDED } fill={ '#C2C2C1' } />;
                   case 3:

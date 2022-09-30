@@ -6,18 +6,15 @@ import { bool } from 'prop-types';
 
 import {
   ACTUAL_IRRIGATION_OPTION,
-  ANALYSE_FIELD_OPTION,
   CHART_ACTIVE_PERIOD,
   CHART_TOP_BAR_MENU,
   CHART_USAGE_MENU,
   CHART_USAGE_SASRI_MENU,
   DEFICIT_OPTION,
   EC_OPTION,
-  EXCEL_OPTION,
   FLOW_DAILY_OPTION,
   FLOW_DETAILED_OPTION,
   LOG_OUT_ICON,
-  RAIN_OPTION,
   REPORT_PROBLEM_ICON,
   TOPBAR_OPTIONS,
   VOLT_READINGS_OPTION,
@@ -31,6 +28,7 @@ import { requestLogout } from '../../../redux/actions/auth.action';
 import Button from '../button/Button';
 import ThemeToggle from '../theme-toggle/ThemeToggle';
 import SVGIcon from '../icon/SVGIcon';
+import CheckboxInput from '../input/checkbox/CheckboxInput';
 
 import './drop-down-menu.scss';
 
@@ -47,7 +45,9 @@ const DropDownButton = ({
                           mid,
                           tiny,
                           onDivClick,
-                          profile
+                          profile,
+                          activeExtendedChart,
+                          setActiveExtendedChart
                         }) => {
   return (
     <div className={ className }
@@ -60,6 +60,8 @@ const DropDownButton = ({
 
       <DropDownMenu menu={ menu }
                     menuData={ menuData }
+                    activeExtendedChart={ activeExtendedChart }
+                    setActiveExtendedChart={ setActiveExtendedChart }
                     setActiveDataPeriod={ setActiveDataPeriod }
                     onLogOutClick={ onLogOutClick }
                     left={ left }
@@ -71,7 +73,17 @@ const DropDownButton = ({
 
 export default DropDownButton;
 
-const DropDownMenu = ({ menu, menuData, left, mid, period, setActiveDataPeriod, onLogOutClick }) => {
+const DropDownMenu = ({
+                        menu,
+                        menuData,
+                        activeExtendedChart,
+                        setActiveExtendedChart,
+                        setActiveDataPeriod,
+                        onLogOutClick,
+                        left,
+                        period,
+                        mid
+                      }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -95,7 +107,8 @@ const DropDownMenu = ({ menu, menuData, left, mid, period, setActiveDataPeriod, 
          onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
 
       { showPrimaryDropDown &&
-        <div className={ getClassNames('dropdown__popup', { left, mid, period, logout: !!onLogOutClick }) }>
+        <div className={ getClassNames('dropdown__popup',
+          { left, mid, period, logout: !!onLogOutClick }) }>
           { menu === CHART_TOP_BAR_MENU &&
             <div>
               <div>{ 'Probes on field:' }</div>
@@ -108,17 +121,35 @@ const DropDownMenu = ({ menu, menuData, left, mid, period, setActiveDataPeriod, 
             </div> }
 
           { menu === CHART_USAGE_MENU &&
-            <div>
-              <div>{ DEFICIT_OPTION }</div>
-              <div>{ VOLT_READINGS_OPTION }</div>
-              <div>{ FLOW_DAILY_OPTION }</div>
-              <div>{ FLOW_DETAILED_OPTION }</div>
-              <div>{ RAIN_OPTION }</div>
-              <div>{ EC_OPTION }</div>
-              <div>{ VPD_OPTION }</div>
-              <div>{ ACTUAL_IRRIGATION_OPTION }</div>
-              <div>{ EXCEL_OPTION }</div>
-              <div>{ ANALYSE_FIELD_OPTION }</div>
+            <div className={ 'dropdown__popup__extended' }>
+
+              <ChartOptionRow option={ DEFICIT_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ VOLT_READINGS_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ FLOW_DAILY_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ FLOW_DETAILED_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ EC_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ VPD_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
+
+              <ChartOptionRow option={ ACTUAL_IRRIGATION_OPTION }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              activeExtendedChart={ activeExtendedChart } />
             </div> }
 
           { menu === CHART_USAGE_SASRI_MENU &&
@@ -178,4 +209,13 @@ const DropDownMenu = ({ menu, menuData, left, mid, period, setActiveDataPeriod, 
 DropDownButton.propTypes = {
   left: bool,
   mid: bool
+};
+
+const ChartOptionRow = ({ option, setActiveExtendedChart, activeExtendedChart }) => {
+  return (
+    <div onClick={ () => setActiveExtendedChart(option) }>
+      <CheckboxInput checked={ activeExtendedChart === option } />
+      <p>{ option }</p>
+    </div>
+  );
 };

@@ -1,7 +1,8 @@
-import { SET_FIELD_CHART_LIST } from '../actions/field.action';
+import { SET_FIELD_CHART_LIST, SET_FIELD_VOLT_CHART_LIST } from '../actions/field.action';
 
 export const initialState = {
-  chartList: undefined
+  chartList: undefined,
+  voltChartList: undefined
 };
 
 export const fieldReducer = (state = initialState, action) => {
@@ -11,6 +12,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         chartList
+      };
+    }
+    case SET_FIELD_VOLT_CHART_LIST: {
+      const { voltChartList } = action;
+      return {
+        ...state,
+        voltChartList
       };
     }
     default:

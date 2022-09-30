@@ -1,4 +1,100 @@
-export const pushForecastRegionRow = (tableList, listItem, index, mappedList) => {
+import {
+  FOUR_WEEKS,
+  FULL_VIEW,
+  SIX_MONTHS,
+  THREE_MONTHS,
+  TWELVE_MONTHS,
+  TWO_MONTHS,
+  TWO_WEEKS
+} from '../../../tools/general/system-variables.util';
+
+import { hoursBetweenDates } from '../../../tools/general/helpers.util';
+
+//*******************************************************************************
+
+export const mapFieldList = (fieldList) => {
+  if (!fieldList) return;
+  const tableList = [];
+  const mappedList = [];
+
+  for (let field in fieldList) tableList?.push(fieldList[field]);
+  tableList.forEach((listItem, index) => {
+    pushForecastRegionRow(tableList, listItem, index, mappedList);
+    pushLandGroupRow(tableList, listItem, index, mappedList);
+    pushFieldRow(tableList, listItem, index, mappedList);
+  });
+  return mappedList;
+};
+
+export const mapMenuData = (fieldChartList) => {
+  if (!fieldChartList) return;
+  const mappedMenuData = [];
+  mappedMenuData.push(fieldChartList.pnrs);
+  mappedMenuData.push(fieldChartList.besproeistelsel);
+  mappedMenuData.push(fieldChartList.seasontime);
+  mappedMenuData.push(fieldChartList.field_hectares);
+  return mappedMenuData;
+};
+
+export const mapChartList = (fieldChartList, probeNumber) => {
+  if (!fieldChartList?.[probeNumber]) return;
+  const mappedChartList = [], oneHundredMmList = [], twoHundredMmList = [], threeHundredMmList = [], fourHundredMmList = [],
+    sixHundredMmList = [], eightHundredMmList = [], topSoilMmList = [], bottomSoilMmList = [], recommendationsSizeList = [],
+    usageETCList = [];
+
+  mapDeficitLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList,
+    sixHundredMmList, eightHundredMmList, fieldChartList, probeNumber);
+  mapAggregateLists(topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList);
+  mapUsageETCList(usageETCList, fieldChartList);
+  pushMappedLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList, sixHundredMmList, eightHundredMmList,
+    topSoilMmList, recommendationsSizeList, bottomSoilMmList, usageETCList, mappedDailyETOList(fieldChartList, probeNumber),
+    mappedChartList, fieldChartList);
+  return mappedChartList;
+};
+
+export const mapVoltChartLists = (fieldVoltChartList, fieldChartList, activeLoadPeriod) => {
+  if (!fieldVoltChartList) return [];
+  const mappedVoltChartList = [];
+
+  Object.entries(fieldVoltChartList?.grafieke)?.forEach(([key, value], i) => {
+    mappedVoltChartList.push({ id: i, x: key, y: value });
+  });
+
+  for (let i = 10; i > 0; i--)
+    mappedVoltChartList.push({
+      x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
+      y: undefined
+    });
+
+  return filterLoadPeriod(mappedVoltChartList, activeLoadPeriod);
+};
+
+//*******************************************************************************
+
+const filterLoadPeriod = (mappedVoltChartList, activeLoadPeriod) => {
+
+  const lastElementIndex = mappedVoltChartList.length - 1;
+  const lastElementDate = new Date(mappedVoltChartList[mappedVoltChartList.length - 1].x);
+
+  switch (activeLoadPeriod) {
+    case TWO_WEEKS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 14), lastElementIndex - 1);
+    case FOUR_WEEKS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 28), lastElementIndex - 1);
+    case TWO_MONTHS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 60), lastElementIndex - 1);
+    case THREE_MONTHS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 91), lastElementIndex - 1);
+    case SIX_MONTHS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 182), lastElementIndex - 1);
+    case TWELVE_MONTHS:
+      return mappedVoltChartList.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 365), lastElementIndex - 1);
+    case FULL_VIEW:
+      return mappedVoltChartList;
+  }
+};
+
+const pushForecastRegionRow = (tableList, listItem, index, mappedList) => {
   if (checkForecastArea(index, tableList)) {
     mappedList.push({
       fieldName: {
@@ -8,7 +104,7 @@ export const pushForecastRegionRow = (tableList, listItem, index, mappedList) =>
   }
 };
 
-export const pushLandGroupRow = (tableList, listItem, index, mappedList) => {
+const pushLandGroupRow = (tableList, listItem, index, mappedList) => {
   if (checkLandGroupArea(index, tableList)) {
     mappedList.push({
       fieldName: {
@@ -18,7 +114,7 @@ export const pushLandGroupRow = (tableList, listItem, index, mappedList) => {
   }
 };
 
-export const pushFieldRow = (tableList, listItem, index, mappedList) => {
+const pushFieldRow = (tableList, listItem, index, mappedList) => {
   mappedList.push({
     fieldName: {
       locationName: listItem?.fieldname,
@@ -51,7 +147,7 @@ const checkLandGroupArea = (index, tableList) => {
   return (currentItem !== nextItem);
 };
 
-export const mapDeficitLists = (
+const mapDeficitLists = (
   oneHundredMmList,
   twoHundredMmList,
   threeHundredMmList,
@@ -101,7 +197,7 @@ export const mapDeficitLists = (
   });
 };
 
-export const mapAggregateLists = (topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList) => {
+const mapAggregateLists = (topSoilMmList, bottomSoilMmList, fieldChartList, recommendationsSizeList) => {
   const idealTop = fieldChartList?.Grafieke[Object.keys(fieldChartList?.Grafieke)[0]].BB;
   const idealBottom = fieldChartList?.Grafieke[Object.keys(fieldChartList?.Grafieke)[0]].BO;
   Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
@@ -145,7 +241,7 @@ export const mapAggregateLists = (topSoilMmList, bottomSoilMmList, fieldChartLis
   });
 };
 
-export const mapUsageETCList = (usageETCList, fieldChartList) => {
+const mapUsageETCList = (usageETCList, fieldChartList) => {
   let initialLineY;
   Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
     Object.keys(value).forEach((innerKey, index) => {
@@ -185,7 +281,7 @@ export const mapUsageETCList = (usageETCList, fieldChartList) => {
     });
 };
 
-export const mappedDailyETOList = (fieldChartList) => {
+const mappedDailyETOList = (fieldChartList) => {
   const dailyETOList = [];
 
   let initialLineY;
@@ -204,7 +300,7 @@ export const mappedDailyETOList = (fieldChartList) => {
   return dailyETOList;
 };
 
-export const pushMappedLists = (
+const pushMappedLists = (
   oneHundredMmList,
   twoHundredMmList,
   threeHundredMmList,
@@ -231,13 +327,4 @@ export const pushMappedLists = (
   mappedChartList.push(usageETCList);
   mappedChartList.push(mappedDailyETOList);
   mappedChartList.push(fieldChartList?.dieptes);
-};
-
-export const mapMenuData = (fieldChartList) => {
-  const mappedMenuData = [];
-  mappedMenuData.push(fieldChartList.pnrs);
-  mappedMenuData.push(fieldChartList.besproeistelsel);
-  mappedMenuData.push(fieldChartList.seasontime);
-  mappedMenuData.push(fieldChartList.field_hectares);
-  return mappedMenuData;
 };

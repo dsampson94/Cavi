@@ -27,7 +27,7 @@ import RecommendationModal from '../../modal/RecommendationModal';
 
 import './table.scss';
 
-const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject, clientRequestFields }) => {
+const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -265,9 +265,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
         </tr> }
 
       { showModal &&
-        <RecommendationModal activeObject={ hoveredRowObject }
-                             clientRequestFields={ clientRequestFields }
-                             showModal={ showModal } /> }
+        <RecommendationModal activeObject={ hoveredRowObject } /> }
       </tbody>
     );
   };

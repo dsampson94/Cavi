@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { zoomIdentity } from 'd3';
 
 import { arrayOf, shape } from 'prop-types';
@@ -15,11 +15,14 @@ const ClientFieldsView = ({
                             mappedFieldList,
                             mappedChartList,
                             mappedMenuList,
+                            mappedVoltChartList,
                             activeLoadPeriod,
                             setActiveLoadPeriod,
                             setActiveFieldName,
                             activeProbeFactor,
-                            setActiveProbeFactor
+                            setActiveProbeFactor,
+                            activeExtendedChart,
+                            setActiveExtendedChart
                           }) => {
 
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
@@ -31,6 +34,14 @@ const ClientFieldsView = ({
   const [date, setDate] = useState(null);
   const [activeDataPeriod, setActiveDataPeriod] = useState('All');
   const [xAxisViewMode, setXAxisViewMode] = useState('topBar');
+
+  useEffect(() => {
+    setXAxisViewMode('topBar');
+    setActiveDataPeriod('All');
+    setCurrentGlobalZoomState(zoomIdentity);
+    setCurrentXZoomState(zoomIdentity);
+    setCurrentYZoomState(zoomIdentity);
+  }, [activeLoadPeriod]);
 
   return (
     <ContentContainer view={ FIELD_CHARTS }
@@ -73,6 +84,7 @@ const ClientFieldsView = ({
                                   setDate={ setDate } />
 
           <AggregateChartsContainer mappedChartList={ mappedChartList }
+                                    mappedVoltChartList={ mappedVoltChartList }
                                     currentGlobalZoomState={ currentGlobalZoomState }
                                     setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                                     currentYZoomState={ currentYZoomState }
@@ -89,6 +101,8 @@ const ClientFieldsView = ({
                                     setXAxisViewMode={ setXAxisViewMode }
                                     activeProbeFactor={ activeProbeFactor }
                                     setActiveProbeFactor={ setActiveProbeFactor }
+                                    activeExtendedChart={ activeExtendedChart }
+                                    setActiveExtendedChart={ setActiveExtendedChart }
                                     date={ date }
                                     setDate={ setDate } />
         </div>

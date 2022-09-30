@@ -1,3 +1,5 @@
+import { retrieveUserLoginFromLocalStorage } from '../../tools/storage/localStorage';
+
 export const API_HOST = process.env.REACT_APP_API_ENDPOINT; // api endpoint provided in .env
 export const SERVER_HOST = process.env.REACT_APP_HOST; // host provided in .env
 
@@ -34,3 +36,54 @@ export const getHttpGetPDFOptions = (params = null, headers = null) => ({
   headers
 });
 
+export const getRequestParams = ({
+                                   groupName,
+                                   clientName,
+                                   activeFieldName,
+                                   activeLoadPeriod,
+                                   activeProbeFactor,
+                                   overviewOptionSelected,
+                                   activeObject
+                                 }) => {
+
+  const user = retrieveUserLoginFromLocalStorage();
+
+  const clientParams = {
+    username: user?.username,
+    password: user?.password,
+    groupname: groupName,
+    clientname: clientName
+  };
+
+  return {
+    overviewParams: {
+      username: user?.username,
+      password: user?.password,
+      getwhat: overviewOptionSelected
+    },
+    clientParams: {
+      ...clientParams
+    },
+    loadParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      load: activeLoadPeriod ? activeLoadPeriod : null
+    },
+    recommendationModalParams: {
+      ...clientParams,
+      sensor: activeObject?.sensor,
+      day: activeObject?.day,
+      fieldname: activeObject?.fieldName?.locationName
+    },
+    calibrationParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      f: activeProbeFactor ? activeProbeFactor : null
+    },
+    voltParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: 'volts'
+    }
+  };
+};

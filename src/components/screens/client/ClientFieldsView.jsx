@@ -14,7 +14,7 @@ import Table from '../../common/table/client-fields/Table';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
+const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -45,10 +45,11 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups, 
 
   return (
     <ContentContainer view={ CLIENT_FIELDS }
-                      clientRequestFields={ clientRequestFields }
+                      clientRequestParams={ clientRequestParams }
                       showClientsSideBar={ showClientsSideBar }
                       setShowClientsSideBar={ setClientsShowSideBar }
                       mappedFieldList={ mappedFieldList }>
+
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
         <MidBar view={ CLIENT_FIELDS_MIDBAR }
@@ -57,7 +58,6 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups, 
                 showClientsSideBar={ showClientsSideBar }
                 setFilteredTableData={ setFilteredTableData }
                 setActiveTableData={ setActiveTableData }
-                clientRequestFields={ clientRequestFields }
                 toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
                 reloadToggleActive={ reloadToggleActive }
                 setReloadToggleActive={ setReloadToggleActive } />
@@ -72,9 +72,9 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups, 
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setSelectedDropdownObject={ setSelectedDropdownObject }
-                 setActiveTableData={ setActiveTableData }
-                 clientRequestFields={ clientRequestFields } />
+                 setActiveTableData={ setActiveTableData } />
         </div>
+
       </div>
     </ContentContainer>
   );

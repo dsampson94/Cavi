@@ -34,29 +34,29 @@ import DropDownButton from '../drop-down/DropDownButton';
 
 import './top-bar.scss';
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestFields, mappedFieldList, view }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, view }) => {
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsTopBar showSideBar={ showSideBar }
                                  setShowSideBar={ setShowSideBar }
-                                 clientRequestFields={ clientRequestFields } />;
+                                 clientRequestParams={ clientRequestParams } />;
     case FIELD_CHARTS:
-      return <FieldChartsTopBar clientRequestFields={ clientRequestFields }
+      return <FieldChartsTopBar clientRequestParams={ clientRequestParams }
                                 mappedFieldList={ mappedFieldList } />;
     case FIELD_TEMPERATURES:
-      return <FieldTemperaturesChartsTopBar clientRequestFields={ clientRequestFields } />;
+      return <FieldTemperaturesChartsTopBar clientRequestParams={ clientRequestParams } />;
   }
 };
 
 TopBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func,
-  clientRequestFields: shape({})
+  clientRequestParams: shape({})
 };
 
 export default TopBar;
 
-const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }) => {
+const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -72,17 +72,17 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
   }, [clientPDF]);
 
   const downloadPDF = () => {
-    if (!clientRequestFields) return;
+    if (!clientRequestParams) return;
     if (!clientPDF) return;
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(clientPDF);
-    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.download = `Irricheck Recommendations ${ clientRequestParams.clientname }`;
     link.click();
   };
 
   const getPDF = () => {
-    if (clientRequestFields)
-      dispatch(requestClientPDF(clientRequestFields));
+    if (clientRequestParams)
+      dispatch(requestClientPDF(clientRequestParams));
   };
 
   const getPDFAndEmail = () => {
@@ -139,7 +139,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
         <EmailModal setShowEmailModal={ setShowEmailModal }
                     emailAddress={ emailAddress }
                     setEmailAddress={ setEmailAddress }
-                    clientRequestFields={ clientRequestFields } /> }
+                    clientRequestParams={ clientRequestParams } /> }
     </div>
   );
 };
@@ -147,10 +147,10 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestFields }
 ClientFieldsTopBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func,
-  clientRequestFields: shape({})
+  clientRequestParams: shape({})
 };
 
-const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
+const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
 
   useTheme(true);
 
@@ -166,17 +166,17 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
   }, [clientPDF]);
 
   const downloadPDF = () => {
-    if (!clientRequestFields) return;
+    if (!clientRequestParams) return;
     if (!clientPDF) return;
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(clientPDF);
-    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.download = `Irricheck Recommendations ${ clientRequestParams.clientname }`;
     link.click();
   };
 
   const getPDF = () => {
-    if (clientRequestFields)
-      dispatch(requestClientPDF(clientRequestFields));
+    if (clientRequestParams)
+      dispatch(requestClientPDF(clientRequestParams));
   };
 
   const logout = () => {
@@ -260,10 +260,10 @@ const FieldChartsTopBar = ({ clientRequestFields, mappedFieldList }) => {
 };
 
 FieldChartsTopBar.propTypes = {
-  clientRequestFields: shape({})
+  clientRequestParams: shape({})
 };
 
-const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
+const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
 
   useTheme(true);
 
@@ -282,17 +282,17 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
   }, [clientPDF]);
 
   const downloadPDF = () => {
-    if (!clientRequestFields) return;
+    if (!clientRequestParams) return;
     if (!clientPDF) return;
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(clientPDF);
-    link.download = `Irricheck Recommendations ${ clientRequestFields.clientname }`;
+    link.download = `Irricheck Recommendations ${ clientRequestParams.clientname }`;
     link.click();
   };
 
   const getPDF = () => {
-    if (clientRequestFields)
-      dispatch(requestClientPDF(clientRequestFields));
+    if (clientRequestParams)
+      dispatch(requestClientPDF(clientRequestParams));
   };
 
   const logout = () => {
@@ -339,7 +339,7 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
         <EmailModal setShowEmailModal={ setShowEmailModal }
                     emailAddress={ emailAddress }
                     setEmailAddress={ setEmailAddress }
-                    clientRequestFields={ clientRequestFields } /> }
+                    clientRequestParams={ clientRequestParams } /> }
     </div>
   );
 };
@@ -347,5 +347,5 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestFields }) => {
 FieldTemperaturesChartsTopBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func,
-  clientRequestFields: shape({})
+  clientRequestParams: shape({})
 };

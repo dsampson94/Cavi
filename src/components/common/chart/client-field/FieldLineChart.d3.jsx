@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
-import { chartByName, ChartHeader } from '../Chart.util';
-import { AGGREGATE, DAILY_ETO, DEFICIT } from '../../../../tools/general/system-variables.util';
+import { chartByName } from '../Chart.util';
+import { AGGREGATE, DAILY, DAILY_ETO, DEFICIT, EXTENDED } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
 import useTheme from '../../../../tools/hooks/useTheme';
@@ -15,6 +15,7 @@ import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
 import CheckboxFilter from '../components/CheckboxFilter';
+import ChartHeader from '../components/ChartHeader';
 
 const FieldLineChartD3 = ({
                             data,
@@ -40,6 +41,8 @@ const FieldLineChartD3 = ({
                             setXAxisViewMode,
                             activeProbeFactor,
                             setActiveProbeFactor,
+                            activeExtendedChart,
+                            setActiveExtendedChart,
                             date,
                             setDate
                           }) => {
@@ -59,7 +62,7 @@ const FieldLineChartD3 = ({
     marginRight: 1,
     marginBottom: chartType === DEFICIT ? 0 : 1,
     marginLeft: 40,
-    innerPadding: chartType === DAILY_ETO ? 24 : 10
+    innerPadding: chartName === DAILY_ETO ? 24 : 10
   };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
@@ -71,10 +74,10 @@ const FieldLineChartD3 = ({
   let yAccessor = d => d?.y;
   let xAccessor = d => new Date(d?.x);
 
-  const activeData = yAxisShared ? (!chartName.includes('ET')) ? sharedYScaleData : data : data;
+  const activeData = yAxisShared ? (chartType !== EXTENDED) ? sharedYScaleData : data : data;
 
   let yScale = scaleLinear().
-    domain(chartName.includes('ET')
+    domain((chartType === EXTENDED || chartType === DAILY)
       ? [min(activeData, yAccessor), max(activeData, yAccessor)]
       : [max(activeData, yAccessor), min(activeData, yAccessor)]).
     range([boundedHeight - innerPadding, innerPadding]).nice();
@@ -162,7 +165,11 @@ const FieldLineChartD3 = ({
     <>
       { chartType !== DEFICIT &&
         <ChartHeader chartName={ chartName }
-                     isDarkMode={ isDarkMode } /> }
+                     chartType={ chartType }
+                     isDarkMode={ isDarkMode }
+                     activeExtendedChart={ activeExtendedChart }
+                     setActiveExtendedChart={ setActiveExtendedChart }
+        /> }
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }
@@ -171,6 +178,7 @@ const FieldLineChartD3 = ({
         <Chart svgRef={ svgRef }
                dimensions={ updatedDimensions }
                chartName={ chartName }
+               chartType={ chartType }
                chartInfo={ chartInfo }
                isDarkMode={ isDarkMode }>
 
