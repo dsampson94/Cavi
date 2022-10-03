@@ -12,7 +12,8 @@ const CheckboxInput = ({
                          checked,
                          onClick,
                          disabled,
-                         daily
+                         actual,
+                         forecast
                        }) => {
 
   return (
@@ -27,7 +28,7 @@ const CheckboxInput = ({
              disabled={ disabled }
              onClick={ onClick }
              type={ 'checkbox' }
-             className={ getClassNames('checkbox-input__input', { daily }) } />
+             className={ getClassNames('checkbox-input__input', { actual, forecast }) } />
     </div>
   );
 };

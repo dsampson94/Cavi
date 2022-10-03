@@ -3,8 +3,8 @@ export const SNACK_SUCCESS = 'snack--success';
 export const SNACK_CRITICAL = 'snack--critical';
 export const SNACK_INFO = 'snack--info';
 
-export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'FieldsOverview Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'FieldsOverview Not Retrieved';
+export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Not Retrieved';
 
 export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
@@ -22,13 +22,25 @@ export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
 export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
 
 export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
 
 export const SUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibrated Successfully ';
 export const UNSUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibration Unsuccessful';
 
 export const SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Not Retrieved';
 
 //MIDBAR
 export const MID_BAR_ASSISTANT = 'Assistant';
@@ -64,24 +76,6 @@ export const GREEN = 'Viewed in less than 7 days ';
 export const YELLOW = 'Viewed in less than 14 days';
 export const ORANGE = 'Viewed in less than 30 days';
 export const RED = 'Viewed in MORE than 30 days!';
-
-//DROPDOWN
-export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
-export const CHART_USAGE_MENU = 'chart_usage_menu';
-export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
-export const CHART_ACTIVE_PERIOD = 'chart_active_period';
-export const TOPBAR_OPTIONS = 'topbar_options';
-
-export const DEFICIT_OPTION = 'Deficit / ETo';
-export const VOLT_READINGS_OPTION = 'Volt Readings';
-export const FLOW_DAILY_OPTION = 'Flow Meter Daily Total';
-export const FLOW_DETAILED_OPTION = 'Flow Meter Detailed';
-export const RAIN_OPTION = 'Rain';
-export const EC_OPTION = 'EC Readings';
-export const VPD_OPTION = 'VPD Readings';
-export const ACTUAL_IRRIGATION_OPTION = 'Actual Irrigation Data';
-export const EXCEL_OPTION = 'Excel Report';
-export const ANALYSE_FIELD_OPTION = 'Analyse Field';
 
 //TOPBAR
 export const EMAIL_RECOMMENDATIONS = 'email_recommendations';
@@ -173,15 +167,33 @@ export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
 export const DEFICIT_ETO = 'Deficit / ETo';
 export const VOLT_READINGS = 'Volt Readings';
 export const FLOW_DAILY = 'Flow Meter Daily Total';
-export const FLOW_DETAILED = 'Flow Meter Detailed';
+export const FLOW_HOURLY = 'Flow Meter Hourly';
 export const RAIN = 'Rain';
 export const EC = 'EC Readings';
-export const VPD = 'VPD Readings';
+export const VPD = 'VPD (kPa) Readings';
 export const ACTUAL_IRRIGATION = 'Actual Irrigation Data';
 export const EXCEL = 'Excel Report';
 export const ANALYSE_FIELD = 'Analyse Field';
 
 export const DAILY_ETO = 'Daily ETo';
+
+//DROPDOWN
+export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
+export const CHART_USAGE_MENU = 'chart_usage_menu';
+export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
+export const CHART_ACTIVE_PERIOD = 'chart_active_period';
+export const TOPBAR_OPTIONS = 'topbar_options';
+
+export const DEFICIT_OPTION = 'Deficit / ETo';
+export const VOLT_READINGS_OPTION = 'Volt Readings';
+export const FLOW_DAILY_OPTION = 'Flow Meter Daily Total';
+export const FLOW_HOURLY_OPTION = 'Flow Meter Hourly';
+export const RAIN_OPTION = 'Rain';
+export const EC_OPTION = 'EC Readings';
+export const VPD_OPTION = 'VPD (kPa) Readings';
+export const ACTUAL_IRRIGATION_OPTION = 'Actual Irrigation Data';
+export const EXCEL_OPTION = 'Excel Report';
+export const ANALYSE_FIELD_OPTION = 'Analyse Field';
 
 //CHART ICONS
 export const DOWN_ARROW = 'down_arrow';
@@ -212,3 +224,12 @@ export const CLIENT_PARAMS = 'client_request';
 export const LOAD_PERIOD_PARAMS = 'load_period_request';
 export const VOLTS_PARAMS = 'volts_request';
 export const PROBE_CALIBRATION_PARAMS = 'probe_calibration_request';
+
+// 'GETGRAPHSMORE' 'get' API STRINGS
+export const VOLTS_STRING = 'volts';
+export const FLOW_DAILY_STRING = 'flowdaily';
+export const FLOW_HOURLY_STRING = 'flowhourly';
+export const EC_STRING = 'ec';
+export const VPD_STRING = 'vpd';
+export const MOTTECH_STRING = 'mottech';
+

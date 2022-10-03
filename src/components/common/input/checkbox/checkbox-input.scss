@@ -30,7 +30,7 @@
     cursor: pointer;
     width: util.rem(12);
     height: util.rem(11);
-    border: util.rem(1.2) solid map.get(color.$colorMap, pulse-blue);
+    border: util.rem(1.2) solid map.get(color.$colorMap, white);
     border-radius: map.get(radius.$border-radius, medium);
   }
 }
@@ -39,19 +39,32 @@
 
   &:checked {
     animation: ripple 0.2s linear forwards;
-    background-color: map.get(color.$colorMap, pulse-blue);
+    background-color: map.get(color.$colorMap, black);
   }
 
   &:hover {
     border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
   }
 
-  &--daily {
+  &--actual {
+    border: util.rem(1.2) solid map.get(color.$colorMap, black);
 
     &:checked {
       animation: ripple 0.2s linear forwards;
       background-color: map.get(color.$colorMap, daily-ETO-green);
-      border: util.rem(1.2) solid map.get(color.$colorMap, daily-ETO-green);
+    }
+
+    &:hover {
+      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+  }
+
+  &--forecast {
+    border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+    &:checked {
+      animation: ripple 0.2s linear forwards;
+      background-color: map.get(color.$colorMap, black);
     }
 
     &:hover {

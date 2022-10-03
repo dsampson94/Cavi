@@ -16,6 +16,11 @@ const ClientFieldsView = ({
                             mappedChartList,
                             mappedMenuList,
                             mappedVoltChartList,
+                            mappedFlowMeterDailyChartList,
+                            mappedFlowMeterHourlyList,
+                            mappedECChartList,
+                            mappedVPDChartList,
+                            mappedActualChartList,
                             activeLoadPeriod,
                             setActiveLoadPeriod,
                             setActiveFieldName,
@@ -85,6 +90,11 @@ const ClientFieldsView = ({
 
           <AggregateChartsContainer mappedChartList={ mappedChartList }
                                     mappedVoltChartList={ mappedVoltChartList }
+                                    mappedFlowMeterDailyChartList={ mappedFlowMeterDailyChartList }
+                                    mappedFlowMeterHourlyList={ mappedFlowMeterHourlyList }
+                                    mappedECChartList={ mappedECChartList }
+                                    mappedVPDChartList={ mappedVPDChartList }
+                                    mappedActualChartList={ mappedActualChartList }
                                     currentGlobalZoomState={ currentGlobalZoomState }
                                     setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                                     currentYZoomState={ currentYZoomState }

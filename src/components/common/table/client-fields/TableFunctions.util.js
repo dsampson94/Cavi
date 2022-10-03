@@ -1,21 +1,27 @@
 import { noOp } from '../../../../tools/general/helpers.util';
 
 export const handleRowDoubleClick = (history, groupName, clientName, object) => {
-  history.push(`/client/${ groupName }/${ clientName }/field/${ object?.locationName }/${ object?.probeNumber }`);
+  const { safeGroupName, safeClientName, safeLocationName, safeProbeNumber } = validatedEndpoints(groupName, clientName, object);
+  history.push(`/client/${ safeGroupName }/${ safeClientName }/field/${ safeLocationName }/${ safeProbeNumber }`);
+};
+
+export const validatedEndpoints = (groupName, clientName, object) => {
+  let safeGroupName = groupName;
+  let safeClientName = clientName;
+  let safeLocationName = object?.locationName;
+  let safeProbeNumber = object?.probeNumber;
+
+  if (safeLocationName.includes('landGroup')) return null;
+  return { safeGroupName, safeClientName, safeLocationName, safeProbeNumber };
 };
 
 export const hideColumnHeader = (tableName, key) => {
   switch (key) {
     case 'w':
-      return 'transparent';
     case 'b':
-      return 'transparent';
     case 'p':
-      return 'transparent';
     case 'l':
-      return 'transparent';
     case 'c':
-      return 'transparent';
     case 'q':
       return 'transparent';
     default:

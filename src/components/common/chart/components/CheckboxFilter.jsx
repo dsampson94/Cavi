@@ -50,12 +50,14 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList })
 
         <CheckboxInput constant={ 'Forecast' }
                        checked={ hiddenLineList.includes('Forecast') }
-                       onClick={ e => hideLineClick(e) } />
+                       onClick={ e => hideLineClick(e) }
+                       forecast />
 
         <CheckboxInput constant={ 'Actual' }
                        checked={ hiddenLineList.includes('Actual') }
                        onClick={ e => hideLineClick(e) }
-                       daily />
+                       daily
+                       actual />
       </div>
     </div>
   );

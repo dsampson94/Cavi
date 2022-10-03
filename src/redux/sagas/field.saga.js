@@ -6,11 +6,14 @@ import {
   SNACK_SUCCESS,
   SPINNER_TEXT,
   SUCCESSFULLY_CALIBRATED_PROBE,
-  SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST,
-  SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
+  SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST,
+  SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST,
+  SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST,
+  SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST, SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST,
   UNSUCCESSFULLY_CALIBRATED_PROBE,
-  UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST,
-  UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST
+  UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST,
+  UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST, UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST,
+  UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST, UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST
 } from '../../tools/general/system-variables.util';
 
 import { responseStatus } from '../endpoints/index';
@@ -20,10 +23,15 @@ import { getChartProbeCalibrationRequest, getExtendedChartList, getFieldChartLis
 import { addSystemNotice, setSpinnerText } from '../actions/system.action';
 import {
   GET_FIELD_CHART_LIST,
-  REQUEST_FIELD_VOLT_CHART_LIST,
+  REQUEST_EXTENDED_FIELD_CHART_LIST,
   REQUEST_PROBE_CALIBRATION,
   SET_FIELD_CHART_LIST,
-  SET_FIELD_VOLT_CHART_LIST
+  SET_FIELD_EC_CHART_LIST,
+  SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
+  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
+  SET_FIELD_MOTTECH_CHART_LIST,
+  SET_FIELD_VOLT_CHART_LIST,
+  SET_FIELD_VPD_CHART_LIST
 } from '../actions/field.action';
 
 export function* performRetrieveFieldChartListRequest({ field, onSuccess, onError }) {
@@ -89,7 +97,55 @@ export function* watchForChartCalibrateProbeRequest() {
   yield takeLatest(REQUEST_PROBE_CALIBRATION, performChartCalibrateProbeRequest);
 }
 
-export function* performRetrieveFieldVoltChartListRequest({ field, onSuccess, onError }) {
+export function* performRetrieveExtendedFieldChartListRequest({ field, use, onSuccess, onError }) {
+
+  const getUseType = () => {
+    switch (use) {
+      case SET_FIELD_VOLT_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
+          stateObject: 'voltChartList'
+        };
+      case SET_FIELD_FLOW_METER_DAILY_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST,
+          stateObject: 'flowMeterDailyList'
+        };
+      case SET_FIELD_FLOW_METER_HOURLY_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST,
+          stateObject: 'flowMeterHourlyList'
+        };
+      case SET_FIELD_EC_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST,
+          stateObject: 'ECList'
+        };
+      case SET_FIELD_VPD_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST,
+          stateObject: 'VPDList'
+        };
+      case SET_FIELD_MOTTECH_CHART_LIST:
+        return {
+          type: use,
+          successNotice: SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST,
+          errorNotice: UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST,
+          stateObject: 'mottechList'
+        };
+    }
+  };
+
   try {
     yield put(setSpinnerText(SPINNER_TEXT));
     const [endpoint, requestOptions] = getExtendedChartList(field);
@@ -97,13 +153,46 @@ export function* performRetrieveFieldVoltChartListRequest({ field, onSuccess, on
 
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put({ type: SET_FIELD_VOLT_CHART_LIST, undefined });
+        yield put({ type: getUseType().type, undefined });
+        yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
+        if (onError) yield call(onError);
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: getUseType().type, [getUseType().stateObject]: data });
+        yield put(addSystemNotice(getUseType().successNotice, SNACK_SUCCESS));
+        if (onSuccess) yield call(onSuccess, data);
+    }
+
+    yield put(setSpinnerText(null));
+
+  } catch ({ response }) {
+    yield put({ type: getUseType().type, undefined });
+    yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
+    if (onError) yield call(onError);
+    yield put(setSpinnerText(null));
+  }
+}
+
+export function* watchForRetrieveExtendedFieldChartListRequest() {
+  yield takeLatest(REQUEST_EXTENDED_FIELD_CHART_LIST, performRetrieveExtendedFieldChartListRequest);
+}
+
+export function* performRetrieveFieldFlowMeterDailyChartListRequest({ field, onSuccess, onError }) {
+  try {
+    yield put(setSpinnerText(SPINNER_TEXT));
+    const [endpoint, requestOptions] = getExtendedChartList(field);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_FIELD_FLOW_METER_DAILY_CHART_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST, SNACK_CRITICAL));
         if (onError) yield call(onError);
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put({ type: SET_FIELD_VOLT_CHART_LIST, voltChartList: data });
+        yield put({ type: SET_FIELD_FLOW_METER_DAILY_CHART_LIST, voltChartList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
     }
@@ -111,21 +200,21 @@ export function* performRetrieveFieldVoltChartListRequest({ field, onSuccess, on
     yield put(setSpinnerText(null));
 
   } catch ({ response }) {
-    yield put({ type: SET_FIELD_VOLT_CHART_LIST, undefined });
+    yield put({ type: SET_FIELD_FLOW_METER_DAILY_CHART_LIST, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST, SNACK_CRITICAL));
     if (onError) yield call(onError);
     yield put(setSpinnerText(null));
   }
 }
 
-export function* watchForRetrieveFieldVoltChartListRequest() {
-  yield takeLatest(REQUEST_FIELD_VOLT_CHART_LIST, performRetrieveFieldVoltChartListRequest);
+export function* watchForRetrieveFieldFlowMeterDailyListRequest() {
+  yield takeLatest(REQUEST_EXTENDED_FIELD_CHART_LIST, performRetrieveFieldFlowMeterDailyChartListRequest);
 }
 
 export default function* fieldSaga() {
   yield all([
     watchForRetrieveFieldChartListRequest(),
     watchForChartCalibrateProbeRequest(),
-    watchForRetrieveFieldVoltChartListRequest()
+    watchForRetrieveExtendedFieldChartListRequest()
   ]);
 }

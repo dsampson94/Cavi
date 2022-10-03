@@ -19,6 +19,7 @@ import ChartHeader from '../components/ChartHeader';
 
 const FieldLineChartD3 = ({
                             data,
+                            secondaryData,
                             chartName,
                             chartType,
                             chartInfo,
@@ -198,6 +199,7 @@ const FieldLineChartD3 = ({
                  isDarkMode={ isDarkMode } />
 
           <Line data={ data }
+                secondaryData={ secondaryData }
                 recommendationOffset={ recommendationOffset }
                 chartName={ chartName }
                 chartType={ chartType }
@@ -244,6 +246,7 @@ const FieldLineChartD3 = ({
         </Chart>
 
         <CheckboxFilter chartName={ chartName }
+                        secondaryData={ secondaryData }
                         hiddenLineList={ hiddenLineList }
                         setHiddenLineList={ setHiddenLineList } />
 

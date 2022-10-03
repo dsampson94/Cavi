@@ -3,11 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
-import { DEFICIT_ETO, VOLT_READINGS } from '../../../tools/general/system-variables.util';
+import {
+  ACTUAL_IRRIGATION,
+  DEFICIT_ETO,
+  EC,
+  FLOW_DAILY,
+  FLOW_HOURLY,
+  VOLT_READINGS,
+  VPD
+} from '../../../tools/general/system-variables.util';
 
-import { mapChartList, mapFieldList, mapMenuData, mapVoltChartLists } from './FieldChartView.container.util';
+import {
+  mapChartList,
+  mapFieldList,
+  mapFlowMeterDailyChartLists,
+  mapMenuData,
+  mapVoltChartLists,
+  mapVPDChartLists
+} from './FieldChartView.container.util';
 
-import { requestChartProbeCalibration, requestFieldChartList, requestFieldVoltChartList } from '../../../redux/actions/field.action';
+import {
+  requestChartProbeCalibration,
+  requestFieldChartList,
+  requestExtendedFieldChartList,
+  SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
+  SET_FIELD_VOLT_CHART_LIST,
+  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
+  SET_FIELD_EC_CHART_LIST,
+  SET_FIELD_VPD_CHART_LIST, SET_FIELD_MOTTECH_CHART_LIST
+} from '../../../redux/actions/field.action';
+
 import { requestClientFieldList } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
@@ -22,6 +47,11 @@ const FieldChartViewContainer = () => {
 
   const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
   const fieldVoltChartList = useSelector(createSelector([state => state.field], field => field?.voltChartList));
+  const fieldFlowMeterDailyChartList = useSelector(createSelector([state => state.field], field => field?.flowMeterDailyList));
+  const fieldFlowMeterHourlyChartList = useSelector(createSelector([state => state.field], field => field?.flowMeterHourlyList));
+  const fieldECChartList = useSelector(createSelector([state => state.field], field => field?.ECList));
+  const fieldVPDChartList = useSelector(createSelector([state => state.field], field => field?.VPDList));
+  const fieldActualChartList = useSelector(createSelector([state => state.field], field => field?.mottechList));
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
@@ -29,6 +59,8 @@ const FieldChartViewContainer = () => {
   const [activeExtendedChart, setActiveExtendedChart] = useState(DEFICIT_ETO);
 
   const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod, activeProbeFactor });
+  // console.log(fieldFlowMeterDailyChartList);
+  // console.log(fieldFlowMeterHourlyChartList);
 
   useEffect(() => {
     dispatch(requestClientFieldList(request.clientParams));
@@ -37,7 +69,20 @@ const FieldChartViewContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (activeExtendedChart === VOLT_READINGS) dispatch(requestFieldVoltChartList(request.voltParams));
+    switch (activeExtendedChart) {
+      case VOLT_READINGS:
+        return dispatch(requestExtendedFieldChartList(request.voltParams, SET_FIELD_VOLT_CHART_LIST));
+      case FLOW_DAILY:
+        return dispatch(requestExtendedFieldChartList(request.flowMeterDailyParams, SET_FIELD_FLOW_METER_DAILY_CHART_LIST));
+      case FLOW_HOURLY:
+        return dispatch(requestExtendedFieldChartList(request.flowMeterHourlyParams, SET_FIELD_FLOW_METER_HOURLY_CHART_LIST));
+      case EC:
+        return dispatch(requestExtendedFieldChartList(request.ECParams, SET_FIELD_EC_CHART_LIST));
+      case VPD:
+        return dispatch(requestExtendedFieldChartList(request.VPDParams, SET_FIELD_VPD_CHART_LIST));
+      case ACTUAL_IRRIGATION:
+        return dispatch(requestExtendedFieldChartList(request.mottechParams, SET_FIELD_MOTTECH_CHART_LIST));
+    }
   }, [activeExtendedChart]);
 
   useEffect(() => {
@@ -68,10 +113,35 @@ const FieldChartViewContainer = () => {
     return mapVoltChartLists(fieldVoltChartList, fieldChartList, activeLoadPeriod);
   };
 
+  const mappedFlowMeterDailyChartList = () => {
+    return mapFlowMeterDailyChartLists(fieldFlowMeterDailyChartList, fieldChartList, activeLoadPeriod);
+  };
+
+  const mappedFlowMeterHourlyList = () => {
+    return mapVoltChartLists(fieldFlowMeterHourlyChartList, fieldChartList, activeLoadPeriod);
+  };
+
+  const mappedECChartList = () => {
+    return mapVoltChartLists(fieldECChartList, fieldChartList, activeLoadPeriod);
+  };
+
+  const mappedVPDChartList = () => {
+    return mapVPDChartLists(fieldVPDChartList, fieldChartList, activeLoadPeriod);
+  };
+
+  const mappedActualChartList = () => {
+    return mapVoltChartLists(fieldActualChartList, fieldChartList, activeLoadPeriod);
+  };
+
   return <FieldChartView mappedFieldList={ mappedFieldList() }
                          mappedChartList={ mappedChartList() }
                          mappedMenuList={ mappedMenuList() }
                          mappedVoltChartList={ mappedVoltChartList() }
+                         mappedFlowMeterDailyChartList={ mappedFlowMeterDailyChartList() }
+                         mappedFlowMeterHourlyList={ mappedFlowMeterHourlyList() }
+                         mappedECChartList={ mappedECChartList() }
+                         mappedVPDChartList={ mappedVPDChartList() }
+                         mappedActualChartList={ mappedActualChartList() }
                          activeLoadPeriod={ activeLoadPeriod }
                          setActiveLoadPeriod={ setActiveLoadPeriod }
                          setActiveFieldName={ setActiveFieldName }

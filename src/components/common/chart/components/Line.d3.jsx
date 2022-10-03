@@ -14,11 +14,12 @@ import {
 } from '../../../../tools/general/system-variables.util';
 
 const Line = ({
+                data,
+                secondaryData,
                 xAccessor,
                 xScale,
                 yAccessor,
                 yScale,
-                data,
                 chartType,
                 chartName,
                 recommendationOffset,
@@ -33,6 +34,7 @@ const Line = ({
     case EXTENDED:
     case DAILY:
       return <FieldChartLine data={ data }
+                             secondaryData={ secondaryData }
                              recommendationOffset={ recommendationOffset }
                              chartName={ chartName }
                              chartType={ chartType }
@@ -62,11 +64,12 @@ const Line = ({
 export default Line;
 
 const FieldChartLine = ({
+                          data,
+                          secondaryData,
                           xAccessor,
                           xScale,
                           yAccessor,
                           yScale,
-                          data,
                           chartType,
                           chartName,
                           recommendationOffset,
@@ -84,7 +87,8 @@ const FieldChartLine = ({
 
   selectAll('.line').on('contextmenu ', event => event.preventDefault());
 
-  const getLineColor = () => {
+  const getLineColor = (color) => {
+    if (color) return color;
     if (chartName === AGGREGATE_TOP_SOIL) return 'url(#lineGradientAggregateTop)';
     else if (chartName === AGGREGATE_BOTTOM_SOIL) return 'url(#lineGradientAggregateBottom)';
     else if ((chartName === DEFICIT_ETO || chartName === DAILY_ETO) && isDarkMode) return 'white';
@@ -114,10 +118,23 @@ const FieldChartLine = ({
             clipPath={ clipPath }
             stroke={ getLineColor() }
             style={ {
+              display: chartType === DAILY ? hiddenLineList?.includes('Forecast') ? 'flex' : 'none' : 'flex',
               fill: 'none',
               strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
               strokeLinecap: 'round'
             } } />
+
+      { secondaryData &&
+        <path className={ 'secondaryLine' }
+              d={ lineGenerator(secondaryData) }
+              clipPath={ clipPath }
+              stroke={ getLineColor('#2AE851') }
+              style={ {
+                display: chartType === DAILY ? hiddenLineList?.includes('Actual') ? 'flex' : 'none' : 'flex',
+                fill: 'none',
+                strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
+                strokeLinecap: 'round'
+              } } /> }
 
       <ReferenceLine xScale={ xScale }
                      yScale={ yScale }

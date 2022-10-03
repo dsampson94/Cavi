@@ -13,7 +13,7 @@ import {
   DEFICIT_OPTION,
   EC_OPTION,
   FLOW_DAILY_OPTION,
-  FLOW_DETAILED_OPTION,
+  FLOW_HOURLY_OPTION,
   LOG_OUT_ICON,
   REPORT_PROBLEM_ICON,
   TOPBAR_OPTIONS,
@@ -135,7 +135,7 @@ const DropDownMenu = ({
                               setActiveExtendedChart={ setActiveExtendedChart }
                               activeExtendedChart={ activeExtendedChart } />
 
-              <ChartOptionRow option={ FLOW_DETAILED_OPTION }
+              <ChartOptionRow option={ FLOW_HOURLY_OPTION }
                               setActiveExtendedChart={ setActiveExtendedChart }
                               activeExtendedChart={ activeExtendedChart } />
 

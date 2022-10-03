@@ -202,4 +202,18 @@ body.dark-mode {
     color: map.get(color.$colorMap, light-mode-white);
     background-color: map.get(color.$colorMap, dark-mode-grey-modal);
   }
+
+  .checkbox-input__input--forecast {
+    background-color: map.get(color.$colorMap, black);
+    border: util.rem(1.2) solid map.get(color.$colorMap, white);
+
+    &:checked {
+      animation: ripple 0.2s linear forwards;
+      background-color: map.get(color.$colorMap, white);
+    }
+
+    &:hover {
+      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+  }
 }

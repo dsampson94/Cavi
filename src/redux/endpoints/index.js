@@ -1,5 +1,14 @@
 import { retrieveUserLoginFromLocalStorage } from '../../tools/storage/localStorage';
 
+import {
+  EC_STRING,
+  FLOW_DAILY_STRING,
+  FLOW_HOURLY_STRING,
+  MOTTECH_STRING,
+  VOLTS_STRING,
+  VPD_STRING
+} from '../../tools/general/system-variables.util';
+
 export const API_HOST = process.env.REACT_APP_API_ENDPOINT; // api endpoint provided in .env
 export const SERVER_HOST = process.env.REACT_APP_HOST; // host provided in .env
 
@@ -83,7 +92,32 @@ export const getRequestParams = ({
     voltParams: {
       ...clientParams,
       field: activeFieldName ? activeFieldName : null,
-      get: 'volts'
+      get: VOLTS_STRING
+    },
+    flowMeterDailyParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: FLOW_DAILY_STRING
+    },
+    flowMeterHourlyParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: FLOW_HOURLY_STRING
+    },
+    ECParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: EC_STRING
+    },
+    VPDParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: VPD_STRING
+    },
+    mottechParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: MOTTECH_STRING
     }
   };
 };
