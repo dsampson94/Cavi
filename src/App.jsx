@@ -15,7 +15,6 @@ import ClientContainer from './routes/client/Client.container';
 const App = () => {
 
   const dispatch = useDispatch();
-  const activeURL = useLocation();
 
   const notices = useSelector(createSelector([state => state.system], system => system?.notices));
   const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));

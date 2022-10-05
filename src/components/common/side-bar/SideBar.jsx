@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { bool, func } from 'prop-types';
 
 import { CLIENT_FIELDS, FIELD_CHARTS, FIELD_TEMPERATURES, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
-import { SideBarButton, SideBarFieldList, SideBarList, ViewDataBar } from './Sidebar.util';
-import { getClassNames } from '../../../tools/general/helpers.util';
+
+import { mapFavoritesList, SideBarButton, SideBarFieldList, SideBarList, ViewDataBar } from './Sidebar.util';
+import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
+import { viewFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
 
 import InputSearch from '../input-search/InputSearch';
 
@@ -22,7 +24,8 @@ const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList,
                                  setShowSideBar={ setShowSideBar }
                                  mappedFieldList={ mappedFieldList }
                                  setActiveLoadPeriod={ setActiveLoadPeriod }
-                                 setActiveFieldName={ setActiveFieldName } />;
+                                 setActiveFieldName={ setActiveFieldName }
+                                 mappedUserData={ mappedUserData } />;
 
     case FIELD_TEMPERATURES:
       return <FieldTemperaturesChartsSideBar showSideBar={ showSideBar }
@@ -40,41 +43,85 @@ SideBar.propTypes = {
 
 export default SideBar;
 
-const ClientFieldsSideBar = ({ showSideBar, mappedUserData, setShowSideBar }) => {
+const ClientFieldsSideBar = ({ showSideBar, mappedUserData }) => {
 
-  const [filteredSideBarData, setFilteredSideBarData] = useState(undefined);
-  const [persistSearchString, setPersistSearchString] = useState('');
+    let storedFavoritesList = viewFarmLocalStorageFavorites();
 
-  return (
-    <div className={ getClassNames('client-fields-side-bar', { show: showSideBar }) }>
-      { showSideBar && <>
-        <InputSearch dataToFilter={ mappedUserData }
-                     setFilteredData={ setFilteredSideBarData }
-                     persistSearchString={ persistSearchString }
-                     setPersistSearchString={ setPersistSearchString }
-                     placeholder={ SEARCH_PLACEHOLDER }
-                     sidebar />
+    const [filteredSideBarData, setFilteredSideBarData] = useState(undefined);
+    const [persistSearchString, setPersistSearchString] = useState('');
+    const [favoritesToggle, setFavoritesToggle] = useState(false);
+    const [mappedFavoritesList, setMappedFavoritesList] = useState([]);
 
-        <SideBarList mappedUserData={ filteredSideBarData ? filteredSideBarData : mappedUserData }
-                     filteredSideBarData={ filteredSideBarData } />
+    useEffect(() => {
+      storedFavoritesList = viewFarmLocalStorageFavorites();
+      setMappedFavoritesList(mapFavoritesList(storedFavoritesList, mappedUserData));
+    }, []);
 
-        <SideBarButton />
-      </> }
-    </div>
-  );
-};
+    useEffect(() => {
+      storedFavoritesList = viewFarmLocalStorageFavorites();
+      setMappedFavoritesList(mapFavoritesList(storedFavoritesList, mappedUserData));
+    }, [favoritesToggle]);
+
+    return (
+      <div className={ getClassNames('client-fields-side-bar', { show: showSideBar }) }>
+        { showSideBar && <>
+          <InputSearch dataToFilter={ mappedUserData }
+                       setFilteredData={ setFilteredSideBarData }
+                       persistSearchString={ persistSearchString }
+                       setPersistSearchString={ setPersistSearchString }
+                       placeholder={ SEARCH_PLACEHOLDER }
+                       sidebar />
+
+          { !isEmpty(mappedFavoritesList) &&
+          <SideBarList mappedUserData={ mappedFavoritesList }
+                       favoritesToggle={ favoritesToggle }
+                       setFavoritesToggle={ setFavoritesToggle }
+                       myFavorites /> }
+
+          <SideBarList mappedUserData={ filteredSideBarData ? filteredSideBarData : mappedUserData }
+                       filteredSideBarData={ filteredSideBarData }
+                       favoritesToggle={ favoritesToggle }
+                       setFavoritesToggle={ setFavoritesToggle }
+                       myClients />
+
+          <SideBarButton />
+        </> }
+      </div>
+    );
+  }
+;
 
 ClientFieldsSideBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func
 };
 
-const FieldChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setActiveLoadPeriod, setActiveFieldName }) => {
+const FieldChartsSideBar = ({
+                              showSideBar,
+                              mappedFieldList,
+                              clientRequestFields,
+                              setActiveLoadPeriod,
+                              setActiveFieldName,
+                              mappedUserData
+                            }) => {
+
+  let storedFavoritesList = viewFarmLocalStorageFavorites();
+
+  const [mappedFavoritesList, setMappedFavoritesList] = useState([]);
+
+  useEffect(() => {
+    storedFavoritesList = viewFarmLocalStorageFavorites();
+    setMappedFavoritesList(mapFavoritesList(storedFavoritesList, mappedUserData));
+  }, []);
 
   return (
     <div className={ getClassNames('field-charts-side-bar', { show: showSideBar }) }>
       { showSideBar && <>
         <ViewDataBar setActiveLoadPeriod={ setActiveLoadPeriod } />
+
+        { !isEmpty(mappedFavoritesList) &&
+        <SideBarList mappedUserData={ mappedFavoritesList }
+                     myFavoritesChart /> }
 
         <SideBarFieldList view={ FIELD_CHARTS }
                           mappedFieldList={ mappedFieldList }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
@@ -176,24 +175,23 @@ const ClientFieldsTableMidBar = ({
                                    setReloadToggleActive
                                  }) => {
 
-  const dispatch = useDispatch();
   const { groupName, clientName } = useParams();
 
   return (
     <div className={ getClassNames('client-fields__top-bar', { show: showClientsSideBar }) }>
       <div className="client-fields__top-bar-left">
         { hasSubGroups &&
-          <>
-            { !filteredTableData &&
-              <div className="client-fields__top-bar-left-button">
-                <Button icon={ DROPDOWN_ALL }
-                        onClick={ toggleDropdowns } />
-              </div> }
-            { filteredTableData &&
-              <div className="client-fields__top-bar-left-no-button" /> }
-          </> }
-        { !hasSubGroups &&
+        <>
+          { !filteredTableData &&
+          <div className="client-fields__top-bar-left-button">
+            <Button icon={ DROPDOWN_ALL }
+                    onClick={ toggleDropdowns } />
+          </div> }
+          { filteredTableData &&
           <div className="client-fields__top-bar-left-no-button" /> }
+        </> }
+        { !hasSubGroups &&
+        <div className="client-fields__top-bar-left-no-button" /> }
         <p>{ `Recommendations: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
       </div>
       <div className="client-fields__top-bar-right">
@@ -242,7 +240,7 @@ const FieldChartsMidBar = ({
                            }) => {
 
   const history = useHistory();
-  const { groupName, clientName, fieldName } = useParams();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
 
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
@@ -265,10 +263,18 @@ const FieldChartsMidBar = ({
   return (
     <div className={ 'field-chart__top-bar' }>
       <div className="field-chart__top-bar--left">
+
         <FieldButtons className={ 'field-chart__top-bar--left-inner' }
                       setShowChartsSideBar={ setShowChartsSideBar }
                       showChartsSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Temperatures' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
 
         <DropDownButton name={ SETTINGS_GEAR }
                         className={ 'field-chart__top-bar--left__settings' }
@@ -326,7 +332,9 @@ const FieldTemperaturesChartsMidBar = ({
                                        }) => {
 
   const history = useHistory();
-  const { groupName, clientName, fieldName } = useParams();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
+
+  console.log(fieldName);
 
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
@@ -349,10 +357,19 @@ const FieldTemperaturesChartsMidBar = ({
   return (
     <div className={ 'field-temperatures__top-bar' }>
       <div className="field-temperatures__top-bar--left">
+
         <FieldButtons className={ 'field-temperatures__top-bar--left-inner' }
                       setShowChartsSideBar={ setShowChartsSideBar }
                       showChartsSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Deficits' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
+
       </div>
 
       <div className="field-temperatures__top-bar--center">

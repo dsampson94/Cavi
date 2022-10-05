@@ -136,10 +136,10 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
       </div>
 
       { showEmailModal &&
-        <EmailModal setShowEmailModal={ setShowEmailModal }
-                    emailAddress={ emailAddress }
-                    setEmailAddress={ setEmailAddress }
-                    clientRequestParams={ clientRequestParams } /> }
+      <EmailModal setShowEmailModal={ setShowEmailModal }
+                  emailAddress={ emailAddress }
+                  setEmailAddress={ setEmailAddress }
+                  clientRequestParams={ clientRequestParams } /> }
     </div>
   );
 };
@@ -217,13 +217,10 @@ const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
                 tooltip={ PRINT }
                 spaced
                 small />
-        <Button label={ 'Fields' }
+        <Button label={ 'Other Farms' }
                 onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
                 spaced />
         <Button label={ 'Field Setup' } spaced />
-        <Button label={ 'Temperatures' }
-                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ fieldName }/${ probeNumber }/temperatures`) }
-                spaced />
         <Button label={ 'Probes Monitor' }
                 spaced />
 
@@ -315,7 +312,7 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
           <Button icon={ PRINT_ICON }
                   onClick={ getPDF }
                   tooltip={ PRINT } />
-          <Button label={ 'Fields' }
+          <Button label={ 'Other Farms' }
                   onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
                   spaced />
           <Button label={ 'Moisture Graphs' } />
@@ -336,10 +333,10 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
       </div>
 
       { showEmailModal &&
-        <EmailModal setShowEmailModal={ setShowEmailModal }
-                    emailAddress={ emailAddress }
-                    setEmailAddress={ setEmailAddress }
-                    clientRequestParams={ clientRequestParams } /> }
+      <EmailModal setShowEmailModal={ setShowEmailModal }
+                  emailAddress={ emailAddress }
+                  setEmailAddress={ setEmailAddress }
+                  clientRequestParams={ clientRequestParams } /> }
     </div>
   );
 };

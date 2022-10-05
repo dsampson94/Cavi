@@ -59,8 +59,6 @@ const FieldChartViewContainer = () => {
   const [activeExtendedChart, setActiveExtendedChart] = useState(DEFICIT_ETO);
 
   const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod, activeProbeFactor });
-  // console.log(fieldFlowMeterDailyChartList);
-  // console.log(fieldFlowMeterHourlyChartList);
 
   useEffect(() => {
     dispatch(requestClientFieldList(request.clientParams));

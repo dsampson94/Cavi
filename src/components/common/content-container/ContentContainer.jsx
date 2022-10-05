@@ -8,6 +8,8 @@ import { mappedUserData } from '../side-bar/Sidebar.util';
 import TopBar from '../top-bar/TopBar';
 import SideBar from '../side-bar/SideBar';
 
+import useTheme from '../../../tools/hooks/useTheme';
+
 import './content-container.scss';
 
 const ContentContainer = ({
@@ -56,6 +58,8 @@ export default ContentContainer;
 
 const ClientFieldsContentContainer = ({ children, view, showClientsSideBar, setShowClientsSideBar, clientRequestParams }) => {
 
+  useTheme(true);
+
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
 
@@ -90,6 +94,8 @@ const FieldChartsContentContainer = ({
                                        setActiveLoadPeriod,
                                        setActiveFieldName
                                      }) => {
+
+  useTheme(true);
 
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
@@ -126,6 +132,8 @@ const FieldTemperaturesChartsContentContainer = ({
                                                    setActiveLoadPeriod,
                                                    setActiveFieldName
                                                  }) => {
+
+  useTheme(true);
 
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);

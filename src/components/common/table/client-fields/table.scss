@@ -14,6 +14,7 @@
   &__header {
     position: sticky;
     box-shadow: 0 util.rem(0.9);
+    background-color: map.get(color.$colorMap, light-mode-white);
     z-index: 9;
     top: 0;
 
@@ -44,8 +45,16 @@
   &__body {
 
     &__row {
-      transition: 1s;
-      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, grey);
+      border-bottom: util.rem(2) solid map.get(color.$colorMap, light-grey);
+
+      &:hover {
+        cursor: pointer;
+        z-index: 4;
+        position: relative;
+        opacity: 1;
+        border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
 
       td {
         position: relative;
@@ -268,6 +277,13 @@
 
       &--header {
         border-bottom: none;
+        border-top: none;
+
+        &:hover {
+          border-bottom: none;
+          border-top: none;
+          background-color: transparent;
+        }
       }
 
       &--hidden {
@@ -275,6 +291,13 @@
       }
 
       &--selected {
+        cursor: pointer;
+        transition: 0.15s;
+        z-index: 4;
+        position: relative;
+        opacity: 1;
+        border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+        border-top: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
         background-color: map.get(color.$colorMap, row-hover-blue);
       }
 
@@ -287,15 +310,7 @@
             padding-left: util.rem(6);
             text-align: left;
           }
-
         }
-
-      }
-
-      &:hover {
-        cursor: pointer;
-        transition: 0.15s;
-        background-color: map.get(color.$colorMap, row-hover-blue);
       }
     }
   }

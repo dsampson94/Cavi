@@ -9,31 +9,16 @@
   display: flex;
   justify-content: center;
 
-  &__overlay {
-    position: fixed;
-    z-index: 21;
-    background-color: map.get(color.$colorMap, grey);
-    opacity: 0.1;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-  }
-
   &__container {
-    flex-direction: column;
     position: absolute;
-    justify-content: center;
     box-shadow: 0 0 3px black, inset 0 0 3px grey;
     background-position: center;
     background-size: cover;
     border-radius: 5px;
     top: 85%;
-    left: 85%;
+    left: 86%;
     height: 12%;
-    width: 12%;
-    padding: 30px 0px 30px 0px;
+    width: 11%;
     z-index: 20;
 
     &--entering {
@@ -49,36 +34,63 @@
   @keyframes enter-load {
 
     0% {
-      transform: translateY(150%);
+      opacity: 0;
     }
 
     100% {
-      transform: translateY(0%);
+      opacity: 1;
     }
   }
 
   @keyframes leave-load {
 
     0% {
-      transform: translateY(0%);
+      opacity: 1;
     }
 
     100% {
-      transform: translateY(150%);
+      opacity: 0;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+
+    &__center {
+      height: 10px;
+      justify-content: center;
+      align-content: center;
     }
   }
 }
 
 .lds-ellipsis {
   position: relative;
-  margin-top: -20px;
-  width: 80px;
-  height: 100px;
+  margin-left: 3%;
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+    margin-left: 15%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+    margin-left: 25%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+    margin-left: 30%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, xxx-large)) {
+    margin-left: 35%;
+  }
 }
 
 .lds-ellipsis div {
   position: absolute;
-  top: 33px;
   width: 6px;
   height: 6px;
   border-radius: 40%;

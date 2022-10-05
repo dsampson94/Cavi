@@ -2,6 +2,7 @@ import React from 'react';
 import { bisector, pointer, selectAll } from 'd3';
 
 import '../chart.scss';
+import { DAILY_ETO } from '../../../../tools/general/system-variables.util';
 
 const ChartTooltipDot = ({
                            data,
@@ -16,7 +17,9 @@ const ChartTooltipDot = ({
                            chartName,
                            clipPath,
                            showPrimaryDropDown,
-                           xAxisViewMode
+                           xAxisViewMode,
+                           hiddenLineList,
+                           secondaryData
                          }) => {
 
   return <LineDot data={ data }
@@ -31,7 +34,9 @@ const ChartTooltipDot = ({
                   chartName={ chartName }
                   clipPath={ clipPath }
                   showPrimaryDropDown={ showPrimaryDropDown }
-                  xAxisViewMode={ xAxisViewMode } />;
+                  xAxisViewMode={ xAxisViewMode }
+                  hiddenLineList={ hiddenLineList }
+                  secondaryData={ secondaryData } />;
 };
 
 export default ChartTooltipDot;
@@ -47,16 +52,18 @@ const LineDot = ({
                    yAccessor,
                    hoverActive,
                    clipPath,
+                   chartName,
                    showPrimaryDropDown,
-                   xAxisViewMode
+                   xAxisViewMode,
+                   hiddenLineList,
+                   secondaryData
                  }) => {
 
-  selectAll('.mouse-tracker').
-    on('touchmouse mousemove', event => {
-      setHoverActive(true);
-      if (showPrimaryDropDown) return setDate(date);
-      if (xAxisViewMode === 'topBar') setDate(xScale.invert(pointer(event)[0] + 10));
-    }).on('contextmenu', (event) => {
+  selectAll('.mouse-tracker').on('touchmouse mousemove', event => {
+    setHoverActive(true);
+    if (showPrimaryDropDown) return setDate(date);
+    if (xAxisViewMode === 'topBar') setDate(xScale.invert(pointer(event)[0] + 10));
+  }).on('contextmenu', (event) => {
     if (showPrimaryDropDown) {
       setDate(xScale.invert(pointer(event)[0] + 10));
     }
@@ -65,18 +72,42 @@ const LineDot = ({
   });
 
   let dateBisector = bisector(xAccessor).center;
-  let x = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
-  let y = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
+  let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
+  let y1 = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
+
+  let x2;
+  let y2;
+
+  if (secondaryData) {
+    x2 = xScale(xAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
+    y2 = yScale(yAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
+  }
+
+  const renderDot = (chart) => {
+    if (chartName === DAILY_ETO && hiddenLineList?.includes(chart) && hoverActive && y1 && (data[dateBisector(data, date)]?.barY !== -0.1)) {
+      return true;
+    } else return chartName !== DAILY_ETO && hoverActive && y1 && (data[dateBisector(data, date)]?.barY !== -0.1);
+  };
 
   return (<>
-    { hoverActive && y && (data[dateBisector(data, date)]?.barY !== -0.1) &&
-      <circle className={ 'tool-tip-dot' }
-              clipPath={ clipPath }
-              cx={ x + 1.5 }
-              cy={ y }
-              fill={ '#0081ff' }
-              stroke={ 'white' }
-              strokeWidth={ 2 }
-              r={ 5 } /> }
+    { renderDot(chartName === DAILY_ETO && 'Forecast') &&
+    <circle className={ 'tool-tip-dot' }
+            clipPath={ clipPath }
+            cx={ x1 + 1.5 }
+            cy={ y1 }
+            fill={ '#0081ff' }
+            stroke={ 'white' }
+            strokeWidth={ 2 }
+            r={ 5 } /> }
+
+    { chartName === DAILY_ETO && renderDot('Actual') && secondaryData &&
+    <circle className={ 'tool-tip-dot-' }
+            clipPath={ clipPath }
+            cx={ x2 + 1.5 }
+            cy={ y2 }
+            fill={ '#0081ff' }
+            stroke={ 'white' }
+            strokeWidth={ 2 }
+            r={ 5 } /> }
   </>);
 };

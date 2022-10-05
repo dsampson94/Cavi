@@ -14,6 +14,7 @@ import {
   DROPDOWN,
   DROPDOWN_ALL,
   EMAIL_RECOMMENDATIONS,
+  FAVORITES_STAR,
   HARVEST_ICON,
   LOG_OUT_ICON,
   MAPS_ICON,
@@ -24,8 +25,8 @@ import {
   PREVIOUS,
   PRINT_ICON,
   PROFILE_ICON,
-  RAINING,
   RAIN_CLOUDS,
+  RAINING,
   REPORT_PROBLEM_ICON,
   SATISFIED,
   SEARCH,
@@ -83,6 +84,8 @@ const getViewBox = (name, tiny, chart) => {
       if (chart) return '3 3 20 60';
       else if (tiny) return '4 1 15 34';
       else return '3 -1 20 50';
+    case FAVORITES_STAR:
+      return '3 6 10 80';
     case WARNING:
       return '-5 -9 1 42';
     case DROPDOWN:
@@ -170,6 +173,8 @@ const getIconFill = (activeTheme, fill, name) => {
       case RAIN_CLOUDS:
       case WATCH:
         return 'white';
+      case FAVORITES_STAR:
+        return '#f37b2c';
       case CAMERA:
         return '#607CB1';
       case CLOUDED:
@@ -396,6 +401,12 @@ const getPath = (name) => {
       return (
         <path
           d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h14.55v3H9v30h14.55v3Zm24.3-9.25-2.15-2.15 5.1-5.1h-17.5v-3h17.4l-5.1-5.1 2.15-2.15 8.8 8.8Z" />
+      );
+
+    case FAVORITES_STAR :
+      return (
+        <path
+          d="m16.15 37.75 7.85-4.7 7.85 4.75-2.1-8.9 6.9-6-9.1-.8L24 13.7l-3.55 8.35-9.1.8 6.9 6ZM11.65 44l3.25-14.05L4 20.5l14.4-1.25L24 6l5.6 13.25L44 20.5l-10.9 9.45L36.35 44 24 36.55ZM24 26.25Z" />
       );
     default:
       return <path />;

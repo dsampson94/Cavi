@@ -99,6 +99,7 @@ export const BULLSEYE = 'bullseye';
 //SIDEBAR
 export const SEARCH = 'search';
 export const SETTINGS_GEAR = 'settings_gear';
+export const FAVORITES_STAR = 'favorites_star';
 export const SEARCH_PLACEHOLDER = 'Filter clients';
 
 //TABLE

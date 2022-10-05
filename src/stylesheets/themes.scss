@@ -59,7 +59,18 @@ body.dark-mode {
 
   .table__body__row--selected,
   .table__body__row:hover {
+    border-bottom: util.rem(2) solid map.get(color.$colorMap, row-hover-blue);
     background-color: map.get(color.$colorMap, pulse-blue);
+  }
+
+  .client-fields-side-bar__list__item__subheader--selected,
+  .client-fields-side-bar__list__item__subheader:hover {
+    border-bottom: util.rem(2) solid map.get(color.$colorMap, row-hover-blue);
+    background-color: map.get(color.$colorMap, pulse-blue);
+  }
+
+  .table__header {
+    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
   }
 
   .table__body__row__td--dark {
@@ -88,6 +99,17 @@ body.dark-mode {
 
   .input__label-container--login label {
     color: map.get(color.$colorMap, black);
+  }
+
+  .table__body__row--header {
+    border-bottom: none;
+    border-top: none;
+
+    &:hover {
+      border-bottom: none;
+      border-top: none;
+      background-color: transparent;
+    }
   }
 
   .input__input,

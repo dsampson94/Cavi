@@ -13,9 +13,9 @@ const ClientContainer = () => {
     <Switch>
       <Route exact path={ `${ path }/:groupName/:clientName` }
              component={ ClientFieldsViewContainer } />
-      <Route exact path={ `${ path }/:groupName+/:clientName+/field/:fieldName+/:probeNumber+` }
+      <Route exact path={ `${ path }/:groupName/:clientName/field/:probeNumber/:fieldName+` }
              component={ FieldChartViewContainer } />
-      <Route exact path={ `${ path }/:groupName+/:clientName+/field/:fieldName+/:probeNumber+/temperatures` }
+      <Route exact path={ `${ path }/:groupName/:clientName/field-temperatures/:probeNumber/:fieldName+` }
              component={ FieldTemperaturesChartViewContainer } />
     </Switch>
   );

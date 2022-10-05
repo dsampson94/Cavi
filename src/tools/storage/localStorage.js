@@ -1,8 +1,9 @@
-import { base64ToObject, objectToBase64 } from '../general/helpers.util';
+import { base64ToObject, isEmpty, objectToBase64 } from '../general/helpers.util';
 
 const USER_ACCOUNT = 'U';
 const USER_LOGIN = 'UL';
-const THEME = 'theme';
+const THEME = 'T';
+const FAVORITES = 'F';
 
 export const saveUserLoginToLocalStorage = (account) => {
   localStorage.setItem(USER_LOGIN, objectToBase64(account));
@@ -26,4 +27,35 @@ export const saveActiveThemeToLocalStorage = (theme) => {
 
 export const retrieveActiveThemeFromLocalStorage = () => {
   return base64ToObject(localStorage.getItem(THEME));
+};
+
+export const addOrRemoveFarmLocalStorageFavorites = (groupName, clientName) => {
+  let storedFavoritesList = [];
+
+  if (base64ToObject(localStorage.getItem(FAVORITES))) {
+    storedFavoritesList = base64ToObject(localStorage.getItem(FAVORITES));
+  }
+
+  let found = false;
+  storedFavoritesList?.forEach((item, index) => {
+    if (item === `${ groupName }/${ clientName }`) {
+      if (storedFavoritesList.length === 1) {
+        storedFavoritesList = [];
+      } else {
+        storedFavoritesList.splice(index, 1);
+      }
+      found = true;
+    }
+  });
+
+  if (!found) {
+    storedFavoritesList.push(`${ groupName }/${ clientName }`);
+    found = false;
+  }
+
+  localStorage.setItem(FAVORITES, objectToBase64(storedFavoritesList));
+};
+
+export const viewFarmLocalStorageFavorites = () => {
+  return base64ToObject(localStorage.getItem(FAVORITES));
 };

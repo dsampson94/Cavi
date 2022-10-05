@@ -4,8 +4,10 @@ import { useHistory, useParams } from 'react-router';
 import { func } from 'prop-types';
 
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
+
 import {
   CHARTS,
+  FAVORITES_STAR,
   FIELD_CHARTS,
   FIELD_TEMPERATURES,
   FOUR_WEEKS,
@@ -19,15 +21,30 @@ import {
   TWO_WEEKS
 } from '../../../tools/general/system-variables.util';
 
+import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
+
 import SVGIcon from '../icon/SVGIcon';
 import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
 import ToolTip from '../tool-tip/ToolTip';
 
-export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
+export const SideBarList = ({
+                              mappedUserData,
+                              filteredSideBarData,
+                              favoritesToggle,
+                              setFavoritesToggle,
+                              myFavorites,
+                              myClients,
+                              myFavoritesChart
+                            }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
+
+  const handleFavoritesClick = (groupName, clientName) => {
+    addOrRemoveFarmLocalStorageFavorites(groupName, clientName);
+    setFavoritesToggle(!favoritesToggle);
+  };
 
   let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item) => {
     return (
@@ -56,6 +73,13 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
                    onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok) }>
                 { value.iok }
               </div>
+
+              { !myFavoritesChart &&
+              <div className="client-fields-side-bar__list__item__subheader__icon"
+                   onClick={ () => handleFavoritesClick(item.objectKey, value.iok) }>
+                <SVGIcon name={ FAVORITES_STAR } fill={ '#f37b2c' } />
+              </div> }
+
               <div className="client-fields-side-bar__list__item__subheader__icon"
                    onClick={ noOp() }>
                 <SVGIcon name={ SETTINGS_GEAR } />
@@ -68,12 +92,19 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
   });
 
   return (
-    <div className="client-fields-side-bar__list">
-      <div className="client-fields-side-bar__list__header">{ 'MY CLIENTS' }</div>
-      <div className="client-fields-side-bar__list__container">
-        { listItem }
+    <>
+      <div className="client-fields-side-bar__list__header">
+        { myClients ? 'MY CLIENTS' : 'MY FAVORITES' }
       </div>
-    </div>
+      <div className={ getClassNames('client-fields-side-bar__list',
+        { favorites: myFavorites || myFavoritesChart, clients: myClients }) }>
+
+        <div className="client-fields-side-bar__list__container">
+          { listItem }
+        </div>
+      </div>
+    </>
+
   );
 };
 
@@ -115,7 +146,7 @@ export const ViewDataBar = ({ setActiveLoadPeriod }) => {
   return (
     <div className="field-charts-side-bar__view-mode">
       <div className="field-charts-side-bar__view-mode__header">
-        { 'View Data' }
+        { 'VIEW DATA' }
       </div>
 
       <div className="field-charts-side-bar__view-mode__options">
@@ -224,10 +255,25 @@ const handleFieldClick = (history, groupName, clientName, field, setActiveFieldN
   setActiveFieldName(field.locationName);
   switch (view) {
     case FIELD_CHARTS :
-      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.probeNumber }/${ field?.locationName }`);
       break;
     case FIELD_TEMPERATURES :
-      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
+      history.push(`/client/${ groupName }/${ clientName }/field/temperatures/${ field?.probeNumber }/${ field?.locationName }`);
       break;
   }
+};
+
+export const mapFavoritesList = (storedFavoritesList, mappedUserData) => {
+  if (!storedFavoritesList) return null;
+  const favoritesList = [];
+  storedFavoritesList?.forEach((storedItem) => {
+    mappedUserData?.forEach((userItem) => {
+      if (userItem?.objectKey !== storedItem?.split('/')[0]) return;
+      userItem.innerObjectValueList?.forEach((innerItem) => {
+        if (innerItem?.iok !== storedItem?.split('/')[1]) return;
+        favoritesList.push({ objectKey: userItem?.objectKey, innerObjectValueList: [innerItem] });
+      });
+    });
+  });
+  return favoritesList;
 };

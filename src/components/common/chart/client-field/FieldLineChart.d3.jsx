@@ -77,11 +77,9 @@ const FieldLineChartD3 = ({
 
   const activeData = yAxisShared ? (chartType !== EXTENDED) ? sharedYScaleData : data : data;
 
-  let yScale = scaleLinear().
-    domain((chartType === EXTENDED || chartType === DAILY)
-      ? [min(activeData, yAccessor), max(activeData, yAccessor)]
-      : [max(activeData, yAccessor), min(activeData, yAccessor)]).
-    range([boundedHeight - innerPadding, innerPadding]).nice();
+  let yScale = scaleLinear().domain((chartType === EXTENDED || chartType === DAILY)
+    ? [min(activeData, yAccessor), max(activeData, yAccessor)]
+    : [max(activeData, yAccessor), min(activeData, yAccessor)]).range([boundedHeight - innerPadding, innerPadding]).nice();
 
   const activeMinDate = () => {
     if (activeDataPeriod === 'All') return min(data, xAccessor);
@@ -165,12 +163,12 @@ const FieldLineChartD3 = ({
   return (
     <>
       { chartType !== DEFICIT &&
-        <ChartHeader chartName={ chartName }
-                     chartType={ chartType }
-                     isDarkMode={ isDarkMode }
-                     activeExtendedChart={ activeExtendedChart }
-                     setActiveExtendedChart={ setActiveExtendedChart }
-        /> }
+      <ChartHeader chartName={ chartName }
+                   chartType={ chartType }
+                   isDarkMode={ isDarkMode }
+                   activeExtendedChart={ activeExtendedChart }
+                   setActiveExtendedChart={ setActiveExtendedChart }
+      /> }
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }
@@ -184,9 +182,9 @@ const FieldLineChartD3 = ({
                isDarkMode={ isDarkMode }>
 
           { chartType === AGGREGATE &&
-            <rect width={ '94%' }
-                  height={ '90%' }
-                  fill={ isDarkMode ? '#252529' : 'white' } /> }
+          <rect width={ '94%' }
+                height={ '90%' }
+                fill={ isDarkMode ? '#252529' : 'white' } /> }
 
           <YAxis yScale={ yScale }
                  data={ data }
@@ -231,7 +229,9 @@ const FieldLineChartD3 = ({
                            showPrimaryDropDown={ showPrimaryDropDown }
                            chartName={ chartName }
                            clipPath={ clipPath }
-                           xAxisViewMode={ xAxisViewMode } />
+                           xAxisViewMode={ xAxisViewMode }
+                           hiddenLineList={ hiddenLineList }
+                           secondaryData={ secondaryData } />
 
           <ChartTooltipText xAccessor={ xAccessor }
                             yAccessor={ yAccessor }
@@ -242,7 +242,9 @@ const FieldLineChartD3 = ({
                             hoverActive={ hoverActive }
                             setHoverActive={ setHoverActive }
                             chartName={ chartName }
-                            clipPath={ clipPath } />
+                            clipPath={ clipPath }
+                            hiddenLineList={ hiddenLineList }
+                            secondaryData={ secondaryData } />
         </Chart>
 
         <CheckboxFilter chartName={ chartName }

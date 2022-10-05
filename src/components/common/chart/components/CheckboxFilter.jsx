@@ -7,11 +7,12 @@ import CheckboxInput from '../../input/checkbox/CheckboxInput';
 
 import '../chart.scss';
 
-const CheckboxFilter = ({ chartName, hiddenLineList, setHiddenLineList }) => {
+const CheckboxFilter = ({ chartName, hiddenLineList, setHiddenLineList, secondaryData }) => {
 
   switch (chartName) {
     case DAILY_ETO:
       return <DailyETOCheckboxGroup chartName={ chartName }
+                                    secondaryData={ secondaryData }
                                     hiddenLineList={ hiddenLineList }
                                     setHiddenLineList={ setHiddenLineList } />;
     case TEMPERATURE_MULTILINE:
@@ -27,7 +28,7 @@ CheckboxFilter.propTypes = {};
 
 export default CheckboxFilter;
 
-const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList }) => {
+const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList, secondaryData }) => {
 
   const [activeList] = useState(['Actual', 'Forecast']);
   const [checked, setChecked] = useState(null);
@@ -53,11 +54,12 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList })
                        onClick={ e => hideLineClick(e) }
                        forecast />
 
+        { secondaryData &&
         <CheckboxInput constant={ 'Actual' }
                        checked={ hiddenLineList.includes('Actual') }
                        onClick={ e => hideLineClick(e) }
                        daily
-                       actual />
+                       actual /> }
       </div>
     </div>
   );

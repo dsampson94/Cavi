@@ -36,37 +36,8 @@
   &--loading {
 
     img {
-      margin-top: util.rem(50);
       margin-left: util.rem(10);
-      max-width: 100%;
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        height: util.rem(10);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        height: util.rem(15);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        height: util.rem(20);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        height: util.rem(25);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        height: util.rem(40);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        height: util.rem(60);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xxx-large)) {
-        height: util.rem(75);
-      }
+      height: 80%
     }
   }
 }

@@ -321,9 +321,10 @@ const mappedDailyETOList = (fieldChartList) => {
   const dailyETORealList = [];
 
   let initialLineY;
+
   Object.entries(fieldChartList?.eto)?.forEach(([key, value], index) => {
     if (index === 0) {
-      initialLineY = value.f;
+      initialLineY = value?.f;
     }
   });
 
@@ -331,14 +332,15 @@ const mappedDailyETOList = (fieldChartList) => {
   for (let i = 0; i < 12; i++) dailyETORealList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], y: initialLineY });
 
   Object.entries(fieldChartList?.eto)?.forEach(([key, value]) => {
-    if (value.f) dailyETOForecastList.push({ x: key, y: value.f });
-    if (value.r) dailyETORealList.push({ x: key, y: value.r });
+    if (value?.f) dailyETOForecastList.push({ x: key, y: value?.f });
+    if (value?.r) dailyETORealList.push({ x: key, y: value?.r });
   });
 
   dailyETOList.push(dailyETOForecastList);
-  dailyETOList.push(dailyETORealList);
 
-  console.log(dailyETOList);
+  if (dailyETORealList.length > 12)
+    dailyETOList.push(dailyETORealList);
+
   return dailyETOList;
 };
 
