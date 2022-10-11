@@ -1,7 +1,7 @@
 import React from 'react';
 import { TEMPERATURE_MULTILINE } from '../../../tools/general/system-variables.util';
 
-import TemperaturesLineChartD3 from '../../common/chart/client-field/TemperaturesLineChart.d3';
+import TemperaturesLineChartD3 from '../../common/chart/client-field/MultiLineChart.d3';
 
 export const TemperatureChartsContainer = ({
                                              mappedTemperaturesList,

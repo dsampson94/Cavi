@@ -133,14 +133,24 @@ export const FIELDS_MOISTURE_QUESTION = 'Are your fields too wet or too dry curr
 export const FIELD_UP_TO_DATE_QUESTION = 'Which fields are up to date?';
 
 //RADIO LABELS
-export const TWO_WEEKS = '2 weeks (fastest)';
-export const FOUR_WEEKS = '4 weeks (fast)';
-export const TWO_MONTHS = '2 months';
-export const THREE_MONTHS = '3 months';
-export const SIX_MONTHS = '6 months';
-export const TWELVE_MONTHS = '12 months';
-export const FULL_VIEW = 'Full View';
+export const TWO_WEEKS_LABEL = '2 weeks (fastest)';
+export const FOUR_WEEKS_LABEL = '4 weeks (fast)';
+export const TWO_MONTHS_LABEL = '2 months';
+export const THREE_MONTHS_LABEL = '3 months';
+export const SIX_MONTHS_LABEL = '6 months';
+export const TWELVE_MONTHS_LABEL = '12 months';
+export const FULL_VIEW_LABEL = 'Full View';
+
 export const RADIO_GROUP = 'viewPeriod';
+
+//DATE NUMBERS
+export const TWO_WEEKS_DAYS = 7;
+export const FOUR_WEEKS_DAYS = 14;
+export const TWO_MONTHS_DAYS = 28;
+export const THREE_MONTHS_DAYS = 60;
+export const SIX_MONTHS_DAYS = 91;
+export const TWELVE_MONTHS_DAYS = 182;
+export const FULL_VIEW_DAYS = 365;
 
 //OTHER STRINGS
 export const CLIENT_FIELDS = 'ClientFields';
@@ -167,10 +177,10 @@ export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
 
 export const DEFICIT_ETO = 'Deficit / ETo';
 export const VOLT_READINGS = 'Volt Readings';
-export const FLOW_DAILY = 'Flow Meter Daily Total';
+export const FLOW_DAILY = 'Flow Meter Daily';
 export const FLOW_HOURLY = 'Flow Meter Hourly';
 export const RAIN = 'Rain';
-export const EC = 'EC Readings';
+export const EC = 'EC Sensor Data (mS/cm)';
 export const VPD = 'VPD (kPa) Readings';
 export const ACTUAL_IRRIGATION = 'Actual Irrigation Data';
 export const EXCEL = 'Excel Report';
@@ -187,10 +197,10 @@ export const TOPBAR_OPTIONS = 'topbar_options';
 
 export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';
-export const FLOW_DAILY_OPTION = 'Flow Meter Daily Total';
+export const FLOW_DAILY_OPTION = 'Flow Meter Daily';
 export const FLOW_HOURLY_OPTION = 'Flow Meter Hourly';
 export const RAIN_OPTION = 'Rain';
-export const EC_OPTION = 'EC Readings';
+export const EC_OPTION = 'EC Sensor Data (mS/cm)';
 export const VPD_OPTION = 'VPD (kPa) Readings';
 export const ACTUAL_IRRIGATION_OPTION = 'Actual Irrigation Data';
 export const EXCEL_OPTION = 'Excel Report';
@@ -219,12 +229,6 @@ export const MENU_4 = 'dropdown-menu-4';
 
 export const MENU_2_INPUT = 'dropdown-menu-2-input';
 export const MENU_2_INPUT_BUTTON = 'dropdown-menu-2-input-button';
-
-// REQUEST PARAMS
-export const CLIENT_PARAMS = 'client_request';
-export const LOAD_PERIOD_PARAMS = 'load_period_request';
-export const VOLTS_PARAMS = 'volts_request';
-export const PROBE_CALIBRATION_PARAMS = 'probe_calibration_request';
 
 // 'GETGRAPHSMORE' 'get' API STRINGS
 export const VOLTS_STRING = 'volts';

@@ -67,9 +67,7 @@ const TemperaturesLineChart = ({
     let yAccessor = d => d?.y;
     let xAccessor = d => new Date(d?.x);
 
-    let yScale = scaleLinear().
-      domain([max(data?.[0], yAccessor), min(data?.[0], yAccessor)]).
-      range([boundedHeight - innerPadding, innerPadding]).nice();
+    let yScale = scaleLinear().domain([max(data?.[0], yAccessor), min(data?.[0], yAccessor)]).range([boundedHeight - innerPadding, innerPadding]).nice();
 
     const activeMinDate = () => {
       if (activeDataPeriod === 'All') return min(data?.[0], xAccessor);
@@ -212,6 +210,7 @@ const TemperaturesLineChart = ({
                               hoverActive={ hoverActive }
                               setHoverActive={ setHoverActive }
                               chartName={ chartName }
+                              chartType={ chartType }
                               clipPath={ clipPath } />
           </Chart>
 

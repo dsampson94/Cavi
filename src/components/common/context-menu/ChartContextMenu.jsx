@@ -14,8 +14,6 @@ import {
   PERIOD_OPTION
 } from '../../../tools/general/system-variables.util';
 
-import { bisector } from 'd3';
-
 import SubmitInput from '../input/submit/SubmitInput';
 import NumberInput from '../input/number/NumberInput';
 

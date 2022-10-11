@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bisector } from 'd3';
 
-import { DAILY_ETO, DEFICIT_ETO } from '../../../../tools/general/system-variables.util';
+import { DAILY_ETO, DEFICIT_ETO, EC, EXTENDED, VOLT_READINGS } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
 
@@ -16,6 +16,7 @@ const ChartTooltipText = ({
                             hoverActive,
                             setHoverActive,
                             chartName,
+                            chartType,
                             clipPath,
                             hiddenLineList,
                             secondaryData
@@ -30,6 +31,7 @@ const ChartTooltipText = ({
                       hoverActive={ hoverActive }
                       setHoverActive={ setHoverActive }
                       chartName={ chartName }
+                      chartType={ chartType }
                       clipPath={ clipPath }
                       hiddenLineList={ hiddenLineList }
                       secondaryData={ secondaryData } />;
@@ -46,6 +48,7 @@ const TooltipText = ({
                        date,
                        hoverActive,
                        chartName,
+                       chartType,
                        clipPath,
                        hiddenLineList,
                        secondaryData
@@ -74,9 +77,15 @@ const TooltipText = ({
       return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
     } else if (chartName === DEFICIT_ETO) {
       return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY.toFixed(3) } @ ${ hoveredObject?.x }`;
+    } else if (chartName === VOLT_READINGS) {
+      return ` Volts: ${ hoveredObject?.y } @ ${ hoveredObject?.x }`;
+    } else if (chartName === EC) {
+      return ` mS/cm: ${ hoveredObject?.y } @ ${ hoveredObject?.x }`;
     } else if (chartName === DAILY_ETO) {
       if (chart === 'Actual') return `Actual: ${ secondaryHoveredObject?.y }mm ${ secondaryHoveredObject?.x }`;
       else return `Forecast: ${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
+    } else if (hoveredObject.barY && hoverActive) {
+      return `${ hoveredObject?.barY }mm ${ hoveredObject?.x }`;
     } else {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
     }
@@ -108,7 +117,8 @@ const TooltipText = ({
       return !!(hiddenLineList?.includes(chart) && hoverActive && hoveredObject?.y);
     } else if (chart !== 'Actual' && hoverActive && hoveredObject?.y) {
       return true;
-    }
+    } else if (hoveredObject?.barY && hoverActive) return true;
+
   };
 
   return (<>
@@ -120,7 +130,7 @@ const TooltipText = ({
               x={ getXPos('Forecast').rect1 }
               y={ getYPos('Forecast').rect1 }
               height={ 18 }
-              width={ chartName.includes('deficit') ? 260 : chartName === DEFICIT_ETO ? 232 : chartName === DAILY_ETO ? 200 : 169 }
+              width={ chartName.includes('deficit') ? 260 : chartType === EXTENDED ? 200 : chartName === DAILY_ETO ? 200 : 169 }
               rx={ '5' }
               ry={ '5' } />
 

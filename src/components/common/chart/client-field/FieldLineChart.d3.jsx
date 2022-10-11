@@ -242,6 +242,7 @@ const FieldLineChartD3 = ({
                             hoverActive={ hoverActive }
                             setHoverActive={ setHoverActive }
                             chartName={ chartName }
+                            chartType={ chartType }
                             clipPath={ clipPath }
                             hiddenLineList={ hiddenLineList }
                             secondaryData={ secondaryData } />

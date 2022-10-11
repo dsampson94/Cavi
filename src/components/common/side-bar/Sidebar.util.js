@@ -10,15 +10,15 @@ import {
   FAVORITES_STAR,
   FIELD_CHARTS,
   FIELD_TEMPERATURES,
-  FOUR_WEEKS,
-  FULL_VIEW,
+  FOUR_WEEKS_LABEL,
+  FULL_VIEW_LABEL,
   RADIO_GROUP,
   SETTINGS_GEAR,
-  SIX_MONTHS,
-  THREE_MONTHS,
-  TWELVE_MONTHS,
-  TWO_MONTHS,
-  TWO_WEEKS
+  SIX_MONTHS_LABEL,
+  THREE_MONTHS_LABEL,
+  TWELVE_MONTHS_LABEL,
+  TWO_MONTHS_LABEL,
+  TWO_WEEKS_LABEL
 } from '../../../tools/general/system-variables.util';
 
 import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
@@ -137,7 +137,7 @@ export const SideBarButton = () => {
 
 export const ViewDataBar = ({ setActiveLoadPeriod }) => {
 
-  const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS);
+  const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS_LABEL);
 
   useEffect(() => {
     setActiveLoadPeriod(selectedPeriod);
@@ -150,34 +150,34 @@ export const ViewDataBar = ({ setActiveLoadPeriod }) => {
       </div>
 
       <div className="field-charts-side-bar__view-mode__options">
-        <RadioInput constant={ TWO_WEEKS }
+        <RadioInput constant={ TWO_WEEKS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWO_WEEKS }
+                    checked={ selectedPeriod === TWO_WEEKS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ FOUR_WEEKS }
+        <RadioInput constant={ FOUR_WEEKS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === FOUR_WEEKS }
+                    checked={ selectedPeriod === FOUR_WEEKS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput label={ TWO_MONTHS }
-                    constant={ TWO_MONTHS }
+        <RadioInput label={ TWO_MONTHS_LABEL }
+                    constant={ TWO_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWO_MONTHS }
+                    checked={ selectedPeriod === TWO_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ THREE_MONTHS }
+        <RadioInput constant={ THREE_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === THREE_MONTHS }
+                    checked={ selectedPeriod === THREE_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ SIX_MONTHS }
+        <RadioInput constant={ SIX_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === SIX_MONTHS }
+                    checked={ selectedPeriod === SIX_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ TWELVE_MONTHS }
+        <RadioInput constant={ TWELVE_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWELVE_MONTHS }
+                    checked={ selectedPeriod === TWELVE_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ FULL_VIEW }
+        <RadioInput constant={ FULL_VIEW_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === FULL_VIEW }
+                    checked={ selectedPeriod === FULL_VIEW_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
       </div>
     </div>

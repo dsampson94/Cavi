@@ -9,14 +9,18 @@ import {
   EC,
   FLOW_DAILY,
   FLOW_HOURLY,
+  TWO_WEEKS_LABEL,
   VOLT_READINGS,
   VPD
 } from '../../../tools/general/system-variables.util';
 
 import {
+  mapActualMottechChartLists,
   mapChartList,
+  mapECChartLists,
   mapFieldList,
   mapFlowMeterDailyChartLists,
+  mapFlowMeterHourlyChartLists,
   mapMenuData,
   mapVoltChartLists,
   mapVPDChartLists
@@ -24,13 +28,14 @@ import {
 
 import {
   requestChartProbeCalibration,
-  requestFieldChartList,
   requestExtendedFieldChartList,
-  SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
-  SET_FIELD_VOLT_CHART_LIST,
-  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
+  requestFieldChartList,
   SET_FIELD_EC_CHART_LIST,
-  SET_FIELD_VPD_CHART_LIST, SET_FIELD_MOTTECH_CHART_LIST
+  SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
+  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
+  SET_FIELD_MOTTECH_CHART_LIST,
+  SET_FIELD_VOLT_CHART_LIST,
+  SET_FIELD_VPD_CHART_LIST
 } from '../../../redux/actions/field.action';
 
 import { requestClientFieldList } from '../../../redux/actions/client.action';
@@ -53,7 +58,7 @@ const FieldChartViewContainer = () => {
   const fieldVPDChartList = useSelector(createSelector([state => state.field], field => field?.VPDList));
   const fieldActualChartList = useSelector(createSelector([state => state.field], field => field?.mottechList));
 
-  const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
+  const [activeLoadPeriod, setActiveLoadPeriod] = useState(TWO_WEEKS_LABEL);
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
   const [activeProbeFactor, setActiveProbeFactor] = useState(undefined);
   const [activeExtendedChart, setActiveExtendedChart] = useState(DEFICIT_ETO);
@@ -112,15 +117,15 @@ const FieldChartViewContainer = () => {
   };
 
   const mappedFlowMeterDailyChartList = () => {
-    return mapFlowMeterDailyChartLists(fieldFlowMeterDailyChartList, fieldChartList, activeLoadPeriod);
+    return mapFlowMeterDailyChartLists(fieldFlowMeterDailyChartList, fieldVoltChartList, fieldChartList, activeLoadPeriod);
   };
 
   const mappedFlowMeterHourlyList = () => {
-    return mapVoltChartLists(fieldFlowMeterHourlyChartList, fieldChartList, activeLoadPeriod);
+    return mapFlowMeterHourlyChartLists(fieldFlowMeterHourlyChartList, fieldChartList, activeLoadPeriod);
   };
 
   const mappedECChartList = () => {
-    return mapVoltChartLists(fieldECChartList, fieldChartList, activeLoadPeriod);
+    return mapECChartLists(fieldECChartList, fieldChartList, activeLoadPeriod);
   };
 
   const mappedVPDChartList = () => {
@@ -128,7 +133,7 @@ const FieldChartViewContainer = () => {
   };
 
   const mappedActualChartList = () => {
-    return mapVoltChartLists(fieldActualChartList, fieldChartList, activeLoadPeriod);
+    return mapActualMottechChartLists(fieldActualChartList, fieldChartList, activeLoadPeriod);
   };
 
   return <FieldChartView mappedFieldList={ mappedFieldList() }

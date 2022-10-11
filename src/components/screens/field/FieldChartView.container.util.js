@@ -1,14 +1,21 @@
-import {
-  FOUR_WEEKS,
-  FULL_VIEW,
-  SIX_MONTHS,
-  THREE_MONTHS,
-  TWELVE_MONTHS,
-  TWO_MONTHS,
-  TWO_WEEKS
-} from '../../../tools/general/system-variables.util';
+import { getDaysPastDate } from '../../../tools/general/helpers.util';
 
-import { hoursBetweenDates } from '../../../tools/general/helpers.util';
+import {
+  FOUR_WEEKS_DAYS,
+  FOUR_WEEKS_LABEL,
+  FULL_VIEW_DAYS,
+  FULL_VIEW_LABEL,
+  SIX_MONTHS_DAYS,
+  SIX_MONTHS_LABEL,
+  THREE_MONTHS_DAYS,
+  THREE_MONTHS_LABEL,
+  TWELVE_MONTHS_DAYS,
+  TWELVE_MONTHS_LABEL,
+  TWO_MONTHS_DAYS,
+  TWO_MONTHS_LABEL,
+  TWO_WEEKS_DAYS,
+  TWO_WEEKS_LABEL
+} from '../../../tools/general/system-variables.util';
 
 //*******************************************************************************
 
@@ -53,37 +60,71 @@ export const mapChartList = (fieldChartList, probeNumber) => {
 };
 
 export const mapVoltChartLists = (fieldVoltChartList, fieldChartList, activeLoadPeriod) => {
-  if (!fieldVoltChartList) return [];
+  if (!fieldVoltChartList?.grafieke) return [];
   const mappedVoltChartList = [];
 
   Object.entries(fieldVoltChartList?.grafieke)?.forEach(([key, value], i) => {
-    mappedVoltChartList.push({ id: i, x: key, y: value });
+    mappedVoltChartList.push({ x: key, y: value });
   });
 
-  for (let i = 10; i > 0; i--)
+  for (let i = 1; i > 0; i--)
     mappedVoltChartList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       y: undefined
     });
 
-  return filterLoadPeriod(mappedVoltChartList, activeLoadPeriod);
+  return filterLoadPeriod(mappedVoltChartList, fieldChartList, activeLoadPeriod);
 };
 
-export const mapFlowMeterDailyChartLists = (fieldFlowMeterChartList, fieldChartList, activeLoadPeriod) => {
+export const mapFlowMeterDailyChartLists = (fieldFlowMeterChartList, fieldVoltChartList, fieldChartList, activeLoadPeriod) => {
   if (!fieldFlowMeterChartList?.grafieke) return [];
-  const mappedVoltChartList = [];
+  const mappedFlowMeterChartList = [];
 
-  Object.entries(fieldFlowMeterChartList?.grafieke)?.forEach(([key, value], i) => {
-    mappedVoltChartList.push({ id: i, x: key, y: value });
+  Object.entries(fieldFlowMeterChartList?.grafieke)?.forEach(([key, value]) => {
+    mappedFlowMeterChartList.push({ x: key, barY: value });
   });
 
-  for (let i = 10; i > 0; i--)
-    mappedVoltChartList.push({
+  for (let i = 1; i > 0; i--)
+    mappedFlowMeterChartList.push({
+      x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
+      barY: undefined
+    });
+
+  return filterLoadPeriod(mappedFlowMeterChartList, fieldChartList, activeLoadPeriod);
+};
+
+export const mapFlowMeterHourlyChartLists = (fieldFlowMeterChartList, fieldChartList, activeLoadPeriod) => {
+  if (!fieldFlowMeterChartList?.grafieke) return [];
+  const mappedFlowMeterChartList = [];
+
+  Object.entries(fieldFlowMeterChartList?.grafieke)?.forEach(([key, value]) => {
+    mappedFlowMeterChartList.push({ x: key, barY: value });
+  });
+
+  for (let i = 1; i > 0; i--)
+    mappedFlowMeterChartList.push({
+      x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
+      barY: undefined
+    });
+
+  return filterLoadPeriod(mappedFlowMeterChartList, fieldChartList, activeLoadPeriod);
+};
+
+export const mapECChartLists = (fieldECChartList, fieldChartList, activeLoadPeriod) => {
+  if (!fieldECChartList?.data) return [];
+  const mappedECChartList = [];
+
+  Object.entries(fieldECChartList?.data)?.forEach(([key, value]) => {
+    mappedECChartList.push({ x: key, y: value?.ec });
+  });
+
+  for (let i = 1; i > 0; i--)
+    mappedECChartList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       y: undefined
     });
 
-  return filterLoadPeriod(mappedVoltChartList, activeLoadPeriod);
+  return filterLoadPeriod(mappedECChartList, fieldChartList, activeLoadPeriod);
 };
 
 export const mapVPDChartLists = (fieldVPDChartList, fieldChartList, activeLoadPeriod) => {
@@ -91,41 +132,60 @@ export const mapVPDChartLists = (fieldVPDChartList, fieldChartList, activeLoadPe
   const mappedVPDChartList = [];
 
   Object.entries(fieldVPDChartList?.data)?.forEach(([key, value], i) => {
-    mappedVPDChartList.push({ id: i, x: key, y: value.vpd });
+    mappedVPDChartList.push({ x: key, y: value.vpd });
   });
 
-  for (let i = 10; i > 0; i--)
+  for (let i = 1; i > 0; i--)
     mappedVPDChartList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       y: undefined
     });
 
-  return filterLoadPeriod(mappedVPDChartList, activeLoadPeriod);
+  return filterLoadPeriod(mappedVPDChartList, fieldChartList, activeLoadPeriod);
+};
+
+export const mapActualMottechChartLists = (fieldVPDChartList, fieldChartList, activeLoadPeriod) => {
+  if (!fieldVPDChartList?.data) return [];
+  const mappedVPDChartList = [];
+
+  Object.entries(fieldVPDChartList?.data)?.forEach(([key, value], i) => {
+    mappedVPDChartList.push({ x: key, y: value.vpd });
+  });
+
+  for (let i = 1; i > 0; i--)
+    mappedVPDChartList.push({
+      x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
+      y: undefined
+    });
+
+  return filterLoadPeriod(mappedVPDChartList, fieldChartList, activeLoadPeriod);
 };
 
 //*******************************************************************************
 
-const filterLoadPeriod = (mappedListToFilter, activeLoadPeriod) => {
-  console.log(mappedListToFilter);
-  const lastElementIndex = mappedListToFilter.length - 1;
-  const lastElementDate = new Date(mappedListToFilter[mappedListToFilter.length - 1].x);
+const filterLoadPeriod = (mappedListToFilter, fieldChartList, activeLoadPeriod) => {
 
   switch (activeLoadPeriod) {
-    case TWO_WEEKS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 14), lastElementIndex - 1);
-    case FOUR_WEEKS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 28), lastElementIndex - 1);
-    case TWO_MONTHS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 60), lastElementIndex - 1);
-    case THREE_MONTHS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 91), lastElementIndex - 1);
-    case SIX_MONTHS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 182), lastElementIndex - 1);
-    case TWELVE_MONTHS:
-      return mappedListToFilter.slice(lastElementIndex - hoursBetweenDates(lastElementDate, 365), lastElementIndex - 1);
-    case FULL_VIEW:
-      return mappedListToFilter;
+    case TWO_WEEKS_LABEL:
+      console.log(getDateFilteredList(mappedListToFilter, TWO_WEEKS_DAYS));
+      return getDateFilteredList(mappedListToFilter, TWO_WEEKS_DAYS);
+    case FOUR_WEEKS_LABEL:
+      return getDateFilteredList(mappedListToFilter, FOUR_WEEKS_DAYS);
+    case TWO_MONTHS_LABEL:
+      return getDateFilteredList(mappedListToFilter, TWO_MONTHS_DAYS);
+    case THREE_MONTHS_LABEL:
+      return getDateFilteredList(mappedListToFilter, THREE_MONTHS_DAYS);
+    case SIX_MONTHS_LABEL:
+      return getDateFilteredList(mappedListToFilter, SIX_MONTHS_DAYS);
+    case TWELVE_MONTHS_LABEL:
+      return getDateFilteredList(mappedListToFilter, TWELVE_MONTHS_DAYS);
+    case FULL_VIEW_LABEL:
+      return getDateFilteredList(mappedListToFilter, FULL_VIEW_DAYS);
   }
+};
+
+const getDateFilteredList = (mappedListToFilter, activeLoadPeriod) => {
+  return mappedListToFilter.filter(item => getDaysPastDate(activeLoadPeriod) < new Date(item?.x));
 };
 
 const pushForecastRegionRow = (tableList, listItem, index, mappedList) => {

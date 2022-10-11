@@ -32,35 +32,6 @@
     height: util.rem(11);
     border: util.rem(1.2) solid map.get(color.$colorMap, white);
     border-radius: map.get(radius.$border-radius, medium);
-  }
-}
-
-.checkbox-input__input {
-
-  &:checked {
-    animation: ripple 0.2s linear forwards;
-    background-color: map.get(color.$colorMap, black);
-  }
-
-  &:hover {
-    border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
-  }
-
-  &--actual {
-    border: util.rem(1.2) solid map.get(color.$colorMap, black);
-
-    &:checked {
-      animation: ripple 0.2s linear forwards;
-      background-color: map.get(color.$colorMap, daily-ETO-green);
-    }
-
-    &:hover {
-      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
-    }
-  }
-
-  &--forecast {
-    border: util.rem(1.2) solid map.get(color.$colorMap, black);
 
     &:checked {
       animation: ripple 0.2s linear forwards;
@@ -69,6 +40,32 @@
 
     &:hover {
       border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+
+    &--actual {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, daily-ETO-green);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--forecast {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, black);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
     }
   }
 }

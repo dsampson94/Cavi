@@ -1,8 +1,9 @@
 import React from 'react';
 import { bisector, pointer, selectAll } from 'd3';
 
-import '../chart.scss';
 import { DAILY_ETO } from '../../../../tools/general/system-variables.util';
+
+import '../chart.scss';
 
 const ChartTooltipDot = ({
                            data,
@@ -84,9 +85,8 @@ const LineDot = ({
   }
 
   const renderDot = (chart) => {
-    if (chartName === DAILY_ETO && hiddenLineList?.includes(chart) && hoverActive && y1 && (data[dateBisector(data, date)]?.barY !== -0.1)) {
-      return true;
-    } else return chartName !== DAILY_ETO && hoverActive && y1 && (data[dateBisector(data, date)]?.barY !== -0.1);
+    if (chartName === DAILY_ETO && hiddenLineList?.includes(chart) && hoverActive && y1) return true;
+    else return chartName !== DAILY_ETO && hoverActive && y1;
   };
 
   return (<>

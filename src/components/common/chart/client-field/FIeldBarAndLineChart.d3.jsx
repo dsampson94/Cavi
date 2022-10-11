@@ -16,7 +16,7 @@ import Bars from '../components/Bars.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
 import ChartHeader from '../components/ChartHeader';
 
-const FieldDeficitETOChart = ({
+const FieldBarAndLineChart = ({
                                 data,
                                 chartName,
                                 chartType,
@@ -41,7 +41,8 @@ const FieldDeficitETOChart = ({
                                 activeExtendedChart,
                                 setActiveExtendedChart,
                                 date,
-                                setDate
+                                setDate,
+                                showOnlyBars
                               }) => {
 
   const svgRef = useRef();
@@ -171,6 +172,7 @@ const FieldDeficitETOChart = ({
                  chartName={ chartName }
                  isDarkMode={ isDarkMode } />
 
+          { !showOnlyBars &&
           <Line data={ data }
                 recommendationOffset={ recommendationOffset }
                 chartName={ chartName }
@@ -180,7 +182,7 @@ const FieldDeficitETOChart = ({
                 xScale={ xScale }
                 yScale={ yScale }
                 clipPath={ clipPath }
-                isDarkMode={ isDarkMode } />
+                isDarkMode={ isDarkMode } /> }
 
           <rect className={ 'mouse-tracker' }
                 width={ dimensions.width }
@@ -212,6 +214,7 @@ const FieldDeficitETOChart = ({
                             date={ date }
                             hoverActive={ hoverActive }
                             chartName={ chartName }
+                            chartType={ chartType }
                             clipPath={ clipPath } />
         </Chart>
 
@@ -236,4 +239,4 @@ const FieldDeficitETOChart = ({
   );
 };
 
-export default FieldDeficitETOChart;
+export default FieldBarAndLineChart;
