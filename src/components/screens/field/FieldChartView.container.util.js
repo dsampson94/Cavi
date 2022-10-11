@@ -144,21 +144,23 @@ export const mapVPDChartLists = (fieldVPDChartList, fieldChartList, activeLoadPe
   return filterLoadPeriod(mappedVPDChartList, fieldChartList, activeLoadPeriod);
 };
 
-export const mapActualMottechChartLists = (fieldVPDChartList, fieldChartList, activeLoadPeriod) => {
-  if (!fieldVPDChartList?.data) return [];
-  const mappedVPDChartList = [];
+export const mapActualMottechChartLists = (fieldActualChartList, fieldChartList, activeLoadPeriod) => {
+  if (!fieldActualChartList?.grafieke) return [];
+  const mappedActualChartList = [];
 
-  Object.entries(fieldVPDChartList?.data)?.forEach(([key, value], i) => {
-    mappedVPDChartList.push({ x: key, y: value.vpd });
+  Object.entries(fieldActualChartList?.grafieke)?.forEach(([key, value], i) => {
+    mappedActualChartList.push({ x: key, y: value });
   });
 
+  console.log(mappedActualChartList);
+
   for (let i = 1; i > 0; i--)
-    mappedVPDChartList.push({
+    mappedActualChartList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       y: undefined
     });
 
-  return filterLoadPeriod(mappedVPDChartList, fieldChartList, activeLoadPeriod);
+  return filterLoadPeriod(mappedActualChartList, fieldChartList, activeLoadPeriod);
 };
 
 //*******************************************************************************
