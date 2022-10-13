@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, string } from 'prop-types';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
-import SVGIcon from '../icon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import ToolTip from '../tool-tip/ToolTip';
 
 import './button.scss';

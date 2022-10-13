@@ -27,7 +27,7 @@ import { requestLogout } from '../../../redux/actions/auth.action';
 
 import Button from '../button/Button';
 import ThemeToggle from '../theme-toggle/ThemeToggle';
-import SVGIcon from '../icon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import CheckboxInput from '../input/checkbox/CheckboxInput';
 
 import './drop-down-menu.scss';

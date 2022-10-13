@@ -32,7 +32,7 @@ import {
 import Button from '../button/Button';
 import DropDownButton from '../drop-down/DropDownButton';
 import NumberInput from '../input/number/NumberInput';
-import SVGIcon from '../icon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 import './mid-bar.scss';
 

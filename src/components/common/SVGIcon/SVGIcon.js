@@ -17,6 +17,7 @@ import {
   FAVORITES_STAR,
   HARVEST_ICON,
   LOG_OUT_ICON,
+  LOW_BATTERY,
   MAPS_ICON,
   NEUTRAL,
   OPEN_MENU,
@@ -52,7 +53,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile }) =
 
   return (
     <div className={ getClassNames('svg-icon',
-      { tiny: tiny, small: getSmallIcons(name), chart, profile: profile }) }
+      { tiny: tiny, small: getSmallIcons(name), chart, profile: profile, battery: name === LOW_BATTERY }) }
          onClick={ onClick }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -92,6 +93,8 @@ const getViewBox = (name, tiny, chart) => {
       return '6 -3 1 30';
     case CAMERA:
       return '8 -9 1 42';
+    case LOW_BATTERY:
+      return '21 14 3 23';
     case PENCIL:
       return '-1 -9 1 42';
     case CHARTS:
@@ -179,6 +182,8 @@ const getIconFill = (activeTheme, fill, name) => {
         return '#607CB1';
       case CLOUDED:
         return '#C2C2C1';
+      case LOW_BATTERY:
+        return 'orange';
       default:
         return fill;
     }
@@ -402,11 +407,15 @@ const getPath = (name) => {
         <path
           d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h14.55v3H9v30h14.55v3Zm24.3-9.25-2.15-2.15 5.1-5.1h-17.5v-3h17.4l-5.1-5.1 2.15-2.15 8.8 8.8Z" />
       );
-
     case FAVORITES_STAR :
       return (
         <path
           d="m16.15 37.75 7.85-4.7 7.85 4.75-2.1-8.9 6.9-6-9.1-.8L24 13.7l-3.55 8.35-9.1.8 6.9 6ZM11.65 44l3.25-14.05L4 20.5l14.4-1.25L24 6l5.6 13.25L44 20.5l-10.9 9.45L36.35 44 24 36.55ZM24 26.25Z" />
+      );
+    case LOW_BATTERY :
+      return (
+        <path
+          d="M8.7 34q-.65 0-1.075-.425Q7.2 33.15 7.2 32.5V28H4v-8h3.2v-4.5q0-.65.425-1.075Q8.05 14 8.7 14h33.8q.65 0 1.075.425Q44 14.85 44 15.5v17q0 .65-.425 1.075Q43.15 34 42.5 34Zm1.5-3H35V17H10.2Z" />
       );
     default:
       return <path />;

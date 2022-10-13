@@ -34,4 +34,9 @@
     max-height: util.rem(24);
     margin-top: util.rem(2);
   }
+
+  &--battery {
+    height: util.rem(22);
+    transform: translateY(-19%);
+  }
 }

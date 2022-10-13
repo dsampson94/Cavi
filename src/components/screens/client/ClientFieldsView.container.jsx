@@ -23,7 +23,7 @@ const ClientFieldsViewContainer = () => {
 
   const request = getRequestParams({ groupName, clientName });
 
-  let hasSubGroups = false;
+  const subGroupList = [];
 
   useEffect(() => {
     dispatch(requestFullClientFieldList(request.clientParams));
@@ -31,14 +31,14 @@ const ClientFieldsViewContainer = () => {
   }, [groupName, clientName, reloadToggleActive]);
 
   const mappedFieldTableList = () => {
-    return mapFieldTableList(fieldList, fieldRainData, hasSubGroups);
+    return mapFieldTableList(fieldList, fieldRainData, subGroupList);
   };
 
   return <ClientFieldsView mappedFieldList={ mappedFieldTableList() }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }
-                           hasSubGroups={ hasSubGroups } />;
+                           hasSubGroups={ !!(subGroupList.includes(1)) } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

@@ -14,7 +14,7 @@ import {
 
 import { chartByName } from '../Chart.util';
 
-import SVGIcon from '../../icon/SVGIcon';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 import CheckboxInput from '../../input/checkbox/CheckboxInput';
 import DropDownButton from '../../drop-down/DropDownButton';
 
@@ -58,7 +58,7 @@ const ChartHeader = ({ chartName, chartType, isDarkMode, activeExtendedChart, se
           </div> }
 
           { chartName === DAILY_ETO &&
-          <div className="chart__header__zoom-options--left-bottom"></div> }
+          <div className="chart__header__zoom-options--left-bottom" /> }
         </div>
 
         { !chartName.includes('deficit') &&

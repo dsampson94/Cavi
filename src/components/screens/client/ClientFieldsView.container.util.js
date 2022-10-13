@@ -2,12 +2,12 @@ import { CAPTURE, QUICK_VIEW } from '../../../tools/general/system-variables.uti
 
 //*******************************************************************************
 
-export const mapFieldTableList = (fieldList, fieldRainData, hasSubGroups) => {
+export const mapFieldTableList = (fieldList, fieldRainData, subGroupList) => {
   if (!fieldList) return;
   if (!fieldRainData) return;
   const tableList = [];
   const mappedList = [];
-  const subGroupSplitList = [];
+  let rowHasSubGroups;
 
   const rainData = getRainDataList(fieldList, fieldRainData);
   let rainDataUpper = getRainDataUpperList(rainData);
@@ -18,14 +18,16 @@ export const mapFieldTableList = (fieldList, fieldRainData, hasSubGroups) => {
 
   tableList.forEach((listItem, index) => {
     const weatherDataKeys = Object.keys(listItem?.weervoorspelling);
-    hasSubGroups = setHasSubGroups(listItem, subGroupSplitList);
+    rowHasSubGroups = setHasSubGroups(listItem, subGroupList);
     pushForecastRegionRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
     pushLandGroupRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys);
     pushFieldRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, rainDataUpper, rainDataLower);
-    if (hasSubGroups) {
+
+    if (rowHasSubGroups) {
       pushDropdownRow(tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, fieldRainData);
     }
   });
+
   return mappedList;
 };
 
@@ -161,7 +163,8 @@ const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, r
     p: listItem?.fotots,
     l: {
       lastReading: listItem?.last_reading,
-      tooltip: (listItem?.last_reading) ?
+      hasBattery: !!listItem?.foutiefbattery,
+      tooltip: (listItem?.foutiefbattery) ? listItem?.foutiefbattery : (listItem?.last_reading) ?
         `Probe Number: ${ listItem?.p1 } (Double click to search last readings)` : undefined
     },
     c: CAPTURE,
@@ -243,7 +246,8 @@ const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, r
 };
 
 const pushDropdownRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys, fieldRainData) => {
-  const subGroupData = getSubGroupDataForDropdown(listItem, fieldRainData);
+  const subGroupData = getSubGroupObjectForDropdown(listItem, fieldRainData);
+
   mappedList.push({
     fieldName: subGroupData,
     w: undefined,
@@ -275,30 +279,23 @@ const pushDropdownRow = (tableList, listItem, index, mappedList, weatherDataKeys
   });
 };
 
-const getSubGroupDataForDropdown = (listItem, fieldRainData) => {
-  return {
-    ...(listItem?.sublande ? {
-      sublande: Object.keys(listItem?.sublande).map(function(key) {
-        if (!fieldRainData?.split) return;
-        const subFieldKeys = Object.keys(fieldRainData?.split);
-        if (subFieldKeys.includes(key)) {
-          return {
-            ...listItem?.sublande[key],
-            name: key,
-            '30d': fieldRainData?.split[key][6],
-            Total: fieldRainData?.split[key][5]
-          };
-        } else {
-          return { ...listItem?.sublande[key], name: key };
-        }
-      })
-    } : {})
+const getSubGroupObjectForDropdown = (listItem, fieldRainData) => {
+  if (!listItem?.sublande) return null;
+  else return {
+    sublande: Object.keys(listItem?.sublande).map(key => {
+      return {
+        ...listItem?.sublande[key],
+        name: key,
+        '30d': fieldRainData?.split?.[key]?.[6],
+        Total: fieldRainData?.split?.[key]?.[5]
+      };
+    })
   };
 };
 
-const setHasSubGroups = (listItem, subGroupSplitList) => {
-  subGroupSplitList.push(listItem?.split);
-  return subGroupSplitList.includes(1);
+const setHasSubGroups = (listItem, subGroupList) => {
+  if (listItem?.sublande) subGroupList.push(1);
+  return !!(subGroupList.includes(1));
 };
 
 const checkForecastArea = (index, tableList) => {

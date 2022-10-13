@@ -2,7 +2,7 @@ import React from 'react';
 
 import { bisector } from 'd3';
 
-import { DAILY_ETO, DEFICIT_ETO, EC, EXTENDED, VOLT_READINGS } from '../../../../tools/general/system-variables.util';
+import { DAILY_ETO, DEFICIT, DEFICIT_ETO, EC, EXTENDED, VOLT_READINGS } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
 
@@ -56,15 +56,15 @@ const TooltipText = ({
 
   let dateBisector = bisector(xAccessor).center;
 
+  let hoveredObject = data[dateBisector(data, date)];
+
   let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
   let y1 = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
 
+  let secondaryHoveredObject;
+
   let x2;
   let y2;
-
-  let hoveredObject = data[dateBisector(data, date)];
-
-  let secondaryHoveredObject;
 
   if (secondaryData) {
     x2 = xScale(xAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
@@ -112,13 +112,18 @@ const TooltipText = ({
     else return { rect1: y1 - 20, text1: y1 - 7 };
   };
 
-  const renderText = (chart) => {
-    if (chartName === DAILY_ETO) {
-      return !!(hiddenLineList?.includes(chart) && hoverActive && hoveredObject?.y);
-    } else if (chart !== 'Actual' && hoverActive && hoveredObject?.y) {
-      return true;
-    } else if (hoveredObject?.barY && hoverActive) return true;
+  const getTextWidth = () => {
+    if (chartName === DEFICIT_ETO) return 240;
+    if (chartType === EXTENDED) return 200;
+    else if (chartType === DEFICIT) return 265;
+    else if (chartName === DAILY_ETO) return 200;
+    else return 169;
+  };
 
+  const renderText = (chart) => {
+    if (chartName === DAILY_ETO) return !!(hiddenLineList?.includes(chart) && hoverActive && hoveredObject?.y);
+    else if (chart !== 'Actual' && hoverActive && hoveredObject?.y) return true;
+    else if (hoveredObject?.barY && hoverActive && y1) return true;
   };
 
   return (<>
@@ -130,7 +135,7 @@ const TooltipText = ({
               x={ getXPos('Forecast').rect1 }
               y={ getYPos('Forecast').rect1 }
               height={ 18 }
-              width={ chartName.includes('deficit') ? 260 : chartType === EXTENDED ? 200 : chartName === DAILY_ETO ? 200 : 169 }
+              width={ getTextWidth() }
               rx={ '5' }
               ry={ '5' } />
 
@@ -151,7 +156,7 @@ const TooltipText = ({
               x={ getXPos('Actual').rect2 }
               y={ getYPos('Actual').rect2 }
               height={ 18 }
-              width={ chartName.includes('deficit') ? 260 : chartName === DEFICIT_ETO ? 232 : chartName === DAILY_ETO ? 200 : 169 }
+              width={ getTextWidth() }
               rx={ '5' }
               ry={ '5' } />
 

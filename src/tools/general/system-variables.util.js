@@ -113,6 +113,7 @@ export const RAIN_CLOUDS = 'rain_clouds';
 export const WATCH = 'watch';
 export const HARVEST_ICON = 'harvest_tractor';
 export const TABLE_SEARCH_PLACEHOLDER = 'Search field or probe number';
+export const LOW_BATTERY = 'low_battery';
 
 //EMOJI
 export const VERY_SATISFIED = 'very_satisfied';

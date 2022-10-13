@@ -17,7 +17,7 @@ import {
   YELLOW
 } from '../../../tools/general/system-variables.util';
 
-import SVGIcon from '../../common/icon/SVGIcon';
+import SVGIcon from '../../common/SVGIcon/SVGIcon';
 import { arrayOf, func, number, shape } from 'prop-types';
 
 import ToolTip from '../../common/tool-tip/ToolTip';

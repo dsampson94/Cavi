@@ -60,6 +60,19 @@ const LineDot = ({
                    secondaryData
                  }) => {
 
+  let dateBisector = bisector(xAccessor).center;
+
+  let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
+  let y1 = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
+
+  let x2;
+  let y2;
+
+  if (secondaryData) {
+    x2 = xScale(xAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
+    y2 = yScale(yAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
+  }
+
   selectAll('.mouse-tracker').on('touchmouse mousemove', event => {
     setHoverActive(true);
     if (showPrimaryDropDown) return setDate(date);
@@ -71,18 +84,6 @@ const LineDot = ({
   }).on('mouseleave', () => {
     setHoverActive(false);
   });
-
-  let dateBisector = bisector(xAccessor).center;
-  let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
-  let y1 = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
-
-  let x2;
-  let y2;
-
-  if (secondaryData) {
-    x2 = xScale(xAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
-    y2 = yScale(yAccessor(secondaryData[Math.max(0, dateBisector(secondaryData, date))]));
-  }
 
   const renderDot = (chart) => {
     if (chartName === DAILY_ETO && hiddenLineList?.includes(chart) && hoverActive && y1) return true;

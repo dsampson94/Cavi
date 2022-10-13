@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import { func } from 'prop-types';
 
@@ -21,9 +22,11 @@ import {
   TWO_WEEKS_LABEL
 } from '../../../tools/general/system-variables.util';
 
+import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA } from '../../../redux/actions/client.action';
+
 import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
 
-import SVGIcon from '../icon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
 import ToolTip from '../tool-tip/ToolTip';
@@ -39,6 +42,7 @@ export const SideBarList = ({
                             }) => {
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const { groupName, clientName } = useParams();
 
   const handleFavoritesClick = (groupName, clientName) => {
@@ -70,7 +74,7 @@ export const SideBarList = ({
                        }
                      })()
                    } }
-                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok) }>
+                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, dispatch) }>
                 { value.iok }
               </div>
 
@@ -108,7 +112,9 @@ export const SideBarList = ({
   );
 };
 
-const handleSubHeaderClick = (history, groupName, clientName) => {
+const handleSubHeaderClick = (history, groupName, clientName, dispatch) => {
+  dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
+  dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
   history.push(`/client/${ groupName }/${ clientName }`);
 };
 
