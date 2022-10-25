@@ -188,11 +188,11 @@
 
   &__checkbox-filter {
     display: flex;
+    position: relative;
     justify-content: center;
 
     &__inner {
       display: flex;
-      flex-direction: row-reverse;
     }
 
     &--dailyETO {
@@ -231,27 +231,27 @@
     &--temperatures {
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -20vh;
+        margin-top: -29vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -21vh;
+        margin-top: -25vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -22vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-top: -23vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
         margin-top: -24vh;
       }
 
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-top: -24vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-top: -23vh;
+      }
+
       @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -25vh;
+        margin-top: -24vh;
       }
     }
   }

@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react';
 
 import { bool, func } from 'prop-types';
 
-import { CLIENT_FIELDS, FIELD_CHARTS, FIELD_TEMPERATURES, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
+import {
+  CLIENT_FIELDS,
+  FIELD_CHARTS,
+  FIELD_SETUP,
+  FIELD_TEMPERATURES,
+  SEARCH_PLACEHOLDER
+} from '../../../tools/general/system-variables.util';
 
 import { mapFavoritesList, SideBarButton, SideBarFieldList, SideBarList, ViewDataBar } from './Sidebar.util';
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 import { viewFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
 
 import InputSearch from '../input-search/InputSearch';
+import Button from '../button/Button';
 
 import './side-bar.scss';
 
 const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList, setActiveLoadPeriod, setActiveFieldName, view }) => {
+
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsSideBar showSideBar={ showSideBar }
@@ -32,7 +40,14 @@ const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList,
                                              setShowSideBar={ setShowSideBar }
                                              mappedFieldList={ mappedFieldList }
                                              setActiveLoadPeriod={ setActiveLoadPeriod }
-                                             setActiveFieldName={ setActiveFieldName } />;
+                                             setActiveFieldName={ setActiveFieldName }
+                                             mappedUserData={ mappedUserData } />;
+
+    case FIELD_SETUP:
+      return <FieldSetupSideBar showSideBar={ showSideBar }
+                                setShowSideBar={ setShowSideBar }
+                                mappedFieldList={ mappedFieldList }
+                                setActiveFieldName={ setActiveFieldName } />;
   }
 };
 
@@ -137,12 +152,32 @@ FieldChartsSideBar.propTypes = {
   setShowSideBar: func
 };
 
-const FieldTemperaturesChartsSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setActiveLoadPeriod, setActiveFieldName }) => {
+const FieldTemperaturesChartsSideBar = ({
+                                          showSideBar,
+                                          mappedFieldList,
+                                          clientRequestFields,
+                                          setActiveLoadPeriod,
+                                          setActiveFieldName,
+                                          mappedUserData
+                                        }) => {
+
+  let storedFavoritesList = viewFarmLocalStorageFavorites();
+
+  const [mappedFavoritesList, setMappedFavoritesList] = useState([]);
+
+  useEffect(() => {
+    storedFavoritesList = viewFarmLocalStorageFavorites();
+    setMappedFavoritesList(mapFavoritesList(storedFavoritesList, mappedUserData));
+  }, []);
 
   return (
     <div className={ getClassNames('field-charts-side-bar', { show: showSideBar }) }>
       { showSideBar && <>
         <ViewDataBar setActiveLoadPeriod={ setActiveLoadPeriod } />
+
+        { !isEmpty(mappedFavoritesList) &&
+        <SideBarList mappedUserData={ mappedFavoritesList }
+                     myFavoritesChart /> }
 
         <SideBarFieldList view={ FIELD_TEMPERATURES }
                           mappedFieldList={ mappedFieldList }
@@ -154,6 +189,52 @@ const FieldTemperaturesChartsSideBar = ({ showSideBar, mappedFieldList, clientRe
 };
 
 FieldTemperaturesChartsSideBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func
+};
+
+const FieldSetupSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setActiveFieldName }) => {
+
+  return (
+    <div className={ getClassNames('field-setup-side-bar', { show: showSideBar }) }>
+      { showSideBar && <>
+
+        <ul className={ 'field-setup-side-bar__list' }>
+          <h4>Field Setup</h4>
+          <li>General</li>
+          <li>Probes - Summary</li>
+          <li>Probes - Detail</li>
+          <li>Sensors</li>
+          <li>Roots</li>
+          <li>Cropfactors</li>
+          <li>Crop Details</li>
+          <li>Weatherstation</li>
+          <li>Irrigation System</li>
+          <li>Irrigation Days</li>
+          <li>SMS Warnings</li>
+          <li>Push Notifications</li>
+          <li>Split Valves</li>
+          <li><Button label={ 'Create new field' } /></li>
+        </ul>
+
+        <ul className={ 'field-setup-side-bar__list--client' }>
+          <h4>Client Details</h4>
+          <li>Billing</li>
+          <li>Client Details</li>
+          <li>Users</li>
+          <li>SMS Recommendations</li>
+        </ul>
+
+        <ul className={ 'field-setup-side-bar__list' }>
+          <h4>Advanced</h4>
+          <li>Forecasts</li>
+        </ul>
+      </> }
+    </div>
+  );
+};
+
+FieldSetupSideBar.propTypes = {
   showSideBar: bool,
   setShowSideBar: func
 };

@@ -7,8 +7,7 @@ const AuthContainer = () => {
 
   return (
     <Switch>
-      <Route exact path={ '/' }
-             component={ LoginContainer } />
+      <Route exact path={ '/' } component={ LoginContainer } />
     </Switch>
   );
 };

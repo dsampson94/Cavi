@@ -123,6 +123,7 @@
   &--chartbar {
     height: util.rem(15);
     margin-left: util.rem(2);
+    width: util.rem(180);
   }
 
   &--long {
@@ -141,5 +142,9 @@
       font-size: util.rem(8);
       height: 50%;
     }
+  }
+
+  &--medium {
+    max-width: util.rem(90);
   }
 }

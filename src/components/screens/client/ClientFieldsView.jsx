@@ -14,14 +14,7 @@ import Table from '../../common/table/client-fields/Table';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({
-                            mappedFieldList,
-                            clientRequestParams,
-                            hasSubGroups,
-                            subGroupSplitList,
-                            reloadToggleActive,
-                            setReloadToggleActive
-                          }) => {
+const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -62,7 +55,6 @@ const ClientFieldsView = ({
         <MidBar view={ CLIENT_FIELDS_MIDBAR }
                 filteredTableData={ filteredTableData }
                 hasSubGroups={ hasSubGroups }
-                subGroupSplitList={ subGroupSplitList }
                 showClientsSideBar={ showClientsSideBar }
                 setFilteredTableData={ setFilteredTableData }
                 setActiveTableData={ setActiveTableData }

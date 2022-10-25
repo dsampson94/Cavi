@@ -72,6 +72,10 @@
   position: relative;
   margin-left: 3%;
 
+  @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+    margin-left: 20%;
+  }
+
   @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
     margin-left: 15%;
   }

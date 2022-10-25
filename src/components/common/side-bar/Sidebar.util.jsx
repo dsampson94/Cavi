@@ -264,7 +264,7 @@ const handleFieldClick = (history, groupName, clientName, field, setActiveFieldN
       history.push(`/client/${ groupName }/${ clientName }/field/${ field?.probeNumber }/${ field?.locationName }`);
       break;
     case FIELD_TEMPERATURES :
-      history.push(`/client/${ groupName }/${ clientName }/field/temperatures/${ field?.probeNumber }/${ field?.locationName }`);
+      history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ field?.probeNumber }/${ field?.locationName }`);
       break;
   }
 };
@@ -283,3 +283,18 @@ export const mapFavoritesList = (storedFavoritesList, mappedUserData) => {
   });
   return favoritesList;
 };
+
+export const SideBarFieldSetupOptions = ({ setActiveFieldName, view }) => {
+
+  const history = useHistory();
+
+  const { groupName, clientName, fieldName } = useParams();
+
+  return (
+    <div className="field-setup-side-bar__list">
+      <h2>FIELD SETUP</h2>
+    </div>
+  );
+};
+
+SideBarFieldSetupOptions.propTypes = {};

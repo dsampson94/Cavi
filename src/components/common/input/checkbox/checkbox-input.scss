@@ -67,6 +67,136 @@
         border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
       }
     }
+
+    &--mm100 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm200 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm300 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-red);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm400 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-cyan);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm600 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-azure);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm800 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-green);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--canopy {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--outside {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--humidity {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--rain{
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
   }
 }
 

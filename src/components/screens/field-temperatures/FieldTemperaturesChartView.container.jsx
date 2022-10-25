@@ -7,7 +7,7 @@ import { mapFieldList } from '../field/FieldChartView.container.util';
 import { mapTemperaturesList } from './FieldTemperaturesChartView.container.util';
 
 import { requestClientFieldList } from '../../../redux/actions/client.action';
-import { requestFieldChartList } from '../../../redux/actions/field.action';
+import { requestExtendedFieldChartList, SET_SOIL_TEMP_LIST } from '../../../redux/actions/field.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
 import FieldTemperaturesChartView from './FieldTemperaturesChartView';
@@ -17,7 +17,7 @@ const FieldTemperaturesChartViewContainer = () => {
   const dispatch = useDispatch();
   const { groupName, clientName, fieldName, probeNumber } = useParams();
 
-  const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
+  const soilTempList = useSelector(createSelector([state => state.field], field => field?.soilTempList));
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
@@ -26,13 +26,13 @@ const FieldTemperaturesChartViewContainer = () => {
   const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod });
 
   useEffect(() => {
-    dispatch(requestFieldChartList(request.loadParams));
+    dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
     dispatch(requestClientFieldList(request.clientParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    dispatch(requestFieldChartList(request.loadParams));
+    dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFieldName, activeLoadPeriod]);
 
@@ -41,7 +41,9 @@ const FieldTemperaturesChartViewContainer = () => {
   };
 
   const mappedTemperaturesList = () => {
-    return mapTemperaturesList(fieldChartList, probeNumber);
+    if (soilTempList) {
+      return mapTemperaturesList(soilTempList, probeNumber, activeLoadPeriod, dispatch);
+    }
   };
 
   return <FieldTemperaturesChartView mappedFieldList={ mappedFieldList() }

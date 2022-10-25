@@ -228,6 +228,7 @@ const FieldLineChartD3 = ({
                            setHoverActive={ setHoverActive }
                            showPrimaryDropDown={ showPrimaryDropDown }
                            chartName={ chartName }
+                           chartType={ chartType }
                            clipPath={ clipPath }
                            xAxisViewMode={ xAxisViewMode }
                            hiddenLineList={ hiddenLineList }

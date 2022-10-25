@@ -152,24 +152,21 @@ export const mapActualMottechChartLists = (fieldActualChartList, fieldChartList,
     mappedActualChartList.push({ x: key, y: value });
   });
 
-  console.log(mappedActualChartList);
-
   for (let i = 1; i > 0; i--)
     mappedActualChartList.push({
       x: Object.keys(fieldChartList?.Grafieke)[(Object.keys(fieldChartList?.Grafieke).length) - i],
       y: undefined
     });
 
-  return filterLoadPeriod(mappedActualChartList, fieldChartList, activeLoadPeriod);
+  return filterLoadPeriod(mappedActualChartList, activeLoadPeriod);
 };
 
 //*******************************************************************************
 
-const filterLoadPeriod = (mappedListToFilter, fieldChartList, activeLoadPeriod) => {
+export const filterLoadPeriod = (mappedListToFilter, activeLoadPeriod) => {
 
   switch (activeLoadPeriod) {
     case TWO_WEEKS_LABEL:
-      console.log(getDateFilteredList(mappedListToFilter, TWO_WEEKS_DAYS));
       return getDateFilteredList(mappedListToFilter, TWO_WEEKS_DAYS);
     case FOUR_WEEKS_LABEL:
       return getDateFilteredList(mappedListToFilter, FOUR_WEEKS_DAYS);
@@ -187,7 +184,7 @@ const filterLoadPeriod = (mappedListToFilter, fieldChartList, activeLoadPeriod) 
 };
 
 const getDateFilteredList = (mappedListToFilter, activeLoadPeriod) => {
-  return mappedListToFilter.filter(item => getDaysPastDate(activeLoadPeriod) < new Date(item?.x));
+  return mappedListToFilter?.filter(item => getDaysPastDate(activeLoadPeriod) < new Date(item?.x));
 };
 
 const pushForecastRegionRow = (tableList, listItem, index, mappedList) => {
@@ -350,8 +347,6 @@ const mapUsageETCList = (usageETCList, fieldChartList) => {
     });
   });
 
-  for (let i = 0; i < 12; i++) usageETCList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], lineY: initialLineY, barY: -0.1 });
-
   Object.entries(fieldChartList?.Grafieke)?.forEach(([key, value]) => {
     Object.keys(value).forEach((innerKey) => {
       switch (innerKey) {
@@ -389,9 +384,6 @@ const mappedDailyETOList = (fieldChartList) => {
       initialLineY = value?.f;
     }
   });
-
-  for (let i = 0; i < 12; i++) dailyETOForecastList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], y: initialLineY });
-  for (let i = 0; i < 12; i++) dailyETORealList.push({ x: Object.keys(fieldChartList?.Grafieke)[i], y: initialLineY });
 
   Object.entries(fieldChartList?.eto)?.forEach(([key, value]) => {
     if (value?.f) dailyETOForecastList.push({ x: key, y: value?.f });

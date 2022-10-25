@@ -60,6 +60,8 @@
         display: flex;
         position: relative;
         z-index: 5;
+        margin: 0 util.rem(2) 0 util.rem(2);
+        overflow: hidden;
         flex-direction: row;
         width: 13%;
       }

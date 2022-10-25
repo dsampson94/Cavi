@@ -73,9 +73,7 @@
 
         &:hover {
           cursor: pointer;
-          z-index: 4;
           position: relative;
-          opacity: 1;
           border-bottom: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
           background-color: map.get(color.$colorMap, row-hover-blue);
         }
@@ -98,9 +96,7 @@
 
         &--selected {
           cursor: pointer;
-          z-index: 4;
           position: relative;
-          opacity: 1;
           border-bottom: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
           background-color: map.get(color.$colorMap, row-hover-blue);
         }
@@ -213,6 +209,81 @@
         position: relative;
         width: 22%;
         height: util.rem(16);
+      }
+    }
+  }
+
+  &--show {
+    width: 12%;
+  }
+}
+
+.field-setup-side-bar {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  user-select: none;
+  transition: 0.4s;
+  height: 100%;
+  width: 0;
+
+  &__list {
+    padding: util.rem(20) util.rem(5) util.rem(0) util.rem(10);
+    font-size: util.rem(12);
+
+    h4 {
+      font-weight: bold;
+      padding: util.rem(1) util.rem(0) util.rem(1) util.rem(2);
+      border: util.rem(2) solid transparent;
+    }
+
+    &--client {
+      padding: util.rem(20) util.rem(5) util.rem(0) util.rem(10);
+      font-size: util.rem(12);
+
+      li {
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        font-size: util.rem(16);
+        padding: util.rem(1);
+        color: orange;
+        border: util.rem(2) solid transparent;
+        border-top-right-radius: map.get(radius.$border-radius, medium);
+        border-bottom-right-radius: map.get(radius.$border-radius, medium);
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &:hover {
+          cursor: pointer;
+          position: relative;
+          border-bottom: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
+          background-color: map.get(color.$colorMap, row-hover-blue);
+        }
+      }
+    }
+
+    li {
+      display: flex;
+      flex-direction: row;
+      cursor: pointer;
+      font-size: util.rem(16);
+      padding: util.rem(1);
+      border: util.rem(2) solid transparent;
+      border-top-right-radius: map.get(radius.$border-radius, medium);
+      border-bottom-right-radius: map.get(radius.$border-radius, medium);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        position: relative;
+        border-bottom: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
+        background-color: map.get(color.$colorMap, row-hover-blue);
       }
     }
   }

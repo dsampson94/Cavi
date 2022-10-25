@@ -10,6 +10,7 @@ import {
   EMAIL,
   EMAIL_RECOMMENDATIONS,
   FIELD_CHARTS,
+  FIELD_SETUP,
   FIELD_TEMPERATURES,
   MAPS,
   MAPS_ICON,
@@ -20,12 +21,11 @@ import {
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
+
 import { daysFromToday } from '../../../tools/general/helpers.util';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
-
-import useTheme from '../../../tools/hooks/useTheme';
 
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
@@ -35,16 +35,22 @@ import DropDownButton from '../drop-down/DropDownButton';
 import './top-bar.scss';
 
 const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, view }) => {
+
   switch (view) {
     case CLIENT_FIELDS:
       return <ClientFieldsTopBar showSideBar={ showSideBar }
                                  setShowSideBar={ setShowSideBar }
                                  clientRequestParams={ clientRequestParams } />;
+
     case FIELD_CHARTS:
       return <FieldChartsTopBar clientRequestParams={ clientRequestParams }
                                 mappedFieldList={ mappedFieldList } />;
+
     case FIELD_TEMPERATURES:
       return <FieldTemperaturesChartsTopBar clientRequestParams={ clientRequestParams } />;
+
+    case FIELD_SETUP:
+      return <FieldSetupTopBar />;
   }
 };
 
@@ -60,6 +66,8 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const { groupName, clientName } = useParams();
 
   const [emailAddress, setEmailAddress] = useState(undefined);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -109,12 +117,17 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
           <Button icon={ PRINT_ICON }
                   onClick={ getPDF }
                   tooltip={ PRINT } />
+
           <Button icon={ EMAIL_RECOMMENDATIONS }
                   onClick={ getPDFAndEmail }
                   tooltip={ EMAIL } />
+
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
-          <Button label={ 'Field Setup' } />
+
+          <Button label={ 'Field Setup' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/`) }
+          />
           <Button label={ 'Probes Monitor' } />
           <Button icon={ WEATHER_STATION_ICON }
                   tooltip={ WEATHER_STATION } />
@@ -152,11 +165,9 @@ ClientFieldsTopBar.propTypes = {
 
 const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
 
-  useTheme(true);
-
   const history = useHistory();
   const dispatch = useDispatch();
-  const { groupName, clientName, fieldName, probeNumber } = useParams();
+  const { groupName, clientName, fieldName } = useParams();
 
   const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
 
@@ -217,10 +228,15 @@ const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
                 tooltip={ PRINT }
                 spaced
                 small />
+
         <Button label={ 'Other Farms' }
                 onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
                 spaced />
-        <Button label={ 'Field Setup' } spaced />
+
+        <Button label={ 'Field Setup' }
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/`) }
+                spaced />
+
         <Button label={ 'Probes Monitor' }
                 spaced />
 
@@ -261,8 +277,6 @@ FieldChartsTopBar.propTypes = {
 };
 
 const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
-
-  useTheme(true);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -346,3 +360,61 @@ FieldTemperaturesChartsTopBar.propTypes = {
   setShowSideBar: func,
   clientRequestParams: shape({})
 };
+
+const FieldSetupTopBar = ({}) => {
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { groupName, clientName } = useParams();
+
+  const logout = () => {
+    dispatch(requestLogout());
+    history.push('/');
+  };
+
+  return (
+    <div className="field-setup-top-bar">
+      <div className="field-setup-top-bar__left">
+
+        <div className="field-setup-top-bar__left-header">
+          <img src={ '/favicon-irricheck.ico' }
+               alt={ 'icon' }
+               height={ 14 } />
+          <p onClick={ () => history.push('/overview') }>
+            { 'IrriCheck Pulse' }
+          </p>
+        </div>
+
+        <div className="field-setup-top-bar__left-lower">
+
+          <Button label={ 'Recommendations' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
+                  medium />
+
+          <Button label={ 'Other Farms' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
+                  medium />
+        </div>
+      </div>
+      <div className="field-setup-top-bar__right">
+        <TextInput placeholder={ 'Find Last Readings' }
+                   topbar />
+
+        <DropDownButton name={ PROFILE_ICON }
+                        className={ 'client-fields-top-bar__right--menu' }
+                        fill={ '#53a5df' }
+                        onLogOutClick={ () => logout() }
+                        menu={ TOPBAR_OPTIONS }
+                        profile
+                        left />
+      </div>
+    </div>
+  );
+};
+
+FieldSetupTopBar.propTypes = {
+  showSideBar: bool,
+  setShowSideBar: func,
+  clientRequestParams: shape({})
+};
+

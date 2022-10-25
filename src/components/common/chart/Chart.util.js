@@ -3,6 +3,7 @@ import {
   ACTUAL_IRRIGATION,
   AGGREGATE_BOTTOM_SOIL,
   AGGREGATE_TOP_SOIL,
+  CANOPY_OUTSIDE_TEMPERATURE,
   DAILY_ETO,
   DEFICIT_100MM,
   DEFICIT_200MM,
@@ -14,7 +15,8 @@ import {
   EC,
   FLOW_DAILY,
   FLOW_HOURLY,
-  TEMPERATURE_MULTILINE,
+  RAIN_HUMIDITY,
+  SOIL_TEMPERATURE,
   VOLT_READINGS,
   VPD
 } from '../../../tools/general/system-variables.util';
@@ -47,8 +49,11 @@ export const chartByName = (chartName, isDarkMode) => {
     case ACTUAL_IRRIGATION:
     case DAILY_ETO:
       return { header: chartName, height: '35%' };
-    case TEMPERATURE_MULTILINE :
+    case SOIL_TEMPERATURE :
+    case CANOPY_OUTSIDE_TEMPERATURE :
+    case RAIN_HUMIDITY :
       return { height: '33.3%' };
     default:
+      return { height: '33.3%' };
   }
 };

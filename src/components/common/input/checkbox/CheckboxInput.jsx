@@ -13,7 +13,17 @@ const CheckboxInput = ({
                          onClick,
                          disabled,
                          actual,
-                         forecast
+                         forecast,
+                         mm100,
+                         mm200,
+                         mm300,
+                         mm400,
+                         mm600,
+                         mm800,
+                         canopy,
+                         outside,
+                         humidity,
+                         rain
                        }) => {
 
   return (
@@ -28,7 +38,8 @@ const CheckboxInput = ({
              disabled={ disabled }
              onClick={ onClick }
              type={ 'checkbox' }
-             className={ getClassNames('checkbox-input__input', { actual, forecast }) } />
+             className={ getClassNames('checkbox-input__input',
+               { actual, forecast, mm100, mm200, mm300, mm400, mm600, mm800, canopy, outside, humidity, rain }) } />
     </div>
   );
 };

@@ -63,6 +63,15 @@ body.dark-mode {
     background-color: map.get(color.$colorMap, pulse-blue);
   }
 
+  .field-setup-side-bar__list--client,
+  .field-setup-side-bar__list {
+    li {
+      &:hover {
+        border-bottom: util.rem(2) solid map.get(color.$colorMap, row-hover-blue);
+        background-color: map.get(color.$colorMap, pulse-blue);
+      }
+    }
+  }
   .client-fields-side-bar__list__item__subheader--selected,
   .client-fields-side-bar__list__item__subheader:hover {
     border-bottom: util.rem(2) solid map.get(color.$colorMap, row-hover-blue);
@@ -125,6 +134,10 @@ body.dark-mode {
 
   .snack {
     background-color: map.get(color.$colorMap, dark-mode-grey);
+  }
+
+  .checkbox-input__input {
+    border: util.rem(1.2) solid map.get(color.$colorMap, white);
   }
 
   .tooltip__popup {

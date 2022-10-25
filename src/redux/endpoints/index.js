@@ -5,6 +5,7 @@ import {
   FLOW_DAILY_STRING,
   FLOW_HOURLY_STRING,
   MOTTECH_STRING,
+  SOIL_TEMP,
   VOLTS_STRING,
   VPD_STRING
 } from '../../tools/general/system-variables.util';
@@ -118,6 +119,11 @@ export const getRequestParams = ({
       ...clientParams,
       field: activeFieldName ? activeFieldName : null,
       get: MOTTECH_STRING
+    },
+    soilTempParams: {
+      ...clientParams,
+      field: activeFieldName ? activeFieldName : null,
+      get: SOIL_TEMP
     }
   };
 };

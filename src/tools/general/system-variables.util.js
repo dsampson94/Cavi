@@ -42,6 +42,9 @@ export const UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Not Retr
 export const SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Retrieved Successfully';
 export const UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Not Retrieved';
 
+export const SUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Not Retrieved';
+
 //MIDBAR
 export const MID_BAR_ASSISTANT = 'Assistant';
 export const MID_BAR_OVERVIEW = 'Overview';
@@ -91,6 +94,7 @@ export const OVERVIEW_MIDBAR = 'overview_midbar';
 export const CLIENT_FIELDS_MIDBAR = 'client_fields__midbar';
 export const FIELD_CHART_MIDBAR = 'field_chart_midbar';
 export const FIELD_TEMPERATURES_MIDBAR = 'field_temperatures_midbar';
+export const FIELD_SETUP_MIDBAR = 'field_setup_midbar';
 
 //TABLE_MIDBAR
 export const PREVIOUS = 'previous';
@@ -157,6 +161,7 @@ export const FULL_VIEW_DAYS = 365;
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
 export const FIELD_TEMPERATURES = 'FieldTemperatures';
+export const FIELD_SETUP = 'ClientSetup';
 
 //CHART TYPES
 export const DEFICIT = 'deficit';
@@ -172,6 +177,13 @@ export const DEFICIT_300MM = 'deficit_300mm';
 export const DEFICIT_400MM = 'deficit_400mm';
 export const DEFICIT_600MM = 'deficit_600mm';
 export const DEFICIT_800MM = 'deficit_800mm';
+
+export const LINE_100MM = '100mm';
+export const LINE_200MM = '200mm';
+export const LINE_300MM = '300mm';
+export const LINE_400MM = '400mm';
+export const LINE_600MM = '600mm';
+export const LINE_800MM = '800mm';
 
 export const AGGREGATE_TOP_SOIL = 'aggregate_0 - 400mm';
 export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
@@ -189,6 +201,16 @@ export const ANALYSE_FIELD = 'Analyse Field';
 
 export const DAILY_ETO = 'Daily ETo';
 
+export const SOIL_TEMPERATURE = 'soil_temperature';
+export const CANOPY_OUTSIDE_TEMPERATURE = 'canopy_outside_temperature';
+export const RAIN_HUMIDITY = 'rain_humidity';
+
+export const CANOPY_LINE = 'Canopy Temperatures';
+export const OUTSIDE_LINE = 'Outside Temperatures';
+
+export const RAIN_LINE = 'Rain';
+export const HUMIDITY_LINE = 'Humidity';
+
 //DROPDOWN
 export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';
 export const CHART_USAGE_MENU = 'chart_usage_menu';
@@ -200,7 +222,7 @@ export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';
 export const FLOW_DAILY_OPTION = 'Flow Meter Daily';
 export const FLOW_HOURLY_OPTION = 'Flow Meter Hourly';
-export const RAIN_OPTION = 'Rain';
+export const RAIN_OPTION = 'Rain_option';
 export const EC_OPTION = 'EC Sensor Data (mS/cm)';
 export const VPD_OPTION = 'VPD (kPa) Readings';
 export const ACTUAL_IRRIGATION_OPTION = 'Actual Irrigation Data';
@@ -238,4 +260,5 @@ export const FLOW_HOURLY_STRING = 'flowhourly';
 export const EC_STRING = 'ec';
 export const VPD_STRING = 'vpd';
 export const MOTTECH_STRING = 'mottech';
+export const SOIL_TEMP = 'soiltemp';
 

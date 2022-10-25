@@ -1,8 +1,12 @@
 import {
-  SET_FIELD_CHART_LIST, SET_FIELD_EC_CHART_LIST,
+  SET_FIELD_CHART_LIST,
+  SET_FIELD_EC_CHART_LIST,
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
-  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST, SET_FIELD_MOTTECH_CHART_LIST,
-  SET_FIELD_VOLT_CHART_LIST, SET_FIELD_VPD_CHART_LIST
+  SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
+  SET_FIELD_MOTTECH_CHART_LIST,
+  SET_FIELD_VOLT_CHART_LIST,
+  SET_FIELD_VPD_CHART_LIST,
+  SET_SOIL_TEMP_LIST
 } from '../actions/field.action';
 
 export const initialState = {
@@ -12,7 +16,8 @@ export const initialState = {
   flowMeterHourlyList: undefined,
   ECList: undefined,
   VPDList: undefined,
-  mottechList: undefined
+  mottechList: undefined,
+  soilTempList: undefined
 };
 
 export const fieldReducer = (state = initialState, action) => {
@@ -64,6 +69,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         mottechList
+      };
+    }
+    case SET_SOIL_TEMP_LIST: {
+      const { soilTempList } = action;
+      return {
+        ...state,
+        soilTempList
       };
     }
     default:

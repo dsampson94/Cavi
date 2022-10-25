@@ -9,8 +9,7 @@ const OverviewContainer = () => {
 
   return (
     <Switch>
-      <Route exact path={ `${ path }` }
-             component={ FieldsOverviewContainer } />
+      <Route exact path={ `${ path }` } component={ FieldsOverviewContainer } />
     </Switch>
   );
 };

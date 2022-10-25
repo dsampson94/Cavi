@@ -13,6 +13,7 @@ import {
   DOUBLE_DROPDOWN,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
+  FIELD_SETUP_MIDBAR,
   FIELD_TEMPERATURES_MIDBAR,
   MID_BAR_ASSISTANT,
   MID_BAR_CHART,
@@ -51,6 +52,8 @@ const MidBar = ({
                   setActiveDataPeriod,
                   showChartsSideBar,
                   setShowChartsSideBar,
+                  showSetupSideBar,
+                  setShowSetupSideBar,
                   mappedFieldList,
                   mappedMenuList,
                   setActiveFieldName,
@@ -95,6 +98,15 @@ const MidBar = ({
                                             setActiveFieldName={ setActiveFieldName }
                                             yAxisShared={ yAxisShared }
                                             setYAxisShared={ setYAxisShared } />;
+
+    case FIELD_SETUP_MIDBAR:
+      return <FieldSetupMidBar showSetupSideBar={ showSetupSideBar }
+                               setShowSetupSideBar={ setShowSetupSideBar }
+                               mappedFieldList={ mappedFieldList }
+                               mappedMenuList={ mappedMenuList }
+                               setActiveFieldName={ setActiveFieldName }
+                               yAxisShared={ yAxisShared }
+                               setYAxisShared={ setYAxisShared } />;
   }
 };
 
@@ -265,8 +277,8 @@ const FieldChartsMidBar = ({
       <div className="field-chart__top-bar--left">
 
         <FieldButtons className={ 'field-chart__top-bar--left-inner' }
-                      setShowChartsSideBar={ setShowChartsSideBar }
-                      showChartsSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }
+                      showSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
 
         <div className={ 'field-chart__top-bar--left-outer' }>
@@ -334,8 +346,6 @@ const FieldTemperaturesChartsMidBar = ({
   const history = useHistory();
   const { groupName, clientName, probeNumber, fieldName } = useParams();
 
-  console.log(fieldName);
-
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
       if (item.fieldName.locationName === fieldName) {
@@ -359,8 +369,8 @@ const FieldTemperaturesChartsMidBar = ({
       <div className="field-temperatures__top-bar--left">
 
         <FieldButtons className={ 'field-temperatures__top-bar--left-inner' }
-                      setShowChartsSideBar={ setShowChartsSideBar }
-                      showChartsSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }
+                      showSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
 
         <div className={ 'field-chart__top-bar--left-outer' }>
@@ -403,11 +413,63 @@ const FieldTemperaturesChartsMidBar = ({
 
 FieldTemperaturesChartsMidBar.propTypes = {};
 
-const FieldButtons = ({ className, setShowChartsSideBar, showChartsSideBar, viewClient }) => {
+const FieldSetupMidBar = ({
+                            showSetupSideBar,
+                            setShowSetupSideBar,
+                            mappedFieldList,
+                            setActiveFieldName
+                          }) => {
+
+  const history = useHistory();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
+
+  const viewClient = (direction) => {
+    mappedFieldList.forEach((item, index) => {
+      if (item.fieldName.locationName === fieldName) {
+        const field = mappedFieldList[index + direction].fieldName;
+        setActiveFieldName(field.locationName);
+        handleFieldClick(history, groupName, clientName, field);
+      }
+    });
+  };
+
+  const handleFieldClick = (history, groupName, clientName, field) => {
+    history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
+  };
+
+  return (
+    <div className="field-setup__top-bar">
+      <div className="field-setup__top-bar--left">
+
+        <FieldButtons className={ 'field-setup__top-bar--left-inner' }
+                      setShowSideBar={ setShowSetupSideBar }
+                      viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Deficits' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
+
+      </div>
+
+      <div className="field-temperatures__top-bar--center">
+        <div>{ fieldName }</div>
+      </div>
+
+    </div>
+  );
+};
+
+FieldSetupMidBar.propTypes = {};
+
+const FieldButtons = ({ className, setShowSideBar, showSideBar, viewClient }) => {
+
   return (
     <div className={ className }>
       <Button label={ 'Fields' }
-              onClick={ () => setShowChartsSideBar(!showChartsSideBar) }
+              onClick={ () => setShowSideBar(!showSideBar) }
               chartbar
               spaced />
       <Button label={ '<' }
