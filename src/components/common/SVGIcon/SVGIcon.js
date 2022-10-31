@@ -47,7 +47,7 @@ import useTheme from '../../../tools/hooks/useTheme';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, row }) => {
 
   const { localActiveTheme } = useTheme(false);
 

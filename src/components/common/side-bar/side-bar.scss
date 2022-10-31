@@ -233,8 +233,9 @@
 
     h4 {
       font-weight: bold;
+      white-space: nowrap;
       padding: util.rem(1) util.rem(0) util.rem(1) util.rem(2);
-      border: util.rem(2) solid transparent;
+      border: util.rem(3) solid transparent;
     }
 
     &--client {
@@ -246,9 +247,8 @@
         flex-direction: row;
         cursor: pointer;
         font-size: util.rem(16);
-        padding: util.rem(1);
         color: orange;
-        border: util.rem(2) solid transparent;
+        border: util.rem(1) solid transparent;
         border-top-right-radius: map.get(radius.$border-radius, medium);
         border-bottom-right-radius: map.get(radius.$border-radius, medium);
 
@@ -271,7 +271,7 @@
       cursor: pointer;
       font-size: util.rem(16);
       padding: util.rem(1);
-      border: util.rem(2) solid transparent;
+      border: util.rem(1) solid transparent;
       border-top-right-radius: map.get(radius.$border-radius, medium);
       border-bottom-right-radius: map.get(radius.$border-radius, medium);
 
@@ -286,9 +286,18 @@
         background-color: map.get(color.$colorMap, row-hover-blue);
       }
     }
+
+    &__item {
+
+      &--selected {
+        cursor: pointer;
+        position: relative;
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+    }
   }
 
   &--show {
-    width: 12%;
+    width: 16%;
   }
 }

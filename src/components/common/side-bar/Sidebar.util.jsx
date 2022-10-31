@@ -283,18 +283,3 @@ export const mapFavoritesList = (storedFavoritesList, mappedUserData) => {
   });
   return favoritesList;
 };
-
-export const SideBarFieldSetupOptions = ({ setActiveFieldName, view }) => {
-
-  const history = useHistory();
-
-  const { groupName, clientName, fieldName } = useParams();
-
-  return (
-    <div className="field-setup-side-bar__list">
-      <h2>FIELD SETUP</h2>
-    </div>
-  );
-};
-
-SideBarFieldSetupOptions.propTypes = {};

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
-import { generateId, getClassNames, isEmpty, removeCamelCase } from '../../../../tools/general/helpers.util';
-import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+
+import { CHARTS, CLIENT_RECOMMENDATION_VIEW, FIELD_SETUP_VIEW, QUICK_VIEW } from '../../../tools/general/system-variables.util';
 
 import {
   CaptureNoteColumn,
@@ -11,6 +11,8 @@ import {
   DeficitColumn,
   DropdownIconColumn,
   FieldNameColumn,
+  FieldSetupChartButton,
+  FieldSetupNameColumn,
   ForecastTimeIconsColumn,
   LandGroupForecastColumn,
   LastReadingColumn,
@@ -23,11 +25,34 @@ import {
   WarningIconColumn
 } from './TableComponents.util';
 
-import RecommendationModal from '../../modal/RecommendationModal';
+import { generateId, getClassNames, isEmpty, removeCamelCase } from '../../../tools/general/helpers.util';
+import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+
+import RecommendationModal from '../modal/RecommendationModal';
 
 import './table.scss';
 
 const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
+
+  switch (tableName) {
+    case CLIENT_RECOMMENDATION_VIEW:
+      return <ClientFieldsTable tableName={ tableName }
+                                activeTableData={ activeTableData }
+                                hiddenColumns={ hiddenColumns }
+                                setSelectedIndex={ setSelectedIndex }
+                                setSelectedDropdownObject={ setSelectedDropdownObject } />;
+    case FIELD_SETUP_VIEW:
+      return <FieldSetupTable tableName={ tableName }
+                              activeTableData={ activeTableData }
+                              hiddenColumns={ hiddenColumns }
+                              setSelectedIndex={ setSelectedIndex }
+                              setSelectedDropdownObject={ setSelectedDropdownObject } />;
+  }
+};
+
+export default Table;
+
+const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -240,19 +265,19 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
       return (
         <>
           { !isDropdownRow &&
-            <tr className={ getClassNames('table__body__row',
-              { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
-                onClick={ () => setSelectedRow(object) }
-                onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
-                key={ generateId() }>
-              { tableDataElements }
-            </tr> }
+          <tr className={ getClassNames('table__body__row',
+            { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
+              onClick={ () => setSelectedRow(object) }
+              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+              key={ generateId() }>
+            { tableDataElements }
+          </tr> }
 
           { object.expanded && isDropdownRow &&
-            <tr className={ 'table__body__row' }
-                key={ generateId() }>
-              { tableDataElements }
-            </tr> }
+          <tr className={ 'table__body__row' }
+              key={ generateId() }>
+            { tableDataElements }
+          </tr> }
         </>
       );
     });
@@ -265,7 +290,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
         </tr> }
 
       { showModal &&
-        <RecommendationModal activeObject={ hoveredRowObject } /> }
+      <RecommendationModal activeObject={ hoveredRowObject } /> }
       </tbody>
     );
   };
@@ -278,10 +303,128 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
   );
 };
 
-Table.propTypes = {
+ClientFieldsTable.propTypes = {
   tableName: string.isRequired,
   activeTableData: arrayOf(shape({})),
   hiddenColumns: arrayOf(string).isRequired
 };
 
-export default Table;
+const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
+
+  const history = useHistory();
+  const { groupName, clientName, activeScreen } = useParams();
+
+  const [selectedRow, setSelectedRow] = useState(undefined);
+
+  const buildTableHeader = () => {
+    if (!activeTableData) return;
+    let headers;
+    if (activeTableData?.length !== 0) {
+      const objectKeys = Object.keys(activeTableData?.[0]);
+      headers = objectKeys.filter((key) => !hiddenColumns?.includes(key)).map((key) => (
+        <th key={ generateId() }
+            style={ { color: hideColumnHeader(tableName, key) } }>
+          <div className="table__header-row__text--field-setup">
+            { removeCamelCase(key) }
+          </div>
+        </th>
+      ));
+    }
+
+    return (
+      <thead className="table__header">
+      <tr className="table__header-row">
+        { headers }
+      </tr>
+      </thead>
+    );
+  };
+
+  const buildTableBody = () => {
+    if (!activeTableData) return;
+    const rows = activeTableData?.map((object, rowIndex) => {
+
+      const objectValues = [];
+      for (const property in object) {
+        if (!hiddenColumns.includes(property)) {
+          objectValues.push(object[property]);
+        }
+      }
+
+      let tableDataElements = [];
+      if (activeTableData?.length > 0) {
+        tableDataElements = objectValues?.map((value, dataIndex) => {
+          switch (dataIndex) {
+            case 0:
+              return <FieldSetupChartButton history={ history }
+                                            groupName={ groupName }
+                                            clientName={ clientName }
+                                            dataIndex={ dataIndex }
+                                            value={ value }
+                                            name={ value?.name }
+                                            activeScreen={ activeScreen }
+                                            icon={ CHARTS } />;
+            case 1:
+              if (value === QUICK_VIEW)
+                return <FieldSetupChartButton history={ history }
+                                              groupName={ groupName }
+                                              clientName={ clientName }
+                                              dataIndex={ dataIndex }
+                                              value={ value }
+                                              name={ value?.name }
+                                              activeScreen={ activeScreen }
+                                              icon={ QUICK_VIEW } />;
+              else
+                return <FieldSetupNameColumn dataIndex={ dataIndex }
+                                             name={ value?.name }
+                                             probe={ value?.probe }
+                                             value={ value } />;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            default:
+              return <FieldSetupNameColumn dataIndex={ dataIndex }
+                                           name={ value?.name }
+                                           probe={ value?.probe }
+                                           value={ value } />;
+          }
+        });
+      }
+
+      return (
+        <>
+          <tr className={ 'table__body__row' }
+              onClick={ () => setSelectedRow(object) }
+              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+              key={ generateId() }>
+            { tableDataElements }
+          </tr>
+        </>
+      );
+    });
+
+    return (
+      <tbody className="table__body">
+      { (!isEmpty(rows)) ? rows :
+        <tr key={ generateId() }>
+          <td>{ 'Loading...' }</td>
+        </tr> }
+      </tbody>
+    );
+  };
+
+  return (
+    <table className="table">
+      { buildTableHeader() }
+      { buildTableBody() }
+    </table>
+  );
+};
+
+FieldSetupTable.propTypes = {
+  tableName: string.isRequired,
+  activeTableData: arrayOf(shape({})),
+  hiddenColumns: arrayOf(string).isRequired
+};
+

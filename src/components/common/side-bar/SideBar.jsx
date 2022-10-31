@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 
 import { bool, func } from 'prop-types';
 
 import {
+  BILLING_ROUTE,
+  CLIENT_DETAILS_ROUTE,
   CLIENT_FIELDS,
+  CROP_DETAILS_ROUTE,
+  CROP_FACTORS_ROUTE,
   FIELD_CHARTS,
   FIELD_SETUP,
   FIELD_TEMPERATURES,
-  SEARCH_PLACEHOLDER
+  FIELDS_SPLIT_ROUTE,
+  GENERAL_ROUTE,
+  IRRIDAY_ROUTE,
+  IRRISYS_ROUTE,
+  ML_FORECASTS_STRING,
+  PROBES_DETAILED_ROUTE,
+  PROBES_SUMMARY_ROUTE,
+  PUSH_WARNING_ROUTE,
+  ROOTS_ROUTE,
+  SEARCH_PLACEHOLDER,
+  SENSORS_ROUTE,
+  SMS_RECOMMENDATION_ROUTE,
+  SMS_WARNING_ROUTE,
+  USERS_ROUTE,
+  WEATHER_STATION_ROUTE
 } from '../../../tools/general/system-variables.util';
 
 import { mapFavoritesList, SideBarButton, SideBarFieldList, SideBarList, ViewDataBar } from './Sidebar.util';
@@ -19,7 +38,15 @@ import Button from '../button/Button';
 
 import './side-bar.scss';
 
-const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList, setActiveLoadPeriod, setActiveFieldName, view }) => {
+const SideBar = ({
+                   showSideBar,
+                   setShowSideBar,
+                   mappedUserData,
+                   mappedFieldList,
+                   setActiveLoadPeriod,
+                   setActiveFieldName,
+                   view
+                 }) => {
 
   switch (view) {
     case CLIENT_FIELDS:
@@ -46,7 +73,6 @@ const SideBar = ({ showSideBar, setShowSideBar, mappedUserData, mappedFieldList,
     case FIELD_SETUP:
       return <FieldSetupSideBar showSideBar={ showSideBar }
                                 setShowSideBar={ setShowSideBar }
-                                mappedFieldList={ mappedFieldList }
                                 setActiveFieldName={ setActiveFieldName } />;
   }
 };
@@ -193,7 +219,15 @@ FieldTemperaturesChartsSideBar.propTypes = {
   setShowSideBar: func
 };
 
-const FieldSetupSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, setActiveFieldName }) => {
+const FieldSetupSideBar = ({ showSideBar, clientRequestFields, setActiveFieldName }) => {
+
+  const history = useHistory();
+
+  const { groupName, clientName, activeScreen } = useParams();
+
+  const handleSetupSideBarClick = (optionSelected) => {
+    return history.push(`/client/${ groupName }/${ clientName }/field-setup/${ optionSelected }`);
+  };
 
   return (
     <div className={ getClassNames('field-setup-side-bar', { show: showSideBar }) }>
@@ -201,33 +235,85 @@ const FieldSetupSideBar = ({ showSideBar, mappedFieldList, clientRequestFields, 
 
         <ul className={ 'field-setup-side-bar__list' }>
           <h4>Field Setup</h4>
-          <li>General</li>
-          <li>Probes - Summary</li>
-          <li>Probes - Detail</li>
-          <li>Sensors</li>
-          <li>Roots</li>
-          <li>Cropfactors</li>
-          <li>Crop Details</li>
-          <li>Weatherstation</li>
-          <li>Irrigation System</li>
-          <li>Irrigation Days</li>
-          <li>SMS Warnings</li>
-          <li>Push Notifications</li>
-          <li>Split Valves</li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === GENERAL_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(GENERAL_ROUTE) }>General
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === PROBES_SUMMARY_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(PROBES_SUMMARY_ROUTE) }>Probes - Summary
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === PROBES_DETAILED_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(PROBES_DETAILED_ROUTE) }>Probes - Detail
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === SENSORS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(SENSORS_ROUTE) }>Sensors
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === ROOTS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(ROOTS_ROUTE) }>Roots
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === CROP_FACTORS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(CROP_FACTORS_ROUTE) }>Cropfactors
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === CROP_DETAILS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(CROP_DETAILS_ROUTE) }>Crop Details
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === WEATHER_STATION_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(WEATHER_STATION_ROUTE) }>Weatherstation
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === IRRISYS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(IRRISYS_ROUTE) }>Irrigation System
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === IRRIDAY_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(IRRIDAY_ROUTE) }>Irrigation Days
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === SMS_WARNING_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(SMS_WARNING_ROUTE) }>SMS Warnings
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === PUSH_WARNING_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(PUSH_WARNING_ROUTE) }>Push Notifications
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === FIELDS_SPLIT_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(FIELDS_SPLIT_ROUTE) }>Split Valves
+          </li>
           <li><Button label={ 'Create new field' } /></li>
         </ul>
 
         <ul className={ 'field-setup-side-bar__list--client' }>
           <h4>Client Details</h4>
-          <li>Billing</li>
-          <li>Client Details</li>
-          <li>Users</li>
-          <li>SMS Recommendations</li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === BILLING_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(BILLING_ROUTE) }>Billing
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === CLIENT_DETAILS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(CLIENT_DETAILS_ROUTE) }>Client Details
+          </li>
+          <li className={ getClassNames('field-setup-side-bar__list__item',
+            { selected: (activeScreen === USERS_ROUTE) }) }
+              onClick={ () => handleSetupSideBarClick(USERS_ROUTE) }>Users
+          </li>
+          <li
+            className={ getClassNames('field-setup-side-bar__list__item',
+              { selected: (activeScreen === SMS_RECOMMENDATION_ROUTE) }) }
+            onClick={ () => handleSetupSideBarClick(SMS_RECOMMENDATION_ROUTE) }>SMS Recommendations
+          </li>
         </ul>
 
         <ul className={ 'field-setup-side-bar__list' }>
           <h4>Advanced</h4>
-          <li>Forecasts</li>
+          <li onClick={ () => handleSetupSideBarClick(ML_FORECASTS_STRING) }>Forecasts</li>
         </ul>
       </> }
     </div>

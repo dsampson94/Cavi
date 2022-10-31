@@ -19,13 +19,13 @@ import {
     UNIT,
     WARNING,
     WATCH
-} from '../../../../tools/general/system-variables.util';
+} from '../../../tools/general/system-variables.util';
 
-import { getClassNames, noOp } from '../../../../tools/general/helpers.util';
+import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
 
-import SVGIcon from '../../SVGIcon/SVGIcon';
-import ToolTip from '../../tool-tip/ToolTip';
-import InputSearch from '../../input-search/InputSearch';
+import SVGIcon from '../SVGIcon/SVGIcon';
+import ToolTip from '../tool-tip/ToolTip';
+import InputSearch from '../input-search/InputSearch';
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
     return <div className="client-fields__search">
@@ -547,4 +547,46 @@ DropDown.propTypes = {
     value: shape({}),
     columnNumber: number,
     onClick: func
+};
+
+export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
+    if (value)
+        return <td onClick={ noOp() }
+                   key={ generateId() }>
+            <div className={ 'table__body__row__td-container--field-setup' }
+                 style={ { color: value?.color } }>
+                {/*<ToolTip text={ value } />*/ }
+                { name ? name : probe ? probe : value }
+            </div>
+        </td>;
+    else
+        return <td key={ generateId() } />;
+};
+
+FieldSetupNameColumn.propTypes = {
+    dataIndex: number.isRequired,
+    value: string
+};
+
+export const FieldSetupChartButton = ({ history, groupName, clientName, dataIndex, icon, value }) => {
+
+    const handleRowChartButtonClick = () => {
+        const probeNumber = value?.split('*_*')[1];
+        if (probeNumber === 'undefined') return undefined;
+        const fieldName = value?.split('*_*')[0];
+        history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`);
+    };
+
+    return <td onClick={ noOp() }
+               key={ generateId() }>
+        <SVGIcon name={ icon }
+                 onClick={ () => handleRowChartButtonClick() }
+                 row />
+
+    </td>;
+};
+
+FieldSetupChartButton.propTypes = {
+    dataIndex: number.isRequired,
+    value: string
 };

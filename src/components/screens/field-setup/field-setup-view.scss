@@ -1,0 +1,21 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
+
+.field-setup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+
+  &__scroll {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+  }
+}

@@ -17,3 +17,9 @@ export const getExtendedChartList = (field) => [
   getExtendedChartListEndpoint(),
   getHttpGetOptions(field)
 ];
+
+const getFieldSetupListEndpoint = () => `${ API_HOST }/getFieldSetup.php`;
+export const getFieldSetupList = (field) => [
+  getFieldSetupListEndpoint(),
+  getHttpGetOptions(field)
+];

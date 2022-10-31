@@ -20,6 +20,8 @@ const ClientFieldsContainer = () => {
              component={ FieldTemperaturesChartViewContainer } />
       <Route exact path={ `${ path }/:groupName/:clientName/field-setup/` }
              component={ FieldSetupViewContainer } />
+      <Route exact path={ `${ path }/:groupName/:clientName/field-setup/:activeScreen` }
+             component={ FieldSetupViewContainer } />
     </Switch>
   );
 };

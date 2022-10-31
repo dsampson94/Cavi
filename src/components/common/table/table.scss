@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../../stylesheets/util" as util;
-@use "../../../../stylesheets/color" as color;
-@use "../../../../stylesheets/radius" as radius;
-@use "../../../../stylesheets/mixin" as mixin;
-@use "../../../../stylesheets/config" as config;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
 .table {
   display: table;
@@ -29,14 +29,20 @@
 
       &__text {
         user-select: none;
-        font-size: util.rem(9);
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          font-size: util.rem(10);
-        }
+        font-size: util.rem(12);
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          font-size: util.rem(14);
+          font-size: util.rem(15);
+        }
+
+        &--field-setup {
+          text-align: left;
+          user-select: none;
+          font-size: util.rem(12);
+
+          @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+            font-size: util.rem(15);
+          }
         }
       }
     }
@@ -53,7 +59,6 @@
         position: relative;
         opacity: 1;
         border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
-        background-color: map.get(color.$colorMap, row-hover-blue);
       }
 
       td {
@@ -128,6 +133,13 @@
               margin-top: util.rem(-5.5);
               right: 0;
             }
+          }
+
+          &--field-setup {
+            font-size: util.rem(11);
+            margin-left: util.rem(8);
+            text-align: left;
+            height: 100%;
           }
 
           &__battery-text {
@@ -300,13 +312,10 @@
 
       &--selected {
         cursor: pointer;
-        transition: 0.15s;
         z-index: 4;
         position: relative;
         opacity: 1;
         border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
-        border-top: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
-        background-color: map.get(color.$colorMap, row-hover-blue);
       }
 
       &--dropdown {

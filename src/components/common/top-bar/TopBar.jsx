@@ -12,6 +12,7 @@ import {
   FIELD_CHARTS,
   FIELD_SETUP,
   FIELD_TEMPERATURES,
+  GENERAL_ROUTE,
   MAPS,
   MAPS_ICON,
   PRINT,
@@ -126,7 +127,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
                   onClick={ () => setShowSideBar(!showSideBar) } />
 
           <Button label={ 'Field Setup' }
-                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/`) }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) }
           />
           <Button label={ 'Probes Monitor' } />
           <Button icon={ WEATHER_STATION_ICON }
@@ -234,7 +235,7 @@ const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
                 spaced />
 
         <Button label={ 'Field Setup' }
-                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/`) }
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) }
                 spaced />
 
         <Button label={ 'Probes Monitor' }

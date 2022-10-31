@@ -1,4 +1,4 @@
-import { noOp } from '../../../../tools/general/helpers.util';
+import { noOp } from '../../../tools/general/helpers.util';
 
 export const handleRowDoubleClick = (history, groupName, clientName, object) => {
   const { safeGroupName, safeClientName, safeLocationName, safeProbeNumber } = validatedEndpoints(groupName, clientName, object);

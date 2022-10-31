@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 
-import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
-import { TableSearchBar } from '../../common/table/client-fields/TableComponents.util';
+import { TableSearchBar } from '../../common/table/TableComponents.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
-import Table from '../../common/table/client-fields/Table';
+import Table from '../../common/table/Table';
 
 import './client-fields-view.scss';
 
@@ -31,11 +31,11 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
   useEffect(() => {
     if (!selectedIndex) return;
-    if (filteredTableData) {
+    if (filteredTableData)
       toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
-    } else {
+    else
       toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
-    }
+
     setSelectedIndex(undefined);
   });
 
@@ -66,7 +66,7 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
                         setFilteredTableData={ setFilteredTableData } />
 
         <div className="client-fields__scroll">
-          <Table tableName={ 'recommendationClientFieldView' }
+          <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
                  activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
                  hiddenColumns={ ['expanded'] }
                  selectedIndex={ selectedIndex }

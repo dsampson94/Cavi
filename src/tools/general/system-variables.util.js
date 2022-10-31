@@ -3,48 +3,6 @@ export const SNACK_SUCCESS = 'snack--success';
 export const SNACK_CRITICAL = 'snack--critical';
 export const SNACK_INFO = 'snack--info';
 
-export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Not Retrieved';
-
-export const SUCCESSFULLY_EMAILED_PDF = 'Client PDF Emailed Successfully';
-
-export const SUCCESSFUL_SEARCH = 'Fields Retrieved Successfully ';
-export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
-export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
-
-export const SUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibrated Successfully ';
-export const UNSUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibration Unsuccessful';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Not Retrieved';
-
-export const SUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Retrieved Successfully';
-export const UNSUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Not Retrieved';
-
 //MIDBAR
 export const MID_BAR_ASSISTANT = 'Assistant';
 export const MID_BAR_OVERVIEW = 'Overview';
@@ -118,6 +76,10 @@ export const WATCH = 'watch';
 export const HARVEST_ICON = 'harvest_tractor';
 export const TABLE_SEARCH_PLACEHOLDER = 'Search field or probe number';
 export const LOW_BATTERY = 'low_battery';
+
+//TABLENAMES
+export const CLIENT_RECOMMENDATION_VIEW = 'recommendationClientFieldView';
+export const FIELD_SETUP_VIEW = 'fieldSetupView';
 
 //EMOJI
 export const VERY_SATISFIED = 'very_satisfied';
@@ -261,4 +223,96 @@ export const EC_STRING = 'ec';
 export const VPD_STRING = 'vpd';
 export const MOTTECH_STRING = 'mottech';
 export const SOIL_TEMP = 'soiltemp';
+
+// 'GETFIELDSETUP' 'g' API STRINGS
+export const GENERAL_STRING = 'general';
+export const SENSORS_STRING = 'sensors';
+export const PROBES_STRING = 'probes';
+export const PROBES_DETAILED_STRING = 'probesdet';
+export const MAP_STRING = 'map';
+export const ROOTS_STRING = 'roots';
+export const CROP_FACTORS_STRING = 'cf';
+export const CROP_DETAILS_STRING = 'cropdetails';
+export const PHENOLOGICAL_STRING = 'phenological';
+export const IRRISYS_STRING = 'irrisys';
+export const IRRIDAY_STRING = 'irriday';
+export const WEATHER_STATION_STRING = 'ws';
+export const SASRI_STRING = 'sasri';
+export const USERS_STRING = 'users';
+export const SMS_RECOMMENDATION_STRING = 'smssending ';
+export const SMS_WARNING_STRING = 'smswarning';
+export const PUSH_WARNING_STRING = 'pushwarning';
+export const FIELDS_SPLIT_STRING = 'fieldssplit';
+export const CLIENT_DETAILS_STRING = 'clientdetails';
+export const BILLING_STRING = 'billing';
+export const ML_FORECASTS_STRING = 'mlforecasts';
+
+//ROUTES
+export const GENERAL_ROUTE = 'general';
+export const PROBES_SUMMARY_ROUTE = 'probe-summary';
+export const PROBES_DETAILED_ROUTE = 'probe-details';
+export const SENSORS_ROUTE = 'sensors';
+export const MAP_ROUTE = 'map';
+export const ROOTS_ROUTE = 'roots';
+export const CROP_FACTORS_ROUTE = 'cf';
+export const CROP_DETAILS_ROUTE = 'cropdetails';
+export const PHENOLOGICAL_ROUTE = 'phenological';
+export const IRRISYS_ROUTE = 'irrisys';
+export const IRRIDAY_ROUTE = 'irriday';
+export const WEATHER_STATION_ROUTE = 'ws';
+export const SASRI_ROUTE = 'sasri';
+export const USERS_ROUTE = 'users';
+export const SMS_RECOMMENDATION_ROUTE = 'smssending ';
+export const SMS_WARNING_ROUTE = 'smswarning';
+export const PUSH_WARNING_ROUTE = 'pushwarning';
+export const FIELDS_SPLIT_ROUTE = 'fieldssplit';
+export const CLIENT_DETAILS_ROUTE = 'clientdetails';
+export const BILLING_ROUTE = 'billing';
+export const ML_FORECASTS_ROUTE = 'mlforecasts';
+
+//SUCCESS/ERROR MESSAGES
+export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELDS = 'Fields Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELDS = 'Field Data Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA = 'Rain Data Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_PDF = 'Client PDF Not Retrieved';
+
+export const SUCCESSFULLY_EMAILED_PDF = 'Client PDF Emailed Successfully';
+
+export const SUCCESSFUL_SEARCH = 'Fields Retrieved Successfully ';
+export const UNSUCCESSFUL_FIELD_SEARCH = 'Invalid search - No Fields Found';
+export const UNSUCCESSFUL_CLIENT_SEARCH = 'Invalid search - No Clients Found';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST = 'Field Charts Not Retrieved';
+
+export const SUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibrated Successfully ';
+export const UNSUCCESSFULLY_CALIBRATED_PROBE = 'Probe Calibration Unsuccessful';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST = 'Volts Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_FLOW_METER_CHART_LIST = 'Flow Meter Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST = 'EC Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST = 'VPD Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_MOTTECH_CHART_LIST = 'MOTTECH Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST = 'Soil Temp Chart Not Retrieved';
+
+export const SUCCESSFULLY_RETRIEVED_FIELD_SETUP_LIST = 'Field setup list Retrieved Successfully';
+export const UNSUCCESSFULLY_RETRIEVED_FIELD_SETUP_LIST = 'Field setup list Not Retrieved';
 

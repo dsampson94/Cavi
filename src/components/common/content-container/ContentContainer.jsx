@@ -52,7 +52,6 @@ const ContentContainer = ({
       return <FieldSetupContentContainer children={ children }
                                          showSetupSideBar={ showSetupSideBar }
                                          setShowSetupSideBar={ setShowSetupSideBar }
-                                         mappedFieldList={ mappedFieldList }
                                          clientRequestParams={ clientRequestParams }
                                          setActiveFieldName={ setActiveFieldName }
                                          view={ view } />;
@@ -170,7 +169,6 @@ const FieldSetupContentContainer = ({
                                       showSetupSideBar,
                                       setShowSetupSideBar,
                                       clientRequestParams,
-                                      mappedFieldList,
                                       setActiveLoadPeriod,
                                       setActiveFieldName
                                     }) => {
@@ -181,13 +179,11 @@ const FieldSetupContentContainer = ({
   return (
     <div className="content-container">
       <TopBar clientRequestParams={ clientRequestParams }
-              mappedFieldList={ mappedFieldList }
               view={ view } />
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSetupSideBar }
                  mappedUserData={ mappedUser }
-                 mappedFieldList={ mappedFieldList }
                  setActiveLoadPeriod={ setActiveLoadPeriod }
                  setActiveFieldName={ setActiveFieldName }
                  view={ view } />
