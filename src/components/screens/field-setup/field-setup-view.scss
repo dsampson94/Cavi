@@ -18,4 +18,15 @@
     overflow: auto;
     flex-direction: column;
   }
+
+  &__client-details {
+
+    &__list {
+      margin-top: 2%;
+    }
+
+    &__label {
+      padding: util.rem(20) util.rem(0) util.rem(20) 5%;
+    }
+  }
 }

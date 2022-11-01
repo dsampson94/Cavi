@@ -159,6 +159,71 @@ const FieldSetupViewContainer = () => {
 
   useEffect(() => {
     dispatch(requestFieldSetupList(request.fieldSetupProbesParams, SET_FIELD_SETUP_PROBES_LIST));
+    switch (activeScreen) {
+      case GENERAL_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
+        return;
+      case PROBES_SUMMARY_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupProbesParams, SET_FIELD_SETUP_PROBES_LIST));
+        return;
+      case PROBES_DETAILED_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupProbesDetailedParams, SET_FIELD_SETUP_PROBES_DETAILED_LIST));
+        return;
+      case SENSORS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupSensorParams, SET_FIELD_SETUP_SENSORS_LIST));
+        return;
+      case MAP_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupMapParams, SET_FIELD_SETUP_MAP_LIST));
+        return;
+      case ROOTS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupRootsParams, SET_FIELD_SETUP_ROOTS_LIST));
+        return;
+      case CROP_FACTORS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupCropFactorsParams, SET_FIELD_SETUP_CROP_FACTORS_LIST));
+        return;
+      case CROP_DETAILS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupCropDetailsParams, SET_FIELD_SETUP_CROP_DETAILS_LIST));
+        return;
+      case PHENOLOGICAL_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupPhenologicalParams, SET_FIELD_SETUP_PHENOLOGICAL_LIST));
+        return;
+      case IRRISYS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupIrrigationSystemParams, SET_FIELD_SETUP_IRRIGATION_SYSTEM_LIST));
+        return;
+      case IRRIDAY_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupIrrigationDaysParams, SET_FIELD_SETUP_IRRIGATION_DAYS_LIST));
+        return;
+      case WEATHER_STATION_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupWeatherStationParams, SET_FIELD_SETUP_WEATHER_STATION_LIST));
+        return;
+      case SASRI_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupSASRIParams, SET_FIELD_SETUP_SASRI_LIST));
+        return;
+      case USERS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupUsersParams, SET_FIELD_SETUP_USERS_LIST));
+        return;
+      case SMS_RECOMMENDATION_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupSMSRecommendationParams, SET_FIELD_SETUP_SMS_RECOMMENDATION_LIST));
+        return;
+      case SMS_WARNING_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupSMSWarningParams, SET_FIELD_SETUP_SMS_WARNING_LIST));
+        return;
+      case PUSH_WARNING_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupPushWarningParams, SET_FIELD_SETUP_PUSH_WARNING_LIST));
+        return;
+      case FIELDS_SPLIT_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupFieldSplitParams, SET_FIELD_SETUP_SPLIT_VALVES_LIST));
+        return;
+      case CLIENT_DETAILS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupClientDetailsParams, SET_FIELD_SETUP_CLIENT_DETAILS_LIST));
+        return;
+      case BILLING_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupBillingParams, SET_FIELD_SETUP_BILLING_LIST));
+        return;
+      case ML_FORECASTS_ROUTE:
+        dispatch(requestFieldSetupList(request.fieldSetupMLForecastsParams, SET_FIELD_SETUP_ML_FORECASTS_LIST));
+        return;
+    }
   }, []);
 
   const mappedFieldSetupList = () => {
@@ -169,6 +234,7 @@ const FieldSetupViewContainer = () => {
   };
 
   return <FieldSetupView mappedSetupList={ mappedFieldSetupList() }
+                         activeScreen={ activeScreen }
                          clientRequestParams={ request.clientParams } />;
 };
 

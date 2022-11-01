@@ -32,7 +32,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
       return generalList?.lande?.map((field, index) => {
         return {
           ['']: `${ field?.land }*_*${ probeSummaryList?.lande[index]?.probe }`,
-          field: { name: field?.land, color: (field?.kleur === 'blou') ? 'blue' : field?.kleur },
+          field: { name: field?.land, color: (field?.kleur === 'blou') ? '#6495ED' : field?.kleur },
           currentCrop: field?.gewas,
           forecast: field?.gebied,
           group: field?.landgroep,
@@ -49,7 +49,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
         return {
           ['']: `${ field?.land }*_*${ field?.probe }`,
           field: { name: field?.land },
-          probe: { probe: field?.probe, color: 'blue' },
+          probe: { probe: field?.probe, color: '#6495ED' },
           [' ']: field?.status,
           latitude: field?.lat,
           longitude: field?.lon,
@@ -126,7 +126,6 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
       });
     case WEATHER_STATION_ROUTE:
       return weatherStationList?.lande?.map((field, index) => {
-        console.log(probeSummaryList);
         return {
           ['']: `${ field?.land }*_*${ probeSummaryList?.lande[index]?.probe }`,
           field: { name: field?.land },
@@ -179,7 +178,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
         };
       });
     case CLIENT_DETAILS_ROUTE:
-      const field = clientDetailsList?.['client'];
+      const field = clientDetailsList?.client;
       return [{
         ['']: `${ field?.land }*_*${ field?.probe }`,
         databaseName: `${ groupName } - ${ clientName }`,

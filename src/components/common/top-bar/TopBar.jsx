@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
@@ -67,6 +67,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const { groupName, clientName } = useParams();
 
@@ -126,9 +127,9 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
 
+          { !location?.pathname?.includes('overview') &&
           <Button label={ 'Field Setup' }
-                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) }
-          />
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) } /> }
           <Button label={ 'Probes Monitor' } />
           <Button icon={ WEATHER_STATION_ICON }
                   tooltip={ WEATHER_STATION } />

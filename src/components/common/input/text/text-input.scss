@@ -22,6 +22,20 @@
     min-width: util.rem(50);
   }
 
+  &--centered {
+    border-bottom: 1px solid map.get(color.$colorMap, black);;
+    padding: util.rem(0) 10% util.rem(0) 1%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+      padding: util.rem(0) 20% util.rem(0) 1%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+      padding: util.rem(0) 10% util.rem(0) 1%;
+    }
+
+  }
+
   &--topbar {
     min-width: 120px;
     width: 120px;
@@ -44,6 +58,10 @@
       text-align: left;
       margin-top: util.rem(5);
       flex-direction: row;
+    }
+
+    &--centered {
+      min-width: 35%;
     }
   }
 

@@ -1,3 +1,17 @@
+//ROUTES - NAVIGATETO
+export const navigateTo = (screenName, history, groupName, clientName, probeNumber, fieldName) => {
+  switch (screenName) {
+    case CLIENT_FIELDS :
+      return history.push(`/client/${ groupName }/${ clientName }`);
+    case FIELD_CHARTS :
+      return history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`);
+    case FIELD_TEMPERATURES :
+      return history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`);
+    case FIELD_SETUP :
+      return history.push(`/client/${ groupName }/${ clientName }/field-setup/general`);
+  }
+};
+
 //SNACKBAR
 export const SNACK_SUCCESS = 'snack--success';
 export const SNACK_CRITICAL = 'snack--critical';
@@ -269,6 +283,35 @@ export const FIELDS_SPLIT_ROUTE = 'fieldssplit';
 export const CLIENT_DETAILS_ROUTE = 'clientdetails';
 export const BILLING_ROUTE = 'billing';
 export const ML_FORECASTS_ROUTE = 'mlforecasts';
+
+//CLIENT DETAILS LABELS
+export const DATABASE_NAME = 'Database Name:';
+export const CREATED_BY = 'Created By:';
+export const CREATED_ON = 'Created On:';
+export const CONSULTANT = 'Consultant:';
+export const CLIENT_NAME = 'Client Name:';
+export const REGISTERED_BUSINESS_NAME = 'Registered Business Name:';
+export const XERO_CLIENT_CODE = 'Xero Client Code:';
+export const VAT_NUMBER = 'Vat Number:';
+export const POSTAL_ADDRESS = 'Postal Address:';
+export const CONTACT_PERSON = 'Contact Person:';
+export const CONTACT_TELEPHONE = 'Contact Telephone:';
+export const CONTACT_EMAIL = 'Contact Email:';
+export const AREA_REGION = 'Area / Region:';
+export const TIME_ZOME = 'Time Zone:';
+export const SEND_ANALYSIS_REPORT_ON = 'Send Analysis Report On:';
+export const SEND_ANALYSIS_REPORT_TO = 'Send Analysis Report To:';
+export const WARN_WHEN_VOLTS_BELOW = 'Warn Me When Volts Below:';
+export const SHOW_TRANSP_EVAP = 'Show Trans / Evap for week with recommendations:';
+export const SEND_INTERVAL_4G = '4G Send Interval:';
+export const SHOW_FROST_WARNINGS = 'Show Frost Warnings:';
+export const INTERVAL_CODE_VALUES_4G = '4G Interval Code Possible Values';
+export const INTERVAL_CODE_1_4G = '4G Interval Code -1 = Default As Set Per Consultant (Highly Recommended)';
+export const INTERVAL_CODE_2_4G = '4G Interval Code 2 = Send Every 2 Hours';
+export const INTERVAL_CODE_4_4G = '4G Interval Code 4 = Send 4am & 4pm Daily';
+export const INTERVAL_CODE_5_4G = '4G Interval Code 5 = Send Every Hour';
+export const KML_FILE_FOR_MAPS = 'KML File For Google Maps';
+export const DELETE_DATABASE_HERE = 'If this client has no fields set up, you can delete the database here';
 
 //SUCCESS/ERROR MESSAGES
 export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Retrieved Successfully';
