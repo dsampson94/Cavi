@@ -29,11 +29,12 @@ const Button = ({
                   chartbar,
                   datebar,
                   long,
-                  medium
+                  medium,
+                  add
                 }) => {
   return (
     <button className={ getClassNames('button',
-      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny, long, medium }) }
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny, long, medium, add }) }
             name={ name }
             type={ type }
             onClick={ onClick }
@@ -41,9 +42,9 @@ const Button = ({
             disabled={ disabled }>
       { !datebar && <label>{ label }</label> }
       { datebar && <div>
-          <div className={ 'button__label--upper' }><label>{ label }</label></div>
-          <div className={ 'button__label--lower' }><label>{ lowerLabel !== 0 && lowerLabel }</label></div>
-        </div> }
+        <div className={ 'button__label--upper' }><label>{ label }</label></div>
+        <div className={ 'button__label--lower' }><label>{ lowerLabel !== 0 && lowerLabel }</label></div>
+      </div> }
       { tooltip && <ToolTip text={ tooltip }
                             left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }

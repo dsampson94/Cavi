@@ -115,4 +115,10 @@
       }
     }
   }
+
+  &__text-input {
+    display: flex;
+    justify-content: left;
+    width: util.rem(100);
+  }
 }

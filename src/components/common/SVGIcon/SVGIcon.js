@@ -41,13 +41,14 @@ import {
   WATCH,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
+
 import { getClassNames } from '../../../tools/general/helpers.util';
 
 import useTheme from '../../../tools/hooks/useTheme';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, row }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall }) => {
 
   const { localActiveTheme } = useTheme(false);
 
@@ -60,14 +61,14 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, row
            height={ height }
            width={ width }
            fill={ getIconFill(localActiveTheme, fill, name) }
-           viewBox={ getViewBox(name, tiny, chart) }>
+           viewBox={ getViewBox(name, tiny, chart, tall) }>
         { getPath(name) }
       </svg>
     </div>
   );
 };
 
-const getViewBox = (name, tiny, chart) => {
+const getViewBox = (name, tiny, chart, tall) => {
   switch (name) {
     case DOWN_ARROW:
       return '10 -1 50 100';
@@ -78,7 +79,8 @@ const getViewBox = (name, tiny, chart) => {
     case CIRCLE_DROPDOWN:
       return '9 1 35 80';
     case DOUBLE_DROPDOWN:
-      return '9 8 35 70';
+      if (tall) return '9 1 35 60';
+      else return '9 8 35 70';
     case TOGGLE_YAXIS:
       return '6 1.5 25 60';
     case SETTINGS_GEAR:

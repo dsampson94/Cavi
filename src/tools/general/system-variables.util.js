@@ -193,6 +193,7 @@ export const CHART_USAGE_MENU = 'chart_usage_menu';
 export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
 export const CHART_ACTIVE_PERIOD = 'chart_active_period';
 export const TOPBAR_OPTIONS = 'topbar_options';
+export const FIELD_SETUP_LIST_CONTAINER = 'field_setup_list_container';
 
 export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';
@@ -273,6 +274,7 @@ export const CROP_DETAILS_ROUTE = 'cropdetails';
 export const PHENOLOGICAL_ROUTE = 'phenological';
 export const IRRISYS_ROUTE = 'irrisys';
 export const IRRIDAY_ROUTE = 'irriday';
+export const ADD_FIELD_ROUTE = 'create';
 export const WEATHER_STATION_ROUTE = 'ws';
 export const SASRI_ROUTE = 'sasri';
 export const USERS_ROUTE = 'users';
@@ -312,6 +314,68 @@ export const INTERVAL_CODE_4_4G = '4G Interval Code 4 = Send 4am & 4pm Daily';
 export const INTERVAL_CODE_5_4G = '4G Interval Code 5 = Send Every Hour';
 export const KML_FILE_FOR_MAPS = 'KML File For Google Maps';
 export const DELETE_DATABASE_HERE = 'If this client has no fields set up, you can delete the database here';
+
+//SMSWARNINGS LABELS
+export const ADD_NEW_NUMBER_TO_RECEIVE = 'Add New Number To Receive SMS Warning';
+export const ADD_WARNING = 'Add Warning';
+export const NOTE_IRRICHECK = 'Note: Irricheck May Bill The Client For The SMS Sent';
+export const NOTE_NOTIFICATIONS = 'Note: Notifications Will Only Work On Correctly Installed and Configured THT Sensors';
+export const NOTE_IMPORTANT_SMS = 'IMPORTANT: Irricheck Takes No Responsibility For SMS Warnings Not Sent Out';
+export const SMS_WARNINGS_FOR = 'SMS Warnings For ';
+
+//PUSHNOTIFICATIONS LABELS
+export const ADD_NEW_USER_LOGIN_TO_RECEIVE = 'Add New User Login To Receive Push Warnings';
+export const NOTE_IMPORTANT_PUSH = 'IMPORTANT: Irricheck Takes No Responsibility For Push Warnings Not Sent Out';
+export const THT_WARNINGS_FOR = 'THT Or EC Sensor Warnings For ';
+
+
+//SPLITVALVE LABELS
+export const ADD_NEW_SPLIT_VALVE = 'Add New Split Valve';
+export const NO_SPLIT_VALVE_CREATED = 'No Split Valves Have Been Created For The Database Yet';
+export const USE_THE_ABOVE_LIST = 'Use the Above Dropdown List to Create Your First Split Valve Now';
+
+//CREATE NEW FIELD
+export const ADD_NEW_FIELD_TODB = 'Add New Field To Database';
+export const COPY_TIP = 'TIP: Try the COPY function under general to set up fields';
+
+export const FIELD_NAME = 'Field Name';
+export const FORECAST_AREA = 'Forecast Area ';
+export const CROP = 'Crop';
+export const PLANT_DATE = 'Plant Date';
+export const HARVEST_DATE = 'Harvest Date';
+export const IRRIGATION_SYSTEM = 'Irrigation System';
+export const PROBE_NUMBER = 'Probe Number';
+export const LENGTH = 'Length';
+
+export const CHOOSE_CLOSEST = 'Choose area closest to the field location';
+export const DATE_CROP_PLANTED = 'Probe readings from the date the crop was planted';
+export const EXPECTED_HARVEST_DATE = 'Expected harvest date of crop. Probe readings after this date will not be imported.';
+export const PROBE_EG = 'Eg. AC51234, AC11909, 17635, etc.';
+export const LENGTH_OF_PROBE = 'Length of the probe, usually 800mm.';
+
+//CLIENT DETAILS USERS LABELS
+export const USERS_WITH_ACCESS_TO = 'Users With Access To: ';
+export const ONLY_ADMINS_CAN_EDIT = 'Only Admins Can Edit The Users For: ';
+export const CLIENT_DETAILS_HEADER = 'Client Details';
+export const CLIENT_NAME_HEADER = 'Client Name: ';
+export const CONTACT_EMAIL_HEADER = 'Contact Email: ';
+export const CONTACT_AREA_HEADER = 'Area: ';
+export const CLIENT_WAS_CREATED_ON_PULSE = 'Client Was Created in Pulse on ';
+
+//SMS RECOMMENDATIONS LABELS
+export const SMS_CONFIGURATION_FOR = 'Users With Access To: ';
+export const NOTE_BILLING_SMS = 'Note: Irricheck May Bill The Client R1.00 Per SMS Sent. ';
+export const CLICK_BUTTON_TO_ADD = 'Add New Number';
+
+//SMS RECOMMENDATIONS LABELS
+export const USE_THIS_SECTION_TO_MAINTAIN = 'Users with access to: ';
+export const STEPS_TO_CREATE_A_NEW_STATION = 'Note: Irricheck may bill the client R1.00 per SMS sent. ';
+export const STEP_1 = '1. While at the station physically, use the app to set up the GWS station. ';
+export const STEP_2 = '2. Come back to this screen and give the station a proper forecast name that is not already in use. ';
+export const STEP_3 = '3. After a few hours check back here to see if the station has calculated. ';
+export const STEP_4 = '4. Link The fields to the forecast that will now appear under \'General -Forecast Areas\'. ';
+export const STEP_5 = '5. Sick back and know you did something awesome! ';
+export const EXISTING_STATIONS_CREATED = 'Existing stations that you have created: ';
 
 //SUCCESS/ERROR MESSAGES
 export const SUCCESSFULLY_RETRIEVED_OVERVIEW = 'Fields Overview Retrieved Successfully';

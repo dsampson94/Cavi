@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { bool, func } from 'prop-types';
 
 import {
+  ADD_FIELD_ROUTE,
   BILLING_ROUTE,
   CLIENT_DETAILS_ROUTE,
   CLIENT_FIELDS,
@@ -287,7 +288,9 @@ const FieldSetupSideBar = ({ showSideBar, clientRequestFields, setActiveFieldNam
             { selected: (activeScreen === FIELDS_SPLIT_ROUTE) }) }
               onClick={ () => handleSetupSideBarClick(FIELDS_SPLIT_ROUTE) }>Split Valves
           </li>
-          <li><Button label={ 'Create new field' } /></li>
+          <li><Button label={ 'Create new field' }
+                      onClick={ () => handleSetupSideBarClick(ADD_FIELD_ROUTE) } />
+          </li>
         </ul>
 
         <ul className={ 'field-setup-side-bar__list--client' }>

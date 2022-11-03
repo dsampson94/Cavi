@@ -17,6 +17,60 @@
     display: flex;
     overflow: auto;
     flex-direction: column;
+
+    &__list {
+      margin: 2% 0 0 1%;
+
+      &__item {
+        display: flex;
+        flex-direction: row;
+        margin-top: util.rem(10);
+        min-height: util.rem(30);
+        border-bottom: util.rem(1) solid map.get(color.$colorMap, black);;
+
+        &__button-container {
+          margin: util.rem(5) 0 0 util.rem(20);
+        }
+
+        &--centered {
+          margin-top: util.rem(5);
+        }
+
+        &--dropdown {
+
+        }
+      }
+    }
+
+    &__button-container {
+      display: flex;
+      justify-items: center;
+      margin: 2% 45% 0 45%;
+    }
+
+    &-tool-container {
+      display: flex;
+      justify-content: left;
+      flex-direction: row-reverse;
+      width: util.rem(100);
+    }
+
+    &-icon-container {
+      display: flex;
+      position: relative;
+      width: util.rem(30);
+      height: util.rem(25);
+      margin: util.rem(4) util.rem(0) util.rem(4) util.rem(4);
+      border-top-right-radius: map.get(radius.$border-radius, medium);
+      border-bottom-right-radius: map.get(radius.$border-radius, medium);
+      border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+      background-color: map.get(color.$colorMap, pulse-blue);
+
+      &:active {
+        position: relative;
+        top: 0.9px;
+      }
+    }
   }
 
   &__client-details {

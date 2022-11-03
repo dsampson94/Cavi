@@ -23,7 +23,7 @@
   }
 
   &--centered {
-    border-bottom: 1px solid map.get(color.$colorMap, black);;
+    border-bottom: util.rem(1) solid map.get(color.$colorMap, black);;
     padding: util.rem(0) 10% util.rem(0) 1%;
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
@@ -86,6 +86,15 @@
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
         height: util.rem(35);
       }
+    }
+
+    &--select {
+      margin: util.rem(0) util.rem(-10) util.rem(0) util.rem(25);
+      border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+      height: util.rem(25);
+      width: util.rem(50);
+      font-size: util.bu(1.1);
+      padding: 0 0 0 util.rem(1.8);
     }
 
     &--chartbar {
