@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { mapFieldList } from '../field/FieldChartView.container.util';
+import { mapFieldList } from '../field-charts/FieldChartsView.container.util';
 import { mapTemperaturesList } from './FieldTemperaturesChartView.container.util';
 
 import { requestClientFieldList } from '../../../redux/actions/client.action';

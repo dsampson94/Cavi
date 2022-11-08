@@ -8,7 +8,7 @@ import { createMemoryHistory } from 'history';
 import { getMockStore } from '../../../tools/testing/test.util';
 import { initialState as clientState } from '../../../redux/reducers/client.reducer';
 
-import FieldChartView from './FieldChartView';
+import FieldChartView from './FieldChartsView';
 
 const mockState = { client: clientState };
 const mockHasSubGroups = true;

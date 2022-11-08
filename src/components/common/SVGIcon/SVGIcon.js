@@ -3,11 +3,15 @@ import React from 'react';
 
 import { string } from 'prop-types';
 import {
+  ADD_PROBE,
+  ARCHIVE_FIELD,
   BULLSEYE,
   CAMERA,
   CHARTS,
   CIRCLE_DROPDOWN,
   CLOUDED,
+  COPY_FIELD,
+  DELETE_FIELD,
   DISSATISFIED,
   DOUBLE_DROPDOWN,
   DOWN_ARROW,
@@ -15,6 +19,7 @@ import {
   DROPDOWN_ALL,
   EMAIL_RECOMMENDATIONS,
   FAVORITES_STAR,
+  FIX_READINGS,
   HARVEST_ICON,
   LOG_OUT_ICON,
   LOW_BATTERY,
@@ -28,15 +33,21 @@ import {
   PROFILE_ICON,
   RAIN_CLOUDS,
   RAINING,
+  REMOVE_PROBE,
+  RENAME_FIELD,
+  REPLACE_PROBE_WITH_NEW,
   REPORT_PROBLEM_ICON,
   SATISFIED,
   SEARCH,
   SETTINGS_GEAR,
   SINGLE_DROPDOWN,
   SUNNY,
+  TOGGLE_OFF,
+  TOGGLE_ON,
   TOGGLE_YAXIS,
   VERY_DISSATISFIED,
   VERY_SATISFIED,
+  VIEW_CHARTS,
   WARNING,
   WATCH,
   WEATHER_STATION_ICON
@@ -48,14 +59,21 @@ import useTheme from '../../../tools/hooks/useTheme';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left }) => {
 
   const { localActiveTheme } = useTheme(false);
 
   return (
-    <div className={ getClassNames('svg-icon',
-      { tiny: tiny, small: getSmallIcons(name), chart, profile: profile, battery: name === LOW_BATTERY }) }
-         onClick={ onClick }>
+    <div onClick={ onClick }
+         className={ getClassNames('svg-icon',
+           {
+             tiny,
+             small: getSmallIcons(name),
+             chart,
+             profile,
+             battery: name === LOW_BATTERY,
+             left
+           }) }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
            height={ height }
@@ -99,9 +117,11 @@ const getViewBox = (name, tiny, chart, tall) => {
       return '21 14 3 23';
     case PENCIL:
       return '-1 -9 1 42';
+    case VIEW_CHARTS:
+      return '16 -2 60 55';
     case CHARTS:
       if (chart) return '16 1 1 42';
-      else return '5 -9 1 42';
+      else return '5 -5 1 35';
     case RAIN_CLOUDS:
       return '0 1 50 120';
     case WATCH:
@@ -141,6 +161,20 @@ const getViewBox = (name, tiny, chart, tall) => {
       return '-3 -3 40 50';
     case PROFILE_ICON:
       return '-6 0 36 23';
+    case RENAME_FIELD:
+      return '3 -1 40 29';
+    case REPLACE_PROBE_WITH_NEW:
+      return '6 -2 90 60';
+    case COPY_FIELD:
+    case ARCHIVE_FIELD:
+    case DELETE_FIELD:
+    case FIX_READINGS:
+    case ADD_PROBE:
+    case REMOVE_PROBE:
+      return '6 1 80 50';
+    case TOGGLE_ON:
+    case TOGGLE_OFF:
+      return '-2 4 70 40';
     default:
       return '-6 0 36 24';
   }
@@ -163,21 +197,27 @@ const getSmallIcons = (name) => {
   }
 };
 
-const getIconFill = (activeTheme, fill, name) => {
+const getIconFill = (activeTheme, fill, name, row) => {
   if (activeTheme === 'light')
     return fill;
   else if (activeTheme === 'dark')
     switch (name) {
+      case CHARTS:
       case DOWN_ARROW:
       case SINGLE_DROPDOWN:
       case CIRCLE_DROPDOWN:
       case OPEN_MENU:
       case SETTINGS_GEAR:
       case PENCIL:
-      case CHARTS:
       case RAIN_CLOUDS:
       case WATCH:
+      case REPLACE_PROBE_WITH_NEW:
+      case COPY_FIELD:
         return 'white';
+      case TOGGLE_OFF:
+        return 'lightgrey';
+      case TOGGLE_ON:
+        return '#0090ff';
       case FAVORITES_STAR:
         return '#f37b2c';
       case CAMERA:
@@ -420,10 +460,70 @@ const getPath = (name) => {
           d="M8.7 34q-.65 0-1.075-.425Q7.2 33.15 7.2 32.5V28H4v-8h3.2v-4.5q0-.65.425-1.075Q8.05 14 8.7 14h33.8q.65 0 1.075.425Q44 14.85 44 15.5v17q0 .65-.425 1.075Q43.15 34 42.5 34Zm1.5-3H35V17H10.2Z"
           transform="rotate(180 22.5 24)" />
       );
+    case RENAME_FIELD :
+      return (
+        <g>
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path
+            d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" />
+        </g>
+      );
+    case COPY_FIELD :
+      return (
+        <path
+          d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z" />
+      );
+    case ARCHIVE_FIELD :
+      return (
+        <path
+          d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V12.85q0-.75.15-1.275.15-.525.55-.975l2.8-3.8q.4-.45.925-.625T11.65 6h24.7q.7 0 1.2.175t.9.625l2.85 3.8q.4.45.55.975.15.525.15 1.275V39q0 1.2-.9 2.1-.9.9-2.1.9Zm.85-30.7H38.1L36.3 9H11.65Zm-.85 3V39h30V14.3Zm15 20.2 7.8-7.8-2-2-4.3 4.3V18.95h-3V29l-4.3-4.3-2 2ZM9 39h30H9Z" />
+      );
+    case DELETE_FIELD :
+      return (
+        <path
+          d="M13.05 42q-1.25 0-2.125-.875T10.05 39V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z" />
+      );
+    case TOGGLE_ON :
+      return (
+        <path
+          d="M14 36q-5 0-8.5-3.5T2 24q0-5 3.5-8.5T14 12h20q5 0 8.5 3.5T46 24q0 5-3.5 8.5T34 36Zm0-3h20q3.75 0 6.375-2.625T43 24q0-3.75-2.625-6.375T34 15H14q-3.75 0-6.375 2.625T5 24q0 3.75 2.625 6.375T14 33Zm20.05-3.95q2.1 0 3.575-1.475T39.1 24q0-2.1-1.475-3.575T34.05 18.95q-2.1 0-3.575 1.475T29 24q0 2.1 1.475 3.575t3.575 1.475ZM24 24Z" />
+      );
+    case TOGGLE_OFF :
+      return (
+        <path
+          d="M14 36q-5 0-8.5-3.5T2 24q0-5 3.5-8.5T14 12h20q5 0 8.5 3.5T46 24q0 5-3.5 8.5T34 36Zm0-3h20q3.75 0 6.375-2.625T43 24q0-3.75-2.625-6.375T34 15H14q-3.75 0-6.375 2.625T5 24q0 3.75 2.625 6.375T14 33Zm-.05-3.95q2.1 0 3.575-1.475T19 24q0-2.1-1.475-3.575T13.95 18.95q-2.1 0-3.575 1.475T8.9 24q0 2.1 1.475 3.575t3.575 1.475ZM24 24Z" />
+      );
+    case FIX_READINGS :
+      return (
+        <path
+          d="M38.4 42 25.85 29.45l2.85-2.85 12.55 12.55ZM9.35 42 6.5 39.15 21 24.65l-5.35-5.35-1.15 1.15-2.2-2.2v4.25l-1.2 1.2L5 17.6l1.2-1.2h4.3L8.1 14l6.55-6.55q.85-.85 1.85-1.15 1-.3 2.2-.3 1.2 0 2.2.425 1 .425 1.85 1.275l-5.35 5.35 2.4 2.4-1.2 1.2 5.2 5.2 6.1-6.1q-.4-.65-.625-1.5-.225-.85-.225-1.8 0-2.65 1.925-4.575Q32.9 5.95 35.55 5.95q.75 0 1.275.15.525.15.875.4l-4.25 4.25 3.75 3.75 4.25-4.25q.25.4.425.975t.175 1.325q0 2.65-1.925 4.575Q38.2 19.05 35.55 19.05q-.9 0-1.55-.125t-1.2-.375Z" />
+      );
+    case REPLACE_PROBE_WITH_NEW :
+      return (
+        <path
+          d="M9 47.4q-1.2 0-2.1-.9-.9-.9-.9-2.1v-30q0-1.2.9-2.1.9-.9 2.1-.9h20.25l-3 3H9v30h30V27l3-3v20.4q0 1.2-.9 2.1-.9.9-2.1.9Zm15-18Zm9.1-17.6 2.15 2.1L21 28.1v4.3h4.25l14.3-14.3 2.1 2.1L26.5 35.4H18v-8.5Zm8.55 8.4-8.55-8.4 5-5q.85-.85 2.125-.85t2.125.9l4.2 4.25q.85.9.85 2.125t-.9 2.075Z" />
+      );
+    case ADD_PROBE :
+      return (
+        <path
+          d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z" />
+      );
+    case REMOVE_PROBE :
+      return (
+        <path
+          d="M14 25.35h20v-3H14ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z" />
+      );
+    case VIEW_CHARTS :
+      return (
+        <path
+          d="M4.45 35.55 2 33.75l9.4-15 6 7 7.95-12.9 5.45 8.1q-.8.1-1.55.325t-1.5.525l-2.25-3.45-7.65 12.45-6.05-7.05ZM43.85 46l-6.7-6.7q-1.05.75-2.275 1.15-1.225.4-2.525.4-3.55 0-6.025-2.475Q23.85 35.9 23.85 32.35q0-3.55 2.475-6.025Q28.8 23.85 32.35 23.85q3.55 0 6.025 2.475Q40.85 28.8 40.85 32.35q0 1.3-.425 2.525Q40 36.1 39.3 37.2l6.7 6.65Zm-11.5-8.15q2.3 0 3.9-1.6t1.6-3.9q0-2.3-1.6-3.9t-3.9-1.6q-2.3 0-3.9 1.6t-1.6 3.9q0 2.3 1.6 3.9t3.9 1.6Zm3.7-16.4q-.75-.3-1.55-.4-.8-.1-1.65-.2L43.55 4 46 5.8Z" />
+      );
+
     default:
       return <path />;
   }
 };
+
 
 SVGIcon.defaultProps = {
   name: undefined,

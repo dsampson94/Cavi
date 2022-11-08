@@ -1,6 +1,6 @@
 //******************************************************************************************************************************************
 
-import { filterLoadPeriod } from '../field/FieldChartView.container.util';
+import { filterLoadPeriod } from '../field-charts/FieldChartsView.container.util';
 
 export const mapTemperaturesList = (fieldChartList, probeNumber, activeLoadPeriod) => {
   if (!fieldChartList) return;

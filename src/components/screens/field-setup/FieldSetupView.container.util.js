@@ -41,16 +41,24 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
           plantingDate: field?.plantdatum,
           harvestDate: field?.oesdatum,
           unit: field?.eenheid,
-          maxMM: field?.maxmm
+          maxMM: field?.maxmm,
+          rename: field?.land,
+          copy: field?.land,
+          archive: field?.land,
+          delete: field?.land
         };
       });
     case PROBES_SUMMARY_ROUTE:
       return probeSummaryList?.lande?.map(field => {
         return {
-          ['']: `${ field?.land }*_*${ field?.probe }`,
+          [' ']: `${ field?.land }*_*${ field?.probe }`,
           field: { name: field?.land },
-          probe: { probe: field?.probe, color: '#6495ED' },
-          [' ']: field?.status,
+          probe: { probe: field?.probe, color: 'black' },
+          status: field?.status,
+          fix: field?.probe,
+          replace: field?.probe,
+          add: field?.probe,
+          remove: field?.probe,
           latitude: field?.lat,
           longitude: field?.lon,
           cellNumber: field?.selnommer,
@@ -62,13 +70,17 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
     case PROBES_DETAILED_ROUTE:
       return probeDetailedList?.lande?.map(field => {
         return {
-          ['']: `${ field?.land }*_*${ field?.probe }`,
           probe: { probe: field?.probe },
-          depthMMEnd: field?.probe,
+          field: field?.land,
+          depthMMEnd: field?.dieptemm,
+          depthMMLength: field?.dikte,
           VWK: field?.vwk,
+          moistKonst: field?.mmkonst,
           moistKoef: field?.mmkoef,
           tempKoef: field?.tkoef,
-          tempKonst: field?.tkonst
+          tempKonst: field?.tkonst,
+          DT: field?.dt,
+          status: field?.active
         };
       });
     case SENSORS_ROUTE:
@@ -90,6 +102,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
       return rootsList?.lande?.map((field, index) => {
         return {
           ['']: `${ field?.land }*_*${ probeSummaryList?.lande[index]?.probe }`,
+          [' ']: '',
           field: { name: field?.land },
           startDepth: field?.beginworteldiepte,
           germinationDays: field?.ontkiemperiode,

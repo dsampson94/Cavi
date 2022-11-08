@@ -24,7 +24,7 @@ import {
   mapMenuData,
   mapVoltChartLists,
   mapVPDChartLists
-} from './FieldChartView.container.util';
+} from './FieldChartsView.container.util';
 
 import {
   requestChartProbeCalibration,
@@ -41,9 +41,9 @@ import {
 import { requestClientFieldList } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
-import FieldChartView from './FieldChartView';
+import FieldChartView from './FieldChartsView';
 
-const FieldChartViewContainer = () => {
+const FieldChartsViewContainer = () => {
 
   const dispatch = useDispatch();
   const { groupName, clientName, fieldName, probeNumber } = useParams();
@@ -154,4 +154,4 @@ const FieldChartViewContainer = () => {
                          setActiveExtendedChart={ setActiveExtendedChart } />;
 };
 
-export default FieldChartViewContainer;
+export default FieldChartsViewContainer;

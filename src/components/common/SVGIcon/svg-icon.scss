@@ -11,6 +11,11 @@
   height: 100%;
   width: 100%;
 
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+
   &--tiny {
     margin-top: util.rem(-2);
     max-height: util.rem(10);
@@ -38,5 +43,10 @@
   &--battery {
     height: util.rem(22);
     transform: translateY(-19%);
+  }
+
+  &--left {
+    justify-content: flex-start;
+    margin-left: util.rem(6);
   }
 }

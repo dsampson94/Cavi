@@ -228,29 +228,29 @@
   width: 0;
 
   &__list {
-    padding: util.rem(20) util.rem(5) util.rem(0) util.rem(10);
-    font-size: util.rem(12);
+    padding: util.rem(10) util.rem(5) util.rem(0) util.rem(10);
+    font-size: util.rem(11);
 
     h4 {
       font-weight: bold;
       white-space: nowrap;
-      padding: util.rem(1) util.rem(0) util.rem(1) util.rem(2);
+      padding: util.rem(0) util.rem(0) util.rem(1) util.rem(2);
       border: util.rem(3) solid transparent;
     }
 
     &--client {
       padding: util.rem(20) util.rem(5) util.rem(0) util.rem(10);
-      font-size: util.rem(12);
+      font-size: util.rem(11);
 
       li {
         display: flex;
         flex-direction: row;
         cursor: pointer;
-        font-size: util.rem(16);
+        font-size: util.rem(14);
         color: orange;
-        border: util.rem(1) solid transparent;
+        padding: util.rem(3) 0 util.rem(3) 0;
         border-top-right-radius: map.get(radius.$border-radius, medium);
-        border-bottom-right-radius: map.get(radius.$border-radius, medium);
+        border-bottom: util.rem(1) solid map.get(color.$colorMap, light-grey);
 
         &::-webkit-scrollbar {
           display: none;
@@ -269,11 +269,10 @@
       display: flex;
       flex-direction: row;
       cursor: pointer;
-      font-size: util.rem(16);
-      padding: util.rem(1);
-      border: util.rem(1) solid transparent;
+      font-size: util.rem(14);
       border-top-right-radius: map.get(radius.$border-radius, medium);
-      border-bottom-right-radius: map.get(radius.$border-radius, medium);
+      padding: util.rem(3) 0 util.rem(3) 0;
+      border-bottom: util.rem(1) solid map.get(color.$colorMap, light-grey);
 
       &::-webkit-scrollbar {
         display: none;
@@ -298,6 +297,6 @@
   }
 
   &--show {
-    width: 16%;
+    width: 15%;
   }
 }

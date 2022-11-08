@@ -68,28 +68,28 @@
         text-align: center;
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          max-height: util.rem(22);
+          font-size: util.rem(7);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
           max-height: util.rem(24);
           font-size: util.rem(8);
         }
 
-        @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
           max-height: util.rem(26);
           font-size: util.rem(9);
         }
 
-        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
           max-height: util.rem(28);
           font-size: util.rem(10);
         }
 
-        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
           max-height: util.rem(30);
           font-size: util.rem(11);
-        }
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          max-height: util.rem(32);
-          font-size: util.rem(12);
         }
 
         &--warning {

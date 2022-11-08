@@ -90,6 +90,17 @@ export const WATCH = 'watch';
 export const HARVEST_ICON = 'harvest_tractor';
 export const TABLE_SEARCH_PLACEHOLDER = 'Search field or probe number';
 export const LOW_BATTERY = 'low_battery';
+export const RENAME_FIELD = 'rename_field';
+export const COPY_FIELD = 'copy_field';
+export const ARCHIVE_FIELD = 'archive_field';
+export const DELETE_FIELD = 'delete_field';
+export const TOGGLE_ON = 'toggle_on';
+export const TOGGLE_OFF = 'toggle_off';
+export const FIX_READINGS = 'fix_readings';
+export const REPLACE_PROBE_WITH_NEW = 'replace_probe';
+export const ADD_PROBE = 'add_probe';
+export const REMOVE_PROBE = 'remove_probe';
+export const VIEW_CHARTS = 'view_charts';
 
 //TABLENAMES
 export const CLIENT_RECOMMENDATION_VIEW = 'recommendationClientFieldView';
@@ -213,6 +224,7 @@ export const TOGGLE_YAXIS = 'toggle_y';
 export const CIRCLE_DROPDOWN = 'circle_dropdown';
 export const DOUBLE_DROPDOWN = 'double_dropdown';
 export const SINGLE_DROPDOWN = 'single_dropdown';
+export const NONE = 'none';
 
 //CONTEXT MENU
 export const CONTEXT_MENU = 'contextMenu';
