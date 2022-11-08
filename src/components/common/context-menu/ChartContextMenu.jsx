@@ -14,8 +14,6 @@ import {
   PERIOD_OPTION
 } from '../../../tools/general/system-variables.util';
 
-import { bisector } from 'd3';
-
 import SubmitInput from '../input/submit/SubmitInput';
 import NumberInput from '../input/number/NumberInput';
 
@@ -84,10 +82,6 @@ const ContextMenu = ({
 
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const [secondaryMenu, setSecondaryMenu] = useState(null);
-
-  let dateBisector = bisector(xAccessor).center;
-  let x = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
-  let y = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
 
   const screenMidWidth = window.innerWidth / 2 + 50;
   const screenMidHeight = window.screen.height / 2 - 10;

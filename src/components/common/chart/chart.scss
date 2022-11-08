@@ -5,37 +5,6 @@
 @use "../../../stylesheets/mixin" as mixin;
 @use "../../../stylesheets/config" as config;
 
-.chart__header__container {
-  margin-top: 2%;
-
-  &--usage {
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      height: 12%;
-      margin-top: 8%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      height: 10%;
-      margin-top: 5.5%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      height: 8%;
-      margin-top: 5%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-      height: 8%;
-      margin-top: 3%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-      height: 6%;
-      margin-top: 2%;
-    }
-  }
-}
-
 .chart {
   border-bottom-left-radius: map.get(radius.$border-radius, medium);
   border-bottom-right-radius: map.get(radius.$border-radius, medium);
@@ -47,6 +16,37 @@
     font-size: util.rem(10);
     white-space: nowrap;
     user-select: none;
+
+    &__container {
+      margin-top: 2%;
+
+      &--usage {
+        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          height: 12%;
+          margin-top: 8%;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+          height: 10%;
+          margin-top: 5.5%;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+          height: 8%;
+          margin-top: 5%;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          height: 8%;
+          margin-top: 3%;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          height: 6%;
+          margin-top: 2%;
+        }
+      }
+    }
 
     &__zoom-options {
       display: flex;
@@ -109,7 +109,8 @@
       & p {
         font-weight: bold;
         font-size: util.rem(10) !important;
-        margin-top: util.rem(2);
+        margin-top: util.rem(5);
+        padding-bottom: 5%;
       }
     }
 
@@ -184,6 +185,77 @@
     border-bottom-left-radius: map.get(radius.$border-radius, medium);
     border-bottom-right-radius: map.get(radius.$border-radius, medium);
   }
+
+  &__checkbox-filter {
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    &__inner {
+      display: flex;
+    }
+
+    &--dailyETO {
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        margin-top: -17vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-top: -13vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        margin-top: -14vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-top: -14vh;
+        margin-left: 1%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-top: -13vh;
+        margin-left: 5%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        margin-top: -14vh;
+        margin-left: 8%;
+      }
+    }
+
+    &--temperatures {
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        margin-top: -29vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-top: -25vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        margin-top: -24vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-top: -24vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-top: -23vh;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        margin-top: -24vh;
+      }
+    }
+  }
+
 }
 
 .tooltip-container {

@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 
-import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
-import { TableSearchBar } from '../../common/table/client-fields/TableComponents.util';
+import { TableSearchBar } from '../../common/table/TableComponents.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
-import Table from '../../common/table/client-fields/Table';
+import Table from '../../common/table/Table';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }) => {
+const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -31,11 +31,11 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
 
   useEffect(() => {
     if (!selectedIndex) return;
-    if (filteredTableData) {
+    if (filteredTableData)
       toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
-    } else {
+    else
       toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
-    }
+
     setSelectedIndex(undefined);
   });
 
@@ -45,10 +45,11 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
 
   return (
     <ContentContainer view={ CLIENT_FIELDS }
-                      clientRequestFields={ clientRequestFields }
+                      clientRequestParams={ clientRequestParams }
                       showClientsSideBar={ showClientsSideBar }
                       setShowClientsSideBar={ setClientsShowSideBar }
                       mappedFieldList={ mappedFieldList }>
+
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
         <MidBar view={ CLIENT_FIELDS_MIDBAR }
@@ -57,22 +58,23 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestFields, hasSubGroups }
                 showClientsSideBar={ showClientsSideBar }
                 setFilteredTableData={ setFilteredTableData }
                 setActiveTableData={ setActiveTableData }
-                clientRequestFields={ clientRequestFields }
-                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
+                reloadToggleActive={ reloadToggleActive }
+                setReloadToggleActive={ setReloadToggleActive } />
 
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />
 
         <div className="client-fields__scroll">
-          <Table tableName={ 'recommendationClientFieldView' }
+          <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
                  activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
                  hiddenColumns={ ['expanded'] }
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setSelectedDropdownObject={ setSelectedDropdownObject }
-                 setActiveTableData={ setActiveTableData }
-                 clientRequestFields={ clientRequestFields } />
+                 setActiveTableData={ setActiveTableData } />
         </div>
+
       </div>
     </ContentContainer>
   );

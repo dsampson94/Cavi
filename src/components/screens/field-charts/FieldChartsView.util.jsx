@@ -1,9 +1,11 @@
 import React from 'react';
 
 import {
+  ACTUAL_IRRIGATION,
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
   AGGREGATE_TOP_SOIL,
+  DAILY,
   DAILY_ETO,
   DEFICIT,
   DEFICIT_100MM,
@@ -12,11 +14,17 @@ import {
   DEFICIT_400MM,
   DEFICIT_600MM,
   DEFICIT_800MM,
-  USAGE_ETC
+  DEFICIT_ETO,
+  EC,
+  EXTENDED,
+  FLOW_DAILY,
+  FLOW_HOURLY,
+  VOLT_READINGS,
+  VPD
 } from '../../../tools/general/system-variables.util';
 
 import FieldLineChartD3 from '../../common/chart/client-field/FieldLineChart.d3';
-import FieldCombinationChart from '../../common/chart/client-field/FieldCombinationChart.d3';
+import FieldBarAndLineChart from '../../common/chart/client-field/FIeldBarAndLineChart.d3';
 
 export const DeficitChartsContainer = ({
                                          mappedChartList,
@@ -196,6 +204,12 @@ DeficitChartsContainer.propTypes = {};
 
 export const AggregateChartsContainer = ({
                                            mappedChartList,
+                                           mappedVoltChartList,
+                                           mappedFlowMeterDailyChartList,
+                                           mappedFlowMeterHourlyList,
+                                           mappedECChartList,
+                                           mappedVPDChartList,
+                                           mappedActualChartList,
                                            hoverActive,
                                            setHoverActive,
                                            currentGlobalZoomState,
@@ -212,6 +226,8 @@ export const AggregateChartsContainer = ({
                                            setXAxisViewMode,
                                            activeProbeFactor,
                                            setActiveProbeFactor,
+                                           activeExtendedChart,
+                                           setActiveExtendedChart,
                                            date,
                                            setDate
                                          }) => {
@@ -273,30 +289,39 @@ export const AggregateChartsContainer = ({
       </div>
 
       <div className="field-chart__right__bottom">
-        <FieldCombinationChart chartType={ USAGE_ETC }
-                               chartName={ USAGE_ETC }
-                               data={ mappedChartList?.[9] }
-                               hoverActive={ hoverActive }
-                               setHoverActive={ setHoverActive }
-                               currentGlobalZoomState={ currentGlobalZoomState }
-                               setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
-                               currentYZoomState={ currentYZoomState }
-                               setCurrentYZoomState={ setCurrentYZoomState }
-                               currentXZoomState={ currentXZoomState }
-                               setCurrentXZoomState={ setCurrentXZoomState }
-                               activeLoadPeriod={ activeLoadPeriod }
-                               activeDataPeriod={ activeDataPeriod }
-                               setActiveDataPeriod={ setActiveDataPeriod }
-                               xAxisViewMode={ xAxisViewMode }
-                               setXAxisViewMode={ setXAxisViewMode }
-                               activeProbeFactor={ activeProbeFactor }
-                               setActiveProbeFactor={ setActiveProbeFactor }
-                               date={ date }
-                               setDate={ setDate } />
+        <ExtendedChartsSelector chartType={ EXTENDED }
+                                chartName={ activeExtendedChart }
+                                mappedChartList={ mappedChartList }
+                                mappedVoltChartList={ mappedVoltChartList }
+                                mappedFlowMeterDailyChartList={ mappedFlowMeterDailyChartList }
+                                mappedFlowMeterHourlyList={ mappedFlowMeterHourlyList }
+                                mappedECChartList={ mappedECChartList }
+                                mappedVPDChartList={ mappedVPDChartList }
+                                mappedActualChartList={ mappedActualChartList }
+                                hoverActive={ hoverActive }
+                                setHoverActive={ setHoverActive }
+                                currentGlobalZoomState={ currentGlobalZoomState }
+                                setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                                currentYZoomState={ currentYZoomState }
+                                setCurrentYZoomState={ setCurrentYZoomState }
+                                currentXZoomState={ currentXZoomState }
+                                setCurrentXZoomState={ setCurrentXZoomState }
+                                activeLoadPeriod={ activeLoadPeriod }
+                                activeDataPeriod={ activeDataPeriod }
+                                setActiveDataPeriod={ setActiveDataPeriod }
+                                xAxisViewMode={ xAxisViewMode }
+                                setXAxisViewMode={ setXAxisViewMode }
+                                activeProbeFactor={ activeProbeFactor }
+                                setActiveProbeFactor={ setActiveProbeFactor }
+                                activeExtendedChart={ activeExtendedChart }
+                                setActiveExtendedChart={ setActiveExtendedChart }
+                                date={ date }
+                                setDate={ setDate } />
 
-        <FieldLineChartD3 chartType={ DAILY_ETO }
+        <FieldLineChartD3 chartType={ DAILY }
                           chartName={ DAILY_ETO }
-                          data={ mappedChartList?.[10] }
+                          data={ mappedChartList?.[10]?.[0] }
+                          secondaryData={ mappedChartList?.[10]?.[1] }
                           hoverActive={ hoverActive }
                           setHoverActive={ setHoverActive }
                           currentGlobalZoomState={ currentGlobalZoomState }
@@ -321,3 +346,214 @@ export const AggregateChartsContainer = ({
 };
 
 AggregateChartsContainer.propTypes = {};
+
+const ExtendedChartsSelector = ({
+                                  chartName,
+                                  mappedChartList,
+                                  mappedVoltChartList,
+                                  mappedFlowMeterDailyChartList,
+                                  mappedFlowMeterHourlyList,
+                                  mappedECChartList,
+                                  mappedVPDChartList,
+                                  mappedActualChartList,
+                                  hoverActive,
+                                  setHoverActive,
+                                  currentGlobalZoomState,
+                                  setCurrentGlobalZoomState,
+                                  currentYZoomState,
+                                  setCurrentYZoomState,
+                                  currentXZoomState,
+                                  setCurrentXZoomState,
+                                  activeLoadPeriod,
+                                  activeDataPeriod,
+                                  setActiveDataPeriod,
+                                  xAxisViewMode,
+                                  setXAxisViewMode,
+                                  activeProbeFactor,
+                                  setActiveProbeFactor,
+                                  activeExtendedChart,
+                                  setActiveExtendedChart,
+                                  date,
+                                  setDate
+                                }) => {
+
+  switch (chartName) {
+    case DEFICIT_ETO :
+      return (
+        <FieldBarAndLineChart chartType={ EXTENDED }
+                              chartName={ DEFICIT_ETO }
+                              data={ mappedChartList?.[9] }
+                              hoverActive={ hoverActive }
+                              setHoverActive={ setHoverActive }
+                              currentGlobalZoomState={ currentGlobalZoomState }
+                              setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                              currentYZoomState={ currentYZoomState }
+                              setCurrentYZoomState={ setCurrentYZoomState }
+                              currentXZoomState={ currentXZoomState }
+                              setCurrentXZoomState={ setCurrentXZoomState }
+                              activeLoadPeriod={ activeLoadPeriod }
+                              activeDataPeriod={ activeDataPeriod }
+                              setActiveDataPeriod={ setActiveDataPeriod }
+                              xAxisViewMode={ xAxisViewMode }
+                              setXAxisViewMode={ setXAxisViewMode }
+                              activeProbeFactor={ activeProbeFactor }
+                              setActiveProbeFactor={ setActiveProbeFactor }
+                              activeExtendedChart={ activeExtendedChart }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              date={ date }
+                              setDate={ setDate } />
+      );
+    case VOLT_READINGS:
+      return (
+        <FieldLineChartD3 chartType={ EXTENDED }
+                          chartName={ VOLT_READINGS }
+                          data={ mappedVoltChartList }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          activeExtendedChart={ activeExtendedChart }
+                          setActiveExtendedChart={ setActiveExtendedChart }
+                          date={ date }
+                          setDate={ setDate } />
+      );
+    case FLOW_DAILY:
+      return (
+        <FieldBarAndLineChart chartType={ EXTENDED }
+                              chartName={ FLOW_DAILY }
+                              data={ mappedFlowMeterDailyChartList }
+                              hoverActive={ hoverActive }
+                              setHoverActive={ setHoverActive }
+                              currentGlobalZoomState={ currentGlobalZoomState }
+                              setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                              currentYZoomState={ currentYZoomState }
+                              setCurrentYZoomState={ setCurrentYZoomState }
+                              currentXZoomState={ currentXZoomState }
+                              setCurrentXZoomState={ setCurrentXZoomState }
+                              activeLoadPeriod={ activeLoadPeriod }
+                              activeDataPeriod={ activeDataPeriod }
+                              setActiveDataPeriod={ setActiveDataPeriod }
+                              xAxisViewMode={ xAxisViewMode }
+                              setXAxisViewMode={ setXAxisViewMode }
+                              activeProbeFactor={ activeProbeFactor }
+                              setActiveProbeFactor={ setActiveProbeFactor }
+                              activeExtendedChart={ activeExtendedChart }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              date={ date }
+                              setDate={ setDate }
+                              showOnlyBars />
+      );
+    case FLOW_HOURLY:
+      return (
+        <FieldBarAndLineChart chartType={ EXTENDED }
+                              chartName={ FLOW_HOURLY }
+                              data={ mappedFlowMeterHourlyList }
+                              hoverActive={ hoverActive }
+                              setHoverActive={ setHoverActive }
+                              currentGlobalZoomState={ currentGlobalZoomState }
+                              setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                              currentYZoomState={ currentYZoomState }
+                              setCurrentYZoomState={ setCurrentYZoomState }
+                              currentXZoomState={ currentXZoomState }
+                              setCurrentXZoomState={ setCurrentXZoomState }
+                              activeLoadPeriod={ activeLoadPeriod }
+                              activeDataPeriod={ activeDataPeriod }
+                              setActiveDataPeriod={ setActiveDataPeriod }
+                              xAxisViewMode={ xAxisViewMode }
+                              setXAxisViewMode={ setXAxisViewMode }
+                              activeProbeFactor={ activeProbeFactor }
+                              setActiveProbeFactor={ setActiveProbeFactor }
+                              activeExtendedChart={ activeExtendedChart }
+                              setActiveExtendedChart={ setActiveExtendedChart }
+                              date={ date }
+                              setDate={ setDate }
+                              showOnlyBars />
+      );
+    case EC:
+      return (
+        <FieldLineChartD3 chartType={ EXTENDED }
+                          chartName={ EC }
+                          data={ mappedECChartList }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          activeExtendedChart={ activeExtendedChart }
+                          setActiveExtendedChart={ setActiveExtendedChart }
+                          date={ date }
+                          setDate={ setDate } />
+      );
+    case VPD:
+      return (
+        <FieldLineChartD3 chartType={ EXTENDED }
+                          chartName={ VPD }
+                          data={ mappedVPDChartList }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          activeExtendedChart={ activeExtendedChart }
+                          setActiveExtendedChart={ setActiveExtendedChart }
+                          date={ date }
+                          setDate={ setDate } />
+      );
+    case ACTUAL_IRRIGATION:
+      return (
+        <FieldLineChartD3 chartType={ EXTENDED }
+                          chartName={ ACTUAL_IRRIGATION }
+                          data={ mappedActualChartList }
+                          hoverActive={ hoverActive }
+                          setHoverActive={ setHoverActive }
+                          currentGlobalZoomState={ currentGlobalZoomState }
+                          setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
+                          currentYZoomState={ currentYZoomState }
+                          setCurrentYZoomState={ setCurrentYZoomState }
+                          currentXZoomState={ currentXZoomState }
+                          setCurrentXZoomState={ setCurrentXZoomState }
+                          activeLoadPeriod={ activeLoadPeriod }
+                          activeDataPeriod={ activeDataPeriod }
+                          setActiveDataPeriod={ setActiveDataPeriod }
+                          xAxisViewMode={ xAxisViewMode }
+                          setXAxisViewMode={ setXAxisViewMode }
+                          activeProbeFactor={ activeProbeFactor }
+                          setActiveProbeFactor={ setActiveProbeFactor }
+                          activeExtendedChart={ activeExtendedChart }
+                          setActiveExtendedChart={ setActiveExtendedChart }
+                          date={ date }
+                          setDate={ setDate } />
+      );
+  }
+};

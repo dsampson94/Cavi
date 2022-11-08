@@ -71,6 +71,26 @@
       margin-left: util.rem(-60);
     }
 
+    &__extended {
+      margin: util.rem(-5) util.rem(-10) util.rem(-5) util.rem(-10);
+
+      > div {
+        display: flex;
+        flex-direction: row;
+        max-height: util.rem(32);
+
+        &:hover {
+          background-color: map.get(color.$colorMap, row-hover-blue);
+        }
+
+        p {
+          padding-left: util.rem(20);
+          margin-top: util.rem(3.5);
+          transform: translateX(-15%);
+        }
+      }
+    }
+
     &--logout {
       display: flex;
       justify-content: center;
@@ -94,5 +114,11 @@
         }
       }
     }
+  }
+
+  &__text-input {
+    display: flex;
+    justify-content: left;
+    width: util.rem(100);
   }
 }

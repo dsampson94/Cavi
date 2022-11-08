@@ -8,7 +8,7 @@ import { initialState as clientState } from '../../redux/reducers/client.reducer
 
 import { getMockStore } from '../../tools/testing/test.util';
 
-import ClientContainer from './Client.container';
+import ClientFieldsContainer from './ClientFields.container';
 
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
@@ -24,7 +24,7 @@ describe('Client Container', () => {
     return render(
       <Provider store={ getMockStore(mockState) }>
         <MemoryRouter initialEntries={ [path] }>
-          <ClientContainer />
+          <ClientFieldsContainer />
         </MemoryRouter>
       </Provider>
     );

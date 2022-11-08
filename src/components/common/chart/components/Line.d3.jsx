@@ -5,18 +5,34 @@ import {
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
   AGGREGATE_TOP_SOIL,
+  CANOPY_LINE,
+  CANOPY_OUTSIDE_TEMPERATURE,
+  DAILY,
   DAILY_ETO,
   DEFICIT,
-  TEMPERATURE_MULTILINE,
-  USAGE_ETC
+  DEFICIT_ETO,
+  EXTENDED,
+  HUMIDITY_LINE,
+  LINE_100MM,
+  LINE_200MM,
+  LINE_300MM,
+  LINE_400MM,
+  LINE_600MM,
+  LINE_800MM,
+  OUTSIDE_LINE,
+  RAIN_HUMIDITY,
+  RAIN_LINE,
+  SOIL_TEMPERATURE,
+  TEMPERATURE_MULTILINE
 } from '../../../../tools/general/system-variables.util';
 
 const Line = ({
+                data,
+                secondaryData,
                 xAccessor,
                 xScale,
                 yAccessor,
                 yScale,
-                data,
                 chartType,
                 chartName,
                 recommendationOffset,
@@ -28,9 +44,10 @@ const Line = ({
   switch (chartType) {
     case DEFICIT:
     case AGGREGATE:
-    case USAGE_ETC:
-    case DAILY_ETO:
+    case EXTENDED:
+    case DAILY:
       return <FieldChartLine data={ data }
+                             secondaryData={ secondaryData }
                              recommendationOffset={ recommendationOffset }
                              chartName={ chartName }
                              chartType={ chartType }
@@ -60,11 +77,12 @@ const Line = ({
 export default Line;
 
 const FieldChartLine = ({
+                          data,
+                          secondaryData,
                           xAccessor,
                           xScale,
                           yAccessor,
                           yScale,
-                          data,
                           chartType,
                           chartName,
                           recommendationOffset,
@@ -75,18 +93,19 @@ const FieldChartLine = ({
 
   let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
 
-  if (chartName === USAGE_ETC) {
+  if (chartName === DEFICIT_ETO) {
     let lineYAccessor = d => d?.lineY;
     lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(lineYAccessor(d)));
   }
 
   selectAll('.line').on('contextmenu ', event => event.preventDefault());
 
-  const getLineColor = () => {
+  const getLineColor = (color) => {
+    if (color) return color;
     if (chartName === AGGREGATE_TOP_SOIL) return 'url(#lineGradientAggregateTop)';
     else if (chartName === AGGREGATE_BOTTOM_SOIL) return 'url(#lineGradientAggregateBottom)';
-    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && isDarkMode) return 'white';
-    else if ((chartName === USAGE_ETC || chartName === DAILY_ETO) && !isDarkMode) return 'black';
+    else if ((chartName === DEFICIT_ETO || chartName === DAILY_ETO) && isDarkMode) return 'white';
+    else if ((chartName === DEFICIT_ETO || chartName === DAILY_ETO) && !isDarkMode) return 'black';
     else if (isDarkMode) return '#0090ff';
     else if (!isDarkMode) return '#0000FF';
   };
@@ -112,10 +131,23 @@ const FieldChartLine = ({
             clipPath={ clipPath }
             stroke={ getLineColor() }
             style={ {
+              display: chartType === DAILY ? hiddenLineList?.includes('Forecast') ? 'flex' : 'none' : 'flex',
               fill: 'none',
               strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
               strokeLinecap: 'round'
             } } />
+
+      { secondaryData &&
+      <path className={ 'secondaryLine' }
+            d={ lineGenerator(secondaryData) }
+            clipPath={ clipPath }
+            stroke={ getLineColor('#2AE851') }
+            style={ {
+              display: chartType === DAILY ? hiddenLineList?.includes('Actual') ? 'flex' : 'none' : 'flex',
+              fill: 'none',
+              strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
+              strokeLinecap: 'round'
+            } } /> }
 
       <ReferenceLine xScale={ xScale }
                      yScale={ yScale }
@@ -134,69 +166,130 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
 
   selectAll('.line').on('contextmenu ', event => event.preventDefault());
 
-  return (
-    <g>
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[0]) }
-            clipPath={ clipPath }
-            stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
+  switch (chartName) {
+    case SOIL_TEMPERATURE:
+      return (
+        <g>
+          { hiddenLineList.includes(LINE_100MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
 
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[1]) }
-            clipPath={ clipPath }
-            stroke={ '#f37b2c' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
+          { hiddenLineList.includes(LINE_200MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
 
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[2]) }
-            clipPath={ clipPath }
-            stroke={ '#ea3a3d' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
+          { hiddenLineList.includes(LINE_300MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[2]) }
+                clipPath={ clipPath }
+                stroke={ '#ea3a3d' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
 
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[3]) }
-            clipPath={ clipPath }
-            stroke={ '#47FFFF' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
+          { hiddenLineList.includes(LINE_400MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[3]) }
+                clipPath={ clipPath }
+                stroke={ '#47FFFF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
 
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[4]) }
-            clipPath={ clipPath }
-            stroke={ '#1ad598' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
+          { hiddenLineList.includes(LINE_600MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[4]) }
+                clipPath={ clipPath }
+                stroke={ '#1ad598' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
 
-      <path className={ 'line' }
-            d={ lineGenerator(data?.[5]) }
-            clipPath={ clipPath }
-            stroke={ 'green' }
-            style={ {
-              fill: 'none',
-              strokeWidth: '1.2px',
-              strokeLinecap: 'round'
-            } } />
-    </g>
-  );
+          { hiddenLineList.includes(LINE_800MM) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[5]) }
+                clipPath={ clipPath }
+                stroke={ 'green' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
+        </g>
+      );
+    case CANOPY_OUTSIDE_TEMPERATURE:
+      return (
+        <g>
+          { hiddenLineList.includes(CANOPY_LINE) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
+
+          { hiddenLineList.includes(OUTSIDE_LINE) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
+        </g>
+      );
+    case RAIN_HUMIDITY:
+      return (
+        <g>
+          { hiddenLineList.includes(RAIN_LINE) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
+
+          { hiddenLineList.includes(HUMIDITY_LINE) &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } /> }
+        </g>
+      );
+  }
 };
 
 const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName, isDarkMode }) => {

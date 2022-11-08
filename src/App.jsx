@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useLocation } from 'react-router';
+import { Route } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
@@ -10,12 +10,15 @@ import Spinner from './components/common/spinner/Spinner';
 
 import AuthContainer from './routes/auth/Auth.container';
 import OverviewContainer from './routes/overview/Overview.container';
-import ClientContainer from './routes/client/Client.container';
+import ClientFieldsContainer from './routes/client-fields/ClientFields.container';
+
+import useTheme from './tools/hooks/useTheme';
 
 const App = () => {
 
   const dispatch = useDispatch();
-  const activeURL = useLocation();
+
+  useTheme(true);
 
   const notices = useSelector(createSelector([state => state.system], system => system?.notices));
   const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
@@ -35,11 +38,9 @@ const App = () => {
     <div className="app" style={ style }>
       <Route path="/" component={ AuthContainer } />
       <Route path="/overview" component={ OverviewContainer } />
-      <Route path="/client" component={ ClientContainer } />
+      <Route path="/client" component={ ClientFieldsContainer } />
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
-      <Spinner sidebar={activeURL.pathname !== '/'}
-               centered={activeURL.pathname === '/'}
-               showSpinnerText={ spinnerText } />
+      <Spinner showSpinnerText={ spinnerText } />
     </div>
   );
 };

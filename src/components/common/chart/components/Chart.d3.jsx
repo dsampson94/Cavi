@@ -1,12 +1,13 @@
 import React, { createContext, useContext } from 'react';
 
 import { chartByName } from '../Chart.util';
+import { EXTENDED } from '../../../../tools/general/system-variables.util';
 
 const ChartContext = createContext();
 
 export const useDimensionsContext = () => useContext(ChartContext);
 
-const Chart = ({ svgRef, dimensions, chartName, chartInfo, children, isDarkMode }) => {
+const Chart = ({ svgRef, dimensions, chartName, chartType, chartInfo, children, isDarkMode }) => {
 
   return (
     <ChartContext.Provider value={ dimensions }>
@@ -54,7 +55,7 @@ const Chart = ({ svgRef, dimensions, chartName, chartInfo, children, isDarkMode 
         </g>
       </svg>
 
-      { !chartName.includes('ET') &&
+      { (chartType !== EXTENDED) &&
         <div className="chart__info"
              onContextMenu={ event => event.preventDefault() }>
           { chartInfo }

@@ -22,9 +22,9 @@ export const getClassNames = (baseClassName, modifiers = {}) => {
 
 export const toBase64String = (url, callback) => {
   const xhr = new XMLHttpRequest();
-  xhr.onload = function() {
+  xhr.onload = function () {
     const reader = new FileReader();
-    reader.onloadend = function() {
+    reader.onloadend = function () {
       callback(reader.result);
     };
     reader.readAsDataURL(xhr.response);
@@ -58,6 +58,15 @@ export const base64ToObject = (base64String) => {
 export const daysFromToday = (daysFromToday) => {
   const dateList = new Date(Date.now() + 1000 * 60 * 60 * 24 * daysFromToday).toString().split(' ');
   return `${ dateList[0] } ${ dateList[2] }`;
+};
+
+export const getDaysPastDate = (days) => {
+  const dateList = new Date(new Date() - 1000 * 60 * 60 * 24 * days * 2)?.toString()?.split(' ');
+  return new Date(dateList);
+};
+
+export const isDateBefore = (date1, date2) => {
+  return date1.valueOf() < date2.valueOf();
 };
 
 export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;

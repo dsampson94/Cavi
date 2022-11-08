@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
-import { pushFieldRow, pushForecastRegionRow, pushLandGroupRow } from '../field/FieldChartView.container.util';
-import { mapTemperatureLists, pushMappedTemperatureLists } from './FieldTemperaturesChartView.container.util';
+import { mapFieldList } from '../field-charts/FieldChartsView.container.util';
+import { mapTemperaturesList } from './FieldTemperaturesChartView.container.util';
 
 import { requestClientFieldList } from '../../../redux/actions/client.action';
-import { requestFieldChartList } from '../../../redux/actions/field.action';
+import { requestExtendedFieldChartList, SET_SOIL_TEMP_LIST } from '../../../redux/actions/field.action';
+import { getRequestParams } from '../../../redux/endpoints';
 
 import FieldTemperaturesChartView from './FieldTemperaturesChartView';
 
@@ -17,65 +17,33 @@ const FieldTemperaturesChartViewContainer = () => {
   const dispatch = useDispatch();
   const { groupName, clientName, fieldName, probeNumber } = useParams();
 
-  const user = retrieveUserLoginFromLocalStorage();
-  const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
+  const soilTempList = useSelector(createSelector([state => state.field], field => field?.soilTempList));
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
 
+  const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod });
+
   useEffect(() => {
-    dispatch(requestFieldChartList(fieldRequestFields));
-    if (!fieldList) dispatch(requestClientFieldList(clientRequestFields));
-    if (!fieldChartList) dispatch(requestFieldChartList(fieldRequestFields));
+    dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
+    dispatch(requestClientFieldList(request.clientParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    dispatch(requestFieldChartList(fieldRequestFields));
+    dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFieldName, activeLoadPeriod]);
 
-  const clientRequestFields = {
-    username: user?.username,
-    password: user?.password,
-    groupname: groupName,
-    clientname: clientName
-  };
-
-  const fieldRequestFields = {
-    username: user?.username,
-    password: user?.password,
-    groupname: groupName,
-    clientname: clientName,
-    field: activeFieldName,
-    load: activeLoadPeriod
-  };
-
   const mappedFieldList = () => {
-    if (!fieldList) return;
-    const tableList = [];
-    const mappedList = [];
-
-    for (let field in fieldList) tableList?.push(fieldList[field]);
-    tableList.forEach((listItem, index) => {
-      pushForecastRegionRow(tableList, listItem, index, mappedList);
-      pushLandGroupRow(tableList, listItem, index, mappedList);
-      pushFieldRow(tableList, listItem, index, mappedList);
-    });
-    return mappedList;
+    return mapFieldList(fieldList);
   };
 
   const mappedTemperaturesList = () => {
-    if (!fieldChartList?.[probeNumber]) return;
-    const mappedTemperaturesList = [], oneHundredMmList = [], twoHundredMmList = [], threeHundredMmList = [], fourHundredMmList = [],
-      sixHundredMmList = [], eightHundredMmList = [];
-
-    mapTemperatureLists(oneHundredMmList, twoHundredMmList, threeHundredMmList, fourHundredMmList,
-      sixHundredMmList, eightHundredMmList, fieldChartList, probeNumber);
-    pushMappedTemperatureLists(oneHundredMmList, twoHundredMmList, threeHundredMmList,
-      fourHundredMmList, sixHundredMmList, eightHundredMmList, mappedTemperaturesList);
-    return mappedTemperaturesList;
+    if (soilTempList) {
+      return mapTemperaturesList(soilTempList, probeNumber, activeLoadPeriod, dispatch);
+    }
   };
 
   return <FieldTemperaturesChartView mappedFieldList={ mappedFieldList() }

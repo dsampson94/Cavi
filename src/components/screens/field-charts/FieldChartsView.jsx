@@ -1,25 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { zoomIdentity } from 'd3';
 
 import { arrayOf, shape } from 'prop-types';
 
 import { FIELD_CHART_MIDBAR, FIELD_CHARTS } from '../../../tools/general/system-variables.util';
-import { AggregateChartsContainer, DeficitChartsContainer } from './FieldChartView.util';
+import { AggregateChartsContainer, DeficitChartsContainer } from './FieldChartsView.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
 
-import './field-chart-view.scss';
+import './field-charts-view.scss';
 
 const ClientFieldsView = ({
                             mappedFieldList,
                             mappedChartList,
                             mappedMenuList,
+                            mappedVoltChartList,
+                            mappedFlowMeterDailyChartList,
+                            mappedFlowMeterHourlyList,
+                            mappedECChartList,
+                            mappedVPDChartList,
+                            mappedActualChartList,
                             activeLoadPeriod,
                             setActiveLoadPeriod,
                             setActiveFieldName,
                             activeProbeFactor,
-                            setActiveProbeFactor
+                            setActiveProbeFactor,
+                            activeExtendedChart,
+                            setActiveExtendedChart
                           }) => {
 
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
@@ -31,6 +39,14 @@ const ClientFieldsView = ({
   const [date, setDate] = useState(null);
   const [activeDataPeriod, setActiveDataPeriod] = useState('All');
   const [xAxisViewMode, setXAxisViewMode] = useState('topBar');
+
+  useEffect(() => {
+    setXAxisViewMode('topBar');
+    setActiveDataPeriod('All');
+    setCurrentGlobalZoomState(zoomIdentity);
+    setCurrentXZoomState(zoomIdentity);
+    setCurrentYZoomState(zoomIdentity);
+  }, [activeLoadPeriod]);
 
   return (
     <ContentContainer view={ FIELD_CHARTS }
@@ -73,6 +89,12 @@ const ClientFieldsView = ({
                                   setDate={ setDate } />
 
           <AggregateChartsContainer mappedChartList={ mappedChartList }
+                                    mappedVoltChartList={ mappedVoltChartList }
+                                    mappedFlowMeterDailyChartList={ mappedFlowMeterDailyChartList }
+                                    mappedFlowMeterHourlyList={ mappedFlowMeterHourlyList }
+                                    mappedECChartList={ mappedECChartList }
+                                    mappedVPDChartList={ mappedVPDChartList }
+                                    mappedActualChartList={ mappedActualChartList }
                                     currentGlobalZoomState={ currentGlobalZoomState }
                                     setCurrentGlobalZoomState={ setCurrentGlobalZoomState }
                                     currentYZoomState={ currentYZoomState }
@@ -89,6 +111,8 @@ const ClientFieldsView = ({
                                     setXAxisViewMode={ setXAxisViewMode }
                                     activeProbeFactor={ activeProbeFactor }
                                     setActiveProbeFactor={ setActiveProbeFactor }
+                                    activeExtendedChart={ activeExtendedChart }
+                                    setActiveExtendedChart={ setActiveExtendedChart }
                                     date={ date }
                                     setDate={ setDate } />
         </div>

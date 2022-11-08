@@ -1,33 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import { func } from 'prop-types';
 
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
+
 import {
   CHARTS,
+  FAVORITES_STAR,
   FIELD_CHARTS,
   FIELD_TEMPERATURES,
-  FOUR_WEEKS,
-  FULL_VIEW,
+  FOUR_WEEKS_LABEL,
+  FULL_VIEW_LABEL,
   RADIO_GROUP,
   SETTINGS_GEAR,
-  SIX_MONTHS,
-  THREE_MONTHS,
-  TWELVE_MONTHS,
-  TWO_MONTHS,
-  TWO_WEEKS
+  SIX_MONTHS_LABEL,
+  THREE_MONTHS_LABEL,
+  TWELVE_MONTHS_LABEL,
+  TWO_MONTHS_LABEL,
+  TWO_WEEKS_LABEL
 } from '../../../tools/general/system-variables.util';
 
-import SVGIcon from '../icon/SVGIcon';
+import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA } from '../../../redux/actions/client.action';
+
+import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
+
+import SVGIcon from '../SVGIcon/SVGIcon';
 import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
 import ToolTip from '../tool-tip/ToolTip';
 
-export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
+export const SideBarList = ({
+                              mappedUserData,
+                              filteredSideBarData,
+                              favoritesToggle,
+                              setFavoritesToggle,
+                              myFavorites,
+                              myClients,
+                              myFavoritesChart
+                            }) => {
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const { groupName, clientName } = useParams();
+
+  const handleFavoritesClick = (groupName, clientName) => {
+    addOrRemoveFarmLocalStorageFavorites(groupName, clientName);
+    setFavoritesToggle(!favoritesToggle);
+  };
 
   let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item) => {
     return (
@@ -53,9 +74,16 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
                        }
                      })()
                    } }
-                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok) }>
+                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, dispatch) }>
                 { value.iok }
               </div>
+
+              { !myFavoritesChart &&
+              <div className="client-fields-side-bar__list__item__subheader__icon"
+                   onClick={ () => handleFavoritesClick(item.objectKey, value.iok) }>
+                <SVGIcon name={ FAVORITES_STAR } fill={ '#f37b2c' } />
+              </div> }
+
               <div className="client-fields-side-bar__list__item__subheader__icon"
                    onClick={ noOp() }>
                 <SVGIcon name={ SETTINGS_GEAR } />
@@ -68,16 +96,25 @@ export const SideBarList = ({ mappedUserData, filteredSideBarData }) => {
   });
 
   return (
-    <div className="client-fields-side-bar__list">
-      <div className="client-fields-side-bar__list__header">{ 'MY CLIENTS' }</div>
-      <div className="client-fields-side-bar__list__container">
-        { listItem }
+    <>
+      <div className="client-fields-side-bar__list__header">
+        { myClients ? 'MY CLIENTS' : 'MY FAVORITES' }
       </div>
-    </div>
+      <div className={ getClassNames('client-fields-side-bar__list',
+        { favorites: myFavorites || myFavoritesChart, clients: myClients }) }>
+
+        <div className="client-fields-side-bar__list__container">
+          { listItem }
+        </div>
+      </div>
+    </>
+
   );
 };
 
-const handleSubHeaderClick = (history, groupName, clientName) => {
+const handleSubHeaderClick = (history, groupName, clientName, dispatch) => {
+  dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
+  dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
   history.push(`/client/${ groupName }/${ clientName }`);
 };
 
@@ -106,7 +143,7 @@ export const SideBarButton = () => {
 
 export const ViewDataBar = ({ setActiveLoadPeriod }) => {
 
-  const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS);
+  const [selectedPeriod, setSelectedPeriod] = useState(TWO_WEEKS_LABEL);
 
   useEffect(() => {
     setActiveLoadPeriod(selectedPeriod);
@@ -115,38 +152,38 @@ export const ViewDataBar = ({ setActiveLoadPeriod }) => {
   return (
     <div className="field-charts-side-bar__view-mode">
       <div className="field-charts-side-bar__view-mode__header">
-        { 'View Data' }
+        { 'VIEW DATA' }
       </div>
 
       <div className="field-charts-side-bar__view-mode__options">
-        <RadioInput constant={ TWO_WEEKS }
+        <RadioInput constant={ TWO_WEEKS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWO_WEEKS }
+                    checked={ selectedPeriod === TWO_WEEKS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ FOUR_WEEKS }
+        <RadioInput constant={ FOUR_WEEKS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === FOUR_WEEKS }
+                    checked={ selectedPeriod === FOUR_WEEKS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput label={ TWO_MONTHS }
-                    constant={ TWO_MONTHS }
+        <RadioInput label={ TWO_MONTHS_LABEL }
+                    constant={ TWO_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWO_MONTHS }
+                    checked={ selectedPeriod === TWO_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ THREE_MONTHS }
+        <RadioInput constant={ THREE_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === THREE_MONTHS }
+                    checked={ selectedPeriod === THREE_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ SIX_MONTHS }
+        <RadioInput constant={ SIX_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === SIX_MONTHS }
+                    checked={ selectedPeriod === SIX_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ TWELVE_MONTHS }
+        <RadioInput constant={ TWELVE_MONTHS_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === TWELVE_MONTHS }
+                    checked={ selectedPeriod === TWELVE_MONTHS_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
-        <RadioInput constant={ FULL_VIEW }
+        <RadioInput constant={ FULL_VIEW_LABEL }
                     name={ RADIO_GROUP }
-                    checked={ selectedPeriod === FULL_VIEW }
+                    checked={ selectedPeriod === FULL_VIEW_LABEL }
                     onClick={ ({ target }) => setSelectedPeriod(target.value) } />
       </div>
     </div>
@@ -224,10 +261,25 @@ const handleFieldClick = (history, groupName, clientName, field, setActiveFieldN
   setActiveFieldName(field.locationName);
   switch (view) {
     case FIELD_CHARTS :
-      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
+      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.probeNumber }/${ field?.locationName }`);
       break;
     case FIELD_TEMPERATURES :
-      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
+      history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ field?.probeNumber }/${ field?.locationName }`);
       break;
   }
+};
+
+export const mapFavoritesList = (storedFavoritesList, mappedUserData) => {
+  if (!storedFavoritesList) return null;
+  const favoritesList = [];
+  storedFavoritesList?.forEach((storedItem) => {
+    mappedUserData?.forEach((userItem) => {
+      if (userItem?.objectKey !== storedItem?.split('/')[0]) return;
+      userItem.innerObjectValueList?.forEach((innerItem) => {
+        if (innerItem?.iok !== storedItem?.split('/')[1]) return;
+        favoritesList.push({ objectKey: userItem?.objectKey, innerObjectValueList: [innerItem] });
+      });
+    });
+  });
+  return favoritesList;
 };

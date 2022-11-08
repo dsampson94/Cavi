@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../../stylesheets/util" as util;
-@use "../../../../stylesheets/color" as color;
-@use "../../../../stylesheets/radius" as radius;
-@use "../../../../stylesheets/mixin" as mixin;
-@use "../../../../stylesheets/config" as config;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
 
 .table {
   display: table;
@@ -14,7 +14,8 @@
   &__header {
     position: sticky;
     box-shadow: 0 util.rem(0.9);
-    z-index: 9;
+    background-color: map.get(color.$colorMap, light-mode-white);;
+    z-index: 10;
     top: 0;
 
     &-row {
@@ -28,14 +29,20 @@
 
       &__text {
         user-select: none;
-        font-size: util.rem(9);
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          font-size: util.rem(10);
-        }
+        font-size: util.rem(12);
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          font-size: util.rem(14);
+          font-size: util.rem(15);
+        }
+
+        &--field-setup {
+          text-align: left;
+          user-select: none;
+          font-size: util.rem(12);
+
+          @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+            font-size: util.rem(15);
+          }
         }
       }
     }
@@ -44,8 +51,15 @@
   &__body {
 
     &__row {
-      transition: 1s;
-      border-bottom: util.rem(0.5) solid map.get(color.$colorMap, grey);
+      border-bottom: util.rem(2) solid map.get(color.$colorMap, light-grey);
+
+      &:hover {
+        cursor: pointer;
+        z-index: 4;
+        position: relative;
+        opacity: 1;
+        border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
+      }
 
       td {
         position: relative;
@@ -54,27 +68,27 @@
         text-align: center;
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-          max-height: util.rem(24);
+          max-height: util.rem(22);
           font-size: util.rem(7);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-          max-height: util.rem(26);
+          max-height: util.rem(24);
           font-size: util.rem(8);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-          max-height: util.rem(28);
+          max-height: util.rem(26);
           font-size: util.rem(9);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          max-height: util.rem(30);
+          max-height: util.rem(28);
           font-size: util.rem(10);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          max-height: util.rem(32);
+          max-height: util.rem(30);
           font-size: util.rem(11);
         }
 
@@ -109,11 +123,6 @@
           display: flex;
           flex-direction: column;
 
-          p {
-            padding: 0 util.rem(2) 0 util.rem(2);
-            font-size: util.rem(10);
-          }
-
           &__icon {
             position: absolute;
             margin-top: util.rem(1);
@@ -124,6 +133,26 @@
               margin-top: util.rem(-5.5);
               right: 0;
             }
+          }
+
+          &--field-setup {
+            font-size: util.rem(11);
+            margin-left: util.rem(8);
+            text-align: left;
+            height: 100%;
+          }
+
+          &__battery-text {
+            font-weight: bold;
+            transform: translateY(120%);
+            padding: 0 util.rem(2) 0 util.rem(2);
+            font-size: util.rem(10);
+          }
+
+          &__text {
+            font-weight: bold;
+            padding: 0 util.rem(2) 0 util.rem(2);
+            font-size: util.rem(10);
           }
 
           &-forecast {
@@ -268,6 +297,13 @@
 
       &--header {
         border-bottom: none;
+        border-top: none;
+
+        &:hover {
+          border-bottom: none;
+          border-top: none;
+          background-color: transparent;
+        }
       }
 
       &--hidden {
@@ -275,27 +311,23 @@
       }
 
       &--selected {
-        background-color: map.get(color.$colorMap, row-hover-blue);
+        cursor: pointer;
+        z-index: 4;
+        position: relative;
+        opacity: 1;
+        border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
       }
 
       &--dropdown {
-        font-size: 100%;
+        min-width: util.rem(40);
+        text-align: center;
 
         &__icon {
 
           &--left {
-            padding-left: util.rem(6);
             text-align: left;
           }
-
         }
-
-      }
-
-      &:hover {
-        cursor: pointer;
-        transition: 0.15s;
-        background-color: map.get(color.$colorMap, row-hover-blue);
       }
     }
   }

@@ -1,11 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
-
-import { requestClientFieldList } from '../../../redux/actions/client.action';
 
 import {
   ACCURACY_ANALYSIS,
@@ -16,6 +13,7 @@ import {
   DOUBLE_DROPDOWN,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
+  FIELD_SETUP_MIDBAR,
   FIELD_TEMPERATURES_MIDBAR,
   MID_BAR_ASSISTANT,
   MID_BAR_CHART,
@@ -35,7 +33,7 @@ import {
 import Button from '../button/Button';
 import DropDownButton from '../drop-down/DropDownButton';
 import NumberInput from '../input/number/NumberInput';
-import SVGIcon from '../icon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 import './mid-bar.scss';
 
@@ -54,11 +52,15 @@ const MidBar = ({
                   setActiveDataPeriod,
                   showChartsSideBar,
                   setShowChartsSideBar,
+                  showSetupSideBar,
+                  setShowSetupSideBar,
                   mappedFieldList,
                   mappedMenuList,
                   setActiveFieldName,
                   yAxisShared,
-                  setYAxisShared
+                  setYAxisShared,
+                  reloadToggleActive,
+                  setReloadToggleActive
                 }) => {
 
   switch (view) {
@@ -71,9 +73,10 @@ const MidBar = ({
                                       hasSubGroups={ hasSubGroups }
                                       setFilteredTableData={ setFilteredTableData }
                                       setActiveTableData={ setActiveTableData }
-                                      clientRequestFields={ setActiveTableData }
                                       toggleDropdowns={ toggleDropdowns }
-                                      showClientsSideBar={ showClientsSideBar } />;
+                                      showClientsSideBar={ showClientsSideBar }
+                                      reloadToggleActive={ reloadToggleActive }
+                                      setReloadToggleActive={ setReloadToggleActive } />;
     case FIELD_CHART_MIDBAR:
       return <FieldChartsMidBar activeDataPeriod={ activeDataPeriod }
                                 setActiveDataPeriod={ setActiveDataPeriod }
@@ -95,6 +98,15 @@ const MidBar = ({
                                             setActiveFieldName={ setActiveFieldName }
                                             yAxisShared={ yAxisShared }
                                             setYAxisShared={ setYAxisShared } />;
+
+    case FIELD_SETUP_MIDBAR:
+      return <FieldSetupMidBar showSetupSideBar={ showSetupSideBar }
+                               setShowSetupSideBar={ setShowSetupSideBar }
+                               mappedFieldList={ mappedFieldList }
+                               mappedMenuList={ mappedMenuList }
+                               setActiveFieldName={ setActiveFieldName }
+                               yAxisShared={ yAxisShared }
+                               setYAxisShared={ setYAxisShared } />;
   }
 };
 
@@ -169,29 +181,29 @@ const ClientFieldsTableMidBar = ({
                                    hasSubGroups,
                                    setFilteredTableData,
                                    setActiveTableData,
-                                   clientRequestFields,
                                    toggleDropdowns,
-                                   showClientsSideBar
+                                   showClientsSideBar,
+                                   reloadToggleActive,
+                                   setReloadToggleActive
                                  }) => {
 
-  const dispatch = useDispatch();
   const { groupName, clientName } = useParams();
 
   return (
     <div className={ getClassNames('client-fields__top-bar', { show: showClientsSideBar }) }>
       <div className="client-fields__top-bar-left">
         { hasSubGroups &&
-          <>
-            { !filteredTableData &&
-              <div className="client-fields__top-bar-left-button">
-                <Button icon={ DROPDOWN_ALL }
-                        onClick={ toggleDropdowns } />
-              </div> }
-            { filteredTableData &&
-              <div className="client-fields__top-bar-left-no-button" /> }
-          </> }
-        { !hasSubGroups &&
+        <>
+          { !filteredTableData &&
+          <div className="client-fields__top-bar-left-button">
+            <Button icon={ DROPDOWN_ALL }
+                    onClick={ toggleDropdowns } />
+          </div> }
+          { filteredTableData &&
           <div className="client-fields__top-bar-left-no-button" /> }
+        </> }
+        { !hasSubGroups &&
+        <div className="client-fields__top-bar-left-no-button" /> }
         <p>{ `Recommendations: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
       </div>
       <div className="client-fields__top-bar-right">
@@ -209,9 +221,9 @@ const ClientFieldsTableMidBar = ({
         <Button label={ 'Reload Recommendations' }
                 spaced
                 onClick={ () => {
-                  setFilteredTableData(undefined);
                   setActiveTableData([]);
-                  dispatch(requestClientFieldList(clientRequestFields));
+                  setFilteredTableData(undefined);
+                  setReloadToggleActive(!reloadToggleActive);
                 } } />
       </div>
     </div>
@@ -240,7 +252,7 @@ const FieldChartsMidBar = ({
                            }) => {
 
   const history = useHistory();
-  const { groupName, clientName, fieldName } = useParams();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
 
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
@@ -263,10 +275,18 @@ const FieldChartsMidBar = ({
   return (
     <div className={ 'field-chart__top-bar' }>
       <div className="field-chart__top-bar--left">
+
         <FieldButtons className={ 'field-chart__top-bar--left-inner' }
-                      setShowChartsSideBar={ setShowChartsSideBar }
-                      showChartsSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }
+                      showSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Temperatures' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
 
         <DropDownButton name={ SETTINGS_GEAR }
                         className={ 'field-chart__top-bar--left__settings' }
@@ -324,7 +344,7 @@ const FieldTemperaturesChartsMidBar = ({
                                        }) => {
 
   const history = useHistory();
-  const { groupName, clientName, fieldName } = useParams();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
 
   const viewClient = (direction) => {
     mappedFieldList.forEach((item, index) => {
@@ -347,10 +367,19 @@ const FieldTemperaturesChartsMidBar = ({
   return (
     <div className={ 'field-temperatures__top-bar' }>
       <div className="field-temperatures__top-bar--left">
+
         <FieldButtons className={ 'field-temperatures__top-bar--left-inner' }
-                      setShowChartsSideBar={ setShowChartsSideBar }
-                      showChartsSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }
+                      showSideBar={ showChartsSideBar }
                       viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Deficits' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
+
       </div>
 
       <div className="field-temperatures__top-bar--center">
@@ -384,11 +413,63 @@ const FieldTemperaturesChartsMidBar = ({
 
 FieldTemperaturesChartsMidBar.propTypes = {};
 
-const FieldButtons = ({ className, setShowChartsSideBar, showChartsSideBar, viewClient }) => {
+const FieldSetupMidBar = ({
+                            showSetupSideBar,
+                            setShowSetupSideBar,
+                            mappedFieldList,
+                            setActiveFieldName
+                          }) => {
+
+  const history = useHistory();
+  const { groupName, clientName, probeNumber, fieldName } = useParams();
+
+  const viewClient = (direction) => {
+    mappedFieldList.forEach((item, index) => {
+      if (item.fieldName.locationName === fieldName) {
+        const field = mappedFieldList[index + direction].fieldName;
+        setActiveFieldName(field.locationName);
+        handleFieldClick(history, groupName, clientName, field);
+      }
+    });
+  };
+
+  const handleFieldClick = (history, groupName, clientName, field) => {
+    history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
+  };
+
+  return (
+    <div className="field-setup__top-bar">
+      <div className="field-setup__top-bar--left">
+
+        <FieldButtons className={ 'field-setup__top-bar--left-inner' }
+                      setShowSideBar={ setShowSetupSideBar }
+                      viewClient={ viewClient } />
+
+        <div className={ 'field-chart__top-bar--left-outer' }>
+          <Button label={ 'Deficits' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
+                  chartbar
+                  spaced />
+        </div>
+
+      </div>
+
+      <div className="field-temperatures__top-bar--center">
+        <div>{ fieldName }</div>
+      </div>
+
+    </div>
+  );
+};
+
+FieldSetupMidBar.propTypes = {};
+
+const FieldButtons = ({ className, setShowSideBar, showSideBar, viewClient }) => {
+
   return (
     <div className={ className }>
       <Button label={ 'Fields' }
-              onClick={ () => setShowChartsSideBar(!showChartsSideBar) }
+              onClick={ () => setShowSideBar(!showSideBar) }
               chartbar
               spaced />
       <Button label={ '<' }

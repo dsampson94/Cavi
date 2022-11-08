@@ -91,26 +91,24 @@ export function* performRetrieveFullClientFieldListRequest({ client, onSuccess, 
               yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
               yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_CRITICAL));
               if (onError) yield call(onError);
-              yield put(setSpinnerText(null));
               return;
 
             case responseStatus(data).SUCCESS:
               yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: data });
               yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_SUCCESS));
               if (onSuccess) yield call(onSuccess, data);
-              yield put(setSpinnerText(null));
           }
 
         } catch (response) {
           yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
           yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_CRITICAL));
           if (onError) yield call(onError);
-          yield put(setSpinnerText(null));
         }
 
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch (response) {
     yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
@@ -135,15 +133,15 @@ export function* performRetrieveClientFieldListRequest({ client, onSuccess, onEr
         yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
         if (onError) yield call(onError);
-        yield put(setSpinnerText(null));
         return;
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_CLIENT_FIELD_LIST, fieldList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch (response) {
     yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
@@ -196,20 +194,19 @@ export function* performRetrieveClientPDFRequest({ client, onSuccess, onError })
         yield put({ type: SET_CLIENT_PDF, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_PDF, SNACK_CRITICAL));
         if (onError) yield call(onError);
-        yield put(setSpinnerText(null));
         return;
 
       case responseStatus(data).SUCCESS:
         if (client.mail) {
           if (onSuccess) yield call(onSuccess, data);
           yield put(addSystemNotice(SUCCESSFULLY_EMAILED_PDF, SNACK_SUCCESS));
-          yield put(setSpinnerText(null));
         }
 
         yield put({ type: SET_CLIENT_PDF, clientPDF: data });
         if (onSuccess) yield call(onSuccess, data);
-        yield put(setSpinnerText(null));
     }
+
+    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put({ type: SET_CLIENT_PDF, undefined });

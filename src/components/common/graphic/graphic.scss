@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
 
-  &__img {
+  img {
     max-width: 100%;
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
@@ -30,6 +30,14 @@
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
       height: util.rem(140);
+    }
+  }
+
+  &--loading {
+
+    img {
+      margin-left: util.rem(10);
+      height: 80%
     }
   }
 }

@@ -37,6 +37,11 @@
     cursor: pointer;
   }
 
+  &--add {
+    margin: util.rem(-5) 0 util.rem(8) util.rem(10);
+    width: util.rem(70);
+  }
+
   &--datebar {
     display: flex;
     justify-content: center;
@@ -123,6 +128,7 @@
   &--chartbar {
     height: util.rem(15);
     margin-left: util.rem(2);
+    width: util.rem(180);
   }
 
   &--long {
@@ -141,5 +147,9 @@
       font-size: util.rem(8);
       height: 50%;
     }
+  }
+
+  &--medium {
+    max-width: util.rem(90);
   }
 }

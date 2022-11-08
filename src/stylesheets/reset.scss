@@ -38,6 +38,7 @@ ul {
 
 *, *::before, *::after {
   box-sizing: border-box;
+  scrollbar-width: thin;
 }
 
 svg {

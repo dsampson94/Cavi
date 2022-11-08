@@ -30,32 +30,172 @@
     cursor: pointer;
     width: util.rem(12);
     height: util.rem(11);
-    border: util.rem(1.2) solid map.get(color.$colorMap, pulse-blue);
+    border: util.rem(1.2) solid map.get(color.$colorMap, white);
     border-radius: map.get(radius.$border-radius, medium);
-  }
-}
-
-.checkbox-input__input {
-
-  &:checked {
-    animation: ripple 0.2s linear forwards;
-    background-color: map.get(color.$colorMap, pulse-blue);
-  }
-
-  &:hover {
-    border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
-  }
-
-  &--daily {
 
     &:checked {
       animation: ripple 0.2s linear forwards;
-      background-color: map.get(color.$colorMap, daily-ETO-green);
-      border: util.rem(1.2) solid map.get(color.$colorMap, daily-ETO-green);
+      background-color: map.get(color.$colorMap, black);
     }
 
     &:hover {
       border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+
+    &--actual {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, daily-ETO-green);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--forecast {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, black);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm100 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm200 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm300 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-red);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm400 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-cyan);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm600 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-azure);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--mm800 {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, soiltemp-line-green);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--canopy {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--outside {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--humidity {
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
+    }
+
+    &--rain{
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        background-color: map.get(color.$colorMap, canopy-line-blue);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      }
     }
   }
 }
@@ -72,79 +212,5 @@
 
   100% {
     box-shadow: 0 0 0 util.rem(5) rgba(0, 0, 0, 0);
-  }
-}
-
-.chart {
-
-  &__checkbox-filter {
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    &__inner {
-      display: flex;
-      flex-direction: row-reverse;
-    }
-
-    &--dailyETO {
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -16vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -15vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -16vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-top: -16vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -16vh;
-        margin-left: 5%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -17vh;
-        margin-left: 8%;
-      }
-    }
-
-    &--temperatures {
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -20vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -21vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -22vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-top: -23vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -24vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -25vh;
-      }
-    }
   }
 }
