@@ -557,8 +557,7 @@ export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
     if (value)
         return <td onClick={ noOp() }
                    key={ generateId() }>
-            <div className={ 'table__body__row__td-container--field-setup' }
-                 style={ { color: value?.color } }>
+            <div className={ 'table__body__row__td-container--field-setup' }>
                 {/*<ToolTip text={ value } />*/ }
                 { name ? name : probe ? probe : value }
             </div>

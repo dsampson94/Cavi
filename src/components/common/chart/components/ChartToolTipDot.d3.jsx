@@ -98,6 +98,8 @@ const LineDot = ({
 
   let dateBisector = bisector(xAccessor).center;
 
+  let hoveredObject = data[dateBisector(data, date)];
+
   let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
   let y1 = yScale(yAccessor(data[Math.max(0, dateBisector(data, date))]));
 
@@ -122,6 +124,7 @@ const LineDot = ({
   });
 
   const renderDot = (chart) => {
+    if (hoveredObject?.barY === -0.1) return false;
     if (chartName === DAILY_ETO && hiddenLineList?.includes(chart) && hoverActive && y1) return true;
     else return chartName !== DAILY_ETO && hoverActive && y1;
   };

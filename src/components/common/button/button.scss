@@ -152,4 +152,31 @@
   &--medium {
     max-width: util.rem(90);
   }
+
+  &--tab {
+    background-color: white;
+    color: black;
+    box-shadow: none;
+    border-bottom: util.rem(1) solid grey;
+    border-radius: 0;
+
+    &:hover {
+      background-color: transparent;
+      color: map.get(color.$colorMap, chart-line-blue);
+    }
+
+    &:active {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  &--active {
+    color: map.get(color.$colorMap, chart-line-blue);
+
+    &:active {
+      position: relative;
+      top: 0;
+    }
+  }
 }

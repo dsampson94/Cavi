@@ -10,6 +10,7 @@ import {
   CLIENT_RECOMMENDATION_VIEW,
   COPY_FIELD,
   DELETE_FIELD,
+  FIELD_CHARTS_MODAL_VIEW,
   FIELD_SETUP_VIEW,
   FIX_READINGS,
   GENERAL_ROUTE,
@@ -62,6 +63,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                 hiddenColumns={ hiddenColumns }
                                 setSelectedIndex={ setSelectedIndex }
                                 setSelectedDropdownObject={ setSelectedDropdownObject } />;
+    case FIELD_CHARTS_MODAL_VIEW:
     case FIELD_SETUP_VIEW:
       return <FieldSetupTable tableName={ tableName }
                               activeTableData={ activeTableData }
@@ -342,7 +344,7 @@ const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelecte
     let headers;
     if (activeTableData?.length !== 0) {
       const objectKeys = Object.keys(activeTableData?.[0]);
-      headers = objectKeys.filter((key) => !hiddenColumns?.includes(key)).map((key) => (
+      headers = objectKeys?.filter((key) => !hiddenColumns?.includes(key)).map((key) => (
         <th key={ generateId() }
             style={ { color: hideColumnHeader(tableName, key) } }>
           <div className="table__header-row__text--field-setup">
@@ -367,8 +369,8 @@ const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelecte
 
       const objectValues = [];
       for (const property in object) {
-        if (!hiddenColumns.includes(property)) {
-          objectValues.push(object[property]);
+        if (!hiddenColumns?.includes(property)) {
+          objectValues?.push(object[property]);
         }
       }
 

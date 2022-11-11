@@ -1,0 +1,42 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
+
+.field-charts-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+  z-index: 12;
+  border: util.rem(0.5) solid map.get(color.$colorMap, shadow);
+  border-radius: map.get(radius.$border-radius, modal);
+  background-color: map.get(color.$colorMap, white);
+  box-shadow: util.rem(0) util.rem(0) util.rem(25) map.get(color.$colorMap, dark-mode-grey);
+  margin-left: 15%;
+  margin-right: 9%;
+  width: 81%;
+  height: util.rem(380);
+  bottom: 5%;
+  left: 0;
+  right: 0;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    margin: util.rem(3) util.rem(10) util.rem(0) util.rem(10);
+  }
+
+  &__scroll {
+    height: 85%;
+    width: 98%;
+    display: flex;
+    overflow-y: auto;
+    overflow-x: auto;
+    flex-direction: column;
+  }
+}

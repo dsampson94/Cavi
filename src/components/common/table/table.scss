@@ -49,6 +49,7 @@
   }
 
   &__body {
+    width: 90%;
 
     &__row {
       border-bottom: util.rem(2) solid map.get(color.$colorMap, light-grey);

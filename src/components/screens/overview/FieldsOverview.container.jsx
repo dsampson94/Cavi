@@ -24,7 +24,6 @@ const OverviewContainer = () => {
 
   useEffect(() => {
     dispatch(requestClientOverviewList(request.overviewParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [overviewOptionSelected]);
 
   return <FieldsOverview ownClientsList={ mappedClientsList }

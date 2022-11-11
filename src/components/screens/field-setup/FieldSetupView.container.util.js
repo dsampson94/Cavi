@@ -53,7 +53,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
         return {
           [' ']: `${ field?.land }*_*${ field?.probe }`,
           field: { name: field?.land },
-          probe: { probe: field?.probe, color: 'black' },
+          probe: { probe: field?.probe },
           status: field?.status,
           fix: field?.probe,
           replace: field?.probe,

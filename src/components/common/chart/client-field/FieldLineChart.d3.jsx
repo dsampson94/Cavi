@@ -44,6 +44,8 @@ const FieldLineChartD3 = ({
                             setActiveProbeFactor,
                             activeExtendedChart,
                             setActiveExtendedChart,
+                            showChartsModal,
+                            setShowChartsModal,
                             date,
                             setDate
                           }) => {
@@ -166,6 +168,8 @@ const FieldLineChartD3 = ({
       <ChartHeader chartName={ chartName }
                    chartType={ chartType }
                    isDarkMode={ isDarkMode }
+                   showChartsModal={ showChartsModal }
+                   setShowChartsModal={ setShowChartsModal }
                    activeExtendedChart={ activeExtendedChart }
                    setActiveExtendedChart={ setActiveExtendedChart }
       /> }

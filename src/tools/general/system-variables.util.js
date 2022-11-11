@@ -103,8 +103,9 @@ export const REMOVE_PROBE = 'remove_probe';
 export const VIEW_CHARTS = 'view_charts';
 
 //TABLENAMES
-export const CLIENT_RECOMMENDATION_VIEW = 'recommendationClientFieldView';
-export const FIELD_SETUP_VIEW = 'fieldSetupView';
+export const CLIENT_RECOMMENDATION_VIEW = 'recommendation_client_field_view';
+export const FIELD_SETUP_VIEW = 'field_setup_view';
+export const FIELD_CHARTS_MODAL_VIEW = 'field_charts_modal_view';
 
 //EMOJI
 export const VERY_SATISFIED = 'very_satisfied';
@@ -297,6 +298,15 @@ export const FIELDS_SPLIT_ROUTE = 'fieldssplit';
 export const CLIENT_DETAILS_ROUTE = 'clientdetails';
 export const BILLING_ROUTE = 'billing';
 export const ML_FORECASTS_ROUTE = 'mlforecasts';
+
+//TAB STRINGS
+export const GENERAL_TAB_NAME = 'General';
+export const CROP_FACTORS_TAB_NAME = 'Crop Factors';
+export const PROBES_SUMMARY_TAB_NAME = 'Probe Summary';
+export const PROBES_DETAILED_TAB_NAME = 'Probe Detailed';
+export const ROOTS_TAB_NAME = 'Roots';
+export const IRRISYS_TAB_NAME = 'Irrigation System';
+export const SENSORS_TAB_NAME = 'Sensors';
 
 //CLIENT DETAILS LABELS
 export const DATABASE_NAME = 'Database Name:';

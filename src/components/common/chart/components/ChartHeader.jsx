@@ -20,7 +20,15 @@ import DropDownButton from '../../drop-down/DropDownButton';
 
 import './../chart.scss';
 
-const ChartHeader = ({ chartName, chartType, isDarkMode, activeExtendedChart, setActiveExtendedChart }) => {
+const ChartHeader = ({
+                       chartName,
+                       chartType,
+                       showChartsModal,
+                       setShowChartsModal,
+                       isDarkMode,
+                       activeExtendedChart,
+                       setActiveExtendedChart
+                     }) => {
 
   return (
     <div className={ getClassNames('chart__header__container',
@@ -38,7 +46,8 @@ const ChartHeader = ({ chartName, chartType, isDarkMode, activeExtendedChart, se
 
           { chartName === AGGREGATE_TOP_SOIL &&
           <div className="chart__header__zoom-options--left-top">
-            <div className="chart__header__zoom-options--left-top__settings">
+            <div className="chart__header__zoom-options--left-top__settings"
+                 onClick={ () => setShowChartsModal(!showChartsModal) }>
               <SVGIcon name={ SETTINGS_GEAR } />
             </div>
             <CheckboxInput constant={ 'Hide rain' } />

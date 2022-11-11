@@ -30,11 +30,13 @@ const Button = ({
                   datebar,
                   long,
                   medium,
-                  add
+                  add,
+                  tab,
+                  active
                 }) => {
   return (
     <button className={ getClassNames('button',
-      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny, long, medium, add }) }
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny, long, medium, add, tab, active }) }
             name={ name }
             type={ type }
             onClick={ onClick }

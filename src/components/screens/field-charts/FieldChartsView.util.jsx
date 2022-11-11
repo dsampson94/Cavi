@@ -228,6 +228,8 @@ export const AggregateChartsContainer = ({
                                            setActiveProbeFactor,
                                            activeExtendedChart,
                                            setActiveExtendedChart,
+                                           showChartsModal,
+                                           setShowChartsModal,
                                            date,
                                            setDate
                                          }) => {
@@ -259,6 +261,8 @@ export const AggregateChartsContainer = ({
                           setXAxisViewMode={ setXAxisViewMode }
                           activeProbeFactor={ activeProbeFactor }
                           setActiveProbeFactor={ setActiveProbeFactor }
+                          showChartsModal={ showChartsModal }
+                          setShowChartsModal={ setShowChartsModal }
                           date={ date }
                           setDate={ setDate } />
 

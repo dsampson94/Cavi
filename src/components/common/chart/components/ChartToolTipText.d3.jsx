@@ -321,7 +321,7 @@ const TooltipText = ({
     } else if (chartName === DAILY_ETO) {
       if (chart === 'Actual') return `Actual: ${ secondaryHoveredObject?.y }mm ${ secondaryHoveredObject?.x }`;
       else return `Forecast: ${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
-    } else if (hoveredObject.barY && hoverActive) {
+    } else if (hoveredObject?.barY && hoverActive) {
       return `${ hoveredObject?.barY }mm ${ hoveredObject?.x }`;
     } else {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
@@ -358,6 +358,7 @@ const TooltipText = ({
   };
 
   const renderText = (chart) => {
+    if (hoveredObject?.barY === -0.1) return false;
     if (chartName === DAILY_ETO) return !!(hiddenLineList?.includes(chart) && hoverActive && hoveredObject?.y);
     else if (chart !== 'Actual' && hoverActive && hoveredObject?.y) return true;
     else if (hoveredObject?.barY && hoverActive && y1) return true;

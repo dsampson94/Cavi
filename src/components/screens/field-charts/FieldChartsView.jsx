@@ -8,6 +8,7 @@ import { AggregateChartsContainer, DeficitChartsContainer } from './FieldChartsV
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
+import FieldChartsModal from '../../common/modal/FieldChartsModal';
 
 import './field-charts-view.scss';
 
@@ -30,6 +31,7 @@ const ClientFieldsView = ({
                             setActiveExtendedChart
                           }) => {
 
+  const [showChartsModal, setShowChartsModal] = useState(false);
   const [showChartsSideBar, setShowChartsSideBar] = useState(true);
   const [currentGlobalZoomState, setCurrentGlobalZoomState] = useState(zoomIdentity);
   const [currentYZoomState, setCurrentYZoomState] = useState(zoomIdentity);
@@ -101,6 +103,8 @@ const ClientFieldsView = ({
                                     setCurrentYZoomState={ setCurrentYZoomState }
                                     currentXZoomState={ currentXZoomState }
                                     setCurrentXZoomState={ setCurrentXZoomState }
+                                    showChartsModal={ showChartsModal }
+                                    setShowChartsModal={ setShowChartsModal }
                                     yAxisShared={ yAxisShared }
                                     hoverActive={ hoverActive }
                                     setHoverActive={ setHoverActive }
@@ -120,6 +124,11 @@ const ClientFieldsView = ({
         <div className="field-chart__lower" />
 
       </div>
+
+      { showChartsModal &&
+      <FieldChartsModal showChartsModal={ showChartsModal }
+                        setShowChartsModal={ setShowChartsModal } /> }
+
     </ContentContainer>
   );
 };
