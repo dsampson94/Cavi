@@ -24,6 +24,7 @@ import {
 } from '../../../tools/general/system-variables.util';
 
 import { daysFromToday } from '../../../tools/general/helpers.util';
+import { saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
@@ -100,6 +101,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
   };
 
   const logout = () => {
+    saveUserLoginToLocalStorage({});
     dispatch(requestLogout());
     history.push('/');
   };
@@ -193,6 +195,7 @@ const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
   };
 
   const logout = () => {
+    saveUserLoginToLocalStorage({});
     dispatch(requestLogout());
     history.push('/');
   };
@@ -309,6 +312,7 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
   };
 
   const logout = () => {
+    saveUserLoginToLocalStorage({});
     dispatch(requestLogout());
     history.push('/');
   };
@@ -370,6 +374,7 @@ const FieldSetupTopBar = ({}) => {
   const { groupName, clientName } = useParams();
 
   const logout = () => {
+    saveUserLoginToLocalStorage({});
     dispatch(requestLogout());
     history.push('/');
   };

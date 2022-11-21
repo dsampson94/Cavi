@@ -71,7 +71,7 @@ import {
   SET_SOIL_TEMP_LIST
 } from '../actions/field.action';
 
-export function* performRetrieveFieldChartListRequest({ field, onSuccess, onError }) {
+export function* performRetrieveFieldChartListRequest({ field }) {
   try {
     yield put(setSpinnerText(SPINNER_TEXT));
     const [endpoint, requestOptions] = getFieldChartListRequest(field);
@@ -81,21 +81,17 @@ export function* performRetrieveFieldChartListRequest({ field, onSuccess, onErro
       case responseStatus(data).ERROR:
         yield put({ type: SET_FIELD_CHART_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
-        if (onError) yield call(onError);
         return;
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
-        if (onSuccess) yield call(onSuccess, data);
     }
-
-    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put({ type: SET_FIELD_CHART_LIST, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
-    if (onError) yield call(onError);
+  } finally {
     yield put(setSpinnerText(null));
   }
 }
@@ -104,7 +100,7 @@ export function* watchForRetrieveFieldChartListRequest() {
   yield takeLatest(GET_FIELD_CHART_LIST, performRetrieveFieldChartListRequest);
 }
 
-export function* performChartCalibrateProbeRequest({ field, onSuccess, onError }) {
+export function* performChartCalibrateProbeRequest({ field }) {
   try {
     yield put(setSpinnerText(SPINNER_TEXT));
     const [endpoint, requestOptions] = getChartProbeCalibrationRequest(field);
@@ -113,19 +109,15 @@ export function* performChartCalibrateProbeRequest({ field, onSuccess, onError }
     switch (data) {
       case responseStatus(data).ERROR:
         yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
-        if (onError) yield call(onError);
         return;
 
       case responseStatus(data).SUCCESS:
         yield put(addSystemNotice(SUCCESSFULLY_CALIBRATED_PROBE, SNACK_SUCCESS));
-        if (onSuccess) yield call(onSuccess, data);
     }
-
-    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
-    if (onError) yield call(onError);
+  } finally {
     yield put(setSpinnerText(null));
   }
 }
@@ -134,7 +126,7 @@ export function* watchForChartCalibrateProbeRequest() {
   yield takeLatest(REQUEST_PROBE_CALIBRATION, performChartCalibrateProbeRequest);
 }
 
-export function* performRetrieveExtendedFieldChartListRequest({ field, use, onSuccess, onError }) {
+export function* performRetrieveExtendedFieldChartListRequest({ field, use }) {
 
   const getUseType = () => {
     switch (use) {
@@ -199,21 +191,17 @@ export function* performRetrieveExtendedFieldChartListRequest({ field, use, onSu
       case responseStatus(data).ERROR:
         yield put({ type: getUseType().type, undefined });
         yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
-        if (onError) yield call(onError);
         return;
 
       case responseStatus(data).SUCCESS:
         yield put({ type: getUseType().type, [getUseType().stateObject]: data });
         yield put(addSystemNotice(getUseType().successNotice, SNACK_SUCCESS));
-        if (onSuccess) yield call(onSuccess, data);
     }
-
-    yield put(setSpinnerText(null));
 
   } catch ({ response }) {
     yield put({ type: getUseType().type, undefined });
     yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
-    if (onError) yield call(onError);
+  } finally {
     yield put(setSpinnerText(null));
   }
 }
@@ -222,7 +210,7 @@ export function* watchForRetrieveExtendedFieldChartListRequest() {
   yield takeLatest(REQUEST_EXTENDED_FIELD_CHART_LIST, performRetrieveExtendedFieldChartListRequest);
 }
 
-export function* performRetrieveFieldSetupListRequest({ field, use, onSuccess, onError }) {
+export function* performRetrieveFieldSetupListRequest({ field, use }) {
 
   const getUseType = () => {
     switch (use) {
@@ -385,13 +373,11 @@ export function* performRetrieveFieldSetupListRequest({ field, use, onSuccess, o
       case responseStatus(data).ERROR:
         yield put({ type: getUseType().type, undefined });
         yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
-        if (onError) yield call(onError);
         return;
 
       case responseStatus(data).SUCCESS:
         yield put({ type: getUseType().type, [getUseType().stateObject]: data });
         yield put(addSystemNotice(getUseType().successNotice, SNACK_SUCCESS));
-        if (onSuccess) yield call(onSuccess, data);
     }
 
     yield put(setSpinnerText(null));
@@ -399,7 +385,7 @@ export function* performRetrieveFieldSetupListRequest({ field, use, onSuccess, o
   } catch ({ response }) {
     yield put({ type: getUseType().type, undefined });
     yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
-    if (onError) yield call(onError);
+  } finally {
     yield put(setSpinnerText(null));
   }
 }

@@ -39,6 +39,11 @@ export const responseStatus = (data) => Object.freeze({
   ERROR: (!data)
 });
 
+export const requestResponse = () => Object.freeze({
+  SUCCESS: 1,
+  ERROR: 0
+});
+
 export function getResponseMetaData(data) {
   return {
     responseMessage: data?.snackbartext

@@ -30,10 +30,8 @@ export const setTheme = (theme) => ({
 });
 
 export const GET_THEME = '[SYSTEM_STORE] Get theme';
-export const getTheme = (onSuccess, onError) => ({
-  type: GET_THEME,
-  onSuccess,
-  onError
+export const getTheme = () => ({
+  type: GET_THEME
 });
 
 export const CANCEL_REQUEST = '[SYSTEM_STORE] Cancel Request';

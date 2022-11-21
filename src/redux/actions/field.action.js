@@ -30,35 +30,27 @@ export const SET_FIELD_SETUP_PHENOLOGICAL_LIST = '[FIELD_STORE] Set field phenol
 export const SET_FIELD_SETUP_MAP_LIST = '[FIELD_STORE] Set field map list';
 
 export const GET_FIELD_CHART_LIST = '[FIELD_STORE] Get field chart list';
-export const requestFieldChartList = (field, onSuccess, onError) => ({
+export const requestFieldChartList = (field) => ({
   type: GET_FIELD_CHART_LIST,
-  field,
-  onSuccess,
-  onError
+  field
 });
 
 export const REQUEST_PROBE_CALIBRATION = '[FIELD_STORE] Request probe calibration';
-export const requestChartProbeCalibration = (field, onSuccess, onError) => ({
+export const requestChartProbeCalibration = (field) => ({
   type: REQUEST_PROBE_CALIBRATION,
-  field,
-  onSuccess,
-  onError
+  field
 });
 
 export const REQUEST_EXTENDED_FIELD_CHART_LIST = '[FIELD_STORE] Request extended field chart list';
-export const requestExtendedFieldChartList = (field, use, onSuccess, onError) => ({
+export const requestExtendedFieldChartList = (field, use) => ({
   type: REQUEST_EXTENDED_FIELD_CHART_LIST,
   field,
-  use,
-  onSuccess,
-  onError
+  use
 });
 
 export const REQUEST_FIELD_SETUP_LIST = '[FIELD_STORE] Request field setup list';
-export const requestFieldSetupList = (field, use, onSuccess, onError) => ({
+export const requestFieldSetupList = (field, use) => ({
   type: REQUEST_FIELD_SETUP_LIST,
   field,
-  use,
-  onSuccess,
-  onError
+  use
 });

@@ -1,4 +1,4 @@
-import { base64ToObject, isEmpty, objectToBase64 } from '../general/helpers.util';
+import { base64ToObject, objectToBase64 } from '../general/helpers.util';
 
 const USER_ACCOUNT = 'U';
 const USER_LOGIN = 'UL';

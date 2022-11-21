@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { removeSystemNotice } from './redux/actions/system.action';
+import { ProtectedRoute } from './routes';
 
 import SnackBar from './components/common/snack-bar/SnackBar';
 import Spinner from './components/common/spinner/Spinner';
@@ -37,8 +38,9 @@ const App = () => {
   return (
     <div className="app" style={ style }>
       <Route path="/" component={ AuthContainer } />
-      <Route path="/overview" component={ OverviewContainer } />
-      <Route path="/client" component={ ClientFieldsContainer } />
+      <ProtectedRoute path="/overview" component={ OverviewContainer } />
+      <ProtectedRoute path="/client" component={ ClientFieldsContainer } />
+
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
       <Spinner showSpinnerText={ spinnerText } />
     </div>
