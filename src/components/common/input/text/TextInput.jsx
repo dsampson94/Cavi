@@ -20,11 +20,12 @@ const TextInput = ({
                      chartbar,
                      topbar,
                      centered,
-                     select
+                     select,
+                     wide
                    }) => {
 
   return (
-    <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar, centered }) }>
+    <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar, centered, select, wide }) }>
 
       <div className={ getClassNames('text-input__label-container', { login, left, centered }) }>
         <label>{ label }</label>
@@ -36,7 +37,7 @@ const TextInput = ({
              onKeyDown={ onKeyPress }
              disabled={ disabled }
              type={ type }
-             className={ getClassNames('text-input__input', { login, chartbar, select }) } />
+             className={ getClassNames('text-input__input', { login, chartbar, select, wide }) } />
     </div>
   );
 };

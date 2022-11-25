@@ -7,7 +7,7 @@
   top: utils.rem(60);
   right: utils.bu(.5);
   user-select: none;
-  transform: translateY(utils.bu(-3));
+  transform: translateY(utils.bu(2));
   min-width: utils.rem(300);
   max-width: utils.rem(300);
   z-index: 999;
@@ -17,14 +17,6 @@
     min-width: utils.rem(350);
     max-width: utils.rem(450);
     right: utils.bu(1.5);
-  }
-
-  @include mixins.breakpoint(map-get(config.$breakpoints, large)) {
-    transform: translateY(utils.bu(-4));
-  }
-
-  @include mixins.breakpoint(map-get(config.$breakpoints, x-large)) {
-    transform: translateY(utils.bu(-3));
   }
 
   @include mixins.breakpoint(map-get(config.$breakpoints, small)) {

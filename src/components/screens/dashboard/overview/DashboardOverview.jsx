@@ -2,42 +2,32 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { arrayOf, func, number, shape, string } from 'prop-types';
+import { DASHBOARD, SEARCH_PLACEHOLDER } from '../../../../tools/general/system-variables.util';
+import { ActiveHeader, OverviewList } from './DashboardOverview.util';
 
-import { CLIENT_FIELDS, OVERVIEW_MIDBAR, SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
-import { ActiveHeader, OverviewList } from './FieldsOverview.util';
+import ContentContainer from '../../../common/content-container/ContentContainer';
+import InputSearch from '../../../common/input-search/InputSearch';
 
-import ContentContainer from '../../common/content-container/ContentContainer';
-import MidBar from '../../common/mid-bar/MidBar';
-import InputSearch from '../../common/input-search/InputSearch';
+import './dashboard-overview.scss';
 
-import './fields-overview.scss';
-
-const FieldsOverview = ({
-                          ownClientsList,
-                          overviewOptionSelected,
-                          setOverviewOptionSelected,
-                          activePath
-                        }) => {
+const DashboardOverview = ({
+                             ownClientsList,
+                             overviewOptionSelected,
+                             setOverviewOptionSelected
+                           }) => {
 
   const history = useHistory();
 
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [filteredClientData, setFilteredClientData] = useState(undefined);
 
-  const handleOverviewClick = () => history.push('/overview');
-  const handleMonitorProbesClick = () => history.push('/monitor');
-
   const handleSubHeaderClick = (groupName, clientName) => history.push(`/client/${ groupName }/${ clientName }`);
 
   return (
-    <ContentContainer view={ CLIENT_FIELDS }
+    <ContentContainer view={ DASHBOARD }
                       showClientsSideBar={ showClientsSideBar }
                       setShowClientsSideBar={ setShowClientsSideBar }>
-      <div className="fields-overview">
-        <MidBar view={ OVERVIEW_MIDBAR }
-                activePath={ activePath }
-                handleOverviewClick={ handleOverviewClick }
-                handleMonitorProbesClick={ handleMonitorProbesClick } />
+      <div className="dashboard-overview">
 
         <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
                       setOverviewOptionSelected={ setOverviewOptionSelected } />
@@ -56,11 +46,11 @@ const FieldsOverview = ({
   );
 };
 
-FieldsOverview.propTypes = {
+DashboardOverview.propTypes = {
   ownClientsList: arrayOf(shape({})),
   overviewOptionSelected: number || undefined,
   setOverviewOptionSelected: func,
-  activePath: string.isRequired
+  activePath: string
 };
 
-export default FieldsOverview;
+export default DashboardOverview;

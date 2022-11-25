@@ -10,6 +10,7 @@ import {
   CLIENT_FIELDS,
   CROP_DETAILS_ROUTE,
   CROP_FACTORS_ROUTE,
+  DASHBOARD,
   FIELD_CHARTS,
   FIELD_SETUP,
   FIELD_TEMPERATURES,
@@ -50,6 +51,7 @@ const SideBar = ({
                  }) => {
 
   switch (view) {
+    case DASHBOARD:
     case CLIENT_FIELDS:
       return <ClientFieldsSideBar showSideBar={ showSideBar }
                                   setShowSideBar={ setShowSideBar }
@@ -220,7 +222,7 @@ FieldTemperaturesChartsSideBar.propTypes = {
   setShowSideBar: func
 };
 
-const FieldSetupSideBar = ({ showSideBar, clientRequestFields, setActiveFieldName }) => {
+const FieldSetupSideBar = ({ showSideBar }) => {
 
   const history = useHistory();
 

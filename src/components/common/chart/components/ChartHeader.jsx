@@ -16,7 +16,7 @@ import { chartByName } from '../Chart.util';
 
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import CheckboxInput from '../../input/checkbox/CheckboxInput';
-import DropDownButton from '../../drop-down/DropDownButton';
+import DropDownButton from '../../drop-down/drop-down-button/DropDownButton';
 
 import './../chart.scss';
 

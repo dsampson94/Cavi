@@ -16,5 +16,11 @@
     flex-direction: row;
     height: calc(100vh - 59px);
     width: 100%;
+
+    &--dashboard {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 }

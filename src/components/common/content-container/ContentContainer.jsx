@@ -1,13 +1,16 @@
 import React from 'react';
 import { arrayOf, node, oneOfType } from 'prop-types';
+import { useHistory, useRouteMatch } from 'react-router';
 
 import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
 
-import { CLIENT_FIELDS, FIELD_CHARTS, FIELD_SETUP, FIELD_TEMPERATURES } from '../../../tools/general/system-variables.util';
+import { Routes } from '../../../routes';
+import { CLIENT_FIELDS, DASHBOARD, FIELD_CHARTS, FIELD_SETUP, FIELD_TEMPERATURES } from '../../../tools/general/system-variables.util';
 import { mappedUserData } from '../side-bar/Sidebar.util';
 
 import TopBar from '../top-bar/TopBar';
 import SideBar from '../side-bar/SideBar';
+import MidBar from '../mid-bar/MidBar';
 
 import './content-container.scss';
 
@@ -25,6 +28,13 @@ const ContentContainer = ({
                             setShowClientsSideBar
                           }) => {
   switch (view) {
+    case DASHBOARD:
+      return <DashboardContentContainer children={ children }
+                                        showClientsSideBar={ showClientsSideBar }
+                                        setShowClientsSideBar={ setShowClientsSideBar }
+                                        clientRequestParams={ clientRequestParams }
+                                        view={ view } />;
+
     case CLIENT_FIELDS:
       return <ClientFieldsContentContainer children={ children }
                                            showClientsSideBar={ showClientsSideBar }
@@ -63,6 +73,61 @@ ContentContainer.propTypes = {
 };
 
 export default ContentContainer;
+
+const DashboardContentContainer = ({ children, view, showClientsSideBar, setShowClientsSideBar, clientRequestParams }) => {
+
+  const history = useHistory();
+  const { path } = useRouteMatch();
+
+  const userAccount = retrieveUserClientListFromLocalStorage();
+  const mappedUser = mappedUserData(userAccount);
+
+  const handleAssistantClick = () => history.push(Routes.ASSISTANT);
+  const handleOverviewClick = () => history.push(Routes.OVERVIEW);
+  const handleMonitorProbesClick = () => history.push(Routes.MONITOR);
+  const handleLastReadingsClick = () => history.push(Routes.LAST_READINGS);
+  const handleNeglectedClick = () => history.push(Routes.NEGLECTED_FIELDS);
+  const handleEmailReadingsClick = () => history.push(Routes.EMAIL_READINGS);
+  const handleRawReadingsClick = () => history.push(Routes.RAW_READINGS);
+  const handleIrricomsClick = () => history.push(Routes.CHECK_IRRICOMS);
+
+  return (
+    <div className="content-container">
+      <TopBar showSideBar={ showClientsSideBar }
+              setShowSideBar={ setShowClientsSideBar }
+              clientRequestParams={ clientRequestParams }
+              view={ view } />
+
+      <div className="content-container__screen">
+        <SideBar showSideBar={ showClientsSideBar }
+                 mappedUserData={ mappedUser }
+                 setShowSideBar={ setShowClientsSideBar }
+                 view={ view } />
+
+        <div className="content-container__screen--dashboard">
+
+          <MidBar view={ view }
+                  activePath={ path }
+                  handleAssistantClick={ handleAssistantClick }
+                  handleOverviewClick={ handleOverviewClick }
+                  handleMonitorProbesClick={ handleMonitorProbesClick }
+                  handlelastReadingsClick={ handleLastReadingsClick }
+                  handleNeglectedClick={ handleNeglectedClick }
+                  handleEmailReadingsClick={ handleEmailReadingsClick }
+                  handleRawReadingsClick={ handleRawReadingsClick }
+                  handleIrricomsClick={ handleIrricomsClick } />
+
+          { children }
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+DashboardContentContainer.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired
+};
 
 const ClientFieldsContentContainer = ({ children, view, showClientsSideBar, setShowClientsSideBar, clientRequestParams }) => {
 

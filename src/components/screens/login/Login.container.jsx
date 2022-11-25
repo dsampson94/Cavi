@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
+import { Routes } from '../../../routes';
 import { saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestLogin } from '../../../redux/actions/auth.action';
@@ -15,7 +16,7 @@ const LoginContainer = () => {
 
   const onLoginSuccess = ({ user }) => {
     saveUserLoginToLocalStorage(user);
-    history.push('/overview');
+    history.push(Routes.OVERVIEW);
   };
 
   const onLoginClick = (user) => dispatch(requestLogin(user, () => onLoginSuccess(user)));

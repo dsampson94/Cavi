@@ -19,16 +19,16 @@ import {
   TOPBAR_OPTIONS,
   VOLT_READINGS_OPTION,
   VPD_OPTION
-} from '../../../tools/general/system-variables.util';
+} from '../../../../tools/general/system-variables.util';
 
-import { getClassNames } from '../../../tools/general/helpers.util';
+import { getClassNames } from '../../../../tools/general/helpers.util';
 
-import { requestLogout } from '../../../redux/actions/auth.action';
+import { requestLogout } from '../../../../redux/actions/auth.action';
 
-import Button from '../button/Button';
-import ThemeToggle from '../theme-toggle/ThemeToggle';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import CheckboxInput from '../input/checkbox/CheckboxInput';
+import Button from '../../button/Button';
+import ThemeToggle from '../../theme-toggle/ThemeToggle';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import CheckboxInput from '../../input/checkbox/CheckboxInput';
 
 import './drop-down-menu.scss';
 
@@ -48,7 +48,10 @@ const DropDownButton = ({
                           profile,
                           activeExtendedChart,
                           setActiveExtendedChart,
-                          tall
+                          selectedOption,
+                          setSelectedOption,
+                          tall,
+                          select
                         }) => {
   return (
     <div className={ className }
@@ -60,32 +63,69 @@ const DropDownButton = ({
                profile={ profile }
                tall={ tall } />
 
-      <DropDownMenu menu={ menu }
-                    menuData={ menuData }
-                    activeExtendedChart={ activeExtendedChart }
-                    setActiveExtendedChart={ setActiveExtendedChart }
-                    setActiveDataPeriod={ setActiveDataPeriod }
-                    onLogOutClick={ onLogOutClick }
-                    left={ left }
-                    period={ period }
-                    mid={ mid } />
+      { !select &&
+      <DropDownMenuFixed menu={ menu }
+                         menuData={ menuData }
+                         activeExtendedChart={ activeExtendedChart }
+                         setActiveExtendedChart={ setActiveExtendedChart }
+                         setActiveDataPeriod={ setActiveDataPeriod }
+                         onLogOutClick={ onLogOutClick }
+                         left={ left }
+                         period={ period }
+                         mid={ mid } /> }
+
+      { select &&
+      <DropDownMenuGeneric menuData={ menuData }
+                           selectedOption={ selectedOption }
+                           setSelectedOption={ setSelectedOption }
+                           select={ select } /> }
     </div>
   );
 };
 
 export default DropDownButton;
 
-const DropDownMenu = ({
-                        menu,
-                        menuData,
-                        activeExtendedChart,
-                        setActiveExtendedChart,
-                        setActiveDataPeriod,
-                        onLogOutClick,
-                        left,
-                        period,
-                        mid
-                      }) => {
+const DropDownMenuGeneric = ({ menuData, select, selectedOption, setSelectedOption }) => {
+
+  const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
+
+  const handleMenuItemClick = (event) => {
+    setSelectedOption(event.target.textContent);
+  };
+
+  return (
+    <div className="dropdown"
+         onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
+
+      { showPrimaryDropDown &&
+      <div className={ getClassNames('dropdown__popup', { select }) }>
+        { Object.keys(menuData)?.map((key) => {
+          return <div className="dropdown__popup__item"
+                      onClick={ handleMenuItemClick }>
+            { key }
+          </div>;
+        }) }
+      </div> }
+    </div>
+  );
+};
+
+DropDownMenuGeneric.propTypes = {
+  left: bool,
+  mid: bool
+};
+
+const DropDownMenuFixed = ({
+                             menu,
+                             menuData,
+                             activeExtendedChart,
+                             setActiveExtendedChart,
+                             setActiveDataPeriod,
+                             onLogOutClick,
+                             left,
+                             period,
+                             mid
+                           }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -208,7 +248,7 @@ const DropDownMenu = ({
   );
 };
 
-DropDownButton.propTypes = {
+DropDownMenuFixed.propTypes = {
   left: bool,
   mid: bool
 };

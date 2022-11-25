@@ -84,7 +84,7 @@ import {
 import TextInput from '../../common/input/text/TextInput';
 import Button from '../../common/button/Button';
 import Table from '../../common/table/Table';
-import DropDownButton from '../../common/drop-down/DropDownButton';
+import DropDownButton from '../../common/drop-down/drop-down-button/DropDownButton';
 
 import './field-setup-view.scss';
 

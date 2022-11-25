@@ -10,16 +10,16 @@ import SnackBar from './components/common/snack-bar/SnackBar';
 import Spinner from './components/common/spinner/Spinner';
 
 import AuthContainer from './routes/auth/Auth.container';
-import OverviewContainer from './routes/overview/Overview.container';
+import DashboardContainer from './routes/dashboard/Dashboard.container';
 import ClientFieldsContainer from './routes/client-fields/ClientFields.container';
 
 import useTheme from './tools/hooks/useTheme';
 
 const App = () => {
 
-  const dispatch = useDispatch();
-
   useTheme(true);
+
+  const dispatch = useDispatch();
 
   const notices = useSelector(createSelector([state => state.system], system => system?.notices));
   const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className="app" style={ style }>
       <Route path="/" component={ AuthContainer } />
-      <ProtectedRoute path="/overview" component={ OverviewContainer } />
+      <ProtectedRoute path="/dashboard" component={ DashboardContainer } />
       <ProtectedRoute path="/client" component={ ClientFieldsContainer } />
 
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />

@@ -7,6 +7,7 @@ import { bool, func, shape } from 'prop-types';
 
 import {
   CLIENT_FIELDS,
+  DASHBOARD,
   EMAIL,
   EMAIL_RECOMMENDATIONS,
   FIELD_CHARTS,
@@ -32,13 +33,14 @@ import { requestLogout } from '../../../redux/actions/auth.action';
 import Button from '../button/Button';
 import TextInput from '../input/text/TextInput';
 import EmailModal from '../modal/EmailModal';
-import DropDownButton from '../drop-down/DropDownButton';
+import DropDownButton from '../drop-down/drop-down-button/DropDownButton';
 
 import './top-bar.scss';
 
 const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, view }) => {
 
   switch (view) {
+    case DASHBOARD:
     case CLIENT_FIELDS:
       return <ClientFieldsTopBar showSideBar={ showSideBar }
                                  setShowSideBar={ setShowSideBar }
@@ -113,7 +115,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
           <img src={ '/favicon-irricheck.ico' }
                alt={ 'icon' }
                height={ 14 } />
-          <p onClick={ () => history.push('/overview') }>
+          <p onClick={ () => history.push('/dashboard/overview') }>
             { 'IrriCheck Pulse' }
           </p>
         </div>
@@ -129,7 +131,7 @@ const ClientFieldsTopBar = ({ showSideBar, setShowSideBar, clientRequestParams }
           <Button label={ 'Other Farm' }
                   onClick={ () => setShowSideBar(!showSideBar) } />
 
-          { !location?.pathname?.includes('overview') &&
+          { !location?.pathname?.includes('dashboard') &&
           <Button label={ 'Field Setup' }
                   onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) } /> }
           <Button label={ 'Probes Monitor' } />
@@ -223,7 +225,7 @@ const FieldChartsTopBar = ({ clientRequestParams, mappedFieldList }) => {
         <img src={ '/favicon-irricheck.ico' }
              alt={ 'icon' }
              height={ 14 } />
-        <p onClick={ () => history.push('/overview') }>
+        <p onClick={ () => history.push('/dashboard/overview') }>
           { 'IrriCheck Pulse' }
         </p>
       </div>
@@ -324,7 +326,7 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
           <img src={ '/favicon-irricheck.ico' }
                alt={ 'icon' }
                height={ 14 } />
-          <p onClick={ () => history.push('/overview') }>
+          <p onClick={ () => history.push('/dashboard/overview') }>
             { 'IrriCheck Pulse' }
           </p>
         </div>
@@ -335,6 +337,11 @@ const FieldTemperaturesChartsTopBar = ({ clientRequestParams }) => {
           <Button label={ 'Other Farms' }
                   onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }
                   spaced />
+
+          <Button label={ 'Field Setup' }
+                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) }
+                  spaced />
+
           <Button label={ 'Moisture Graphs' } />
           <Button label={ 'Probes Monitor' } />
         </div>
@@ -387,7 +394,7 @@ const FieldSetupTopBar = ({}) => {
           <img src={ '/favicon-irricheck.ico' }
                alt={ 'icon' }
                height={ 14 } />
-          <p onClick={ () => history.push('/overview') }>
+          <p onClick={ () => history.push('/dashboard/overview') }>
             { 'IrriCheck Pulse' }
           </p>
         </div>

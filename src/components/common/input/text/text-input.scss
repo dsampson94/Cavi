@@ -17,6 +17,10 @@
     display: flex;
   }
 
+  &--wide {
+    min-width: util.rem(150);
+  }
+
   &--chartbar {
     padding: 0;
     min-width: util.rem(50);
@@ -95,6 +99,10 @@
       width: util.rem(50);
       font-size: util.bu(1.1);
       padding: 0 0 0 util.rem(1.8);
+    }
+
+    &--wide {
+      min-width: util.rem(150);
     }
 
     &--chartbar {

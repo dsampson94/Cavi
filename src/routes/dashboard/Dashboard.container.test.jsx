@@ -8,7 +8,7 @@ import { initialState as AuthState } from '../../redux/reducers/auth.reducer';
 
 import { getMockStore } from '../../tools/testing/test.util';
 
-import OverviewContainer from './Overview.container';
+import DashboardContainer from './Dashboard.container';
 
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
@@ -24,7 +24,7 @@ describe('Overview Container', () => {
     return render(
       <Provider store={ getMockStore(mockState) }>
         <MemoryRouter initialEntries={ [path] }>
-          <OverviewContainer />
+          <DashboardContainer />
         </MemoryRouter>
       </Provider>
     );

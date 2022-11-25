@@ -73,17 +73,33 @@ body.dark-mode {
     }
   }
 
+  .button--selected {
+    background-color: map.get(color.$colorMap, secondary-blue-1);
+
+    label {
+      color: map.get(color.$colorMap, white);
+    }
+  }
+
   .field-setup__scroll__list__item,
   .text-input--centered {
     border-bottom: util.rem(1) solid map.get(color.$colorMap, clouded-grey);
   }
 
   .text-input__input {
-    border: util.rem(2) solid map.get(color.$colorMap, clouded-grey);
-    background-color: map.get(color.$colorMap, chart-background-grey);
-    color: map.get(color.$colorMap, light-mode-white);
+    background-color: map.get(color.$colorMap, clouded-grey);
   }
 
+  .text-input__input--login {
+    background-color: map.get(color.$colorMap, light-mode-white);
+    color: map.get(color.$colorMap, black);
+  }
+
+  .overview__top-button__left-subheader:hover,
+  .dashboard-overview__menu-one:hover,
+  .dashboard-overview__menu-two:hover,
+  .dashboard-overview__menu-three:hover,
+  .dashboard-overview__list__item__subheader:hover,
   .field-setup-side-bar__list__item--selected,
   .client-fields-side-bar__list__item__subheader--selected,
   .client-fields-side-bar__list__item__subheader:hover {
@@ -223,7 +239,7 @@ body.dark-mode {
   .button--white {
 
     &:hover {
-      background-color: map.get(color.$colorMap, hover-blue);
+      background-color: map.get(color.$colorMap, secondary-blue-1);
     }
 
     label {

@@ -25,15 +25,21 @@
   }
 
   &:hover {
-    background-color: map.get(color.$colorMap, hover-blue);
+    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1);
+    background-color: map.get(color.$colorMap, secondary-blue-1);
   }
 
   &:active {
+    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1);
     position: relative;
     top: 0.8px;
   }
 
   & label:hover {
+    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1);
     cursor: pointer;
   }
 
@@ -83,6 +89,16 @@
     }
   }
 
+  &--selected {
+    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1);
+    background-color: map.get(color.$colorMap, secondary-blue-1);
+
+    label {
+      color: map.get(color.$colorMap, white);
+    }
+  }
+
   &--spaced {
     margin: 0 util.rem(6) 0 util.rem(0);
   }
@@ -102,6 +118,7 @@
     background-color: transparent;
 
     &:hover {
+      box-shadow: none;
       background-color: transparent;
     }
 

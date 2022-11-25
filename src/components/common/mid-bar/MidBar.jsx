@@ -10,6 +10,7 @@ import {
   CHART_ACTIVE_PERIOD,
   CHART_TOP_BAR_MENU,
   CLIENT_FIELDS_MIDBAR,
+  DASHBOARD,
   DOUBLE_DROPDOWN,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
@@ -23,7 +24,6 @@ import {
   MID_BAR_MONITOR,
   MID_BAR_NEGLECTED_FIELDS,
   MID_BAR_OVERVIEW,
-  OVERVIEW_MIDBAR,
   PREVIOUS,
   PREVIOUS_RECOMMENDATIONS,
   SETTINGS_GEAR,
@@ -31,7 +31,7 @@ import {
 } from '../../../tools/general/system-variables.util';
 
 import Button from '../button/Button';
-import DropDownButton from '../drop-down/DropDownButton';
+import DropDownButton from '../drop-down/drop-down-button/DropDownButton';
 import NumberInput from '../input/number/NumberInput';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
@@ -40,8 +40,14 @@ import './mid-bar.scss';
 const MidBar = ({
                   view,
                   activePath,
+                  handleAssistantClick,
                   handleOverviewClick,
                   handleMonitorProbesClick,
+                  handlelastReadingsClick,
+                  handleNeglectedClick,
+                  handleEmailReadingsClick,
+                  handleRawReadingsClick,
+                  handleIrricomsClick,
                   filteredTableData,
                   hasSubGroups,
                   setFilteredTableData,
@@ -64,10 +70,16 @@ const MidBar = ({
                 }) => {
 
   switch (view) {
-    case OVERVIEW_MIDBAR:
-      return <OverviewMidBar activePath={ activePath }
-                             handleOverviewClick={ handleOverviewClick }
-                             handleMonitorProbesClick={ handleMonitorProbesClick } />;
+    case DASHBOARD:
+      return <DashboardMidBar activePath={ activePath }
+                              handleAssistantClick={ handleAssistantClick }
+                              handleOverviewClick={ handleOverviewClick }
+                              handleMonitorProbesClick={ handleMonitorProbesClick }
+                              handlelastReadingsClick={ handlelastReadingsClick }
+                              handleNeglectedClick={ handleNeglectedClick }
+                              handleEmailReadingsClick={ handleEmailReadingsClick }
+                              handleRawReadingsClick={ handleRawReadingsClick }
+                              handleIrricomsClick={ handleIrricomsClick } />;
     case CLIENT_FIELDS_MIDBAR:
       return <ClientFieldsTableMidBar filteredTableData={ filteredTableData }
                                       hasSubGroups={ hasSubGroups }
@@ -114,57 +126,57 @@ MidBar.propTypes = {};
 
 export default MidBar;
 
-const OverviewMidBar = ({
-                          activePath,
-                          handleOverviewClick,
-                          handleMonitorProbesClick,
-                          handleFindLastRecordingsClick,
-                          handleAssistantClick,
-                          handleNeglectedClick,
-                          handleEmailReadingsClick,
-                          handleChartClick,
-                          handleIrricomsClick
-                        }) => {
+const DashboardMidBar = ({
+                           activePath,
+                           handleAssistantClick,
+                           handleOverviewClick,
+                           handleMonitorProbesClick,
+                           handlelastReadingsClick,
+                           handleNeglectedClick,
+                           handleEmailReadingsClick,
+                           handleChartClick,
+                           handleIrricomsClick
+                         }) => {
 
   return (
     <div className="overview__midbar">
 
       <Button label={ MID_BAR_ASSISTANT }
               onClick={ handleAssistantClick }
-              white={ !activePath.includes('assistant') } />
+              selected={ activePath.includes('assistant') } />
 
       <Button label={ MID_BAR_OVERVIEW }
               onClick={ handleOverviewClick }
-              white={ !activePath.includes('overview') } />
+              selected={ activePath.includes('overview') } />
 
       <Button label={ MID_BAR_MONITOR }
               onClick={ handleMonitorProbesClick }
-              white={ !activePath.includes('monitor') } />
+              selected={ activePath.includes('monitor-probes') } />
 
       <Button label={ MID_BAR_LAST_READINGS }
-              onClick={ handleFindLastRecordingsClick }
-              white={ !activePath.includes('recordings') } />
+              onClick={ handlelastReadingsClick }
+              selected={ activePath.includes('last-readings') } />
 
       <Button label={ MID_BAR_NEGLECTED_FIELDS }
               onClick={ handleNeglectedClick }
-              white={ !activePath.includes('neglected') } />
+              selected={ activePath.includes('neglected-fields') } />
 
       <Button label={ MID_BAR_EMAIL_READINGS }
               onClick={ handleEmailReadingsClick }
-              white={ !activePath.includes('email') } />
+              selected={ activePath.includes('email-readings') } />
 
       <Button label={ MID_BAR_CHART }
               onClick={ handleChartClick }
-              white={ !activePath.includes('chart') } />
+              selected={ activePath.includes('raw-readings') } />
 
       <Button label={ MID_BAR_IRRICOMS }
               onClick={ handleIrricomsClick }
-              white={ !activePath.includes('irricoms') } />
+              selected={ activePath.includes('irricoms') } />
     </div>
   );
 };
 
-OverviewMidBar.propTypes = {
+DashboardMidBar.propTypes = {
   activePath: string,
   handleOverviewClick: func,
   handleMonitorProbesClick: func,

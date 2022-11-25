@@ -131,6 +131,7 @@
         box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, pulse-blue),
         inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
         background-color: map.get(color.$colorMap, pulse-blue);
+        cursor: pointer;
 
         &:active {
           position: relative;

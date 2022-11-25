@@ -1,11 +1,11 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/color" as color;
-@use "../../../stylesheets/util" as util;
-@use "../../../stylesheets/radius" as radius;
-@use "../../../stylesheets/mixin" as mixin;
-@use "../../../stylesheets/config" as config;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
 
-.fields-overview {
+.dashboard-assistant{
   display: flex;
   overflow-y: scroll;
   flex-direction: column;

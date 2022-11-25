@@ -101,6 +101,8 @@ export const REPLACE_PROBE_WITH_NEW = 'replace_probe';
 export const ADD_PROBE = 'add_probe';
 export const REMOVE_PROBE = 'remove_probe';
 export const VIEW_CHARTS = 'view_charts';
+export const EXCEL_ICON = 'excel';
+export const LOCATION_PIN = 'location_pin';
 
 //TABLENAMES
 export const CLIENT_RECOMMENDATION_VIEW = 'recommendation_client_field_view';
@@ -146,6 +148,7 @@ export const TWELVE_MONTHS_DAYS = 182;
 export const FULL_VIEW_DAYS = 365;
 
 //OTHER STRINGS
+export const DASHBOARD = 'Dashboard';
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
 export const FIELD_TEMPERATURES = 'FieldTemperatures';

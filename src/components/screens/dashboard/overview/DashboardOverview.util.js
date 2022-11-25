@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { generateId, getClassNames } from '../../../tools/general/helpers.util';
+import { generateId, getClassNames } from '../../../../tools/general/helpers.util';
 import {
   DISSATISFIED,
   FIELD_UP_TO_DATE_QUESTION,
@@ -15,21 +15,21 @@ import {
   VERY_DISSATISFIED,
   VERY_SATISFIED,
   YELLOW
-} from '../../../tools/general/system-variables.util';
+} from '../../../../tools/general/system-variables.util';
 
-import SVGIcon from '../../common/SVGIcon/SVGIcon';
+import SVGIcon from '../../../common/SVGIcon/SVGIcon';
 import { arrayOf, func, number, shape } from 'prop-types';
 
-import ToolTip from '../../common/tool-tip/ToolTip';
+import ToolTip from '../../../common/tool-tip/ToolTip';
 
-import './fields-overview.scss';
+import './dashboard-overview.scss';
 
 export const ActiveHeader = ({ setOverviewOptionSelected, overviewOptionSelected }) => {
   return (
-    <div className="fields-overview__top-button"
+    <div className="dashboard-overview__top-button"
          onClick={ () => setOverviewOptionSelected(undefined) }>
-      <div className="fields-overview__top-button__left">
-        <div className="fields-overview__top-button__left-header">
+      <div className="dashboard-overview__top-button__left">
+        <div className="dashboard-overview__top-button__left-header">
           { (() => {
             switch (overviewOptionSelected) {
               case 1:
@@ -49,24 +49,24 @@ export const ActiveHeader = ({ setOverviewOptionSelected, overviewOptionSelected
         </div>
       </div>
 
-      <div className="fields-overview__top-button__right">
-        <div className="fields-overview__top-button__right__very-satisfied">
+      <div className="dashboard-overview__top-button__right">
+        <div className="dashboard-overview__top-button__right__very-satisfied">
           <ToolTip text={ TODAY } />
           <SVGIcon name={ VERY_SATISFIED } fill={ '#00AEFF' } />
         </div>
-        <div className="fields-overview__top-button__right__satisfied">
+        <div className="dashboard-overview__top-button__right__satisfied">
           <ToolTip text={ GREEN } />
           <SVGIcon name={ SATISFIED } fill={ '#00FF21' } />
         </div>
-        <div className="fields-overview__top-button__right__neutral">
+        <div className="dashboard-overview__top-button__right__neutral">
           <ToolTip text={ YELLOW } />
           <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } />
         </div>
-        <div className="fields-overview__top-button__right__dissatisfied">
+        <div className="dashboard-overview__top-button__right__dissatisfied">
           <ToolTip text={ ORANGE } left />
           <SVGIcon name={ DISSATISFIED } fill={ '#FF8019' } />
         </div>
-        <div className="fields-overview__top-button__right__very-dissatisfied">
+        <div className="dashboard-overview__top-button__right__very-dissatisfied">
           <ToolTip text={ RED } left />
           <SVGIcon name={ VERY_DISSATISFIED } fill={ '#FF0000' } />
         </div>
@@ -84,50 +84,50 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
   return (
     <>
       { !overviewOptionSelected &&
-        <div className={ 'fields-overview__menu' }>
-          <div className={ 'fields-overview__menu-one' }
-               onClick={ () => setOverviewOptionSelected(1) }>
-            { FIELDS_LAST_VIEWED_QUESTION }
-          </div>
-          <div className={ 'fields-overview__menu-two' }
-               onClick={ () => setOverviewOptionSelected(2) }>
-            { FIELDS_MOISTURE_QUESTION }
-          </div>
-          <div className={ 'fields-overview__menu-three' }
-               onClick={ () => setOverviewOptionSelected(3) }>
-            { FIELD_UP_TO_DATE_QUESTION }
-          </div>
-        </div> }
+      <div className={ 'dashboard-overview__menu' }>
+        <div className={ 'dashboard-overview__menu-one' }
+             onClick={ () => setOverviewOptionSelected(1) }>
+          { FIELDS_LAST_VIEWED_QUESTION }
+        </div>
+        <div className={ 'dashboard-overview__menu-two' }
+             onClick={ () => setOverviewOptionSelected(2) }>
+          { FIELDS_MOISTURE_QUESTION }
+        </div>
+        <div className={ 'dashboard-overview__menu-three' }
+             onClick={ () => setOverviewOptionSelected(3) }>
+          { FIELD_UP_TO_DATE_QUESTION }
+        </div>
+      </div> }
 
       { overviewOptionSelected &&
-        <div className="fields-overview__list">
-          { ownClientsList?.map((item) => {
-            return (
-              <div className="fields-overview__list__item" key={ generateId() }>
-                <div className="fields-overview__list__item__header">
-                  { item.objectKey?.toUpperCase() }
-                </div>
-                { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
-                  return (
-                    <div className={ getClassNames('fields-overview__list__item__subheader', {}) } key={ generateId() }>
-                      <div className="fields-overview__list__item__subheader__text"
-                           onClick={ () => handleSubHeaderClick(item.objectKey, value.iok) }>
-                        { value.iok }
-                      </div>
-                      <div className="fields-overview__list__item__subheader__icon">
-                        { overviewOptionSelected === 1 &&
-                          <FrequencyIndicator value={ value } /> }
-                        { overviewOptionSelected === 2 &&
-                          <DeficitIndicator value={ value } /> }
-                        { overviewOptionSelected === 3 &&
-                          <LastReadingIndicator value={ value } /> }
-                      </div>
-                    </div>);
-                }) }
+      <div className="dashboard-overview__list">
+        { ownClientsList?.map((item) => {
+          return (
+            <div className="dashboard-overview__list__item" key={ generateId() }>
+              <div className="dashboard-overview__list__item__header">
+                { item.objectKey?.toUpperCase() }
               </div>
-            );
-          }) }
-        </div> }
+              { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
+                return (
+                  <div className={ getClassNames('dashboard-overview__list__item__subheader', {}) } key={ generateId() }>
+                    <div className="dashboard-overview__list__item__subheader__text"
+                         onClick={ () => handleSubHeaderClick(item.objectKey, value.iok) }>
+                      { value.iok }
+                    </div>
+                    <div className="dashboard-overview__list__item__subheader__icon">
+                      { overviewOptionSelected === 1 &&
+                      <FrequencyIndicator value={ value } /> }
+                      { overviewOptionSelected === 2 &&
+                      <DeficitIndicator value={ value } /> }
+                      { overviewOptionSelected === 3 &&
+                      <LastReadingIndicator value={ value } /> }
+                    </div>
+                  </div>);
+              }) }
+            </div>
+          );
+        }) }
+      </div> }
     </>
   );
 };

@@ -8,14 +8,14 @@ import {
   FIELD_UP_TO_DATE_QUESTION,
   FIELDS_LAST_VIEWED_QUESTION,
   FIELDS_MOISTURE_QUESTION
-} from '../../../tools/general/system-variables.util';
+} from '../../../../tools/general/system-variables.util';
 
-import { getMockStore } from '../../../tools/testing/test.util';
-import { initialState as clientState } from '../../../redux/reducers/client.reducer';
+import { getMockStore } from '../../../../tools/testing/test.util';
+import { initialState as clientState } from '../../../../redux/reducers/client.reducer';
 
-import OverviewContainer from './FieldsOverview.container';
+import OverviewContainer from './DashboardOverview.container';
 
-const mockClientActions = require('../../../redux/actions/client.action');
+const mockClientActions = require('../../../../redux/actions/client.action');
 const mockState = { client: clientState };
 
 describe('OverviewContainer', () => {
@@ -29,7 +29,7 @@ describe('OverviewContainer', () => {
     );
   };
 
-  test('should render/contain the FieldsOverview screen', () => {
+  test('should render/contain the DashboardOverview screen', () => {
     const { container } = setUp();
 
     const recommendationOverviewScreen = container.querySelector('.fields-overview');

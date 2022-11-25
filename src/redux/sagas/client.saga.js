@@ -8,6 +8,7 @@ import {
   SUCCESSFULLY_EMAILED_PDF,
   SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
   SUCCESSFULLY_RETRIEVED_FIELDS,
+  SUCCESSFULLY_RETRIEVED_OVERVIEW,
   UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
   UNSUCCESSFULLY_RETRIEVED_FIELDS,
   UNSUCCESSFULLY_RETRIEVED_OVERVIEW,
@@ -50,6 +51,7 @@ export function* performRetrieveClientOverviewRequest({ client }) {
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_CLIENT_OVERVIEW_LIST, overviewList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
     }
 
   } catch ({ response }) {

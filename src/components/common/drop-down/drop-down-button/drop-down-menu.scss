@@ -1,9 +1,9 @@
 @use "sass:map" as map;
-@use "../../../stylesheets/util" as util;
-@use "../../../stylesheets/color" as color;
-@use "../../../stylesheets/radius" as radius;
-@use "../../../stylesheets/mixin" as mixin;
-@use "../../../stylesheets/config" as config;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/config" as config;
 
 .dropdown {
   position: absolute;
@@ -59,6 +59,14 @@
       }
     }
 
+    &__item {
+
+      &:hover {
+        background-color: map.get(color.$colorMap, row-hover-blue);
+      }
+
+    }
+
     &--left {
       margin-left: util.rem(-125);
     }
@@ -89,6 +97,10 @@
           transform: translateX(-15%);
         }
       }
+    }
+
+    &--select {
+      margin: util.rem(25) util.rem(-60) util.rem(0) util.rem(-53);
     }
 
     &--logout {

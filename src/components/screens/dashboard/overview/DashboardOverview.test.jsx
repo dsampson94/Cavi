@@ -5,16 +5,16 @@ import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
-import { noOp } from '../../../tools/general/helpers.util';
+import { noOp } from '../../../../tools/general/helpers.util';
 
-import { getMockStore } from '../../../tools/testing/test.util';
-import { initialState as clientState } from '../../../redux/reducers/client.reducer';
+import { getMockStore } from '../../../../tools/testing/test.util';
+import { initialState as clientState } from '../../../../redux/reducers/client.reducer';
 
-import FieldsOverview from './FieldsOverview';
+import DashboardOverview from './DashboardOverview';
 
 const mockState = { client: clientState };
 
-describe('FieldsOverview', () => {
+describe('DashboardOverview', () => {
 
   const history = createMemoryHistory();
 
@@ -22,16 +22,16 @@ describe('FieldsOverview', () => {
     return render(
       <Provider store={ getMockStore(mockState) }>
         <Router history={ history }>
-          <FieldsOverview ownClientsList={ [] }
-                          overviewOptionSelected={ 1 }
-                          setOverviewOptionSelected={ noOp() }
-                          activePath={ '/recommendation/overview' } />
+          <DashboardOverview ownClientsList={ [] }
+                             overviewOptionSelected={ 1 }
+                             setOverviewOptionSelected={ noOp() }
+                             activePath={ '/recommendation/overview' } />
         </Router>
       </Provider>
     );
   };
 
-  test('should render the FieldsOverview screen', () => {
+  test('should render the DashboardOverview screen', () => {
       const { container } = setUp();
 
       const contentContainer = container.querySelector('.content-container');

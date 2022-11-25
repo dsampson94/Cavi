@@ -1,0 +1,34 @@
+@use "sass:map" as map;
+@use "../../../stylesheets/color" as color;
+@use "../../../stylesheets/util" as util;
+@use "../../../stylesheets/radius" as radius;
+@use "../../../stylesheets/mixin" as mixin;
+@use "../../../stylesheets/config" as config;
+
+.select {
+  display: flex;
+  justify-content: left;
+  width: util.rem(105);
+
+  &:active {
+    position: relative;
+    top: 0.9px;
+  }
+
+  &--wide {
+    margin: 0 10px 0 10px;
+    width: util.rem(150);
+  }
+
+  &__button {
+    display: flex;
+    position: relative;
+    width: util.rem(30);
+    height: util.rem(25);
+    margin: util.rem(4) util.rem(0) util.rem(4) util.rem(4);
+    border-top-right-radius: map.get(radius.$border-radius, medium);
+    border-bottom-right-radius: map.get(radius.$border-radius, medium);
+    border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+    background-color: map.get(color.$colorMap, pulse-blue);
+  }
+}

@@ -9,7 +9,7 @@ import { getMockStore } from '../../../tools/testing/test.util';
 import { initialState as clientState } from '../../../redux/reducers/client.reducer';
 
 import ContentContainer from './ContentContainer';
-import OverviewContainer from '../../screens/overview/FieldsOverview.container';
+import OverviewContainer from '../../screens/dashboard/overview/DashboardOverview.container';
 import { CLIENT_FIELDS } from '../../../tools/general/system-variables.util';
 
 const mockState = { client: clientState };
