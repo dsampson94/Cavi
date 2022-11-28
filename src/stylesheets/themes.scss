@@ -220,6 +220,15 @@ body.dark-mode {
     }
   }
 
+  .button--tab {
+    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    color: map.get(color.$colorMap, white);
+  }
+
+  .button--active {
+    background-color: map.get(color.$colorMap, secondary-blue-1);
+  }
+
   .email-modal,
   .recommendation-modal {
     box-shadow: util.rem(0) util.rem(0) util.rem(100) map.get(color.$colorMap, black-alt);
@@ -283,5 +292,9 @@ body.dark-mode {
     &:hover {
       border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
     }
+  }
+
+  .field-charts-modal {
+    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
   }
 }

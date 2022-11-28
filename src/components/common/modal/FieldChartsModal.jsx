@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getRequestParams } from '../../../redux/endpoints';
 import { createSelector } from '@reduxjs/toolkit';
+
+import { getRequestParams } from '../../../redux/endpoints';
+
+import useDraggable from '../../../tools/hooks/useDraggable';
 
 import {
   CROP_FACTORS_TAB_NAME,
@@ -35,8 +38,12 @@ const FieldChartsModal = ({ setShowChartsModal }) => {
 
   const [activeTab, setActiveTab] = useState(GENERAL_TAB_NAME);
 
+  const handleDrag = useCallback(({ x, y }) => ({ x, y }), []);
+
+  const [ref] = useDraggable({ onDrag: handleDrag });
+
   return (
-    <div className={ 'field-charts-modal' }>
+    <div ref={ ref } className={ 'field-charts-modal' }>
       <TabButtons activeTab={ activeTab }
                   setActiveTab={ setActiveTab }
                   setShowChartsModal={ setShowChartsModal } />
@@ -61,30 +68,37 @@ const TabButtons = ({ activeTab, setActiveTab, setShowChartsModal }) => {
               active={ (activeTab === GENERAL_TAB_NAME) }
               onClick={ () => handleTabClick(GENERAL_TAB_NAME) }
               tab />
+
       <Button label={ CROP_FACTORS_TAB_NAME }
               active={ (activeTab === CROP_FACTORS_TAB_NAME) }
               onClick={ () => handleTabClick(CROP_FACTORS_TAB_NAME) }
               tab />
+
       <Button label={ PROBES_SUMMARY_TAB_NAME }
               active={ (activeTab === PROBES_SUMMARY_TAB_NAME) }
               onClick={ () => handleTabClick(PROBES_SUMMARY_TAB_NAME) }
               tab />
+
       <Button label={ PROBES_DETAILED_TAB_NAME }
               active={ (activeTab === PROBES_DETAILED_TAB_NAME) }
               onClick={ () => handleTabClick(PROBES_DETAILED_TAB_NAME) }
               tab />
+
       <Button label={ ROOTS_TAB_NAME }
               active={ (activeTab === ROOTS_TAB_NAME) }
               onClick={ () => handleTabClick(ROOTS_TAB_NAME) }
               tab />
+
       <Button label={ IRRISYS_TAB_NAME }
               active={ (activeTab === IRRISYS_TAB_NAME) }
               onClick={ () => handleTabClick(IRRISYS_TAB_NAME) }
               tab />
+
       <Button label={ SENSORS_TAB_NAME }
               active={ (activeTab === SENSORS_TAB_NAME) }
               onClick={ () => handleTabClick(SENSORS_TAB_NAME) }
               tab />
+
       <Button label={ 'Close' }
               onClick={ () => setShowChartsModal(false) }
               tab />

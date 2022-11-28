@@ -171,27 +171,30 @@
   }
 
   &--tab {
-    background-color: white;
-    color: black;
+    background-color: map.get(color.$colorMap, white);
+    color: map.get(color.$colorMap, black);
     box-shadow: none;
-    border-bottom: util.rem(1) solid grey;
-    border-radius: 0;
+    margin-bottom: util.rem(5);
 
     &:hover {
-      background-color: transparent;
-      color: map.get(color.$colorMap, chart-line-blue);
+      box-shadow: none;
+      border-radius: util.rem(50);
     }
 
     &:active {
+      box-shadow: none;
       position: relative;
       top: 0;
     }
   }
 
   &--active {
-    color: map.get(color.$colorMap, chart-line-blue);
+    background-color: map.get(color.$colorMap, secondary-blue-1);
+    border-radius: util.rem(50);
 
     &:active {
+      color: map.get(color.$colorMap, chart-line-blue);
+      border-radius: util.rem(50);
       position: relative;
       top: 0;
     }
