@@ -14,6 +14,7 @@ import {
   DOUBLE_DROPDOWN,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
+  FIELD_REPORTS,
   FIELD_SETUP_MIDBAR,
   FIELD_TEMPERATURES_MIDBAR,
   MID_BAR_ASSISTANT,
@@ -119,6 +120,15 @@ const MidBar = ({
                                setActiveFieldName={ setActiveFieldName }
                                yAxisShared={ yAxisShared }
                                setYAxisShared={ setYAxisShared } />;
+
+    case FIELD_REPORTS:
+      return <FieldReportsMidBar showSetupSideBar={ showSetupSideBar }
+                                 setShowSetupSideBar={ setShowSetupSideBar }
+                                 mappedFieldList={ mappedFieldList }
+                                 mappedMenuList={ mappedMenuList }
+                                 setActiveFieldName={ setActiveFieldName }
+                                 yAxisShared={ yAxisShared }
+                                 setYAxisShared={ setYAxisShared } />;
   }
 };
 
@@ -199,6 +209,7 @@ const ClientFieldsTableMidBar = ({
                                    setReloadToggleActive
                                  }) => {
 
+  const history = useHistory();
   const { groupName, clientName } = useParams();
 
   return (
@@ -224,6 +235,7 @@ const ClientFieldsTableMidBar = ({
                 tooltip={ ACCURACY_ANALYSIS }
                 spaced />
         <Button label={ 'Reports' }
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-reports`) }
                 spaced />
         <Button icon={ PREVIOUS }
                 tooltip={ PREVIOUS_RECOMMENDATIONS }
@@ -475,6 +487,27 @@ const FieldSetupMidBar = ({
 };
 
 FieldSetupMidBar.propTypes = {};
+
+const FieldReportsMidBar = ({ showClientsSideBar }) => {
+
+  const history = useHistory();
+  const { groupName, clientName } = useParams();
+
+  return (
+    <div className={ getClassNames('field-reports__top-bar', { show: showClientsSideBar }) }>
+      <div className="field-reports__top-bar-left">
+        <p>{ `Generated Reports for: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
+      </div>
+      <div className="field-reports__top-bar-right">
+        <Button label={ 'Upload Custom PDF' }
+                spaced />
+        <Button label={ 'Create New Report' }
+                spaced />
+      </div>
+    </div>
+  );
+};
+FieldReportsMidBar.propTypes = {};
 
 const FieldButtons = ({ className, setShowSideBar, showSideBar, viewClient }) => {
 

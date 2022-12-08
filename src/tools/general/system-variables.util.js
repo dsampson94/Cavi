@@ -107,6 +107,7 @@ export const LOCATION_PIN = 'location_pin';
 //TABLENAMES
 export const CLIENT_RECOMMENDATION_VIEW = 'recommendation_client_field_view';
 export const FIELD_SETUP_VIEW = 'field_setup_view';
+export const FIELD_REPORTS_VIEW = 'field_reports_view';
 export const FIELD_CHARTS_MODAL_VIEW = 'field_charts_modal_view';
 
 //EMOJI
@@ -152,6 +153,7 @@ export const DASHBOARD = 'Dashboard';
 export const CLIENT_FIELDS = 'ClientFields';
 export const FIELD_CHARTS = 'FieldCharts';
 export const FIELD_TEMPERATURES = 'FieldTemperatures';
+export const FIELD_REPORTS = 'FieldReports';
 export const FIELD_SETUP = 'ClientSetup';
 
 //CHART TYPES

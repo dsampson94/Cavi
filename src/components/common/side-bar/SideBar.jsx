@@ -72,11 +72,15 @@ const SideBar = ({
                                              setActiveLoadPeriod={ setActiveLoadPeriod }
                                              setActiveFieldName={ setActiveFieldName }
                                              mappedUserData={ mappedUserData } />;
-
     case FIELD_SETUP:
       return <FieldSetupSideBar showSideBar={ showSideBar }
                                 setShowSideBar={ setShowSideBar }
                                 setActiveFieldName={ setActiveFieldName } />;
+
+    default:
+      return <ClientFieldsSideBar showSideBar={ showSideBar }
+                                  setShowSideBar={ setShowSideBar }
+                                  mappedUserData={ mappedUserData } />;
   }
 };
 

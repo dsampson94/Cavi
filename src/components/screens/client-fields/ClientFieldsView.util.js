@@ -4,14 +4,14 @@ export const toggleAllDropdowns = (allDropdownsExpanded, mappedFieldList, active
     const copyOfActiveList = [...mappedFieldList];
     activeTableData?.forEach((listItem, index) => {
       mappedFieldList?.splice(index + 1, 1,
-        { ...copyOfActiveList[index + 1], expanded: false });
+        { ...copyOfActiveList[index + 1], expanded: true });
     });
     setActiveTableData([...mappedFieldList]);
   } else {
     const copyOfActiveList = [...mappedFieldList];
     activeTableData?.forEach((listItem, index) => {
       mappedFieldList?.splice(index + 1, 1,
-        { ...copyOfActiveList[index + 1], expanded: true });
+        { ...copyOfActiveList[index + 1], expanded: false });
     });
     setActiveTableData([...mappedFieldList]);
   }

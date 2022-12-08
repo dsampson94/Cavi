@@ -11,6 +11,8 @@ export const navigateTo = (props, history) => {
   switch (props.screen) {
     case Routes.FIELD_LIST:
       return () => history.push(`/client/${ props.groupName }/${ props.clientName }`);
+    case Routes.FIELD_REPORTS:
+      return () => history.push(`/client/${ props.groupName }/${ props.clientName }/field-reports`);
     default:
       return () => history.push(Routes.OVERVIEW);
   }
@@ -29,6 +31,7 @@ export const Routes = {
   FIELD_LIST: '/client/:groupName/:clientName',
   FIELD_CHARTS: '/client/:groupName/:clientName/field/:probeNumber/:fieldName+',
   FIELD_TEMPERATURES: '/:groupName/:clientName/field-temperatures/:probeNumber/:fieldName+',
+  FIELD_REPORTS: '/:groupName/:clientName/field-reports',
   FIELD_SETUP: '/client/:groupName/:clientName/field-setup/',
   FIELD_SETUP_SCREEN: '/client/:groupName/:clientName/field-setup/:activeScreen'
 };

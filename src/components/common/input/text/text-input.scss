@@ -41,6 +41,8 @@
   }
 
   &--topbar {
+    height: 100%;
+    padding-top: util.rem(10);
     min-width: 120px;
     width: 120px;
   }

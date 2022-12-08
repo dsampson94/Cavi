@@ -5,7 +5,16 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import { Routes } from '../../../routes';
-import { CLIENT_FIELDS, DASHBOARD, FIELD_CHARTS, FIELD_SETUP, FIELD_TEMPERATURES } from '../../../tools/general/system-variables.util';
+
+import {
+  CLIENT_FIELDS,
+  DASHBOARD,
+  FIELD_CHARTS,
+  FIELD_REPORTS,
+  FIELD_SETUP,
+  FIELD_TEMPERATURES
+} from '../../../tools/general/system-variables.util';
+
 import { mappedUserData } from '../side-bar/Sidebar.util';
 
 import TopBar from '../top-bar/TopBar';
@@ -65,6 +74,14 @@ const ContentContainer = ({
                                          clientRequestParams={ clientRequestParams }
                                          setActiveFieldName={ setActiveFieldName }
                                          view={ view } />;
+
+    case FIELD_REPORTS:
+      return <FieldReportsContentContainer children={ children }
+                                           showClientsSideBar={ showClientsSideBar }
+                                           setShowClientsSideBar={ setShowClientsSideBar }
+                                           clientRequestParams={ clientRequestParams }
+                                           setActiveFieldName={ setActiveFieldName }
+                                           view={ view } />;
   }
 };
 
@@ -232,7 +249,6 @@ const FieldSetupContentContainer = ({
                                       children,
                                       view,
                                       showSetupSideBar,
-                                      setShowSetupSideBar,
                                       clientRequestParams,
                                       setActiveLoadPeriod,
                                       setActiveFieldName
@@ -259,5 +275,38 @@ const FieldSetupContentContainer = ({
 };
 
 FieldSetupContentContainer.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired
+};
+
+const FieldReportsContentContainer = ({
+                                        children,
+                                        view,
+                                        showClientsSideBar,
+                                        clientRequestParams,
+                                        setActiveLoadPeriod,
+                                        setActiveFieldName
+                                      }) => {
+
+  const userAccount = retrieveUserClientListFromLocalStorage();
+  const mappedUser = mappedUserData(userAccount);
+
+  return (
+    <div className="content-container">
+      <TopBar clientRequestParams={ clientRequestParams }
+              view={ view } />
+
+      <div className="content-container__screen">
+        <SideBar showSideBar={ showClientsSideBar }
+                 mappedUserData={ mappedUser }
+                 setActiveLoadPeriod={ setActiveLoadPeriod }
+                 setActiveFieldName={ setActiveFieldName }
+                 view={ view } />
+        { children }
+      </div>
+    </div>
+  );
+};
+
+FieldReportsContentContainer.propTypes = {
   children: oneOfType([arrayOf(node), node]).isRequired
 };

@@ -25,9 +25,7 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
   useEffect(() => {
       setActiveTableData(mappedFieldList);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [mappedFieldList]);
+    }, [mappedFieldList]);
 
   useEffect(() => {
     if (!selectedIndex) return;

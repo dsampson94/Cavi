@@ -6,10 +6,11 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './graphic.scss';
 
-const Graphic = ({ graphic, login, loading }) => {
+const Graphic = ({ graphic, onClick, login, loading, topbar }) => {
 
   return (
-    <div className={ getClassNames('graphic', { login, loading }) }>
+    <div className={ getClassNames('graphic', { login, loading, topbar }) }
+         onClick={ onClick }>
       <img src={ graphic } alt={ 'Pulse Logo' } />
     </div>
   );

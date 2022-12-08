@@ -51,7 +51,7 @@ body.light-mode {
 body.dark-mode {
   transition: 0.3s;
   color: map.get(color.$colorMap, light-mode-white);
-  background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+  background-color: map.get(color.$colorMap, dark-mode-grey);
 
   .spinner__text {
     color: map.get(color.$colorMap, black);
@@ -112,7 +112,7 @@ body.dark-mode {
   }
 
   .table__header {
-    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
   .table__body__row__td--dark {
@@ -221,7 +221,7 @@ body.dark-mode {
   }
 
   .button--tab {
-    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    background-color: map.get(color.$colorMap, dark-mode-grey);
     color: map.get(color.$colorMap, white);
   }
 
@@ -232,7 +232,7 @@ body.dark-mode {
   .email-modal,
   .recommendation-modal {
     box-shadow: util.rem(0) util.rem(0) util.rem(100) map.get(color.$colorMap, black-alt);
-    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    background-color: map.get(color.$colorMap, dark-mode-grey);
     color: map.get(color.$colorMap, dark-mode-white);
     border: util.rem(0.5) solid transparent;
   }
@@ -277,7 +277,7 @@ body.dark-mode {
   .dropdown__popup--logout {
     transition: 0.3s;
     color: map.get(color.$colorMap, light-mode-white);
-    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
   .checkbox-input__input--forecast {
@@ -295,6 +295,6 @@ body.dark-mode {
   }
 
   .field-charts-modal {
-    background-color: map.get(color.$colorMap, dark-mode-grey-modal);
+    background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 }

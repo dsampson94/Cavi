@@ -31,8 +31,6 @@
   }
 
   &:active {
-    box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1),
-    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, secondary-blue-1);
     position: relative;
     top: 0.8px;
   }

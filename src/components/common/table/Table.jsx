@@ -11,6 +11,7 @@ import {
   COPY_FIELD,
   DELETE_FIELD,
   FIELD_CHARTS_MODAL_VIEW,
+  FIELD_REPORTS_VIEW,
   FIELD_SETUP_VIEW,
   FIX_READINGS,
   GENERAL_ROUTE,
@@ -65,6 +66,7 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                                 setSelectedDropdownObject={ setSelectedDropdownObject } />;
     case FIELD_CHARTS_MODAL_VIEW:
     case FIELD_SETUP_VIEW:
+    case FIELD_REPORTS_VIEW:
       return <FieldSetupTable tableName={ tableName }
                               activeTableData={ activeTableData }
                               hiddenColumns={ hiddenColumns }
