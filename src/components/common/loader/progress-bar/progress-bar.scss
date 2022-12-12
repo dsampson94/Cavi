@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "src/stylesheets/color" as color;
+@use "src/stylesheets/radius" as radius;
+@use "src/stylesheets/config" as config;
+@use "src/stylesheets/util" as util;
+@use "src/stylesheets/mixin" as mixin;
+
+.progress-bar {
+  position: absolute;
+  top: util.rem(45);
+  z-index: 99;
+  opacity: 0.5;
+  width: 100%;
+  transition: all 0.5s ease-out;
+
+  &--complete {
+    opacity: 0;
+  }
+}

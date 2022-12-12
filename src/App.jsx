@@ -7,8 +7,6 @@ import { removeSystemNotice } from './redux/actions/system.action';
 import { ProtectedRoute } from './routes';
 
 import SnackBar from './components/common/snack-bar/SnackBar';
-import Spinner from './components/common/spinner/Spinner';
-
 import AuthContainer from './routes/auth/Auth.container';
 import DashboardContainer from './routes/dashboard/Dashboard.container';
 import ClientFieldsContainer from './routes/client-fields/ClientFields.container';
@@ -22,7 +20,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   const notices = useSelector(createSelector([state => state.system], system => system?.notices));
-  const spinnerText = useSelector(createSelector([state => state.system], system => system?.spinnerText));
 
   const style = {
     display: 'flex',
@@ -42,7 +39,6 @@ const App = () => {
       <ProtectedRoute path="/client" component={ ClientFieldsContainer } />
 
       <SnackBar notices={ notices } onCloseNotice={ handleCloseNotice } />
-      <Spinner showSpinnerText={ spinnerText } />
     </div>
   );
 };

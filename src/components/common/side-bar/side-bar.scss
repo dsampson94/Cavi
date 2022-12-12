@@ -8,6 +8,7 @@
 .client-fields-side-bar {
   display: flex;
   flex-direction: column;
+  margin-top: util.rem(1);
   user-select: none;
   transition: 0.4s;
   height: 100%;

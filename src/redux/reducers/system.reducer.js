@@ -2,6 +2,7 @@ import {
   ADD_SYSTEM_NOTICE,
   CANCEL_REQUEST,
   REMOVE_SYSTEM_NOTICE,
+  SET_PROGRESS_BAR,
   SET_SHOW_SHIMMER,
   SET_SPINNER_TEXT,
   SET_THEME
@@ -14,6 +15,7 @@ export const initialState = {
   notices: [],
   spinnerText: null,
   showShimmer: false,
+  progressBar: null,
   theme: retrieveActiveThemeFromLocalStorage()
 };
 
@@ -48,6 +50,14 @@ export function systemReducer(state = initialState, action) {
       return {
         ...state,
         showShimmer
+      };
+    }
+    case SET_PROGRESS_BAR: {
+      const { progressBar } = action;
+
+      return {
+        ...state,
+        progressBar
       };
     }
     case SET_THEME: {

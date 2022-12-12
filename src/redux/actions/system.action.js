@@ -17,6 +17,12 @@ export const setSpinnerText = (spinnerText) => ({
   spinnerText
 });
 
+export const SET_PROGRESS_BAR = '[SYSTEM_STORE] Set progress bar';
+export const setProgressBar= (progressBar) => ({
+  type: SET_PROGRESS_BAR,
+  progressBar
+});
+
 export const SET_SHOW_SHIMMER = '[SYSTEM_STORE] Set show shimmer';
 export const setShowShimmer = (showShimmer) => ({
   type: SET_SHOW_SHIMMER,

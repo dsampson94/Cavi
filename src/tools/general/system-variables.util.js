@@ -30,6 +30,12 @@ export const MID_BAR_IRRICOMS = 'Check Irricoms (manual)';
 //SPINNER
 export const SPINNER_TEXT = 'Loading..';
 
+//PROGRESSBAR
+export const INITIAL_PROGRESS = '10';
+export const HALF_PROGRESS = '50';
+export const THREE_QUARTER_PROGRESS = '75';
+export const COMPLETE_PROGRESS = '100';
+
 //TOOLTIPS
 export const EMAIL = 'Email Recommendations to any Email Address';
 export const PRINT = 'Print';

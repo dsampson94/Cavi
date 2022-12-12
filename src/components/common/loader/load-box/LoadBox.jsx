@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import { bool, string } from 'prop-types';
 
-import { getClassNames } from '../../../tools/general/helpers.util';
+import { getClassNames } from '../../../../tools/general/helpers.util';
 
-import Graphic from '../graphic/Graphic';
+import Graphic from '../../graphic/Graphic';
 
-import logo from '../../../tools/images/pulselogo.png';
-import background from '../../../tools/images/irricheckbackground.jpg';
+import logo from '../../../../tools/images/pulselogo.png';
+import background from '../../../../tools/images/irricheckbackground.jpg';
 
-import './spinner.scss';
+import './load-box.scss';
 
-const Spinner = ({ showSpinnerText }) => {
+const LoadBox = ({ showSpinnerText }) => {
 
   const [showSpinner, setShowSpinner] = useState(true);
 
@@ -51,10 +51,10 @@ const Spinner = ({ showSpinnerText }) => {
   );
 };
 
-Spinner.propTypes = {
+LoadBox.propTypes = {
   showSpinnerText: string,
   content: bool,
   centered: bool
 };
 
-export default Spinner;
+export default LoadBox;

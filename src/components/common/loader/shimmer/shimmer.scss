@@ -1,9 +1,9 @@
 @use "sass:map";
-@use "../../../stylesheets/color" as color;
-@use "../../../stylesheets/radius" as radius;
-@use "../../../stylesheets/config" as config;
-@use "../../../stylesheets/util" as util;
-@use "../../../stylesheets/mixin" as mixin;
+@use "../../../../stylesheets/color" as color;
+@use "../../../../stylesheets/radius" as radius;
+@use "../../../../stylesheets/config" as config;
+@use "../../../../stylesheets/util" as util;
+@use "../../../../stylesheets/mixin" as mixin;
 
 .shimmer {
   display: flex;
