@@ -261,7 +261,7 @@ const handleFieldClick = (history, groupName, clientName, field, setActiveFieldN
   setActiveFieldName(field.locationName);
   switch (view) {
     case FIELD_CHARTS :
-      history.push(`/client/${ groupName }/${ clientName }/field/${ field?.probeNumber }/${ field?.locationName }`);
+      history.push(`/client/${ groupName }/${ clientName }/field-charts/${ field?.probeNumber }/${ field?.locationName }`);
       break;
     case FIELD_TEMPERATURES :
       history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ field?.probeNumber }/${ field?.locationName }`);

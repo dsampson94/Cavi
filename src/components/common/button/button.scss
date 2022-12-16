@@ -51,14 +51,15 @@
     justify-content: center;
     align-items: flex-start;
     font-weight: bold;
+    padding-top: util.rem(6);
 
     &:hover {
-      cursor: default;
       background-color: map.get(color.$colorMap, pulse-blue);
     }
 
     & label:hover {
       cursor: default;
+      box-shadow: none;
     }
 
     &:active {

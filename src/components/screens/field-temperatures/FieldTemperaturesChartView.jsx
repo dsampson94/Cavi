@@ -38,7 +38,8 @@ const FieldTemperaturesChartView = ({
                       mappedFieldList={ mappedFieldList }
                       setActiveLoadPeriod={ setActiveLoadPeriod }
                       setActiveFieldName={ setActiveFieldName }
-                      showChartsSideBar={ showChartsSideBar }>
+                      showSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }>
 
       <div className="field-temperatures">
         <MidBar view={ FIELD_TEMPERATURES_MIDBAR }

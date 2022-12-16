@@ -1,7 +1,7 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 
-import { getClassNames } from '../../../tools/general/helpers.util';
+import { daysFromToday, getClassNames } from '../../../tools/general/helpers.util';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 
 import {
@@ -276,6 +276,8 @@ const FieldChartsMidBar = ({
                            }) => {
 
   const history = useHistory();
+  const location = useLocation();
+
   const { groupName, clientName, probeNumber, fieldName } = useParams();
 
   const viewClient = (direction) => {
@@ -294,6 +296,23 @@ const FieldChartsMidBar = ({
 
   const onHandleChangeNumeric = (event) => {
     if (Number(event.target.value)) setActiveDataPeriod(event.target.value);
+  };
+
+  const getTopBarValue = () => {
+    const recommendations = [];
+    mappedFieldList?.forEach(item => {
+      if (fieldName === item.fieldName.locationName) {
+        recommendations.push(item.fieldName.recommend1);
+        recommendations.push(item.fieldName.recommend2);
+        recommendations.push(item.fieldName.recommend3);
+        recommendations.push(item.fieldName.recommend4);
+        recommendations.push(item.fieldName.recommend5);
+        recommendations.push(item.fieldName.recommend6);
+        recommendations.push(item.fieldName.recommend7);
+        recommendations.push(item.fieldName.recommend8);
+      }
+    });
+    return recommendations;
   };
 
   return (
@@ -332,6 +351,7 @@ const FieldChartsMidBar = ({
       </div>
 
       <div className="field-chart__top-bar--right">
+
         <div className="field-chart__top-bar--right-tool-container">
 
           <DropDownButton name={ DOUBLE_DROPDOWN }
@@ -351,6 +371,26 @@ const FieldChartsMidBar = ({
         <div className="field-chart__top-bar--right-days-container">
           <p style={ { fontSize: '10px', marginTop: '5px' } }>{ 'Days:' }</p>
         </div>
+
+        { location.pathname.includes('field-charts') &&
+        <div className={ 'field-chart__top-bar--right--datebar' }>
+          <Button label={ daysFromToday(0) }
+                  lowerLabel={ getTopBarValue()[0] } datebar />
+          <Button label={ daysFromToday(1) }
+                  lowerLabel={ getTopBarValue()[1] } datebar />
+          <Button label={ daysFromToday(2) }
+                  lowerLabel={ getTopBarValue()[2] } datebar />
+          <Button label={ daysFromToday(3) }
+                  lowerLabel={ getTopBarValue()[3] } datebar />
+          <Button label={ daysFromToday(4) }
+                  lowerLabel={ getTopBarValue()[4] } datebar />
+          <Button label={ daysFromToday(5) }
+                  lowerLabel={ getTopBarValue()[5] } datebar />
+          <Button label={ daysFromToday(6) }
+                  lowerLabel={ getTopBarValue()[6] } datebar />
+          <Button label={ daysFromToday(7) }
+                  lowerLabel={ getTopBarValue()[7] } datebar spaced />
+        </div> }
       </div>
     </div>
   );
@@ -513,10 +553,6 @@ const FieldButtons = ({ className, setShowSideBar, showSideBar, viewClient }) =>
 
   return (
     <div className={ className }>
-      <Button label={ 'Fields' }
-              onClick={ () => setShowSideBar(!showSideBar) }
-              chartbar
-              spaced />
       <Button label={ '<' }
               onClick={ () => viewClient(-1) }
               spaceds

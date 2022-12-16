@@ -21,8 +21,8 @@ const DashboardLastReadings = ({
 
   return (
     <ContentContainer view={ DASHBOARD }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setShowClientsSideBar }>
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-last-readings">
         <div className="dashboard-header">Find most recent readings from any probe, Irricom, Aquawave, DFM, GPRS probe:
         </div>

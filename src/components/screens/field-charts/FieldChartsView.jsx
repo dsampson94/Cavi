@@ -55,7 +55,8 @@ const ClientFieldsView = ({
                       mappedFieldList={ mappedFieldList }
                       setActiveLoadPeriod={ setActiveLoadPeriod }
                       setActiveFieldName={ setActiveFieldName }
-                      showChartsSideBar={ showChartsSideBar }>
+                      showSideBar={ showChartsSideBar }
+                      setShowSideBar={ setShowChartsSideBar }>
 
       <div className="field-chart">
         <MidBar view={ FIELD_CHART_MIDBAR }

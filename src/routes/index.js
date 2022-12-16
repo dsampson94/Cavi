@@ -29,7 +29,7 @@ export const Routes = {
   RAW_READINGS: '/dashboard/raw-readings',
   CHECK_IRRICOMS: '/dashboard/irricoms',
   FIELD_LIST: '/client/:groupName/:clientName',
-  FIELD_CHARTS: '/client/:groupName/:clientName/field/:probeNumber/:fieldName+',
+  FIELD_CHARTS: '/client/:groupName/:clientName/field-charts/:probeNumber/:fieldName+',
   FIELD_TEMPERATURES: '/:groupName/:clientName/field-temperatures/:probeNumber/:fieldName+',
   FIELD_REPORTS: '/:groupName/:clientName/field-reports',
   FIELD_SETUP: '/client/:groupName/:clientName/field-setup/',

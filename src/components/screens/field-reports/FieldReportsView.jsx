@@ -22,8 +22,8 @@ const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
   return (
     <ContentContainer view={ FIELD_REPORTS }
                       clientRequestParams={ clientRequestParams }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setClientsShowSideBar }
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setClientsShowSideBar }
                       mappedFieldList={ mappedReportList }>
 
       <div className={ getClassNames('field-reports', { show: showClientsSideBar }) }>

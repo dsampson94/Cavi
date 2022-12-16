@@ -39,8 +39,12 @@ export const COMPLETE_PROGRESS = '100';
 //TOOLTIPS
 export const EMAIL = 'Email Recommendations to any Email Address';
 export const PRINT = 'Print';
+export const OTHER_FARM = 'View Farms';
 export const MAPS = 'Show Probes on Google Maps';
+export const FIELD_SETUP_STRING = 'Field Setup';
+export const RECOMMENDATION_LIST = 'Recommendation List';
 export const WEATHER_STATION = 'Show Weather Station Data';
+export const PROBES_MONITOR_STRING = 'Probes Monitor';
 export const REPORT_PROBLEM = 'Report a problem to your agent';
 export const LOG_OUT = 'Log out';
 
@@ -109,6 +113,10 @@ export const REMOVE_PROBE = 'remove_probe';
 export const VIEW_CHARTS = 'view_charts';
 export const EXCEL_ICON = 'excel';
 export const LOCATION_PIN = 'location_pin';
+export const VIEW_SIDEBAR = 'view_sidebar';
+export const FIELD_SETTINGS = 'field_settings';
+export const PROBES_MONITOR = 'probes_monitor';
+export const TABLE_LIST = 'table_list';
 
 //TABLENAMES
 export const CLIENT_RECOMMENDATION_VIEW = 'recommendation_client_field_view';

@@ -30,8 +30,8 @@ const DashboardMonitor = ({
 
   return (
     <ContentContainer view={ DASHBOARD }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setShowClientsSideBar }>
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-monitor">
         <div className="dashboard-monitor__topbar">
           <div className="dashboard-monitor__select-container">

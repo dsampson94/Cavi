@@ -6,14 +6,7 @@ import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/l
 
 import { Routes } from '../../../routes';
 
-import {
-  CLIENT_FIELDS,
-  DASHBOARD,
-  FIELD_CHARTS,
-  FIELD_REPORTS,
-  FIELD_SETUP,
-  FIELD_TEMPERATURES
-} from '../../../tools/general/system-variables.util';
+import { DASHBOARD } from '../../../tools/general/system-variables.util';
 
 import { mappedUserData } from '../side-bar/Sidebar.util';
 
@@ -30,58 +23,27 @@ const ContentContainer = ({
                             mappedFieldList,
                             setActiveLoadPeriod,
                             setActiveFieldName,
-                            showChartsSideBar,
-                            showClientsSideBar,
-                            showSetupSideBar,
-                            setShowSetupSideBar,
-                            setShowClientsSideBar
+                            showSideBar,
+                            setShowSideBar
                           }) => {
   switch (view) {
     case DASHBOARD:
       return <DashboardContentContainer children={ children }
-                                        showClientsSideBar={ showClientsSideBar }
-                                        setShowClientsSideBar={ setShowClientsSideBar }
+                                        showSideBar={ showSideBar }
+                                        setShowSideBar={ setShowSideBar }
                                         clientRequestParams={ clientRequestParams }
                                         view={ view } />;
 
-    case CLIENT_FIELDS:
-      return <ClientFieldsContentContainer children={ children }
-                                           showClientsSideBar={ showClientsSideBar }
-                                           setShowClientsSideBar={ setShowClientsSideBar }
-                                           clientRequestParams={ clientRequestParams }
-                                           view={ view } />;
-
-    case FIELD_CHARTS:
-      return <FieldChartsContentContainer children={ children }
-                                          showChartsSideBar={ showChartsSideBar }
-                                          mappedFieldList={ mappedFieldList }
+    default:
+      return <ClientFieldContentContainer children={ children }
+                                          showSideBar={ showSideBar }
+                                          setShowSideBar={ setShowSideBar }
                                           clientRequestParams={ clientRequestParams }
-                                          setActiveLoadPeriod={ setActiveLoadPeriod }
                                           setActiveFieldName={ setActiveFieldName }
+                                          setActiveLoadPeriod={ setActiveLoadPeriod }
+                                          mappedFieldList={ mappedFieldList }
                                           view={ view } />;
-    case FIELD_TEMPERATURES:
-      return <FieldTemperaturesChartsContentContainer children={ children }
-                                                      showChartsSideBar={ showChartsSideBar }
-                                                      mappedFieldList={ mappedFieldList }
-                                                      clientRequestParams={ clientRequestParams }
-                                                      setActiveLoadPeriod={ setActiveLoadPeriod }
-                                                      setActiveFieldName={ setActiveFieldName }
-                                                      view={ view } />;
-    case FIELD_SETUP:
-      return <FieldSetupContentContainer children={ children }
-                                         showSetupSideBar={ showSetupSideBar }
-                                         setShowSetupSideBar={ setShowSetupSideBar }
-                                         clientRequestParams={ clientRequestParams }
-                                         setActiveFieldName={ setActiveFieldName }
-                                         view={ view } />;
 
-    case FIELD_REPORTS:
-      return <FieldReportsContentContainer children={ children }
-                                           showClientsSideBar={ showClientsSideBar }
-                                           setShowClientsSideBar={ setShowClientsSideBar }
-                                           clientRequestParams={ clientRequestParams }
-                                           setActiveFieldName={ setActiveFieldName }
-                                           view={ view } />;
   }
 };
 
@@ -91,7 +53,7 @@ ContentContainer.propTypes = {
 
 export default ContentContainer;
 
-const DashboardContentContainer = ({ children, view, showClientsSideBar, setShowClientsSideBar, clientRequestParams }) => {
+const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar, clientRequestParams }) => {
 
   const history = useHistory();
   const { path } = useRouteMatch();
@@ -110,15 +72,15 @@ const DashboardContentContainer = ({ children, view, showClientsSideBar, setShow
 
   return (
     <div className="content-container">
-      <TopBar showSideBar={ showClientsSideBar }
-              setShowSideBar={ setShowClientsSideBar }
+      <TopBar showSideBar={ showSideBar }
+              setShowSideBar={ setShowSideBar }
               clientRequestParams={ clientRequestParams }
               view={ view } />
 
       <div className="content-container__screen">
-        <SideBar showSideBar={ showClientsSideBar }
+        <SideBar showSideBar={ showSideBar }
                  mappedUserData={ mappedUser }
-                 setShowSideBar={ setShowClientsSideBar }
+                 setShowSideBar={ setShowSideBar }
                  view={ view } />
 
         <div className="content-container__screen--dashboard">
@@ -146,37 +108,11 @@ DashboardContentContainer.propTypes = {
   children: oneOfType([arrayOf(node), node]).isRequired
 };
 
-const ClientFieldsContentContainer = ({ children, view, showClientsSideBar, setShowClientsSideBar, clientRequestParams }) => {
-
-  const userAccount = retrieveUserClientListFromLocalStorage();
-  const mappedUser = mappedUserData(userAccount);
-
-  return (
-    <div className="content-container">
-      <TopBar showSideBar={ showClientsSideBar }
-              setShowSideBar={ setShowClientsSideBar }
-              clientRequestParams={ clientRequestParams }
-              view={ view } />
-
-      <div className="content-container__screen">
-        <SideBar showSideBar={ showClientsSideBar }
-                 mappedUserData={ mappedUser }
-                 setShowSideBar={ setShowClientsSideBar }
-                 view={ view } />
-        { children }
-      </div>
-    </div>
-  );
-};
-
-ClientFieldsContentContainer.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired
-};
-
-const FieldChartsContentContainer = ({
+const ClientFieldContentContainer = ({
                                        children,
                                        view,
-                                       showChartsSideBar,
+                                       showSideBar,
+                                       setShowSideBar,
                                        clientRequestParams,
                                        mappedFieldList,
                                        setActiveLoadPeriod,
@@ -188,12 +124,14 @@ const FieldChartsContentContainer = ({
 
   return (
     <div className="content-container">
-      <TopBar clientRequestParams={ clientRequestParams }
+      <TopBar showSideBar={ showSideBar }
+              setShowSideBar={ setShowSideBar }
+              clientRequestParams={ clientRequestParams }
               mappedFieldList={ mappedFieldList }
               view={ view } />
 
       <div className="content-container__screen">
-        <SideBar showSideBar={ showChartsSideBar }
+        <SideBar showSideBar={ showSideBar }
                  mappedUserData={ mappedUser }
                  mappedFieldList={ mappedFieldList }
                  setActiveLoadPeriod={ setActiveLoadPeriod }
@@ -205,108 +143,6 @@ const FieldChartsContentContainer = ({
   );
 };
 
-FieldChartsContentContainer.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired
-};
-
-const FieldTemperaturesChartsContentContainer = ({
-                                                   children,
-                                                   view,
-                                                   showChartsSideBar,
-                                                   clientRequestParams,
-                                                   mappedFieldList,
-                                                   setActiveLoadPeriod,
-                                                   setActiveFieldName
-                                                 }) => {
-
-  const userAccount = retrieveUserClientListFromLocalStorage();
-  const mappedUser = mappedUserData(userAccount);
-
-  return (
-    <div className="content-container">
-      <TopBar clientRequestParams={ clientRequestParams }
-              mappedFieldList={ mappedFieldList }
-              view={ view } />
-
-      <div className="content-container__screen">
-        <SideBar showSideBar={ showChartsSideBar }
-                 mappedUserData={ mappedUser }
-                 mappedFieldList={ mappedFieldList }
-                 setActiveLoadPeriod={ setActiveLoadPeriod }
-                 setActiveFieldName={ setActiveFieldName }
-                 view={ view } />
-        { children }
-      </div>
-    </div>
-  );
-};
-
-FieldTemperaturesChartsContentContainer.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired
-};
-
-const FieldSetupContentContainer = ({
-                                      children,
-                                      view,
-                                      showSetupSideBar,
-                                      clientRequestParams,
-                                      setActiveLoadPeriod,
-                                      setActiveFieldName
-                                    }) => {
-
-  const userAccount = retrieveUserClientListFromLocalStorage();
-  const mappedUser = mappedUserData(userAccount);
-
-  return (
-    <div className="content-container">
-      <TopBar clientRequestParams={ clientRequestParams }
-              view={ view } />
-
-      <div className="content-container__screen">
-        <SideBar showSideBar={ showSetupSideBar }
-                 mappedUserData={ mappedUser }
-                 setActiveLoadPeriod={ setActiveLoadPeriod }
-                 setActiveFieldName={ setActiveFieldName }
-                 view={ view } />
-        { children }
-      </div>
-    </div>
-  );
-};
-
-FieldSetupContentContainer.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired
-};
-
-const FieldReportsContentContainer = ({
-                                        children,
-                                        view,
-                                        showClientsSideBar,
-                                        clientRequestParams,
-                                        setActiveLoadPeriod,
-                                        setActiveFieldName
-                                      }) => {
-
-  const userAccount = retrieveUserClientListFromLocalStorage();
-  const mappedUser = mappedUserData(userAccount);
-
-  return (
-    <div className="content-container">
-      <TopBar clientRequestParams={ clientRequestParams }
-              view={ view } />
-
-      <div className="content-container__screen">
-        <SideBar showSideBar={ showClientsSideBar }
-                 mappedUserData={ mappedUser }
-                 setActiveLoadPeriod={ setActiveLoadPeriod }
-                 setActiveFieldName={ setActiveFieldName }
-                 view={ view } />
-        { children }
-      </div>
-    </div>
-  );
-};
-
-FieldReportsContentContainer.propTypes = {
+ClientFieldContentContainer.propTypes = {
   children: oneOfType([arrayOf(node), node]).isRequired
 };

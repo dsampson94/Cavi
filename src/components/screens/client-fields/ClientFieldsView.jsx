@@ -44,8 +44,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
   return (
     <ContentContainer view={ CLIENT_FIELDS }
                       clientRequestParams={ clientRequestParams }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setClientsShowSideBar }
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setClientsShowSideBar }
                       mappedFieldList={ mappedFieldList }>
 
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>

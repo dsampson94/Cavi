@@ -8,13 +8,21 @@ import { bool, func, shape } from 'prop-types';
 import {
   EMAIL,
   EMAIL_RECOMMENDATIONS,
+  FIELD_SETTINGS,
+  FIELD_SETUP_STRING,
   GENERAL_ROUTE,
   MAPS,
   MAPS_ICON,
+  OTHER_FARM,
   PRINT,
   PRINT_ICON,
+  PROBES_MONITOR,
+  PROBES_MONITOR_STRING,
   PROFILE_ICON,
+  RECOMMENDATION_LIST,
+  TABLE_LIST,
   TOPBAR_OPTIONS,
+  VIEW_SIDEBAR,
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
@@ -39,7 +47,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { groupName, clientName } = useParams();
+  const { fieldName, groupName, clientName } = useParams();
 
   const [emailAddress, setEmailAddress] = useState(undefined);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -84,29 +92,48 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             <Graphic onClick={ () => history.push('/dashboard/overview') } topbar graphic={ logo } />
           </div>
           <div className="top-bar__left__buttons">
-            <Button icon={ PRINT_ICON }
-                    onClick={ getPDF }
-                    tooltip={ PRINT } />
-
-            <Button icon={ EMAIL_RECOMMENDATIONS }
-                    onClick={ getPDFAndEmail }
-                    tooltip={ EMAIL } />
-
-            <Button label={ 'Other Farm' }
+            <Button icon={ VIEW_SIDEBAR }
+                    tooltip={ OTHER_FARM }
                     onClick={ () => setShowSideBar(!showSideBar) } />
 
-            { !location?.pathname?.includes('dashboard') &&
-            <Button label={ 'Field Setup' }
+            { (location?.pathname?.includes('chart') ||
+              location?.pathname?.includes('setup') ||
+              location?.pathname?.includes('report') ||
+              location?.pathname?.includes('temperature')) &&
+            <Button icon={ TABLE_LIST }
+                    tooltip={ RECOMMENDATION_LIST }
+                    onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) } /> }
+
+            { !location?.pathname?.includes('dashboard') && !location?.pathname?.includes('setup') &&
+            <Button icon={ FIELD_SETTINGS }
+                    tooltip={ FIELD_SETUP_STRING }
                     onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) } /> }
-            <Button label={ 'Probes Monitor' } />
-            <Button icon={ WEATHER_STATION_ICON }
-                    tooltip={ WEATHER_STATION } />
-            <Button icon={ MAPS_ICON }
-                    tooltip={ MAPS } />
+
+            { !location?.pathname?.includes('overview') && <>
+              <Button icon={ PRINT_ICON }
+                      onClick={ getPDF }
+                      tooltip={ PRINT } />
+
+              <Button icon={ EMAIL_RECOMMENDATIONS }
+                      onClick={ getPDFAndEmail }
+                      tooltip={ EMAIL } />
+
+
+              <Button icon={ PROBES_MONITOR }
+                      tooltip={ PROBES_MONITOR_STRING } />
+
+              <Button icon={ WEATHER_STATION_ICON }
+                      tooltip={ WEATHER_STATION } />
+
+              <Button icon={ MAPS_ICON }
+                      tooltip={ MAPS } />
+            </> }
+
           </div>
         </div>
 
-        <div className="top-bar__right">
+        <div className={ 'top-bar__right' }>
+
           <TextInput placeholder={ 'Find Last Readings' }
                      topbar />
 

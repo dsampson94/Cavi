@@ -25,8 +25,8 @@ const DashboardOverview = ({
 
   return (
     <ContentContainer view={ DASHBOARD }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setShowClientsSideBar }>
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-overview">
 
         <ActiveHeader overviewOptionSelected={ overviewOptionSelected }

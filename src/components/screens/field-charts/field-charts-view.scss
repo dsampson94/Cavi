@@ -49,8 +49,6 @@
         position: relative;
         z-index: 5;
         flex-direction: row;
-        width: 18%;
-        min-width: util.rem(80);
       }
 
       &-outer {
@@ -60,7 +58,6 @@
         margin: 0 util.rem(2) 0 util.rem(2);
         flex-direction: row;
         width: 18%;
-        min-width: util.rem(70);
       }
     }
 
@@ -84,8 +81,12 @@
       flex-direction: row-reverse;
       align-items: center;
       font-size: util.rem(10);
-      margin-right: util.rem(10);
       width: 50%;
+
+      &--datebar {
+        display: flex;
+        width: 70%;
+      }
 
       &-days-container {
         display: flex;
@@ -117,6 +118,7 @@
         justify-content: left;
         flex-direction: row-reverse;
         width: util.rem(105);
+        margin-right: util.rem(30);
       }
 
       &-icon-container {

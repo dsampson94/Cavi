@@ -28,8 +28,8 @@ const FieldSetupView = ({
   return (
     <ContentContainer view={ FIELD_SETUP }
                       clientRequestParams={ clientRequestParams }
-                      showSetupSideBar={ showSetupSideBar }
-                      setShowSetupSideBar={ setShowSetupSideBar }>
+                      showSideBar={ showSetupSideBar }
+                      setShowSideBar={ setShowSetupSideBar }>
 
       <div className={ getClassNames('field-setup', { show: showSetupSideBar }) }>
         <ActiveScreen activeScreen={ activeScreen }

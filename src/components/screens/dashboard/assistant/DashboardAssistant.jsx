@@ -21,8 +21,8 @@ const DashboardAssistant = ({
 
   return (
     <ContentContainer view={ DASHBOARD }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setShowClientsSideBar }>
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-assistant">
         <div className="field-chart__top-bar--right-tool-container">
 
