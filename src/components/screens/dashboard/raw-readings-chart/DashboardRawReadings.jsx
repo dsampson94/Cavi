@@ -6,6 +6,10 @@ import { DASHBOARD } from '../../../../tools/general/system-variables.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
+import Select from '../../../common/select/Select';
+import TextInput from '../../../common/input/text/TextInput';
+import Button from '../../../common/button/Button';
+
 import './dashboard-raw-readings.scss';
 
 const DashboardRawReadings = ({
@@ -20,9 +24,23 @@ const DashboardRawReadings = ({
 
   return (
     <ContentContainer view={ DASHBOARD }
-                      showClientsSideBar={ showClientsSideBar }
-                      setShowClientsSideBar={ setShowClientsSideBar }>
+                      showSideBar={ showClientsSideBar }
+                      setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-raw-readings">
+
+        <div className="dashboard-raw-readings__container">
+
+          <TextInput label={ 'Probe' } left />
+
+          <Select label={ 'Type' }
+                  menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] }
+                  left input />
+
+          <div className="dashboard-raw-readings__button-container">
+            <Button label={ 'Send Readings' } medium />
+          </div>
+
+        </div>
 
       </div>
     </ContentContainer>

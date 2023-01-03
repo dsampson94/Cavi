@@ -18,7 +18,7 @@
   }
 
   &--wide {
-    min-width: util.rem(150);
+    min-width: util.rem(130);
   }
 
   &--chartbar {
@@ -60,7 +60,7 @@
 
     &--left {
       display: flex;
-      min-width: util.rem(160);
+      min-width: util.rem(170);
       text-align: left;
       margin-top: util.rem(5);
       flex-direction: row;
@@ -114,6 +114,10 @@
       width: util.rem(50);
       font-size: util.bu(1.1);
       padding: 0 0 0 util.rem(1.8);
+    }
+
+    &--input {
+      min-width: util.rem(200);
     }
   }
 

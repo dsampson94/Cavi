@@ -23,12 +23,14 @@ const CheckboxInput = ({
                          canopy,
                          outside,
                          humidity,
-                         rain
+                         rain,
+                         left,
+                         rightText
                        }) => {
 
   return (
-    <div className={ getClassNames('checkbox-input', { disabled }) }>
-      <div className={ getClassNames('checkbox-input__label-container') }>
+    <div className={ getClassNames('checkbox-input', { disabled, left }) }>
+      <div className={ getClassNames('checkbox-input__label-container', { left }) }>
         <label htmlFor={ constant }>{ constant }</label>
       </div>
       <input id={ constant }
@@ -39,7 +41,8 @@ const CheckboxInput = ({
              onClick={ onClick }
              type={ 'checkbox' }
              className={ getClassNames('checkbox-input__input',
-               { actual, forecast, mm100, mm200, mm300, mm400, mm600, mm800, canopy, outside, humidity, rain }) } />
+               { actual, forecast, mm100, mm200, mm300, mm400, mm600, mm800, canopy, outside, humidity, rain, left }) } />
+      <label className={'checkbox-input__right-label'} htmlFor={ constant }>{ rightText }</label>
     </div>
   );
 };

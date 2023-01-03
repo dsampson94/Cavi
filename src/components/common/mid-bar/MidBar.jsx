@@ -144,7 +144,7 @@ const DashboardMidBar = ({
                            handlelastReadingsClick,
                            handleNeglectedClick,
                            handleEmailReadingsClick,
-                           handleChartClick,
+                           handleRawReadingsClick,
                            handleIrricomsClick
                          }) => {
 
@@ -176,7 +176,7 @@ const DashboardMidBar = ({
               selected={ activePath.includes('email-readings') } />
 
       <Button label={ MID_BAR_CHART }
-              onClick={ handleChartClick }
+              onClick={ handleRawReadingsClick }
               selected={ activePath.includes('raw-readings') } />
 
       <Button label={ MID_BAR_IRRICOMS }

@@ -12,12 +12,20 @@
   user-select: none;
   width: 100%;
 
+  &--left {
+    margin-top: util.rem(8);
+    flex-direction: row;
+  }
+
   &__label-container {
     display: flex;
     align-items: flex-start;
     padding-left: util.rem(1);
     margin-top: util.rem(0);
-    font-size: util.rem(10);
+
+    &--left {
+      font-size: util.bu(2);
+    }
 
     & label {
       margin-top: util.rem(2);
@@ -39,6 +47,12 @@
     }
 
     &:hover {
+      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+    }
+
+    &--left {
+      margin-top: util.rem(6);
+      margin-left: util.rem(87);
       border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
     }
 
@@ -197,6 +211,11 @@
         border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
       }
     }
+  }
+
+  &__right-label {
+    margin-top: util.rem(2);
+    margin-left: util.rem(5);
   }
 }
 

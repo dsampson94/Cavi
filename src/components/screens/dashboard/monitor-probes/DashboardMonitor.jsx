@@ -33,18 +33,25 @@ const DashboardMonitor = ({
                       showSideBar={ showClientsSideBar }
                       setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-monitor">
+
         <div className="dashboard-monitor__topbar">
+
           <div className="dashboard-monitor__select-container">
             <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
             <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
             <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
             <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
           </div>
-          <Button label={ 'Reload' }
-                  onClick={ handleReloadButtonClick } medium spaced />
-          <div style={ { width: '30px' } }><SVGIcon name={ EXCEL_ICON } /></div>
-          <div style={ { width: '30px' } }><SVGIcon name={ LOCATION_PIN } /></div>
+
+          <div className="dashboard-monitor__button-container">
+            <Button label={ 'Reload' }
+                    onClick={ handleReloadButtonClick } medium spaced />
+            <div style={ { width: '30px' } }><SVGIcon name={ EXCEL_ICON } /></div>
+            <div style={ { width: '30px' } }><SVGIcon name={ LOCATION_PIN } fill={ 'red' } /></div>
+          </div>
+
         </div>
+
         <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
                activeTableData={ [{
                  group: '',
