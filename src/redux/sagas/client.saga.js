@@ -47,17 +47,13 @@ export function* performRetrieveClientOverviewRequest({ client }) {
     const [endpoint, requestOptions] = getClientOverviewRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_CLIENT_OVERVIEW_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_CLIENT_OVERVIEW_LIST, overviewList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
     }
@@ -81,11 +77,8 @@ export function* performRetrieveFullClientFieldListRequest({ client }) {
     const [endpoint, requestOptions] = getClientFieldListRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
         return;
@@ -100,13 +93,11 @@ export function* performRetrieveFullClientFieldListRequest({ client }) {
 
           switch (data) {
             case responseStatus(data).ERROR:
-              yield put(setProgressBar(THREE_QUARTER_PROGRESS));
               yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
               yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_CRITICAL));
               return;
 
             case responseStatus(data).SUCCESS:
-              yield put(setProgressBar(THREE_QUARTER_PROGRESS));
               yield put({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: data });
               yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA, SNACK_SUCCESS));
           }
@@ -139,17 +130,13 @@ export function* performRetrieveClientFieldListRequest({ client }) {
     const [endpoint, requestOptions] = getClientFieldListRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_CLIENT_FIELD_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_CLIENT_FIELD_LIST, fieldList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
     }

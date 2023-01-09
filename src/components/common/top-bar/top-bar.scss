@@ -10,9 +10,9 @@
   flex-direction: row;
   align-items: center;
   user-select: none;
-  height: util.rem(50);
+  height: util.rem(55);
   margin-bottom: util.rem(4);
-  border-bottom: util.rem(1) solid grey;
+  border-bottom: util.rem(3) solid grey;
   max-width: 99.7%;
 
   & button {

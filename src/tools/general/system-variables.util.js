@@ -31,9 +31,7 @@ export const MID_BAR_IRRICOMS = 'Check Irricoms (manual)';
 export const SPINNER_TEXT = 'Loading..';
 
 //PROGRESSBAR
-export const INITIAL_PROGRESS = '10';
-export const HALF_PROGRESS = '50';
-export const THREE_QUARTER_PROGRESS = '75';
+export const INITIAL_PROGRESS = '95';
 export const COMPLETE_PROGRESS = '100';
 
 //TOOLTIPS

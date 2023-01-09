@@ -81,17 +81,13 @@ export function* performRetrieveFieldChartListRequest({ field }) {
     const [endpoint, requestOptions] = getFieldChartListRequest(field);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_FIELD_CHART_LIST, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
     }
@@ -115,16 +111,12 @@ export function* performChartCalibrateProbeRequest({ field }) {
     const [endpoint, requestOptions] = getChartProbeCalibrationRequest(field);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put(addSystemNotice(UNSUCCESSFULLY_CALIBRATED_PROBE, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put(addSystemNotice(SUCCESSFULLY_CALIBRATED_PROBE, SNACK_SUCCESS));
     }
 
@@ -201,17 +193,13 @@ export function* performRetrieveExtendedFieldChartListRequest({ field, use }) {
     const [endpoint, requestOptions] = getExtendedChartList(field);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: getUseType().type, undefined });
         yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: getUseType().type, [getUseType().stateObject]: data });
         yield put(addSystemNotice(getUseType().successNotice, SNACK_SUCCESS));
     }
@@ -388,17 +376,13 @@ export function* performRetrieveFieldSetupListRequest({ field, use }) {
     const [endpoint, requestOptions] = getFieldSetupList(field);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    yield put(setProgressBar(HALF_PROGRESS));
-
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: getUseType().type, undefined });
         yield put(addSystemNotice(getUseType().errorNotice, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put(setProgressBar(THREE_QUARTER_PROGRESS));
         yield put({ type: getUseType().type, [getUseType().stateObject]: data });
         yield put(addSystemNotice(getUseType().successNotice, SNACK_SUCCESS));
     }
