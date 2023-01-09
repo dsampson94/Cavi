@@ -123,7 +123,7 @@ const InputSearch = ({
   };
 
   return (
-    <div className={ 'search' }>
+    <div className={ getClassNames('search', { overview }) }>
       <div className={ 'search__icon' }>
         <SVGIcon name={ SEARCH } />
       </div>

@@ -7,24 +7,45 @@
 
 .dashboard-overview {
   display: flex;
-  overflow-y: scroll;
   flex-direction: column;
   width: 100%;
-  height: 98%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
 
   &__top-button {
-    width: 100%;
     display: flex;
     flex-direction: row;
     height: util.rem(45);
+    width: 100%;
+    padding: util.rem(6);
     cursor: pointer;
-    padding: util.rem(7);
 
     &__left {
-      width: 78%;
+      width: 70%;
       display: flex;
       flex-direction: column;
       white-space: nowrap;
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-right: -10%
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+        margin-right: -10%
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+        margin-right: -5%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+        margin-right: 2%;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+        margin-right: 12%;
+      }
 
       &-header {
         font-weight: bold;
@@ -82,9 +103,7 @@
 
   &__list {
     display: flex;
-    overflow-y: scroll;
-    flex-direction: column;
-    padding: util.rem(3);
+    overflow: scroll;
 
     &__item {
       display: flex;
@@ -95,14 +114,13 @@
         display: flex;
         font-size: util.rem(16);
         padding-top: util.rem(2);
-        border-bottom: util.rem(0.5) solid map.get(color.$colorMap, light-grey);;
+        border-bottom: util.rem(0.5) solid map.get(color.$colorMap, light-grey);
       }
 
       &__subheader {
         display: flex;
         flex-direction: row;
         height: util.rem(24);
-        width: 20%;
         cursor: pointer;
 
         &:hover {
@@ -112,12 +130,56 @@
 
         &__text {
           font-size: util.rem(16);
-          width: 100%;
+          width: 16%;
         }
 
         &__icon {
-          width: util.rem(18);
           position: relative;
+          width: 84%;
+
+          &__grid {
+            display: table;
+            border-collapse: collapse;
+            margin: util.rem(-5) util.rem(0) util.rem(5) util.rem(0);
+            justify-content: left;
+
+            &__frequency {
+
+              &__container {
+                position: relative;
+                display: table-cell;
+                background-clip: padding-box;
+                text-align: center;
+                max-width: util.rem(20);
+              }
+            }
+
+            &__deficit {
+
+              &__container {
+                position: relative;
+                display: table-cell;
+                background-clip: padding-box;
+                text-align: center;
+                padding-top: util.rem(6);
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                color: map.get(color.$colorMap, light-mode-white);
+              }
+            }
+
+            &__reading {
+
+              &__container {
+                position: relative;
+                display: table-cell;
+                background-clip: padding-box;
+                text-align: center;
+                color: map.get(color.$colorMap, light-mode-white);
+              }
+            }
+          }
         }
       }
     }
@@ -125,12 +187,6 @@
 }
 
 .deficit-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  color: map.get(color.$colorMap, light-mode-white);
-  height: 100%;
 
   &__upper {
     display: flex;
@@ -139,6 +195,8 @@
     border-top-right-radius: map.get(radius.$border-radius, small);
     font-size: util.rem(9);
     height: 50%;
+    margin-right: util.rem(4);
+    width: util.rem(20)
   }
 
   &__lower {
@@ -148,6 +206,8 @@
     border-bottom-right-radius: map.get(radius.$border-radius, small);
     font-size: util.rem(9);
     height: 50%;
+    margin-right: util.rem(4);
+    width: util.rem(20)
   }
 }
 
@@ -160,6 +220,8 @@
   &__container {
     margin-top: util.rem(2);
     border-radius: map.get(radius.$border-radius, large);
+    margin-right: util.rem(1);
+    width: util.rem(23)
   }
 
   &__text {

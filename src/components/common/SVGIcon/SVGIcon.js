@@ -62,10 +62,11 @@ import {
 import { getClassNames } from '../../../tools/general/helpers.util';
 
 import useTheme from '../../../tools/hooks/useTheme';
+import ToolTip from '../tool-tip/ToolTip';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left, tooltip, grid }) => {
 
   const { localActiveTheme } = useTheme(false);
 
@@ -88,6 +89,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
            viewBox={ getViewBox(name, tiny, chart, tall) }>
         { getPath(name) }
       </svg>
+      { tooltip && <ToolTip text={ tooltip } grid={ grid } /> }
     </div>
   );
 };

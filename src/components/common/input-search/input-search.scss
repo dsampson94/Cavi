@@ -15,6 +15,33 @@
   border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
 
+  &--overview {
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      width: 80%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+      width: 84%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+      width: 85%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+      width: 86%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, xm-large)) {
+      width: 94%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+      width: 99%;
+    }
+  }
+
   &__icon {
     position: relative;
     z-index: 6;

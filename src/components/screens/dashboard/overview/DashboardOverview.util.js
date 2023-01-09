@@ -81,6 +81,7 @@ ActiveHeader.propTypes = {
 };
 
 export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOverviewOptionSelected, handleSubHeaderClick }) => {
+
   return (
     <>
       { !overviewOptionSelected &&
@@ -104,9 +105,11 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
         { ownClientsList?.map((item) => {
           return (
             <div className="dashboard-overview__list__item" key={ generateId() }>
+
               <div className="dashboard-overview__list__item__header">
                 { item.objectKey?.toUpperCase() }
               </div>
+
               { (item?.innerObjectValueList ? item?.innerObjectValueList : item?.filteredInnerObjectValueList)?.map((value) => {
                 return (
                   <div className={ getClassNames('dashboard-overview__list__item__subheader', {}) } key={ generateId() }>
@@ -115,12 +118,9 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
                       { value.iok }
                     </div>
                     <div className="dashboard-overview__list__item__subheader__icon">
-                      { overviewOptionSelected === 1 &&
-                      <FrequencyIndicator value={ value } /> }
-                      { overviewOptionSelected === 2 &&
-                      <DeficitIndicator value={ value } /> }
-                      { overviewOptionSelected === 3 &&
-                      <LastReadingIndicator value={ value } /> }
+                      { overviewOptionSelected === 1 && FrequencyIndicator(value) }
+                      { overviewOptionSelected === 2 && DeficitIndicator(value) }
+                      { overviewOptionSelected === 3 && LastReadingIndicator(value) }
                     </div>
                   </div>);
               }) }
@@ -139,58 +139,57 @@ OverviewList.propTypes = {
   ownClientsList: arrayOf(shape({}))
 };
 
-const FrequencyIndicator = ({ value }) => {
-  switch (Object.entries(value?.iov)[0][1]) {
-    case 'blue':
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ VERY_SATISFIED } fill={ '#00AEFF' } tiny />
-      </>;
-    case 'green':
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ SATISFIED } fill={ '#00FF21' } tiny />
-      </>;
-    case 'yellow':
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />
-      </>;
-    case 'orange':
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ DISSATISFIED } fill={ '#FF8019' } tiny />
-      </>;
-    case 'red':
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ VERY_DISSATISFIED } fill={ '#FF0000' } tiny />
-      </>;
-    default:
-      return <>
-        <ToolTip text={ Object.keys(value.iov)[0] } mid />
-        <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } tiny />
-      </>;
+const FrequencyIndicator = (value) => {
+
+  const innerFields = Object.values(value)[1];
+  let fieldList = [];
+  for (const [fieldName, color] of Object.entries(innerFields)) {
+    fieldList.push({ fieldName, color });
   }
+
+  return (
+    <div className="dashboard-overview__list__item__subheader__icon__grid">
+      { fieldList.map((number, index) => (
+        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__frequency__container">
+          <ToolTip text={ number.fieldName } grid />
+          <SVGIcon name={ VERY_SATISFIED } fill={ number.color } />
+        </div>
+      )) }
+    </div>
+  );
 };
 
 FrequencyIndicator.propTypes = {
   value: shape({}).isRequired
 };
 
-const DeficitIndicator = ({ value }) => {
+const DeficitIndicator = (value) => {
+
+  console.log(value);
+
   const objectValues = Object.values(value.iov)[0];
+
+  const innerFields = Object.values(value)[1];
+  let fieldList = [];
+  for (const [key, value] of Object.entries(innerFields)) {
+    fieldList.push({ key });
+  }
+
   return (
-    <div className={ 'deficit-container' }>
-      <ToolTip text={ Object.keys(value.iov)[0] } mid />
-      <div className={ 'deficit-container__upper' }
-           style={ { backgroundColor: `#${ objectValues?.kleurbohex?.slice(3) }` } }>
-        { objectValues?.tmbo }
-      </div>
-      <div className={ 'deficit-container__lower' }
-           style={ { backgroundColor: `#${ objectValues?.kleuronderhex?.slice(3) }` } }>
-        { objectValues?.tmon }
-      </div>
+    <div className="dashboard-overview__list__item__subheader__icon__grid">
+      { fieldList.map((number, index) => (
+        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__deficit__container">
+          <ToolTip text={ number.key } grid />
+          <div className={ 'deficit-container__upper' }
+               style={ { backgroundColor: `#${ objectValues?.kleurbohex?.slice(3) }` } }>
+            { objectValues?.tmbo }
+          </div>
+          <div className={ 'deficit-container__lower' }
+               style={ { backgroundColor: `#${ objectValues?.kleuronderhex?.slice(3) }` } }>
+            { objectValues?.tmon }
+          </div>
+        </div>
+      )) }
     </div>
   );
 };
@@ -199,15 +198,27 @@ DeficitIndicator.propTypes = {
   value: shape({}).isRequired
 };
 
-const LastReadingIndicator = ({ value }) => {
+const LastReadingIndicator = (value) => {
+
   const objectValues = Object.values(value.iov)[0];
+
+  const innerFields = Object.values(value)[1];
+  let fieldList = [];
+  for (const [key, value] of Object.entries(innerFields)) {
+    fieldList.push({ key });
+  }
+
   return (
-    <div className={ 'last-reading' }>
-      <ToolTip text={ Object.keys(value.iov)[0] } mid />
-      <div className={ 'last-reading__container' }
-           style={ { backgroundColor: `#${ objectValues?.lastreadingkleur?.slice(3) }` } }>
-        <div className={ 'last-reading__text' }>{ objectValues?.lastreading }</div>
-      </div>
+    <div className="dashboard-overview__list__item__subheader__icon__grid">
+      { fieldList.map((number, index) => (
+        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__reading__container">
+          <ToolTip text={ number.key } grid />
+          <div className={ 'last-reading__container' }
+               style={ { backgroundColor: `#${ objectValues?.lastreadingkleur?.slice(3) }` } }>
+            <div className={ 'last-reading__text' }>{ objectValues?.lastreading }</div>
+          </div>
+        </div>
+      )) }
     </div>
   );
 };

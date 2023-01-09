@@ -9,4 +9,29 @@
   display: flex;
   flex-direction: row;
   margin-top: util.rem(4);
+
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+    width: 80%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
+    width: 84%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+    width: 85%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+    width: 86%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, xm-large)) {
+    width: 94%;
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+    width: 99%;
+  }
 }

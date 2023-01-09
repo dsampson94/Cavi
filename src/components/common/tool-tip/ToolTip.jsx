@@ -6,12 +6,12 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import './tool-tip.scss';
 
-const ToolTip = ({ text, left, mid }) => {
+const ToolTip = ({ text, left, mid, grid }) => {
 
   const [showToolTip, setShowToolTip] = useState(false);
 
   return (
-    <div className="tooltip"
+    <div className={ getClassNames('tooltip', { grid }) }
          onClick={ () => setShowToolTip(!showToolTip) }
          onMouseEnter={ () => setShowToolTip(true) }
          onMouseLeave={ () => setShowToolTip(false) }>
