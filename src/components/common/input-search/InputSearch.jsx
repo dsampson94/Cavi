@@ -17,6 +17,7 @@ import { pushEmptyRow } from '../table/TableFunctions.util';
 import { addSystemNotice } from '../../../redux/actions/system.action';
 
 import SVGIcon from '../SVGIcon/SVGIcon';
+import ToolTip from '../tool-tip/ToolTip';
 
 import './input-search.scss';
 
@@ -36,6 +37,7 @@ const InputSearch = ({
   const dispatch = useDispatch();
 
   const [searchString, setSearchString] = useState(persistSearchString ? persistSearchString : '');
+  const [searchTypeIsClient, setSearchTypeIsClient] = useState(true);
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
@@ -43,15 +45,15 @@ const InputSearch = ({
   useEffect(() => {
     filter();
     if (searchString.length === 0) setFilteredData(undefined);
-  }, [searchString]);
+  }, [searchString, searchTypeIsClient]);
 
   const filter = () => {
     if (table)
       filterTable();
     else if (overview)
-      filterClientList();
+      searchTypeIsClient ? filterClientSidebarList() : filterClientOverviewList();
     else if (sidebar) {
-      filterClientList();
+      searchTypeIsClient ? filterClientSidebarList() : filterClientOverviewList();
       setPersistSearchString(searchString);
     }
   };
@@ -84,7 +86,20 @@ const InputSearch = ({
     }
   };
 
-  const filterClientList = () => {
+  const filterClientSidebarList = () => {
+    if (searchString.length < 2) return;
+
+    const filteredList = filterList(dataToFilter, searchString);
+
+    if (isEmpty(filteredList)) {
+      dispatch(addSystemNotice(UNSUCCESSFUL_CLIENT_SEARCH, SNACK_CRITICAL));
+      setFilteredData(undefined);
+    } else {
+      setFilteredData(filteredList);
+    }
+  };
+
+  const filterClientOverviewList = () => {
     if (searchString.length < 2) return;
 
     let mappedClientsInner = [];
@@ -122,10 +137,20 @@ const InputSearch = ({
     }
   };
 
+  const filterList = (list, searchString) => {
+    return list.filter(item => {
+      return (
+        item.objectKey.toLowerCase().includes(searchString.toLowerCase()) ||
+        item.innerObjectValueList.some(innerItem => innerItem.iok.toLowerCase().includes(searchString.toLowerCase()))
+      );
+    });
+  };
+
   return (
     <div className={ getClassNames('search', { overview }) }>
-      <div className={ 'search__icon' }>
-        <SVGIcon name={ SEARCH } />
+      <div className={ 'search__icon' } onClick={ () => setSearchTypeIsClient(!searchTypeIsClient) }>
+        <ToolTip text={ !searchTypeIsClient ? 'Search by Client' : 'Search by Field' } />
+        <SVGIcon name={ SEARCH } fill={ searchTypeIsClient ? '#0000FF' : '#607CB1' } />
       </div>
       <input autoFocus
              name={ name }

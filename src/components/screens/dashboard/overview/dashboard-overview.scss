@@ -6,12 +6,6 @@
 @use "../../../../stylesheets/config" as config;
 
 .dashboard-overview {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
 
   &__top-button {
     display: flex;
@@ -22,30 +16,10 @@
     cursor: pointer;
 
     &__left {
-      width: 70%;
+      width: 75%;
       display: flex;
       flex-direction: column;
       white-space: nowrap;
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-right: -10%
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-right: -10%
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-right: -5%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-right: 2%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-right: 12%;
-      }
 
       &-header {
         font-weight: bold;
@@ -104,6 +78,7 @@
   &__list {
     display: flex;
     overflow: scroll;
+    flex-direction: column;
 
     &__item {
       display: flex;

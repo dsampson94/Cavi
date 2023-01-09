@@ -21,6 +21,8 @@
     &--dashboard {
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: hidden;
       width: 100%;
     }
   }

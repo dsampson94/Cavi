@@ -27,21 +27,19 @@ const DashboardOverview = ({
     <ContentContainer view={ DASHBOARD }
                       showSideBar={ showClientsSideBar }
                       setShowSideBar={ setShowClientsSideBar }>
-      <div className="dashboard-overview">
 
-        <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
-                      setOverviewOptionSelected={ setOverviewOptionSelected } />
+      <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
+                    setOverviewOptionSelected={ setOverviewOptionSelected } />
 
-        <InputSearch dataToFilter={ ownClientsList }
-                     setFilteredData={ setFilteredClientData }
-                     placeholder={ SEARCH_PLACEHOLDER }
-                     overview />
+      <InputSearch dataToFilter={ ownClientsList }
+                   setFilteredData={ setFilteredClientData }
+                   placeholder={ SEARCH_PLACEHOLDER }
+                   overview />
 
-        <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
-                      overviewOptionSelected={ overviewOptionSelected }
-                      setOverviewOptionSelected={ setOverviewOptionSelected }
-                      handleSubHeaderClick={ handleSubHeaderClick } />
-      </div>
+      <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
+                    overviewOptionSelected={ overviewOptionSelected }
+                    setOverviewOptionSelected={ setOverviewOptionSelected }
+                    handleSubHeaderClick={ handleSubHeaderClick } />
     </ContentContainer>
   );
 };
