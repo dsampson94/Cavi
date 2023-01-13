@@ -3,8 +3,6 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import {
   COMPLETE_PROGRESS,
-  HALF_PROGRESS,
-  INITIAL_PROGRESS,
   SNACK_CRITICAL,
   SNACK_SUCCESS,
   SUCCESSFULLY_CALIBRATED_PROBE,
@@ -16,7 +14,6 @@ import {
   SUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST,
   SUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
   SUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST,
-  THREE_QUARTER_PROGRESS,
   UNSUCCESSFULLY_CALIBRATED_PROBE,
   UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_EC_CHART_LIST,
@@ -27,6 +24,7 @@ import {
   UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST
 } from '../../tools/general/system-variables.util';
+import { getProgress } from '../../tools/general/helpers.util';
 
 import { responseStatus } from '../endpoints/index';
 
@@ -76,7 +74,7 @@ import {
 
 export function* performRetrieveFieldChartListRequest({ field }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getFieldChartListRequest(field);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -106,7 +104,7 @@ export function* watchForRetrieveFieldChartListRequest() {
 
 export function* performChartCalibrateProbeRequest({ field }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getChartProbeCalibrationRequest(field);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -188,7 +186,7 @@ export function* performRetrieveExtendedFieldChartListRequest({ field, use }) {
   };
 
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getExtendedChartList(field);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -371,7 +369,7 @@ export function* performRetrieveFieldSetupListRequest({ field, use }) {
   };
 
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getFieldSetupList(field);
     const { data } = yield call(axios, endpoint, requestOptions);

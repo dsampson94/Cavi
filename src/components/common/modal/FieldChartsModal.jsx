@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { getRequestParams } from '../../../redux/endpoints';
-
-import useDraggable from '../../../tools/hooks/useDraggable';
 
 import {
   CROP_FACTORS_TAB_NAME,
@@ -36,20 +34,80 @@ import './field-charts-modal.scss';
 
 const FieldChartsModal = ({ setShowChartsModal }) => {
 
+  const [width, setWidth] = useState(1200);
+  const [height, setHeight] = useState(380);
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(250);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [originalX, setOriginalX] = useState(0);
+  const [originalY, setOriginalY] = useState(0);
+  const [originalWidth, setOriginalWidth] = useState(0);
+  const [originalHeight, setOriginalHeight] = useState(0);
+
   const [activeTab, setActiveTab] = useState(GENERAL_TAB_NAME);
 
-  const handleDrag = useCallback(({ x, y }) => ({ x, y }), []);
+  const handleMouseDown = (e) => {
+    if (e.target.classList.contains('resizer')) {
+      setIsResizing(true);
+      setOriginalX(e.clientX);
+      setOriginalY(e.clientY);
+      setOriginalWidth(width);
+      setOriginalHeight(height);
+    } else {
+      setIsDragging(true);
+      setOriginalX(e.clientX - left);
+      setOriginalY(e.clientY - top);
+    }
+  };
 
-  const [ref] = useDraggable({ onDrag: handleDrag });
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      setLeft(e.clientX - originalX);
+      setTop(e.clientY - originalY);
+    }
+    if (isResizing) {
+      setWidth(originalWidth + (e.clientX - originalX));
+      setHeight(originalHeight + (e.clientY - originalY));
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setIsResizing(false);
+  };
 
   return (
-    <div ref={ ref } className={ 'field-charts-modal' }>
-      <TabButtons activeTab={ activeTab }
-                  setActiveTab={ setActiveTab }
-                  setShowChartsModal={ setShowChartsModal } />
+    <div className={ 'field-charts-modal__container' }
+         onMouseDown={ handleMouseDown }
+         onMouseMove={ handleMouseMove }
+         onMouseUp={ handleMouseUp }
+         onMouseLeave={ handleMouseUp }>
 
-      <ActiveTab activeTab={ activeTab }
-                 setActiveTab={ setActiveTab } />
+      <div className={ 'field-charts-modal' }
+           style={ {
+             width,
+             height,
+             left,
+             top
+           } }>
+
+        <TabButtons activeTab={ activeTab }
+                    setActiveTab={ setActiveTab }
+                    setShowChartsModal={ setShowChartsModal } />
+
+        <ActiveTab activeTab={ activeTab }
+                   setActiveTab={ setActiveTab } />
+      </div>
+
+      <div className={ 'resizer' }
+           style={ {
+             width: width + 120,
+             height: + 480,
+             left: left + 200,
+             top: top - 20,
+             position: 'absolute'
+           } } />
     </div>
   );
 };

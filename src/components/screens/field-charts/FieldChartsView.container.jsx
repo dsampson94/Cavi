@@ -58,6 +58,7 @@ const FieldChartsViewContainer = () => {
   const fieldVPDChartList = useSelector(createSelector([state => state.field], field => field?.VPDList));
   const fieldActualChartList = useSelector(createSelector([state => state.field], field => field?.mottechList));
 
+  const [liveUpdate, setLiveUpdate] = useState(false);
   const [activeLoadPeriod, setActiveLoadPeriod] = useState(TWO_WEEKS_LABEL);
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
   const [activeProbeFactor, setActiveProbeFactor] = useState(undefined);
@@ -69,6 +70,18 @@ const FieldChartsViewContainer = () => {
     dispatch(requestClientFieldList(request.clientParams));
     dispatch(requestFieldChartList(request.loadParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    function updateData() {
+      dispatch(requestFieldChartList(request.loadParams));
+      setTimeout(updateData, 10 * 60 * 1000);
+    }
+
+    updateData();
+    return () => {
+      clearTimeout(updateData);
+    };
   }, []);
 
   useEffect(() => {
@@ -91,7 +104,7 @@ const FieldChartsViewContainer = () => {
   useEffect(() => {
     dispatch(requestFieldChartList(request.loadParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFieldName, activeLoadPeriod]);
+  }, [liveUpdate, activeFieldName, activeLoadPeriod]);
 
   useEffect(() => {
     if (activeProbeFactor) dispatch(requestChartProbeCalibration(request.calibrationParams));

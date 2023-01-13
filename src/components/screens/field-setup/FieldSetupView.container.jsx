@@ -226,6 +226,8 @@ const FieldSetupViewContainer = () => {
     }
   }, []);
 
+
+
   const mappedFieldSetupList = () => {
     return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
       cropDetailsList, weatherStationList, irrigationSystemList, irrigationDaysList, pushWarningsList, SMSWarningsList, splitValvesList,

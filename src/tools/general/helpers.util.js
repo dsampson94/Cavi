@@ -77,3 +77,14 @@ export const isUndefined = (value) => typeof value === 'undefined';
 
 export const noOp = () => {
 };
+
+export const chooseRandom = (numbers) => {
+  let randomIndex = Math.floor(Math.random() * numbers.length);
+  return numbers[randomIndex];
+};
+
+export const getProgress = () => {
+  const progress = [55, 79, 80, 95];
+  let randomIndex = Math.floor(Math.random() * progress.length);
+  return progress[randomIndex];
+};

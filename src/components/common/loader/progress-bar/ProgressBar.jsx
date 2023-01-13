@@ -4,7 +4,7 @@ import { getClassNames } from '../../../../tools/general/helpers.util';
 
 import './progress-bar.scss';
 
-const ProgressBar = ({ value }) => {
+const ProgressBar = ({ value, max }) => {
 
   let intervalId = null;
 
@@ -12,11 +12,11 @@ const ProgressBar = ({ value }) => {
 
   useEffect(() => {
     const updateValue = () => {
-      if (currentValue < parseInt(value)) setCurrentValue(currentValue + 1);
+      if (currentValue < parseInt(value)) setCurrentValue(currentValue + 0.1);
       else clearInterval(intervalId);
     };
 
-    intervalId = setInterval(updateValue, 0.8);
+    intervalId = setInterval(updateValue, 1);
     return () => clearInterval(intervalId);
   });
 
@@ -26,10 +26,14 @@ const ProgressBar = ({ value }) => {
   }, [value]);
 
   return (
-    <progress className={ getClassNames('progress-bar', { complete: currentValue === 100 || value === '100' || !value }) }
-              value={ currentValue }
-              max="100" />
+    <div className={ getClassNames('progress-bar', { complete: currentValue === 100 || value === '100' || !value }) }>
+      <div className="progress-bar-value"
+           style={ { width: `${ (value / max) * 100 }%` } }>
+
+      </div>
+    </div>
   );
+
 };
 
 export default ProgressBar;

@@ -153,7 +153,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                     clientRequestParams={ clientRequestParams } /> }
 
       </div>
-      <ProgressBar value={ progress } />
+      <ProgressBar value={ progress } max={ 100 } />
     </>
   );
 };

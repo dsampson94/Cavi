@@ -7,13 +7,22 @@
 
 .progress-bar {
   position: absolute;
-  top: util.rem(48);
+  top: util.rem(55);
   z-index: 99;
   opacity: 0.5;
   width: 100%;
+  height: util.rem(10);
   transition: all 0.5s ease-out;
 
   &--complete {
     opacity: 0;
   }
 }
+
+.progress-bar-value {
+  height: 5px;
+  background-color: map.get(color.$colorMap, palette-blue-2);
+  border-radius: 10px;
+  position: absolute;
+}
+

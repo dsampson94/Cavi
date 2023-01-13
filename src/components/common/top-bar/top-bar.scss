@@ -7,6 +7,7 @@
 
 .top-bar {
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
   user-select: none;
@@ -14,6 +15,7 @@
   margin-bottom: util.rem(4);
   border-bottom: util.rem(3) solid grey;
   max-width: 99.7%;
+  z-index: 99;
 
   & button {
     margin: util.rem(4);

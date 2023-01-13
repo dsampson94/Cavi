@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-items: center;
   position: absolute;
   z-index: 12;
   border: util.rem(0.5) solid map.get(color.$colorMap, shadow);
@@ -18,11 +17,17 @@
   box-shadow: util.rem(0) util.rem(0) util.rem(25) map.get(color.$colorMap, dark-mode-grey);
   margin-left: 15%;
   margin-right: 9%;
-  width: 80%;
-  height: util.rem(380);
-  bottom: 2%;
-  left: 0;
-  right: 0;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    bottom: -20%;
+    left: 0;
+    right: 0;
+  }
 
   &__header {
     display: flex;
@@ -38,5 +43,11 @@
     overflow-y: auto;
     overflow-x: auto;
     flex-direction: column;
+    user-select: none;
   }
+}
+
+.resizer {
+  position: absolute;
+  cursor: se-resize;
 }

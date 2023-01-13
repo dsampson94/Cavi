@@ -10,6 +10,7 @@ import { requestFullClientFieldList } from '../../../redux/actions/client.action
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
+import { requestFieldChartList } from '../../../redux/actions/field.action';
 
 const ClientFieldsViewContainer = () => {
 
@@ -29,6 +30,18 @@ const ClientFieldsViewContainer = () => {
     dispatch(requestFullClientFieldList(request.clientParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupName, clientName, reloadToggleActive]);
+
+  useEffect(() => {
+    function updateData() {
+      dispatch(requestFullClientFieldList(request.clientParams));
+      setTimeout(updateData, 10 * 60 * 1000);
+    }
+
+    updateData();
+    return () => {
+      clearTimeout(updateData);
+    };
+  }, []);
 
   const mappedFieldTableList = () => {
     return mapFieldTableList(fieldList, fieldRainData, subGroupList);

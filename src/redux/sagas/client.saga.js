@@ -1,23 +1,6 @@
 import axios from 'axios';
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
-import {
-  COMPLETE_PROGRESS,
-  HALF_PROGRESS,
-  INITIAL_PROGRESS,
-  SNACK_CRITICAL,
-  SNACK_SUCCESS,
-  SUCCESSFULLY_EMAILED_PDF,
-  SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
-  SUCCESSFULLY_RETRIEVED_FIELDS,
-  SUCCESSFULLY_RETRIEVED_OVERVIEW,
-  THREE_QUARTER_PROGRESS,
-  UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
-  UNSUCCESSFULLY_RETRIEVED_FIELDS,
-  UNSUCCESSFULLY_RETRIEVED_OVERVIEW,
-  UNSUCCESSFULLY_RETRIEVED_PDF
-} from '../../tools/general/system-variables.util';
-
 import { responseStatus } from '../endpoints/index';
 import {
   getClientFieldListPDFRequest,
@@ -25,6 +8,8 @@ import {
   getClientFieldRainDataRequest,
   getClientOverviewRequest
 } from '../endpoints/client.endpoint';
+
+import { getProgress } from '../../tools/general/helpers.util';
 
 import { addSystemNotice, setProgressBar } from '../actions/system.action';
 import {
@@ -40,9 +25,23 @@ import {
   SET_CLIENT_PDF
 } from '../actions/client.action';
 
+import {
+  COMPLETE_PROGRESS,
+  SNACK_CRITICAL,
+  SNACK_SUCCESS,
+  SUCCESSFULLY_EMAILED_PDF,
+  SUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
+  SUCCESSFULLY_RETRIEVED_FIELDS,
+  SUCCESSFULLY_RETRIEVED_OVERVIEW,
+  UNSUCCESSFULLY_RETRIEVED_FIELD_RAIN_DATA,
+  UNSUCCESSFULLY_RETRIEVED_FIELDS,
+  UNSUCCESSFULLY_RETRIEVED_OVERVIEW,
+  UNSUCCESSFULLY_RETRIEVED_PDF
+} from '../../tools/general/system-variables.util';
+
 export function* performRetrieveClientOverviewRequest({ client }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getClientOverviewRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -72,7 +71,7 @@ export function* watchForRetrieveClientOverviewRequest() {
 
 export function* performRetrieveFullClientFieldListRequest({ client }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getClientFieldListRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -125,7 +124,7 @@ export function* watchForRetrieveFullClientFieldListRequest() {
 
 export function* performRetrieveClientFieldListRequest({ client }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getClientFieldListRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -155,7 +154,7 @@ export function* watchForRetrieveClientFieldListRequest() {
 
 export function* performRetrieveRainDataForChartRequest({ client }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getClientFieldRainDataRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
@@ -184,7 +183,7 @@ export function* watchForRetrieveRainDataForChartRequest() {
 
 export function* performRetrieveClientPDFRequest({ client }) {
   try {
-    yield put(setProgressBar(INITIAL_PROGRESS));
+    yield put(setProgressBar(getProgress()));
 
     const [endpoint, requestOptions] = getClientFieldListPDFRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);

@@ -6,7 +6,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { mapFieldList } from '../field-charts/FieldChartsView.container.util';
 import { mapTemperaturesList } from './FieldTemperaturesChartView.container.util';
 
-import { requestClientFieldList } from '../../../redux/actions/client.action';
+import { requestClientFieldList, requestClientOverviewList } from '../../../redux/actions/client.action';
 import { requestExtendedFieldChartList, SET_SOIL_TEMP_LIST } from '../../../redux/actions/field.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
@@ -29,6 +29,19 @@ const FieldTemperaturesChartViewContainer = () => {
     dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
     dispatch(requestClientFieldList(request.clientParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    function updateData() {
+      dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
+      dispatch(requestClientFieldList(request.clientParams));
+      setTimeout(updateData, 10 * 60 * 1000);
+    }
+
+    updateData();
+    return () => {
+      clearTimeout(updateData);
+    };
   }, []);
 
   useEffect(() => {

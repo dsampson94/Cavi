@@ -60,14 +60,15 @@
       &__header {
         display: flex;
         font-weight: bold;
-        font-size: util.rem(13);
+        font-size: util.rem(15);
         border-bottom: util.rem(1) solid;
+        margin-top: util.rem(3);
       }
 
       &__subheader {
         display: flex;
         flex-direction: row;
-        height: util.rem(17);
+        height: util.rem(19);
         cursor: pointer;
         border-top-right-radius: map.get(radius.$border-radius, medium);
         border-bottom-right-radius: map.get(radius.$border-radius, medium);
@@ -80,7 +81,8 @@
         }
 
         &__text {
-          font-size: util.rem(12);
+          font-size: util.rem(14);
+          font-weight: 400;
           overflow-x: hidden;
           width: 89%;
         }
