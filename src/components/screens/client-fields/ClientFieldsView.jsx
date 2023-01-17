@@ -50,15 +50,15 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
-        <MidBar view={ CLIENT_FIELDS_MIDBAR }
-                filteredTableData={ filteredTableData }
-                hasSubGroups={ hasSubGroups }
-                showClientsSideBar={ showClientsSideBar }
-                setFilteredTableData={ setFilteredTableData }
-                setActiveTableData={ setActiveTableData }
-                toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
-                reloadToggleActive={ reloadToggleActive }
-                setReloadToggleActive={ setReloadToggleActive } />
+        {/*<MidBar view={ CLIENT_FIELDS_MIDBAR }*/}
+        {/*        filteredTableData={ filteredTableData }*/}
+        {/*        hasSubGroups={ hasSubGroups }*/}
+        {/*        showClientsSideBar={ showClientsSideBar }*/}
+        {/*        setFilteredTableData={ setFilteredTableData }*/}
+        {/*        setActiveTableData={ setActiveTableData }*/}
+        {/*        toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }*/}
+        {/*        reloadToggleActive={ reloadToggleActive }*/}
+        {/*        setReloadToggleActive={ setReloadToggleActive } />*/}
 
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />

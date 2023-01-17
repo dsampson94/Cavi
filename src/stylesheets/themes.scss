@@ -90,6 +90,13 @@ body.dark-mode {
     background-color: map.get(color.$colorMap, clouded-grey);
   }
 
+  .top-bar__left__breadcrumb__container {
+
+    p {
+      color: map.get(color.$colorMap, clouded-grey);
+    }
+  }
+
   .text-input__input--login {
     background-color: map.get(color.$colorMap, light-mode-white);
     color: map.get(color.$colorMap, black);

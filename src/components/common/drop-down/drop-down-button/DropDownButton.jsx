@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 
 import { bool } from 'prop-types';
 
@@ -21,7 +21,7 @@ import {
   VPD_OPTION
 } from '../../../../tools/general/system-variables.util';
 
-import { getClassNames } from '../../../../tools/general/helpers.util';
+import { daysFromToday, getClassNames } from '../../../../tools/general/helpers.util';
 
 import { requestLogout } from '../../../../redux/actions/auth.action';
 
@@ -49,6 +49,7 @@ const DropDownButton = ({
                           activeExtendedChart,
                           setActiveExtendedChart,
                           selectedOption,
+                          mappedFieldList,
                           setSelectedOption,
                           tall,
                           select
@@ -70,6 +71,7 @@ const DropDownButton = ({
                          setActiveExtendedChart={ setActiveExtendedChart }
                          setActiveDataPeriod={ setActiveDataPeriod }
                          onLogOutClick={ onLogOutClick }
+                         mappedFieldList={ mappedFieldList }
                          left={ left }
                          period={ period }
                          mid={ mid } /> }
@@ -122,6 +124,7 @@ const DropDownMenuFixed = ({
                              setActiveExtendedChart,
                              setActiveDataPeriod,
                              onLogOutClick,
+                             mappedFieldList,
                              left,
                              period,
                              mid
@@ -129,6 +132,8 @@ const DropDownMenuFixed = ({
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const { fieldName } = useParams();
 
   const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
   const [showText, setShowText] = useState(false);
@@ -144,19 +149,60 @@ const DropDownMenuFixed = ({
     history.push('/');
   };
 
+  const getTopBarValue = () => {
+    const recommendations = [];
+    mappedFieldList?.forEach(item => {
+      if (fieldName === item.fieldName.locationName) {
+        recommendations.push(item.fieldName.recommend1);
+        recommendations.push(item.fieldName.recommend2);
+        recommendations.push(item.fieldName.recommend3);
+        recommendations.push(item.fieldName.recommend4);
+        recommendations.push(item.fieldName.recommend5);
+        recommendations.push(item.fieldName.recommend6);
+        recommendations.push(item.fieldName.recommend7);
+        recommendations.push(item.fieldName.recommend8);
+      }
+    });
+    return recommendations;
+  };
+
   return (
     <div className="dropdown"
          onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
 
       { showPrimaryDropDown &&
-      <div className={ getClassNames('dropdown__popup',
+      <div className={ getClassNames('dropdown__popup--left',
         { left, mid, period, logout: !!onLogOutClick }) }>
         { menu === CHART_TOP_BAR_MENU &&
         <div>
-          <div>{ 'Probes on field:' }</div>
-          { Object.keys(menuData[0])?.map((key) => {
-            return <div style={ { color: 'blue' } }>{ key }</div>;
-          }) }
+
+          { location.pathname.includes('field-charts') &&
+          <div className={ 'field-chart__top-bar--right--datebar' }>
+            <Button label={ daysFromToday(0) }
+                    lowerLabel={ getTopBarValue()[0] } datebar />
+            <Button label={ daysFromToday(1) }
+                    lowerLabel={ getTopBarValue()[1] } datebar />
+            <Button label={ daysFromToday(2) }
+                    lowerLabel={ getTopBarValue()[2] } datebar />
+            <Button label={ daysFromToday(3) }
+                    lowerLabel={ getTopBarValue()[3] } datebar />
+            <Button label={ daysFromToday(4) }
+                    lowerLabel={ getTopBarValue()[4] } datebar />
+            <Button label={ daysFromToday(5) }
+                    lowerLabel={ getTopBarValue()[5] } datebar />
+            <Button label={ daysFromToday(6) }
+                    lowerLabel={ getTopBarValue()[6] } datebar />
+            <Button label={ daysFromToday(7) }
+                    lowerLabel={ getTopBarValue()[7] } datebar spaced />
+          </div> }
+
+          <div style={ { display: 'flex', textDecoration: 'underline', marginBottom: '2px' } }>
+            <div>{ 'Probes on field:' }</div>
+
+            { Object.keys(menuData[0])?.map((key) => {
+              return <div style={ { color: 'blue' } }>{ key }</div>;
+            }) }
+          </div>
           <div>{ menuData[1] }</div>
           <div>{ menuData[2] }</div>
           <div>{ menuData[3] }</div>

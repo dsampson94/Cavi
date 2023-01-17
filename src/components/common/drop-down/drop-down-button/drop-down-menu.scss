@@ -30,6 +30,24 @@
     background-color: map.get(color.$colorMap, light-mode-tooltip-white);
     white-space: nowrap;
 
+    &--left {
+      position: absolute;
+      user-select: none;
+      z-index: 10;
+      font-size: util.rem(12);
+      font-weight: normal;
+      margin-top: util.rem(30);
+      border-radius: map.get(radius.$border-radius, large);
+      padding: util.rem(10);
+      color: map.get(color.$colorMap, black);
+      box-shadow: util.rem(1) util.rem(1) util.rem(14) map.get(color.$colorMap, grey),
+      inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
+      background-color: map.get(color.$colorMap, light-mode-tooltip-white);
+      white-space: nowrap;
+      transform: translateX(-65%);
+      cursor: default;
+    }
+
     & div {
 
       > div {

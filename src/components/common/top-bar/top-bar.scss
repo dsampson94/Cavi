@@ -24,47 +24,67 @@
   &__left {
     display: flex;
     flex-direction: row;
-    margin-right: 10%;
-    width: 50%;
     height: 100%;
+    width: 50%;
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      margin-right: 2%;
+    &__divider {
+      display: flex;
+      border-right: util.rem(1) solid map.get(color.$colorMap, palette-blue-1);
+      height: 80%;
+      width: 28%;
+      align-self: center;
+
+      &__button {
+        align-self: center;
+      }
     }
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      margin-right: 10%;
-    }
+    &__breadcrumb {
+      align-self: center;
+      margin-left: util.rem(5);
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      margin-right: 16%;
-    }
+      &__container {
+        display: flex;
+      }
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-      margin-right: 18%;
-    }
+      p {
+        cursor: pointer;
+        font-weight: 400;
+        font-size: util.rem(18);
+        margin-left: util.rem(5);
+        color: map.get(color.$colorMap, palette-blue-1);
+        font-family: "Roboto Thin";
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-      margin-right: 20%;
+        &:active {
+          position: relative;
+          color: map.get(color.$colorMap, hover-blue);
+          top: 0.9px;
+        }
+
+        &:hover {
+          position: relative;
+          color: map.get(color.$colorMap, hover-blue);
+          top: 0.4px;
+        }
+      }
     }
 
     &__header {
       display: flex;
       margin: util.rem(2) 0 util.rem(2) util.rem(6);
-      width: util.rem(150);
     }
 
     &__buttons {
       display: flex;
       margin-top: util.rem(8);
+      margin-right: util.rem(10);
     }
   }
 
   &__right {
     display: flex;
-    align-items: flex-end;
     justify-content: flex-end;
-    width: 40%;
+    width: 50%;
     height: 100%;
 
     &--menu {
@@ -72,32 +92,13 @@
       position: relative;
       z-index: 11;
       cursor: pointer;
-      height: util.rem(39);
+      align-self: center;
+      margin-top: util.rem(5);
 
       &:active {
         position: relative;
         top: 0.9px;
       }
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      margin-left: 2%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      margin-left: 10%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      margin-left: 16%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-      margin-left: 18%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-      margin-left: 20%;
     }
   }
 }

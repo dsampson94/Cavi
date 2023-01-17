@@ -15,8 +15,8 @@
     display: flex;
     flex-direction: row;
     margin-left: util.rem(1);
-    margin-top: util.rem(2);
-    height: util.rem(15);
+    margin-top: util.rem(-6);
+    height: util.rem(0);
     white-space: nowrap;
     user-select: none;
 
@@ -24,7 +24,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding-right: util.rem(50);
+      padding-top: util.rem(32);
+      padding-left: util.rem(45);
       font-size: util.rem(12);
       width: 50%;
 

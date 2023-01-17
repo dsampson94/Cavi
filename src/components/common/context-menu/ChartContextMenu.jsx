@@ -5,13 +5,15 @@ import {
   CONTEXT_MENU,
   EXPORT_OPTION,
   IRRIGATION_OR_DELETE_OPTION,
+  MENU_0,
   MENU_1,
   MENU_2,
   MENU_2_INPUT,
   MENU_2_INPUT_BUTTON,
   MENU_3,
   MENU_4,
-  PERIOD_OPTION
+  PERIOD_OPTION,
+  RECOMMENDATIONS_OPTION
 } from '../../../tools/general/system-variables.util';
 
 import SubmitInput from '../input/submit/SubmitInput';
@@ -117,6 +119,8 @@ const ContextMenu = ({
     if (!eventId.includes('dropdown')) {
       setShowPrimaryDropDown(false);
       setShowSecondaryDropDown(false);
+    } else if (eventId === MENU_0) {
+      handleOptionClick(secondaryMenu, RECOMMENDATIONS_OPTION);
     } else if (eventId === MENU_1) {
       handleOptionClick(secondaryMenu, PERIOD_OPTION);
     } else if (eventId === MENU_2) {
@@ -144,28 +148,28 @@ const ContextMenu = ({
   return (
     <>
       { showPrimaryDropDown &&
-        <PrimaryMenu handleLeftClick={ handleLeftClick }
+      <PrimaryMenu handleLeftClick={ handleLeftClick }
+                   setHoverActive={ setHoverActive }
+                   shouldDisplayFurtherUp={ shouldDisplayFurtherUp }
+                   isLessThanHalfWidth={ isLessThanHalfWidth }
+                   shouldDisplayLeft={ shouldDisplayLeft }
+                   anchorPoint={ anchorPoint }
+                   switchAtMidWidth={ switchAtMidWidth } /> }
+
+      { showSecondaryDropDown &&
+      <SecondaryMenu handleLeftClick={ handleLeftClick }
                      setHoverActive={ setHoverActive }
+                     setActiveProbeFactor={ setActiveProbeFactor }
+                     setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                     setXAxisViewMode={ setXAxisViewMode }
+                     setActiveDataPeriod={ setActiveDataPeriod }
+                     activeDataPeriod={ activeDataPeriod }
+                     activeProbeFactor={ activeProbeFactor }
                      shouldDisplayFurtherUp={ shouldDisplayFurtherUp }
                      isLessThanHalfWidth={ isLessThanHalfWidth }
                      shouldDisplayLeft={ shouldDisplayLeft }
                      anchorPoint={ anchorPoint }
-                     switchAtMidWidth={ switchAtMidWidth } /> }
-
-      { showSecondaryDropDown &&
-        <SecondaryMenu handleLeftClick={ handleLeftClick }
-                       setHoverActive={ setHoverActive }
-                       setActiveProbeFactor={ setActiveProbeFactor }
-                       setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                       setXAxisViewMode={ setXAxisViewMode }
-                       setActiveDataPeriod={ setActiveDataPeriod }
-                       activeDataPeriod={ activeDataPeriod }
-                       activeProbeFactor={ activeProbeFactor }
-                       shouldDisplayFurtherUp={ shouldDisplayFurtherUp }
-                       isLessThanHalfWidth={ isLessThanHalfWidth }
-                       shouldDisplayLeft={ shouldDisplayLeft }
-                       anchorPoint={ anchorPoint }
-                       secondaryMenu={ secondaryMenu } /> }
+                     secondaryMenu={ secondaryMenu } /> }
     </>
   );
 };
@@ -189,6 +193,8 @@ const PrimaryMenu = ({
 
       { switchAtMidWidth && isLessThanHalfWidth && <div>
         <div id={ MENU_1 } onClick={ handleLeftClick }>{ 'Start here and show...' }</div>
+        <div id={ MENU_0 } onClick={ handleLeftClick }>{ 'Start at recommendations...' }</div>
+
         <hr />
         <div id={ MENU_2 } onClick={ handleLeftClick }>{ 'Calibrate Visually' }</div>
         <div id={ MENU_3 } onClick={ handleLeftClick }>{ 'Irrigations...' }</div>
@@ -256,17 +262,25 @@ const SecondaryMenu = ({
 
       { isLessThanHalfWidth && <div>
         { secondaryMenu === PERIOD_OPTION &&
-          <PeriodSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                               setXAxisViewMode={ setXAxisViewMode }
-                               setActiveDataPeriod={ setActiveDataPeriod }
-                               activeDataPeriod={ activeDataPeriod }
-                               handleLeftClick={ handleLeftClick } /> }
+        <PeriodSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                             setXAxisViewMode={ setXAxisViewMode }
+                             setActiveDataPeriod={ setActiveDataPeriod }
+                             activeDataPeriod={ activeDataPeriod }
+                             handleLeftClick={ handleLeftClick } /> }
+
+        { secondaryMenu === RECOMMENDATIONS_OPTION &&
+        <PeriodSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                             setXAxisViewMode={ setXAxisViewMode }
+                             setActiveDataPeriod={ setActiveDataPeriod }
+                             activeDataPeriod={ activeDataPeriod }
+                             handleLeftClick={ handleLeftClick }
+                             secondaryMenu={ RECOMMENDATIONS_OPTION } /> }
 
         { secondaryMenu === CALIBRATE_OPTION &&
-          <CalibrateSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                                  setXAxisViewMode={ setXAxisViewMode }
-                                  activeProbeFactor={ activeProbeFactor }
-                                  setActiveProbeFactor={ setActiveProbeFactor } /> }
+        <CalibrateSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                                setXAxisViewMode={ setXAxisViewMode }
+                                activeProbeFactor={ activeProbeFactor }
+                                setActiveProbeFactor={ setActiveProbeFactor } /> }
 
         { secondaryMenu === IRRIGATION_OR_DELETE_OPTION && <>
           <div>{ 'Capture new Irrigation' }</div>
@@ -281,17 +295,17 @@ const SecondaryMenu = ({
 
       { !isLessThanHalfWidth && <div>
         { secondaryMenu === PERIOD_OPTION &&
-          <PeriodSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                               setXAxisViewMode={ setXAxisViewMode }
-                               setActiveDataPeriod={ setActiveDataPeriod }
-                               activeDataPeriod={ activeDataPeriod }
-                               handleLeftClick={ handleLeftClick } /> }
+        <PeriodSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                             setXAxisViewMode={ setXAxisViewMode }
+                             setActiveDataPeriod={ setActiveDataPeriod }
+                             activeDataPeriod={ activeDataPeriod }
+                             handleLeftClick={ handleLeftClick } /> }
 
         { secondaryMenu === CALIBRATE_OPTION &&
-          <CalibrateSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                                  setXAxisViewMode={ setXAxisViewMode }
-                                  activeProbeFactor={ activeProbeFactor }
-                                  setActiveProbeFactor={ setActiveProbeFactor } /> }
+        <CalibrateSecondaryMenu setShowPrimaryDropDown={ setShowPrimaryDropDown }
+                                setXAxisViewMode={ setXAxisViewMode }
+                                activeProbeFactor={ activeProbeFactor }
+                                setActiveProbeFactor={ setActiveProbeFactor } /> }
 
         { secondaryMenu === IRRIGATION_OR_DELETE_OPTION && <>
           <div id={ 'dropdown-menu-1' } onClick={ handleLeftClick }>{ 'Delete all readings up to this point' }</div>
@@ -307,13 +321,18 @@ const PeriodSecondaryMenu = ({
                                setShowPrimaryDropDown,
                                setXAxisViewMode,
                                setActiveDataPeriod,
-                               activeDataPeriod
+                               activeDataPeriod,
+                               secondaryMenu
                              }) => {
 
   const handlePeriodClick = (period) => {
-    setShowPrimaryDropDown(false);
-    setXAxisViewMode(CONTEXT_MENU);
-    setActiveDataPeriod(period);
+    if (secondaryMenu === RECOMMENDATIONS_OPTION) {
+      setActiveDataPeriod(period);
+    } else {
+      setShowPrimaryDropDown(false);
+      setXAxisViewMode(CONTEXT_MENU);
+      setActiveDataPeriod(period);
+    }
   };
 
   return (
@@ -335,7 +354,7 @@ const PeriodSecondaryMenu = ({
                    placeholder={ '1' }
                    min={ '1' }
                    value={ activeDataPeriod }
-                   onChange={ ({ target }) => handlePeriodClick(target.value) } />
+                   onChange={({ target }) => handlePeriodClick(target.value) } />
     </>
   );
 };

@@ -88,3 +88,7 @@ export const getProgress = () => {
   let randomIndex = Math.floor(Math.random() * progress.length);
   return progress[randomIndex];
 };
+
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1);
+}

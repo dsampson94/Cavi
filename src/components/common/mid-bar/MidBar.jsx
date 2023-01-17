@@ -1,17 +1,15 @@
 import React from 'react';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
-import { daysFromToday, getClassNames } from '../../../tools/general/helpers.util';
+import { getClassNames } from '../../../tools/general/helpers.util';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 
 import {
   ACCURACY_ANALYSIS,
   BULLSEYE,
-  CHART_ACTIVE_PERIOD,
   CHART_TOP_BAR_MENU,
   CLIENT_FIELDS_MIDBAR,
   DASHBOARD,
-  DOUBLE_DROPDOWN,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
   FIELD_REPORTS,
@@ -33,7 +31,6 @@ import {
 
 import Button from '../button/Button';
 import DropDownButton from '../drop-down/drop-down-button/DropDownButton';
-import NumberInput from '../input/number/NumberInput';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 import './mid-bar.scss';
@@ -67,7 +64,8 @@ const MidBar = ({
                   yAxisShared,
                   setYAxisShared,
                   reloadToggleActive,
-                  setReloadToggleActive
+                  setReloadToggleActive,
+                  mappedChartList
                 }) => {
 
   switch (view) {
@@ -99,7 +97,8 @@ const MidBar = ({
                                 mappedMenuList={ mappedMenuList }
                                 setActiveFieldName={ setActiveFieldName }
                                 yAxisShared={ yAxisShared }
-                                setYAxisShared={ setYAxisShared } />;
+                                setYAxisShared={ setYAxisShared }
+                                mappedChartList={ mappedChartList } />;
 
     case FIELD_TEMPERATURES_MIDBAR:
       return <FieldTemperaturesChartsMidBar activeDataPeriod={ activeDataPeriod }
@@ -110,7 +109,8 @@ const MidBar = ({
                                             mappedMenuList={ mappedMenuList }
                                             setActiveFieldName={ setActiveFieldName }
                                             yAxisShared={ yAxisShared }
-                                            setYAxisShared={ setYAxisShared } />;
+                                            setYAxisShared={ setYAxisShared }
+                                            mappedChartList={ mappedChartList } />;
 
     case FIELD_SETUP_MIDBAR:
       return <FieldSetupMidBar showSetupSideBar={ showSetupSideBar }
@@ -227,7 +227,6 @@ const ClientFieldsTableMidBar = ({
         </> }
         { !hasSubGroups &&
         <div className="client-fields__top-bar-left-no-button" /> }
-        <p>{ `Recommendations: ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</p>
       </div>
       <div className="client-fields__top-bar-right">
         <Button icon={ BULLSEYE }
@@ -264,78 +263,23 @@ ClientFieldsTableMidBar.propTypes = {
 };
 
 const FieldChartsMidBar = ({
-                             activeDataPeriod,
-                             setActiveDataPeriod,
-                             showChartsSideBar,
-                             setShowChartsSideBar,
                              mappedFieldList,
                              mappedMenuList,
-                             setActiveFieldName,
                              yAxisShared,
-                             setYAxisShared
+                             setYAxisShared,
+                             mappedChartList
                            }) => {
-
-  const history = useHistory();
-  const location = useLocation();
-
-  const { groupName, clientName, probeNumber, fieldName } = useParams();
-
-  const viewClient = (direction) => {
-    mappedFieldList.forEach((item, index) => {
-      if (item.fieldName.locationName === fieldName) {
-        const field = mappedFieldList[index + direction].fieldName;
-        setActiveFieldName(field.locationName);
-        handleFieldClick(history, groupName, clientName, field);
-      }
-    });
-  };
-
-  const handleFieldClick = (history, groupName, clientName, field) => {
-    history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }`);
-  };
-
-  const onHandleChangeNumeric = (event) => {
-    if (Number(event.target.value)) setActiveDataPeriod(event.target.value);
-  };
-
-  const getTopBarValue = () => {
-    const recommendations = [];
-    mappedFieldList?.forEach(item => {
-      if (fieldName === item.fieldName.locationName) {
-        recommendations.push(item.fieldName.recommend1);
-        recommendations.push(item.fieldName.recommend2);
-        recommendations.push(item.fieldName.recommend3);
-        recommendations.push(item.fieldName.recommend4);
-        recommendations.push(item.fieldName.recommend5);
-        recommendations.push(item.fieldName.recommend6);
-        recommendations.push(item.fieldName.recommend7);
-        recommendations.push(item.fieldName.recommend8);
-      }
-    });
-    return recommendations;
-  };
 
   return (
     <div className={ 'field-chart__top-bar' }>
-      <div className="field-chart__top-bar--left">
-
-        <FieldButtons className={ 'field-chart__top-bar--left-inner' }
-                      setShowSideBar={ setShowChartsSideBar }
-                      showSideBar={ showChartsSideBar }
-                      viewClient={ viewClient } />
-
-        <div className={ 'field-chart__top-bar--left-outer' }>
-          <Button label={ 'Temperatures' }
-                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`) }
-                  chartbar
-                  spaced />
-        </div>
+      { mappedChartList && <div className="field-chart__top-bar--left">
 
         <DropDownButton name={ SETTINGS_GEAR }
                         className={ 'field-chart__top-bar--left__settings' }
                         fill={ '#6E8192' }
                         menu={ CHART_TOP_BAR_MENU }
                         menuData={ mappedMenuList }
+                        mappedFieldList={ mappedFieldList }
                         tiny />
 
         <div className="field-chart__top-bar--left__settings"
@@ -343,55 +287,7 @@ const FieldChartsMidBar = ({
           <SVGIcon name={ TOGGLE_YAXIS } tiny fill={ yAxisShared ? '#00B8B0' : '#0081ff' } />
         </div>
 
-        <p>{ 'Deficit per layer (mm)' }</p>
-      </div>
-
-      <div className="field-chart__top-bar--center">
-        <div>{ fieldName }</div>
-      </div>
-
-      <div className="field-chart__top-bar--right">
-
-        <div className="field-chart__top-bar--right-tool-container">
-
-          <DropDownButton name={ DOUBLE_DROPDOWN }
-                          menu={ CHART_ACTIVE_PERIOD }
-                          className={ 'field-chart__top-bar--right-icon-container' }
-                          setActiveDataPeriod={ setActiveDataPeriod }
-                          fill={ 'white' }
-                          period />
-
-          <NumberInput placeholder={ activeDataPeriod }
-                       onChange={ onHandleChangeNumeric }
-                       value={ activeDataPeriod }
-                       min={ 1 }
-                       chartbar />
-        </div>
-
-        <div className="field-chart__top-bar--right-days-container">
-          <p style={ { fontSize: '10px', marginTop: '5px' } }>{ 'Days:' }</p>
-        </div>
-
-        { location.pathname.includes('field-charts') &&
-        <div className={ 'field-chart__top-bar--right--datebar' }>
-          <Button label={ daysFromToday(0) }
-                  lowerLabel={ getTopBarValue()[0] } datebar />
-          <Button label={ daysFromToday(1) }
-                  lowerLabel={ getTopBarValue()[1] } datebar />
-          <Button label={ daysFromToday(2) }
-                  lowerLabel={ getTopBarValue()[2] } datebar />
-          <Button label={ daysFromToday(3) }
-                  lowerLabel={ getTopBarValue()[3] } datebar />
-          <Button label={ daysFromToday(4) }
-                  lowerLabel={ getTopBarValue()[4] } datebar />
-          <Button label={ daysFromToday(5) }
-                  lowerLabel={ getTopBarValue()[5] } datebar />
-          <Button label={ daysFromToday(6) }
-                  lowerLabel={ getTopBarValue()[6] } datebar />
-          <Button label={ daysFromToday(7) }
-                  lowerLabel={ getTopBarValue()[7] } datebar spaced />
-        </div> }
-      </div>
+      </div> }
     </div>
   );
 };
@@ -399,78 +295,16 @@ const FieldChartsMidBar = ({
 FieldChartsMidBar.propTypes = {};
 
 const FieldTemperaturesChartsMidBar = ({
-                                         activeDataPeriod,
-                                         setActiveDataPeriod,
-                                         showChartsSideBar,
-                                         setShowChartsSideBar,
                                          mappedFieldList,
-                                         setActiveFieldName
+                                         mappedMenuList,
+                                         yAxisShared,
+                                         setYAxisShared,
+                                         mappedChartList
                                        }) => {
-
-  const history = useHistory();
-  const { groupName, clientName, probeNumber, fieldName } = useParams();
-
-  const viewClient = (direction) => {
-    mappedFieldList.forEach((item, index) => {
-      if (item.fieldName.locationName === fieldName) {
-        const field = mappedFieldList[index + direction].fieldName;
-        setActiveFieldName(field.locationName);
-        handleFieldClick(history, groupName, clientName, field);
-      }
-    });
-  };
-
-  const handleFieldClick = (history, groupName, clientName, field) => {
-    history.push(`/client/${ groupName }/${ clientName }/field/${ field?.locationName }/${ field?.probeNumber }/temperatures`);
-  };
-
-  const onHandleChangeNumeric = (event) => {
-    if (Number(event.target.value)) setActiveDataPeriod(event.target.value);
-  };
 
   return (
     <div className={ 'field-temperatures__top-bar' }>
-      <div className="field-temperatures__top-bar--left">
 
-        <FieldButtons className={ 'field-temperatures__top-bar--left-inner' }
-                      setShowSideBar={ setShowChartsSideBar }
-                      showSideBar={ showChartsSideBar }
-                      viewClient={ viewClient } />
-
-        <div className={ 'field-chart__top-bar--left-outer' }>
-          <Button label={ 'Deficits' }
-                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
-                  chartbar
-                  spaced />
-        </div>
-
-      </div>
-
-      <div className="field-temperatures__top-bar--center">
-        <div>{ fieldName }</div>
-      </div>
-
-      <div className="field-temperatures__top-bar--right">
-        <div className="field-temperatures__top-bar--right-tool-container">
-
-          <DropDownButton name={ DOUBLE_DROPDOWN }
-                          className={ 'field-temperatures__top-bar--right-icon-container' }
-                          setActiveDataPeriod={ setActiveDataPeriod }
-                          menu={ CHART_ACTIVE_PERIOD }
-                          fill={ 'white' }
-                          period />
-
-          <NumberInput placeholder={ activeDataPeriod }
-                       onChange={ onHandleChangeNumeric }
-                       value={ activeDataPeriod }
-                       min={ 1 }
-                       chartbar />
-        </div>
-
-        <div className="field-temperatures__top-bar--right-days-container">
-          <p style={ { fontSize: '10px', marginTop: '5px' } }>{ 'Days:' }</p>
-        </div>
-      </div>
     </div>
   );
 };
@@ -509,13 +343,6 @@ const FieldSetupMidBar = ({
                       setShowSideBar={ setShowSetupSideBar }
                       viewClient={ viewClient } />
 
-        <div className={ 'field-chart__top-bar--left-outer' }>
-          <Button label={ 'Deficits' }
-                  onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`) }
-                  chartbar
-                  spaced />
-        </div>
-
       </div>
 
       <div className="field-temperatures__top-bar--center">
@@ -530,7 +357,6 @@ FieldSetupMidBar.propTypes = {};
 
 const FieldReportsMidBar = ({ showClientsSideBar }) => {
 
-  const history = useHistory();
   const { groupName, clientName } = useParams();
 
   return (

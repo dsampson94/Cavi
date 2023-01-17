@@ -33,7 +33,8 @@ const Button = ({
                   add,
                   tab,
                   active,
-                  selected
+                  selected,
+                  tall
                 }) => {
   return (
     <button className={ getClassNames('button',
@@ -52,7 +53,8 @@ const Button = ({
                             left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }
                          chart={ chart }
-                         fill={ (iconFill) ? iconFill : '#53A5DF' } /> }
+                         fill={ (iconFill) ? iconFill : '#53A5DF' }
+                         tall={ tall } /> }
     </button>
   );
 };

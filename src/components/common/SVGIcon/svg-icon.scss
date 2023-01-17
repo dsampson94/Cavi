@@ -28,25 +28,26 @@
   &--profile {
 
     svg {
-      height: 80px !important;
+      height: 100px !important;
       width: 80px !important;
     }
-  }
-
-  & svg {
-    cursor: pointer;
-    min-height: util.rem(24);
-    max-height: util.rem(24);
-    margin-top: util.rem(2);
   }
 
   &--battery {
     height: util.rem(22);
     transform: translateY(-19%);
   }
+}
 
-  &--left {
-    justify-content: flex-start;
-    margin-left: util.rem(6);
+.svg {
+  cursor: pointer;
+  min-height: util.rem(24);
+  max-height: util.rem(24);
+  margin-top: util.rem(2);
+
+  &--tall {
+    cursor: pointer;
+    min-height: util.rem(36);
+    margin-top: util.rem(-4);
   }
 }

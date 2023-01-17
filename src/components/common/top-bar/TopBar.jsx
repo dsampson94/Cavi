@@ -26,6 +26,7 @@ import {
   WEATHER_STATION,
   WEATHER_STATION_ICON
 } from '../../../tools/general/system-variables.util';
+import { capitalize } from '../../../tools/general/helpers.util';
 import { saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestClientPDF } from '../../../redux/actions/client.action';
@@ -41,13 +42,13 @@ import ProgressBar from '../loader/progress-bar/ProgressBar';
 
 import './top-bar.scss';
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, view }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, setActiveFieldName }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { fieldName, groupName, clientName } = useParams();
+  const { fieldName, groupName, clientName, probeNumber } = useParams();
 
   const [emailAddress, setEmailAddress] = useState(undefined);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -84,17 +85,95 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
     history.push('/');
   };
 
+  const handleFieldClick = (history, groupName, clientName, field) => {
+    if (location.pathname.includes('charts'))
+      history.push(`/client/${ groupName }/${ clientName }/field-charts/${ field?.probeNumber }/${ field?.locationName }`);
+    if (location.pathname.includes('temperature'))
+      history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ field?.probeNumber }/${ field?.locationName }`);
+  };
+
+  const viewClient = (direction) => {
+    mappedFieldList.forEach((item, index) => {
+      if (item.fieldName.locationName === fieldName) {
+        const field = mappedFieldList[index + direction].fieldName;
+        setActiveFieldName(field.locationName);
+        handleFieldClick(history, groupName, clientName, field);
+      }
+    });
+  };
+
   return (
     <>
       <div className="top-bar">
         <div className="top-bar__left">
-          <div className="top-bar__left__header">
+
+          <div className="top-bar__left__divider">
+
             <Graphic onClick={ () => history.push('/dashboard/overview') } topbar graphic={ logo } />
-          </div>
-          <div className="top-bar__left__buttons">
+
             <Button icon={ VIEW_SIDEBAR }
                     tooltip={ OTHER_FARM }
-                    onClick={ () => setShowSideBar(!showSideBar) } />
+                    onClick={ () => setShowSideBar(!showSideBar) }
+            />
+          </div>
+
+          <div className="top-bar__left__breadcrumb">
+
+            { fieldName &&
+            <div className="top-bar__left__breadcrumb__container">
+
+              <p onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }>
+                { `${ capitalize(groupName) }  /  ${ capitalize(clientName) }` }
+              </p>
+
+              <p onClick={ () => viewClient(1) }>{ `/  ${ fieldName }` }</p>
+
+              { location.pathname.includes('charts') &&
+              <p
+                onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`) }>
+                { '  / Deficit Charts ' }
+              </p> }
+
+              { location.pathname.includes('temperature') &&
+              <p onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-charts/${ probeNumber }/${ fieldName }`) }>
+                { '  / Temperature Charts ' }
+              </p> }
+
+            </div> }
+
+            { location.pathname.includes('client') &
+            !location.pathname.includes('setup') & !fieldName ?
+              <div className="top-bar__left__breadcrumb__container">
+                <p>{ `${ capitalize(groupName) } / ${ capitalize(clientName) }` }</p>
+                <p onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/general`) }>
+                  { ' /  Field List' }
+                </p>
+              </div> : <></> }
+
+            { location.pathname.includes('setup') &&
+            <div className="top-bar__left__breadcrumb__container">
+              <p onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }>
+                { `${ capitalize(groupName) }  /  ${ capitalize(clientName) }` }
+              </p>
+              <p onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) }>
+                { ' / Field Setup' }
+              </p>
+              <p>{ `  /  ${ capitalize(location.pathname.split('/')[5]) }` }</p>
+            </div> }
+
+            { location.pathname.includes('dashboard') &&
+            <div className="top-bar__left__breadcrumb__container">
+              <p>{ `${ location.pathname.split('/')[1] }` }</p>
+              <p>{ ` / ${ location.pathname.split('/')[2] }` }</p>
+            </div> }
+
+          </div>
+
+        </div>
+
+        <div className={ 'top-bar__right' }>
+
+          <div className="top-bar__left__buttons">
 
             { (location?.pathname?.includes('chart') ||
               location?.pathname?.includes('setup') ||
@@ -130,9 +209,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             </> }
 
           </div>
-        </div>
 
-        <div className={ 'top-bar__right' }>
 
           <TextInput placeholder={ 'Find Last Readings' }
                      topbar />
@@ -143,6 +220,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                           onLogOutClick={ () => logout() }
                           menu={ TOPBAR_OPTIONS }
                           profile
+                          tall
                           left />
         </div>
 

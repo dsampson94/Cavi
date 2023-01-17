@@ -10,7 +10,6 @@ import { requestFullClientFieldList } from '../../../redux/actions/client.action
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
-import { requestFieldChartList } from '../../../redux/actions/field.action';
 
 const ClientFieldsViewContainer = () => {
 

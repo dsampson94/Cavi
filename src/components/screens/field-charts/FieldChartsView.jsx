@@ -68,7 +68,8 @@ const ClientFieldsView = ({
                 mappedMenuList={ mappedMenuList }
                 setActiveFieldName={ setActiveFieldName }
                 yAxisShared={ yAxisShared }
-                setYAxisShared={ setYAxisShared } />
+                setYAxisShared={ setYAxisShared }
+                mappedChartList={ mappedChartList } />
 
         <div className="field-chart__container">
           <DeficitChartsContainer mappedChartList={ mappedChartList }

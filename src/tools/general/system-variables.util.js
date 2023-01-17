@@ -247,11 +247,13 @@ export const NONE = 'none';
 //CONTEXT MENU
 export const CONTEXT_MENU = 'contextMenu';
 
+export const RECOMMENDATIONS_OPTION = 0;
 export const PERIOD_OPTION = 1;
 export const CALIBRATE_OPTION = 2;
 export const IRRIGATION_OR_DELETE_OPTION = 3;
 export const EXPORT_OPTION = 4;
 
+export const MENU_0 = 'dropdown-menu-0';
 export const MENU_1 = 'dropdown-menu-1';
 export const MENU_2 = 'dropdown-menu-2';
 export const MENU_3 = 'dropdown-menu-3';

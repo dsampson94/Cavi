@@ -126,6 +126,7 @@ const ClientFieldContentContainer = ({
     <div className="content-container">
       <TopBar showSideBar={ showSideBar }
               setShowSideBar={ setShowSideBar }
+              setActiveFieldName={setActiveFieldName}
               clientRequestParams={ clientRequestParams }
               mappedFieldList={ mappedFieldList }
               view={ view } />

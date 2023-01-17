@@ -79,14 +79,16 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
              chart,
              profile,
              battery: name === LOW_BATTERY,
-             left
+             left,
+             tall
            }) }>
       <svg xmlns="http://www.w3.org/2000/svg"
            xmlnsXlink="http://www.w3.org/1999/xlink"
            height={ height }
            width={ width }
            fill={ getIconFill(localActiveTheme, fill, name) }
-           viewBox={ getViewBox(name, tiny, chart, tall) }>
+           viewBox={ getViewBox(name, tiny, chart, tall) }
+           className={ getClassNames('svg', { tall }) }>
         { getPath(name) }
       </svg>
       { tooltip && <ToolTip text={ tooltip } grid={ grid } /> }
@@ -168,7 +170,7 @@ const getViewBox = (name, tiny, chart, tall) => {
     case LOG_OUT_ICON:
       return '-3 -3 40 50';
     case PROFILE_ICON:
-      return '-6 0 36 23';
+      return '0 2 16 20';
     case RENAME_FIELD:
       return '3 -1 40 29';
     case REPLACE_PROBE_WITH_NEW:
@@ -188,7 +190,7 @@ const getViewBox = (name, tiny, chart, tall) => {
     case EXCEL_ICON:
       return '-2 6 40 55';
     case VIEW_SIDEBAR:
-      return '-6 0 40 36';
+      return '-2 -2 50 36';
     case TABLE_LIST:
       return '-4 2 26 14';
     case PROBES_MONITOR:
