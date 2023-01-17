@@ -52,7 +52,8 @@ const DropDownButton = ({
                           mappedFieldList,
                           setSelectedOption,
                           tall,
-                          select
+                          select,
+                          settings
                         }) => {
   return (
     <div className={ className }
@@ -74,7 +75,8 @@ const DropDownButton = ({
                          mappedFieldList={ mappedFieldList }
                          left={ left }
                          period={ period }
-                         mid={ mid } /> }
+                         mid={ mid }
+                         settings={ settings } /> }
 
       { select &&
       <DropDownMenuGeneric menuData={ menuData }
@@ -127,7 +129,8 @@ const DropDownMenuFixed = ({
                              mappedFieldList,
                              left,
                              period,
-                             mid
+                             mid,
+                             settings
                            }) => {
 
   const history = useHistory();
@@ -171,8 +174,8 @@ const DropDownMenuFixed = ({
          onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
 
       { showPrimaryDropDown &&
-      <div className={ getClassNames('dropdown__popup--left',
-        { left, mid, period, logout: !!onLogOutClick }) }>
+      <div className={ getClassNames('dropdown__popup',
+        { left, mid, period, settings, logout: !!onLogOutClick }) }>
         { menu === CHART_TOP_BAR_MENU &&
         <div>
 

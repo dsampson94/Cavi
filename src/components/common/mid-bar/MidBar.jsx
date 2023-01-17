@@ -280,6 +280,7 @@ const FieldChartsMidBar = ({
                         menu={ CHART_TOP_BAR_MENU }
                         menuData={ mappedMenuList }
                         mappedFieldList={ mappedFieldList }
+                        settings
                         tiny />
 
         <div className="field-chart__top-bar--left__settings"
