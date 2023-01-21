@@ -79,7 +79,9 @@ export const getRequestParams = ({
                                    activeLoadPeriod,
                                    activeProbeFactor,
                                    overviewOptionSelected,
-                                   activeObject
+                                   activeObject,
+                                   selectedProbeNumber,
+                                   updatedHaValue
                                  }) => {
 
   const user = retrieveUserLoginFromLocalStorage();
@@ -255,6 +257,13 @@ export const getRequestParams = ({
       ...clientParams,
       field: activeFieldName ? activeFieldName : null,
       g: ML_FORECASTS_STRING
+    },
+    setFieldSetupHa: {
+      ...clientParams,
+      fieldname: activeFieldName ? activeFieldName : null,
+      probeno: selectedProbeNumber,
+      setfield: 'ha',
+      setvalue: updatedHaValue
     }
   };
 };

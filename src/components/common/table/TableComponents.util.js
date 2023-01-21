@@ -8,6 +8,7 @@ import {
   CLOUDED,
   DROPDOWN,
   FIELD_CHARTS,
+  HA,
   HARVEST,
   HARVEST_ICON,
   LOW_BATTERY,
@@ -30,6 +31,7 @@ import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.
 import SVGIcon from '../SVGIcon/SVGIcon';
 import ToolTip from '../tool-tip/ToolTip';
 import InputSearch from '../input-search/InputSearch';
+import TextInput from '../input/text/TextInput';
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="client-fields__search">
@@ -78,10 +80,16 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
     return <td onClick={ noOp() }
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }>
+
         <div className={ 'table__body__row__td-upper' }
              style={ { color: getColor(value?.color) } }>
-          { value?.locationName }</div>
-        <div className={ 'table__body__row__td-lower' }>{ value?.type }</div>
+          { value?.locationName }
+        </div>
+
+        <div className={ 'table__body__row__td-lower' }>
+          { value?.type }
+        </div>
+
       </div>
       <DropDown value={ value }
                 columnNumber={ 0 } />
@@ -554,6 +562,8 @@ DropDown.propTypes = {
 };
 
 export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
+
+
   return <td onClick={ noOp() }
              key={ generateId() }>
     <div className={ 'table__body__row__td-container--field-setup' }>
@@ -566,6 +576,26 @@ export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
 };
 
 FieldSetupNameColumn.propTypes = {
+  value: string
+};
+
+export const FieldSetupInputColumn = ({ value, setUpdatedHaValue, updateFieldDetails }) => {
+
+  return <td onClick={ noOp() }
+             key={ generateId() }>
+    <div className={ 'table__body__row__td-container--field-setup' }>
+      <TextInput value={ value }
+                 onChange={ ({ target }) => setUpdatedHaValue(target.value) }
+                 onKeyPress={ event => {
+                   if (event.key === 'Enter') updateFieldDetails(HA);
+                 } }
+                 table
+                 autoFocus />
+    </div>
+  </td>;
+};
+
+FieldSetupInputColumn.propTypes = {
   value: string
 };
 

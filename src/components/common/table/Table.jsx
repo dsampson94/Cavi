@@ -35,6 +35,7 @@ import {
   DropdownIconColumn,
   FieldNameColumn,
   FieldSetupChartButton,
+  FieldSetupInputColumn,
   FieldSetupNameColumn,
   ForecastTimeIconsColumn,
   LandGroupForecastColumn,
@@ -55,7 +56,16 @@ import RecommendationModal from '../modal/RecommendationModal';
 
 import './table.scss';
 
-const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
+const Table = ({
+                 tableName,
+                 activeTableData,
+                 hiddenColumns,
+                 setSelectedIndex,
+                 setSelectedDropdownObject,
+                 updatedHaValue,
+                 setUpdatedHaValue,
+                 updateFieldDetails
+               }) => {
 
   switch (tableName) {
     case CLIENT_RECOMMENDATION_VIEW:
@@ -71,7 +81,10 @@ const Table = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, se
                               activeTableData={ activeTableData }
                               hiddenColumns={ hiddenColumns }
                               setSelectedIndex={ setSelectedIndex }
-                              setSelectedDropdownObject={ setSelectedDropdownObject } />;
+                              setSelectedDropdownObject={ setSelectedDropdownObject }
+                              updatedHaValue={ updatedHaValue }
+                              setUpdatedHaValue={ setUpdatedHaValue }
+                              updateFieldDetails={ updateFieldDetails } />;
   }
 };
 
@@ -334,12 +347,18 @@ ClientFieldsTable.propTypes = {
   hiddenColumns: arrayOf(string).isRequired
 };
 
-const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
+const FieldSetupTable = ({
+                           tableName,
+                           activeTableData,
+                           hiddenColumns,
+                           setSelectedIndex,
+                           updatedHaValue,
+                           setUpdatedHaValue,
+                           updateFieldDetails
+                         }) => {
 
   const history = useHistory();
   const { groupName, clientName, activeScreen } = useParams();
-
-  const [selectedRow, setSelectedRow] = useState(undefined);
 
   const buildTableHeader = () => {
     if (!activeTableData) return;
@@ -392,129 +411,132 @@ const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelecte
                                        icon={ activeScreen === PROBES_DETAILED_ROUTE ? NONE : VIEW_CHARTS } />
               </div>;
             case 1:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ ROOTS_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ CHARTS }
-                                fill={ '#607CB1' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ ROOTS_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ CHARTS }
+                              fill={ '#607CB1' } />;
             case 2:
               return <FieldSetupNameColumn dataIndex={ dataIndex }
                                            name={ value?.name }
                                            probe={ value?.probe }
                                            value={ value } />;
             case 3:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_SUMMARY_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ value === 'Active' ? TOGGLE_ON : TOGGLE_OFF }
-                                fill={ value === 'Active' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_SUMMARY_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ value === 'Active' ? TOGGLE_ON : TOGGLE_OFF }
+                              fill={ value === 'Active' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 4:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_SUMMARY_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ FIX_READINGS }
-                                fill={ '#607CB1' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_SUMMARY_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ FIX_READINGS }
+                              fill={ '#607CB1' } />;
             case 5:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_SUMMARY_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ REPLACE_PROBE_WITH_NEW } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_SUMMARY_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ REPLACE_PROBE_WITH_NEW }
+                              updatedHaValue={ updatedHaValue }
+                              setUpdatedHaValue={ setUpdatedHaValue }
+                              updateFieldDetails={ updateFieldDetails } />;
             case 6:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_SUMMARY_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ ADD_PROBE }
-                                fill={ '#63e016' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_SUMMARY_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ ADD_PROBE }
+                              fill={ '#63e016' } />;
             case 7:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_SUMMARY_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ REMOVE_PROBE }
-                                fill={ 'red' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_SUMMARY_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ REMOVE_PROBE }
+                              fill={ 'red' } />;
             case 8:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ SENSORS_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
-                                fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ SENSORS_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
+                              fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 10:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ PROBES_DETAILED_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
-                                fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ PROBES_DETAILED_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
+                              fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 11:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ GENERAL_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ RENAME_FIELD }
-                                fill={ '#0090ff' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ GENERAL_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ RENAME_FIELD }
+                              fill={ '#0090ff' } />;
             case 12:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ GENERAL_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ COPY_FIELD }
-                                fill={ 'grey' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ GENERAL_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ COPY_FIELD }
+                              fill={ 'grey' } />;
             case 13:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ GENERAL_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ ARCHIVE_FIELD }
-                                fill={ '#f37b2c' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ GENERAL_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ ARCHIVE_FIELD }
+                              fill={ '#f37b2c' } />;
             case 14:
-              return <RowButton history={ history }
-                                groupName={ groupName }
-                                clientName={ clientName }
-                                dataIndex={ dataIndex }
-                                value={ value }
-                                particularScreen={ GENERAL_ROUTE }
-                                activeScreen={ activeScreen }
-                                icon={ DELETE_FIELD }
-                                fill={ 'red' } />;
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ GENERAL_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ DELETE_FIELD }
+                              fill={ 'red' } />;
             default:
               return <FieldSetupNameColumn dataIndex={ dataIndex }
                                            name={ value?.name }
@@ -527,7 +549,7 @@ const FieldSetupTable = ({ tableName, activeTableData, hiddenColumns, setSelecte
       return (
         <>
           <tr className={ 'table__body__row' }
-              onClick={ () => setSelectedRow(object) }
+              onClick={ () => setSelectedIndex(object) }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
             { tableDataElements }
@@ -560,7 +582,21 @@ FieldSetupTable.propTypes = {
   hiddenColumns: arrayOf(string).isRequired
 };
 
-const RowButton = ({ activeScreen, particularScreen, history, groupName, clientName, dataIndex, value, icon, fill }) => {
+const RowData = ({
+                   activeScreen,
+                   particularScreen,
+                   history,
+                   groupName,
+                   clientName,
+                   dataIndex,
+                   value,
+                   icon,
+                   fill,
+                   updatedHaValue,
+                   setUpdatedHaValue,
+                   updateFieldDetails
+                 }) => {
+
   if (activeScreen === particularScreen)
     return <FieldSetupChartButton history={ history }
                                   groupName={ groupName }
@@ -570,8 +606,13 @@ const RowButton = ({ activeScreen, particularScreen, history, groupName, clientN
                                   activeScreen={ activeScreen }
                                   icon={ icon }
                                   fill={ fill } />;
+  else if (dataIndex === 5 && activeScreen === GENERAL_ROUTE)
+    return <FieldSetupInputColumn value={ updatedHaValue ? updatedHaValue : value }
+                                  setUpdatedHaValue={ setUpdatedHaValue }
+                                  updateFieldDetails={ updateFieldDetails } />;
   else
     return <FieldSetupNameColumn dataIndex={ dataIndex }
+                                 activeScreen={ activeScreen }
                                  name={ value?.name }
                                  probe={ value?.probe }
                                  value={ value } />;

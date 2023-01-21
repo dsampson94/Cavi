@@ -108,9 +108,9 @@
 
       & p {
         font-weight: bold;
-        font-size: util.rem(10) !important;
-        margin-top: util.rem(5);
-        padding-bottom: 5%;
+        font-size: util.rem(11) !important;
+        margin-top: util.rem(1);
+        padding-bottom: 10%;
       }
     }
 
@@ -148,6 +148,10 @@
     margin: -4.5% 0 0 6.5%;
     color: red;
     opacity: 0.3;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      margin: -18% 0 0 24%;
+    }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       font-size: util.rem(7);
@@ -198,7 +202,7 @@
     &--dailyETO {
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -17vh;
+        margin-top: -9vh;
         margin-left: 1%;
       }
 
@@ -218,7 +222,7 @@
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -13vh;
+        margin-top: -14vh;
         margin-left: 5%;
       }
 
@@ -231,15 +235,15 @@
     &--temperatures {
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -29vh;
+        margin-top: -22vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -25vh;
+        margin-top: -16vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -24vh;
+        margin-top: -20vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
@@ -247,11 +251,11 @@
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -23vh;
+        margin-top: -25vh;
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -24vh;
+        margin-top: -26vh;
       }
     }
   }

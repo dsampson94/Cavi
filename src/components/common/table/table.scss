@@ -67,6 +67,8 @@
         display: table-cell;
         background-clip: padding-box;
         text-align: center;
+        max-width: util.rem(90);
+        user-focus: none;
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
           max-height: util.rem(22);
@@ -137,7 +139,7 @@
           }
 
           &--field-setup {
-            font-size: util.rem(11);
+            font-size: util.rem(12);
             margin-left: util.rem(8);
             text-align: left;
             height: 100%;
@@ -154,6 +156,7 @@
             font-weight: bold;
             padding: 0 util.rem(2) 0 util.rem(2);
             font-size: util.rem(10);
+            user-focus: none;
           }
 
           &-forecast {
@@ -168,6 +171,7 @@
               height: 50%;
               padding-top: util.rem(5);
               display: flex;
+              user-focus: none;
             }
 
             &-lower {
@@ -175,6 +179,7 @@
               display: flex;
               padding-top: util.rem(2);
               color: map.get(color.$colorMap, climate-text-blue);
+              user-focus: none;
             }
           }
 

@@ -21,7 +21,8 @@
     display: flex;
     align-items: flex-start;
     padding-left: util.rem(1);
-    margin-top: util.rem(0);
+    margin-top: util.rem(-6);
+    white-space: nowrap;
 
     &--left {
       font-size: util.bu(2);

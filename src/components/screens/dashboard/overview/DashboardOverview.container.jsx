@@ -25,18 +25,6 @@ const DashboardOverviewContainer = () => {
     dispatch(requestClientOverviewList(request.overviewParams));
   }, [overviewOptionSelected]);
 
-  useEffect(() => {
-    function updateData() {
-      dispatch(requestClientOverviewList(request.overviewParams));
-      setTimeout(updateData, 10 * 60 * 1000);
-    }
-
-    updateData();
-    return () => {
-      clearTimeout(updateData);
-    };
-  }, []);
-
   return <DashboardOverview ownClientsList={ mappedClientsList }
                             overviewOptionSelected={ overviewOptionSelected }
                             setOverviewOptionSelected={ setOverviewOptionSelected } />;

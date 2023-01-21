@@ -30,18 +30,6 @@ const ClientFieldsViewContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupName, clientName, reloadToggleActive]);
 
-  useEffect(() => {
-    function updateData() {
-      dispatch(requestFullClientFieldList(request.clientParams));
-      setTimeout(updateData, 10 * 60 * 1000);
-    }
-
-    updateData();
-    return () => {
-      clearTimeout(updateData);
-    };
-  }, []);
-
   const mappedFieldTableList = () => {
     return mapFieldTableList(fieldList, fieldRainData, subGroupList);
   };

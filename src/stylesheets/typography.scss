@@ -3,6 +3,11 @@
 @use "../stylesheets/util" as utils;
 @use "../stylesheets/mixin" as mixins;
 
+
+* {
+  font-family: Segoe UI Emoji;
+}
+
 h1 {
   font-size: utils.rem(20);
   font-weight: 700;

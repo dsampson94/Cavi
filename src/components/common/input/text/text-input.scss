@@ -23,6 +23,10 @@
 
   &--chartbar {
     padding: 0;
+  }
+
+  &--table {
+    padding: 0;
     min-width: util.rem(50);
   }
 
@@ -42,9 +46,17 @@
 
   &--topbar {
     height: 100%;
-    padding-top: util.rem(12);
+    padding-top: util.rem(6);
     min-width: 120px;
     width: 120px;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      display: none;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      display: flex;
+    }
   }
 
   &__label-container {
@@ -114,6 +126,15 @@
       width: util.rem(50);
       font-size: util.bu(1.1);
       padding: 0 0 0 util.rem(1.8);
+    }
+
+    &--table {
+      border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
+      height: util.rem(18);
+      width: util.rem(40);
+      font-size: util.bu(1.4);
+      padding: 0 0 0 util.rem(1.8);
+      margin-left: util.rem(-10);
     }
 
     &--input {

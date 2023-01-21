@@ -31,7 +31,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
     case GENERAL_ROUTE:
       return generalList?.lande?.map((field, index) => {
         return {
-          ['']: `${ field?.land }*_*${ probeSummaryList?.lande[index]?.probe }`,
+          ['']: `${ field?.land }*_*${ field?.probelys }`,
           field: { name: field?.land, color: (field?.kleur === 'blou') ? '#6495ED' : field?.kleur },
           currentCrop: field?.gewas,
           forecast: field?.gebied,

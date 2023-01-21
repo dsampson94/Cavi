@@ -14,7 +14,12 @@ import './field-setup-view.scss';
 const FieldSetupView = ({
                           mappedSetupList,
                           activeScreen,
-                          clientRequestParams
+                          clientRequestParams,
+                          setSelectedProbeNumber,
+                          updatedHaValue,
+                          setUpdatedHaValue,
+                          updateFieldDetails,
+                          setSelectedFieldName
                         }) => {
 
   const [showSetupSideBar, setShowSetupSideBar] = useState(true);
@@ -24,6 +29,11 @@ const FieldSetupView = ({
   useEffect(() => {
     setActiveTableData(mappedSetupList);
   }, [mappedSetupList]);
+
+  useEffect(() => {
+    setSelectedFieldName(selectedIndex?.field?.name);
+    setSelectedProbeNumber(selectedIndex?.['']?.split('*_*')[1]?.slice(0, -1));
+  }, [selectedIndex]);
 
   return (
     <ContentContainer view={ FIELD_SETUP }
@@ -37,7 +47,10 @@ const FieldSetupView = ({
                       selectedIndex={ selectedIndex }
                       setSelectedIndex={ setSelectedIndex }
                       setActiveTableData={ setActiveTableData }
-                      activeTableData={ activeTableData } />
+                      activeTableData={ activeTableData }
+                      updatedHaValue={ updatedHaValue }
+                      setUpdatedHaValue={ setUpdatedHaValue }
+                      updateFieldDetails={ updateFieldDetails } />
       </div>
     </ContentContainer>
   );

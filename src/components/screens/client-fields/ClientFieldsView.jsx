@@ -9,7 +9,6 @@ import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from '.
 import { TableSearchBar } from '../../common/table/TableComponents.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
-import MidBar from '../../common/mid-bar/MidBar';
 import Table from '../../common/table/Table';
 
 import './client-fields-view.scss';

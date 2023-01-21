@@ -108,7 +108,14 @@
   }
 
   &--show {
-    min-width: 14%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      min-width: 35%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      min-width: 14%;
+    }
   }
 
   &__lower-button {
@@ -218,7 +225,14 @@
   }
 
   &--show {
-    width: 12%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      min-width: 28%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      min-width: 12%;
+    }
   }
 }
 
@@ -301,6 +315,13 @@
   }
 
   &--show {
-    width: 15%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      min-width: 35%;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      min-width: 15%;
+    }
   }
 }

@@ -29,6 +29,18 @@
       font-size: util.rem(12);
       width: 50%;
 
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        padding-top: util.rem(40);
+        flex-direction: row;
+        transform: translateX(35%);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        padding-top: util.rem(30);
+        flex-direction: row-reverse;
+        transform: translateX(0%);
+      }
+
       &__settings {
         position: relative;
         cursor: pointer;
@@ -157,6 +169,19 @@
     cursor: pointer;
     width: 100%;
     height: 100vh;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      flex-direction: column-reverse;
+      width: 160%;
+      overflow: auto;
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      flex-direction: row;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
   }
 
   &__left {
@@ -204,6 +229,7 @@
     }
 
     &__top {
+      margin-top: util.rem(-2);
       height: 50%;
     }
 

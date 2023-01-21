@@ -14,6 +14,7 @@ import {
   EC_OPTION,
   FLOW_DAILY_OPTION,
   FLOW_HOURLY_OPTION,
+  HIDDEN_MENU,
   LOG_OUT_ICON,
   REPORT_PROBLEM_ICON,
   TOPBAR_OPTIONS,
@@ -170,7 +171,7 @@ const DropDownMenuFixed = ({
   };
 
   return (
-    <div className="dropdown"
+    <div className={ getClassNames('dropdown', { hidden: menu === HIDDEN_MENU }) }
          onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
 
       { showPrimaryDropDown &&
@@ -292,6 +293,10 @@ const DropDownMenuFixed = ({
           { showText && showHiddenTextOption === 3 && <p>Log Out</p> }
 
         </div> }
+
+        { menu === HIDDEN_MENU &&
+        <></>
+        }
       </div> }
     </div>
   );

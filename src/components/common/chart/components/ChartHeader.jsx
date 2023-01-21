@@ -46,11 +46,11 @@ const ChartHeader = ({
 
           { chartName === AGGREGATE_TOP_SOIL &&
           <div className="chart__header__zoom-options--left-top">
-            <div className="chart__header__zoom-options--left-top__settings"
-                 onClick={ () => setShowChartsModal(!showChartsModal) }>
-              <SVGIcon name={ SETTINGS_GEAR } />
-            </div>
-            <CheckboxInput constant={ 'Hide rain' } />
+            {/*<div className="chart__header__zoom-options--left-top__settings"*/}
+            {/*     onClick={ () => setShowChartsModal(!showChartsModal) }>*/}
+            {/*  <SVGIcon name={ SETTINGS_GEAR } />*/}
+            {/*</div>*/}
+            {/*<CheckboxInput constant={ 'Hide rain' } />*/}
           </div> }
 
           { chartType === EXTENDED &&
@@ -79,9 +79,9 @@ const ChartHeader = ({
         </div> }
 
         { chartName === AGGREGATE_TOP_SOIL &&
-        <div className={ getClassNames('chart__header__rain--top',
+        <div className={ getClassNames('chart__header__rain',
           { lower: !(chartName === AGGREGATE_TOP_SOIL) }) }>
-          { 'Total rain for season: 0' }
+          {/*{ 'Total rain for season: 0' }*/}
         </div> }
 
         { chartName === AGGREGATE_BOTTOM_SOIL &&

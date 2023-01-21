@@ -174,7 +174,7 @@ const DeficitIndicator = (value) => {
   for (const [key, value] of Object.entries(innerFields)) {
     fieldList.push({ key });
   }
-
+  console.log(objectValues?.kleuronderhex);
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (

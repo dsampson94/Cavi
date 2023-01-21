@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
@@ -14,7 +14,7 @@ import {
   FIELD_CHART_MIDBAR,
   FIELD_REPORTS,
   FIELD_SETUP_MIDBAR,
-  FIELD_TEMPERATURES_MIDBAR,
+  FIELD_TEMPERATURES_MIDBAR, HIDDEN_MENU, INFO_CIRCLE,
   MID_BAR_ASSISTANT,
   MID_BAR_CHART,
   MID_BAR_EMAIL_READINGS,
@@ -34,6 +34,7 @@ import DropDownButton from '../drop-down/drop-down-button/DropDownButton';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 import './mid-bar.scss';
+import FieldChartsModal from '../modal/FieldChartsModal';
 
 const MidBar = ({
                   view,
@@ -270,11 +271,23 @@ const FieldChartsMidBar = ({
                              mappedChartList
                            }) => {
 
+  const [showChartsModal, setShowChartsModal] = useState(false);
+
   return (
     <div className={ 'field-chart__top-bar' }>
       { mappedChartList && <div className="field-chart__top-bar--left">
 
         <DropDownButton name={ SETTINGS_GEAR }
+                        className={ 'field-chart__top-bar--left__settings' }
+                        fill={ '#6E8192' }
+                        menu={ HIDDEN_MENU }
+                        menuData={ mappedMenuList }
+                        mappedFieldList={ mappedFieldList }
+                        onDivClick={() => setShowChartsModal(!showChartsModal)}
+                        settings
+                        tiny />
+
+        <DropDownButton name={ INFO_CIRCLE }
                         className={ 'field-chart__top-bar--left__settings' }
                         fill={ '#6E8192' }
                         menu={ CHART_TOP_BAR_MENU }
@@ -289,6 +302,10 @@ const FieldChartsMidBar = ({
         </div>
 
       </div> }
+
+      { showChartsModal &&
+      <FieldChartsModal showChartsModal={ showChartsModal }
+                        setShowChartsModal={ setShowChartsModal } /> }
     </div>
   );
 };

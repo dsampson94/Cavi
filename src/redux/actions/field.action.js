@@ -29,9 +29,9 @@ export const SET_FIELD_SETUP_SASRI_LIST = '[FIELD_STORE] Set field sasri list';
 export const SET_FIELD_SETUP_PHENOLOGICAL_LIST = '[FIELD_STORE] Set field phenological list';
 export const SET_FIELD_SETUP_MAP_LIST = '[FIELD_STORE] Set field map list';
 
-export const GET_FIELD_CHART_LIST = '[FIELD_STORE] Get field chart list';
+export const REQUEST_FIELD_CHART_LIST = '[FIELD_STORE] Get field chart list';
 export const requestFieldChartList = (field) => ({
-  type: GET_FIELD_CHART_LIST,
+  type: REQUEST_FIELD_CHART_LIST,
   field
 });
 
@@ -53,4 +53,10 @@ export const requestFieldSetupList = (field, use) => ({
   type: REQUEST_FIELD_SETUP_LIST,
   field,
   use
+});
+
+export const REQUEST_SET_FIELD_SETUP = '[FIELD_STORE] Request set field setup';
+export const requestSetFieldSetup = (field) => ({
+  type: REQUEST_SET_FIELD_SETUP,
+  field
 });

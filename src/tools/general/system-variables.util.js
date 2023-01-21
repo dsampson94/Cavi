@@ -135,6 +135,9 @@ export const RAINING = 'raining';
 export const PARTLY_CLOUDED = 'party_clouded';
 export const CLOUDED = 'clouded';
 
+//FIELD DETAIL NAMES (FIELD FIELD NAMES)
+export const HA = 'ha';
+
 //OVERVIEW OPTIONS
 export const FIELDS_LAST_VIEWED_QUESTION = 'When is the last time that you viewed your fields?';
 export const FIELDS_MOISTURE_QUESTION = 'Are your fields too wet or too dry currently?';
@@ -223,6 +226,9 @@ export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
 export const CHART_ACTIVE_PERIOD = 'chart_active_period';
 export const TOPBAR_OPTIONS = 'topbar_options';
 export const FIELD_SETUP_LIST_CONTAINER = 'field_setup_list_container';
+export const HIDDEN_MENU = 'empty_menu';
+export const INFO_CIRCLE = 'info_circle';
+export const MOBILE_MENU = 'mobile_menu';
 
 export const DEFICIT_OPTION = 'Deficit / ETo';
 export const VOLT_READINGS_OPTION = 'Volt Readings';

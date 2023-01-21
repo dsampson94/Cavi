@@ -17,6 +17,15 @@
   max-width: 99.7%;
   z-index: 99;
 
+  @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+    margin-bottom: util.rem(50);
+  }
+
+  @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+    height: util.rem(55);
+    margin-bottom: util.rem(4);
+  }
+
   & button {
     margin: util.rem(4);
   }
@@ -25,23 +34,64 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 50%;
+    width: 70%;
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+      transform: translateX(-31%);
+      margin-bottom: util.rem(8);
+    }
+
+    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+      transform: translateX(0%);
+      margin-bottom: util.rem(0);
+    }
 
     &__divider {
       display: flex;
       border-right: util.rem(1) solid map.get(color.$colorMap, palette-blue-1);
       height: 80%;
-      width: 28%;
+      width: 20%;
       align-self: center;
 
-      &__button {
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        min-width: util.rem(120);
+        border: none;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        border-right: util.rem(1) solid map.get(color.$colorMap, palette-blue-1);
+        width: 20%;
+      }
+
+      button {
         align-self: center;
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+          display: none;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          display: flex;
+        }
       }
     }
 
     &__breadcrumb {
       align-self: center;
       margin-left: util.rem(5);
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        margin-left: 0;
+        margin-top: util.rem(10);
+        min-width: 104%;
+        overflow: hidden;
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-left: util.rem(5);
+        margin-top: util.rem(0);
+        min-width: 1%;
+      }
 
       &__container {
         display: flex;
@@ -54,6 +104,15 @@
         margin-left: util.rem(5);
         color: map.get(color.$colorMap, palette-blue-1);
         font-family: "Roboto Thin";
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+          font-size: util.rem(12);
+          white-space: nowrap;
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+          font-size: util.rem(18);
+        }
 
         &:active {
           position: relative;
@@ -78,13 +137,24 @@
       display: flex;
       margin-top: util.rem(8);
       margin-right: util.rem(10);
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
+        padding-top: util.rem(55);
+        transform: translateX(23%);
+      }
+
+      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
+        margin-top: util.rem(8);
+        padding-top: util.rem(0);
+        transform: translateX(0%);
+      }
     }
   }
 
   &__right {
     display: flex;
     justify-content: flex-end;
-    width: 50%;
+    width: 30%;
     height: 100%;
 
     &--menu {

@@ -32,15 +32,16 @@ import {
   getChartProbeCalibrationRequest,
   getExtendedChartList,
   getFieldChartListRequest,
-  getFieldSetupList
+  getFieldSetupList,
+  getSetFieldSetup
 } from '../endpoints/field.endpoints';
 
 import { addSystemNotice, setProgressBar, setSpinnerText } from '../actions/system.action';
 import {
-  GET_FIELD_CHART_LIST,
+  REQUEST_FIELD_CHART_LIST,
   REQUEST_EXTENDED_FIELD_CHART_LIST,
   REQUEST_FIELD_SETUP_LIST,
-  REQUEST_PROBE_CALIBRATION,
+  REQUEST_PROBE_CALIBRATION, REQUEST_SET_FIELD_SETUP,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
@@ -99,7 +100,7 @@ export function* performRetrieveFieldChartListRequest({ field }) {
 }
 
 export function* watchForRetrieveFieldChartListRequest() {
-  yield takeLatest(GET_FIELD_CHART_LIST, performRetrieveFieldChartListRequest);
+  yield takeLatest(REQUEST_FIELD_CHART_LIST, performRetrieveFieldChartListRequest);
 }
 
 export function* performChartCalibrateProbeRequest({ field }) {
@@ -399,11 +400,43 @@ export function* watchForRetrieveFieldSetupListRequest() {
   yield takeLatest(REQUEST_FIELD_SETUP_LIST, performRetrieveFieldSetupListRequest);
 }
 
+export function* performSetFieldSetupRequest({ field }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getSetFieldSetup(field);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    console.log(data);
+    // switch (data) {
+    //   case responseStatus(data).ERROR:
+    //     yield put({ type: SET_FIELD_CHART_LIST, undefined });
+    //     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
+    //     return;
+    //
+    //   case responseStatus(data).SUCCESS:
+    //     yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
+    //     yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
+    // }
+
+  } catch ({ response }) {
+    yield put({ type: SET_FIELD_CHART_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForSetFieldSetupRequest() {
+  yield takeLatest(REQUEST_SET_FIELD_SETUP, performSetFieldSetupRequest);
+}
+
 export default function* fieldSaga() {
   yield all([
     watchForRetrieveFieldChartListRequest(),
     watchForChartCalibrateProbeRequest(),
     watchForRetrieveExtendedFieldChartListRequest(),
-    watchForRetrieveFieldSetupListRequest()
+    watchForRetrieveFieldSetupListRequest(),
+    watchForSetFieldSetupRequest()
   ]);
 }

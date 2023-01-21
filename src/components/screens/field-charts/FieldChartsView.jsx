@@ -127,10 +127,6 @@ const ClientFieldsView = ({
 
       </div>
 
-      { showChartsModal &&
-      <FieldChartsModal showChartsModal={ showChartsModal }
-                        setShowChartsModal={ setShowChartsModal } /> }
-
     </ContentContainer>
   );
 };

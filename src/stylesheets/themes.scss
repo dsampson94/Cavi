@@ -102,11 +102,14 @@ body.dark-mode {
     color: map.get(color.$colorMap, black);
   }
 
+  .dashboard-overview__list__item__subheader:hover {
+  }
+
+
   .overview__top-button__left-subheader:hover,
   .dashboard-overview__menu-one:hover,
   .dashboard-overview__menu-two:hover,
   .dashboard-overview__menu-three:hover,
-  .dashboard-overview__list__item__subheader:hover,
   .field-setup-side-bar__list__item--selected,
   .client-fields-side-bar__list__item__subheader--selected,
   .client-fields-side-bar__list__item__subheader:hover {

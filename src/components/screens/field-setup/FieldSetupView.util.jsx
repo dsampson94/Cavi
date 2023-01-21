@@ -88,7 +88,17 @@ import DropDownButton from '../../common/drop-down/drop-down-button/DropDownButt
 
 import './field-setup-view.scss';
 
-export const ActiveScreen = ({ activeScreen, mappedSetupList, activeTableData, selectedIndex, setSelectedIndex, setActiveTableData }) => {
+export const ActiveScreen = ({
+                               activeScreen,
+                               mappedSetupList,
+                               activeTableData,
+                               selectedIndex,
+                               setSelectedIndex,
+                               setActiveTableData,
+                               updatedHaValue,
+                               setUpdatedHaValue,
+                               updateFieldDetails
+                             }) => {
     switch (activeScreen) {
       case SMS_WARNING_ROUTE:
         return <>
@@ -229,7 +239,10 @@ export const ActiveScreen = ({ activeScreen, mappedSetupList, activeTableData, s
                  hiddenColumns={ ['color'] }
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
-                 setActiveTableData={ setActiveTableData } />
+                 setActiveTableData={ setActiveTableData }
+                 updatedHaValue={ updatedHaValue }
+                 setUpdatedHaValue={ setUpdatedHaValue }
+                 updateFieldDetails={ updateFieldDetails } />
         </div>;
     }
   }
