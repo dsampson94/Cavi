@@ -28,7 +28,7 @@ export default class MyDocument extends Document {
                         } }
                     />
                     <meta charSet="utf-8" />
-                    <link rel="shortcut icon" href="../static/favicon.png" />
+                    <link rel="shortcut icon" href="../static/favicon.ico" />
                     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                     <meta property="og:image" content="/caviwhitebacklogo.png" />
                     {/* Google Adsense */ }

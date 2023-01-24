@@ -37,7 +37,7 @@ const people = [
         role: 'CEO | DERMALOGICA',
         qualification: 'BA, PGDip Mgt (GSB UCT)',
         about: 'Joanne is a seasoned retailer, with over 25 years working for Woolworths South Africa. She has strong business acumen and is passionate about building brands in the South African landscape. She is recognised as having deep knowledge of the beauty industry.',
-        videoUrl: '/Staffvid-jw.mp4',
+        videoUrl: '/Staffvid-Jw.mp4',
         twitterUrl: '#',
         linkedinUrl: '#'
     },

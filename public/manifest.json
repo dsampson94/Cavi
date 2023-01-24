@@ -1,0 +1,44 @@
+{
+  "short_name": "CAVI Brands",
+  "name": "CAVI Brands - Leading luxury brand management company",
+  "default_locale": "en",
+  "description": "CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "caviwhitebacklogo.png",
+      "sizes": "64x64 32x32",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#252529",
+  "scope": "/",
+  "dir": "ltr",
+  "lang": "en",
+  "orientation": "any",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "web",
+      "id": "https://cavi-brands.vercel.app"
+    }
+  ],
+  "webmanifest_links": []
+}
