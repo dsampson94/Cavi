@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
                             images: [
                                 {
                                     url: '/caviwhitebacklogo.png',
-                                    width: 800,
+                                    width: 600,
                                     height: 600,
                                     alt: 'CAVI Brands Logo'
                                 }
