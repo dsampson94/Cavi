@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import * as gtag from '../components/ads/gtag';
+import { Analytics } from '@vercel/analytics/react';
 
 import './../styles/globals.css';
 
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }) {
       <title>{ 'CAVI BRANDS' }</title>
     </Head>
     <Component { ...pageProps } />
+    <Analytics />
   </>;
 }
 
