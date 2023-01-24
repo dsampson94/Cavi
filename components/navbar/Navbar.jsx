@@ -33,7 +33,6 @@ export default function Navbar() {
     ];
     const navigation = [
         { name: 'Why CAVI', href: '/' },
-        { name: 'Contact', href: '/' },
         { name: 'Clients', href: '/' },
         { name: 'Careers', href: '/' },
         { name: 'About', href: '/' }

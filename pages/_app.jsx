@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import * as gtag from '../../cb/components/ads/gtag';
+import * as gtag from '../components/ads/gtag';
 
 import './../styles/globals.css';
 
