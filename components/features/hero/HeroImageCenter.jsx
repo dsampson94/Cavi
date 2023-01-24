@@ -5,17 +5,20 @@ export default function HeroImageCenter() {
     return (
         <div className="bg-white pt-16">
             <main>
+                <p className={ 'text-center text-xs ' }>{ 'v.0.3 - Includes SEO iteration, mobile responsiveness and Google tracker (gtag)' }</p>
                 <div>
                     {/* Hero card */ }
                     <div className="relative">
                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
                         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                             <div className="relative shadow-2xl sm:overflow-hidden sm:rounded-2xl">
-                                <div className="absolute inset-0">
+                                <div className="absolute inset-0 w-full h-full">
                                     <Image src={ '/cavicampus.jpg' }
                                            alt={ 'rss logo' }
                                            height={ 1300 }
-                                           width={ 1300 } />
+                                           width={ 1300 }
+                                           style={ { objectFit: 'cover', width: '100%', height: '100%' } }
+                                    />
                                     <div className="absolute inset-0 bg-gray-500 mix-blend-multiply" />
                                 </div>
                                 <div className="relative py-16 px-6 sm:py-24 lg:py-32 lg:px-8">
