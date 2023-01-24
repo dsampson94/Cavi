@@ -5,7 +5,7 @@ export default function HeroImageCenter() {
     return (
         <div className="bg-white pt-16">
             <main>
-                <p className={ 'text-center text-xs ' }>{ 'v.0.3 - Includes SEO iteration, mobile responsiveness and Google tracker (gtag)' }</p>
+                <p className={ 'text-center text-xs ' }>{ 'v.0.3 - Includes SEO, mobile responsiveness and Google tracker (gtag)' }</p>
                 <div>
                     {/* Hero card */ }
                     <div className="relative">
