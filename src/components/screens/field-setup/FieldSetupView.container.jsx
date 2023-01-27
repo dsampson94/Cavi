@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
-
-import { shape } from 'prop-types';
 import { getRequestParams } from '../../../redux/endpoints';
 
 import FieldSetupView from './FieldSetupView';
@@ -60,6 +58,7 @@ import {
 } from '../../../redux/actions/field.action';
 
 import { mapSetupList } from './FieldSetupView.container.util';
+import { retrieveUserLoginFromLocalStorage } from '../../../tools/storage/localStorage';
 
 const FieldSetupViewContainer = () => {
 
@@ -91,9 +90,14 @@ const FieldSetupViewContainer = () => {
 
   const [selectedProbeNumber, setSelectedProbeNumber] = useState(null);
   const [selectedFieldName, setSelectedFieldName] = useState(null);
-  const [updatedHaValue, setUpdatedHaValue] = useState(null);
+  const [haValueToUpdate, setHaValueToUpdate] = useState(false);
 
-  const request = getRequestParams({ groupName, clientName, selectedProbeNumber, updatedHaValue, activeFieldName: selectedFieldName });
+  const request = getRequestParams({
+    groupName,
+    clientName,
+    selectedProbeNumber,
+    activeFieldName: selectedFieldName
+  });
 
   useEffect(() => {
     switch (activeScreen) {
@@ -163,10 +167,25 @@ const FieldSetupViewContainer = () => {
     }
   }, [activeScreen]);
 
-  const updateFieldDetails = (fieldDetailName) => {
-    if (fieldDetailName === HA) dispatch(requestSetFieldSetup(request.setFieldSetupHa));
-    dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
+  const updateFieldDetails = (fieldDetailName, inputValue) => {
+    const user = retrieveUserLoginFromLocalStorage();
+    if (fieldDetailName === HA) {
+      dispatch(requestSetFieldSetup({
+        username: user?.username,
+        password: user?.password,
+        groupname: groupName,
+        clientname: clientName,
+        fieldname: selectedFieldName ? selectedFieldName : null,
+        probeno: selectedProbeNumber,
+        setfield: 'ha',
+        setvalue: inputValue
+      }));
+    }
   };
+
+  useEffect(() => {
+    dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
+  }, [haValueToUpdate]);
 
   const mappedFieldSetupList = () => {
     return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
@@ -179,14 +198,10 @@ const FieldSetupViewContainer = () => {
                          activeScreen={ activeScreen }
                          clientRequestParams={ request.clientParams }
                          setSelectedProbeNumber={ setSelectedProbeNumber }
-                         updatedHaValue={ updatedHaValue }
-                         setUpdatedHaValue={ setUpdatedHaValue }
+                         haValueToUpdate={ haValueToUpdate }
+                         setHaValueToUpdate={ setHaValueToUpdate }
                          setSelectedFieldName={ setSelectedFieldName }
                          updateFieldDetails={ updateFieldDetails } />;
-};
-
-FieldSetupViewContainer.propTypes = {
-  fieldList: shape({})
 };
 
 export default FieldSetupViewContainer;

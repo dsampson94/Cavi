@@ -35,36 +35,38 @@ const Login = ({ onLoginClick }) => {
   return (
     <div style={ style }>
       <div className="login">
-        <Graphic login graphic={ logo } />
-        <TextInput label={ 'Username:' }
-                   onChange={ ({ target }) => setUsername(target.value) }
-                   onKeyPress={ event => {
-                     if (event.key === 'Enter') handleLoginClick();
-                   } }
-                   login />
+        <div className="login__container">
+          <Graphic login graphic={ logo } />
+          <TextInput label={ 'Username:' }
+                     onChange={ ({ target }) => setUsername(target.value) }
+                     onKeyPress={ event => {
+                       if (event.key === 'Enter') handleLoginClick();
+                     } }
+                     login />
 
-        <TextInput label={ 'Password:' }
-                   type={ 'password' }
-                   onChange={ ({ target }) => setPassword(target.value) }
-                   onKeyPress={ event => {
-                     if (event.key === 'Enter') handleLoginClick();
-                   } }
-                   login />
+          <TextInput label={ 'Password:' }
+                     type={ 'password' }
+                     onChange={ ({ target }) => setPassword(target.value) }
+                     onKeyPress={ event => {
+                       if (event.key === 'Enter') handleLoginClick();
+                     } }
+                     login />
 
-        <Button label={ 'Log in' }
-                type={ 'submit' }
-                onClick={ handleLoginClick }
-                login />
+          <Button label={ 'Log in' }
+                  type={ 'submit' }
+                  onClick={ handleLoginClick }
+                  login />
 
-        <Button label={ 'Log out of Pulse' } />
+          <Button label={ 'Log out of Pulse' } />
 
-        <div className="login__button-group">
-          <Button label={ 'English' } flex white />
-          <Button label={ 'Spanish' } flex white />
-          <Button label={ 'French' } flex white />
+          <div className="login__button-group">
+            <Button label={ 'English' } flex white />
+            <Button label={ 'Spanish' } flex white />
+            <Button label={ 'French' } flex white />
+          </div>
         </div>
+        <Spinner centered spinnerText={ spinnerText } />
       </div>
-      <Spinner centered spinnerText={ spinnerText } />
     </div>
   );
 };

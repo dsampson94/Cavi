@@ -59,12 +59,15 @@ import './table.scss';
 const Table = ({
                  tableName,
                  activeTableData,
+                 setActiveTableData,
                  hiddenColumns,
+                 selectedIndex,
                  setSelectedIndex,
                  setSelectedDropdownObject,
-                 updatedHaValue,
-                 setUpdatedHaValue,
-                 updateFieldDetails
+                 haValueToUpdate,
+                 setHaValueToUpdate,
+                 updateFieldDetails,
+                 setUpdatedFieldList
                }) => {
 
   switch (tableName) {
@@ -80,11 +83,14 @@ const Table = ({
       return <FieldSetupTable tableName={ tableName }
                               activeTableData={ activeTableData }
                               hiddenColumns={ hiddenColumns }
+                              selectedIndex={ selectedIndex }
                               setSelectedIndex={ setSelectedIndex }
                               setSelectedDropdownObject={ setSelectedDropdownObject }
-                              updatedHaValue={ updatedHaValue }
-                              setUpdatedHaValue={ setUpdatedHaValue }
-                              updateFieldDetails={ updateFieldDetails } />;
+                              haValueToUpdate={ haValueToUpdate }
+                              setHaValueToUpdate={ setHaValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
+                              setActiveTableData={ setActiveTableData }
+                              setUpdatedFieldList={ setUpdatedFieldList } />;
   }
 };
 
@@ -351,10 +357,13 @@ const FieldSetupTable = ({
                            tableName,
                            activeTableData,
                            hiddenColumns,
+                           selectedIndex,
                            setSelectedIndex,
-                           updatedHaValue,
-                           setUpdatedHaValue,
-                           updateFieldDetails
+                           haValueToUpdate,
+                           setHaValueToUpdate,
+                           updateFieldDetails,
+                           setActiveTableData,
+                           setUpdatedFieldList
                          }) => {
 
   const history = useHistory();
@@ -454,9 +463,14 @@ const FieldSetupTable = ({
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ REPLACE_PROBE_WITH_NEW }
-                              updatedHaValue={ updatedHaValue }
-                              setUpdatedHaValue={ setUpdatedHaValue }
-                              updateFieldDetails={ updateFieldDetails } />;
+                              selectedIndex={ selectedIndex }
+                              haValueToUpdate={ haValueToUpdate }
+                              setHaValueToUpdate={ setHaValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
+                              fieldList={ activeTableData }
+                              setActiveTableData={ setActiveTableData }
+                              rowIndex={ rowIndex }
+                              setUpdatedFieldList={ setUpdatedFieldList } />;
             case 6:
               return <RowData history={ history }
                               groupName={ groupName }
@@ -549,6 +563,7 @@ const FieldSetupTable = ({
       return (
         <>
           <tr className={ 'table__body__row' }
+              data-id={ object?.[''] }
               onClick={ () => setSelectedIndex(object) }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
@@ -592,9 +607,14 @@ const RowData = ({
                    value,
                    icon,
                    fill,
-                   updatedHaValue,
-                   setUpdatedHaValue,
-                   updateFieldDetails
+                   selectedIndex,
+                   haValueToUpdate,
+                   setHaValueToUpdate,
+                   updateFieldDetails,
+                   fieldList,
+                   setActiveTableData,
+                   rowIndex,
+                   setUpdatedFieldList
                  }) => {
 
   if (activeScreen === particularScreen)
@@ -607,9 +627,16 @@ const RowData = ({
                                   icon={ icon }
                                   fill={ fill } />;
   else if (dataIndex === 5 && activeScreen === GENERAL_ROUTE)
-    return <FieldSetupInputColumn value={ updatedHaValue ? updatedHaValue : value }
-                                  setUpdatedHaValue={ setUpdatedHaValue }
-                                  updateFieldDetails={ updateFieldDetails } />;
+    return <FieldSetupInputColumn value={ value }
+                                  haValueToUpdate={ haValueToUpdate }
+                                  setHaValueToUpdate={ setHaValueToUpdate }
+                                  updateFieldDetails={ updateFieldDetails }
+                                  selectedIndex={ selectedIndex }
+                                  fieldList={ fieldList }
+                                  setActiveTableData={ setActiveTableData }
+                                  rowIndex={ rowIndex }
+                                  columnIndex={ dataIndex }
+                                  setUpdatedFieldList={ setUpdatedFieldList } />;
   else
     return <FieldSetupNameColumn dataIndex={ dataIndex }
                                  activeScreen={ activeScreen }

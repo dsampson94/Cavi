@@ -100,6 +100,7 @@
     &--login {
       text-align: center;
       height: util.rem(38);
+      border-radius: map.get(radius.$border-radius, medium);
 
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
         height: util.rem(35);
@@ -130,11 +131,12 @@
 
     &--table {
       border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
-      height: util.rem(18);
-      width: util.rem(40);
+      height: util.rem(19);
+      width: util.rem(45);
       font-size: util.bu(1.4);
       padding: 0 0 0 util.rem(1.8);
-      margin-left: util.rem(-10);
+      margin-left: util.rem(-40);
+      z-index: 100;
     }
 
     &--input {

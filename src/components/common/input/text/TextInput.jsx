@@ -12,6 +12,7 @@ const TextInput = ({
                      value,
                      placeholder,
                      onChange,
+                     onClick,
                      onKeyPress,
                      disabled,
                      type,
@@ -24,20 +25,28 @@ const TextInput = ({
                      wide,
                      input,
                      table,
-                     autoFocus
+                     autoFocus,
+                     ref,
+                     defaultValue,
+                     onMouseEnter,
+                     onDoubleClick
                    }) => {
 
   return (
     <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar, centered, select, wide, input, table }) }>
-
-      <div className={ getClassNames('text-input__label-container', { login, left, centered }) }>
+      { label && <div className={ getClassNames('text-input__label-container', { login, left, centered }) }>
         <label>{ label }</label>
-      </div>
+      </div> }
       <input name={ name }
+             ref={ ref }
              value={ value }
+             defaultValue={ defaultValue }
+             onClick={ onClick }
+             onDoubleClick={onDoubleClick}
              placeholder={ placeholder }
              onChange={ onChange }
              onKeyDown={ onKeyPress }
+             onMouseEnter={ onMouseEnter }
              disabled={ disabled }
              type={ type }
              autoFocus={ autoFocus }

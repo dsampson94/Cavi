@@ -163,7 +163,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
             { location.pathname.includes('dashboard') &&
             <div className="top-bar__left__breadcrumb__container">
-              <p>{ `${ location.pathname.split('/')[1] }` }</p>
+              <p>{location.pathname.split('/')[1].charAt(0).toUpperCase() + location.pathname.split('/')[1].slice(1)}</p>
               <p>{ ` / ${ location.pathname.split('/')[2] }` }</p>
             </div> }
 

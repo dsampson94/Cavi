@@ -8,11 +8,18 @@
 .login {
   display: flex;
   flex-direction: column;
-  padding-bottom: util.rem(160);
   font-family: Aller, serif;
-  max-width: util.rem(550);
-  min-width: util.rem(320);
-  width: 40%;
+  max-width: util.rem(650);
+  max-height: 90%;
+
+  &__container {
+    padding: util.rem(72);
+    font-family: Aller, serif;
+    border-radius: map.get(radius.$border-radius, large);
+    background-color: map.get(color.$colorMap, white);
+    box-shadow: inset util.rem(0) util.rem(0) util.rem(6) map.get(color.$colorMap, dark-mode-grey),
+    util.rem(0) util.rem(0) util.rem(6) map.get(color.$colorMap, dark-mode-grey);
+  }
 
   @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
     padding-top: util.rem(0);
@@ -25,5 +32,6 @@
     align-items: center;
     margin-top: util.rem(18);
     border: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: map.get(radius.$border-radius, medium);
   }
 }

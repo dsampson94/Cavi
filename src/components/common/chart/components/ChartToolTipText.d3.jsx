@@ -350,11 +350,11 @@ const TooltipText = ({
   };
 
   const getTextWidth = () => {
-    if (chartName === DEFICIT_ETO) return 240;
-    if (chartType === EXTENDED) return 200;
-    else if (chartType === DEFICIT) return 265;
-    else if (chartName === DAILY_ETO) return 200;
-    else return 169;
+    if (chartName === DEFICIT_ETO) return 260;
+    if (chartType === EXTENDED) return 250;
+    else if (chartType === DEFICIT) return 285;
+    else if (chartName === DAILY_ETO) return 240;
+    else return 180;
   };
 
   const renderText = (chart) => {

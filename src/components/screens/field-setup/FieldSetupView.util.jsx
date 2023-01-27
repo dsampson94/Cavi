@@ -95,9 +95,10 @@ export const ActiveScreen = ({
                                selectedIndex,
                                setSelectedIndex,
                                setActiveTableData,
-                               updatedHaValue,
-                               setUpdatedHaValue,
-                               updateFieldDetails
+                               haValueToUpdate,
+                               setHaValueToUpdate,
+                               updateFieldDetails,
+                               setUpdatedFieldList
                              }) => {
     switch (activeScreen) {
       case SMS_WARNING_ROUTE:
@@ -240,9 +241,10 @@ export const ActiveScreen = ({
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setActiveTableData={ setActiveTableData }
-                 updatedHaValue={ updatedHaValue }
-                 setUpdatedHaValue={ setUpdatedHaValue }
-                 updateFieldDetails={ updateFieldDetails } />
+                 haValueToUpdate={ haValueToUpdate }
+                 setHaValueToUpdate={ setHaValueToUpdate }
+                 updateFieldDetails={ updateFieldDetails }
+                 setUpdatedFieldList={ setUpdatedFieldList } />
         </div>;
     }
   }

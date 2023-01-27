@@ -81,7 +81,7 @@ export const getRequestParams = ({
                                    overviewOptionSelected,
                                    activeObject,
                                    selectedProbeNumber,
-                                   updatedHaValue
+                                   haValueToUpdate
                                  }) => {
 
   const user = retrieveUserLoginFromLocalStorage();
@@ -263,7 +263,7 @@ export const getRequestParams = ({
       fieldname: activeFieldName ? activeFieldName : null,
       probeno: selectedProbeNumber,
       setfield: 'ha',
-      setvalue: updatedHaValue
+      setvalue: haValueToUpdate
     }
   };
 };

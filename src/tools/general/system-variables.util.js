@@ -4,7 +4,7 @@ export const navigateTo = (screenName, history, groupName, clientName, probeNumb
     case CLIENT_FIELDS :
       return history.push(`/client/${ groupName }/${ clientName }`);
     case FIELD_CHARTS :
-      return history.push(`/client/${ groupName }/${ clientName }/field/${ probeNumber }/${ fieldName }`);
+      return history.push(`/client/${ groupName }/${ clientName }/field-charts/${ probeNumber }/${ fieldName }`);
     case FIELD_TEMPERATURES :
       return history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`);
     case FIELD_SETUP :

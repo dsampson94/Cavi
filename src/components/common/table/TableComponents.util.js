@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { arrayOf, bool, func, number, shape, string } from 'prop-types';
 
@@ -579,19 +579,43 @@ FieldSetupNameColumn.propTypes = {
   value: string
 };
 
-export const FieldSetupInputColumn = ({ value, setUpdatedHaValue, updateFieldDetails }) => {
+export const FieldSetupInputColumn = ({
+                                        value,
+                                        updateFieldDetails,
+                                        setHaValueToUpdate,
+                                        rowIndex
+                                      }) => {
 
-  return <td onClick={ noOp() }
-             key={ generateId() }>
-    <div className={ 'table__body__row__td-container--field-setup' }>
-      <TextInput value={ value }
-                 onChange={ ({ target }) => setUpdatedHaValue(target.value) }
-                 onKeyPress={ event => {
-                   if (event.key === 'Enter') updateFieldDetails(HA);
-                 } }
-                 table
-                 autoFocus />
-    </div>
+  const [inputValue, setInputValue] = useState('');
+  const [valueUpdated, setValueUpdated] = useState(false);
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    setHaValueToUpdate(inputValue);
+  }, [valueUpdated]);
+
+  const getFocus = (event) => {
+    ref.current = event.target;
+    ref.current.focus();
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    updateFieldDetails(HA, event.target.value);
+    setValueUpdated(!valueUpdated);
+    getFocus(event);
+  };
+
+  return <td key={ generateId() }
+             onClick={ event => getFocus(event) }>
+    <TextInput ref={ ref }
+               defaultValue={ inputValue ? inputValue : value }
+               onChange={ event => handleInputChange(event, rowIndex) }
+               onMouseEnter={ event => getFocus(event) }
+               onClick={ event => getFocus(event) }
+               onDoubleClick={ event => getFocus(event) }
+               table />
   </td>;
 };
 

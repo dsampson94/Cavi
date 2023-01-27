@@ -75,6 +75,7 @@
   &--login {
     margin: util.rem(10) util.rem(0) util.rem(10) util.rem(0);
     height: util.rem(50);
+    border-radius: map.get(radius.$border-radius, medium);
 
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       height: util.rem(45);

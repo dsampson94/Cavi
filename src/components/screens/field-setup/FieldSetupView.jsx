@@ -16,10 +16,11 @@ const FieldSetupView = ({
                           activeScreen,
                           clientRequestParams,
                           setSelectedProbeNumber,
-                          updatedHaValue,
-                          setUpdatedHaValue,
+                          haValueToUpdate,
+                          setHaValueToUpdate,
                           updateFieldDetails,
-                          setSelectedFieldName
+                          setSelectedFieldName,
+                          setUpdatedFieldList
                         }) => {
 
   const [showSetupSideBar, setShowSetupSideBar] = useState(true);
@@ -48,9 +49,10 @@ const FieldSetupView = ({
                       setSelectedIndex={ setSelectedIndex }
                       setActiveTableData={ setActiveTableData }
                       activeTableData={ activeTableData }
-                      updatedHaValue={ updatedHaValue }
-                      setUpdatedHaValue={ setUpdatedHaValue }
-                      updateFieldDetails={ updateFieldDetails } />
+                      haValueToUpdate={ haValueToUpdate }
+                      setHaValueToUpdate={ setHaValueToUpdate }
+                      updateFieldDetails={ updateFieldDetails }
+                      setUpdatedFieldList={ setUpdatedFieldList } />
       </div>
     </ContentContainer>
   );
