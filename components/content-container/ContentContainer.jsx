@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Contact from '../features/contact/Contact';
 import HeroImageCenter from '../features/hero/HeroImageCenter';
 import Footer from '../features/footer/Footer';
@@ -17,15 +17,15 @@ export default ContentContainer;
 
 const HomePageContentContainer = ({ children, view }) => {
 
+    const contactScrollToRef = useRef('contactScrollToRef');
+
     return (
         <div>
             <div className="isolate bg-white">
-                <Navbar />
+                <Navbar contactScrollToRef={ contactScrollToRef } />
                 <HeroImageCenter />
                 <CenteredIconTextFeature />
-                <LogoCloud />
-                <Team />
-                <Contact />
+                <Contact contactScrollToRef={ contactScrollToRef } />
                 <Footer />
             </div>
         </div>

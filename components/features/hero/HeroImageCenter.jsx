@@ -1,7 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
+import ImageCarousel from './ImageCarousal';
 
 export default function HeroImageCenter() {
+
+    const imagesList = [
+        { src: '/cavicampus.jpg' },
+        { src: '/cavicamps.jpg' },
+        { src: '/cavirecep.png' },
+        { src: '/cavicpt.jpg' }
+    ];
+
     return (
         <div className="bg-white pt-16">
             <main>
@@ -13,12 +22,8 @@ export default function HeroImageCenter() {
                         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                             <div className="relative shadow-2xl sm:overflow-hidden sm:rounded-2xl">
                                 <div className="absolute inset-0 w-full h-full">
-                                    <Image src={ '/cavicampus.jpg' }
-                                           alt={ 'rss logo' }
-                                           height={ 1300 }
-                                           width={ 1300 }
-                                           style={ { objectFit: 'cover', width: '100%', height: '100%' } }
-                                    />
+                                    <ImageCarousel images={ imagesList } />
+
                                     <div className="absolute inset-0 bg-gray-500 mix-blend-multiply" />
                                 </div>
                                 <div className="relative py-16 px-6 sm:py-24 lg:py-32 lg:px-8">
@@ -55,7 +60,7 @@ export default function HeroImageCenter() {
                     <div className="bg-gray-100">
                         <div className="mx-auto max-w-7xl py-16 px-6 lg:px-8">
                             <p className="text-center text-base font-semibold text-gray-500">
-                                Solutions Delivered Through Our Industry Leading Companies
+                                Our Businesses
                             </p>
                             <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
                                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
@@ -92,8 +97,6 @@ export default function HeroImageCenter() {
                         </div>
                     </div>
                 </div>
-
-                {/* More main page content here... */ }
             </main>
         </div>
     );

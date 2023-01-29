@@ -63,7 +63,7 @@ const people = [
         name: 'Cherie Ten Hope',
         role: 'CHAIRPERSON, THE DERMAL INSTITUTE OF SOUTH AFRICA',
         qualification: 'CIDESCO, BABTAC, AAD & SAAIBTH, CERT. GEN MGMT (CRANFIELD, UK)',
-        videoUrl: '/Staffvid-Mp.mp4',
+        videoUrl: '/Staffvid-CTH.mp4',
         about: 'Cherie has a passion for brands and is recognised for having a deep understanding of the professional skin care channel to market. She also has an instinctive understanding and knowledge of delivery-orientated marketing and sales capabilities.',
         twitterUrl: '#',
         linkedinUrl: '#'

@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     <Head>
-      <title>{ 'CAVI BRANDS' }</title>
+      <title>{ 'CAVI Brands' }</title>
     </Head>
     <Component { ...pageProps } />
     <Analytics />

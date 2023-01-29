@@ -30,7 +30,11 @@ export default class MyDocument extends Document {
                     <meta charSet="utf-8" />
                     <link rel="shortcut icon" href="../static/favicon.ico" />
                     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
                     <meta property="og:image" content="/caviwhitebacklogo.png" />
+                    {/* Google Maps */ }
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
+
                     {/* Google Adsense */ }
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7780458585019281"
                             crossOrigin="anonymous"></script>
