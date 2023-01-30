@@ -2,8 +2,8 @@ import React from 'react';
 
 import ContentContainer from '../components/content-container/ContentContainer';
 
-export default function Home() {
+export default function People() {
     return (
-        <ContentContainer view={'Home'} />
+        <ContentContainer view={'People'} />
     );
 }

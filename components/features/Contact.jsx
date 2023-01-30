@@ -1,5 +1,5 @@
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import Map from '../../map/map';
+import Map from './map';
 
 const supportLinks = [
     {
@@ -55,11 +55,11 @@ export default function Contact({ contactScrollToRef }) {
                                             <MapPinIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
-                                            <p>11-13 St Andrews Road, Parktown, 2193, <br />
-                                                Johannesburg, Gauteng,
-                                                South Africa</p>
+                                            <p></p>
                                             <a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193"
-                                               target="_blank" className="text-blue-500 text-lg font-bold underline">Get Directions</a>
+                                               target="_blank" className="text-md font-bold">11-13 St Andrews Road, Parktown, 2193, <br />
+                                                Johannesburg, Gauteng,
+                                                South Africa</a>
                                         </div>
                                     </div>
                                     <div className="flex">
@@ -68,7 +68,7 @@ export default function Contact({ contactScrollToRef }) {
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
                                             <a href="tel:+27(0)113414900"
-                                               className="text-blue-500 font-bold"
+                                               className="font-bold"
                                             >+27 (0)11 341 4900</a>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@ export default function Contact({ contactScrollToRef }) {
                                             <EnvelopeIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
-                                            <a className="text-blue-500 font-bold"
+                                            <a className="font-bold"
                                                href="mailto:info@cavibrands.co.za">info@cavibrands.co.za</a>
                                         </div>
                                     </div>
@@ -94,12 +94,11 @@ export default function Contact({ contactScrollToRef }) {
                                             <MapPinIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
-                                            <p>Unit 2D, Black River Park North,
+                                            <a href="https://www.google.com/maps/dir/?api=1&destination=Black River Park+2 Fir St, Observatory, Cape Town, 7925"
+                                               target="_blank" className="text-md font-bold">Unit 2D, Black River Park North,
                                                 Fir Street, Observatory, 7925,<br />
                                                 Cape Town, Western Cape,
-                                                South Africa</p>
-                                            <a href="https://www.google.com/maps/dir/?api=1&destination=Black River Park+2 Fir St, Observatory, Cape Town, 7925"
-                                               target="_blank" className="text-blue-500 text-lg font-bold underline">Get Directions</a>
+                                                South Africa</a>
                                         </div>
                                     </div>
                                     <div className="flex">
@@ -108,7 +107,7 @@ export default function Contact({ contactScrollToRef }) {
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
                                             <a href="tel:+270(21)4427700"
-                                               class="text-blue-500 font-bold"
+                                               class="font-bold"
                                             >+27 0(21) 442 7700</a>
                                         </div>
                                     </div>
@@ -117,7 +116,7 @@ export default function Contact({ contactScrollToRef }) {
                                             <EnvelopeIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
-                                            <a class="text-blue-500 font-bold"
+                                            <a class="font-bold"
                                                href="mailto:info@cavibrands.co.za">info@cavibrands.co.za</a>
                                         </div>
                                     </div>

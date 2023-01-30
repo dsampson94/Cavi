@@ -18,9 +18,9 @@ const Map = ({ lat, lon, location }) => {
             map
         });
         let infoWindow = new maps.InfoWindow({
-            content: location === 'JHB' ? '<div><h3>CAVI Johannesburg Campus</h3><p>Address: 11-13 St Andrews Road</p><p>Phone: +27 (0)11 341 4900/p></div>' +
+            content: location === 'JHB' ? '<div><h3>CAVI Johannesburg Campus</h3>' +
                 '<a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193" target="_blank" class="text-blue-500 text-lg font-bold underline">Get Directions</a>'
-                : '<div><h3>CAVI Cape Town Campus</h3><p>Address: Unit 2D, Black River Park North, Fir Street</p><p>Phone: +27 0(21) 442 7700</p></div>' +
+                : '<div><h3>CAVI Cape Town Campus</h3>' +
                 '<a href="https://www.google.com/maps/dir/?api=1&destination=Black River Park+2 Fir St, Observatory, Cape Town, 7925" target="_blank" class="text-blue-500 text-lg font-bold underline">Get Directions</a>\n'
         });
         marker.addListener('click', function () {

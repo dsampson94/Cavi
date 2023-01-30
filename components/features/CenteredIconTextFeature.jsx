@@ -59,7 +59,7 @@ export default function CenteredIconTextFeature() {
                 <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                     WHO WE ARE
                 </p>
-                <p className="mx-auto mt-12 text-2xl text-gray-500">
+                <p className="mx-auto mt-12 text-2xl text-gray-500 p-2">
                     CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our
                     world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer
                     experience in our stores and with our brands, simply extraordinary.
@@ -70,7 +70,7 @@ export default function CenteredIconTextFeature() {
                     <br /><br />CAVI Brands also operates numerous standalone branded stores, provides niched logistics services to strategic luxury partners and has
                     developed a leading digital capability in the eCommerce luxury market.
                 </p>
-                <div className="mt-32">
+                <div className="hidden sm:hidden md:block lg:block xl:block mt-32">
                     <div className="grid grid-cols-1 sm: grid-cols-2 gap-12 sm:grid-cols-2 lg:grid-cols-3">
                         { features.map((feature) => (
                             <div key={ feature.name } className="pt-6">
