@@ -8,6 +8,7 @@ import RightImageWithText from '../features/RightImageWithText';
 import Team from '../features/Team';
 import LogoCloud from '../features/LogoCloud';
 import LeftImageCSR from '../features/LeftImageCSR';
+import CareersOptions from '../features/CareersOption';
 
 const ContentContainer = ({ view, children }) => {
     switch (view) {
@@ -35,6 +36,10 @@ const ContentContainer = ({ view, children }) => {
             return <CsrPageContentContainer>
                 { children }
             </CsrPageContentContainer>;
+        case 'Careers':
+            return <CareerPageContentContainer>
+                { children }
+            </CareerPageContentContainer>;
         default:
             return <HomePageContentContainer>
                 { children }
@@ -138,3 +143,17 @@ const CsrPageContentContainer = () => {
     );
 };
 
+const CareerPageContentContainer = () => {
+
+    const contactScrollToRef = useRef('contactScrollToFooter');
+
+    return (
+        <div>
+            <div className="isolate bg-white">
+                <Navbar contactScrollToRef={ contactScrollToRef } />
+                <CareersOptions />
+                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            </div>
+        </div>
+    );
+};

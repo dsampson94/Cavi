@@ -5,20 +5,20 @@ import React from 'react';
 const features = [
     {
         id: 1,
+        name: 'In Store',
+        description:
+            'We operates numerous standalone branded stores, including the iconic ARC Store retail chain.',
+        icon: BuildingStorefrontIcon,
+        image: '/arcstore.png'
+    },
+    {
+        id: 2,
         name: 'Distribution',
         description:
 
             'Through our companies, we deliver world-class distribution services to luxury beauty, fashion and accessories brands across Southern Africa.',
         icon: TruckIcon,
         image: '/warehouse.jpeg'
-    },
-    {
-        id: 2,
-        name: 'In Store',
-        description:
-            'We operates numerous standalone branded stores, including the iconic ARC Store retail chain.',
-        icon: BuildingStorefrontIcon,
-        image: '/arcstore.png'
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ const features = [
         image: '/digi.png'
     },
     {
-        id: 2,
+        id: 4,
         name: 'Proud of Our Diversity',
         description:
             'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
@@ -37,13 +37,14 @@ const features = [
         image: '/cavicpt.jpg'
     },
     {
+        id: 5,
         name: 'CAVI Cares',
         description: 'Our vision is to help to create a better future for sustainable change in Southern Africa by changing the lives of young South Africans through education.',
         icon: ServerIcon,
         image: '/cavicares.png'
     },
     {
-        id: 1,
+        id: 6,
         name: 'Offices in Johannesburg and Cape Town',
         description:
             'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',

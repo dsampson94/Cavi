@@ -52,13 +52,14 @@ export default function Navbar({ contactScrollToRef }) {
     return (
         <header className="sticky top-0 z-40 shadow-lg br-04 rounded-2xl">
             <Popover className="relative bg-white">
-                <nav className="mx-auto flex max-w-7xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
-                    <div className="flex justify-start lg:w-0 lg:flex-1">
+                <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
+                    <div className="flex justify-start lg:w-0 lg:flex-1 mt-2 min-w-32">
                         <a href="/">
                             <Image src={ '/cavi-blue-logo.png' }
                                    alt={ 'cavi logo' }
-                                   height={ 120 }
-                                   width={ 200 } />
+                                   height={ 200 }
+                                   width={ 200 }
+                                   className="h-18 min-w-32" />
                         </a>
                     </div>
                     <div className="-my-2 -mr-2 md:hidden">
@@ -133,12 +134,7 @@ export default function Navbar({ contactScrollToRef }) {
                                 { item.name }
                             </a>
                         )) }
-                        <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                            <a className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700"
-                               onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
-                                Contact Us
-                            </a>
-                        </div>
+
                         <div className="flex">
                             { socials.map((item) => (
                                 <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500 mt-2 mr-2" target="_blank">
@@ -146,6 +142,10 @@ export default function Navbar({ contactScrollToRef }) {
                                     <item.icon className="h-6 w-6" aria-hidden="true" />
                                 </a>
                             )) }
+                            <a className="ml-8 text-sm inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-2 py-2 text-base text-white shadow-sm hover:bg-green-700"
+                               onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
+                                Contact Us
+                            </a>
                         </div>
                     </Popover.Group>
                 </nav>
@@ -168,8 +168,8 @@ export default function Navbar({ contactScrollToRef }) {
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <Image src={ '/cavi-blue-logo.png' }
-                                               alt={ 'rss logo' }
-                                               height={ 120 }
+                                               alt={ 'logo' }
+                                               height={ 200 }
                                                width={ 150 } />
                                     </div>
                                     <div className="-mr-2">
