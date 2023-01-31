@@ -106,7 +106,8 @@ export const WarningIconColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }>
+      <div className={ 'table__body__row__td-container' }
+           style={ { marginLeft: '24px' } }>
         <ToolTip text={ value } />
         <SVGIcon name={ WARNING }
                  fill={ '#EE9A94' } />
@@ -240,7 +241,8 @@ export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) 
   return <td onClick={ noOp() }
              key={ dataIndex }>
     { !isDropdownRow &&
-    <div className={ 'table__body__row__td-container' }>
+    <div className={ 'table__body__row__td-container' }
+         style={ { margin: '6px 0 6px 0' } }>
       { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
       <div className={ 'table__body__row__td-upper--deficit' }
            style={ {
@@ -570,13 +572,13 @@ export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
       {/*<ToolTip text={ value } />*/ }
       { (name) ? name :
         (probe) ? probe :
-          (value) ? value : '' }
+          (value) ? value.toString() : '' }
     </div>
   </td>;
 };
 
 FieldSetupNameColumn.propTypes = {
-  value: string
+  value: string || number
 };
 
 export const FieldSetupInputColumn = ({

@@ -13,9 +13,20 @@
   user-select: none;
   height: util.rem(55);
   margin-bottom: util.rem(4);
-  border-bottom: util.rem(3) solid grey;
-  max-width: 99.7%;
+  border-bottom: util.rem(1) solid grey;
+  box-shadow: util.rem(0) util.rem(0) util.rem(5) map.get(color.$colorMap, dark-mode-grey);
+  max-width: 99.99%;
   z-index: 99;
+
+  &__left-buttons {
+    display: flex;
+
+    &--buttons {
+      @media (max-width: 1000px) {
+        display: none;
+      }
+    }
+  }
 
   @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
     margin-bottom: util.rem(50);
@@ -135,6 +146,11 @@
       display: flex;
       margin-top: util.rem(8);
       margin-right: util.rem(10);
+
+      &--modal {
+        display: flex;
+        flex-direction: row;
+      }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
         padding-top: util.rem(55);

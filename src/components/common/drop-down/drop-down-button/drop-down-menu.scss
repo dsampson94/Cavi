@@ -134,12 +134,18 @@
       transform: translateX(-5%);
 
       &-inner {
-        width: 80%;
+        width: 100%;
 
         & section {
           display: flex;
           justify-content: center;
           position: relative;
+        }
+
+        &-menu {
+          @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+            display: none;
+          }
         }
 
         & p {

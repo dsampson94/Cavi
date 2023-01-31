@@ -68,7 +68,7 @@ import ToolTip from '../tool-tip/ToolTip';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left, tooltip, grid }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left, tooltip, grid, menu }) => {
 
   const { localActiveTheme } = useTheme(false);
 
@@ -89,7 +89,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
            height={ height }
            width={ width }
            fill={ getIconFill(localActiveTheme, fill, name) }
-           viewBox={ getViewBox(name, tiny, chart, tall) }
+           viewBox={ getViewBox(name, tiny, chart, tall, menu) }
            className={ getClassNames('svg', { tall }) }>
         { getPath(name) }
       </svg>
@@ -98,14 +98,15 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
   );
 };
 
-const getViewBox = (name, tiny, chart, tall) => {
+const getViewBox = (name, tiny, chart, tall, menu) => {
   switch (name) {
     case DOWN_ARROW:
       return '10 -1 50 100';
     case OPEN_MENU:
       return '10 -3 50 100';
     case SINGLE_DROPDOWN:
-      return '9 0 35 80';
+      if (menu) return '10 -10 10 42';
+      else return '9 0 35 80';
     case CIRCLE_DROPDOWN:
       return '9 1 35 80';
     case DOUBLE_DROPDOWN:

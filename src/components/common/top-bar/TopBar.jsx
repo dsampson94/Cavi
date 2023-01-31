@@ -163,7 +163,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
             { location.pathname.includes('dashboard') &&
             <div className="top-bar__left__breadcrumb__container">
-              <p>{location.pathname.split('/')[1].charAt(0).toUpperCase() + location.pathname.split('/')[1].slice(1)}</p>
+              <p>{ location.pathname.split('/')[1].charAt(0).toUpperCase() + location.pathname.split('/')[1].slice(1) }</p>
               <p>{ ` / ${ location.pathname.split('/')[2] }` }</p>
             </div> }
 
@@ -173,43 +173,10 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
         <div className={ 'top-bar__right' }>
 
-          <div className="top-bar__left__buttons">
-
-            { (location?.pathname?.includes('chart') ||
-              location?.pathname?.includes('setup') ||
-              location?.pathname?.includes('report') ||
-              location?.pathname?.includes('temperature')) &&
-            <Button icon={ TABLE_LIST }
-                    tooltip={ RECOMMENDATION_LIST }
-                    onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) } /> }
-
-            { !location?.pathname?.includes('dashboard') && !location?.pathname?.includes('setup') &&
-            <Button icon={ FIELD_SETTINGS }
-                    tooltip={ FIELD_SETUP_STRING }
-                    onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) } /> }
-
-            { !location?.pathname?.includes('overview') && <>
-              <Button icon={ PRINT_ICON }
-                      onClick={ getPDF }
-                      tooltip={ PRINT } />
-
-              <Button icon={ EMAIL_RECOMMENDATIONS }
-                      onClick={ getPDFAndEmail }
-                      tooltip={ EMAIL } />
-
-
-              <Button icon={ PROBES_MONITOR }
-                      tooltip={ PROBES_MONITOR_STRING } />
-
-              <Button icon={ WEATHER_STATION_ICON }
-                      tooltip={ WEATHER_STATION } />
-
-              <Button icon={ MAPS_ICON }
-                      tooltip={ MAPS } />
-            </> }
-
+          <div className="top-bar__left-buttons--buttons">
+            <TopBarButtons getPDF={ getPDF }
+                           getPDFAndEmail={ getPDFAndEmail } />
           </div>
-
 
           <TextInput placeholder={ 'Find Last Readings' }
                      topbar />
@@ -219,6 +186,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                           fill={ '#53a5df' }
                           onLogOutClick={ () => logout() }
                           menu={ TOPBAR_OPTIONS }
+                          getPDF={ getPDF }
+                          getPDFAndEmail={ getPDFAndEmail }
                           profile
                           tall
                           left />
@@ -243,3 +212,49 @@ TopBar.propTypes = {
 };
 
 export default TopBar;
+
+export const TopBarButtons = ({ getPDF, getPDFAndEmail, modal }) => {
+
+  const { groupName, clientName } = useParams();
+  const history = useHistory();
+  const location = useLocation();
+
+  return (
+    <div className={ modal ? 'top-bar__left__buttons-modal' : 'top-bar__left__buttons' }>
+
+      { (location?.pathname?.includes('chart') ||
+        location?.pathname?.includes('setup') ||
+        location?.pathname?.includes('report') ||
+        location?.pathname?.includes('temperature')) &&
+      <Button icon={ TABLE_LIST }
+              tooltip={ RECOMMENDATION_LIST }
+              onClick={ () => history.push(`/client/${ groupName }/${ clientName }`) } /> }
+
+      { !location?.pathname?.includes('dashboard') && !location?.pathname?.includes('setup') &&
+      <Button icon={ FIELD_SETTINGS }
+              tooltip={ FIELD_SETUP_STRING }
+              onClick={ () => history.push(`/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`) } /> }
+
+      { !location?.pathname?.includes('overview') && <>
+        <Button icon={ PRINT_ICON }
+                onClick={ getPDF }
+                tooltip={ PRINT } />
+
+        <Button icon={ EMAIL_RECOMMENDATIONS }
+                onClick={ getPDFAndEmail }
+                tooltip={ EMAIL } />
+
+
+        <Button icon={ PROBES_MONITOR }
+                tooltip={ PROBES_MONITOR_STRING } />
+
+        <Button icon={ WEATHER_STATION_ICON }
+                tooltip={ WEATHER_STATION } />
+
+        <Button icon={ MAPS_ICON }
+                tooltip={ MAPS } />
+      </> }
+
+    </div>
+  );
+};

@@ -225,6 +225,7 @@ export const CHART_USAGE_MENU = 'chart_usage_menu';
 export const CHART_USAGE_SASRI_MENU = 'chart_usage_sasri_menu';
 export const CHART_ACTIVE_PERIOD = 'chart_active_period';
 export const TOPBAR_OPTIONS = 'topbar_options';
+export const SMALL_SCREEN_DROPDOWN = 'small_screen_dropdown';
 export const FIELD_SETUP_LIST_CONTAINER = 'field_setup_list_container';
 export const HIDDEN_MENU = 'empty_menu';
 export const INFO_CIRCLE = 'info_circle';

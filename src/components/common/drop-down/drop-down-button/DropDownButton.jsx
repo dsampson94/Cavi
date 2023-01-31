@@ -30,6 +30,7 @@ import Button from '../../button/Button';
 import ThemeToggle from '../../theme-toggle/ThemeToggle';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import CheckboxInput from '../../input/checkbox/CheckboxInput';
+import { TopBarButtons } from '../../top-bar/TopBar';
 
 import './drop-down-menu.scss';
 
@@ -54,7 +55,9 @@ const DropDownButton = ({
                           setSelectedOption,
                           tall,
                           select,
-                          settings
+                          settings,
+                          getPDF,
+                          getPDFAndEmail
                         }) => {
   return (
     <div className={ className }
@@ -64,7 +67,8 @@ const DropDownButton = ({
                fill={ fill }
                tiny={ tiny }
                profile={ profile }
-               tall={ tall } />
+               tall={ tall }
+               menu={ menu } />
 
       { !select &&
       <DropDownMenuFixed menu={ menu }
@@ -77,7 +81,9 @@ const DropDownButton = ({
                          left={ left }
                          period={ period }
                          mid={ mid }
-                         settings={ settings } /> }
+                         settings={ settings }
+                         getPDF={ getPDF }
+                         getPDFAndEmail={ getPDFAndEmail } /> }
 
       { select &&
       <DropDownMenuGeneric menuData={ menuData }
@@ -131,7 +137,9 @@ const DropDownMenuFixed = ({
                              left,
                              period,
                              mid,
-                             settings
+                             settings,
+                             getPDF,
+                             getPDFAndEmail
                            }) => {
 
   const history = useHistory();
@@ -263,6 +271,15 @@ const DropDownMenuFixed = ({
 
         { menu === TOPBAR_OPTIONS &&
         <div className={ 'dropdown__popup--logout-inner' }>
+
+          <section onMouseOver={ () => showHiddenText(1, true) }
+                   onMouseLeave={ () => showHiddenText(1, false) }>
+            <div className="dropdown__popup--logout-inner-menu">
+              <TopBarButtons getPDF={ getPDF }
+                             getPDFAndEmail={ getPDFAndEmail }
+                             modal />
+            </div>
+          </section>
 
           <section onMouseOver={ () => showHiddenText(1, true) }
                    onMouseLeave={ () => showHiddenText(1, false) }>
