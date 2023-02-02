@@ -9,6 +9,12 @@ import Team from '../features/Team';
 import LogoCloud from '../features/LogoCloud';
 import LeftImageCSR from '../features/LeftImageCSR';
 import CareersOptions from '../features/CareersOption';
+import BusinessContainer from '../features/BusinessesContainer';
+import BusinessesImagesDermalogica from '../features/BusinessesImagesDermalogica';
+import BusinessesImagesPCD from '../features/BusinessesImagesPCD';
+import BusinessesImagesPCG from '../features/BusinessesImagesPCG';
+import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
+import BusinessesImageARC from '../features/BusinessesImagesARC';
 
 const ContentContainer = ({ view, children }) => {
     switch (view) {
@@ -106,7 +112,12 @@ const BusinessesPageContentContainer = () => {
         <div>
             <div className="isolate bg-white">
                 <Navbar contactScrollToRef={ contactScrollToRef } />
-                <LogoCloud />
+                <BusinessContainer />
+                <BusinessesImagesDermalogica />
+                <BusinessesImagesPCD />
+                <BusinessesImagesPCG />
+                <BusinessesImagesPDS />
+                <BusinessesImageARC />
                 <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
             </div>
         </div>

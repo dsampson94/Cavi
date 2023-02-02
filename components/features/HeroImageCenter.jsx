@@ -14,7 +14,6 @@ export default function HeroImageCenter() {
     return (
         <div className="bg-white pt-16">
             <main>
-                <p className={ 'text-center text-xs ' }>{ 'v.0.4 - Includes feedback, compressed images/videos, maps, pages.' }</p>
                 <div>
                     {/* Hero card */ }
                     <div className="relative">
