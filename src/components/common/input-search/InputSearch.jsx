@@ -37,7 +37,7 @@ const InputSearch = ({
   const dispatch = useDispatch();
 
   const [searchString, setSearchString] = useState(persistSearchString ? persistSearchString : '');
-  const [searchTypeIsClient, setSearchTypeIsClient] = useState(true);
+  const [searchTypeIsClient, setSearchTypeIsClient] = useState(false);
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
@@ -150,7 +150,7 @@ const InputSearch = ({
     <div className={ getClassNames('search', { overview }) }>
       <div className={ 'search__icon' } onClick={ () => setSearchTypeIsClient(!searchTypeIsClient) }>
         <ToolTip text={ !searchTypeIsClient ? 'Search by Client' : 'Search by Field' } />
-        <SVGIcon name={ SEARCH } fill={ searchTypeIsClient ? '#0000FF' : '#607CB1' } />
+        <SVGIcon name={ SEARCH } fill={ !searchTypeIsClient ? '#0000FF' : '#607CB1' } />
       </div>
       <input autoFocus
              name={ name }

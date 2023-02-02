@@ -39,7 +39,6 @@ import InputSearch from '../input-search/InputSearch';
 import Button from '../button/Button';
 
 import './side-bar.scss';
-import SearchModal from '../modal/SearchModal';
 
 const SideBar = ({
                    showSideBar,

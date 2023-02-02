@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 
-import { CLIENT_FIELDS, CLIENT_FIELDS_MIDBAR, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
+import { CLIENT_FIELDS, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
@@ -23,8 +23,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
 
   useEffect(() => {
-      setActiveTableData(mappedFieldList);
-    }, [mappedFieldList]);
+    setActiveTableData(mappedFieldList);
+  }, [mappedFieldList]);
 
   useEffect(() => {
     if (!selectedIndex) return;
@@ -49,15 +49,15 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
-        {/*<MidBar view={ CLIENT_FIELDS_MIDBAR }*/}
-        {/*        filteredTableData={ filteredTableData }*/}
-        {/*        hasSubGroups={ hasSubGroups }*/}
-        {/*        showClientsSideBar={ showClientsSideBar }*/}
-        {/*        setFilteredTableData={ setFilteredTableData }*/}
-        {/*        setActiveTableData={ setActiveTableData }*/}
-        {/*        toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }*/}
-        {/*        reloadToggleActive={ reloadToggleActive }*/}
-        {/*        setReloadToggleActive={ setReloadToggleActive } />*/}
+        {/*<MidBar view={ CLIENT_FIELDS_MIDBAR }*/ }
+        {/*        filteredTableData={ filteredTableData }*/ }
+        {/*        hasSubGroups={ hasSubGroups }*/ }
+        {/*        showClientsSideBar={ showClientsSideBar }*/ }
+        {/*        setFilteredTableData={ setFilteredTableData }*/ }
+        {/*        setActiveTableData={ setActiveTableData }*/ }
+        {/*        toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }*/ }
+        {/*        reloadToggleActive={ reloadToggleActive }*/ }
+        {/*        setReloadToggleActive={ setReloadToggleActive } />*/ }
 
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />
@@ -69,7 +69,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setSelectedDropdownObject={ setSelectedDropdownObject }
-                 setActiveTableData={ setActiveTableData } />
+                 setActiveTableData={ setActiveTableData }
+                 toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
         </div>
 
       </div>

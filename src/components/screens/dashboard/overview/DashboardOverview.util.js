@@ -150,7 +150,8 @@ const FrequencyIndicator = (value) => {
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (
-        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__frequency__container">
+        <div key={ index }
+             className="dashboard-overview__list__item__subheader__icon__grid__frequency__container">
           <ToolTip text={ number.fieldName } grid />
           <SVGIcon name={ VERY_SATISFIED } fill={ number.color } />
         </div>
@@ -165,8 +166,6 @@ FrequencyIndicator.propTypes = {
 
 const DeficitIndicator = (value) => {
 
-  console.log(value);
-
   const objectValues = Object.values(value.iov)[0];
 
   const innerFields = Object.values(value)[1];
@@ -174,7 +173,7 @@ const DeficitIndicator = (value) => {
   for (const [key, value] of Object.entries(innerFields)) {
     fieldList.push({ key });
   }
-  console.log(objectValues?.kleuronderhex);
+
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (

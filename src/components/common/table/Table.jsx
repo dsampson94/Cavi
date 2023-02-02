@@ -67,7 +67,8 @@ const Table = ({
                  haValueToUpdate,
                  setHaValueToUpdate,
                  updateFieldDetails,
-                 setUpdatedFieldList
+                 setUpdatedFieldList,
+                 toggleDropdowns
                }) => {
 
   switch (tableName) {
@@ -76,7 +77,8 @@ const Table = ({
                                 activeTableData={ activeTableData }
                                 hiddenColumns={ hiddenColumns }
                                 setSelectedIndex={ setSelectedIndex }
-                                setSelectedDropdownObject={ setSelectedDropdownObject } />;
+                                setSelectedDropdownObject={ setSelectedDropdownObject }
+                                toggleDropdowns={ toggleDropdowns } />;
     case FIELD_CHARTS_MODAL_VIEW:
     case FIELD_SETUP_VIEW:
     case FIELD_REPORTS_VIEW:
@@ -96,7 +98,7 @@ const Table = ({
 
 export default Table;
 
-const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject }) => {
+const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject, toggleDropdowns }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -159,7 +161,8 @@ const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelec
                                          setSelectedIndex={ setSelectedIndex }
                                          setSelectedDropdownObject={ setSelectedDropdownObject }
                                          rowIndex={ rowIndex }
-                                         object={ object } />;
+                                         object={ object }
+                                         toggleDropdowns={ toggleDropdowns } />;
             case 3:
               return <PhotoIconColumn dataIndex={ dataIndex }
                                       value={ value } />;

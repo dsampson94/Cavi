@@ -122,15 +122,22 @@ WarningIconColumn.propTypes = {
   value: string
 };
 
-export const DropdownIconColumn = ({ dataIndex, value, setSelectedIndex, setSelectedDropdownObject, rowIndex, object }) => {
+export const DropdownIconColumn = ({
+                                     dataIndex,
+                                     value,
+                                     setSelectedIndex,
+                                     setSelectedDropdownObject,
+                                     rowIndex,
+                                     object,
+                                     toggleDropdowns
+                                   }) => {
   if (value)
-    return <td key={ dataIndex }>
+    return <td key={ dataIndex } ondblclick={ toggleDropdowns }>
       { (value?.tooltip) &&
       <div className={ 'table__body__row__td-container' }
-           onClick={ () => {
-             setSelectedIndex(rowIndex);
-             setSelectedDropdownObject(object);
-           } }>
+        // onClick={ () => {setSelectedIndex(rowIndex);setSelectedDropdownObject(object); } }
+           onClick={ toggleDropdowns }>
+
         <ToolTip text={ value?.tooltip } />
         <SVGIcon name={ DROPDOWN }
                  fill={ '#53A5DF' } />

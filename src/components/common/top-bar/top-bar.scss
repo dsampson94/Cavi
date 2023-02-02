@@ -28,10 +28,6 @@
     }
   }
 
-  @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-    margin-bottom: util.rem(50);
-  }
-
   @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
     height: util.rem(55);
     margin-bottom: util.rem(4);
@@ -115,12 +111,15 @@
         font-family: "Roboto Thin";
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-          font-size: util.rem(12);
+          font-size: util.rem(10);
+          max-width: util.rem(36);
           white-space: nowrap;
+          overflow: hidden;
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
           font-size: util.rem(18);
+          max-width: 100%
         }
 
         &:active {

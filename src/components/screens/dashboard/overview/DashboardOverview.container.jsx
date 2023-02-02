@@ -5,7 +5,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { mappedUserData } from '../../../common/side-bar/Sidebar.util';
 import { chooseRandom } from '../../../../tools/general/helpers.util';
 
-import { requestClientOverviewList, requestFullClientFieldList } from '../../../../redux/actions/client.action';
+import { requestClientOverviewList } from '../../../../redux/actions/client.action';
 import { getRequestParams } from '../../../../redux/endpoints';
 
 import DashboardOverview from './DashboardOverview';
@@ -14,7 +14,7 @@ const DashboardOverviewContainer = () => {
 
   const dispatch = useDispatch();
 
-  const [overviewOptionSelected, setOverviewOptionSelected] = useState(chooseRandom([1,2,3]));
+  const [overviewOptionSelected, setOverviewOptionSelected] = useState(chooseRandom([1, 2, 3]));
 
   const userOverviewList = useSelector(createSelector([state => state.client], client => client?.overviewList));
   const mappedClientsList = mappedUserData(userOverviewList, true);
