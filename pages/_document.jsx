@@ -27,6 +27,9 @@ export default class MyDocument extends Document {
                     <meta property="og:site_name" content="CAVI Brands" />
                     <meta property="og:image" itemProp="image" content="/social-share-logo.png" />
                     <meta property="og:type" content="website" />
+                    <meta property="og:image:type" content="image/png" />
+                    <meta property="og:image:width" content="256" />
+                    <meta property="og:image:height" content="256" />
 
                     {/* Google Maps */ }
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
