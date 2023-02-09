@@ -32,7 +32,7 @@ const features = [
         id: 4,
         name: 'Proud of Our Diversity',
         description:
-            'We are proudly African and embrace diversity.',
+            'We are proudly South African and embrace our diversity.',
         icon: UserGroupIcon,
         image: '/cavicpt.jpg'
     },
