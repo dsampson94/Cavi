@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
                             description: 'CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary.',
                             images: [
                                 {
-                                    url: '/caviwhitebacklogo.png',
+                                    url: '/favicon.ico',
                                     width: 600,
                                     height: 600,
                                     alt: 'CAVI Brands Logo'
