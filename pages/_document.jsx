@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
                     <meta property="og:site_name" content="CAVI Brands" />
-                    <meta property="og:image" itemProp="image" content="/android-chrome-192x192.png" />
+                    <meta property="og:image" itemProp="image" content="https://cavi-brands.vercel.app/android-chrome-192x192.png" />
                     <meta property="og:type" content="website" />
                     <meta property="og:image:type" content="image/png" />
 
