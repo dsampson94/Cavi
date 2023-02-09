@@ -18,9 +18,9 @@ export default class MyDocument extends Document {
                             description: 'CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary.',
                             images: [
                                 {
-                                    url: '/caviwhitebacklogo.png',
-                                    width: 300,
-                                    height: 300,
+                                    url: '/social-share-logo.png',
+                                    width: 600,
+                                    height: 600,
                                     alt: 'CAVI Brands Logo'
                                 }
                             ],
@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
                     <link rel="shortcut icon" href="../static/favicon.ico" />
                     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-                    <meta property="og:image" content="/caviwhitebacklogo.png" style={ { height: 300, width: 300 } } />
+                    <meta property="og:image" content="/social-share-logo.png" />
                     {/* Google Maps */ }
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
 
