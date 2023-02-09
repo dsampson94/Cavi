@@ -25,11 +25,9 @@ export default class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
                     <meta property="og:site_name" content="CAVI Brands" />
-                    <meta property="og:image" itemProp="image" content="/social-share-logo.png" />
+                    <meta property="og:image" itemProp="image" content="/android-chrome-192x192.png" />
                     <meta property="og:type" content="website" />
                     <meta property="og:image:type" content="image/png" />
-                    <meta property="og:image:width" content="256" />
-                    <meta property="og:image:height" content="256" />
 
                     {/* Google Maps */ }
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
