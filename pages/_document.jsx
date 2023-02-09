@@ -25,7 +25,9 @@ export default class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
                     <meta property="og:site_name" content="CAVI Brands" />
-                    <meta property="og:image" itemProp="image" content="https://cavi-brands.vercel.app/android-chrome-192x192.png" />
+                    <meta property="og:title" content="CAVI Brands - Leading luxury brand management company" />
+                    <meta property="og:description" content="CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary." />
+                    <meta property="og:image" itemProp="image" content="https://cavi-brands.vercel.app/social-share-logo.png" />
                     <meta property="og:type" content="website" />
                     <meta property="og:image:type" content="image/png" />
 
