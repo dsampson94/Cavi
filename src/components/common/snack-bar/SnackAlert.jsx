@@ -44,7 +44,7 @@ const SnackAlert = ({ status = SNACK_SUCCESS, message, closing }) => {
         { renderIcon(status) }
       </div>
       <div className="snack__title">
-        <p>{ message }</p>
+        <p>{ typeof message === 'string' ? message : 'Error' }</p>
       </div>
     </div>
   );

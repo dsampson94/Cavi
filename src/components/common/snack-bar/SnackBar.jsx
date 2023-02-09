@@ -39,7 +39,7 @@ class SnackBar extends Component {
   }
 
   doesNoticeExist(notices, noticeId) {
-    return !isUndefined(notices.find(({ id }) => id === noticeId));
+    return !isUndefined(notices?.find(({ id }) => id === noticeId));
   }
 
   addNewNotices() {
@@ -49,7 +49,7 @@ class SnackBar extends Component {
         this.setState(({ notices }) => ({
           notices: [...notices, notice]
         }), () => {
-          const newTimeout = setTimeout(() => this.closeNotice(notice.id), NOTICE_REMOVAL_TIMEOUT);
+          const newTimeout = setTimeout(() => this.closeNotice(notice?.id), NOTICE_REMOVAL_TIMEOUT);
           this.timeouts.push(newTimeout);
         });
       }
@@ -61,7 +61,7 @@ class SnackBar extends Component {
     notices.forEach((notice) => {
       if (!this.doesNoticeExistInProps(notice.id)) {
         this.setState(({ notices }) => ({
-          notices: notices.filter((_notice) => _notice.id !== notice.id)
+          notices: notices?.filter((_notice) => _notice?.id !== notice?.id)
         }));
       }
     });
@@ -69,8 +69,8 @@ class SnackBar extends Component {
 
   closeNotice(noticeId) {
     this.setState(({ notices }) => ({
-      notices: notices.map((notice) => {
-        if (notice.id !== noticeId) {
+      notices: notices?.map((notice) => {
+        if (notice?.id !== noticeId) {
           return notice;
         }
 
@@ -90,10 +90,10 @@ class SnackBar extends Component {
     const { notices } = this.state;
     return notices.map((notice) => (
       <SnackAlert
-        key={ notice.id }
-        status={ notice.alertType }
-        message={ notice.message }
-        closing={ notice.closing }
+        key={ notice?.id }
+        status={ notice?.alertType }
+        message={ notice?.message }
+        closing={ notice?.closing }
       />
     ));
   }
