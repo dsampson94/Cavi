@@ -2,13 +2,6 @@ export default function RightImageWithText() {
 
     return (
         <div className="relative bg-white">
-            <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 p-7 mt-12">
-                <img
-                    className="aspect-[16/9] object-cover rounded-xl shadow-xl"
-                    src="/fourps.jpg"
-                    alt=""
-                />
-            </div>
             <div className="mx-auto max-w-7xl">
                 <div className="relative z-10 lg:w-full lg:max-w-2xl">
                     <div className="relative py-12 px-6 sm:py-40 lg:py-56 lg:px-8 lg:pr-0">
@@ -45,6 +38,13 @@ export default function RightImageWithText() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 p-7 mt-12">
+                <img
+                    className="aspect-[16/9] object-cover rounded-xl shadow-xl"
+                    src="/fourps.jpg"
+                    alt=""
+                />
             </div>
         </div>
     );

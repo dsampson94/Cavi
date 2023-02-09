@@ -22,14 +22,13 @@ export default function HeroImageCenter() {
                             <div className="relative shadow-2xl sm:overflow-hidden sm:rounded-2xl">
                                 <div className="absolute inset-0 w-full h-full">
                                     <ImageCarousel images={ imagesList } />
-
                                     <div className="absolute inset-0 bg-gray-500 mix-blend-multiply" />
                                 </div>
                                 <div className="relative py-16 px-6 sm:py-24 lg:py-32 lg:px-8">
                                     <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                                        <span className="block text-white">The Home of Iconic Brands</span>
+                                        <span className="tracking-wider block text-white">The Home of Iconic Brands</span>
                                     </h1>
-                                    <p className="mx-auto mt-8 max-w-md text-center text-xl text-gray-200 sm:max-w-3xl">
+                                    <p className="tracking-wider mx-auto mt-8 max-w-md text-center text-xl text-gray-200 sm:max-w-3xl">
                                         We are dedicated to making every customer experience in our stores and with our
                                         brands, simply extraordinary.
                                     </p>
@@ -58,7 +57,7 @@ export default function HeroImageCenter() {
                     {/* Logo cloud */ }
                     <div className="bg-gray-100">
                         <div className="mx-auto max-w-7xl py-16 px-6 lg:px-8">
-                            <p className="text-center text-base font-semibold text-gray-500">
+                            <p className="tracking-wider text-center text-base font-semibold text-gray-500">
                                 Our Businesses
                             </p>
                             <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">

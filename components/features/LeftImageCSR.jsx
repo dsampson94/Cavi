@@ -40,29 +40,30 @@ export default function LeftImageCSR() {
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-start justify-end lg:order-first">
+                    <div className="flex items-center justify-center lg:order-first">
                         <img
                             src="/cavicares.png"
                             alt="cavicares"
-                            className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+                            className="w-72 lg:w-57 max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-full"
                             width={ 400 }
                             height={ 400 }
                         />
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center mt-36">
+            <div className="flex items-center justify-center mt-36 sm:flex-col lg:flex-row ">
                 <img
                     src="/cavikids.png"
                     alt="cavicares"
-                    className=" rounded-xl shadow-xl mr-24"
+                    className="h-72 rounded-xl shadow-xl"
                     width={ 550 }
                 />
                 <img
                     src="/cavikids1.png"
                     alt="cavicares"
-                    className=" rounded-xl shadow-xl"
+                    className="h-72 rounded-xl shadow-xl sm:mt-8 lg:mt-0 lg:ml-12"
                     width={ 550 }
+                    height={ 200 }
 
                 />
             </div>

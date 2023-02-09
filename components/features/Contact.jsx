@@ -31,7 +31,7 @@ const supportLinks = [
 
 export default function Contact({ contactScrollToRef }) {
     return (
-        <div className="bg-white pt-24">
+        <div className="bg-white">
             {/* Header */ }
             <div className="relative bg-gray-00 pb-16">
                 <div className="absolute inset-0">
@@ -59,7 +59,7 @@ export default function Contact({ contactScrollToRef }) {
                                             <a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193"
                                                target="_blank" className="text-md font-bold">11-13 St Andrews Road, Parktown, 2193, <br />
                                                 Johannesburg, Gauteng,
-                                                South Africa</a>
+                                                South Africa</a><br/>
                                         </div>
                                     </div>
                                     <div className="flex">

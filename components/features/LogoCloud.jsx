@@ -10,19 +10,19 @@ export default function LogoCloud() {
                 </p>
                 <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5 sm:grid-cols-3">
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 ">
-                        <Image src={ '/dermalogica.png' }
+                        <Image src={ '/brands/amouage.png' }
+                               alt={ 'rss logo' }
+                               height={ 200 }
+                               width={ 200 } />
+                    </div>
+                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                        <Image src={ '/brands/bulgari.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/chanel.png' }
-                               alt={ 'rss logo' }
-                               height={ 200 }
-                               width={ 200 } />
-                    </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <Image src={ '/pcg.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />

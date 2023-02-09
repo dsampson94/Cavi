@@ -32,7 +32,7 @@ const features = [
         id: 4,
         name: 'Proud of Our Diversity',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'We are proudly African and embrace diversity.',
         icon: UserGroupIcon,
         image: '/cavicpt.jpg'
     },
@@ -47,7 +47,7 @@ const features = [
         id: 6,
         name: 'Offices in Johannesburg and Cape Town',
         description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+            'With offices situated in Parktown, Johannesburg and Observatory, Cape Town we are local to South Africa\'s two largest luxury markets.',
         icon: GlobeEuropeAfricaIcon,
         image: '/cavicampus.jpg'
     }
@@ -57,10 +57,10 @@ export default function CenteredIconTextFeature() {
     return (
         <div className="relative bg-white py-16 sm:py-16 lg:py-16">
             <div className="mx-auto max-w-md px-2 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
-                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-3xl tracking-widest text-blue-600 sm:text-4xl">
                     WHO WE ARE
                 </p>
-                <p className="mx-auto mt-12 text-2xl text-gray-500 p-2">
+                <p className="mx-auto mt-12 text-xl text-gray-500 p-4">
                     CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our
                     world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer
                     experience in our stores and with our brands, simply extraordinary.
