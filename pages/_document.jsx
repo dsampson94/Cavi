@@ -19,8 +19,8 @@ export default class MyDocument extends Document {
                             images: [
                                 {
                                     url: '/caviwhitebacklogo.png',
-                                    width: 600,
-                                    height: 600,
+                                    width: 300,
+                                    height: 300,
                                     alt: 'CAVI Brands Logo'
                                 }
                             ],
@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
                     <link rel="shortcut icon" href="../static/favicon.ico" />
                     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-                    <meta property="og:image" content="/caviwhitebacklogo.png" />
+                    <meta property="og:image" content="/caviwhitebacklogo.png" style={ { height: 300, width: 300 } } />
                     {/* Google Maps */ }
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
 
