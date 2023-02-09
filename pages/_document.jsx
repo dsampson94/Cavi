@@ -13,19 +13,40 @@ export default class MyDocument extends Document {
                         title="CAVI Brands - Leading luxury brand management company"
                         description="CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary."
                         openGraph={ {
-                            url: '/',
+                            url: 'https://cavibrands.com/',
                             title: 'CAVI Brands - Leading luxury brand management company',
                             description: 'CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary.',
                             images: [
                                 {
-                                    url: '/social-share-logo.png',
-                                    width: 600,
-                                    height: 600,
+                                    url: 'https://cavibrands.com/social-share-logo.png',
                                     alt: 'CAVI Brands Logo'
                                 }
                             ],
-                            site_name: 'CAVI Brands'
+                            site_name: 'CAVI Brands',
+                            type: 'website'
                         } }
+                        twitter={{
+                            cardType: 'summary_large_image'
+                        }}
+                        canonical="https://cavibrands.com/"
+                        additionalMetaTags={[
+                            {
+                                name: 'keywords',
+                                content: 'CAVI, Brands, luxury, brand management, Southern Africa, customers, experience'
+                            },
+                            {
+                                property: 'og:url',
+                                content: 'https://cavibrands.com/'
+                            },
+                            {
+                                property: 'og:type',
+                                content: 'website'
+                            },
+                            {
+                                property: 'og:site_name',
+                                content: 'CAVI Brands'
+                            }
+                        ]}
                     />
                     <meta charSet="utf-8" />
                     <link rel="shortcut icon" href="../static/favicon.ico" />
