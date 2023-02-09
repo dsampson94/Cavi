@@ -16,21 +16,18 @@ export default class MyDocument extends Document {
                             url: '/',
                             title: 'CAVI Brands - Leading luxury brand management company',
                             description: 'CAVI Brands is a business motivated by a passion for luxury across Southern Africa. We combine world leading brands with our extraordinary people, our world class expertise, a profound understanding of our local customers, and an intimate knowledge of luxury. We are dedicated to making every customer experience in our stores and with our brands, simply extraordinary.',
-                            images: [
-                                {
-                                    url: '/social-share-logo.png',
-                                    alt: 'CAVI Brands Logo'
-                                }
-                            ],
                             siteName: 'CAVI Brands'
                         } }
                     />
                     <meta charSet="utf-8" />
-                    <meta property="og:image" content="/social-share-logo.png" />
-
                     <link rel="shortcut icon" href="../static/favicon.ico" />
                     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
                     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+                    <meta property="og:site_name" content="CAVI Brands" />
+                    <meta property="og:image" itemProp="image" content="/social-share-logo.png" />
+                    <meta property="og:type" content="website" />
+
                     {/* Google Maps */ }
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
 
