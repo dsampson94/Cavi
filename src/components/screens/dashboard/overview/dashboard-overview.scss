@@ -173,10 +173,10 @@
     justify-content: center;
     border-top-left-radius: map.get(radius.$border-radius, small);
     border-top-right-radius: map.get(radius.$border-radius, small);
-    font-size: util.rem(9);
+    font-size: util.rem(14);
     height: 50%;
     margin-top: util.rem(4);
-    width: util.rem(20)
+    width: util.rem(26)
   }
 
   &__lower {
@@ -184,10 +184,10 @@
     justify-content: center;
     border-bottom-left-radius: map.get(radius.$border-radius, small);
     border-bottom-right-radius: map.get(radius.$border-radius, small);
-    font-size: util.rem(9);
+    font-size: util.rem(14);
     height: 50%;
     margin-right: util.rem(4);
-    width: util.rem(20)
+    width: util.rem(26)
   }
 }
 
@@ -201,7 +201,7 @@
     margin-top: util.rem(2);
     border-radius: map.get(radius.$border-radius, large);
     margin-right: util.rem(1);
-    width: util.rem(23)
+    width: util.rem(28)
   }
 
   &__text {

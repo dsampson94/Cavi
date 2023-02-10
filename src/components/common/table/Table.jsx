@@ -564,15 +564,13 @@ const FieldSetupTable = ({
       }
 
       return (
-        <>
-          <tr className={ 'table__body__row' }
-              data-id={ object?.[''] }
-              onClick={ () => setSelectedIndex(object) }
-              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
-              key={ generateId() }>
-            { tableDataElements }
-          </tr>
-        </>
+        <tr className={ 'table__body__row' }
+            data-id={ object?.[''] }
+            onClick={ () => setSelectedIndex(object) }
+            onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+            key={ generateId() }>
+          { tableDataElements }
+        </tr>
       );
     });
 

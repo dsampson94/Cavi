@@ -43,41 +43,16 @@
     height: 100%;
     width: 70%;
 
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-      margin-bottom: util.rem(8);
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      margin-bottom: util.rem(0);
-    }
-
     &__divider {
       display: flex;
       border-right: util.rem(1) solid map.get(color.$colorMap, palette-blue-1);
       height: 80%;
-      width: 20%;
+      margin-left: util.rem(5);
+      width: util.rem(200);
       align-self: center;
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        min-width: util.rem(120);
-        border: none;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        border-right: util.rem(1) solid map.get(color.$colorMap, palette-blue-1);
-        width: 20%;
-      }
 
       button {
         align-self: center;
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-          display: none;
-        }
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-          display: flex;
-        }
       }
     }
 
@@ -87,8 +62,7 @@
 
       @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
         margin-left: 0;
-        margin-top: util.rem(10);
-        min-width: 104%;
+        margin-top: util.rem(5);
         overflow: hidden;
       }
 

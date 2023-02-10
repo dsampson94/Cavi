@@ -283,10 +283,19 @@ body.dark-mode {
     color: map.get(color.$colorMap, very-light-grey);
   }
 
+  .dropdown__popup--settings,
+  .field-charts-modal,
   .dropdown__popup--logout {
     transition: 0.3s;
     color: map.get(color.$colorMap, light-mode-white);
     background-color: map.get(color.$colorMap, dark-mode-grey);
+    border: util.rem(1) solid map.get(color.$colorMap, white);
+  }
+
+  .field-chart__top-bar--right--datebar {
+    > button {
+      background-color: map.get(color.$colorMap, dark-mode-white);
+    }
   }
 
   .checkbox-input__input--forecast {

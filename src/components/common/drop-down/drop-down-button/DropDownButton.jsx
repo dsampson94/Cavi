@@ -208,11 +208,11 @@ const DropDownMenuFixed = ({
                     lowerLabel={ getTopBarValue()[7] } datebar spaced />
           </div> }
 
-          <div style={ { display: 'flex', textDecoration: 'underline', marginBottom: '2px' } }>
+          <div style={ { display: 'flex', textDecoration: 'underline', marginLeft: '-5px' } }>
             <div>{ 'Probes on field:' }</div>
 
             { Object.keys(menuData[0])?.map((key) => {
-              return <div style={ { color: 'blue' } }>{ key }</div>;
+              return <div style={ { color: 'lightblue' } }>{ key }</div>;
             }) }
           </div>
           <div>{ menuData[1] }</div>
