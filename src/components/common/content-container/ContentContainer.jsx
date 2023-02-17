@@ -1,10 +1,7 @@
 import React from 'react';
 import { arrayOf, node, oneOfType } from 'prop-types';
-import { useHistory, useRouteMatch } from 'react-router';
 
 import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
-
-import { Routes } from '../../../routes';
 
 import { DASHBOARD } from '../../../tools/general/system-variables.util';
 
@@ -12,7 +9,7 @@ import { mappedUserData } from '../side-bar/Sidebar.util';
 
 import TopBar from '../top-bar/TopBar';
 import SideBar from '../side-bar/SideBar';
-import MidBar from '../mid-bar/MidBar';
+import TabBar from '../tab-bar/TabBar';
 
 import './content-container.scss';
 
@@ -55,20 +52,8 @@ export default ContentContainer;
 
 const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar, clientRequestParams }) => {
 
-  const history = useHistory();
-  const { path } = useRouteMatch();
-
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
-
-  const handleAssistantClick = () => history.push(Routes.ASSISTANT);
-  const handleOverviewClick = () => history.push(Routes.OVERVIEW);
-  const handleMonitorProbesClick = () => history.push(Routes.MONITOR);
-  const handleLastReadingsClick = () => history.push(Routes.LAST_READINGS);
-  const handleNeglectedClick = () => history.push(Routes.NEGLECTED_FIELDS);
-  const handleEmailReadingsClick = () => history.push(Routes.EMAIL_READINGS);
-  const handleRawReadingsClick = () => history.push(Routes.RAW_READINGS);
-  const handleIrricomsClick = () => history.push(Routes.CHECK_IRRICOMS);
 
   return (
     <div className="content-container">
@@ -85,16 +70,7 @@ const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar
 
         <div className="content-container__screen--dashboard">
 
-          <MidBar view={ view }
-                  activePath={ path }
-                  handleAssistantClick={ handleAssistantClick }
-                  handleOverviewClick={ handleOverviewClick }
-                  handleMonitorProbesClick={ handleMonitorProbesClick }
-                  handlelastReadingsClick={ handleLastReadingsClick }
-                  handleNeglectedClick={ handleNeglectedClick }
-                  handleEmailReadingsClick={ handleEmailReadingsClick }
-                  handleRawReadingsClick={ handleRawReadingsClick }
-                  handleIrricomsClick={ handleIrricomsClick } />
+          <TabBar />
 
           { children }
 
@@ -126,7 +102,7 @@ const ClientFieldContentContainer = ({
     <div className="content-container">
       <TopBar showSideBar={ showSideBar }
               setShowSideBar={ setShowSideBar }
-              setActiveFieldName={setActiveFieldName}
+              setActiveFieldName={ setActiveFieldName }
               clientRequestParams={ clientRequestParams }
               mappedFieldList={ mappedFieldList }
               view={ view } />

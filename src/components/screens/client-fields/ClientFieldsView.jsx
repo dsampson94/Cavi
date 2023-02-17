@@ -28,10 +28,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
   useEffect(() => {
     if (!selectedIndex) return;
-    if (filteredTableData)
-      toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
-    else
-      toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
+    if (filteredTableData) toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
+    else toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
 
     setSelectedIndex(undefined);
   });

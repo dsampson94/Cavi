@@ -3,24 +3,30 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import { responseStatus } from '../endpoints/index';
 import {
+  getAdminUserListRequest,
   getClientFieldListPDFRequest,
   getClientFieldListRequest,
   getClientFieldRainDataRequest,
-  getClientOverviewRequest
+  getClientMonitorProbesListRequest,
+  getClientOverviewListRequest
 } from '../endpoints/client.endpoint';
 
 import { getProgress } from '../../tools/general/helpers.util';
 
 import { addSystemNotice, setProgressBar } from '../actions/system.action';
 import {
+  GET_ADMIN_USER_LIST,
   GET_CLIENT_FIELD_LIST,
   GET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  GET_CLIENT_MONITOR_PROBES_LIST,
   GET_CLIENT_OVERVIEW_LIST,
   GET_CLIENT_PDF,
   GET_FULL_CLIENT_FIELD_LIST,
+  SET_ADMIN_USER_LIST,
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
   SET_CLIENT_PDF
 } from '../actions/client.action';
@@ -43,7 +49,7 @@ export function* performRetrieveClientOverviewRequest({ client }) {
   try {
     yield put(setProgressBar(getProgress()));
 
-    const [endpoint, requestOptions] = getClientOverviewRequest(client);
+    const [endpoint, requestOptions] = getClientOverviewListRequest(client);
     const { data } = yield call(axios, endpoint, requestOptions);
 
     switch (data) {
@@ -67,6 +73,36 @@ export function* performRetrieveClientOverviewRequest({ client }) {
 
 export function* watchForRetrieveClientOverviewRequest() {
   yield takeLatest(GET_CLIENT_OVERVIEW_LIST, performRetrieveClientOverviewRequest);
+}
+
+export function* performRetrieveClientMonitorProbesListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientMonitorProbesListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_MONITOR_PROBES_LIST, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_MONITOR_PROBES_LIST, monitorProbesList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_CLIENT_MONITOR_PROBES_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientMonitorProbesListRequest() {
+  yield takeLatest(GET_CLIENT_MONITOR_PROBES_LIST, performRetrieveClientMonitorProbesListRequest);
 }
 
 export function* performRetrieveFullClientFieldListRequest({ client }) {
@@ -214,12 +250,42 @@ export function* watchForRetrieveClientPDFRequest() {
   yield takeLatest(GET_CLIENT_PDF, performRetrieveClientPDFRequest);
 }
 
+export function* performGetAdminUserListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getAdminUserListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_ADMIN_USER_LIST, undefined });
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_ADMIN_USER_LIST, adminUserList: data });
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_ADMIN_USER_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForGetAdminUserListRequest() {
+  yield takeLatest(GET_ADMIN_USER_LIST, performGetAdminUserListRequest);
+}
+
 export default function* clientSaga() {
   yield all([
     watchForRetrieveClientOverviewRequest(),
+    watchForRetrieveClientMonitorProbesListRequest(),
     watchForRetrieveFullClientFieldListRequest(),
     watchForRetrieveClientFieldListRequest(),
     watchForRetrieveRainDataForChartRequest(),
-    watchForRetrieveClientPDFRequest()
+    watchForRetrieveClientPDFRequest(),
+    watchForGetAdminUserListRequest()
   ]);
 }

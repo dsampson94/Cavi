@@ -4,6 +4,7 @@ const USER_ACCOUNT = 'U';
 const USER_LOGIN = 'UL';
 const THEME = 'T';
 const FAVORITES = 'F';
+const MONITOR_PROBES_SETTINGS = 'MPS';
 
 export const saveUserLoginToLocalStorage = (account) => {
   localStorage.setItem(USER_LOGIN, objectToBase64(account));
@@ -58,4 +59,12 @@ export const addOrRemoveFarmLocalStorageFavorites = (groupName, clientName) => {
 
 export const viewFarmLocalStorageFavorites = () => {
   return base64ToObject(localStorage.getItem(FAVORITES));
+};
+
+export const saveMonitorProbeFilterSettingsToLocalStorage = (filterState) => {
+  localStorage.setItem(MONITOR_PROBES_SETTINGS, objectToBase64(filterState));
+};
+
+export const retrieveMonitorProbeFilterSettingsFromLocalStorage = () => {
+  return base64ToObject(localStorage.getItem(MONITOR_PROBES_SETTINGS));
 };

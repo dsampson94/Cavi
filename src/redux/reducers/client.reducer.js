@@ -1,17 +1,21 @@
 import {
+  SET_ADMIN_USER_LIST,
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
   SET_CLIENT_PDF
 } from '../actions/client.action';
 
 export const initialState = {
   overviewList: undefined,
+  monitorProbesList: undefined,
   fieldList: undefined,
   fieldRainData: undefined,
   fieldRainDataForChart: undefined,
-  clientPDF: undefined
+  clientPDF: undefined,
+  adminUserList: undefined
 };
 
 export const clientReducer = (state = initialState, action) => {
@@ -21,6 +25,13 @@ export const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         overviewList
+      };
+    }
+    case SET_CLIENT_MONITOR_PROBES_LIST: {
+      const { monitorProbesList } = action;
+      return {
+        ...state,
+        monitorProbesList
       };
     }
     case SET_CLIENT_FIELD_LIST: {
@@ -49,6 +60,13 @@ export const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         clientPDF
+      };
+    }
+    case SET_ADMIN_USER_LIST: {
+      const { adminUserList } = action;
+      return {
+        ...state,
+        adminUserList
       };
     }
     default:

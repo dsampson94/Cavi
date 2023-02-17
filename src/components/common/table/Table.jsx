@@ -15,6 +15,7 @@ import {
   FIELD_SETUP_VIEW,
   FIX_READINGS,
   GENERAL_ROUTE,
+  MONITOR_PROBES_VIEW,
   NONE,
   PROBES_DETAILED_ROUTE,
   PROBES_SUMMARY_ROUTE,
@@ -79,6 +80,13 @@ const Table = ({
                                 setSelectedIndex={ setSelectedIndex }
                                 setSelectedDropdownObject={ setSelectedDropdownObject }
                                 toggleDropdowns={ toggleDropdowns } />;
+    case MONITOR_PROBES_VIEW:
+      return <MonitorProbesTable tableName={ tableName }
+                                 activeTableData={ activeTableData }
+                                 hiddenColumns={ hiddenColumns }
+                                 setSelectedIndex={ setSelectedIndex }
+                                 setSelectedDropdownObject={ setSelectedDropdownObject }
+                                 toggleDropdowns={ toggleDropdowns } />;
     case FIELD_CHARTS_MODAL_VIEW:
     case FIELD_SETUP_VIEW:
     case FIELD_REPORTS_VIEW:
@@ -593,6 +601,106 @@ const FieldSetupTable = ({
 };
 
 FieldSetupTable.propTypes = {
+  tableName: string.isRequired,
+  activeTableData: arrayOf(shape({})),
+  hiddenColumns: arrayOf(string).isRequired
+};
+
+const MonitorProbesTable = ({
+                              tableName,
+                              activeTableData,
+                              hiddenColumns,
+                              setSelectedIndex,
+                              setSelectedDropdownObject,
+                              toggleDropdowns
+                            }) => {
+
+  const history = useHistory();
+  const { groupName, clientName } = useParams();
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(undefined);
+  const [hoveredRowObject, setHoveredRowObject] = useState(undefined);
+
+  const buildTableHeader = () => {
+    if (!activeTableData) return;
+    let headers;
+    if (activeTableData?.length !== 0) {
+      const objectKeys = Object.keys(activeTableData[0]);
+      headers = objectKeys.filter((key) => !hiddenColumns.includes(key)).map((key) => (
+        <th key={ generateId() }
+            style={ { color: hideColumnHeader(tableName, key) } }>
+          <div className="table__header-row__text">
+            { removeCamelCase(key) }
+          </div>
+        </th>
+      ));
+    }
+
+    return (
+      <thead className="table__header">
+      <tr className="table__header-row">
+        { headers }
+      </tr>
+      </thead>
+    );
+  };
+
+  const buildTableBody = () => {
+    if (!activeTableData) return;
+    const rows = activeTableData?.map((object, rowIndex) => {
+      let objectLocationName = object?.fieldName?.locationName;
+      let isHeaderRow = (objectLocationName?.includes('-forecast') || objectLocationName?.includes('-landGroup'));
+
+      const objectValues = [];
+      for (const property in object) {
+        if (!hiddenColumns.includes(property)) {
+          objectValues.push(object[property]);
+        }
+      }
+
+      let tableDataElements = [];
+      if (activeTableData?.length > 0) {
+        tableDataElements = objectValues?.map((value, dataIndex) => {
+          switch (dataIndex) {
+            default:
+              return <td key={ dataIndex }>{ value }</td>;
+          }
+        });
+      }
+
+      return (
+        <>
+          <tr className={ getClassNames('table__body__row',
+            { header: isHeaderRow, selected: (object === selectedRow) }) }
+              onClick={ () => setSelectedRow(object) }
+              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+              key={ generateId() }>
+            { tableDataElements }
+          </tr>
+        </>
+      );
+    });
+
+    return (
+      <tbody className="table__body">
+      { (!isEmpty(rows)) ? rows :
+        <tr key={ generateId() }>
+          <td>{ `No active fields currently set up on ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</td>
+        </tr> }
+      </tbody>
+    );
+  };
+
+  return (
+    <table className="table">
+      { buildTableHeader() }
+      { buildTableBody() }
+    </table>
+  );
+};
+
+MonitorProbesTable.propTypes = {
   tableName: string.isRequired,
   activeTableData: arrayOf(shape({})),
   hiddenColumns: arrayOf(string).isRequired

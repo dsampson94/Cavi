@@ -37,9 +37,10 @@ const Login = ({ onLoginClick }) => {
 
         <Graphic login graphic={ logo } />
 
-        <div className="mt-6 mb-6 text-center">
-          <label className="text-sm font-medium" htmlFor="username">Username:</label>
-          <input className="mt-2 w-full text-center border border-gray-400 rounded-lg p-2 focus:outline-none focus:shadow-outline" type="text"
+        <div className="mt-6 mb-6 text-center text-black">
+          <label className="text-sm font-medium" htmlFor="username">Username</label>
+          <input className="mt-2 w-full text-center border border-gray-400 rounded-lg p-2 focus:outline-none focus:shadow-outline"
+                 type="text"
                  id="username"
                  onChange={ ({ target }) => setUsername(target.value) }
                  onKeyPress={ (event) => {
@@ -47,9 +48,10 @@ const Login = ({ onLoginClick }) => {
                  } } />
         </div>
 
-        <div className="mb-6 text-center">
-          <label className="text-sm font-medium" htmlFor="password">Password:</label>
-          <input className="mt-2 text-center w-full border border-gray-400 rounded-lg p-2 focus:outline-none focus:shadow-outline" type="password"
+        <div className="mb-6 text-center text-black">
+          <label className="text-sm font-medium" htmlFor="password">Password</label>
+          <input className="mt-2 text-center w-full border border-gray-400 rounded-lg p-2 focus:outline-none focus:shadow-outline"
+                 type="password"
                  id="password"
                  onChange={ ({ target }) => setPassword(target.value) }
                  onKeyPress={ (event) => {

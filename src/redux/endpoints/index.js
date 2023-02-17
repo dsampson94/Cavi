@@ -81,7 +81,11 @@ export const getRequestParams = ({
                                    overviewOptionSelected,
                                    activeObject,
                                    selectedProbeNumber,
-                                   haValueToUpdate
+                                   haValueToUpdate,
+                                   adminUserFilter,
+                                   sortType,
+                                   onlyBehind,
+                                   dfm
                                  }) => {
 
   const user = retrieveUserLoginFromLocalStorage();
@@ -98,6 +102,19 @@ export const getRequestParams = ({
       username: user?.username,
       password: user?.password,
       getwhat: overviewOptionSelected
+    },
+    adminUserParams: {
+      username: user?.username,
+      password: user?.password,
+      list: 1
+    },
+    monitorProbesParams: {
+      username: user?.username,
+      password: user?.password,
+      filter: adminUserFilter?.name,
+      sort: sortType?.name,
+      onlybehind: onlyBehind?.id,
+      dfm: dfm?.id === 0 ? 'no' : 'yes'
     },
     clientParams: {
       ...clientParams
