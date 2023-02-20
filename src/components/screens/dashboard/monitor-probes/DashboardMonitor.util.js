@@ -6,21 +6,22 @@ export const mappedMonitorProbesList = (obj) => {
         let data = obj?.data[group][location][sensor];
         const item = {
           group: data?.groepnaam,
-          location: `${ data?.plaasnaam } - ${ data?.land }`,
-          age: data?.age,
-          probeNumber: data?.probeno,
-          icNumber: data?.ic_nommer,
-          signalStrength: data?.signal,
-          rainfall: data?.rain,
-          probeStatus: data?.probe_status,
-          latitude: data?.latitude,
-          longitude: data?.longitude,
-          volts: data?.volts,
-          redVoltage: data?.voltsRed,
-          firmwareVersion: data?.fw,
+          database: `${ data?.plaasnaam }`,
+          field: `${ data?.land }`,
+          // age: data?.age,
+          probe: data?.probeno,
+          IC: data?.ic_nommer,
           lastReading: data?.lastreading,
-          lastChange: data?.lastchange,
-          airtime: data?.airtime
+          lastSent: data?.lastchange,
+          // rainfall: data?.rain,
+          // latitude: data?.latitude,
+          // longitude: data?.longitude,
+          // redVoltage: data?.voltsRed,
+          FW: data?.fw,
+          airtime: data?.airtime?.slice(0, -1),
+          volts: data?.volts,
+          signal: data?.signal,
+          active: data?.probe_status
         };
         result.push(item);
       }

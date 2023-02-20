@@ -33,7 +33,7 @@ const DashboardRawReadings = ({
           <TextInput label={ 'Probe' } left />
 
           <Select label={ 'Type' }
-                  menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] }
+                  list={ [] }
                   left input />
 
           <div className="dashboard-raw-readings__button-container">

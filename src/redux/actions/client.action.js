@@ -19,6 +19,11 @@ export const requestClientMonitorProbesList = (client) => ({
   client
 });
 
+export const setClientMonitorProbesList = (client) => ({
+  type: SET_CLIENT_MONITOR_PROBES_LIST,
+  client
+});
+
 export const GET_FULL_CLIENT_FIELD_LIST = '[CLIENT_STORE] Get full field list (fields & rain)';
 export const requestFullClientFieldList = (client) => ({
   type: GET_FULL_CLIENT_FIELD_LIST,

@@ -16,10 +16,5 @@
     display: flex;
     flex-direction: row;
     margin-top: util.rem(10);
-
-    > div {
-      margin-left: util.rem(-5);
-      margin-right: util.rem(40);
-    }
   }
 }

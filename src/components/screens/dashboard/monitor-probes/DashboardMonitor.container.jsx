@@ -17,10 +17,10 @@ const DashboardMonitorContainer = () => {
 
   const dispatch = useDispatch();
 
-  const [adminUserFilter, setAdminUserFilter] = useState('admin');
-  const [sortType, setSortType] = useState('Normal');
-  const [onlyBehind, setOnlyBehind] = useState(0);
-  const [dfm, setDfm] = useState('no');
+  const [adminUserFilter, setAdminUserFilter] = useState({ id: 0, name: 'admin' });
+  const [sortType, setSortType] = useState({ id: 0, name: 'Normal' });
+  const [onlyBehind, setOnlyBehind] = useState({ id: 0, name: 'Hide DFM Handlogger Probes' });
+  const [dfm, setDfm] = useState({ id: 1, name: 'Show all probes' });
 
   const loggedInUserData = retrieveUserLoginFromLocalStorage();
 

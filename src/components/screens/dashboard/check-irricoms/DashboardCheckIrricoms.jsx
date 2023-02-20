@@ -38,7 +38,7 @@ const DashboardEmailReadings = ({
           <TextInput label={ 'Irricom Probe Number' } left />
 
           <Select label={ 'Select a Previous List' }
-                  menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] }
+                  list={ [] }
                   left input />
 
           <div className={ 'dashboard-check-irricoms__button-container' }>

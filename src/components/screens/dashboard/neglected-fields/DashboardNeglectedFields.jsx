@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 
 import { arrayOf, func, number, shape, string } from 'prop-types';
-import { CLIENT_RECOMMENDATION_VIEW, DASHBOARD } from '../../../../tools/general/system-variables.util';
+import { DASHBOARD, MONITOR_PROBES_VIEW } from '../../../../tools/general/system-variables.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
-import './dashboard-neglected-fields.scss';
 import Select from '../../../common/select/Select';
-import Button from '../../../common/button/Button';
 import Table from '../../../common/table/Table';
 
+import './dashboard-neglected-fields.scss';
+
 const DashboardNeglectedFields = ({
-                                    ownClientsList,
-                                    overviewOptionSelected,
-                                    setOverviewOptionSelected
+                                    neglectedFieldsList,
+                                    adminUserList,
+                                    adminUserFilter,
+                                    setAdminUserFilter
                                   }) => {
 
-  const history = useHistory();
-
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(undefined);
 
   return (
     <ContentContainer view={ DASHBOARD }
@@ -29,22 +28,17 @@ const DashboardNeglectedFields = ({
 
         <div className="dashboard-neglected-fields__container">
 
-          <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
-
-          <Select menuData={ [{ 1: 1 }, { 2: 2 }, { 3: 3 }] } wide />
-
-          <Button label={ 'Reload' } medium spaced />
+          <Select activeItem={ adminUserFilter }
+                  setActiveItem={ setAdminUserFilter }
+                  list={ adminUserList ?? [] } />
 
         </div>
 
-        <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
-               activeTableData={ [{
-                 group: '',
-                 database: '',
-                 field: '',
-                 lastViewed: ''
-               }] }
-               hiddenColumns={ ['color'] } />
+        <Table tableName={ MONITOR_PROBES_VIEW }
+               activeTableData={ neglectedFieldsList }
+               hiddenColumns={ [] }
+               selectedIndex={ selectedIndex }
+               setSelectedIndex={ setSelectedIndex } />
 
       </div>
     </ContentContainer>

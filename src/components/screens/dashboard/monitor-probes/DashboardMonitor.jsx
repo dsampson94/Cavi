@@ -4,7 +4,6 @@ import { arrayOf, func, number, shape, string } from 'prop-types';
 import { DASHBOARD, EXCEL_ICON, LOCATION_PIN, MONITOR_PROBES_VIEW } from '../../../../tools/general/system-variables.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
-import Button from '../../../common/button/Button';
 import SVGIcon from '../../../common/SVGIcon/SVGIcon';
 import Table from '../../../common/table/Table';
 
@@ -27,10 +26,6 @@ const DashboardMonitor = ({
 
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
-  const [activeTableData, setActiveTableData] = useState([]);
-
-  const handleReloadButtonClick = () => {
-  };
 
   return (
     <ContentContainer view={ DASHBOARD }
@@ -71,12 +66,11 @@ const DashboardMonitor = ({
                       { id: 0, name: 'Filter \'okay\' probes' },
                       { id: 1, name: 'Show all probes' }
                     ] } />
+            <div className="flex pt-2 px-6">
+              <div style={ { width: '30px' } }><SVGIcon name={ EXCEL_ICON } /></div>
+              <div style={ { width: '30px' } }><SVGIcon name={ LOCATION_PIN } fill={ 'red' } /></div>
+            </div>
           </div>
-
-          <Button label={ 'Reload' }
-                  onClick={ handleReloadButtonClick } medium spaced />
-          <div style={ { width: '30px' } }><SVGIcon name={ EXCEL_ICON } /></div>
-          <div style={ { width: '30px' } }><SVGIcon name={ LOCATION_PIN } fill={ 'red' } /></div>
 
         </div>
 
@@ -84,8 +78,7 @@ const DashboardMonitor = ({
                activeTableData={ monitorProbesList }
                hiddenColumns={ [] }
                selectedIndex={ selectedIndex }
-               setSelectedIndex={ setSelectedIndex }
-               setActiveTableData={ setActiveTableData } />
+               setSelectedIndex={ setSelectedIndex } />
       </div>
 
     </ContentContainer>

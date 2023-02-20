@@ -84,7 +84,7 @@ export const chooseRandom = (numbers) => {
 };
 
 export const getProgress = () => {
-  const progress = [55, 79, 80, 95];
+  const progress = [99.99];
   let randomIndex = Math.floor(Math.random() * progress.length);
   return progress[randomIndex];
 };

@@ -572,7 +572,6 @@ DropDown.propTypes = {
 
 export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
 
-
   return <td onClick={ noOp() }
              key={ generateId() }>
     <div className={ 'table__body__row__td-container--field-setup' }>

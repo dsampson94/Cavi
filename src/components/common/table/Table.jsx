@@ -29,6 +29,8 @@ import {
   VIEW_CHARTS
 } from '../../../tools/general/system-variables.util';
 
+import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid';
+
 import {
   CaptureNoteColumn,
   ChartColumn,
@@ -618,7 +620,6 @@ const MonitorProbesTable = ({
   const history = useHistory();
   const { groupName, clientName } = useParams();
 
-  const [showModal, setShowModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState(undefined);
   const [hoveredRowObject, setHoveredRowObject] = useState(undefined);
 
@@ -630,7 +631,7 @@ const MonitorProbesTable = ({
       headers = objectKeys.filter((key) => !hiddenColumns.includes(key)).map((key) => (
         <th key={ generateId() }
             style={ { color: hideColumnHeader(tableName, key) } }>
-          <div className="table__header-row__text">
+          <div className="table__header-row__text--field-setup">
             { removeCamelCase(key) }
           </div>
         </th>
@@ -663,8 +664,38 @@ const MonitorProbesTable = ({
       if (activeTableData?.length > 0) {
         tableDataElements = objectValues?.map((value, dataIndex) => {
           switch (dataIndex) {
+            case 2:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs">
+                  { value }
+                </div>
+              </td>;
+            case 1:
+            case 4:
+            case 5:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs text-blue-700 ">
+                  { value }
+                </div>
+              </td>;
+            case 11:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div>
+                  { value === 'Active' ?
+                    <CheckIcon className="h-6 w-6 text-green-500" /> :
+                    <XMarkIcon className="h-6 w-6 text-red-500" /> }
+                </div>
+              </td>;
             default:
-              return <td key={ dataIndex }>{ value }</td>;
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs">
+                  { value }
+                </div>
+              </td>;
           }
         });
       }
@@ -686,7 +717,7 @@ const MonitorProbesTable = ({
       <tbody className="table__body">
       { (!isEmpty(rows)) ? rows :
         <tr key={ generateId() }>
-          <td>{ `No active fields currently set up on ${ groupName?.toUpperCase() } - ${ clientName?.toUpperCase() }` }</td>
+          <td className="text-xs">{ '' }</td>
         </tr> }
       </tbody>
     );

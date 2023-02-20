@@ -5,6 +5,7 @@ const USER_LOGIN = 'UL';
 const THEME = 'T';
 const FAVORITES = 'F';
 const MONITOR_PROBES_SETTINGS = 'MPS';
+const NEGLECTED_FIELDS_SETTINGS = 'NFS';
 
 export const saveUserLoginToLocalStorage = (account) => {
   localStorage.setItem(USER_LOGIN, objectToBase64(account));
@@ -67,4 +68,12 @@ export const saveMonitorProbeFilterSettingsToLocalStorage = (filterState) => {
 
 export const retrieveMonitorProbeFilterSettingsFromLocalStorage = () => {
   return base64ToObject(localStorage.getItem(MONITOR_PROBES_SETTINGS));
+};
+
+export const saveNeglectedFieldsFilterSettingsToLocalStorage = (filterState) => {
+  localStorage.setItem(NEGLECTED_FIELDS_SETTINGS, objectToBase64(filterState));
+};
+
+export const retrieveNeglectedFieldsFilterSettingsFromLocalStorage = () => {
+  return base64ToObject(localStorage.getItem(NEGLECTED_FIELDS_SETTINGS));
 };

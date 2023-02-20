@@ -1,20 +1,73 @@
 import { Routes } from '../../../routes';
 import { useHistory, useRouteMatch } from 'react-router';
+import { setClientMonitorProbesList } from '../../../redux/actions/client.action';
+import { useDispatch } from 'react-redux';
 
 export default function TabBar() {
 
   const history = useHistory();
   const { path } = useRouteMatch();
+  const dispatch = useDispatch();
 
   const tabs = [
-    { name: 'Assistant', href: () => history.push(Routes.ASSISTANT), current: path.includes('assistant') },
-    { name: 'Overview', href: () => history.push(Routes.OVERVIEW), current: path.includes('overview') },
-    { name: 'Monitor Probes', href: () => history.push(Routes.MONITOR), current: path.includes('monitor-probes') },
-    { name: 'Last Readings', href: () => history.push(Routes.LAST_READINGS), current: path.includes('last-readings') },
-    { name: 'Neglected Fields', href: () => history.push(Routes.NEGLECTED_FIELDS), current: path.includes('neglected-fields') },
-    { name: 'Email Readings', href: () => history.push(Routes.EMAIL_READINGS), current: path.includes('email-readings') },
-    { name: 'Raw Readings', href: () => history.push(Routes.RAW_READINGS), current: path.includes('raw-readings') },
-    { name: 'Irricoms', href: () => history.push(Routes.CHECK_IRRICOMS), current: path.includes('irricoms') }
+    {
+      name: 'Assistant',
+      current: path.includes('assistant'),
+      href: () => {
+        history.push(Routes.ASSISTANT);
+      }
+    },
+    {
+      name: 'Overview',
+      current: path.includes('overview'),
+      href: () => {
+        history.push(Routes.OVERVIEW);
+      }
+    },
+    {
+      name: 'Monitor Probes',
+      current: path.includes('monitor-probes'),
+      href: () => {
+        dispatch(setClientMonitorProbesList([]));
+        history.push(Routes.MONITOR);
+      }
+    },
+    {
+      name: 'Last Readings',
+      current: path.includes('last-readings'),
+      href: () => {
+        history.push(Routes.LAST_READINGS);
+      }
+    },
+    {
+      name: 'Neglected Fields',
+      current: path.includes('neglected-fields'),
+      href: () => {
+        dispatch(setClientMonitorProbesList([]));
+        history.push(Routes.NEGLECTED_FIELDS);
+      }
+    },
+    {
+      name: 'Email Readings',
+      current: path.includes('email-readings'),
+      href: () => {
+        history.push(Routes.EMAIL_READINGS);
+      }
+    },
+    {
+      name: 'Raw Readings',
+      current: path.includes('raw-readings'),
+      href: () => {
+        history.push(Routes.RAW_READINGS);
+      }
+    },
+    {
+      name: 'Irricoms',
+      current: path.includes('irricoms'),
+      href: () => {
+        history.push(Routes.CHECK_IRRICOMS);
+      }
+    }
   ];
 
   function classNames(...classes) {
