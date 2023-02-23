@@ -12,9 +12,9 @@ export default function Select({ list, activeItem, setActiveItem }) {
     <Listbox value={ activeItem } onChange={ setActiveItem }>
       { ({ open }) => (
         <>
-          <div className="relative m-1">
+          <div className="relative m-1 rounded-md border border-gray-300">
             <Listbox.Button
-              className="relative w-64 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm">
+              className="relative w-64 cursor-default py-2 pl-3 pr-10 text-left focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700 sm:text-sm">
               <span className="block truncate">{ activeItem?.name }</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />

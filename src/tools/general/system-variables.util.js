@@ -122,6 +122,8 @@ export const FIELD_SETUP_VIEW = 'field_setup_view';
 export const FIELD_REPORTS_VIEW = 'field_reports_view';
 export const FIELD_CHARTS_MODAL_VIEW = 'field_charts_modal_view';
 export const MONITOR_PROBES_VIEW = 'monitor_probes_view';
+export const LAST_READINGS_VIEW = 'last_readings_view';
+
 //EMOJI
 export const VERY_SATISFIED = 'very_satisfied';
 export const SATISFIED = 'satisfied';

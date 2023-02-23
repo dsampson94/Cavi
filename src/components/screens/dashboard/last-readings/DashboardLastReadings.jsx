@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 
-import { arrayOf, func, number, shape, string } from 'prop-types';
-import { DASHBOARD } from '../../../../tools/general/system-variables.util';
+import { arrayOf, shape } from 'prop-types';
+import { DASHBOARD, LAST_READINGS_VIEW } from '../../../../tools/general/system-variables.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
-import './dashboard-last-readings.scss';
-import './../dashboard.scss';
 import Select from '../../../common/select/Select';
 import Button from '../../../common/button/Button';
+import Table from '../../../common/table/Table';
+import TextInputTw from '../../../common/input/text/TextInput.tw';
+
+import './dashboard-last-readings.scss';
+import './../dashboard.scss';
 
 const DashboardLastReadings = ({
-                                 ownClientsList,
-                                 overviewOptionSelected,
-                                 setOverviewOptionSelected
+                                 lastReadingsIrricomList,
+                                 lastReadingsReadingsList,
+                                 probeNumber,
+                                 setProbeNumber,
+                                 filterNumber,
+                                 setFilterNumber,
+                                 handleSubmit
                                }) => {
 
-  const history = useHistory();
-
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(undefined);
 
   return (
     <ContentContainer view={ DASHBOARD }
@@ -33,26 +38,57 @@ const DashboardLastReadings = ({
 
         <div className="dashboard-last-readings__container">
 
-          <Select list={ [] } wide />
+          <TextInputTw label={ 'Probe Number' }
+                       placeholder={ 'ex. AC12345, DFM00034, 2549, 19273' }
+                       activeValue={ probeNumber }
+                       setActiveValue={ setProbeNumber } />
 
-          <Button label={ 'Search' } medium spaced />
+          <Select activeItem={ filterNumber }
+                  setActiveItem={ setFilterNumber }
+                  list={ [
+                    { id: 0, name: '10' },
+                    { id: 1, name: '50' },
+                    { id: 2, name: '100' },
+                    { id: 3, name: '250' },
+                    { id: 4, name: '500' },
+                    { id: 5, name: '1000' }
+                  ] } />
 
-          <Button label={ 'Send Raw Readings by Email' } long spaced />
+          <div className="flex mt-2 w-full">
+            <Button label={ 'Search' } medium spaced onClick={ handleSubmit } />
 
-          <Button label={ 'View Charts' } medium spaced />
+            <Button label={ 'Send Raw Readings by Email' } long spaced />
+
+            <Button label={ 'View Charts' } medium spaced />
+
+          </div>
 
         </div>
 
+        <div>
+          <Table tableName={ LAST_READINGS_VIEW }
+                 activeTableData={ lastReadingsIrricomList }
+                 hiddenColumns={ [] }
+                 selectedIndex={ selectedIndex }
+                 setSelectedIndex={ setSelectedIndex } />
+        </div>
+
+
+        { lastReadingsReadingsList &&
+        <div>
+          <Table tableName={ LAST_READINGS_VIEW }
+                 activeTableData={ lastReadingsReadingsList }
+                 hiddenColumns={ [] }
+                 selectedIndex={ selectedIndex }
+                 setSelectedIndex={ setSelectedIndex } />
+        </div> }
       </div>
     </ContentContainer>
   );
 };
 
 DashboardLastReadings.propTypes = {
-  ownClientsList: arrayOf(shape({})),
-  overviewOptionSelected: number || undefined,
-  setOverviewOptionSelected: func,
-  activePath: string
+  lastReadingsList: arrayOf(shape({}))
 };
 
 export default DashboardLastReadings;

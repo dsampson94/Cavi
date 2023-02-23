@@ -3,14 +3,20 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
-  SET_CLIENT_PDF
+  SET_CLIENT_PDF,
+  SET_CLIENT_RAW_READINGS,
+  SET_CLIENT_RAW_READINGS_CHART
 } from '../actions/client.action';
 
 export const initialState = {
   overviewList: undefined,
   monitorProbesList: undefined,
+  lastReadingsList: undefined,
+  rawReadings: undefined,
+  rawReadingsChart: undefined,
   fieldList: undefined,
   fieldRainData: undefined,
   fieldRainDataForChart: undefined,
@@ -32,6 +38,27 @@ export const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         monitorProbesList
+      };
+    }
+    case SET_CLIENT_LAST_READINGS_LIST: {
+      const { lastReadingsList } = action;
+      return {
+        ...state,
+        lastReadingsList
+      };
+    }
+    case SET_CLIENT_RAW_READINGS: {
+      const { rawReadings } = action;
+      return {
+        ...state,
+        rawReadings
+      };
+    }
+    case SET_CLIENT_RAW_READINGS_CHART: {
+      const { rawReadingsChart } = action;
+      return {
+        ...state,
+        rawReadingsChart
       };
     }
     case SET_CLIENT_FIELD_LIST: {

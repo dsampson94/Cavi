@@ -17,10 +17,5 @@
     flex-direction: row;
     padding-bottom: util.rem(5);
     border-bottom: 1px solid black;
-
-    > div {
-      margin-left: util.rem(-5);
-      margin-right: util.rem(40);
-    }
   }
 }

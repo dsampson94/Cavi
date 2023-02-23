@@ -12,6 +12,24 @@ export const getClientMonitorProbesListRequest = (client) => [
   getHttpGetOptions(client)
 ];
 
+const getClientLastReadingsListEndpoint = () => `${ API_HOST }/getlastsent.php `;
+export const getClientLastReadingsListRequest = (client) => [
+  getClientLastReadingsListEndpoint(),
+  getHttpGetOptions(client)
+];
+
+const getClientRawReadingsEndpoint = () => `${ API_HOST }/getstatus.php`;
+export const getClientRawReadingsRequest = (client) => [
+  getClientRawReadingsEndpoint(),
+  getHttpGetOptions(client)
+];
+
+const getClientRawReadingsChartEndpoint = () => `${ API_HOST }/getstatus.php`;
+export const getClientRawReadingsChartRequest = (client) => [
+  getClientRawReadingsChartEndpoint(),
+  getHttpGetOptions(client)
+];
+
 const getClientFieldListEndpoint = () => `${ API_HOST }/getRecommendations.php`;
 export const getClientFieldListRequest = (client) => [
   getClientFieldListEndpoint(),

@@ -7,8 +7,11 @@ import {
   getClientFieldListPDFRequest,
   getClientFieldListRequest,
   getClientFieldRainDataRequest,
+  getClientLastReadingsListRequest,
   getClientMonitorProbesListRequest,
-  getClientOverviewListRequest
+  getClientOverviewListRequest,
+  getClientRawReadingsChartRequest,
+  getClientRawReadingsRequest
 } from '../endpoints/client.endpoint';
 
 import { getProgress } from '../../tools/general/helpers.util';
@@ -18,17 +21,23 @@ import {
   GET_ADMIN_USER_LIST,
   GET_CLIENT_FIELD_LIST,
   GET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  GET_CLIENT_LAST_READINGS_LIST,
   GET_CLIENT_MONITOR_PROBES_LIST,
   GET_CLIENT_OVERVIEW_LIST,
   GET_CLIENT_PDF,
+  GET_CLIENT_RAW_READINGS,
+  GET_CLIENT_RAW_READINGS_CHART,
   GET_FULL_CLIENT_FIELD_LIST,
   SET_ADMIN_USER_LIST,
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
-  SET_CLIENT_PDF
+  SET_CLIENT_PDF,
+  SET_CLIENT_RAW_READINGS,
+  SET_CLIENT_RAW_READINGS_CHART
 } from '../actions/client.action';
 
 import {
@@ -103,6 +112,96 @@ export function* performRetrieveClientMonitorProbesListRequest({ client }) {
 
 export function* watchForRetrieveClientMonitorProbesListRequest() {
   yield takeLatest(GET_CLIENT_MONITOR_PROBES_LIST, performRetrieveClientMonitorProbesListRequest);
+}
+
+export function* performRetrieveClientLastReadingsListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientLastReadingsListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_LAST_READINGS_LIST, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_LAST_READINGS_LIST, lastReadingsList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_CLIENT_LAST_READINGS_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientLastReadingsListRequest() {
+  yield takeLatest(GET_CLIENT_LAST_READINGS_LIST, performRetrieveClientLastReadingsListRequest);
+}
+
+export function* performRetrieveClientRawReadingsRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientRawReadingsRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_RAW_READINGS, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_RAW_READINGS, rawReadings: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_CLIENT_RAW_READINGS, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientRawReadingsRequest() {
+  yield takeLatest(GET_CLIENT_RAW_READINGS, performRetrieveClientRawReadingsRequest);
+}
+
+export function* performRetrieveClientRawReadingsChartRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientRawReadingsChartRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_RAW_READINGS_CHART, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_RAW_READINGS_CHART, rawReadingsChart: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_SUCCESS));
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_CLIENT_RAW_READINGS_CHART, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientRawReadingsChartRequest() {
+  yield takeLatest(GET_CLIENT_RAW_READINGS_CHART, performRetrieveClientRawReadingsChartRequest);
 }
 
 export function* performRetrieveFullClientFieldListRequest({ client }) {
@@ -282,6 +381,9 @@ export default function* clientSaga() {
   yield all([
     watchForRetrieveClientOverviewRequest(),
     watchForRetrieveClientMonitorProbesListRequest(),
+    watchForRetrieveClientLastReadingsListRequest(),
+    watchForRetrieveClientRawReadingsRequest(),
+    watchForRetrieveClientRawReadingsChartRequest(),
     watchForRetrieveFullClientFieldListRequest(),
     watchForRetrieveClientFieldListRequest(),
     watchForRetrieveRainDataForChartRequest(),

@@ -1,57 +1,29 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
-
-import { arrayOf, func, number, shape, string } from 'prop-types';
 import { DASHBOARD } from '../../../../tools/general/system-variables.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
-import Select from '../../../common/select/Select';
-import TextInput from '../../../common/input/text/TextInput';
-import Button from '../../../common/button/Button';
-
 import './dashboard-raw-readings.scss';
 
-const DashboardRawReadings = ({
-                                ownClientsList,
-                                overviewOptionSelected,
-                                setOverviewOptionSelected
-                              }) => {
-
-  const history = useHistory();
+const DashboardRawReadings = ({ rawReadings }) => {
 
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
+
+  const chartString = rawReadings ? rawReadings?.slice(0, rawReadings?.indexOf('?')) +
+    'https://www.irricheck.co.za/actcode/web/getstatus.php' + rawReadings?.slice(rawReadings?.indexOf('?')) : null;
 
   return (
     <ContentContainer view={ DASHBOARD }
                       showSideBar={ showClientsSideBar }
                       setShowSideBar={ setShowClientsSideBar }>
-      <div className="dashboard-raw-readings">
-
-        <div className="dashboard-raw-readings__container">
-
-          <TextInput label={ 'Probe' } left />
-
-          <Select label={ 'Type' }
-                  list={ [] }
-                  left input />
-
-          <div className="dashboard-raw-readings__button-container">
-            <Button label={ 'Send Readings' } medium />
-          </div>
-
-        </div>
-
-      </div>
+      <div className="mt-10"
+           dangerouslySetInnerHTML={ { __html: chartString } } />
     </ContentContainer>
   );
 };
 
 DashboardRawReadings.propTypes = {
-  ownClientsList: arrayOf(shape({})),
-  overviewOptionSelected: number || undefined,
-  setOverviewOptionSelected: func,
-  activePath: string
+  rawReadings: String
 };
 
 export default DashboardRawReadings;
