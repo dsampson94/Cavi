@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { arrayOf, shape } from 'prop-types';
 import { DASHBOARD, LAST_READINGS_VIEW } from '../../../../tools/general/system-variables.util';
+import { isEmpty } from '../../../../tools/general/helpers.util';
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
@@ -16,6 +17,7 @@ import './../dashboard.scss';
 const DashboardLastReadings = ({
                                  lastReadingsIrricomList,
                                  lastReadingsReadingsList,
+                                 lastReadingsLandDataList,
                                  probeNumber,
                                  setProbeNumber,
                                  filterNumber,
@@ -65,23 +67,37 @@ const DashboardLastReadings = ({
 
         </div>
 
-        <div>
-          <Table tableName={ LAST_READINGS_VIEW }
-                 activeTableData={ lastReadingsIrricomList }
-                 hiddenColumns={ [] }
-                 selectedIndex={ selectedIndex }
-                 setSelectedIndex={ setSelectedIndex } />
-        </div>
-
-
-        { lastReadingsReadingsList &&
-        <div>
-          <Table tableName={ LAST_READINGS_VIEW }
-                 activeTableData={ lastReadingsReadingsList }
-                 hiddenColumns={ [] }
-                 selectedIndex={ selectedIndex }
-                 setSelectedIndex={ setSelectedIndex } />
+        { lastReadingsLandDataList &&
+        <div className="h-[13%] overflow-y-auto">
+          { lastReadingsLandDataList?.map((item) => {
+            return <div className="text-xs mt-1">{ item?.whichfields || item?.naam }</div>;
+          }) }
         </div> }
+
+        { !isEmpty(lastReadingsIrricomList) &&
+        <>
+          <h2 className="font-bold text-sm">{ 'Irricom Readings' }</h2>
+          <div className="h-[38%] min-h-[200px] overflow-y-auto">
+            <Table tableName={ LAST_READINGS_VIEW }
+                   activeTableData={ lastReadingsIrricomList }
+                   hiddenColumns={ [] }
+                   selectedIndex={ selectedIndex }
+                   setSelectedIndex={ setSelectedIndex } />
+          </div>
+        </> }
+
+        { !isEmpty(lastReadingsReadingsList) &&
+        <>
+          <h2 className="font-bold text-sm mt-2">{ 'DFM or Aquacheck Handlogger Readings' }</h2>
+          <div className="h-[38%] min-h-[200px] overflow-y-auto">
+            <Table tableName={ LAST_READINGS_VIEW }
+                   activeTableData={ lastReadingsReadingsList }
+                   hiddenColumns={ [] }
+                   selectedIndex={ selectedIndex }
+                   setSelectedIndex={ setSelectedIndex } />
+          </div>
+        </> }
+
       </div>
     </ContentContainer>
   );

@@ -6,6 +6,7 @@ const THEME = 'T';
 const FAVORITES = 'F';
 const MONITOR_PROBES_SETTINGS = 'MPS';
 const NEGLECTED_FIELDS_SETTINGS = 'NFS';
+const LAST_READINGS_SETTINGS = 'LRS';
 
 export const saveUserLoginToLocalStorage = (account) => {
   localStorage.setItem(USER_LOGIN, objectToBase64(account));
@@ -76,4 +77,12 @@ export const saveNeglectedFieldsFilterSettingsToLocalStorage = (filterState) => 
 
 export const retrieveNeglectedFieldsFilterSettingsFromLocalStorage = () => {
   return base64ToObject(localStorage.getItem(NEGLECTED_FIELDS_SETTINGS));
+};
+
+export const saveLastReadingsFilterSettingsToLocalStorage = (filterState) => {
+  localStorage.setItem(LAST_READINGS_SETTINGS, objectToBase64(filterState));
+};
+
+export const retrieveLastReadingsFilterSettingsFromLocalStorage = () => {
+  return base64ToObject(localStorage.getItem(LAST_READINGS_SETTINGS));
 };

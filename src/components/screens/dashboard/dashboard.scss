@@ -7,8 +7,8 @@
 
 .dashboard-header {
   display: flex;
-  padding-bottom: util.rem(7);
-  margin: util.rem(10);
+  margin: util.rem(5) util.rem(5) util.rem(5) util.rem(10);
   font-size: util.rem(20);
   user-select: none;
+  white-space: nowrap;
 }

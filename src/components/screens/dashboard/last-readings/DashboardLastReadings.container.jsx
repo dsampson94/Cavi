@@ -6,6 +6,10 @@ import { requestClientLastReadingsList } from '../../../../redux/actions/client.
 import { getRequestParams } from '../../../../redux/endpoints';
 import DashboardLastReadings from './DashboardLastReadings';
 import { mappedLastReadingsIrricomList, mappedLastReadingsReadingsList } from './DashboardLastReadings.util';
+import {
+  retrieveLastReadingsFilterSettingsFromLocalStorage,
+  saveLastReadingsFilterSettingsToLocalStorage
+} from '../../../../tools/storage/localStorage';
 
 const DashboardLastReadingsContainer = () => {
 
@@ -18,18 +22,32 @@ const DashboardLastReadingsContainer = () => {
 
   const request = getRequestParams({ probeNumber, filterNumber });
 
+  useEffect(() => {
+    const stateObject = retrieveLastReadingsFilterSettingsFromLocalStorage();
+    if (stateObject) {
+      setProbeNumber(stateObject.probeNumber);
+      setFilterNumber(stateObject.filterNumber);
+    }
+  }, []);
+
   const handleSubmit = () => {
     dispatch(requestClientLastReadingsList(request.lastReadingsParams));
   };
 
   useEffect(() => {
+    const stateObject = { probeNumber, filterNumber };
+    saveLastReadingsFilterSettingsToLocalStorage(stateObject);
+  }, [probeNumber, filterNumber]);
+
+  useEffect(() => {
     if (probeNumber) {
       dispatch(requestClientLastReadingsList(request.lastReadingsParams));
     }
-  }, [filterNumber]);
+  }, [probeNumber, filterNumber]);
 
   return <DashboardLastReadings lastReadingsIrricomList={ mappedLastReadingsIrricomList(lastReadingsList?.data?.irricom) ?? [] }
                                 lastReadingsReadingsList={ mappedLastReadingsReadingsList(lastReadingsList?.data?.readings) ?? [] }
+                                lastReadingsLandDataList={ lastReadingsList?.data?.landdata }
                                 probeNumber={ probeNumber }
                                 setProbeNumber={ setProbeNumber }
                                 filterNumber={ filterNumber }
