@@ -49,3 +49,12 @@ export const mappedLastReadingsReadingsList = (obj) => {
     };
   });
 };
+
+export const mappedLastReadingsVoltsAndSignal = (data) => {
+  return data?.map(item => {
+    return {
+      volts: item.Volts,
+      signal: item.csq
+    };
+  });
+};

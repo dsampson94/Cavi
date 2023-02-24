@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { bool, func, shape } from 'prop-types';
+import { Routes } from '../../../routes';
 
 import {
   EMAIL,
@@ -29,7 +30,7 @@ import {
 import { capitalize } from '../../../tools/general/helpers.util';
 import { saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
-import { requestClientPDF } from '../../../redux/actions/client.action';
+import { requestClientPDF, setClientMonitorProbesList } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
 
 import Button from '../button/Button';
@@ -218,6 +219,7 @@ export const TopBarButtons = ({ getPDF, getPDFAndEmail, modal }) => {
   const { groupName, clientName } = useParams();
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <div className={ modal ? 'top-bar__left__buttons-modal' : 'top-bar__left__buttons' }>
@@ -246,7 +248,11 @@ export const TopBarButtons = ({ getPDF, getPDFAndEmail, modal }) => {
 
 
         <Button icon={ PROBES_MONITOR }
-                tooltip={ PROBES_MONITOR_STRING } />
+                tooltip={ PROBES_MONITOR_STRING }
+                onClick={ () => {
+                  dispatch(setClientMonitorProbesList([]));
+                  history.push(Routes.MONITOR);
+                } } />
 
         <Button icon={ WEATHER_STATION_ICON }
                 tooltip={ WEATHER_STATION } />

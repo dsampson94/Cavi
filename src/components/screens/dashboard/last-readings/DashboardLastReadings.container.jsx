@@ -5,7 +5,11 @@ import { createSelector } from '@reduxjs/toolkit';
 import { requestClientLastReadingsList } from '../../../../redux/actions/client.action';
 import { getRequestParams } from '../../../../redux/endpoints';
 import DashboardLastReadings from './DashboardLastReadings';
-import { mappedLastReadingsIrricomList, mappedLastReadingsReadingsList } from './DashboardLastReadings.util';
+import {
+  mappedLastReadingsIrricomList,
+  mappedLastReadingsReadingsList,
+  mappedLastReadingsVoltsAndSignal
+} from './DashboardLastReadings.util';
 import {
   retrieveLastReadingsFilterSettingsFromLocalStorage,
   saveLastReadingsFilterSettingsToLocalStorage
@@ -48,6 +52,7 @@ const DashboardLastReadingsContainer = () => {
   return <DashboardLastReadings lastReadingsIrricomList={ mappedLastReadingsIrricomList(lastReadingsList?.data?.irricom) ?? [] }
                                 lastReadingsReadingsList={ mappedLastReadingsReadingsList(lastReadingsList?.data?.readings) ?? [] }
                                 lastReadingsLandDataList={ lastReadingsList?.data?.landdata }
+                                lastReadingsVoltsAndSignal={ mappedLastReadingsVoltsAndSignal(lastReadingsList?.data?.irricom) ?? [] }
                                 probeNumber={ probeNumber }
                                 setProbeNumber={ setProbeNumber }
                                 filterNumber={ filterNumber }

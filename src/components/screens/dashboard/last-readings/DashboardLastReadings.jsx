@@ -10,6 +10,7 @@ import Select from '../../../common/select/Select';
 import Button from '../../../common/button/Button';
 import Table from '../../../common/table/Table';
 import TextInputTw from '../../../common/input/text/TextInput.tw';
+import SlideOverTw from '../../../common/slide-over/SlideOver.tw';
 
 import './dashboard-last-readings.scss';
 import './../dashboard.scss';
@@ -18,6 +19,7 @@ const DashboardLastReadings = ({
                                  lastReadingsIrricomList,
                                  lastReadingsReadingsList,
                                  lastReadingsLandDataList,
+                                 lastReadingsVoltsAndSignal,
                                  probeNumber,
                                  setProbeNumber,
                                  filterNumber,
@@ -28,11 +30,13 @@ const DashboardLastReadings = ({
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
 
+  console.log(lastReadingsVoltsAndSignal);
   return (
     <ContentContainer view={ DASHBOARD }
                       showSideBar={ showClientsSideBar }
                       setShowSideBar={ setShowClientsSideBar }>
       <div className="dashboard-last-readings">
+
 
         <div className="dashboard-header">
           Find most recent readings from any probe, Irricom, Aquawave, DFM, GPRS probe:
@@ -97,6 +101,8 @@ const DashboardLastReadings = ({
                    setSelectedIndex={ setSelectedIndex } />
           </div>
         </> }
+
+        <SlideOverTw />
 
       </div>
     </ContentContainer>
