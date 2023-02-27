@@ -10,7 +10,7 @@ import Select from '../../../common/select/Select';
 import Button from '../../../common/button/Button';
 import Table from '../../../common/table/Table';
 import TextInputTw from '../../../common/input/text/TextInput.tw';
-import SlideOverTw from '../../../common/slide-over/SlideOver.tw';
+import LastReadingsSlideOverTw from '../../../common/slide-over/LastReadingsSlideOverTw';
 
 import './dashboard-last-readings.scss';
 import './../dashboard.scss';
@@ -27,10 +27,10 @@ const DashboardLastReadings = ({
                                  handleSubmit
                                }) => {
 
+  const [showSlideOver, setShowSlideOver] = useState(true);
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
 
-  console.log(lastReadingsVoltsAndSignal);
   return (
     <ContentContainer view={ DASHBOARD }
                       showSideBar={ showClientsSideBar }
@@ -65,7 +65,7 @@ const DashboardLastReadings = ({
 
             <Button label={ 'Send Raw Readings by Email' } long spaced />
 
-            <Button label={ 'View Charts' } medium spaced />
+            <Button label={ 'View Charts' } onClick={ () => setShowSlideOver(!showSlideOver) } medium spaced />
 
           </div>
 
@@ -102,7 +102,10 @@ const DashboardLastReadings = ({
           </div>
         </> }
 
-        <SlideOverTw />
+        { !isEmpty(lastReadingsIrricomList) &&
+        <LastReadingsSlideOverTw showSlideOver={ showSlideOver }
+                                 setShowSlideOver={ setShowSlideOver }
+                                 tableData={ lastReadingsVoltsAndSignal } /> }
 
       </div>
     </ContentContainer>
