@@ -88,8 +88,8 @@
     text-align: left;
     margin: util.rem(4) util.rem(2) util.rem(4) util.rem(0.8);
     padding: 0 util.bu(1.5) 0 util.bu(0.8);
-    border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
-    border-radius: map.get(radius.$border-radius, default);
+    border: util.rem(1) solid map.get(color.$colorMap, pulse-blue);
+    border-radius: map.get(radius.$border-radius, medium);
     font-family: Aller, serif;
     font-size: util.bu(2);
 

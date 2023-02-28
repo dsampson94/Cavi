@@ -53,5 +53,10 @@
       height: 100%
     }
 
+    &:hover {
+      background-color: map.get(color.$colorMap, blur-very-light-grey);
+      border-radius: 8px;
+    }
+
   }
 }

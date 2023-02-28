@@ -7,7 +7,7 @@ import { DASHBOARD } from '../../../tools/general/system-variables.util';
 
 import { mappedUserData } from '../side-bar/Sidebar.util';
 
-import TopBar from '../top-bar/TopBar';
+import TopBarTw from '../top-bar/TopBar.tw';
 import SideBar from '../side-bar/SideBar';
 import TabBar from '../tab-bar/TabBar';
 
@@ -57,10 +57,16 @@ const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar
 
   return (
     <div className="content-container">
-      <TopBar showSideBar={ showSideBar }
-              setShowSideBar={ setShowSideBar }
-              clientRequestParams={ clientRequestParams }
-              view={ view } />
+
+      <TopBarTw showSideBar={ showSideBar }
+                setShowSideBar={ setShowSideBar }
+                clientRequestParams={ clientRequestParams }
+                view={ view } />
+
+      {/*<TopBar showSideBar={ showSideBar }*/ }
+      {/*        setShowSideBar={ setShowSideBar }*/ }
+      {/*        clientRequestParams={ clientRequestParams }*/ }
+      {/*        view={ view } />*/ }
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
@@ -100,12 +106,18 @@ const ClientFieldContentContainer = ({
 
   return (
     <div className="content-container">
-      <TopBar showSideBar={ showSideBar }
-              setShowSideBar={ setShowSideBar }
-              setActiveFieldName={ setActiveFieldName }
-              clientRequestParams={ clientRequestParams }
-              mappedFieldList={ mappedFieldList }
-              view={ view } />
+
+      <TopBarTw showSideBar={ showSideBar }
+                setShowSideBar={ setShowSideBar }
+                clientRequestParams={ clientRequestParams }
+                view={ view } />
+
+      {/*<TopBar showSideBar={ showSideBar }*/}
+      {/*        setShowSideBar={ setShowSideBar }*/}
+      {/*        setActiveFieldName={ setActiveFieldName }*/}
+      {/*        clientRequestParams={ clientRequestParams }*/}
+      {/*        mappedFieldList={ mappedFieldList }*/}
+      {/*        view={ view } />*/}
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }

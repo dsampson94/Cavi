@@ -129,7 +129,7 @@ const getViewBox = (name, tiny, chart, tall, menu) => {
     case CAMERA:
       return '8 -9 1 42';
     case LOW_BATTERY:
-      return '21 14 3 23';
+      return '20 14 3 23';
     case PENCIL:
       return '-1 -9 1 42';
     case VIEW_CHARTS:
