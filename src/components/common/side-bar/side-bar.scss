@@ -109,7 +109,7 @@
   }
 
   &--show {
-    width: util.rem(200);
+    min-width: util.rem(200);
   }
 
   &__lower-button {
@@ -219,7 +219,7 @@
   }
 
   &--show {
-    width: util.rem(200);
+    min-width: util.rem(190);
   }
 }
 
@@ -302,6 +302,6 @@
   }
 
   &--show {
-    width: util.rem(200);
+    min-width: util.rem(200);
   }
 }
