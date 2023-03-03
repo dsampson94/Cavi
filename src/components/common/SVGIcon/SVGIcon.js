@@ -68,7 +68,7 @@ import ToolTip from '../tool-tip/ToolTip';
 
 import './svg-icon.scss';
 
-const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left, tooltip, grid, menu }) => {
+const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tall, left, tooltip, grid, menu, overview }) => {
 
   const { localActiveTheme } = useTheme(false);
 
@@ -89,7 +89,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
            height={ height }
            width={ width }
            fill={ getIconFill(localActiveTheme, fill, name) }
-           viewBox={ getViewBox(name, tiny, chart, tall, menu) }
+           viewBox={ getViewBox(name, tiny, chart, tall, menu, overview) }
            className={ getClassNames('svg', { tall }) }>
         { getPath(name) }
       </svg>
@@ -98,7 +98,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
   );
 };
 
-const getViewBox = (name, tiny, chart, tall, menu) => {
+const getViewBox = (name, tiny, chart, tall, menu, overview) => {
   switch (name) {
     case DOWN_ARROW:
       return '10 -1 50 100';
@@ -153,6 +153,7 @@ const getViewBox = (name, tiny, chart, tall, menu) => {
       return '1 3 18 18';
     case VERY_SATISFIED:
       if (tiny) return '5 12 40 30';
+      if (overview) return '3 14 48 30';
       else return '1 -11 40 55';
     case SATISFIED:
       if (tiny) return '5 12 40 30';

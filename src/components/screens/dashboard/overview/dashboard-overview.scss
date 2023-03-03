@@ -99,7 +99,7 @@
       &__subheader {
         display: flex;
         flex-direction: row;
-        height: util.rem(24);
+        height: util.rem(30);
         margin-bottom: util.rem(4);
         cursor: pointer;
 
@@ -120,8 +120,8 @@
           &__grid {
             display: table;
             border-collapse: collapse;
-            margin: util.rem(0) util.rem(0) util.rem(5) util.rem(0);
             justify-content: left;
+            margin-top: util.rem(2);
 
             &__frequency {
 
@@ -141,7 +141,6 @@
                 display: table-cell;
                 background-clip: padding-box;
                 text-align: center;
-                padding-top: util.rem(1);
                 flex-direction: column;
                 justify-content: center;
                 position: relative;

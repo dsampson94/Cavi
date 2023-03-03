@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { generateId, getClassNames } from '../../../../tools/general/helpers.util';
+import { useHistory } from 'react-router';
+
 import {
   DISSATISFIED,
   FIELD_UP_TO_DATE_QUESTION,
@@ -141,21 +143,23 @@ OverviewList.propTypes = {
 
 const FrequencyIndicator = (groupName, value) => {
 
+  const history = useHistory();
+
   const innerFields = Object.values(value)[1];
 
   let fieldList = [];
   for (const [fieldName, color] of Object.entries(innerFields)) {
     fieldList.push({ groupName, clientName: value.iok, fieldName, color });
   }
+
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (
         <div key={ index }
              className="dashboard-overview__list__item__subheader__icon__grid__frequency__container"
-          // onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }
-        >
+             onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeno }/${ number.fieldName }`) }>
           <ToolTip text={ number.fieldName } grid />
-          <SVGIcon name={ VERY_SATISFIED } fill={ number.color } />
+          <SVGIcon name={ VERY_SATISFIED } fill={ number.color } overview />
         </div>
       )) }
     </div>
@@ -168,19 +172,22 @@ FrequencyIndicator.propTypes = {
 
 const DeficitIndicator = (groupName, value) => {
 
-  const objectValues = Object.values(value.iov)[0];
+  const history = useHistory();
 
+  const objectValues = Object.values(value.iov)[0];
   const innerFields = Object.values(value)[1];
+
   let fieldList = [];
-  for (const [key, value] of Object.entries(innerFields)) {
-    fieldList.push({ key });
+  for (const [fieldName, val] of Object.entries(innerFields)) {
+    fieldList.push({ groupName, clientName: value.iok, probeNumber: val.probeno, fieldName });
   }
 
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (
-        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__deficit__container">
-          <ToolTip text={ number.key } grid />
+        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__deficit__container"
+             onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }>
+          <ToolTip text={ number.fieldName } grid />
           <div className={ 'deficit-container__upper' }
                style={ { backgroundColor: `#${ objectValues?.kleurbohex?.slice(3) }` } }>
             { objectValues?.tmbo }
@@ -201,19 +208,22 @@ DeficitIndicator.propTypes = {
 
 const LastReadingIndicator = (groupName, value) => {
 
-  const objectValues = Object.values(value.iov)[0];
+  const history = useHistory();
 
+  const objectValues = Object.values(value.iov)[0];
   const innerFields = Object.values(value)[1];
+
   let fieldList = [];
-  for (const [key, value] of Object.entries(innerFields)) {
-    fieldList.push({ key });
+  for (const [fieldName, val] of Object.entries(innerFields)) {
+    fieldList.push({ groupName, clientName: value.iok, probeNumber: val.probeno, fieldName });
   }
 
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (
-        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__reading__container">
-          <ToolTip text={ number.key } grid />
+        <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__reading__container"
+             onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }>
+          <ToolTip text={ number.fieldName } grid />
           <div className={ 'last-reading__container' }
                style={ { backgroundColor: `#${ objectValues?.lastreadingkleur?.slice(3) }` } }>
             <div className={ 'last-reading__text' }>{ objectValues?.lastreading }</div>
