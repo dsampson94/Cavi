@@ -118,9 +118,9 @@ export const OverviewList = ({ ownClientsList, overviewOptionSelected, setOvervi
                       { value.iok }
                     </div>
                     <div className="dashboard-overview__list__item__subheader__icon">
-                      { overviewOptionSelected === 1 && FrequencyIndicator(value) }
-                      { overviewOptionSelected === 2 && DeficitIndicator(value) }
-                      { overviewOptionSelected === 3 && LastReadingIndicator(value) }
+                      { overviewOptionSelected === 1 && FrequencyIndicator(item.objectKey, value) }
+                      { overviewOptionSelected === 2 && DeficitIndicator(item.objectKey, value) }
+                      { overviewOptionSelected === 3 && LastReadingIndicator(item.objectKey, value) }
                     </div>
                   </div>);
               }) }
@@ -139,19 +139,21 @@ OverviewList.propTypes = {
   ownClientsList: arrayOf(shape({}))
 };
 
-const FrequencyIndicator = (value) => {
+const FrequencyIndicator = (groupName, value) => {
 
   const innerFields = Object.values(value)[1];
+
   let fieldList = [];
   for (const [fieldName, color] of Object.entries(innerFields)) {
-    fieldList.push({ fieldName, color });
+    fieldList.push({ groupName, clientName: value.iok, fieldName, color });
   }
-
   return (
     <div className="dashboard-overview__list__item__subheader__icon__grid">
       { fieldList.map((number, index) => (
         <div key={ index }
-             className="dashboard-overview__list__item__subheader__icon__grid__frequency__container">
+             className="dashboard-overview__list__item__subheader__icon__grid__frequency__container"
+          // onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }
+        >
           <ToolTip text={ number.fieldName } grid />
           <SVGIcon name={ VERY_SATISFIED } fill={ number.color } />
         </div>
@@ -164,7 +166,7 @@ FrequencyIndicator.propTypes = {
   value: shape({}).isRequired
 };
 
-const DeficitIndicator = (value) => {
+const DeficitIndicator = (groupName, value) => {
 
   const objectValues = Object.values(value.iov)[0];
 
@@ -197,7 +199,7 @@ DeficitIndicator.propTypes = {
   value: shape({}).isRequired
 };
 
-const LastReadingIndicator = (value) => {
+const LastReadingIndicator = (groupName, value) => {
 
   const objectValues = Object.values(value.iov)[0];
 

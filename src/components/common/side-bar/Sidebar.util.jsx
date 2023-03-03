@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { func } from 'prop-types';
 
-import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
+import { generateId, getClassNames } from '../../../tools/general/helpers.util';
 
 import {
   CHARTS,
@@ -13,6 +13,7 @@ import {
   FIELD_TEMPERATURES,
   FOUR_WEEKS_LABEL,
   FULL_VIEW_LABEL,
+  GENERAL_ROUTE,
   RADIO_GROUP,
   SETTINGS_GEAR,
   SIX_MONTHS_LABEL,
@@ -85,7 +86,7 @@ export const SideBarList = ({
               </div> }
 
               <div className="client-fields-side-bar__list__item__subheader__icon"
-                   onClick={ noOp() }>
+                   onClick={ () => history.push(`/client/${ item.objectKey }/${ value.iok }/field-setup/${ GENERAL_ROUTE }`) }>
                 <SVGIcon name={ SETTINGS_GEAR } />
               </div>
             </div>

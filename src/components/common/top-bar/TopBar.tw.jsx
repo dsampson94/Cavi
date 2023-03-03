@@ -18,6 +18,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { FaThermometerHalf } from 'react-icons/fa';
+import { VscGraphLine } from 'react-icons/vsc';
 
 import { bool, func, shape } from 'prop-types';
 import { Routes } from '../../../routes';
@@ -170,6 +171,12 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             description: 'View Recommendations List',
             href: `/client/${ groupName }/${ clientName }`,
             icon: ListBulletIcon
+          },
+          {
+            name: 'Deficit Charts',
+            description: 'View Deficit Charts',
+            href: `/client/${ groupName }/${ clientName }/field-charts/${ probeNumber }/${ fieldName }`,
+            icon: VscGraphLine
           },
           {
             name: 'Monitor Probes',

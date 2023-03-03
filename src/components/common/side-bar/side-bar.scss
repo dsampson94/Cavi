@@ -68,7 +68,7 @@
       &__subheader {
         display: flex;
         flex-direction: row;
-        height: util.rem(19);
+        height: util.rem(23);
         cursor: pointer;
         border-top-right-radius: map.get(radius.$border-radius, medium);
         border-bottom-right-radius: map.get(radius.$border-radius, medium);
@@ -89,12 +89,18 @@
         }
 
         &__icon {
+          padding-top: util.rem(3);
           width: util.rem(18);
           position: relative;
 
           &:active {
             position: relative;
-            top: util.rem(1);
+            top: util.rem(-0.8);
+          }
+
+          &:hover {
+            position: relative;
+            top: util.rem(0.8);
           }
         }
 
