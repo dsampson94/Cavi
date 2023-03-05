@@ -6,7 +6,12 @@ export default function BusinessesImagesPCG() {
         <div className="bg-white py-12 sm:py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
-                    <h2 className="text-3xl mb-4 font-semibold leading-8 tracking-tight text-blue-600">PRESTIGE COSMETICS GROUP</h2>
+                    <div className="flex justify-center">
+                        <Image src={ '/brands/PCG-1.png' }
+                               alt={ 'rss logo' }
+                               height={ 200 }
+                               width={ 200 } />
+                    </div>
                     <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-xl">
                         The Prestige Cosmetics Group is the leading distributor of prestige fragrances, cosmetics and specialised skin care in South Africa.
                     </p>

@@ -26,7 +26,7 @@ export default function LeftImageCSR() {
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                     <div className="lg:ml-auto lg:pt-4 lg:pl-4">
                         <div className="lg:max-w-lg -mt-8">
-                            <h2 className="text-lg font-semibold leading-8 tracking-tight text-blue-600 pb-8">CAVI CARES</h2>
+                            <h2 className="text-lg font-semibold leading-8 tracking-tight text-blue-500 pb-8">CAVI CARES</h2>
                             <p className="-mt-8 text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">Corporate Social Responsibility</p>
                             <p className="mt-6 text-lg leading-8 text-gray-600">
                                 Our vision is to create a better future for South Africa by creating sustainable change in the lives of young South Africans through

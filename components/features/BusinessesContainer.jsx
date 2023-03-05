@@ -17,32 +17,32 @@ export default function BusinessContainer() {
                     </div>
                 </div>
                 <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
-                        <Image src={ '/dermalogica.png' }
+                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                        <Image src={ '/brands/dermalogica-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
-                        <Image src={ '/chanel.png' }
+                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                        <Image src={ '/brands/PCG-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
-                        <Image src={ '/pcg.png' }
+                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                        <Image src={ '/brands/Arc-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1 border border-gray-400 rounded-lg">
-                        <Image src={ '/pds.png' }
+                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                        <Image src={ '/brands/PDS-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1 border border-gray-400 rounded-lg">
-                        <Image src={ '/arc.png' }
+                    <div className="col-span-2 p-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1 border border-gray-400 rounded-lg">
+                        <Image src={ '/brands/Chanel-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }
                                width={ 200 } />

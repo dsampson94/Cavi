@@ -57,7 +57,7 @@ export default function CenteredIconTextFeature() {
     return (
         <div className="relative bg-white py-16 sm:py-16 lg:py-16">
             <div className="mx-auto max-w-md px-2 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
-                <p className="mt-2 text-3xl tracking-widest text-blue-600 sm:text-4xl">
+                <p className="mt-2 text-3xl tracking-widest text-blue-500 sm:text-4xl font-bold">
                     WHO WE ARE
                 </p>
                 <p className="mx-auto mt-12 text-xl text-gray-500 p-4">

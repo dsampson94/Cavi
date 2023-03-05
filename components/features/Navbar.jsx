@@ -8,7 +8,6 @@ export default function Navbar({ contactScrollToRef }) {
 
     const router = useRouter();
 
-
     const solutions = [
         {
             name: 'Inbox',
@@ -45,12 +44,8 @@ export default function Navbar({ contactScrollToRef }) {
         { name: 'Careers', href: '/careers' }
     ];
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ');
-    }
-
     return (
-        <header className="sticky top-0 z-40 shadow-lg br-04 rounded-2xl">
+        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl">
             <Popover className="relative bg-white">
                 <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                     <div className="flex justify-start lg:w-0 lg:flex-1 mt-2 min-w-32">
@@ -58,8 +53,7 @@ export default function Navbar({ contactScrollToRef }) {
                             <Image src={ '/cavi-blue-logo.png' }
                                    alt={ 'cavi logo' }
                                    height={ 200 }
-                                   width={ 200 }
-                                   className="h-18 min-w-32" />
+                                   width={ 200 } />
                         </a>
                     </div>
                     <div className="-my-2 -mr-2 md:hidden">

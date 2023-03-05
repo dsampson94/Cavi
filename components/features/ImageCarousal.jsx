@@ -6,21 +6,18 @@ const ImageCarousel = ({ images }) => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentImageIndex((currentImageIndex + 1) % images.length);
-        },4000);
+        }, 3500);
         return () => clearInterval(intervalId);
     }, [currentImageIndex, images.length]);
 
     return (
-        <img
-            src={ images[currentImageIndex].src }
-            alt="slide-cavi-images"
-            className="transition duration-800 ease-in-out transform hover:scale-105"
-            style={ {
-                transition: 'opacity 6s ease-in-out, transform 6s ease-in-out',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-            } }
+        <img src={ images[currentImageIndex].src }
+             alt="slide-cavi-images"
+             style={ {
+                 width: '100%',
+                 height: '100%',
+                 objectFit: 'cover'
+             } }
         />
     );
 };

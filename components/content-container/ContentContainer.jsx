@@ -114,10 +114,10 @@ const BusinessesPageContentContainer = () => {
                 <Navbar contactScrollToRef={ contactScrollToRef } />
                 <BusinessContainer />
                 <BusinessesImagesDermalogica />
-                <BusinessesImagesPCD />
                 <BusinessesImagesPCG />
-                <BusinessesImagesPDS />
                 <BusinessesImageARC />
+                <BusinessesImagesPDS />
+                <BusinessesImagesPCD />
                 <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
             </div>
         </div>

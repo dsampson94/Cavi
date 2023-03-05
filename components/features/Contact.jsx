@@ -107,7 +107,7 @@ export default function Contact({ contactScrollToRef }) {
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
                                             <a href="tel:+270(21)4427700"
-                                               class="font-bold"
+                                               className="font-bold"
                                             >+27 0(21) 442 7700</a>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@ export default function Contact({ contactScrollToRef }) {
                                             <EnvelopeIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <div className="ml-3 text-base text-gray-500">
-                                            <a class="font-bold"
+                                            <a className="font-bold"
                                                href="mailto:info@cavibrands.co.za">info@cavibrands.co.za</a>
                                         </div>
                                     </div>
