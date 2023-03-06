@@ -51,9 +51,9 @@ export default function BusinessesImageARC() {
                                    width={ 800 }
                             />
                         </div>
-                        <Image src={ '/logos-blue.png' }
+                        <Image src={ '/BLUE LOGOS.svg' }
                                alt={ 'cavi-image' }
-                               className={ 'w-92 object-cover br-04 rounded-xl' }
+                               className={ 'w-92 object-cover br-04 rounded-2xl' }
                                height={ 600 }
                                width={ 800 }
                         />
