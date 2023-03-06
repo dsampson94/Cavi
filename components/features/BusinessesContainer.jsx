@@ -10,7 +10,7 @@ export default function BusinessContainer() {
                         Corporate Structure
                     </h2>
                     <div className="flex justify-center py-12">
-                        <Image src={ '/cavi-blue-logo.png' }
+                        <Image src={ '/cavilogo.svg' }
                                alt={ 'rss logo' }
                                height={ 300 }
                                width={ 300 } />

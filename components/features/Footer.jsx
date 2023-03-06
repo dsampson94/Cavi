@@ -50,7 +50,7 @@ export default function Footer({ hasContactDetails, contactScrollToRef }) {
             <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
                 <div className="xl:grid xl:grid-cols-3 xl:gap-8">
                     <div className="space-y-8">
-                        <Image src={ '/cavi-blue-logo.png' }
+                        <Image src={ '/cavilogo.svg' }
                                alt={ 'rss logo' }
                                height={ 120 }
                                width={ 200 } />
@@ -88,30 +88,6 @@ export default function Footer({ hasContactDetails, contactScrollToRef }) {
                                 </ul>
                             </div>
                         </div>
-                        {/*<div>*/ }
-                        {/*    <h3 className="text-sm font-semibold leading-6 text-gray-900">Company</h3>*/ }
-                        {/*    <ul role="list" className="mt-6 space-y-4">*/ }
-                        {/*        { navigation.company.map((item) => (*/ }
-                        {/*            <li key={ item.name }>*/ }
-                        {/*                <a href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">*/ }
-                        {/*                    { item.name }*/ }
-                        {/*                </a>*/ }
-                        {/*            </li>*/ }
-                        {/*        )) }*/ }
-                        {/*    </ul>*/ }
-                        {/*</div>*/ }
-                        {/*<div className="mt-10 md:mt-0">*/ }
-                        {/*    <h3 className="text-sm font-semibold leading-6 text-gray-900">Legal</h3>*/ }
-                        {/*    <ul role="list" className="mt-6 space-y-4">*/ }
-                        {/*        { navigation.legal.map((item) => (*/ }
-                        {/*            <li key={ item.name }>*/ }
-                        {/*                <a href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">*/ }
-                        {/*                    { item.name }*/ }
-                        {/*                </a>*/ }
-                        {/*            </li>*/ }
-                        {/*        )) }*/ }
-                        {/*    </ul>*/ }
-                        {/*</div>*/ }
 
                         { hasContactDetails &&
                         <div ref={ contactScrollToRef }>

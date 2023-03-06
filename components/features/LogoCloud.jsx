@@ -28,7 +28,7 @@ export default function LogoCloud() {
                                width={ 200 } />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <Image src={ '/brands/clear-1.png' }
+                        <Image src={ '/brands/Clear-1.png' }
                                alt={ 'logo' }
                                height={ 200 }
                                width={ 200 } />
@@ -106,7 +106,7 @@ export default function LogoCloud() {
                                width={ 200 } />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                        <Image src={ '/dermalogica-2.png' }
+                        <Image src={ '/brands/dermalogica-2.png' }
                                alt={ 'logo' }
                                height={ 200 }
                                width={ 200 } />

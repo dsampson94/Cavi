@@ -48,9 +48,9 @@ export default function Navbar({ contactScrollToRef }) {
         <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl">
             <Popover className="relative bg-white">
                 <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
-                    <div className="flex justify-start lg:w-0 lg:flex-1 mt-2 min-w-32">
+                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32">
                         <a href="/">
-                            <Image src={ '/cavi-blue-logo.png' }
+                            <Image src={ '/cavilogo.svg' }
                                    alt={ 'cavi logo' }
                                    height={ 200 }
                                    width={ 200 } />
@@ -95,7 +95,7 @@ export default function Navbar({ contactScrollToRef }) {
                                         <Popover.Panel
                                             className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:left-1/2 lg:ml-0 lg:max-w-2xl lg:-translate-x-1/2">
                                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                                <nav className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
+                                                <nav className="relative grid gap-6 bg-white py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
                                                     { solutions.map((item) => (
                                                         <a
                                                             key={ item.name }
@@ -161,7 +161,7 @@ export default function Navbar({ contactScrollToRef }) {
                             <div className="px-5 pt-5 pb-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <Image src={ '/cavi-blue-logo.png' }
+                                        <Image src={ '/cavilogo.svg' }
                                                alt={ 'logo' }
                                                height={ 200 }
                                                width={ 150 } />

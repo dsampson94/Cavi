@@ -42,7 +42,7 @@ export default function LeftImageCSR() {
                     </div>
                     <div className="flex items-center justify-center lg:order-first">
                         <img
-                            src="/cavicares.png"
+                            src="/cavi-cares.svg"
                             alt="cavicares"
                             className="w-72 lg:w-57 max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-full"
                             width={ 400 }

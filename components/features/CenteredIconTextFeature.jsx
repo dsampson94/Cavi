@@ -41,7 +41,7 @@ const features = [
         name: 'CAVI Cares',
         description: 'Our vision is to help to create a better future for sustainable change in Southern Africa by changing the lives of young South Africans through education.',
         icon: ServerIcon,
-        image: '/cavicares.png'
+        image: '/cavi-cares.svg'
     },
     {
         id: 6,
