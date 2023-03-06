@@ -50,10 +50,11 @@ export default function Navbar({ contactScrollToRef }) {
                 <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                     <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32">
                         <a href="/">
-                            <img src={ '/cavilogo.svg' }
-                                 alt={ 'cavi logo' }
-                                 height={ 200 }
-                                 width={ 200 } />
+                            <Image src={ '/cavilogo.svg' }
+                                   alt={ 'cavi logo' }
+                                   height={ 200 }
+                                   width={ 200 }
+                                   layout="fixed" />
                         </a>
                     </div>
                     <div className="-my-2 -mr-2 md:hidden">

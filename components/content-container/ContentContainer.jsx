@@ -17,154 +17,115 @@ import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
 import BusinessesImageARC from '../features/BusinessesImagesARC';
 
 const ContentContainer = ({ view, children }) => {
-    switch (view) {
-        case 'Home':
-            return <HomePageContentContainer>
-                { children }
-            </HomePageContentContainer>;
-        case 'About':
-            return <AboutPageContentContainer>
-                { children }
-            </AboutPageContentContainer>;
-        case 'People':
-            return <PeoplePageContentContainer>
-                { children }
-            </PeoplePageContentContainer>;
-        case 'Businesses':
-            return <BusinessesPageContentContainer>
-                { children }
-            </BusinessesPageContentContainer>;
-        case 'Brands':
-            return <BrandsPageContentContainer>
-                { children }
-            </BrandsPageContentContainer>;
-        case 'Csr':
-            return <CsrPageContentContainer>
-                { children }
-            </CsrPageContentContainer>;
-        case 'Careers':
-            return <CareerPageContentContainer>
-                { children }
-            </CareerPageContentContainer>;
-        default:
-            return <HomePageContentContainer>
-                { children }
-            </HomePageContentContainer>;
-    }
+    const contactScrollToRef = useRef('contactScrollToRef');
 
+    const PageComponent = (() => {
+        switch (view) {
+            case 'Home':
+                return HomePageContentContainer;
+            case 'About':
+                return AboutPageContentContainer;
+            case 'People':
+                return PeoplePageContentContainer;
+            case 'Businesses':
+                return BusinessesPageContentContainer;
+            case 'Brands':
+                return BrandsPageContentContainer;
+            case 'Csr':
+                return CsrPageContentContainer;
+            case 'Careers':
+                return CareerPageContentContainer;
+            default:
+                return HomePageContentContainer;
+        }
+    })();
+
+    return (
+        <>
+            <Navbar contactScrollToRef={ contactScrollToRef } />
+            <PageComponent contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </PageComponent>
+        </>
+    );
 };
 
 export default ContentContainer;
 
-const HomePageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToRef');
+const HomePageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="font-montserrat-light isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <HeroImageCenter />
-                <CenteredIconTextFeature />
-                <Contact contactScrollToRef={ contactScrollToRef } />
-                <Footer />
-            </div>
+        <div className="font-montserrat-light isolate bg-white">
+            <HeroImageCenter />
+            <CenteredIconTextFeature />
+            <Contact contactScrollToRef={ contactScrollToRef } />
+            <Footer />
         </div>
     );
 };
 
-const AboutPageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const AboutPageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <RightImageWithText />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <RightImageWithText />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
 
 
-const PeoplePageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const PeoplePageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <Team />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <Team />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
 
-const BusinessesPageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const BusinessesPageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <BusinessContainer />
-                <BusinessesImagesDermalogica />
-                <BusinessesImagesPCG />
-                <BusinessesImageARC />
-                <BusinessesImagesPDS />
-                <BusinessesImagesPCD />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <BusinessContainer />
+            <BusinessesImagesDermalogica />
+            <BusinessesImagesPCG />
+            <BusinessesImageARC />
+            <BusinessesImagesPDS />
+            <BusinessesImagesPCD />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
 
-const BrandsPageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const BrandsPageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <LogoCloud />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <LogoCloud />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
 
-const CsrPageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const CsrPageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <LeftImageCSR />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <LeftImageCSR />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
 
-const CareerPageContentContainer = () => {
-
-    const contactScrollToRef = useRef('contactScrollToFooter');
+const CareerPageContentContainer = ({ contactScrollToRef }) => {
 
     return (
-        <div>
-            <div className="isolate bg-white">
-                <Navbar contactScrollToRef={ contactScrollToRef } />
-                <CareersOptions />
-                <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
-            </div>
+        <div className="isolate bg-white">
+            <CareersOptions />
+            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
         </div>
     );
 };
