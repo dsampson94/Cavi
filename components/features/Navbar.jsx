@@ -45,10 +45,10 @@ export default function Navbar({ contactScrollToRef }) {
     ];
 
     return (
-        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl max-h-[120px]">
+        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl max-h-[112px]">
             <Popover className="relative bg-white">
-                <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8 max-h-[120px]">
-                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 max-h-[120px]">
+                <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8 max-h-[112px]">
+                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 max-h-[112px]">
                         <a href="/">
                             <Image src={ '/cavilogo.svg' }
                                    alt={ 'cavi logo' }

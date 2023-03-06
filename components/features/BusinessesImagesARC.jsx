@@ -29,29 +29,29 @@ export default function BusinessesImageARC() {
                     <dl className="grid max-w-xl grid-cols-1 gap-y-2 gap-x-2 lg:max-w-none lg:grid-cols-2 lg:gap-y-2">
                         <div className="flex-col">
 
-                            <video className="w-92 h-64 br-04 rounded-xl" controls>
+                            <video className="w-92 h-64 br-04 rounded-lg" controls>
                                 <source src={ '/Dermalo.mp4' } type="video/mp4" />
                             </video>
                             <Image src={ '/arcstore.png' }
                                    alt={ 'cavi-image' }
-                                   className={ 'mt-5 w-92 h-64 object-cover br-04 rounded-xl' }
+                                   className={ 'mt-4 w-92 h-64 object-cover br-04 rounded-lg' }
                                    height={ 600 }
                                    width={ 800 }
                             />
                             <Image src={ '/arcs.png' }
                                    alt={ 'cavi-image' }
-                                   className={ 'mt-5 w-92 h-64 object-cover br-04 rounded-xl' }
+                                   className={ 'mt-3 w-92 h-64 object-cover br-04 rounded-lg' }
                                    height={ 600 }
                                    width={ 800 }
                             />
                             <Image src={ '/arcis.png' }
                                    alt={ 'cavi-image' }
-                                   className={ 'mt-4 w-92 h-72 object-cover br-04 rounded-xl' }
+                                   className={ 'mt-3 w-92 h-64 object-cover br-04 rounded-lg' }
                                    height={ 600 }
                                    width={ 800 }
                             />
                         </div>
-                        <Image src={ '/BLUE LOGOS.svg' }
+                        <Image src={ '/bluelogowall.svg' }
                                alt={ 'cavi-image' }
                                className={ 'w-92 object-cover br-04 rounded-2xl' }
                                height={ 600 }
