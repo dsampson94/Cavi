@@ -111,7 +111,7 @@ export default function Team() {
                                     <div className="space-y-2">
                                         <div className="space-y-1 text-lg font-medium leading-6">
                                             <h3>{ person.name }</h3>
-                                            <p className="text-indigo-600">{ person.role }</p>
+                                            <p className="text-blue-500">{ person.role }</p>
                                             <p className="text-gray-400 text-m">{ person.qualification }</p>
                                             <p className="text-gray-400 mr-4 pt-4 text-m">{ person.about }</p>
                                         </div>
@@ -142,7 +142,7 @@ export default function Team() {
                                     <div className="space-y-2">
                                         <div className="space-y-1 text-lg font-medium leading-6">
                                             <h3>{ person.name }</h3>
-                                            <p className="text-indigo-600">{ person.role }</p>
+                                            <p className="text-blue-500">{ person.role }</p>
                                             <p className="text-gray-400 text-m">{ person.qualification }</p>
                                             <p className="text-gray-400 mr-4 pt-4 text-m">{ person.about }</p>
                                         </div>

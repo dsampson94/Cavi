@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function RightImageWithText() {
 
     return (
@@ -31,9 +33,9 @@ export default function RightImageWithText() {
                                 Understanding and serving the consumer is our objective and delivering an integrated omni-channel experience is essential in our markets.
                             </p>
                             <div className="mt-10 flex items-center gap-x-6">
-                                <a href="/brands" className="text-base font-semibold leading-7 text-gray-900">
+                                <Link href="/brands" className="text-base font-semibold leading-7 text-gray-900">
                                     Learn more <span aria-hidden="true">→</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

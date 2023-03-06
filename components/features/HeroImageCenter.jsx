@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import ImageCarousel from './ImageCarousal';
+import Link from 'next/link';
 
 export default function HeroImageCenter() {
 
@@ -38,6 +39,9 @@ export default function HeroImageCenter() {
                                         We are dedicated to making every customer experience in our stores and with our
                                         brands, simply extraordinary.
                                     </p>
+                                    <Link href="/people" className="flex justify-center tracking-wider mt-4 text-white text-md hover:text-blue-400">
+                                        Learn more  <span className="pl-2" aria-hidden="true"> →</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
