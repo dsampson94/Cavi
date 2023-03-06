@@ -2,8 +2,9 @@ import React from 'react';
 
 import ContentContainer from '../components/content-container/ContentContainer';
 
-export default function Businesses() {
+export default function Businesses({ contactScrollToRef }) {
     return (
-        <ContentContainer view={'Businesses'} />
+        <ContentContainer contactScrollToRef={ contactScrollToRef }
+                          view={ 'Businesses' } />
     );
 }

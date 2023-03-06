@@ -2,8 +2,9 @@ import React from 'react';
 
 import ContentContainer from '../components/content-container/ContentContainer';
 
-export default function Home() {
+export default function Home({ contactScrollToRef }) {
     return (
-        <ContentContainer view={'Home'} />
+        <ContentContainer contactScrollToRef={ contactScrollToRef }
+                          view={ 'Home' } />
     );
 }

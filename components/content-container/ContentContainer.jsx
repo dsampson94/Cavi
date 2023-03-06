@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Contact from '../features/Contact';
 import HeroImageCenter from '../features/HeroImageCenter';
 import Footer from '../features/Footer';
@@ -14,40 +14,44 @@ import BusinessesImagesPCD from '../features/BusinessesImagesPCD';
 import BusinessesImagesPCG from '../features/BusinessesImagesPCG';
 import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
 import BusinessesImageARC from '../features/BusinessesImagesARC';
-import Navbar from '../features/Navbar';
 
-const ContentContainer = ({ view, children }) => {
-    const contactScrollToRef = useRef('contactScrollToRef');
+const ContentContainer = ({ view, contactScrollToRef, children }) => {
 
-    const PageComponent = (() => {
-        switch (view) {
-            case 'Home':
-                return HomePageContentContainer;
-            case 'About':
-                return AboutPageContentContainer;
-            case 'People':
-                return PeoplePageContentContainer;
-            case 'Businesses':
-                return BusinessesPageContentContainer;
-            case 'Brands':
-                return BrandsPageContentContainer;
-            case 'Csr':
-                return CsrPageContentContainer;
-            case 'Careers':
-                return CareerPageContentContainer;
-            default:
-                return HomePageContentContainer;
-        }
-    })();
-
-    return (
-        <>
-            <Navbar contactScrollToRef={ contactScrollToRef } />
-            <PageComponent contactScrollToRef={ contactScrollToRef }>
+    switch (view) {
+        case 'Home':
+            return <HomePageContentContainer contactScrollToRef={ contactScrollToRef }>
                 { children }
-            </PageComponent>
-        </>
-    );
+            </HomePageContentContainer>;
+        case 'About':
+            return <AboutPageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </AboutPageContentContainer>;
+        case 'People':
+            return <PeoplePageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </PeoplePageContentContainer>;
+        case 'Businesses':
+            return <BusinessesPageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </BusinessesPageContentContainer>;
+        case 'Brands':
+            return <BrandsPageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </BrandsPageContentContainer>;
+        case 'Csr':
+            return <CsrPageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </CsrPageContentContainer>;
+        case 'Careers':
+            return <CareerPageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </CareerPageContentContainer>;
+        default:
+            return <HomePageContentContainer contactScrollToRef={ contactScrollToRef }>
+                { children }
+            </HomePageContentContainer>;
+    }
+
 };
 
 export default ContentContainer;
