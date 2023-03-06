@@ -3,6 +3,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
+import Logo from './Logo';
 
 function Navbar({ contactScrollToRef }) {
 
@@ -81,10 +82,7 @@ function Navbar({ contactScrollToRef }) {
                             <div className="px-5 pt-5 pb-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <Image src={ '/cavilogo.svg' }
-                                               alt={ 'logo' }
-                                               height={ 200 }
-                                               width={ 150 } />
+                                        <Logo />
                                     </div>
                                     <div className="-mr-2">
                                         <Popover.Button
