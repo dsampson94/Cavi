@@ -45,16 +45,16 @@ export default function Navbar({ contactScrollToRef }) {
     ];
 
     return (
-        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl max-h-[112px]">
+        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap">
             <Popover className="relative bg-white">
-                <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8 max-h-[112px]">
-                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 max-h-[112px]">
+                <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
+                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32">
                         <a href="/">
                             <Image src={ '/cavilogo.svg' }
                                    alt={ 'cavi logo' }
-                                   height={ 120 }
+                                   height={ 200 }
                                    width={ 200 }
-                                   layout="fixed" />
+                                   layout="fixed"/>
                         </a>
                     </div>
                     <div className="-my-2 -mr-2 md:hidden">
@@ -68,22 +68,6 @@ export default function Navbar({ contactScrollToRef }) {
                         <Popover className="relative">
                             { ({ open }) => (
                                 <>
-                                    {/*<Popover.Button*/ }
-                                    {/*    className={classNames(*/ }
-                                    {/*        open ? 'text-gray-900' : 'text-gray-500',*/ }
-                                    {/*        'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'*/ }
-                                    {/*    )}*/ }
-                                    {/*>*/ }
-                                    {/*    <span>Solutions</span>*/ }
-                                    {/*    <ChevronDownIcon*/ }
-                                    {/*        className={classNames(*/ }
-                                    {/*            open ? 'text-gray-600' : 'text-gray-400',*/ }
-                                    {/*            'ml-2 h-5 w-5 group-hover:text-gray-500'*/ }
-                                    {/*        )}*/ }
-                                    {/*        aria-hidden="true"*/ }
-                                    {/*    />*/ }
-                                    {/*</Popover.Button>*/ }
-
                                     <Transition
                                         as={ Fragment }
                                         enter="transition ease-out duration-200"

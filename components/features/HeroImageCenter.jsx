@@ -27,12 +27,12 @@ export default function HeroImageCenter() {
                     <div className="relative shadow-2xl h-screen -mt-28">
                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
                         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                            <div className="shadow-2xl sm:overflow-hidden sm:rounded-2xl">
+                            <div className="sm:overflow-hidden sm:rounded-2xl">
                                 <div className="absolute inset-0 w-full h-full">
                                     <ImageCarousel images={ imagesList } />
                                     <div className="absolute inset-0 bg-gray-600 mix-blend-multiply" />
                                 </div>
-                                <div className="relative pt-80 mt-6 px-6 lg:px-8">
+                                <div className="relative pt-80 px-6 lg:px-8">
                                     <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                                         <span className="tracking-wider block text-white">The Home of Iconic Brands</span>
                                     </h1>
@@ -40,23 +40,6 @@ export default function HeroImageCenter() {
                                         We are dedicated to making every customer experience in our stores and with our
                                         brands, simply extraordinary.
                                     </p>
-
-                                    <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-                                        {/*<div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">*/ }
-                                        {/*    <a*/ }
-                                        {/*        href="#"*/ }
-                                        {/*        className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"*/ }
-                                        {/*    >*/ }
-                                        {/*        Get started*/ }
-                                        {/*    </a>*/ }
-                                        {/*    <a*/ }
-                                        {/*        href="#"*/ }
-                                        {/*        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"*/ }
-                                        {/*    >*/ }
-                                        {/*        Live demo*/ }
-                                        {/*    </a>*/ }
-                                        {/*</div>*/ }
-                                    </div>
                                 </div>
                             </div>
                         </div>
