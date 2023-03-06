@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { socials } from './Navbar';
+import Link from 'next/link';
 
 const navigation = {
     navbarOne: [
@@ -69,9 +70,9 @@ export default function Footer({ hasContactDetails, contactScrollToRef }) {
                                 <ul role="list" className="mt-6 space-y-4 text-sm font-semibold leading-6 text-gray-900">
                                     { navigation.navbarOne.map((item) => (
                                         <li key={ item.name }>
-                                            <a href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">
+                                            <Link href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">
                                                 { item.name }
-                                            </a>
+                                            </Link>
                                         </li>
                                     )) }
                                 </ul>
@@ -80,9 +81,9 @@ export default function Footer({ hasContactDetails, contactScrollToRef }) {
                                 <ul role="list" className="mt-6 space-y-4 text-sm font-semibold leading-6 text-gray-900">
                                     { navigation.navbarTwo.map((item) => (
                                         <li key={ item.name }>
-                                            <a href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">
+                                            <Link href={ item.href } className="text-sm leading-6 text-gray-600 hover:text-gray-900">
                                                 { item.name }
-                                            </a>
+                                            </Link>
                                         </li>
                                     )) }
                                 </ul>

@@ -4,6 +4,7 @@ import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import Logo from './Logo';
+import Link from 'next/link';
 
 function Navbar({ contactScrollToRef }) {
 
@@ -24,13 +25,13 @@ function Navbar({ contactScrollToRef }) {
             <Popover className="relative bg-white">
                 <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                     <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[110px] max-h-[110px] h-[110px]">
-                        <a href="/">
+                        <Link href="/">
                             <Image src={ '/cavilogo.svg' }
                                    alt={ 'cavi logo' }
                                    height={ 200 }
                                    width={ 200 }
                                    layout="fixed" />
-                        </a>
+                        </Link>
                     </div>
                     <div className="-my-2 -mr-2 md:hidden">
                         <Popover.Button
@@ -42,12 +43,12 @@ function Navbar({ contactScrollToRef }) {
                     <Popover.Group as="nav" className="hidden space-x-10 md:flex lg:pt-3">
 
                         { navigation.map((item) => (
-                            <a key={ item.name } href={ item.href }
+                            <Link key={ item.name } href={ item.href }
                                className={ `text-base font-medium text-gray-500 hover:text-gray-900 pr-4 pt-2 ${ router.pathname === item.href ? 'font-bold text-black' +
                                    '' : '' }` }
                             >
                                 { item.name }
-                            </a>
+                            </Link>
                         )) }
 
                         <div className="flex">

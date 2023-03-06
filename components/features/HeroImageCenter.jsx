@@ -7,13 +7,11 @@ export default function HeroImageCenter() {
     const imagesList = [
         { src: '/cavicampus.jpg' },
         { src: '/cavicamps.jpg' },
-        { src: '/cavirecep.png' },
         { src: '/cavicampus-4.jpg' },
         { src: '/cavicampus-8.jpg' },
         { src: '/cavicampus-3.jpg' },
         { src: '/fourps.jpg' },
         { src: '/cavicampus-4.jpg' },
-        { src: '/cavicampus-5.jpg' },
         { src: '/cavicampus-6.jpg' },
         { src: '/cavicampus-7.jpg' },
         { src: '/cavicpt.jpg' }

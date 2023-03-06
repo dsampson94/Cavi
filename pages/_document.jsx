@@ -35,20 +35,21 @@ export default class MyDocument extends Document {
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
 
                     {/* Google Adsense */ }
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7780458585019281"
-                            crossOrigin="anonymous"></script>
+                    {/*<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7780458585019281"*/}
+                    {/*        crossOrigin="anonymous"></script>*/}
+
                     {/* Global Site Tag (gtag.js) - Google Analytics */ }
-                    <script async src={ `https://www.googletagmanager.com/gtag/js?id=${ GA_TRACKING_ID }` } />
-                    <script dangerouslySetInnerHTML={ {
-                        __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${ GA_TRACKING_ID }', {
-              page_path: window.location.pathname,
-            });`
-                    } }
-                    />
+            {/*        <script async src={ `https://www.googletagmanager.com/gtag/js?id=${ GA_TRACKING_ID }` } />*/}
+            {/*        <script dangerouslySetInnerHTML={ {*/}
+            {/*            __html: `*/}
+            {/*window.dataLayer = window.dataLayer || [];*/}
+            {/*function gtag(){dataLayer.push(arguments);}*/}
+            {/*gtag('js', new Date());*/}
+            {/*gtag('config', '${ GA_TRACKING_ID }', {*/}
+            {/*  page_path: window.location.pathname,*/}
+            {/*});`*/}
+            {/*        } }*/}
+            {/*        />*/}
                 </Head>
 
                 <body>
