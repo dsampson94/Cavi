@@ -45,7 +45,7 @@ export default function Navbar({ contactScrollToRef }) {
     ];
 
     return (
-        <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl">
+        <header className="sticky top-0 z-50 max-h-[120px] shadow-xl br-04 rounded-2xl ">
             <Popover className="relative bg-white">
                 <nav className="mx-auto flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                     <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32">
