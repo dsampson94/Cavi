@@ -3,7 +3,6 @@ import Contact from '../features/Contact';
 import HeroImageCenter from '../features/HeroImageCenter';
 import Footer from '../features/Footer';
 import CenteredIconTextFeature from '../features/CenteredIconTextFeature';
-import Navbar from '../features/Navbar';
 import RightImageWithText from '../features/RightImageWithText';
 import Team from '../features/Team';
 import LogoCloud from '../features/LogoCloud';
@@ -15,6 +14,7 @@ import BusinessesImagesPCD from '../features/BusinessesImagesPCD';
 import BusinessesImagesPCG from '../features/BusinessesImagesPCG';
 import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
 import BusinessesImageARC from '../features/BusinessesImagesARC';
+import Navbar from '../features/Navbar';
 
 const ContentContainer = ({ view, children }) => {
     const contactScrollToRef = useRef('contactScrollToRef');

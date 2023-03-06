@@ -1,39 +1,13 @@
 import Image from 'next/image';
-import { Bars3Icon, ChatBubbleBottomCenterTextIcon, ChatBubbleLeftRightIcon, InboxIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
-export default function Navbar({ contactScrollToRef }) {
+function Navbar({ contactScrollToRef }) {
 
     const router = useRouter();
 
-    const solutions = [
-        {
-            name: 'Inbox',
-            description: 'Get a better understanding of where your traffic is coming from.',
-            href: '#',
-            icon: InboxIcon
-        },
-        {
-            name: 'Messaging',
-            description: 'Speak directly to your customers in a more meaningful way.',
-            href: '#',
-            icon: ChatBubbleBottomCenterTextIcon
-        },
-        {
-            name: 'Live Chat',
-            description: 'Your customers\' data will be safe and secure.',
-            href: '#',
-            icon: ChatBubbleLeftRightIcon
-        },
-        {
-            name: 'Knowledge Base',
-            description: 'Connect with third-party tools that you\'re already using.',
-            href: '#',
-            icon: QuestionMarkCircleIcon
-        }
-    ];
     const navigation = [
         { name: 'Home', href: '/' },
         { name: 'About', href: '/about' },
@@ -65,45 +39,6 @@ export default function Navbar({ contactScrollToRef }) {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden space-x-10 md:flex lg:pt-3">
-                        <Popover className="relative">
-                            { ({ open }) => (
-                                <>
-                                    <Transition
-                                        as={ Fragment }
-                                        enter="transition ease-out duration-200"
-                                        enterFrom="opacity-0 translate-y-1"
-                                        enterTo="opacity-100 translate-y-0"
-                                        leave="transition ease-in duration-150"
-                                        leaveFrom="opacity-100 translate-y-0"
-                                        leaveTo="opacity-0 translate-y-1"
-                                    >
-                                        <Popover.Panel
-                                            className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:left-1/2 lg:ml-0 lg:max-w-2xl lg:-translate-x-1/2">
-                                            <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                                <nav className="relative grid gap-6 bg-white py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                                                    { solutions.map((item) => (
-                                                        <a
-                                                            key={ item.name }
-                                                            href={ item.href }
-                                                            className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
-                                                        >
-                                                            <div
-                                                                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white sm:h-12 sm:w-12">
-                                                                <item.icon className="h-6 w-6" aria-hidden="true" />
-                                                            </div>
-                                                            <div className="ml-4">
-                                                                <p className="text-base font-medium text-gray-900">{ item.name }</p>
-                                                                <p className="mt-1 text-sm text-gray-500">{ item.description }</p>
-                                                            </div>
-                                                        </a>
-                                                    )) }
-                                                </nav>
-                                            </div>
-                                        </Popover.Panel>
-                                    </Transition>
-                                </>
-                            ) }
-                        </Popover>
 
                         { navigation.map((item) => (
                             <a key={ item.name } href={ item.href }
@@ -159,22 +94,6 @@ export default function Navbar({ contactScrollToRef }) {
                                         </Popover.Button>
                                     </div>
                                 </div>
-                                <div className="mt-6">
-                                    <nav className="grid grid-cols-1 gap-7">
-                                        {/*{solutions.map((item) => (*/ }
-                                        {/*    <a*/ }
-                                        {/*        key={item.name}*/ }
-                                        {/*        href={item.href}*/ }
-                                        {/*        className="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50"*/ }
-                                        {/*    >*/ }
-                                        {/*        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white">*/ }
-                                        {/*            <item.icon className="h-6 w-6" aria-hidden="true" />*/ }
-                                        {/*        </div>*/ }
-                                        {/*        <div className="ml-4 text-base font-medium text-gray-900">{item.name}</div>*/ }
-                                        {/*    </a>*/ }
-                                        {/*))}*/ }
-                                    </nav>
-                                </div>
                             </div>
                             <div className="pb-6 px-5">
                                 <div className="grid grid-cols-2 gap-4">
@@ -210,6 +129,8 @@ export default function Navbar({ contactScrollToRef }) {
         </header>
     );
 }
+
+export default React.memo(Navbar);
 
 export const socials = [
     {
