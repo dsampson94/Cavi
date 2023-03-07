@@ -84,7 +84,7 @@ export default function TabBar() {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+          className="block w-full rounded-md focus:border-blue-500 focus:ring-blue-500"
           defaultValue={ tabs.find((tab) => tab.current).name }
         >
           { tabs.map((tab) => (
@@ -92,25 +92,26 @@ export default function TabBar() {
           )) }
         </select>
       </div>
-      <div className="hidden sm:block">
+      <div className="hidden sm:block mt-0.5">
         <nav className="isolate cursor-pointer flex divide-x divide-gray-300 rounded-lg shadow" aria-label="Tabs">
-          { tabs.map((tab, tabIdx) => (
+          { tabs.map((tab) => (
             <a
               key={ tab.name }
               onClick={ tab.href }
               className={ classNames(
-                tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
-                tabIdx === 0 ? 'rounded-l-lg' : '',
-                tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
-                'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
+                tab.current ? '' : 'text-gray-500 dark:text-gray-400 hover:text-gray-500',
+                'group relative min-w-0 flex-1 overflow-hidden py-3 px-3 text-xs font-medium text-center',
+                'dark:border-b border-gray-300',
+                'transition-colors ease-in-out duration-200'
               ) }
               aria-current={ tab.current ? 'page' : undefined }
             >
+
               <span>{ tab.name }</span>
               <span
                 aria-hidden="true"
                 className={ classNames(
-                  tab.current ? 'bg-blue-500' : 'bg-transparent',
+                  tab.current ? 'bg-blue-500 pb-0.5' : 'bg-transparent',
                   'absolute inset-x-0 bottom-0 h-0.5'
                 ) }
               />

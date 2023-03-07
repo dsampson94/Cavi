@@ -3,11 +3,78 @@ module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx}'
   ],
-  theme: {
-    extend: {}
-  },
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwind-scrollbar-hide')
-  ]
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'pulse-blue': '#043b6e',
+        'secondary-blue-1': '#54a4d9',
+        'secondary-blue-2': '#6fb2df',
+        'secondary-blue-3': '#1f20ff',
+        'topbar-icon-blue': '#53A5DF',
+        'tertiary-orange': '#f37b2c',
+        'error': '#ea3a3d',
+        'success': '#1ad598',
+        'warning': '#f9b959',
+        'info': '#0090ff',
+        'field-name-blue': '#0081ff',
+        'white': '#fff',
+        'black': '#000',
+        'black-alt': '#000000a1',
+        'grey': '#757575',
+        'shadow': '#FFFFFF61',
+        'hover-blue': '#607CB1',
+        'dark-mode-blue': '#101733',
+        'dark-mode-white': 'linen',
+        'dark-mode-grey': '#252529',
+        'dark-mode-grey-modal': '#303040',
+        'dark-mode-grey-2': '#0d1112',
+        'dark-mode-grey-3': '#3a3a3a',
+        'light-mode-white': '#F9F9F9',
+        'light-mode-tooltip-white': '#F9F9F9',
+        'icon-warning-red': '#EE9A94',
+        'selected-blue': '#CCE8FF',
+        'row-hover-blue': '#DBEFFF',
+        'climate-text-blue': '#6495ED',
+        'camera-blue': '#75B7E5',
+        'table-yellow-dark': '#F7F2C5',
+        'table-yellow-light': '#FFFCE5',
+        'table-yellow-fade': '#D5EBF2',
+        'harvest-tractor-green': '#C7DD9D',
+        'autofill-blue': 'rgb(220, 235, 260)',
+        'blur': 'rgba(160, 210, 200, 0.15)',
+        'blur-lighter': 'rgba(160, 180, 190, 0.32)',
+        'blur-very-light-grey': 'rgba(160, 180, 190, 0.15)',
+        'blur-darker': 'rgba(160, 180, 190, 0.70)',
+        'very-light-grey': '#dad9d5',
+        'light-grey': '#a9a9a9',
+        'clouded-grey': '#C2C2C1',
+        'chart-background-blue': '#ABD4EF',
+        'chart-line-blue': '#0000FF',
+        'chart-background-green': '#C1EAC7',
+        'chart-background-grey': 'rgba(100, 105, 130, 0.50)',
+        'chart-recommendation-blue': '#00B8B0',
+        'chart-stress-line-yellow': '#FFA500',
+        'chart-tooltip-silver': '#757991',
+        'zoom-tooltip-grey': '#6E8192',
+        'lumous-cyan': '#47FFFF',
+        'daily-ETO-green': '#2AE851',
+        'soiltemp-line-blue': '#0000FF',
+        'soiltemp-line-orange': '#f37b2c',
+        'soiltemp-line-red': '#ea3a3d',
+        'soiltemp-line-cyan': '#47FFFF',
+        'soiltemp-line-azure': '#1ad598',
+        'soiltemp-line-green': 'green',
+        'canopy-line-blue': '#0000FF',
+        'canopy-line-orange': '#f37b2c',
+        'palette-blue-1': '#063d6d',
+        'palette-orange': '#ee843e',
+        'palette-blue-2': '#56a5db',
+        'palette-blue-3': '#6586a5'
+      }
+    }
+  }
 };

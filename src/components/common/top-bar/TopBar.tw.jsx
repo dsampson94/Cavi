@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
@@ -55,16 +55,20 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
+  const popoverRef = useRef(null);
 
   const { fieldName, groupName, clientName, probeNumber } = useParams();
 
   const userName = retrieveUserLoginFromLocalStorage()?.username?.toUpperCase();
   const getTheme = retrieveActiveThemeFromLocalStorage();
   const [isDarkMode, setIsDarkMode] = useState(!(getTheme === 'dark'));
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (getTheme === 'dark') return document.body.classList.add('dark-mode');
-  }, [isDarkMode]);
+    if (getTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  }, []);
 
   const handleDarkModeClick = () => {
     setIsDarkMode(!isDarkMode);
@@ -273,6 +277,16 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
     if (item.href) history.push(item?.href);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="top-bar">
@@ -294,6 +308,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                          probeNumber={ probeNumber }
                          history={ history }
                          location={ location }
+                         isDarkMode={ isDarkMode }
                          viewClient={ viewClient } />
 
         </div>
@@ -302,12 +317,20 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
           <Popover.Group className="flex">
 
-            <Popover className="relative mt-0.5 ">
+            <Popover className="relative mt-0.5 cursor-pointer">
 
-              <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-                <button type="button"
-                        className="rounded-full p-1 text-[#54a4d9] hover:text-gray-500">
-                  <ChevronDownIcon className="h-7 w-7" aria-hidden="true" />
+              <Popover.Button
+                className={ classNames('flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 transition duration-100',
+                  ` ${ isOpen ? 'transform rotate-90' : 'transform rotate-0' }`) }
+                onClick={ () => setIsOpen(!isOpen) }>
+                <button
+                  type="button"
+                  className="rounded-full p-1 text-[#54a4d9]"
+                >
+                  <ChevronDownIcon
+                    className={ 'h-7 w-7' }
+                    aria-hidden="true"
+                  />
                 </button>
               </Popover.Button>
 
@@ -321,21 +344,28 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel
-                  className="absolute -right-12 top-full z-100 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-gray-900/5">
-                  <div className="p-4">
+                  ref={ popoverRef }
+                  className={ classNames(isDarkMode ? 'bg-white' : 'bg-gray-700',
+                    'absolute -right-12 top-full z-100 mt-3 w-screen max-w-sm overflow-hidden rounded-3xl shadow-xl ring-1 ring-gray-900/5') }>
+                  <div className="p-3">
                     { dropDownList()?.map((item) => (
                       <div key={ item.name }
-                           className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-gray-100">
-                        <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50">
+                           className={ classNames(isDarkMode ? 'hover:bg-gray-200' : 'hover:bg-gray-600',
+                             'group relative flex items-center gap-x-6 rounded-lg p-1 text-sm leading-6') }>
+
+                        <div className={ classNames(isDarkMode ? 'bg-gray-100' : 'bg-gray-800',
+                          'flex h-11 w-11 flex-none items-center justify-center rounded-lg') }>
                           <item.icon className="h-6 w-6 text-[#54a4d9] group-hover:text-[#54a4d9]" aria-hidden="true" />
                         </div>
+
                         <div className="flex-auto">
                           <a onClick={ (event) => handleDropDownClick(event, item) }
-                             className="block font-semibold text-gray-900">
+                             className={ classNames(isDarkMode ? 'text-gray-700' : 'text-gray-200', 'block font-semibold') }>
                             { item.name }
                             <span className="absolute inset-0" />
                           </a>
-                          <p className="mt-1 text-gray-600">{ item.description }</p>
+
+                          <p className="mt-1 text-gray-500">{ item.description }</p>
                           { item.component && <p className="mt-1 text-gray-600">{ item.component }</p> }
                         </div>
                       </div>
@@ -346,7 +376,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             </Popover>
           </Popover.Group>
 
-          <Menu as="div" className="relative mt-0.5 pr-2">
+          <Menu as="div" className="relative mt-0.5 pr-2 cursor-pointer">
             <div>
               <Menu.Button
                 className="flex rounded-full bg-white text-lg focus:outline-none hover:ring-1 hover:ring-[#54a4d9]">
@@ -365,12 +395,13 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items
-                className="absolute right-0 z-100 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                className={ classNames(isDarkMode ? 'bg-white' : 'bg-gray-700',
+                  'absolute right-0 z-100 mt-2 mr-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none') }>
                 <Menu.Item>
                   { ({ active }) => (
                     <a
                       href="#"
-                      className={ classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700') }
+                      className={ classNames(isDarkMode ? active ? 'bg-gray-100' : '' : 'text-white hover:bg-gray-600', 'block px-4 py-2 text-sm text-gray-700') }
                     >
                       Report Problem
                     </a>
@@ -380,11 +411,11 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                   { ({ active }) => (
                     <a
                       onClick={ handleDarkModeClick }
-                      className={ classNames(active ? 'bg-gray-100' : '', 'flex-row block px-4 py-2 text-sm text-gray-700') }
+                      className={ classNames(isDarkMode ? active ? 'bg-gray-100' : '' : 'text-white hover:bg-gray-600', 'block px-4 py-2 text-sm text-gray-700') }
                     >
                       { !isDarkMode && <div className="flex">
-                        Toggle Theme <span style={ { fontSize: '15px' } }><MoonIcon width={ 18 }
-                                                                                    height={ 18 } /></span></div> }
+                        Toggle Theme <span style={ { fontSize: '15px', marginLeft: '5px' } }><MoonIcon width={ 18 }
+                                                                                                       height={ 18 } /></span></div> }
                       { isDarkMode && <>
                         Toggle Theme <span style={ { fontSize: '15px' } }>&#9728;</span> </> }
                     </a>
@@ -394,7 +425,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                   { ({ active }) => (
                     <a
                       onClick={ logout }
-                      className={ classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700') }
+                      className={ classNames(isDarkMode ? active ? 'bg-gray-100' : '' : 'text-white hover:bg-gray-600', 'block px-4 py-2 text-sm text-gray-700') }
                     >
                       Sign out
                     </a>

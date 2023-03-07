@@ -5,53 +5,44 @@
 @use "../stylesheets/color" as color;
 
 body.light-mode {
-  background-color: map.get(color.$colorMap, light-mode-white);
-  transition: 0.3s;
+  @apply bg-light-mode-white text-black transition duration-300;
 
   .input__input,
   .search__input,
   .search__icon {
-    transition: 0.3s;
-    background-color: map.get(color.$colorMap, light-mode-white);
+    @apply bg-light-mode-white transition duration-300;
   }
 
   .input__wrapper input,
   .fields-overview,
   .table__body__row__td-upper {
-    transition: 0.3s;
+    @apply transition duration-300;
   }
 
   .table__body__row__td-container--centered-last {
-    transition: 0.3s;
-    color: map.get(color.$colorMap, secondary-blue-3);
+    @apply transition duration-300 text-secondary-blue-3;
   }
 
   .client-fields-side-bar__list__item__subheader--selected {
-    transition: 0.3s;
-    background-color: map.get(color.$colorMap, selected-blue);
+    @apply transition duration-300 bg-selected-blue;
   }
 
   .table__body__row__td--dark {
-    transition: 1s;
-    background-color: map.get(color.$colorMap, table-yellow-dark);
+    @apply transition duration-1000 bg-table-yellow-dark;
   }
 
   .table__body__row__td--light {
-    transition: 1s;
-    background-color: map.get(color.$colorMap, table-yellow-light);
+    @apply transition duration-1000 bg-table-yellow-light;
   }
 
   .table__body__row__td--fade--thin,
   .table__body__row__td--fade {
-    transition: 1s;
-    background-color: map.get(color.$colorMap, table-yellow-fade);
+    @apply transition duration-1000 bg-table-yellow-fade;
   }
 }
 
 body.dark-mode {
-  transition: 0.3s;
-  color: map.get(color.$colorMap, light-mode-white);
-  background-color: map.get(color.$colorMap, dark-mode-grey);
+  @apply bg-dark-mode-grey text-light-mode-white transition duration-300;
 
   .spinner__text {
     color: map.get(color.$colorMap, black);
