@@ -4,7 +4,7 @@
 @use "../stylesheets/util" as util;
 @use "../stylesheets/color" as color;
 
-body.light-mode {
+html.light {
   @apply bg-light-mode-white text-black transition duration-300;
 
   .input__input,
@@ -41,7 +41,7 @@ body.light-mode {
   }
 }
 
-body.dark-mode {
+html.dark {
   @apply bg-dark-mode-grey text-light-mode-white transition duration-300;
 
   .spinner__text {

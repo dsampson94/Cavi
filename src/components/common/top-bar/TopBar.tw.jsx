@@ -66,7 +66,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
   useEffect(() => {
     if (getTheme === 'dark') {
-      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark');
     }
   }, []);
 
@@ -75,13 +75,13 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
     if (isDarkMode) {
       saveActiveThemeToLocalStorage('dark');
       dispatch({ type: SET_THEME, theme: 'dark' });
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('dark-mode');
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
     } else {
       saveActiveThemeToLocalStorage('light');
       dispatch({ type: SET_THEME, theme: 'light' });
-      document.body.classList.remove('dark-mode');
-      document.body.classList.add('light-mode');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   };
 

@@ -20,11 +20,11 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
             leaveTo="translate-x-full"
           >
             <Dialog.Panel className="pointer-events-auto w-screen max-w-md mt-24 pt-4">
-              <div className="flex h-[50%] flex-col overflow-y-scroll bg-white py-2 shadow-2xl">
+              <div className="flex h-[50%] flex-col border-l-2 border-t-2 rounded-t-md border-blue-400 overflow-y-scroll bg-white dark:bg-dark-mode-grey py-2 shadow-2xl">
                 <div className="flex mr-2 mt-2 flex-row-reverse">
                   <button
                     type="button"
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="rounded-md bg-white dark:bg-dark-mode-grey text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={ () => setShowSlideOver(false) }
                   >
                     <span className="sr-only">Close panel</span>
@@ -32,7 +32,7 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
                   </button>
                 </div>
                 <div className="flex items-start justify-center">
-                  <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
+                  <Dialog.Title className="text-base font-semibold leading-6 text-gray-900 dark:text-white">
                     Volts
                   </Dialog.Title>
                 </div>
@@ -50,7 +50,7 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
                         </defs>
                         <XAxis dataKey="date" interval="preserveEnd" tick={ { fontSize: 10 } } />
                         <YAxis tick={ { fontSize: 10 } } />
-                        <Tooltip />
+                        <Tooltip labelClassName="dark:text-black" />
                         <Area type="monotone" dataKey="Volts" stroke="#f37c2e" fillOpacity={ 1 } fill="url(#colorVolts)" />
                       </AreaChart>
                     </ResponsiveContainer>
@@ -58,10 +58,10 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
                 </div>
               </div>
 
-              <div className="flex h-[50%] flex-col overflow-y-scroll bg-white py-2 shadow-xl">
+              <div className="flex h-[50%] flex-col border-l-2 rounded-b-md border-blue-400 overflow-y-scroll bg-white dark:bg-dark-mode-grey py-2 shadow-xl">
                 <div className="px-4 sm:px-6">
                   <div className="flex items-start justify-center ">
-                    <Dialog.Title className="text-base  font-semibold leading-6 text-gray-900">
+                    <Dialog.Title className="text-base font-semibold leading-6 text-gray-900 dark:text-white">
                       Signal %
                     </Dialog.Title>
                   </div>
@@ -80,7 +80,7 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
                         </defs>
                         <XAxis dataKey="date" interval="preserveEnd" tick={ { fontSize: 10 } } />
                         <YAxis />
-                        <Tooltip />
+                        <Tooltip labelClassName="dark:text-black" />
                         <Area type="monotone" dataKey="Signal" stroke="#54a4d9" fillOpacity={ 1 } fill="url(#colorSignal)" />
                       </AreaChart>
                     </ResponsiveContainer>

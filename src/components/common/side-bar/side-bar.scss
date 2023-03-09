@@ -153,6 +153,8 @@
     &__options {
       display: flex;
       font-size: util.rem(12);
+      margin-left: util.rem(8);
+      margin-top: util.rem(4);
       flex-direction: column;
       height: 100%;
     }

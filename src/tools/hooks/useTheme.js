@@ -11,10 +11,10 @@ const useTheme = (activate) => {
   useEffect(() => {
     if (activate) {
       if (localActiveTheme === 'dark') {
-        return document.body.classList.add('dark-mode');
+        return document.documentElement.classList.add('dark');
       } else {
         saveActiveThemeToLocalStorage('light');
-        return document.body.classList.add('light-mode');
+        return document.documentElement.classList.add('light');
       }
     }
   }, [isDarkMode]);

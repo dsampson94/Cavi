@@ -15,8 +15,8 @@ const LoginContainer = () => {
   const dispatch = useDispatch();
 
   const onLoginSuccess = ({ user }) => {
-    saveUserLoginToLocalStorage(user);
     history.push(Routes.OVERVIEW);
+    saveUserLoginToLocalStorage(user);
   };
 
   const onLoginClick = (user) => dispatch(requestLogin(user, () => onLoginSuccess(user)));
