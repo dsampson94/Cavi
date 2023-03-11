@@ -26,8 +26,9 @@
   }
 
   &--table {
-    padding: 0;
     min-width: util.rem(50);
+    display: flex;
+    justify-content: flex-start;
   }
 
   &--centered {
@@ -131,12 +132,9 @@
 
     &--table {
       border: util.rem(1.5) solid map.get(color.$colorMap, pulse-blue);
-      height: util.rem(19);
-      width: util.rem(45);
+      height: util.rem(35);
+      width: util.rem(50);
       font-size: util.bu(1.4);
-      padding: 0 0 0 util.rem(1.8);
-      margin-left: util.rem(-40);
-      z-index: 100;
     }
 
     &--input {

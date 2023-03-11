@@ -610,19 +610,25 @@ export const FieldSetupInputColumn = ({
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
     updateFieldDetails(HA, event.target.value);
     setValueUpdated(!valueUpdated);
-    getFocus(event);
   };
 
   return <td key={ generateId() }
              onClick={ event => getFocus(event) }>
     <TextInput ref={ ref }
-               defaultValue={ inputValue ? inputValue : value }
-               onChange={ event => handleInputChange(event, rowIndex) }
+               value={ inputValue ? inputValue : value }
                onMouseEnter={ event => getFocus(event) }
                onClick={ event => getFocus(event) }
+               onChange={ event => handleInputChange(event) }
                onDoubleClick={ event => getFocus(event) }
+               onKeyPress={ (event) => {
+                 getFocus(event);
+                 if (event.key === 'Enter') handleSubmit(event, rowIndex);
+               } }
                table />
   </td>;
 };
