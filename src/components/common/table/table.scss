@@ -142,6 +142,7 @@
             font-size: util.rem(12);
             margin-left: util.rem(8);
             text-align: left;
+            white-space: pre-wrap !important;
             height: 100%;
           }
 

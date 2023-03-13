@@ -81,7 +81,7 @@ const DashboardLastReadings = ({
         { !isEmpty(lastReadingsIrricomList) &&
         <>
           <h2 className="font-bold text-sm">{ 'Irricom Readings' }</h2>
-          <div className="h-[38%] min-h-[200px] overflow-y-auto">
+          <div className="h-[30%] min-h-[200px] overflow-y-auto">
             <Table tableName={ LAST_READINGS_VIEW }
                    activeTableData={ lastReadingsIrricomList }
                    hiddenColumns={ [] }
@@ -93,7 +93,7 @@ const DashboardLastReadings = ({
         { !isEmpty(lastReadingsReadingsList) &&
         <>
           <h2 className="font-bold text-sm mt-2">{ 'DFM or Aquacheck Handlogger Readings' }</h2>
-          <div className="h-[38%] min-h-[200px] overflow-y-auto">
+          <div className="h-[30%] min-h-[200px] overflow-y-auto">
             <Table tableName={ LAST_READINGS_VIEW }
                    activeTableData={ lastReadingsReadingsList }
                    hiddenColumns={ [] }

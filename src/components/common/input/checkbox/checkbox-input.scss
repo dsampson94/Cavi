@@ -40,7 +40,12 @@
     width: util.rem(12);
     height: util.rem(11);
     border: util.rem(1.2) solid map.get(color.$colorMap, white);
-    border-radius: map.get(radius.$border-radius, medium);
+    border-radius: map.get(radius.$border-radius, circular) !important;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
 
     &:checked {
       animation: ripple 0.2s linear forwards;
@@ -62,7 +67,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, daily-ETO-green);
+        color: map.get(color.$colorMap, daily-ETO-green);
       }
 
       &:hover {
@@ -75,7 +80,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, black);
+        color: map.get(color.$colorMap, black);
       }
 
       &:hover {
@@ -88,7 +93,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-blue);
+        color: map.get(color.$colorMap, soiltemp-line-blue);
       }
 
       &:hover {
@@ -101,7 +106,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-orange);
+        color: map.get(color.$colorMap, soiltemp-line-orange);
       }
 
       &:hover {
@@ -114,7 +119,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-red);
+        color: map.get(color.$colorMap, soiltemp-line-red);
       }
 
       &:hover {
@@ -127,7 +132,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-cyan);
+        color: map.get(color.$colorMap, soiltemp-line-cyan);
       }
 
       &:hover {
@@ -140,7 +145,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-azure);
+        color: map.get(color.$colorMap, soiltemp-line-azure);
       }
 
       &:hover {
@@ -153,7 +158,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, soiltemp-line-green);
+        color: map.get(color.$colorMap, soiltemp-line-green);
       }
 
       &:hover {

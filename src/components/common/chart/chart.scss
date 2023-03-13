@@ -239,7 +239,8 @@
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -16vh;
+        margin-top: -27vh;
+        margin-left: util.rem(30);
       }
 
       @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {

@@ -160,12 +160,13 @@
   &__label {
 
     &--upper {
-      margin-top: -5%;
+      margin-top: -10%;
       height: 50%;
     }
 
     &--lower {
       font-weight: normal;
+      margin-top: -15%;
       font-size: util.rem(8);
       height: 50%;
     }

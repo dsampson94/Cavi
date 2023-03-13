@@ -27,19 +27,26 @@
     cursor: pointer;
     width: util.rem(12);
     height: util.rem(11);
-    border: util.rem(1.2) solid map.get(color.$colorMap, pulse-blue);
+    border: util.rem(1.2) solid map.get(color.$colorMap, field-name-blue);
     border-radius: map.get(radius.$border-radius, medium);
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border: util.rem(1.2) solid map.get(color.$colorMap, field-name-blue);
+    }
   }
 
   input[type="radio"] {
 
     &:checked {
       animation: ripple 0.2s linear forwards;
-      background-color: map.get(color.$colorMap, pulse-blue);
+      background-color: map.get(color.$colorMap, field-name-blue);
+      border: util.rem(2) solid map.get(color.$colorMap, field-name-blue);
     }
 
     &:hover {
-      border: util.rem(2) solid map.get(color.$colorMap, secondary-blue-1);
+      border: util.rem(2) solid map.get(color.$colorMap, field-name-blue);
     }
   }
 }

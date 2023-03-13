@@ -185,9 +185,9 @@ const DropDownMenuFixed = ({
       { showPrimaryDropDown &&
       <div className={ getClassNames('dropdown__popup',
         { left, mid, period, settings, logout: !!onLogOutClick }) }>
+
         { menu === CHART_TOP_BAR_MENU &&
         <div>
-
           { location.pathname.includes('field-charts') &&
           <div className={ 'field-chart__top-bar--right--datebar' }>
             <Button label={ daysFromToday(0) }
@@ -212,7 +212,7 @@ const DropDownMenuFixed = ({
             <div>{ 'Probes on field:' }</div>
 
             { Object.keys(menuData[0])?.map((key) => {
-              return <div style={ { color: 'lightblue' } }>{ key }</div>;
+              return <div style={ { color: '#54a4d9' } }>{ key }</div>;
             }) }
           </div>
           <div>{ menuData[1] }</div>

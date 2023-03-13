@@ -672,6 +672,14 @@ const MonitorProbesTable = ({
       if (activeTableData?.length > 0) {
         tableDataElements = objectValues?.map((value, dataIndex) => {
           switch (dataIndex) {
+            case 1:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs underline"
+                     onClick={ () => history.push(`/client/${ objectValues[0]?.toLowerCase() }/${ value?.toLowerCase() }`) }>
+                  { value }
+                </div>
+              </td>;
             case 2:
               return <td key={ generateId() }
                          className="whitespace-nowrap min-w-fit px-1">
@@ -679,12 +687,11 @@ const MonitorProbesTable = ({
                   { value }
                 </div>
               </td>;
-            case 1:
             case 4:
             case 5:
               return <td key={ generateId() }
                          className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-xs text-blue-700 ">
+                <div className="flex text-xs ">
                   { value }
                 </div>
               </td>;
@@ -804,7 +811,7 @@ const LastReadingsTable = ({
             case 0:
               return <td key={ generateId() }
                          className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-xs text-blue-700">
+                <div className="flex text-xs">
                   { value }
                 </div>
               </td>;
