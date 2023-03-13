@@ -150,6 +150,7 @@ const FrequencyIndicator = (groupName, value) => {
   let fieldList = [];
   for (const [fieldName, color] of Object.entries(innerFields)) {
     fieldList.push({ groupName, clientName: value.iok, fieldName, color });
+    console.log(color);
   }
 
   return (
@@ -159,7 +160,7 @@ const FrequencyIndicator = (groupName, value) => {
              className="dashboard-overview__list__item__subheader__icon__grid__frequency__container"
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeno }/${ number.fieldName }`) }>
           <ToolTip text={ number.fieldName } grid />
-          <SVGIcon name={ VERY_SATISFIED } fill={ number.color } overview />
+          <SVGIcon name={ VERY_SATISFIED } fill={ number.color === 'yellow' ? 'orange' : number.color } overview />
         </div>
       )) }
     </div>
@@ -189,11 +190,11 @@ const DeficitIndicator = (groupName, value) => {
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }>
           <ToolTip text={ number.fieldName } grid />
           <div className={ 'deficit-container__upper' }
-               style={ { backgroundColor: `#${ objectValues?.kleurbohex?.slice(3) }` } }>
+               style={ { backgroundColor: objectValues?.kleurbohex?.slice(3) === 'FFFFFF' ? 'grey' : `#${ objectValues?.kleurbohex?.slice(3) }` } }>
             { objectValues?.tmbo }
           </div>
           <div className={ 'deficit-container__lower' }
-               style={ { backgroundColor: `#${ objectValues?.kleuronderhex?.slice(3) }` } }>
+               style={ { backgroundColor: objectValues?.kleuronderhex?.slice(3) === 'FFFFFF' ? 'grey' : `#${ objectValues?.kleuronderhex?.slice(3) }` } }>
             { objectValues?.tmon }
           </div>
         </div>
