@@ -247,7 +247,7 @@ const SecondaryMenu = ({
           : anchorPoint.x - 381
         : anchorPoint.x - 341
       : isLessThanHalfWidth
-        ? anchorPoint.x + 134
+        ? anchorPoint.x + 174
         : anchorPoint.x + 203;
   };
 
