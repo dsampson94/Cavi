@@ -27,7 +27,7 @@ const DashboardLastReadings = ({
                                  handleSubmit
                                }) => {
 
-  const [showSlideOver, setShowSlideOver] = useState(true);
+  const [showSlideOver, setShowSlideOver] = useState(false);
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
 

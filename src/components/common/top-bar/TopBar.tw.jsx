@@ -25,12 +25,7 @@ import { Routes } from '../../../routes';
 import { Menu, Popover, Transition } from '@headlessui/react';
 
 import { GENERAL_ROUTE, OTHER_FARM, VIEW_SIDEBAR } from '../../../tools/general/system-variables.util';
-import {
-  retrieveActiveThemeFromLocalStorage,
-  retrieveUserLoginFromLocalStorage,
-  saveActiveThemeToLocalStorage,
-  saveUserLoginToLocalStorage
-} from '../../../tools/storage/localStorage';
+import { retrieveActiveThemeFromLocalStorage, retrieveUserLoginFromLocalStorage, saveActiveThemeToLocalStorage, saveUserLoginToLocalStorage } from '../../../tools/storage/localStorage';
 
 import { requestClientPDF, setClientMonitorProbesList } from '../../../redux/actions/client.action';
 import { requestLogout } from '../../../redux/actions/auth.action';
@@ -42,7 +37,6 @@ import Graphic from '../graphic/Graphic';
 import logo from '../../../tools/images/pulselogo.png';
 import ProgressBar from '../loader/progress-bar/ProgressBar';
 import BreadCrumbsTw from '../bread-crumbs/BreadCrumbs.tw';
-import TextInputTw from '../input/text/TextInput.tw';
 
 import './top-bar.scss';
 
@@ -64,6 +58,12 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
   const [isDarkMode, setIsDarkMode] = useState(!(getTheme === 'dark'));
   const [isOpen, setIsOpen] = useState(false);
 
+  const [emailAddress, setEmailAddress] = useState(undefined);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+
+  const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
+  const progress = useSelector(createSelector([state => state.system], system => system?.progressBar));
+
   useEffect(() => {
     if (getTheme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -84,12 +84,6 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
       document.documentElement.classList.add('light');
     }
   };
-
-  const [emailAddress, setEmailAddress] = useState(undefined);
-  const [showEmailModal, setShowEmailModal] = useState(false);
-
-  const clientPDF = useSelector(createSelector([state => state.client], client => client?.clientPDF));
-  const progress = useSelector(createSelector([state => state.system], system => system?.progressBar));
 
   useEffect(() => {
     if (!emailAddress) downloadPDF();
@@ -212,8 +206,9 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             onClick: () => dispatch(setClientMonitorProbesList([]))
           },
           {
-            component: (<TextInputTw placeholder={ 'Find Last Readings' } />),
-            href: `/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`,
+            name: 'Find Last Readings',
+            description: 'Find Last Readings',
+            href: Routes.LAST_READINGS,
             icon: MagnifyingGlassCircleIcon
           }
         ];
@@ -265,10 +260,19 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
         ];
       default:
         return [{
-          component: (<TextInputTw placeholder={ 'Find Last Readings' } />),
-          href: `/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`,
+          name: 'Find Last Readings',
+          description: 'Find Last Readings',
+          href: Routes.LAST_READINGS,
           icon: MagnifyingGlassCircleIcon
-        }];
+        },
+          {
+            name: 'Monitor Probes',
+            description: 'Monitor Probes',
+            href: Routes.MONITOR,
+            icon: SignalIcon,
+            onClick: () => dispatch(setClientMonitorProbesList([]))
+          }
+        ];
     }
   };
 
