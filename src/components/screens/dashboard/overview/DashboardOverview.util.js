@@ -160,7 +160,7 @@ const FrequencyIndicator = (groupName, value) => {
              className="dashboard-overview__list__item__subheader__icon__grid__frequency__container"
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeno }/${ number.fieldName }`) }>
           <ToolTip text={ number.fieldName } grid />
-          <SVGIcon name={ VERY_SATISFIED } fill={ number.color === 'yellow' ? 'orange' : number.color } overview />
+          <SVGIcon name={ VERY_SATISFIED } fill={ number.color === 'yellow' ? '#f7d800' : number.color } overview />
         </div>
       )) }
     </div>
