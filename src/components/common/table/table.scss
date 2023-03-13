@@ -138,6 +138,10 @@
             }
           }
 
+          &--hoverable {
+            text-decoration: underline;
+          }
+
           &--field-setup {
             font-size: util.rem(12);
             margin-left: util.rem(8);

@@ -45,7 +45,7 @@ const RecommendationBarChart = ({ fieldRainDataForChart }) => {
              fontSize={ 11 }
              dataKey={ 'name' } />
 
-      <Tooltip />
+      <Tooltip labelClassName="dark:text-black" />
 
       <Bar dataKey={ 'val' }
            fill={ '#54a4d9' }

@@ -253,13 +253,13 @@ export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) 
       { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
       <div className={ 'table__body__row__td-upper--deficit' }
            style={ {
-             backgroundColor: value?.colorTop
+             backgroundColor: value?.colorTop === '#F9FFFA' ? 'grey' : value?.colorTop
            } }>
         { value?.top }
       </div>
       <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
            style={ {
-             backgroundColor: value?.colorBot
+             backgroundColor: value?.colorBot === '#F9FFFA' ? 'grey' : value?.colorBot
            } }>
         { value?.bottom }
       </div>
@@ -457,6 +457,8 @@ ForecastTimeIconsColumn.propTypes = {
 
 export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, columnNumber, setShowModal, isHeaderRow }) => {
 
+  const [holdChartOpen, setHoldChartOpen] = useState(false);
+
   const openModal = (sensor) => {
     setHoveredRowObject({
       ...object,
@@ -486,12 +488,19 @@ export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, 
                className={ 'table__body__row__td--fade' }>
       <div className={ 'table__body__row__td-container' }>
         <div onMouseEnter={ () => openModal(1) }
-             onMouseLeave={ () => closeModal() }>
+             style={ { color: holdChartOpen ? '#54a4d9' : null } }
+             className={ 'table__body__row__td-container--hoverable' }
+             onClick={ () => setHoldChartOpen(!holdChartOpen) }
+             onMouseLeave={ holdChartOpen ? null : () => closeModal() }>
           { (value?.upper === 0) ? '' : value?.upper }
         </div>
+
         <div style={ { height: '2px' } } />
+
         <div onMouseEnter={ () => openModal(2) }
-             onMouseLeave={ () => closeModal() }>
+             className={ 'table__body__row__td-container--hoverable' }
+             onClick={ () => setHoldChartOpen(!holdChartOpen) }
+             onMouseLeave={ holdChartOpen ? null : () => closeModal() }>
           { (value?.lower === 0) ? '' : value?.lower }
         </div>
       </div>
