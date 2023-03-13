@@ -308,4 +308,19 @@ html.dark {
   .field-charts-modal {
     background-color: map.get(color.$colorMap, dark-mode-grey);
   }
+
+  #floating_probe {
+    form input,
+    form select {
+      color: black !important;
+    }
+
+    form input[type="submit"] {
+      color: white !important;
+    }
+
+    form {
+      color: white;
+    }
+  }
 }
