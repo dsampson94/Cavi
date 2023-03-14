@@ -355,7 +355,8 @@ const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelec
         </tr> }
 
       { showModal &&
-      <RecommendationModal activeObject={ hoveredRowObject } /> }
+      <RecommendationModal activeObject={ hoveredRowObject }
+                           handleClose={ setShowModal } /> }
       </tbody>
     );
   };

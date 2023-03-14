@@ -155,7 +155,7 @@
 
     @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
       font-size: util.rem(7);
-      margin: -8% 0 0 15%;
+      margin: -9% 0 0 15%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
@@ -165,17 +165,17 @@
 
     @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
       font-size: util.rem(11);
-      margin: -4.5% 0 0 9.5%;
+      margin: -5% 0 0 9.5%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
       font-size: util.rem(13);
-      margin: -4.5% 0 0 7.5%;
+      margin: -5% 0 0 7.5%;
     }
 
     @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
       font-size: util.rem(15);
-      margin: -4.5% 0 0 6.5%;
+      margin: -5% 0 0 6.5%;
     }
   }
 
