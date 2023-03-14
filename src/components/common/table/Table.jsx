@@ -13,7 +13,6 @@ import {
   FIELD_CHARTS_MODAL_VIEW,
   FIELD_REPORTS_VIEW,
   FIELD_SETUP_VIEW,
-  FIX_READINGS,
   GENERAL_ROUTE,
   LAST_READINGS_VIEW,
   MONITOR_PROBES_VIEW,
@@ -68,11 +67,23 @@ const Table = ({
                  selectedIndex,
                  setSelectedIndex,
                  setSelectedDropdownObject,
-                 haValueToUpdate,
-                 setHaValueToUpdate,
                  updateFieldDetails,
                  setUpdatedFieldList,
-                 toggleDropdowns
+                 toggleDropdowns,
+                 groupValueToUpdate,
+                 setGroupValueToUpdate,
+                 haValueToUpdate,
+                 setHaValueToUpdate,
+                 orderValueToUpdate,
+                 setOrderValueToUpdate,
+                 plantDateValueToUpdate,
+                 setPlantDateValueToUpdate,
+                 harvestDateValueToUpdate,
+                 setHarvestDateValueToUpdate,
+                 unitValueToUpdate,
+                 setUnitValueToUpdate,
+                 maxMMValueToUpdate,
+                 setMaxMMValueToUpdate
                }) => {
 
   switch (tableName) {
@@ -106,11 +117,23 @@ const Table = ({
                               selectedIndex={ selectedIndex }
                               setSelectedIndex={ setSelectedIndex }
                               setSelectedDropdownObject={ setSelectedDropdownObject }
-                              haValueToUpdate={ haValueToUpdate }
-                              setHaValueToUpdate={ setHaValueToUpdate }
                               updateFieldDetails={ updateFieldDetails }
                               setActiveTableData={ setActiveTableData }
-                              setUpdatedFieldList={ setUpdatedFieldList } />;
+                              setUpdatedFieldList={ setUpdatedFieldList }
+                              groupValueToUpdate={ groupValueToUpdate }
+                              setGroupValueToUpdate={ setGroupValueToUpdate }
+                              haValueToUpdate={ haValueToUpdate }
+                              setHaValueToUpdate={ setHaValueToUpdate }
+                              orderValueToUpdate={ orderValueToUpdate }
+                              setOrderValueToUpdate={ setOrderValueToUpdate }
+                              plantDateValueToUpdate={ plantDateValueToUpdate }
+                              setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
+                              harvestDateValueToUpdate={ harvestDateValueToUpdate }
+                              setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
+                              unitValueToUpdate={ unitValueToUpdate }
+                              setUnitValueToUpdate={ setUnitValueToUpdate }
+                              maxMMValueToUpdate={ maxMMValueToUpdate }
+                              setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
   }
 };
 
@@ -381,11 +404,23 @@ const FieldSetupTable = ({
                            hiddenColumns,
                            selectedIndex,
                            setSelectedIndex,
-                           haValueToUpdate,
-                           setHaValueToUpdate,
                            updateFieldDetails,
                            setActiveTableData,
-                           setUpdatedFieldList
+                           setUpdatedFieldList,
+                           groupValueToUpdate,
+                           setGroupValueToUpdate,
+                           haValueToUpdate,
+                           setHaValueToUpdate,
+                           orderValueToUpdate,
+                           setOrderValueToUpdate,
+                           plantDateValueToUpdate,
+                           setPlantDateValueToUpdate,
+                           harvestDateValueToUpdate,
+                           setHarvestDateValueToUpdate,
+                           unitValueToUpdate,
+                           setUnitValueToUpdate,
+                           maxMMValueToUpdate,
+                           setMaxMMValueToUpdate
                          }) => {
 
   const history = useHistory();
@@ -464,8 +499,15 @@ const FieldSetupTable = ({
                               value={ value }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
-                              icon={ value === 'Active' ? TOGGLE_ON : TOGGLE_OFF }
-                              fill={ value === 'Active' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
+                              icon={ REPLACE_PROBE_WITH_NEW }
+                              selectedIndex={ selectedIndex }
+                              groupValueToUpdate={ groupValueToUpdate }
+                              setGroupValueToUpdate={ setGroupValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
+                              fieldList={ activeTableData }
+                              setActiveTableData={ setActiveTableData }
+                              rowIndex={ rowIndex }
+                              setUpdatedFieldList={ setUpdatedFieldList } />;
             case 4:
               return <RowData history={ history }
                               groupName={ groupName }
@@ -474,8 +516,15 @@ const FieldSetupTable = ({
                               value={ value }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
-                              icon={ FIX_READINGS }
-                              fill={ '#607CB1' } />;
+                              icon={ REPLACE_PROBE_WITH_NEW }
+                              selectedIndex={ selectedIndex }
+                              groupValueToUpdate={ groupValueToUpdate }
+                              setGroupValueToUpdate={ setGroupValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
+                              fieldList={ activeTableData }
+                              setActiveTableData={ setActiveTableData }
+                              rowIndex={ rowIndex }
+                              setUpdatedFieldList={ setUpdatedFieldList } />;
             case 5:
               return <RowData history={ history }
                               groupName={ groupName }
@@ -502,6 +551,7 @@ const FieldSetupTable = ({
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ ADD_PROBE }
+                              updateFieldDetails={ updateFieldDetails }
                               fill={ '#63e016' } />;
             case 7:
               return <RowData history={ history }
@@ -512,6 +562,7 @@ const FieldSetupTable = ({
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ REMOVE_PROBE }
+                              updateFieldDetails={ updateFieldDetails }
                               fill={ 'red' } />;
             case 8:
               return <RowData history={ history }
@@ -522,6 +573,18 @@ const FieldSetupTable = ({
                               particularScreen={ SENSORS_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
+                              updateFieldDetails={ updateFieldDetails }
+                              fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
+            case 9:
+              return <RowData history={ history }
+                              groupName={ groupName }
+                              clientName={ clientName }
+                              dataIndex={ dataIndex }
+                              value={ value }
+                              particularScreen={ SENSORS_ROUTE }
+                              activeScreen={ activeScreen }
+                              icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
+                              updateFieldDetails={ updateFieldDetails }
                               fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 10:
               return <RowData history={ history }
@@ -532,6 +595,7 @@ const FieldSetupTable = ({
                               particularScreen={ PROBES_DETAILED_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
+                              updateFieldDetails={ updateFieldDetails }
                               fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 11:
               return <RowData history={ history }
@@ -875,13 +939,25 @@ const RowData = ({
                    icon,
                    fill,
                    selectedIndex,
-                   haValueToUpdate,
-                   setHaValueToUpdate,
                    updateFieldDetails,
                    fieldList,
                    setActiveTableData,
                    rowIndex,
-                   setUpdatedFieldList
+                   setUpdatedFieldList,
+                   groupValueToUpdate,
+                   setGroupValueToUpdate,
+                   haValueToUpdate,
+                   setHaValueToUpdate,
+                   orderValueToUpdate,
+                   setOrderValueToUpdate,
+                   plantDateValueToUpdate,
+                   setPlantDateValueToUpdate,
+                   harvestDateValueToUpdate,
+                   setHarvestDateValueToUpdate,
+                   unitValueToUpdate,
+                   setUnitValueToUpdate,
+                   maxMMValueToUpdate,
+                   setMaxMMValueToUpdate
                  }) => {
 
   if (activeScreen === particularScreen)
@@ -893,17 +969,29 @@ const RowData = ({
                                   activeScreen={ activeScreen }
                                   icon={ icon }
                                   fill={ fill } />;
-  else if (dataIndex === 5 && activeScreen === GENERAL_ROUTE)
+  else if ([3, 4, 5, 6, 7, 8, 9, 10].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
     return <FieldSetupInputColumn value={ value }
-                                  haValueToUpdate={ haValueToUpdate }
-                                  setHaValueToUpdate={ setHaValueToUpdate }
                                   updateFieldDetails={ updateFieldDetails }
                                   selectedIndex={ selectedIndex }
                                   fieldList={ fieldList }
                                   setActiveTableData={ setActiveTableData }
                                   rowIndex={ rowIndex }
                                   columnIndex={ dataIndex }
-                                  setUpdatedFieldList={ setUpdatedFieldList } />;
+                                  setUpdatedFieldList={ setUpdatedFieldList }
+                                  groupValueToUpdate={ groupValueToUpdate }
+                                  setGroupValueToUpdate={ setGroupValueToUpdate }
+                                  haValueToUpdate={ haValueToUpdate }
+                                  setHaValueToUpdate={ setHaValueToUpdate }
+                                  orderValueToUpdate={ orderValueToUpdate }
+                                  setOrderValueToUpdate={ setOrderValueToUpdate }
+                                  plantDateValueToUpdate={ plantDateValueToUpdate }
+                                  setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
+                                  harvestDateValueToUpdate={ harvestDateValueToUpdate }
+                                  setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
+                                  unitValueToUpdate={ unitValueToUpdate }
+                                  setUnitValueToUpdate={ setUnitValueToUpdate }
+                                  maxMMValueToUpdate={ maxMMValueToUpdate }
+                                  setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
   else
     return <FieldSetupNameColumn dataIndex={ dataIndex }
                                  activeScreen={ activeScreen }

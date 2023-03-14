@@ -138,7 +138,14 @@ export const PARTLY_CLOUDED = 'party_clouded';
 export const CLOUDED = 'clouded';
 
 //FIELD DETAIL NAMES (FIELD FIELD NAMES)
+export const FORECAST = 'gebied';
+export const GROUP = 'landgroep';
 export const HA = 'ha';
+export const ORDER = 'orde';
+export const PLANT_DATE_ = 'plantdatum';
+export const HARVEST_DATE_ = 'oesdatum';
+export const UNIT_ = 'eenheid';
+export const MAXMM = 'maxmm';
 
 //OVERVIEW OPTIONS
 export const FIELDS_LAST_VIEWED_QUESTION = 'When is the last time that you viewed your fields?';

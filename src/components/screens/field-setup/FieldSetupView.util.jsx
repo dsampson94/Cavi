@@ -95,160 +95,183 @@ export const ActiveScreen = ({
                                selectedIndex,
                                setSelectedIndex,
                                setActiveTableData,
+                               updateFieldDetails,
+                               setUpdatedFieldList,
+                               groupValueToUpdate,
+                               setGroupValueToUpdate,
                                haValueToUpdate,
                                setHaValueToUpdate,
-                               updateFieldDetails,
-                               setUpdatedFieldList
+                               orderValueToUpdate,
+                               setOrderValueToUpdate,
+                               plantDateValueToUpdate,
+                               setPlantDateValueToUpdate,
+                               harvestDateValueToUpdate,
+                               setHarvestDateValueToUpdate,
+                               unitValueToUpdate,
+                               setUnitValueToUpdate,
+                               maxMMValueToUpdate,
+                               setMaxMMValueToUpdate
                              }) => {
-    switch (activeScreen) {
-      case SMS_WARNING_ROUTE:
-        return <>
-          <FieldSetupSMSWarningsView mappedDetails={ mappedSetupList?.[0] } />
-          <div className="field-setup__scroll">
-            <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
-                   activeTableData={ [{
-                     fieldName: '',
-                     probe: '',
-                     pulseLogin: '',
-                     sensor: '',
-                     ['Above / Below']: '',
-                     value: '',
-                     minutesBetweenWarnings: '',
-                     lastWarningSent: ''
-                   }] }
-                   hiddenColumns={ ['color'] }
-                   selectedIndex={ selectedIndex }
-                   setSelectedIndex={ setSelectedIndex }
-                   setActiveTableData={ setActiveTableData } />
-          </div>
-        </>;
-
-      case PUSH_WARNING_ROUTE:
-        return <>
-          <FieldSetupPushWarningsView mappedDetails={ mappedSetupList?.[0] } />
-          <div className="field-setup__scroll">
-            <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
-                   activeTableData={ [{
-                     fieldName: '',
-                     probe: '',
-                     pulseLogin: '',
-                     sensor: '',
-                     ['Above / Below']: '',
-                     value: '',
-                     minutesBetweenWarnings: '',
-                     lastWarningSent: ''
-                   }] }
-                   hiddenColumns={ ['color'] }
-                   selectedIndex={ selectedIndex }
-                   setSelectedIndex={ setSelectedIndex }
-                   setActiveTableData={ setActiveTableData } />
-          </div>
-        </>;
-
-      case FIELDS_SPLIT_ROUTE:
-        return <>
-          <FieldSetupSplitValveView mappedDetails={ mappedSetupList?.[0] } />
-          <div className="field-setup__scroll">
-            <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
-                   activeTableData={ [{
-                     fieldName: '',
-                     probe: '',
-                     splitValve: '',
-                     hectare: ''
-                   }] }
-                   hiddenColumns={ ['color'] }
-                   selectedIndex={ selectedIndex }
-                   setSelectedIndex={ setSelectedIndex }
-                   setActiveTableData={ setActiveTableData } />
-          </div>
-        </>;
-
-      case ADD_FIELD_ROUTE:
-        return <>
-          <FieldSetupCreateNewFieldView mappedDetails={ mappedSetupList?.[0] } />
-        </>;
-
-      case CLIENT_DETAILS_ROUTE:
-        return <div className="field-setup__scroll">
-          <ClientDetailsView mappedDetails={ mappedSetupList?.[0] } />
-        </div>;
-
-      case USERS_ROUTE:
-        return <div className="field-setup__scroll">
-          <ClientDetailsUsersView mappedDetails={ mappedSetupList?.[0] } />
-        </div>;
-
-      case SMS_RECOMMENDATION_ROUTE:
-        return <div className="field-setup__scroll">
-          <ClientDetailsSMSRecommendationsView mappedDetails={ mappedSetupList?.[0] } />
-        </div>;
-
-      case ML_FORECASTS_ROUTE:
-        return <div className="field-setup__scroll">
-          <AdvancedForecastView mappedDetails={ mappedSetupList?.[0] } />
+  switch (activeScreen) {
+    case SMS_WARNING_ROUTE:
+      return <>
+        <FieldSetupSMSWarningsView mappedDetails={ mappedSetupList?.[0] } />
+        <div className="field-setup__scroll">
           <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
                  activeTableData={ [{
-                   forecastArea: '',
-                   GWSSerial: '',
-                   ['Nearest YR.no Forecast']: '',
-                   updated: ''
+                   fieldName: '',
+                   probe: '',
+                   pulseLogin: '',
+                   sensor: '',
+                   ['Above / Below']: '',
+                   value: '',
+                   minutesBetweenWarnings: '',
+                   lastWarningSent: ''
                  }] }
                  hiddenColumns={ ['color'] }
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setActiveTableData={ setActiveTableData } />
-        </div>;
+        </div>
+      </>;
 
-      case PROBES_DETAILED_ROUTE:
-        const mappedProbeList = activeTableData?.forEach((field, index) => {
-            let mappedProbeList = [];
-            let currentProbeName = activeTableData?.[index]?.probe?.probe;
-            let previousProbeName = activeTableData?.[index - 1]?.probe?.probe;
-
-            if (currentProbeName !== previousProbeName) {
-              mappedProbeList?.push(index, 0, {
-                probe: { probe: `Field: ${ activeTableData?.[index]?.[''] }` },
-                depthMMEnd: field?.depthMMEnd,
-                VWK: field?.vwk,
-                moistKoef: field?.mmkoef,
-                tempKoef: field?.tkoef,
-                tempKonst: field?.tkonst,
-                ['']: field?.land
-              });
-
-              mappedProbeList?.push(index, 0, {
-                probe: { probe: field?.probe },
-                ['']: field?.land
-              });
-            }
-          }
-        );
-
-        return <div className="field-setup__scroll">
-          <Table tableName={ FIELD_SETUP_VIEW }
-                 activeTableData={ mappedProbeList ? mappedProbeList : activeTableData }
+    case PUSH_WARNING_ROUTE:
+      return <>
+        <FieldSetupPushWarningsView mappedDetails={ mappedSetupList?.[0] } />
+        <div className="field-setup__scroll">
+          <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
+                 activeTableData={ [{
+                   fieldName: '',
+                   probe: '',
+                   pulseLogin: '',
+                   sensor: '',
+                   ['Above / Below']: '',
+                   value: '',
+                   minutesBetweenWarnings: '',
+                   lastWarningSent: ''
+                 }] }
                  hiddenColumns={ ['color'] }
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
                  setActiveTableData={ setActiveTableData } />
-        </div>;
+        </div>
+      </>;
 
-      default:
-        return <div className="field-setup__scroll">
-          <Table tableName={ FIELD_SETUP_VIEW }
-                 activeTableData={ activeTableData }
+    case FIELDS_SPLIT_ROUTE:
+      return <>
+        <FieldSetupSplitValveView mappedDetails={ mappedSetupList?.[0] } />
+        <div className="field-setup__scroll">
+          <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
+                 activeTableData={ [{
+                   fieldName: '',
+                   probe: '',
+                   splitValve: '',
+                   hectare: ''
+                 }] }
                  hiddenColumns={ ['color'] }
                  selectedIndex={ selectedIndex }
                  setSelectedIndex={ setSelectedIndex }
-                 setActiveTableData={ setActiveTableData }
-                 haValueToUpdate={ haValueToUpdate }
-                 setHaValueToUpdate={ setHaValueToUpdate }
-                 updateFieldDetails={ updateFieldDetails }
-                 setUpdatedFieldList={ setUpdatedFieldList } />
-        </div>;
-    }
+                 setActiveTableData={ setActiveTableData } />
+        </div>
+      </>;
+
+    case ADD_FIELD_ROUTE:
+      return <>
+        <FieldSetupCreateNewFieldView mappedDetails={ mappedSetupList?.[0] } />
+      </>;
+
+    case CLIENT_DETAILS_ROUTE:
+      return <div className="field-setup__scroll">
+        <ClientDetailsView mappedDetails={ mappedSetupList?.[0] } />
+      </div>;
+
+    case USERS_ROUTE:
+      return <div className="field-setup__scroll">
+        <ClientDetailsUsersView mappedDetails={ mappedSetupList?.[0] } />
+      </div>;
+
+    case SMS_RECOMMENDATION_ROUTE:
+      return <div className="field-setup__scroll">
+        <ClientDetailsSMSRecommendationsView mappedDetails={ mappedSetupList?.[0] } />
+      </div>;
+
+    case ML_FORECASTS_ROUTE:
+      return <div className="field-setup__scroll">
+        <AdvancedForecastView mappedDetails={ mappedSetupList?.[0] } />
+        <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
+               activeTableData={ [{
+                 forecastArea: '',
+                 GWSSerial: '',
+                 ['Nearest YR.no Forecast']: '',
+                 updated: ''
+               }] }
+               hiddenColumns={ ['color'] }
+               selectedIndex={ selectedIndex }
+               setSelectedIndex={ setSelectedIndex }
+               setActiveTableData={ setActiveTableData } />
+      </div>;
+
+    case PROBES_DETAILED_ROUTE:
+      const mappedProbeList = activeTableData?.forEach((field, index) => {
+          let mappedProbeList = [];
+          let currentProbeName = activeTableData?.[index]?.probe?.probe;
+          let previousProbeName = activeTableData?.[index - 1]?.probe?.probe;
+
+          if (currentProbeName !== previousProbeName) {
+            mappedProbeList?.push(index, 0, {
+              probe: { probe: `Field: ${ activeTableData?.[index]?.[''] }` },
+              depthMMEnd: field?.depthMMEnd,
+              VWK: field?.vwk,
+              moistKoef: field?.mmkoef,
+              tempKoef: field?.tkoef,
+              tempKonst: field?.tkonst,
+              ['']: field?.land
+            });
+
+            mappedProbeList?.push(index, 0, {
+              probe: { probe: field?.probe },
+              ['']: field?.land
+            });
+          }
+        }
+      );
+
+      return <div className="field-setup__scroll">
+        <Table tableName={ FIELD_SETUP_VIEW }
+               activeTableData={ mappedProbeList ? mappedProbeList : activeTableData }
+               hiddenColumns={ ['color'] }
+               selectedIndex={ selectedIndex }
+               setSelectedIndex={ setSelectedIndex }
+               setActiveTableData={ setActiveTableData } />
+      </div>;
+
+    default:
+      return <div className="field-setup__scroll">
+        <Table tableName={ FIELD_SETUP_VIEW }
+               activeTableData={ activeTableData }
+               hiddenColumns={ ['color'] }
+               selectedIndex={ selectedIndex }
+               setSelectedIndex={ setSelectedIndex }
+               setActiveTableData={ setActiveTableData }
+               updateFieldDetails={ updateFieldDetails }
+               setUpdatedFieldList={ setUpdatedFieldList }
+               groupValueToUpdate={ groupValueToUpdate }
+               setGroupValueToUpdate={ setGroupValueToUpdate }
+               haValueToUpdate={ haValueToUpdate }
+               setHaValueToUpdate={ setHaValueToUpdate }
+               orderValueToUpdate={ orderValueToUpdate }
+               setOrderValueToUpdate={ setOrderValueToUpdate }
+               plantDateValueToUpdate={ plantDateValueToUpdate }
+               setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
+               harvestDateValueToUpdate={ harvestDateValueToUpdate }
+               setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
+               unitValueToUpdate={ unitValueToUpdate }
+               setUnitValueToUpdate={ setUnitValueToUpdate }
+               maxMMValueToUpdate={ maxMMValueToUpdate }
+               setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />
+      </div>;
   }
-;
+};
 
 
 export const ClientDetailsView = ({ mappedDetails }) => {

@@ -8,19 +8,26 @@ import {
   CLOUDED,
   DROPDOWN,
   FIELD_CHARTS,
+  FORECAST,
+  GROUP,
   HA,
   HARVEST,
+  HARVEST_DATE_,
   HARVEST_ICON,
   LOW_BATTERY,
+  MAXMM,
   navigateTo,
   NONE,
+  ORDER,
   PARTLY_CLOUDED,
   PENCIL,
+  PLANT_DATE_,
   RAIN_CLOUDS,
   RAINING,
   SUNNY,
   TABLE_SEARCH_PLACEHOLDER,
   UNIT,
+  UNIT_,
   VIEW_CHARTS,
   WARNING,
   WATCH
@@ -599,8 +606,22 @@ FieldSetupNameColumn.propTypes = {
 export const FieldSetupInputColumn = ({
                                         value,
                                         updateFieldDetails,
+                                        groupValueToUpdate,
+                                        setGroupValueToUpdate,
+                                        haValueToUpdate,
                                         setHaValueToUpdate,
-                                        rowIndex
+                                        orderValueToUpdate,
+                                        setOrderValueToUpdate,
+                                        plantDateValueToUpdate,
+                                        setPlantDateValueToUpdate,
+                                        harvestDateValueToUpdate,
+                                        setHarvestDateValueToUpdate,
+                                        unitValueToUpdate,
+                                        setUnitValueToUpdate,
+                                        maxMMValueToUpdate,
+                                        setMaxMMValueToUpdate,
+                                        rowIndex,
+                                        columnIndex
                                       }) => {
 
   const [inputValue, setInputValue] = useState('');
@@ -609,7 +630,8 @@ export const FieldSetupInputColumn = ({
   const ref = useRef(null);
 
   useEffect(() => {
-    setHaValueToUpdate(inputValue);
+    if (setGroupValueToUpdate) setGroupValueToUpdate(inputValue);
+    if (setHaValueToUpdate) setHaValueToUpdate(inputValue);
   }, [valueUpdated]);
 
   const getFocus = (event) => {
@@ -621,8 +643,12 @@ export const FieldSetupInputColumn = ({
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    updateFieldDetails(HA, event.target.value);
+  const handleSubmit = (event, columnIndex) => {
+    console.log(columnIndex);
+    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_,
+      HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
+    console.log(fieldName);
+    updateFieldDetails(fieldName, event.target.value);
     setValueUpdated(!valueUpdated);
   };
 
@@ -636,7 +662,7 @@ export const FieldSetupInputColumn = ({
                onDoubleClick={ event => getFocus(event) }
                onKeyPress={ (event) => {
                  getFocus(event);
-                 if (event.key === 'Enter') handleSubmit(event, rowIndex);
+                 if (event.key === 'Enter') handleSubmit(event, columnIndex);
                } }
                table />
   </td>;

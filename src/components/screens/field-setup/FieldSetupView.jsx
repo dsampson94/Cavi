@@ -15,12 +15,26 @@ const FieldSetupView = ({
                           mappedSetupList,
                           activeScreen,
                           clientRequestParams,
+                          selectedProbeNumber,
                           setSelectedProbeNumber,
+                          selectedFieldName,
+                          setSelectedFieldName,
+                          updateFieldDetails,
+                          setUpdatedFieldList,
+                          groupValueToUpdate,
+                          setGroupValueToUpdate,
                           haValueToUpdate,
                           setHaValueToUpdate,
-                          updateFieldDetails,
-                          setSelectedFieldName,
-                          setUpdatedFieldList
+                          orderValueToUpdate,
+                          setOrderValueToUpdate,
+                          plantDateValueToUpdate,
+                          setPlantDateValueToUpdate,
+                          harvestDateValueToUpdate,
+                          setHarvestDateValueToUpdate,
+                          unitValueToUpdate,
+                          setUnitValueToUpdate,
+                          maxMMValueToUpdate,
+                          setMaxMMValueToUpdate
                         }) => {
 
   const [showSetupSideBar, setShowSetupSideBar] = useState(true);
@@ -49,8 +63,20 @@ const FieldSetupView = ({
                       setSelectedIndex={ setSelectedIndex }
                       setActiveTableData={ setActiveTableData }
                       activeTableData={ activeTableData }
+                      groupValueToUpdate={ groupValueToUpdate }
+                      setGroupValueToUpdate={ setGroupValueToUpdate }
                       haValueToUpdate={ haValueToUpdate }
                       setHaValueToUpdate={ setHaValueToUpdate }
+                      orderValueToUpdate={ orderValueToUpdate }
+                      setOrderValueToUpdate={ setOrderValueToUpdate }
+                      plantDateValueToUpdate={ plantDateValueToUpdate }
+                      setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
+                      harvestDateValueToUpdate={ harvestDateValueToUpdate }
+                      setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
+                      unitValueToUpdate={ unitValueToUpdate }
+                      setUnitValueToUpdate={ setUnitValueToUpdate }
+                      maxMMValueToUpdate={ maxMMValueToUpdate }
+                      setMaxMMValueToUpdate={ setMaxMMValueToUpdate }
                       updateFieldDetails={ updateFieldDetails }
                       setUpdatedFieldList={ setUpdatedFieldList } />
       </div>

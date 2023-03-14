@@ -13,7 +13,6 @@ import {
   CROP_FACTORS_ROUTE,
   FIELDS_SPLIT_ROUTE,
   GENERAL_ROUTE,
-  HA,
   IRRIDAY_ROUTE,
   IRRISYS_ROUTE,
   MAP_ROUTE,
@@ -90,7 +89,14 @@ const FieldSetupViewContainer = () => {
 
   const [selectedProbeNumber, setSelectedProbeNumber] = useState(null);
   const [selectedFieldName, setSelectedFieldName] = useState(null);
+
+  const [groupValueToUpdate, setGroupValueToUpdate] = useState(false);
   const [haValueToUpdate, setHaValueToUpdate] = useState(false);
+  const [orderValueToUpdate, setOrderValueToUpdate] = useState(false);
+  const [plantDateValueToUpdate, setPlantDateValueToUpdate] = useState(false);
+  const [harvestDateValueToUpdate, setHarvestDateValueToUpdate] = useState(false);
+  const [unitValueToUpdate, setUnitValueToUpdate] = useState(false);
+  const [maxMMValueToUpdate, setMaxMMValueToUpdate] = useState(false);
 
   const request = getRequestParams({
     groupName,
@@ -169,23 +175,23 @@ const FieldSetupViewContainer = () => {
 
   const updateFieldDetails = (fieldDetailName, inputValue) => {
     const user = retrieveUserLoginFromLocalStorage();
-    if (fieldDetailName === HA) {
-      dispatch(requestSetFieldSetup({
-        username: user?.username,
-        password: user?.password,
-        groupname: groupName,
-        clientname: clientName,
-        fieldname: selectedFieldName ? selectedFieldName : null,
-        probeno: selectedProbeNumber,
-        setfield: 'ha',
-        setvalue: inputValue
-      }));
-    }
+    console.log(fieldDetailName);
+    console.log(inputValue);
+    dispatch(requestSetFieldSetup({
+      username: user?.username,
+      password: user?.password,
+      groupname: groupName,
+      clientname: clientName,
+      fieldname: selectedFieldName ? selectedFieldName : null,
+      probeno: selectedProbeNumber,
+      setfield: fieldDetailName,
+      setvalue: inputValue
+    }));
   };
 
   useEffect(() => {
     dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
-  }, [haValueToUpdate]);
+  }, [groupValueToUpdate, haValueToUpdate, orderValueToUpdate, plantDateValueToUpdate, harvestDateValueToUpdate, unitValueToUpdate, maxMMValueToUpdate]);
 
   const mappedFieldSetupList = () => {
     return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
@@ -198,10 +204,22 @@ const FieldSetupViewContainer = () => {
                          activeScreen={ activeScreen }
                          clientRequestParams={ request.clientParams }
                          setSelectedProbeNumber={ setSelectedProbeNumber }
+                         setSelectedFieldName={ setSelectedFieldName }
+                         updateFieldDetails={ updateFieldDetails }
+                         groupValueToUpdate={ groupValueToUpdate }
+                         setGroupValueToUpdate={ setGroupValueToUpdate }
                          haValueToUpdate={ haValueToUpdate }
                          setHaValueToUpdate={ setHaValueToUpdate }
-                         setSelectedFieldName={ setSelectedFieldName }
-                         updateFieldDetails={ updateFieldDetails } />;
+                         orderValueToUpdate={ orderValueToUpdate }
+                         setOrderValueToUpdate={ setOrderValueToUpdate }
+                         plantDateValueToUpdate={ plantDateValueToUpdate }
+                         setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
+                         harvestDateValueToUpdate={ harvestDateValueToUpdate }
+                         setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
+                         unitValueToUpdate={ unitValueToUpdate }
+                         setUnitValueToUpdate={ setUnitValueToUpdate }
+                         maxMMValueToUpdate={ maxMMValueToUpdate }
+                         setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
 };
 
 export default FieldSetupViewContainer;
