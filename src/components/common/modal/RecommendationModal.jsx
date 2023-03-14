@@ -35,11 +35,12 @@ const RecommendationModal = ({ activeObject, handleClose }) => {
       <div className={ 'recommendation-modal' }>
 
         <div className={ 'recommendation-modal__header' }>
+
           { fieldRainDataForChart?.heading }
+
           <button type="button"
                   className="absolute top-0 right-0 p-2 rounded-md bg-white dark:bg-dark-mode-grey
-                   text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2
-                   focus:ring-blue-500 focus:ring-offset-2 mt-1 mr-1"
+                   text-gray-400 hover:text-gray-500 focus:outline-none mt-1 mr-1"
                   onClick={() => handleClose(false)}>
             <span className="sr-only">Close panel</span>
             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
