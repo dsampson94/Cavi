@@ -606,33 +606,15 @@ FieldSetupNameColumn.propTypes = {
 export const FieldSetupInputColumn = ({
                                         value,
                                         updateFieldDetails,
-                                        groupValueToUpdate,
-                                        setGroupValueToUpdate,
-                                        haValueToUpdate,
-                                        setHaValueToUpdate,
-                                        orderValueToUpdate,
-                                        setOrderValueToUpdate,
-                                        plantDateValueToUpdate,
-                                        setPlantDateValueToUpdate,
-                                        harvestDateValueToUpdate,
-                                        setHarvestDateValueToUpdate,
-                                        unitValueToUpdate,
-                                        setUnitValueToUpdate,
-                                        maxMMValueToUpdate,
-                                        setMaxMMValueToUpdate,
+                                        valueToUpdate,
+                                        setValueToUpdate,
                                         rowIndex,
                                         columnIndex
                                       }) => {
 
-  const [inputValue, setInputValue] = useState('');
-  const [valueUpdated, setValueUpdated] = useState(false);
+  const [inputValue, setInputValue] = useState(value);
 
   const ref = useRef(null);
-
-  useEffect(() => {
-    if (setGroupValueToUpdate) setGroupValueToUpdate(inputValue);
-    if (setHaValueToUpdate) setHaValueToUpdate(inputValue);
-  }, [valueUpdated]);
 
   const getFocus = (event) => {
     ref.current = event.target;
@@ -644,28 +626,30 @@ export const FieldSetupInputColumn = ({
   };
 
   const handleSubmit = (event, columnIndex) => {
-    console.log(columnIndex);
-    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_,
-      HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
-    console.log(fieldName);
-    updateFieldDetails(fieldName, event.target.value);
-    setValueUpdated(!valueUpdated);
+    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    updateFieldDetails(fieldName, newValue);
+    setValueToUpdate(newValue);
   };
 
-  return <td key={ generateId() }
-             onClick={ event => getFocus(event) }>
-    <TextInput ref={ ref }
-               value={ inputValue ? inputValue : value }
-               onMouseEnter={ event => getFocus(event) }
-               onClick={ event => getFocus(event) }
-               onChange={ event => handleInputChange(event) }
-               onDoubleClick={ event => getFocus(event) }
-               onKeyPress={ (event) => {
-                 getFocus(event);
-                 if (event.key === 'Enter') handleSubmit(event, columnIndex);
-               } }
-               table />
-  </td>;
+  return (
+    <td key={ generateId() }>
+      <TextInput
+        ref={ ref }
+        value={ inputValue }
+        onMouseEnter={ (event) => getFocus(event) }
+        onClick={ (event) => getFocus(event) }
+        onChange={ (event) => handleInputChange(event) }
+        onDoubleClick={ (event) => getFocus(event) }
+        onKeyPress={ (event) => {
+          getFocus(event);
+          if (event.key === 'Enter') handleSubmit(event, columnIndex);
+        } }
+        table
+      />
+    </td>
+  );
 };
 
 FieldSetupInputColumn.propTypes = {
@@ -711,6 +695,7 @@ const TableRowChartButton = ({ history, groupName, clientName, value, icon }) =>
 
   return <td onClick={ noOp() }
              key={ generateId() }>
+
     <SVGIcon name={ icon }
              onClick={ () => handleRowChartButtonClick() }
              fill={ '#f37b2c' }

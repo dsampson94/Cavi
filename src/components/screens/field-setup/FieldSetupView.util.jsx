@@ -97,20 +97,8 @@ export const ActiveScreen = ({
                                setActiveTableData,
                                updateFieldDetails,
                                setUpdatedFieldList,
-                               groupValueToUpdate,
-                               setGroupValueToUpdate,
-                               haValueToUpdate,
-                               setHaValueToUpdate,
-                               orderValueToUpdate,
-                               setOrderValueToUpdate,
-                               plantDateValueToUpdate,
-                               setPlantDateValueToUpdate,
-                               harvestDateValueToUpdate,
-                               setHarvestDateValueToUpdate,
-                               unitValueToUpdate,
-                               setUnitValueToUpdate,
-                               maxMMValueToUpdate,
-                               setMaxMMValueToUpdate
+                               valueToUpdate,
+                               setValueToUpdate
                              }) => {
   switch (activeScreen) {
     case SMS_WARNING_ROUTE:
@@ -255,20 +243,8 @@ export const ActiveScreen = ({
                setActiveTableData={ setActiveTableData }
                updateFieldDetails={ updateFieldDetails }
                setUpdatedFieldList={ setUpdatedFieldList }
-               groupValueToUpdate={ groupValueToUpdate }
-               setGroupValueToUpdate={ setGroupValueToUpdate }
-               haValueToUpdate={ haValueToUpdate }
-               setHaValueToUpdate={ setHaValueToUpdate }
-               orderValueToUpdate={ orderValueToUpdate }
-               setOrderValueToUpdate={ setOrderValueToUpdate }
-               plantDateValueToUpdate={ plantDateValueToUpdate }
-               setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
-               harvestDateValueToUpdate={ harvestDateValueToUpdate }
-               setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
-               unitValueToUpdate={ unitValueToUpdate }
-               setUnitValueToUpdate={ setUnitValueToUpdate }
-               maxMMValueToUpdate={ maxMMValueToUpdate }
-               setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />
+               valueToUpdate={ valueToUpdate }
+               setValueToUpdate={ setValueToUpdate } />
       </div>;
   }
 };

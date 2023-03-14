@@ -13,6 +13,7 @@ import {
   FIELD_CHARTS_MODAL_VIEW,
   FIELD_REPORTS_VIEW,
   FIELD_SETUP_VIEW,
+  FIX_READINGS,
   GENERAL_ROUTE,
   LAST_READINGS_VIEW,
   MONITOR_PROBES_VIEW,
@@ -70,20 +71,8 @@ const Table = ({
                  updateFieldDetails,
                  setUpdatedFieldList,
                  toggleDropdowns,
-                 groupValueToUpdate,
-                 setGroupValueToUpdate,
-                 haValueToUpdate,
-                 setHaValueToUpdate,
-                 orderValueToUpdate,
-                 setOrderValueToUpdate,
-                 plantDateValueToUpdate,
-                 setPlantDateValueToUpdate,
-                 harvestDateValueToUpdate,
-                 setHarvestDateValueToUpdate,
-                 unitValueToUpdate,
-                 setUnitValueToUpdate,
-                 maxMMValueToUpdate,
-                 setMaxMMValueToUpdate
+                 valueToUpdate,
+                 setValueToUpdate
                }) => {
 
   switch (tableName) {
@@ -120,20 +109,8 @@ const Table = ({
                               updateFieldDetails={ updateFieldDetails }
                               setActiveTableData={ setActiveTableData }
                               setUpdatedFieldList={ setUpdatedFieldList }
-                              groupValueToUpdate={ groupValueToUpdate }
-                              setGroupValueToUpdate={ setGroupValueToUpdate }
-                              haValueToUpdate={ haValueToUpdate }
-                              setHaValueToUpdate={ setHaValueToUpdate }
-                              orderValueToUpdate={ orderValueToUpdate }
-                              setOrderValueToUpdate={ setOrderValueToUpdate }
-                              plantDateValueToUpdate={ plantDateValueToUpdate }
-                              setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
-                              harvestDateValueToUpdate={ harvestDateValueToUpdate }
-                              setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
-                              unitValueToUpdate={ unitValueToUpdate }
-                              setUnitValueToUpdate={ setUnitValueToUpdate }
-                              maxMMValueToUpdate={ maxMMValueToUpdate }
-                              setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate } />;
   }
 };
 
@@ -404,23 +381,11 @@ const FieldSetupTable = ({
                            hiddenColumns,
                            selectedIndex,
                            setSelectedIndex,
+                           valueToUpdate,
+                           setValueToUpdate,
                            updateFieldDetails,
                            setActiveTableData,
-                           setUpdatedFieldList,
-                           groupValueToUpdate,
-                           setGroupValueToUpdate,
-                           haValueToUpdate,
-                           setHaValueToUpdate,
-                           orderValueToUpdate,
-                           setOrderValueToUpdate,
-                           plantDateValueToUpdate,
-                           setPlantDateValueToUpdate,
-                           harvestDateValueToUpdate,
-                           setHarvestDateValueToUpdate,
-                           unitValueToUpdate,
-                           setUnitValueToUpdate,
-                           maxMMValueToUpdate,
-                           setMaxMMValueToUpdate
+                           setUpdatedFieldList
                          }) => {
 
   const history = useHistory();
@@ -466,16 +431,14 @@ const FieldSetupTable = ({
         tableDataElements = objectValues?.map((value, dataIndex) => {
           switch (dataIndex) {
             case 0:
-              return <div>
-                <FieldSetupChartButton history={ history }
-                                       groupName={ groupName }
-                                       clientName={ clientName }
-                                       dataIndex={ dataIndex }
-                                       value={ value }
-                                       particularScreen={ PROBES_DETAILED_ROUTE }
-                                       activeScreen={ activeScreen }
-                                       icon={ activeScreen === PROBES_DETAILED_ROUTE ? NONE : VIEW_CHARTS } />
-              </div>;
+              return <FieldSetupChartButton history={ history }
+                                            groupName={ groupName }
+                                            clientName={ clientName }
+                                            dataIndex={ dataIndex }
+                                            value={ value }
+                                            particularScreen={ PROBES_DETAILED_ROUTE }
+                                            activeScreen={ activeScreen }
+                                            icon={ activeScreen === PROBES_DETAILED_ROUTE ? NONE : VIEW_CHARTS } />;
             case 1:
               return <RowData history={ history }
                               groupName={ groupName }
@@ -497,46 +460,38 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
-                              icon={ REPLACE_PROBE_WITH_NEW }
-                              selectedIndex={ selectedIndex }
-                              groupValueToUpdate={ groupValueToUpdate }
-                              setGroupValueToUpdate={ setGroupValueToUpdate }
-                              updateFieldDetails={ updateFieldDetails }
-                              fieldList={ activeTableData }
-                              setActiveTableData={ setActiveTableData }
-                              rowIndex={ rowIndex }
-                              setUpdatedFieldList={ setUpdatedFieldList } />;
+                              icon={ value === 'Active' ? TOGGLE_ON : TOGGLE_OFF }
+                              fill={ value === 'Active' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 4:
               return <RowData history={ history }
                               groupName={ groupName }
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
-                              icon={ REPLACE_PROBE_WITH_NEW }
-                              selectedIndex={ selectedIndex }
-                              groupValueToUpdate={ groupValueToUpdate }
-                              setGroupValueToUpdate={ setGroupValueToUpdate }
-                              updateFieldDetails={ updateFieldDetails }
-                              fieldList={ activeTableData }
-                              setActiveTableData={ setActiveTableData }
-                              rowIndex={ rowIndex }
-                              setUpdatedFieldList={ setUpdatedFieldList } />;
+                              icon={ FIX_READINGS }
+                              fill={ '#607CB1' } />;
             case 5:
               return <RowData history={ history }
                               groupName={ groupName }
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ REPLACE_PROBE_WITH_NEW }
                               selectedIndex={ selectedIndex }
-                              haValueToUpdate={ haValueToUpdate }
-                              setHaValueToUpdate={ setHaValueToUpdate }
                               updateFieldDetails={ updateFieldDetails }
                               fieldList={ activeTableData }
                               setActiveTableData={ setActiveTableData }
@@ -548,10 +503,12 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ ADD_PROBE }
-                              updateFieldDetails={ updateFieldDetails }
                               fill={ '#63e016' } />;
             case 7:
               return <RowData history={ history }
@@ -559,10 +516,12 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ REMOVE_PROBE }
-                              updateFieldDetails={ updateFieldDetails }
                               fill={ 'red' } />;
             case 8:
               return <RowData history={ history }
@@ -570,10 +529,12 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ SENSORS_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
-                              updateFieldDetails={ updateFieldDetails }
                               fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 9:
               return <RowData history={ history }
@@ -581,10 +542,12 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ SENSORS_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
-                              updateFieldDetails={ updateFieldDetails }
                               fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 10:
               return <RowData history={ history }
@@ -592,10 +555,12 @@ const FieldSetupTable = ({
                               clientName={ clientName }
                               dataIndex={ dataIndex }
                               value={ value }
+                              valueToUpdate={ valueToUpdate }
+                              setValueToUpdate={ setValueToUpdate }
+                              updateFieldDetails={ updateFieldDetails }
                               particularScreen={ PROBES_DETAILED_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === '1' ? TOGGLE_ON : TOGGLE_OFF }
-                              updateFieldDetails={ updateFieldDetails }
                               fill={ value === '1' ? '#0090ff' : 'rgba(100, 105, 130, 0.50)' } />;
             case 11:
               return <RowData history={ history }
@@ -939,25 +904,13 @@ const RowData = ({
                    icon,
                    fill,
                    selectedIndex,
+                   valueToUpdate,
+                   setValueToUpdate,
                    updateFieldDetails,
                    fieldList,
                    setActiveTableData,
                    rowIndex,
-                   setUpdatedFieldList,
-                   groupValueToUpdate,
-                   setGroupValueToUpdate,
-                   haValueToUpdate,
-                   setHaValueToUpdate,
-                   orderValueToUpdate,
-                   setOrderValueToUpdate,
-                   plantDateValueToUpdate,
-                   setPlantDateValueToUpdate,
-                   harvestDateValueToUpdate,
-                   setHarvestDateValueToUpdate,
-                   unitValueToUpdate,
-                   setUnitValueToUpdate,
-                   maxMMValueToUpdate,
-                   setMaxMMValueToUpdate
+                   setUpdatedFieldList
                  }) => {
 
   if (activeScreen === particularScreen)
@@ -971,27 +924,15 @@ const RowData = ({
                                   fill={ fill } />;
   else if ([3, 4, 5, 6, 7, 8, 9, 10].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
     return <FieldSetupInputColumn value={ value }
+                                  valueToUpdate={ valueToUpdate }
+                                  setValueToUpdate={ setValueToUpdate }
                                   updateFieldDetails={ updateFieldDetails }
                                   selectedIndex={ selectedIndex }
                                   fieldList={ fieldList }
                                   setActiveTableData={ setActiveTableData }
                                   rowIndex={ rowIndex }
                                   columnIndex={ dataIndex }
-                                  setUpdatedFieldList={ setUpdatedFieldList }
-                                  groupValueToUpdate={ groupValueToUpdate }
-                                  setGroupValueToUpdate={ setGroupValueToUpdate }
-                                  haValueToUpdate={ haValueToUpdate }
-                                  setHaValueToUpdate={ setHaValueToUpdate }
-                                  orderValueToUpdate={ orderValueToUpdate }
-                                  setOrderValueToUpdate={ setOrderValueToUpdate }
-                                  plantDateValueToUpdate={ plantDateValueToUpdate }
-                                  setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
-                                  harvestDateValueToUpdate={ harvestDateValueToUpdate }
-                                  setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
-                                  unitValueToUpdate={ unitValueToUpdate }
-                                  setUnitValueToUpdate={ setUnitValueToUpdate }
-                                  maxMMValueToUpdate={ maxMMValueToUpdate }
-                                  setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
+                                  setUpdatedFieldList={ setUpdatedFieldList } />;
   else
     return <FieldSetupNameColumn dataIndex={ dataIndex }
                                  activeScreen={ activeScreen }

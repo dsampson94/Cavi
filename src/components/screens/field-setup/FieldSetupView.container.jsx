@@ -90,13 +90,7 @@ const FieldSetupViewContainer = () => {
   const [selectedProbeNumber, setSelectedProbeNumber] = useState(null);
   const [selectedFieldName, setSelectedFieldName] = useState(null);
 
-  const [groupValueToUpdate, setGroupValueToUpdate] = useState(false);
-  const [haValueToUpdate, setHaValueToUpdate] = useState(false);
-  const [orderValueToUpdate, setOrderValueToUpdate] = useState(false);
-  const [plantDateValueToUpdate, setPlantDateValueToUpdate] = useState(false);
-  const [harvestDateValueToUpdate, setHarvestDateValueToUpdate] = useState(false);
-  const [unitValueToUpdate, setUnitValueToUpdate] = useState(false);
-  const [maxMMValueToUpdate, setMaxMMValueToUpdate] = useState(false);
+  const [valueToUpdate, setValueToUpdate] = useState(undefined);
 
   const request = getRequestParams({
     groupName,
@@ -175,8 +169,6 @@ const FieldSetupViewContainer = () => {
 
   const updateFieldDetails = (fieldDetailName, inputValue) => {
     const user = retrieveUserLoginFromLocalStorage();
-    console.log(fieldDetailName);
-    console.log(inputValue);
     dispatch(requestSetFieldSetup({
       username: user?.username,
       password: user?.password,
@@ -191,7 +183,7 @@ const FieldSetupViewContainer = () => {
 
   useEffect(() => {
     dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
-  }, [groupValueToUpdate, haValueToUpdate, orderValueToUpdate, plantDateValueToUpdate, harvestDateValueToUpdate, unitValueToUpdate, maxMMValueToUpdate]);
+  }, [valueToUpdate]);
 
   const mappedFieldSetupList = () => {
     return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
@@ -206,20 +198,8 @@ const FieldSetupViewContainer = () => {
                          setSelectedProbeNumber={ setSelectedProbeNumber }
                          setSelectedFieldName={ setSelectedFieldName }
                          updateFieldDetails={ updateFieldDetails }
-                         groupValueToUpdate={ groupValueToUpdate }
-                         setGroupValueToUpdate={ setGroupValueToUpdate }
-                         haValueToUpdate={ haValueToUpdate }
-                         setHaValueToUpdate={ setHaValueToUpdate }
-                         orderValueToUpdate={ orderValueToUpdate }
-                         setOrderValueToUpdate={ setOrderValueToUpdate }
-                         plantDateValueToUpdate={ plantDateValueToUpdate }
-                         setPlantDateValueToUpdate={ setPlantDateValueToUpdate }
-                         harvestDateValueToUpdate={ harvestDateValueToUpdate }
-                         setHarvestDateValueToUpdate={ setHarvestDateValueToUpdate }
-                         unitValueToUpdate={ unitValueToUpdate }
-                         setUnitValueToUpdate={ setUnitValueToUpdate }
-                         maxMMValueToUpdate={ maxMMValueToUpdate }
-                         setMaxMMValueToUpdate={ setMaxMMValueToUpdate } />;
+                         valueToUpdate={ valueToUpdate }
+                         setValueToUpdate={ setValueToUpdate } />;
 };
 
 export default FieldSetupViewContainer;

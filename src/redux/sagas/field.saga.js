@@ -28,20 +28,15 @@ import { getProgress } from '../../tools/general/helpers.util';
 
 import { responseStatus } from '../endpoints/index';
 
-import {
-  getChartProbeCalibrationRequest,
-  getExtendedChartList,
-  getFieldChartListRequest,
-  getFieldSetupList,
-  getSetFieldSetup
-} from '../endpoints/field.endpoints';
+import { getChartProbeCalibrationRequest, getExtendedChartList, getFieldChartListRequest, getFieldSetupList, getSetFieldSetup } from '../endpoints/field.endpoints';
 
 import { addSystemNotice, setProgressBar, setSpinnerText } from '../actions/system.action';
 import {
-  REQUEST_FIELD_CHART_LIST,
   REQUEST_EXTENDED_FIELD_CHART_LIST,
+  REQUEST_FIELD_CHART_LIST,
   REQUEST_FIELD_SETUP_LIST,
-  REQUEST_PROBE_CALIBRATION, REQUEST_SET_FIELD_SETUP,
+  REQUEST_PROBE_CALIBRATION,
+  REQUEST_SET_FIELD_SETUP,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
@@ -407,17 +402,16 @@ export function* performSetFieldSetupRequest({ field }) {
     const [endpoint, requestOptions] = getSetFieldSetup(field);
     const { data } = yield call(axios, endpoint, requestOptions);
 
-    console.log(data);
-    // switch (data) {
-    //   case responseStatus(data).ERROR:
-    //     yield put({ type: SET_FIELD_CHART_LIST, undefined });
-    //     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
-    //     return;
-    //
-    //   case responseStatus(data).SUCCESS:
-    //     yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
-    //     yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
-    // }
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_FIELD_CHART_LIST, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
+    }
 
   } catch ({ response }) {
     yield put({ type: SET_FIELD_CHART_LIST, undefined });
