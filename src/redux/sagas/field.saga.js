@@ -24,7 +24,7 @@ import {
   UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST
 } from '../../tools/general/system-variables.util';
-import { getProgress } from '../../tools/general/helpers.util';
+import { generateId, getProgress } from '../../tools/general/helpers.util';
 
 import { responseStatus } from '../endpoints/index';
 
@@ -409,7 +409,8 @@ export function* performSetFieldSetupRequest({ field }) {
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put({ type: SET_FIELD_CHART_LIST, chartList: data });
+        yield put({ type: SET_FIELD_CHART_LIST, chartList: { data, id: generateId() } });
+
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
     }
 

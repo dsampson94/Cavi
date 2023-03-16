@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { arrayOf, bool, func, number, shape, string } from 'prop-types';
 
@@ -39,6 +39,9 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import ToolTip from '../tool-tip/ToolTip';
 import InputSearch from '../input-search/InputSearch';
 import TextInput from '../input/text/TextInput';
+import Select from '../select/Select';
+import ComboBox from '../combo-box/ComboBox';
+import DatePick from '../date-picker/DatePick';
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="client-fields__search">
@@ -628,9 +631,8 @@ export const FieldSetupInputColumn = ({
   const handleSubmit = (event, columnIndex) => {
     const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
     const newValue = event.target.value;
-    setInputValue(newValue);
     updateFieldDetails(fieldName, newValue);
-    setValueToUpdate(newValue);
+    ref.current = undefined;
   };
 
   return (
@@ -638,12 +640,9 @@ export const FieldSetupInputColumn = ({
       <TextInput
         ref={ ref }
         value={ inputValue }
-        onMouseEnter={ (event) => getFocus(event) }
-        onClick={ (event) => getFocus(event) }
+        onMouseOver={ (event) => getFocus(event) }
         onChange={ (event) => handleInputChange(event) }
-        onDoubleClick={ (event) => getFocus(event) }
-        onKeyPress={ (event) => {
-          getFocus(event);
+        onKeyDown={ (event) => {
           if (event.key === 'Enter') handleSubmit(event, columnIndex);
         } }
         table
@@ -652,7 +651,154 @@ export const FieldSetupInputColumn = ({
   );
 };
 
+export const FieldSetupSelectColumn = ({
+                                         value,
+                                         updateFieldDetails,
+                                         mappedDropdownList,
+                                         valueToUpdate,
+                                         setValueToUpdate,
+                                         rowIndex,
+                                         columnIndex,
+                                         hasDatePicker
+                                       }) => {
+
+  const [inputValue, setInputValue] = useState({ id: 0, name: value });
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const ref = useRef(null);
+
+  const getFocus = (event) => {
+    ref.current = event.target;
+    ref.current.focus();
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event, columnIndex) => {
+    console.log(event);
+    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    updateFieldDetails(fieldName, newValue);
+    setValueToUpdate(newValue);
+  };
+
+  function findIndexByText(list, searchText) {
+    return list?.findIndex((item) => item.name.toLowerCase().includes(searchText.toLowerCase()));
+  }
+
+  return (
+    <td key={ generateId() }
+        onClick={ (event) => event.stopPropagation() }
+        className="relative min-w-fit">
+      <Select list={ mappedDropdownList }
+              activeItem={ { id: findIndexByText(mappedDropdownList, value), name: value } }
+              setActiveItem={ event => handleSubmit(event.target.value, columnIndex) }
+              ref={ ref }
+              hasDatePicker={ hasDatePicker }
+              selectedDate={ selectedDate }
+              setSelectedDate={ setSelectedDate }
+              table
+      />
+    </td>
+  );
+};
+
+export const FieldSetupDatePickerColumn = ({
+                                             value,
+                                             updateFieldDetails,
+                                             mappedDropdownList,
+                                             valueToUpdate,
+                                             setValueToUpdate,
+                                             rowIndex,
+                                             columnIndex,
+                                             hasDatePicker
+                                           }) => {
+
+  const [inputValue, setInputValue] = useState({ id: 0, name: value });
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const ref = useRef(null);
+
+  const getFocus = (event) => {
+    ref.current = event.target;
+    ref.current.focus();
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event, columnIndex) => {
+    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    updateFieldDetails(fieldName, newValue);
+    setValueToUpdate(newValue);
+  };
+
+  function findIndexByText(list, searchText) {
+    return list?.findIndex((item) => item.name.toLowerCase().includes(searchText.toLowerCase()));
+  }
+
+  return (
+    <td key={ generateId() }
+        onClick={ (event) => event.stopPropagation() }
+        className="relative min-w-fit">
+      <DatePick list={ mappedDropdownList }
+                value={ value }
+                activeItem={ { id: findIndexByText(mappedDropdownList, value), name: value } }
+                setActiveItem={ event => handleSubmit(event.target.value, columnIndex) }
+                columnIndex={columnIndex}
+      />
+    </td>
+  );
+};
+
 FieldSetupInputColumn.propTypes = {
+  value: string
+};
+
+export const FieldSetupComboBoxColumn = ({
+                                           value,
+                                           updateFieldDetails,
+                                           mappedDropdownList,
+                                           valueToUpdate,
+                                           setValueToUpdate,
+                                           rowIndex,
+                                           columnIndex
+                                         }) => {
+
+  const [inputValue, setInputValue] = useState({ id: findIndexByText(mappedDropdownList, value), name: value });
+
+  const ref = useRef(null);
+
+  const handleSubmit = (event, columnIndex) => {
+    const newValue = event.name;
+    const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_][columnIndex - 3];
+    updateFieldDetails(fieldName, newValue);
+  };
+
+  function findIndexByText(list, searchText) {
+    return list?.findIndex((item) => item.name.toLowerCase().includes(searchText.toLowerCase()));
+  }
+
+  return (
+    <td key={ generateId() }
+        className="relative min-w-fit">
+      <ComboBox list={ mappedDropdownList }
+                activeItem={ inputValue }
+                setActiveItem={ event => handleSubmit(event, columnIndex) }
+                ref={ ref }
+                table
+      />
+    </td>
+  );
+};
+
+FieldSetupComboBoxColumn.propTypes = {
   value: string
 };
 

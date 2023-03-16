@@ -13,6 +13,7 @@ import './field-setup-view.scss';
 
 const FieldSetupView = ({
                           mappedSetupList,
+                          mappedDropdownList,
                           activeScreen,
                           clientRequestParams,
                           selectedProbeNumber,
@@ -47,6 +48,7 @@ const FieldSetupView = ({
       <div className={ getClassNames('field-setup', { show: showSetupSideBar }) }>
         <ActiveScreen activeScreen={ activeScreen }
                       mappedSetupList={ mappedSetupList }
+                      mappedDropdownList={ mappedDropdownList }
                       selectedIndex={ selectedIndex }
                       setSelectedIndex={ setSelectedIndex }
                       setActiveTableData={ setActiveTableData }

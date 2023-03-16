@@ -13,7 +13,7 @@ const TextInput = ({
                      placeholder,
                      onChange,
                      onClick,
-                     onKeyPress,
+                     onKeyDown,
                      disabled,
                      type,
                      login,
@@ -29,6 +29,7 @@ const TextInput = ({
                      ref,
                      defaultValue,
                      onMouseEnter,
+                     onMouseOver,
                      onDoubleClick
                    }) => {
 
@@ -42,11 +43,12 @@ const TextInput = ({
              value={ value }
              defaultValue={ defaultValue }
              onClick={ onClick }
-             onDoubleClick={onDoubleClick}
+             onDoubleClick={ onDoubleClick }
              placeholder={ placeholder }
              onChange={ onChange }
-             onKeyDown={ onKeyPress }
+             onKeyDown={ onKeyDown }
              onMouseEnter={ onMouseEnter }
+             onMouseOver={ onMouseOver }
              disabled={ disabled }
              type={ type }
              autoFocus={ autoFocus }

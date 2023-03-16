@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
@@ -66,6 +66,7 @@ const FieldSetupViewContainer = () => {
   const { groupName, clientName, activeScreen } = useParams();
 
   const generalList = useSelector(createSelector([state => state.field], field => field?.fieldSetupGeneralList));
+  const editGeneralListResponse = useSelector(createSelector([state => state.field], field => field?.chartList?.id));
   const probeSummaryList = useSelector(createSelector([state => state.field], field => field?.fieldSetupProbesList));
   const probeDetailedList = useSelector(createSelector([state => state.field], field => field?.fieldSetupProbesDetailedList));
   const sensorList = useSelector(createSelector([state => state.field], field => field?.fieldSetupSensorsList));
@@ -181,10 +182,6 @@ const FieldSetupViewContainer = () => {
     }));
   };
 
-  useEffect(() => {
-    dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
-  }, [valueToUpdate]);
-
   const mappedFieldSetupList = () => {
     return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
       cropDetailsList, weatherStationList, irrigationSystemList, irrigationDaysList, pushWarningsList, SMSWarningsList, splitValvesList,
@@ -192,7 +189,24 @@ const FieldSetupViewContainer = () => {
       clientName, groupName);
   };
 
+  useEffect(() => {
+    dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
+  }, [editGeneralListResponse]);
+
+  const mappedDropdownList = useMemo(() => {
+    const forecastList = generalList?.gebied?.[0]?.map((value, index) => {
+      return { id: `gebied-${ index }`, name: value };
+    }) ?? [];
+
+    const unitList = generalList?.units?.[0]?.map((value, index) => {
+      return { id: `units-${ index }`, name: value };
+    }) ?? [];
+
+    return [forecastList, unitList];
+  }, [generalList?.gebied?.[0], generalList?.units?.[0]]);
+
   return <FieldSetupView mappedSetupList={ mappedFieldSetupList() }
+                         mappedDropdownList={ mappedDropdownList }
                          activeScreen={ activeScreen }
                          clientRequestParams={ request.clientParams }
                          setSelectedProbeNumber={ setSelectedProbeNumber }

@@ -39,6 +39,8 @@ import {
   DropdownIconColumn,
   FieldNameColumn,
   FieldSetupChartButton,
+  FieldSetupComboBoxColumn,
+  FieldSetupDatePickerColumn,
   FieldSetupInputColumn,
   FieldSetupNameColumn,
   ForecastTimeIconsColumn,
@@ -64,6 +66,7 @@ const Table = ({
                  tableName,
                  activeTableData,
                  setActiveTableData,
+                 mappedDropdownList,
                  hiddenColumns,
                  selectedIndex,
                  setSelectedIndex,
@@ -102,6 +105,7 @@ const Table = ({
     case FIELD_REPORTS_VIEW:
       return <FieldSetupTable tableName={ tableName }
                               activeTableData={ activeTableData }
+                              mappedDropdownList={ mappedDropdownList }
                               hiddenColumns={ hiddenColumns }
                               selectedIndex={ selectedIndex }
                               setSelectedIndex={ setSelectedIndex }
@@ -378,6 +382,7 @@ ClientFieldsTable.propTypes = {
 const FieldSetupTable = ({
                            tableName,
                            activeTableData,
+                           mappedDropdownList,
                            hiddenColumns,
                            selectedIndex,
                            setSelectedIndex,
@@ -463,6 +468,7 @@ const FieldSetupTable = ({
                               valueToUpdate={ valueToUpdate }
                               setValueToUpdate={ setValueToUpdate }
                               updateFieldDetails={ updateFieldDetails }
+                              mappedDropdownList={ mappedDropdownList?.[0] }
                               particularScreen={ PROBES_SUMMARY_ROUTE }
                               activeScreen={ activeScreen }
                               icon={ value === 'Active' ? TOGGLE_ON : TOGGLE_OFF }
@@ -544,6 +550,7 @@ const FieldSetupTable = ({
                               value={ value }
                               valueToUpdate={ valueToUpdate }
                               setValueToUpdate={ setValueToUpdate }
+                              mappedDropdownList={ mappedDropdownList?.[1] }
                               updateFieldDetails={ updateFieldDetails }
                               particularScreen={ SENSORS_ROUTE }
                               activeScreen={ activeScreen }
@@ -860,7 +867,7 @@ const LastReadingsTable = ({
         <>
           <tr className={ getClassNames('table__body__row',
             { header: isHeaderRow, selected: (object === selectedRow) }) }
-              onClick={ () => setSelectedRow(object) }
+              onMouseDown={ () => setSelectedRow(object) }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
             { tableDataElements }
@@ -905,6 +912,7 @@ const RowData = ({
                    fill,
                    selectedIndex,
                    valueToUpdate,
+                   mappedDropdownList,
                    setValueToUpdate,
                    updateFieldDetails,
                    fieldList,
@@ -922,7 +930,43 @@ const RowData = ({
                                   activeScreen={ activeScreen }
                                   icon={ icon }
                                   fill={ fill } />;
-  else if ([3, 4, 5, 6, 7, 8, 9, 10].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
+  else if ([3].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
+    return <FieldSetupComboBoxColumn value={ value }
+                                     valueToUpdate={ valueToUpdate }
+                                     setValueToUpdate={ setValueToUpdate }
+                                     updateFieldDetails={ updateFieldDetails }
+                                     selectedIndex={ selectedIndex }
+                                     fieldList={ fieldList }
+                                     setActiveTableData={ setActiveTableData }
+                                     mappedDropdownList={ mappedDropdownList }
+                                     rowIndex={ rowIndex }
+                                     columnIndex={ dataIndex }
+                                     setUpdatedFieldList={ setUpdatedFieldList } />;
+  else if ([9].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
+    return <FieldSetupComboBoxColumn value={ value }
+                                     valueToUpdate={ valueToUpdate }
+                                     setValueToUpdate={ setValueToUpdate }
+                                     updateFieldDetails={ updateFieldDetails }
+                                     selectedIndex={ selectedIndex }
+                                     fieldList={ fieldList }
+                                     setActiveTableData={ setActiveTableData }
+                                     mappedDropdownList={ mappedDropdownList }
+                                     rowIndex={ rowIndex }
+                                     columnIndex={ dataIndex }
+                                     setUpdatedFieldList={ setUpdatedFieldList } />;
+  else if ([7, 8].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
+    return <FieldSetupDatePickerColumn value={ value }
+                                       valueToUpdate={ valueToUpdate }
+                                       setValueToUpdate={ setValueToUpdate }
+                                       updateFieldDetails={ updateFieldDetails }
+                                       selectedIndex={ selectedIndex }
+                                       fieldList={ fieldList }
+                                       setActiveTableData={ setActiveTableData }
+                                       rowIndex={ rowIndex }
+                                       columnIndex={ dataIndex }
+                                       setUpdatedFieldList={ setUpdatedFieldList }
+                                       hasDatePicker />;
+  else if ([4, 5, 6, 10].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
     return <FieldSetupInputColumn value={ value }
                                   valueToUpdate={ valueToUpdate }
                                   setValueToUpdate={ setValueToUpdate }

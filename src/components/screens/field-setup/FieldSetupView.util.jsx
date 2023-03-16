@@ -91,6 +91,7 @@ import './field-setup-view.scss';
 export const ActiveScreen = ({
                                activeScreen,
                                mappedSetupList,
+                               mappedDropdownList,
                                activeTableData,
                                selectedIndex,
                                setSelectedIndex,
@@ -237,6 +238,7 @@ export const ActiveScreen = ({
       return <div className="field-setup__scroll">
         <Table tableName={ FIELD_SETUP_VIEW }
                activeTableData={ activeTableData }
+               mappedDropdownList={ mappedDropdownList }
                hiddenColumns={ ['color'] }
                selectedIndex={ selectedIndex }
                setSelectedIndex={ setSelectedIndex }
