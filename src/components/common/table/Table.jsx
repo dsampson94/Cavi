@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
+import { FixedSizeList } from 'react-window';
 
 import {
   ADD_PROBE,
@@ -396,6 +397,10 @@ const FieldSetupTable = ({
   const history = useHistory();
   const { groupName, clientName, activeScreen } = useParams();
 
+  const handleMouseEnter = useMemo(() => (object) => {
+    setSelectedIndex(object);
+  }, []);
+
   const buildTableHeader = () => {
     if (!activeTableData) return;
     let headers;
@@ -621,7 +626,7 @@ const FieldSetupTable = ({
       return (
         <tr className={ 'table__body__row' }
             data-id={ object?.[''] }
-            onClick={ () => setSelectedIndex(object) }
+            onMouseEnter={ () => handleMouseEnter(object) }
             onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
             key={ generateId() }>
           { tableDataElements }
@@ -632,9 +637,11 @@ const FieldSetupTable = ({
     return (
       <tbody className="table__body">
       { (!isEmpty(rows)) ? rows :
-        <tr key={ generateId() }>
-          <td>{ 'Loading...' }</td>
-        </tr> }
+        <FixedSizeList height={ 400 } itemCount={ rows?.length } itemSize={ 50 }>
+          <tr key={ generateId() }>
+            <td>{ 'Loading...' }</td>
+          </tr>
+        </FixedSizeList> }
       </tbody>
     );
   };
@@ -953,7 +960,8 @@ const RowData = ({
                                      mappedDropdownList={ mappedDropdownList }
                                      rowIndex={ rowIndex }
                                      columnIndex={ dataIndex }
-                                     setUpdatedFieldList={ setUpdatedFieldList } />;
+                                     setUpdatedFieldList={ setUpdatedFieldList }
+                                     shortened />;
   else if ([7, 8].includes(dataIndex) && activeScreen === GENERAL_ROUTE)
     return <FieldSetupDatePickerColumn value={ value }
                                        valueToUpdate={ valueToUpdate }

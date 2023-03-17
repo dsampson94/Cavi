@@ -643,6 +643,7 @@ export const FieldSetupInputColumn = ({
         onMouseOver={ (event) => getFocus(event) }
         onChange={ (event) => handleInputChange(event) }
         onKeyDown={ (event) => {
+          getFocus(event);
           if (event.key === 'Enter') handleSubmit(event, columnIndex);
         } }
         table
@@ -717,9 +718,6 @@ export const FieldSetupDatePickerColumn = ({
                                              hasDatePicker
                                            }) => {
 
-  const [inputValue, setInputValue] = useState({ id: 0, name: value });
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
   const ref = useRef(null);
 
   const getFocus = (event) => {
@@ -727,16 +725,10 @@ export const FieldSetupDatePickerColumn = ({
     ref.current.focus();
   };
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleSubmit = (event, columnIndex) => {
+  const handleSubmit = (date) => {
     const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
-    const newValue = event.target.value;
-    setInputValue(newValue);
-    updateFieldDetails(fieldName, newValue);
-    setValueToUpdate(newValue);
+    updateFieldDetails(fieldName, date);
+    setValueToUpdate(date);
   };
 
   function findIndexByText(list, searchText) {
@@ -745,13 +737,14 @@ export const FieldSetupDatePickerColumn = ({
 
   return (
     <td key={ generateId() }
-        onClick={ (event) => event.stopPropagation() }
         className="relative min-w-fit">
       <DatePick list={ mappedDropdownList }
                 value={ value }
+                onMouseOver={ (event) => getFocus(event) }
+                ref={ ref }
                 activeItem={ { id: findIndexByText(mappedDropdownList, value), name: value } }
-                setActiveItem={ event => handleSubmit(event.target.value, columnIndex) }
-                columnIndex={columnIndex}
+                setActiveItem={ handleSubmit }
+                columnIndex={ columnIndex }
       />
     </td>
   );
@@ -768,7 +761,8 @@ export const FieldSetupComboBoxColumn = ({
                                            valueToUpdate,
                                            setValueToUpdate,
                                            rowIndex,
-                                           columnIndex
+                                           columnIndex,
+                                           shortened
                                          }) => {
 
   const [inputValue, setInputValue] = useState({ id: findIndexByText(mappedDropdownList, value), name: value });
@@ -792,6 +786,7 @@ export const FieldSetupComboBoxColumn = ({
                 activeItem={ inputValue }
                 setActiveItem={ event => handleSubmit(event, columnIndex) }
                 ref={ ref }
+                shortened={ shortened }
                 table
       />
     </td>

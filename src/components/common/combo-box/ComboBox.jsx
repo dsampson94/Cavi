@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function ComboBox({ list, activeItem, setActiveItem }) {
+export default function ComboBox({ list, activeItem, setActiveItem, shortened }) {
   const [query, setQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -16,9 +16,10 @@ export default function ComboBox({ list, activeItem, setActiveItem }) {
 
   return (
     <Combobox as="div" value={ activeItem } onChange={ setActiveItem }>
-      <div className="relative mt-[2px] mr-1 min-w-fit w-40">
+      <div className={ classNames(shortened ? 'w-24' : ' w-32', 'relative mt-[2px] mr-1 min-w-fit') }>
         <Combobox.Input
-          className="w-full rounded-md border-0 bg-white dark:bg-clouded-grey py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-[#043b6e] focus:ring-1 focus:ring-inset focus:ring-[#043b6e] sm:text-sm sm:leading-6"
+          className="w-full h-[35px] rounded-md border-0 bg-white dark:bg-clouded-grey py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-[#043b6e] focus:ring-1
+          focus:ring-inset focus:ring-[#043b6e] sm:text-sm sm:leading-6"
           onChange={ (event) => setQuery(event.target.value) }
           displayValue={ (item) => item?.name }
         />

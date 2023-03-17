@@ -33,7 +33,7 @@ export const mapSetupList = (activeScreen, generalList, probeSummaryList, probeD
         return {
           ['']: `${ field?.land }*_*${ field?.probelys }`,
           field: { name: field?.land, color: (field?.kleur === 'blou') ? '#6495ED' : field?.kleur },
-          currentCrop: field?.gewas,
+          currentCrop: field?.gewas?.includes('Imported from') ? field.gewas.replace('Imported from', '') : field?.gewas,
           forecast: field?.gebied,
           group: field?.landgroep,
           ha: field?.ha,
