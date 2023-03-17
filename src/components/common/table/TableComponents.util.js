@@ -417,7 +417,7 @@ export const LandGroupForecastColumn = ({ dataIndex, value }) => {
             </div>
           </div>
           <div className={ 'table__body__row__td-weather-left--wind' }>
-            { value?.wind }
+            { value?.windDisplay }
           </div>
         </div>
         <div className={ 'table__body__row__td-weather-right' }>

@@ -4,16 +4,17 @@ import { arrayOf, shape } from 'prop-types';
 
 import { CLIENT_FIELDS, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
 
-import { getClassNames } from '../../../tools/general/helpers.util';
+import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
 import { TableSearchBar } from '../../common/table/TableComponents.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import Table from '../../common/table/Table';
+import { Popup } from '../../common/bottom-popup/Popup';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
+const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -47,16 +48,6 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
 
       <div className={ getClassNames('client-fields', { show: showClientsSideBar }) }>
 
-        {/*<MidBar view={ CLIENT_FIELDS_MIDBAR }*/ }
-        {/*        filteredTableData={ filteredTableData }*/ }
-        {/*        hasSubGroups={ hasSubGroups }*/ }
-        {/*        showClientsSideBar={ showClientsSideBar }*/ }
-        {/*        setFilteredTableData={ setFilteredTableData }*/ }
-        {/*        setActiveTableData={ setActiveTableData }*/ }
-        {/*        toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }*/ }
-        {/*        reloadToggleActive={ reloadToggleActive }*/ }
-        {/*        setReloadToggleActive={ setReloadToggleActive } />*/ }
-
         <TableSearchBar mappedFieldList={ mappedFieldList }
                         setFilteredTableData={ setFilteredTableData } />
 
@@ -71,6 +62,8 @@ const ClientFieldsView = ({ mappedFieldList, clientRequestParams, hasSubGroups, 
                  toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
         </div>
 
+        { !isEmpty(mappedWeatherList) &&
+        <Popup mappedWeatherList={ mappedWeatherList } /> }
       </div>
     </ContentContainer>
   );

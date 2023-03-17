@@ -5,6 +5,7 @@ export const SET_CLIENT_RAW_READINGS = '[CLIENT_STORE] Set raw readings';
 export const SET_CLIENT_RAW_READINGS_CHART = '[CLIENT_STORE] Set raw readings chart';
 
 export const SET_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set field list';
+export const SET_CLIENT_FIELD_WEATHER_LIST = '[CLIENT_STORE] Set field weather list';
 export const SET_FULL_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set full field list (fields & rain)';
 export const SET_CLIENT_FIELD_RAIN_DATA = '[CLIENT_STORE] Set field rain data';
 export const SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART = '[CLIENT_STORE] Set field rain data for chart';
@@ -56,6 +57,12 @@ export const GET_CLIENT_FIELD_LIST = '[CLIENT_STORE] Get field list';
 export const requestClientFieldList = (client) => ({
     type: GET_CLIENT_FIELD_LIST,
     client
+});
+
+export const GET_CLIENT_FIELD_WEATHER_LIST = '[CLIENT_STORE] Get field weather list';
+export const requestClientFieldWeatherList = (client) => ({
+  type: GET_CLIENT_FIELD_WEATHER_LIST,
+  client
 });
 
 export const GET_CLIENT_FIELD_RAIN_DATA = '[CLIENT_STORE] Get field rain data';

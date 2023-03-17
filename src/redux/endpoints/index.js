@@ -148,6 +148,10 @@ export const getRequestParams = ({
     clientParams: {
       ...clientParams
     },
+    weatherParams: {
+      ...clientParams,
+      dash: 1
+    },
     loadParams: {
       ...clientParams,
       field: activeFieldName ? activeFieldName : null,

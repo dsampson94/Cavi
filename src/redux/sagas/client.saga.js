@@ -7,6 +7,7 @@ import {
   getClientFieldListPDFRequest,
   getClientFieldListRequest,
   getClientFieldRainDataRequest,
+  getClientFieldWeatherListRequest,
   getClientLastReadingsListRequest,
   getClientMonitorProbesListRequest,
   getClientOverviewListRequest,
@@ -21,6 +22,7 @@ import {
   GET_ADMIN_USER_LIST,
   GET_CLIENT_FIELD_LIST,
   GET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  GET_CLIENT_FIELD_WEATHER_LIST,
   GET_CLIENT_LAST_READINGS_LIST,
   GET_CLIENT_MONITOR_PROBES_LIST,
   GET_CLIENT_OVERVIEW_LIST,
@@ -32,6 +34,7 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
+  SET_CLIENT_FIELD_WEATHER_LIST,
   SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
@@ -287,6 +290,36 @@ export function* watchForRetrieveClientFieldListRequest() {
   yield takeLatest(GET_CLIENT_FIELD_LIST, performRetrieveClientFieldListRequest);
 }
 
+export function* performRetrieveClientFieldWeatherListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientFieldWeatherListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, undefined });
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
+    }
+
+  } catch (response) {
+    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientFieldWeatherListRequest() {
+  yield takeLatest(GET_CLIENT_FIELD_WEATHER_LIST, performRetrieveClientFieldWeatherListRequest);
+}
+
 export function* performRetrieveRainDataForChartRequest({ client }) {
   try {
     yield put(setProgressBar(getProgress()));
@@ -386,6 +419,7 @@ export default function* clientSaga() {
     watchForRetrieveClientRawReadingsChartRequest(),
     watchForRetrieveFullClientFieldListRequest(),
     watchForRetrieveClientFieldListRequest(),
+    watchForRetrieveClientFieldWeatherListRequest(),
     watchForRetrieveRainDataForChartRequest(),
     watchForRetrieveClientPDFRequest(),
     watchForGetAdminUserListRequest()

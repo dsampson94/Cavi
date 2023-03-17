@@ -23,7 +23,7 @@ import {
   TWO_WEEKS_LABEL
 } from '../../../tools/general/system-variables.util';
 
-import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA } from '../../../redux/actions/client.action';
+import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_FIELD_WEATHER_LIST } from '../../../redux/actions/client.action';
 
 import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
 
@@ -116,6 +116,7 @@ export const SideBarList = ({
 const handleSubHeaderClick = (history, groupName, clientName, dispatch) => {
   dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
   dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
+  dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: null });
   history.push(`/client/${ groupName }/${ clientName }`);
 };
 

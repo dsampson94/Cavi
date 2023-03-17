@@ -36,6 +36,12 @@ export const getClientFieldListRequest = (client) => [
   getHttpGetOptions(client)
 ];
 
+const getClientFieldWeatherListEndpoint = () => `${ API_HOST }/getweather.php`;
+export const getClientFieldWeatherListRequest = (client) => [
+  getClientFieldWeatherListEndpoint(),
+  getHttpGetOptions(client)
+];
+
 const getClientFieldRainDataEndpoint = () => `${ API_HOST }/getRain.php`;
 export const getClientFieldRainDataRequest = (client) => [
   getClientFieldRainDataEndpoint(),

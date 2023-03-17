@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 import { shape } from 'prop-types';
 
 import { mapFieldTableList } from './ClientFieldsView.container.util.js';
-import { requestFullClientFieldList } from '../../../redux/actions/client.action';
+import { requestClientFieldWeatherList, requestFullClientFieldList } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
@@ -17,6 +17,7 @@ const ClientFieldsViewContainer = () => {
   const { groupName, clientName } = useParams();
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
+  const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.weatherList?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
@@ -25,9 +26,14 @@ const ClientFieldsViewContainer = () => {
 
   const subGroupList = [];
 
+  function mappedWeatherList(obj) {
+    if (!obj) return;
+    return Object.entries(obj)?.map(([key, value]) => ({ key, value }));
+  }
+
   useEffect(() => {
     dispatch(requestFullClientFieldList(request.clientParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(requestClientFieldWeatherList(request.weatherParams));
   }, [groupName, clientName, reloadToggleActive]);
 
   const mappedFieldTableList = () => {
@@ -35,6 +41,7 @@ const ClientFieldsViewContainer = () => {
   };
 
   return <ClientFieldsView mappedFieldList={ mappedFieldTableList() }
+                           mappedWeatherList={ mappedWeatherList(fieldWeatherList?.stations) }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }
