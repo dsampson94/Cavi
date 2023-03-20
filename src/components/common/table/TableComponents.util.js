@@ -594,7 +594,8 @@ DropDown.propTypes = {
 export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
 
   return <td onClick={ noOp() }
-             key={ generateId() }>
+             key={ generateId() }
+             className="min-w-[110px]">
     <div className={ 'table__body__row__td-container--field-setup' }>
       {/*<ToolTipRelative text={ value } />*/ }
       { (name) ? name :
@@ -638,7 +639,8 @@ export const FieldSetupInputColumn = ({
   };
 
   return (
-    <td key={ generateId() }>
+    <td key={ generateId() }
+        className="min-w-[100px]">
       <TextInput
         ref={ ref }
         value={ inputValue }
@@ -680,7 +682,6 @@ export const FieldSetupSelectColumn = ({
   };
 
   const handleSubmit = (event, columnIndex) => {
-    console.log(event);
     const fieldName = [FORECAST, GROUP, HA, ORDER, PLANT_DATE_, HARVEST_DATE_, UNIT_, MAXMM][columnIndex - 3];
     const newValue = event.target.value;
     setInputValue(newValue);
@@ -695,7 +696,7 @@ export const FieldSetupSelectColumn = ({
   return (
     <td key={ generateId() }
         onClick={ (event) => event.stopPropagation() }
-        className="relative min-w-fit">
+        className="min-w-[100px]">
       <Select list={ mappedDropdownList }
               activeItem={ { id: findIndexByText(mappedDropdownList, value), name: value } }
               setActiveItem={ event => handleSubmit(event.target.value, columnIndex) }
@@ -739,7 +740,7 @@ export const FieldSetupDatePickerColumn = ({
 
   return (
     <td key={ generateId() }
-        className="relative min-w-fit">
+        className="min-w-[100px]">
       <DatePick list={ mappedDropdownList }
                 value={ value }
                 onMouseOver={ (event) => getFocus(event) }
@@ -783,7 +784,7 @@ export const FieldSetupComboBoxColumn = ({
 
   return (
     <td key={ generateId() }
-        className="relative min-w-fit">
+        className="min-w-[100px]">
       <ComboBox list={ mappedDropdownList }
                 activeItem={ inputValue }
                 setActiveItem={ event => handleSubmit(event, columnIndex) }

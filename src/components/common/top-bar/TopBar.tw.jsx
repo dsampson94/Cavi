@@ -298,7 +298,9 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
           <div className="top-bar__left__divider">
 
-            <Graphic onClick={ () => history.push('/dashboard/overview') } topbar graphic={ logo } />
+            <Graphic onClick={ () => history.push('/dashboard/overview') }
+                     graphic={ logo }
+                     topbar />
 
             <Button icon={ VIEW_SIDEBAR }
                     tooltip={ OTHER_FARM }
