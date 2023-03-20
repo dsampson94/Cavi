@@ -17,7 +17,7 @@ import { pushEmptyRow } from '../table/TableFunctions.util';
 import { addSystemNotice } from '../../../redux/actions/system.action';
 
 import SVGIcon from '../SVGIcon/SVGIcon';
-import ToolTip from '../tool-tip/ToolTip';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 import './input-search.scss';
 
@@ -149,7 +149,7 @@ const InputSearch = ({
   return (
     <div className={ getClassNames('search', { overview }) }>
       <div className={ 'search__icon' } onClick={ () => setSearchTypeIsClient(!searchTypeIsClient) }>
-        <ToolTip text={ !searchTypeIsClient ? 'Search by Client' : 'Search by Field' } />
+        <ToolTipRelative text={ !searchTypeIsClient ? 'Search by Client' : 'Search by Field' } />
         <SVGIcon name={ SEARCH } fill={ !searchTypeIsClient ? '#0000FF' : '#607CB1' } />
       </div>
       <input autoFocus

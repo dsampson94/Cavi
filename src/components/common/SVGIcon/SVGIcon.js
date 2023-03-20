@@ -64,7 +64,7 @@ import {
 import { getClassNames } from '../../../tools/general/helpers.util';
 
 import useTheme from '../../../tools/hooks/useTheme';
-import ToolTip from '../tool-tip/ToolTip';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 import './svg-icon.scss';
 
@@ -93,7 +93,7 @@ const SVGIcon = ({ name, fill, height, width, onClick, tiny, chart, profile, tal
            className={ getClassNames('svg', { tall }) }>
         { getPath(name) }
       </svg>
-      { tooltip && <ToolTip text={ tooltip } grid={ grid } /> }
+      { tooltip && <ToolTipRelative text={ tooltip } grid={ grid } /> }
     </div>
   );
 };

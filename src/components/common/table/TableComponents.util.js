@@ -36,12 +36,14 @@ import {
 import { generateId, getClassNames, noOp } from '../../../tools/general/helpers.util';
 
 import SVGIcon from '../SVGIcon/SVGIcon';
-import ToolTip from '../tool-tip/ToolTip';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 import InputSearch from '../input-search/InputSearch';
 import TextInput from '../input/text/TextInput';
 import Select from '../select/Select';
 import ComboBox from '../combo-box/ComboBox';
 import DatePick from '../date-picker/DatePick';
+
+import './table.scss';
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="client-fields__search">
@@ -88,7 +90,8 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
     </td>;
   } else {
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ dataIndex }
+               className="min-w-fit">
       <div className={ 'table__body__row__td-container' }>
 
         <div className={ 'table__body__row__td-upper' }
@@ -116,9 +119,8 @@ export const WarningIconColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }
-           style={ { marginLeft: '26px' } }>
-        <ToolTip text={ value } />
+      <div className={ 'table__body__row__td-container' }>
+        <ToolTipRelative text={ value } />
         <SVGIcon name={ WARNING }
                  fill={ '#EE9A94' } />
       </div>
@@ -148,7 +150,7 @@ export const DropdownIconColumn = ({
         // onClick={ () => {setSelectedIndex(rowIndex);setSelectedDropdownObject(object); } }
            onClick={ toggleDropdowns }>
 
-        <ToolTip text={ value?.tooltip } />
+        <ToolTipRelative text={ value?.tooltip } />
         <SVGIcon name={ DROPDOWN }
                  fill={ '#53A5DF' } />
       </div> }
@@ -173,7 +175,7 @@ export const PhotoIconColumn = ({ dataIndex, value }) => {
     return <td onClick={ noOp() }
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }>
-        <ToolTip text={ value } />
+        <ToolTipRelative text={ value } />
         <SVGIcon name={ CAMERA }
                  fill={ '#043b6e' } />
       </div>
@@ -193,7 +195,7 @@ export const LastReadingColumn = ({ dataIndex, value }) => {
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }
            style={ { color: '#0090ff' } }>
-        <ToolTip text={ value?.tooltip } />
+        <ToolTipRelative text={ value?.tooltip } />
 
         { (value?.hasBattery) && <>
           <p className={ 'table__body__row__td-container__battery-text' }>
@@ -223,7 +225,7 @@ export const CaptureNoteColumn = ({ dataIndex, value }) => {
     return <td onClick={ noOp() }
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }>
-        <ToolTip text={ value } />
+        <ToolTipRelative text={ value } />
         <SVGIcon name={ PENCIL } />
       </div>
     </td>;
@@ -241,7 +243,7 @@ export const ChartColumn = ({ dataIndex, value }) => {
     return <td onClick={ noOp() }
                key={ dataIndex }>
       <div className={ 'table__body__row__td-container' }>
-        <ToolTip text={ value } />
+        <ToolTipRelative text={ value } />
         <SVGIcon name={ CHARTS } />
       </div>
     </td>;
@@ -260,7 +262,7 @@ export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) 
     { !isDropdownRow &&
     <div className={ 'table__body__row__td-container' }
          style={ { margin: '6px 0 6px 0' } }>
-      { value?.tooltip && <ToolTip text={ value?.tooltip } /> }
+      { value?.tooltip && <ToolTipRelative text={ value?.tooltip } /> }
       <div className={ 'table__body__row__td-upper--deficit' }
            style={ {
              backgroundColor: value?.colorTop === '#F9FFFA' ? 'grey' : value?.colorTop
@@ -320,7 +322,7 @@ export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
 
       { (value?.harvest && (value?.data === 0)) &&
       <div className={ 'table__body__row__td-container__icon-right' }>
-        <ToolTip text={ HARVEST } />
+        <ToolTipRelative text={ HARVEST } />
         <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
       </div> }
 
@@ -328,7 +330,7 @@ export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
       <div className={ 'table__body__row__td-container' }>
         { (value?.data === 0) ? '' : value?.data }
         <div className={ 'table__body__row__td-container__icon' }>
-          <ToolTip text={ HARVEST } />
+          <ToolTipRelative text={ HARVEST } />
           <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
         </div>
       </div> }
@@ -364,7 +366,7 @@ export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
 
       { (value?.harvest && (value?.data === 0)) &&
       <div className={ 'table__body__row__td-container__icon-right' }>
-        <ToolTip text={ HARVEST } />
+        <ToolTipRelative text={ HARVEST } />
         <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
       </div> }
 
@@ -372,7 +374,7 @@ export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
       <div className={ 'table__body__row__td-container' }>
         { (value?.data === 0) ? '' : value?.data }
         <div className={ 'table__body__row__td-container__icon' }>
-          <ToolTip text={ HARVEST } />
+          <ToolTipRelative text={ HARVEST } />
           <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
         </div>
       </div> }
@@ -449,7 +451,7 @@ export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
                className={ 'table__body__row__td--fade--thin' }>
       { !value?.dropdown &&
       <>
-        <ToolTip text={ UNIT } />
+        <ToolTipRelative text={ UNIT } />
         <SVGIcon name={ RAIN_CLOUDS } fill={ '#043b6e' } tiny />
         <SVGIcon name={ WATCH } fill={ '#043b6e' } tiny />
       </>
@@ -594,7 +596,7 @@ export const FieldSetupNameColumn = ({ dataIndex, name, probe, value }) => {
   return <td onClick={ noOp() }
              key={ generateId() }>
     <div className={ 'table__body__row__td-container--field-setup' }>
-      {/*<ToolTip text={ value } />*/ }
+      {/*<ToolTipRelative text={ value } />*/ }
       { (name) ? name :
         (probe) ? probe :
           (value) ? value.toString() : '' }

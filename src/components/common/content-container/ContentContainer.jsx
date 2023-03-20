@@ -9,7 +9,7 @@ import { mappedUserData } from '../side-bar/Sidebar.util';
 
 import TopBarTw from '../top-bar/TopBar.tw';
 import SideBar from '../side-bar/SideBar';
-import TabBar from '../tab-bar/TabBar';
+import TabBarTop from '../tab-bar/TabBarTop';
 
 import { Routes } from '../../../routes';
 import { setClientMonitorProbesList } from '../../../redux/actions/client.action';
@@ -141,7 +141,7 @@ const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar
 
         <div className="content-container__screen--dashboard">
 
-          <TabBar tabs={ tabs } />
+          <TabBarTop tabs={ tabs } />
 
           { children }
 

@@ -184,7 +184,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, canopy-line-orange);
+        color: map.get(color.$colorMap, canopy-line-orange);
       }
 
       &:hover {
@@ -197,7 +197,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, canopy-line-orange);
+        color: map.get(color.$colorMap, canopy-line-orange);
       }
 
       &:hover {
@@ -210,7 +210,7 @@
 
       &:checked {
         animation: ripple 0.2s linear forwards;
-        background-color: map.get(color.$colorMap, canopy-line-blue);
+        color: map.get(color.$colorMap, canopy-line-blue);
       }
 
       &:hover {

@@ -30,7 +30,7 @@ import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/loc
 import SVGIcon from '../SVGIcon/SVGIcon';
 import Button from '../button/Button';
 import RadioInput from '../input/radio/RadioInput';
-import ToolTip from '../tool-tip/ToolTip';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 export const SideBarList = ({
                               mappedUserData,
@@ -229,12 +229,12 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) 
 
                   <div className="field-charts-side-bar__field-list__item__container--upper"
                        style={ {
-                         backgroundColor: field?.colorTop
+                         backgroundColor: field?.colorTop === '#F9FFFA' ? 'lightgrey' : field?.colorTop
                        } } />
 
                   <div className="field-charts-side-bar__field-list__item__container--lower"
                        style={ {
-                         backgroundColor: field?.colorBot
+                         backgroundColor: field?.colorBot === '#F9FFFA' ? 'lightgrey' : field?.colorBot
                        } } />
 
                   <div className={ getClassNames('field-charts-side-bar__field-list__item__container--text',
@@ -245,7 +245,7 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) 
 
                 <div className="field-charts-side-bar__field-list__item__icon">
                   <SVGIcon name={ CHARTS } chart />
-                  <ToolTip text={ 'follow up' } />
+                  <ToolTipRelative text={ 'follow up' } />
                 </div>
 
               </div>

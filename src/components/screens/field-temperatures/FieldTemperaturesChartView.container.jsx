@@ -26,37 +26,19 @@ const FieldTemperaturesChartViewContainer = () => {
   const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod });
 
   useEffect(() => {
-    dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
     dispatch(requestClientFieldList(request.clientParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    function updateData() {
-      dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
-      dispatch(requestClientFieldList(request.clientParams));
-      setTimeout(updateData, 10 * 60 * 1000);
-    }
-
-    updateData();
-    return () => {
-      clearTimeout(updateData);
-    };
   }, []);
 
   useEffect(() => {
     dispatch(requestExtendedFieldChartList(request.soilTempParams, SET_SOIL_TEMP_LIST));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFieldName, activeLoadPeriod]);
+  }, [activeFieldName]);
 
   const mappedFieldList = () => {
     return mapFieldList(fieldList);
   };
 
   const mappedTemperaturesList = () => {
-    if (soilTempList) {
-      return mapTemperaturesList(soilTempList, probeNumber, activeLoadPeriod, dispatch);
-    }
+    return mapTemperaturesList(soilTempList, probeNumber, activeLoadPeriod, dispatch);
   };
 
   return <FieldTemperaturesChartView mappedFieldList={ mappedFieldList() }

@@ -79,22 +79,22 @@
 
         @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
           max-height: util.rem(24);
-          font-size: util.rem(11);
+          font-size: util.rem(10);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
           max-height: util.rem(26);
-          font-size: util.rem(12);
+          font-size: util.rem(10);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
           max-height: util.rem(28);
-          font-size: util.rem(13);
+          font-size: util.rem(11);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
           max-height: util.rem(30);
-          font-size: util.rem(14);
+          font-size: util.rem(12);
         }
 
         &--warning {
@@ -127,6 +127,7 @@
         &-container {
           display: flex;
           flex-direction: column;
+          white-space: nowrap;
 
           &__icon {
             position: absolute;

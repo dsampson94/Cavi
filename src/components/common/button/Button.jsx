@@ -3,7 +3,7 @@ import { bool, func, string } from 'prop-types';
 
 import { getClassNames } from '../../../tools/general/helpers.util';
 import SVGIcon from '../SVGIcon/SVGIcon';
-import ToolTip from '../tool-tip/ToolTip';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 import './button.scss';
 
@@ -49,8 +49,8 @@ const Button = ({
         <div className={ 'button__label--upper' }><label>{ label }</label></div>
         <div className={ 'button__label--lower' }><label>{ lowerLabel !== 0 && lowerLabel }</label></div>
       </div> }
-      { tooltip && <ToolTip text={ tooltip }
-                            left={ leftAlignedTooltip } /> }
+      { tooltip && <ToolTipRelative text={ tooltip }
+                                    left={ leftAlignedTooltip } /> }
       { icon && <SVGIcon name={ icon }
                          chart={ chart }
                          fill={ (iconFill) ? iconFill : '#53A5DF' }

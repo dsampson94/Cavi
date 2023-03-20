@@ -22,7 +22,7 @@ import {
 import SVGIcon from '../../../common/SVGIcon/SVGIcon';
 import { arrayOf, func, number, shape } from 'prop-types';
 
-import ToolTip from '../../../common/tool-tip/ToolTip';
+import ToolTipRelative from '../../../common/tool-tip/ToolTipRelative';
 
 import './dashboard-overview.scss';
 
@@ -53,23 +53,23 @@ export const ActiveHeader = ({ setOverviewOptionSelected, overviewOptionSelected
 
       <div className="dashboard-overview__top-button__right">
         <div className="dashboard-overview__top-button__right__very-satisfied">
-          <ToolTip text={ TODAY } />
+          <ToolTipRelative text={ TODAY } />
           <SVGIcon name={ VERY_SATISFIED } fill={ '#00AEFF' } />
         </div>
         <div className="dashboard-overview__top-button__right__satisfied">
-          <ToolTip text={ GREEN } />
+          <ToolTipRelative text={ GREEN } />
           <SVGIcon name={ SATISFIED } fill={ '#00FF21' } />
         </div>
         <div className="dashboard-overview__top-button__right__neutral">
-          <ToolTip text={ YELLOW } />
+          <ToolTipRelative text={ YELLOW } />
           <SVGIcon name={ NEUTRAL } fill={ '#FFD800' } />
         </div>
         <div className="dashboard-overview__top-button__right__dissatisfied">
-          <ToolTip text={ ORANGE } left />
+          <ToolTipRelative text={ ORANGE } left />
           <SVGIcon name={ DISSATISFIED } fill={ '#FF8019' } />
         </div>
         <div className="dashboard-overview__top-button__right__very-dissatisfied">
-          <ToolTip text={ RED } left />
+          <ToolTipRelative text={ RED } left />
           <SVGIcon name={ VERY_DISSATISFIED } fill={ '#FF0000' } />
         </div>
       </div>
@@ -159,7 +159,7 @@ const FrequencyIndicator = (groupName, value) => {
         <div key={ index }
              className="dashboard-overview__list__item__subheader__icon__grid__frequency__container"
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeno }/${ number.fieldName }`) }>
-          <ToolTip text={ number.fieldName } grid />
+          <ToolTipRelative text={ number.fieldName } grid />
           <SVGIcon name={ VERY_SATISFIED } fill={ number.color === 'yellow' ? '#f7d800' : number.color } overview />
         </div>
       )) }
@@ -188,7 +188,7 @@ const DeficitIndicator = (groupName, value) => {
       { fieldList.map((number, index) => (
         <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__deficit__container"
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }>
-          <ToolTip text={ number.fieldName } grid />
+          <ToolTipRelative text={ number.fieldName } grid />
           <div className={ 'deficit-container__upper' }
                style={ { backgroundColor: objectValues?.kleurbohex?.slice(3) === 'FFFFFF' ? 'grey' : `#${ objectValues?.kleurbohex?.slice(3) }` } }>
             { objectValues?.tmbo }
@@ -224,7 +224,7 @@ const LastReadingIndicator = (groupName, value) => {
       { fieldList.map((number, index) => (
         <div key={ index } className="dashboard-overview__list__item__subheader__icon__grid__reading__container"
              onClick={ () => history.push(`/client/${ number.groupName }/${ number.clientName }/field-charts/${ number.probeNumber }/${ number.fieldName }`) }>
-          <ToolTip text={ number.fieldName } grid />
+          <ToolTipRelative text={ number.fieldName } grid />
           <div className={ 'last-reading__container' }
                style={ { backgroundColor: `#${ objectValues?.lastreadingkleur?.slice(3) }` } }>
             <div className={ 'last-reading__text' }>{ objectValues?.lastreading }</div>

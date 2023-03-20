@@ -410,7 +410,6 @@ export function* performSetFieldSetupRequest({ field }) {
 
       case responseStatus(data).SUCCESS:
         yield put({ type: SET_FIELD_CHART_LIST, chartList: { data, id: generateId() } });
-
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
     }
 
