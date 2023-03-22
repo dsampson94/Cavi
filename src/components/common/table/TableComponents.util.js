@@ -144,12 +144,17 @@ export const DropdownIconColumn = ({
                                      toggleDropdowns
                                    }) => {
   if (value)
-    return <td key={ dataIndex } ondblclick={ toggleDropdowns }>
+    return <td key={ dataIndex }
+               onContextMenu={ e => {
+                 e.preventDefault();
+                 toggleDropdowns();
+               } }
+               onClick={ () => {
+                 setSelectedIndex(rowIndex);
+                 setSelectedDropdownObject(object);
+               } }>
       { (value?.tooltip) &&
-      <div className={ 'table__body__row__td-container' }
-        // onClick={ () => {setSelectedIndex(rowIndex);setSelectedDropdownObject(object); } }
-           onClick={ toggleDropdowns }>
-
+      <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value?.tooltip } />
         <SVGIcon name={ DROPDOWN }
                  fill={ '#53A5DF' } />
@@ -174,7 +179,7 @@ export const PhotoIconColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }>
+      <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CAMERA }
                  fill={ '#043b6e' } />
@@ -193,7 +198,7 @@ export const LastReadingColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }
+      <div className={ 'table__body__row__td-container__icon-clickable' }
            style={ { color: '#0090ff' } }>
         <ToolTipRelative text={ value?.tooltip } />
 
@@ -224,7 +229,7 @@ export const CaptureNoteColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }>
+      <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ PENCIL } />
       </div>
@@ -242,7 +247,7 @@ export const ChartColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ dataIndex }>
-      <div className={ 'table__body__row__td-container' }>
+      <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CHARTS } />
       </div>
@@ -261,7 +266,7 @@ export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) 
              key={ dataIndex }>
     { !isDropdownRow &&
     <div className={ 'table__body__row__td-container' }
-         style={ { margin: '6px 0 6px 0' } }>
+         style={ { margin: '1px 0 1px 0' } }>
       { value?.tooltip && <ToolTipRelative text={ value?.tooltip } /> }
       <div className={ 'table__body__row__td-upper--deficit' }
            style={ {

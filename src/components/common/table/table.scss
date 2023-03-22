@@ -130,6 +130,14 @@
           white-space: nowrap;
           user-select: none;
 
+          &__icon-clickable {
+
+            &:hover {
+              position: relative;
+              bottom: util.rem(1);
+            }
+          }
+
           &__icon {
             position: absolute;
             margin-top: util.rem(1);
@@ -206,12 +214,11 @@
         &-weather {
           display: flex;
           flex-direction: row;
-          padding: util.rem(4);
+          padding: util.rem(0) util.rem(3) util.rem(5) util.rem(3);
 
           &-left {
             display: flex;
             flex-direction: column;
-            margin-right: util.rem(2);
             min-width: 50%;
 
             &--icon {
@@ -227,6 +234,7 @@
               font-weight: bold;
               position: absolute;
               font-size: util.rem(9);
+              margin-bottom: util.rem(3);
               text-align: left;
               bottom: 0;
             }

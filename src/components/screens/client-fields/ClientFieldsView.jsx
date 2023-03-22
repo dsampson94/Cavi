@@ -24,14 +24,14 @@ const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestPar
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
 
   useEffect(() => {
-    setActiveTableData(mappedFieldList);
-  }, [mappedFieldList]);
+      setActiveTableData(mappedFieldList);
+    },
+    [mappedFieldList]);
 
   useEffect(() => {
     if (!selectedIndex) return;
     if (filteredTableData) toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
     else toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
-
     setSelectedIndex(undefined);
   });
 

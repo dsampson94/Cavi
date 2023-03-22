@@ -15,8 +15,8 @@ const ToolTipRelative = ({ text }) => {
          onMouseLeave={ () => setShowToolTip(false) }>
 
       { showToolTip && <div
-        className="absolute whitespace-nowrap z-200 min-w-fit p-2
-        text-xs text-white translate-y-full mt-3  bg-gray-500 rounded-lg shadow-lg">
+        className="absolute whitespace-nowrap z-50 min-w-fit p-2
+        text-xs text-white translate-y-full mt-3 bg-gray-500 rounded-lg shadow-lg">
         { text }
       </div> }
     </div>

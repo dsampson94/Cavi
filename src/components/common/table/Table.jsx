@@ -74,9 +74,9 @@ const Table = ({
                  setSelectedDropdownObject,
                  updateFieldDetails,
                  setUpdatedFieldList,
-                 toggleDropdowns,
                  valueToUpdate,
-                 setValueToUpdate
+                 setValueToUpdate,
+                 toggleDropdowns
                }) => {
 
   switch (tableName) {
@@ -92,15 +92,13 @@ const Table = ({
                                  activeTableData={ activeTableData }
                                  hiddenColumns={ hiddenColumns }
                                  setSelectedIndex={ setSelectedIndex }
-                                 setSelectedDropdownObject={ setSelectedDropdownObject }
-                                 toggleDropdowns={ toggleDropdowns } />;
+                                 setSelectedDropdownObject={ setSelectedDropdownObject } />;
     case LAST_READINGS_VIEW:
       return <LastReadingsTable tableName={ tableName }
                                 activeTableData={ activeTableData }
                                 hiddenColumns={ hiddenColumns }
                                 setSelectedIndex={ setSelectedIndex }
-                                setSelectedDropdownObject={ setSelectedDropdownObject }
-                                toggleDropdowns={ toggleDropdowns } />;
+                                setSelectedDropdownObject={ setSelectedDropdownObject } />;
     case FIELD_CHARTS_MODAL_VIEW:
     case FIELD_SETUP_VIEW:
     case FIELD_REPORTS_VIEW:
