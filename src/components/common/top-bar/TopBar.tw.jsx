@@ -298,9 +298,12 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
 
           <div className="top-bar__left__divider">
 
-            <Graphic onClick={ () => history.push('/dashboard/overview') }
-                     graphic={ logo }
-                     topbar />
+            <Graphic graphic={ logo }
+                     topbar
+                     onClick={ () => {
+                       history.push('/dashboard/overview');
+                       setShowSideBar(true);
+                     } } />
 
             <Button icon={ VIEW_SIDEBAR }
                     tooltip={ OTHER_FARM }
@@ -329,15 +332,14 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                 className={ classNames('flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 transition duration-100',
                   ` ${ isOpen ? 'transform rotate-90' : 'transform rotate-0' }`) }
                 onClick={ () => setIsOpen(!isOpen) }>
-                <button
-                  type="button"
-                  className="rounded-full p-1 text-[#54a4d9]"
-                >
+
+                <div type="button"
+                     className="rounded-full p-2 text-[#54a4d9]">
                   <ChevronDownIcon
                     className={ 'h-7 w-7' }
                     aria-hidden="true"
                   />
-                </button>
+                </div>
               </Popover.Button>
 
               <Transition

@@ -35,9 +35,9 @@ const mapTemperatureLists = (
   vpdOneList,
   deltaList) => {
 
-  if (!fieldChartList?.[probeNumber]) return;
+  if (!fieldChartList?.[fieldChartList?.myprobe]) return null;
 
-  Object.entries(fieldChartList?.[probeNumber])?.forEach(([key, value]) => {
+  Object.entries(fieldChartList?.[fieldChartList?.myprobe])?.forEach(([key, value]) => {
     Object.keys(value).forEach((innerKey) => {
       switch (innerKey) {
         case 'D1':
@@ -76,6 +76,8 @@ const mapTemperatureLists = (
         case 'deltat':
           deltaList?.push({ x: key, y: parseInt(value?.['deltat']) });
           return;
+        default:
+          return null;
       }
     });
   });

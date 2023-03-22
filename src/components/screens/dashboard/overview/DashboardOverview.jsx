@@ -25,6 +25,7 @@ const DashboardOverview = ({
   const [filteredClientData, setFilteredClientData] = useState(undefined);
 
   const handleSubHeaderClick = (groupName, clientName) => {
+    // setShowClientsSideBar(false);
     dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
     dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
     dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: null });

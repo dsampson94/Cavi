@@ -17,13 +17,17 @@ const FieldTemperaturesChartViewContainer = () => {
   const dispatch = useDispatch();
   const { groupName, clientName, fieldName, probeNumber } = useParams();
 
+  const decodedGroupName = decodeURIComponent(groupName);
+  const decodedClientName = decodeURIComponent(clientName);
+  const decodedFieldName = decodeURIComponent(fieldName);
+
   const soilTempList = useSelector(createSelector([state => state.field], field => field?.soilTempList));
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState('2 weeks');
-  const [activeFieldName, setActiveFieldName] = useState(fieldName);
+  const [activeFieldName, setActiveFieldName] = useState(decodedFieldName);
 
-  const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod });
+  const request = getRequestParams({ groupName: decodedGroupName, clientName: decodedClientName, activeFieldName, activeLoadPeriod });
 
   useEffect(() => {
     dispatch(requestClientFieldList(request.clientParams));

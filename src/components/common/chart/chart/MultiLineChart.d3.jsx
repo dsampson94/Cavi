@@ -15,7 +15,6 @@ import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Line from '../components/Line.d3';
 
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
-import CheckboxFilter from '../components/CheckboxFilter';
 
 const MultiLineChart = ({
                           data,
@@ -43,7 +42,6 @@ const MultiLineChart = ({
                           setDate,
                           toggleInitialList
                         }) => {
-
     const svgRef = useRef();
 
     const { isDarkMode } = useTheme(false);
@@ -154,7 +152,9 @@ const MultiLineChart = ({
                    dimensions={ updatedDimensions }
                    chartName={ chartName }
                    chartInfo={ chartInfo }
-                   isDarkMode={ isDarkMode }>
+                   isDarkMode={ isDarkMode }
+                   hiddenLineList={ hiddenLineList }
+                   setHiddenLineList={ setHiddenLineList }>
 
               <YAxis yScale={ yScale }
                      data={ data }
@@ -215,10 +215,6 @@ const MultiLineChart = ({
                                 hiddenLineList={ hiddenLineList } />
             </Chart>
 
-            <CheckboxFilter chartName={ chartName }
-                            hiddenLineList={ hiddenLineList }
-                            setHiddenLineList={ setHiddenLineList } />
-
             <ChartContextMenu data={ data }
                               date={ date }
                               xScale={ xScale }
@@ -258,10 +254,6 @@ const MultiLineChart = ({
                      isDarkMode={ isDarkMode } />
 
             </Chart>
-
-            <CheckboxFilter chartName={ chartName }
-                            hiddenLineList={ hiddenLineList }
-                            setHiddenLineList={ setHiddenLineList } />
 
           </div> }
       </>

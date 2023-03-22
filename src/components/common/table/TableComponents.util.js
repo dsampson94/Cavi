@@ -75,7 +75,7 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
 
   if (value?.locationName?.includes('-forecast')) {
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container-forecast' }>
         <div className={ 'table__body__row__td-container-forecast-upper' }>{ value?.locationName?.slice(0, -9) }</div>
         <div className={ 'table__body__row__td-container-forecast-lower' }>{ value?.summary }</div>
@@ -83,14 +83,14 @@ export const FieldNameColumn = ({ dataIndex, value }) => {
     </td>;
   } else if (value?.locationName?.includes('-landGroup')) {
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container-landgroup' }>
         { value?.locationName?.slice(0, -10) }
       </div>
     </td>;
   } else {
     return <td onClick={ noOp() }
-               key={ dataIndex }
+               key={ generateId() }
                className="min-w-fit">
       <div className={ 'table__body__row__td-container' }>
 
@@ -118,7 +118,7 @@ FieldNameColumn.propTypes = {
 export const WarningIconColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ WARNING }
@@ -144,7 +144,7 @@ export const DropdownIconColumn = ({
                                      toggleDropdowns
                                    }) => {
   if (value)
-    return <td key={ dataIndex }
+    return <td key={ generateId() }
                onContextMenu={ e => {
                  e.preventDefault();
                  toggleDropdowns();
@@ -163,7 +163,7 @@ export const DropdownIconColumn = ({
                 columnNumber={ 2 } />
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 DropdownIconColumn.propTypes = {
@@ -178,7 +178,7 @@ DropdownIconColumn.propTypes = {
 export const PhotoIconColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CAMERA }
@@ -186,7 +186,7 @@ export const PhotoIconColumn = ({ dataIndex, value }) => {
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 PhotoIconColumn.propTypes = {
@@ -197,7 +197,7 @@ PhotoIconColumn.propTypes = {
 export const LastReadingColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container__icon-clickable' }
            style={ { color: '#0090ff' } }>
         <ToolTipRelative text={ value?.tooltip } />
@@ -217,7 +217,7 @@ export const LastReadingColumn = ({ dataIndex, value }) => {
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 LastReadingColumn.propTypes = {
@@ -228,14 +228,14 @@ LastReadingColumn.propTypes = {
 export const CaptureNoteColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ PENCIL } />
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 CaptureNoteColumn.propTypes = {
@@ -246,14 +246,14 @@ CaptureNoteColumn.propTypes = {
 export const ChartColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CHARTS } />
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 ChartColumn.propTypes = {
@@ -263,7 +263,7 @@ ChartColumn.propTypes = {
 
 export const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) => {
   return <td onClick={ noOp() }
-             key={ dataIndex }>
+             key={ generateId() }>
     { !isDropdownRow &&
     <div className={ 'table__body__row__td-container' }
          style={ { margin: '1px 0 1px 0' } }>
@@ -294,13 +294,13 @@ DeficitColumn.propTypes = {
 export const UnitColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
       <div className={ 'table__body__row__td-container' }>
         { value?.slice(0, 2) }
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 UnitColumn.propTypes = {
@@ -311,7 +311,7 @@ UnitColumn.propTypes = {
 export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }
+               key={ generateId() }
                className={ 'table__body__row__td--dark' }>
 
       { (value?.comment) &&
@@ -343,7 +343,7 @@ export const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
                 columnNumber={ columnNumber } />
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 PrimaryForecastColumn.propTypes = {
@@ -355,7 +355,7 @@ PrimaryForecastColumn.propTypes = {
 export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }
+               key={ generateId() }
                className={ 'table__body__row__td--light' }>
 
       { (value?.comment) &&
@@ -387,7 +387,7 @@ export const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
                 columnNumber={ columnNumber } />
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 SecondaryForecastColumn.propTypes = {
@@ -399,7 +399,7 @@ SecondaryForecastColumn.propTypes = {
 export const LandGroupForecastColumn = ({ dataIndex, value }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ dataIndex }>
+               key={ generateId() }>
 
       <div className={ 'table__body__row__td-weather' }>
         <div className={ 'table__body__row__td-weather-left' }>
@@ -441,7 +441,7 @@ export const LandGroupForecastColumn = ({ dataIndex, value }) => {
       </div>
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 LandGroupForecastColumn.propTypes = {
@@ -452,7 +452,7 @@ LandGroupForecastColumn.propTypes = {
 export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
   if (value && !isHeaderRow)
     return <td onClick={ noOp() }
-               key={ dataIndex }
+               key={ generateId() }
                className={ 'table__body__row__td--fade--thin' }>
       { !value?.dropdown &&
       <>
@@ -463,7 +463,7 @@ export const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
       }
     </td>;
   else
-    return <td key={ dataIndex } />;
+    return <td key={ generateId() } />;
 };
 
 ForecastTimeIconsColumn.propTypes = {
@@ -501,7 +501,7 @@ export const RainDataColumn = ({ dataIndex, value, object, setHoveredRowObject, 
 
   if (!isHeaderRow)
     return <td onClick={ noOp() }
-               key={ dataIndex }
+               key={ generateId() }
                className={ 'table__body__row__td--fade' }>
       <div className={ 'table__body__row__td-container' }>
         <div onMouseEnter={ () => openModal(1) }
@@ -539,7 +539,7 @@ RainDataColumn.propTypes = {
 
 export const TransEvapTotalsColumn = ({ dataIndex, value }) => {
   return <td onClick={ noOp() }
-             key={ dataIndex }>
+             key={ generateId() }>
     <div className={ 'table__body__row__td-container--centered' }>
       { value }
     </div>
@@ -557,7 +557,8 @@ export const DropDown = ({ value, columnNumber, onClick }) => {
       { value?.sublande?.map((item) => {
         return (
           <div className={ getClassNames('table__body__row--dropdown__icon', { left: (columnNumber === 0) }) }
-               onClick={ onClick }>
+               onClick={ onClick }
+               key={ generateId() }>
             { (() => {
               switch (columnNumber) {
                 case 0:

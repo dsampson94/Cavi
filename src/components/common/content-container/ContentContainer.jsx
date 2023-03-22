@@ -135,8 +135,8 @@ const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
-                 mappedUserData={ mappedUser }
                  setShowSideBar={ setShowSideBar }
+                 mappedUserData={ mappedUser }
                  view={ view } />
 
         <div className="content-container__screen--dashboard">
@@ -186,6 +186,7 @@ const ClientFieldContentContainer = ({
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
+                 setShowSideBar={ setShowSideBar }
                  mappedUserData={ mappedUser }
                  mappedFieldList={ mappedFieldList }
                  setActiveLoadPeriod={ setActiveLoadPeriod }

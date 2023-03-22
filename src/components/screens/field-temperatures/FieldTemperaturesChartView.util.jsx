@@ -16,7 +16,7 @@ import {
   TEMPERATURE_MULTILINE
 } from '../../../tools/general/system-variables.util';
 
-import MultiLineChart from '../../common/chart/client-field/MultiLineChart.d3';
+import MultiLineChart from '../../common/chart/chart/MultiLineChart.d3';
 
 export const TemperatureChartsContainer = ({
                                              mappedTemperaturesList,
@@ -44,9 +44,6 @@ export const TemperatureChartsContainer = ({
 
   return (
     <div className="field-temperatures__whole">
-      { mappedTemperaturesList?.[0] && mappedTemperaturesList?.[1] &&
-      mappedTemperaturesList?.[2] && mappedTemperaturesList?.[3] &&
-      mappedTemperaturesList?.[4] && mappedTemperaturesList?.[5] &&
       <MultiLineChart chartName={ SOIL_TEMPERATURE }
                       chartType={ TEMPERATURE_MULTILINE }
                       data={ [mappedTemperaturesList?.[0], mappedTemperaturesList?.[1], mappedTemperaturesList?.[2],
@@ -69,9 +66,8 @@ export const TemperatureChartsContainer = ({
                       toggleInitialList={ [LINE_100MM, LINE_200MM, LINE_300MM, LINE_400MM, LINE_600MM, LINE_800MM] }
                       date={ date }
                       hasXAxis={ true }
-                      setDate={ setDate } /> }
+                      setDate={ setDate } />
 
-      { mappedTemperaturesList?.[6] && mappedTemperaturesList?.[7] &&
       <MultiLineChart chartName={ CANOPY_OUTSIDE_TEMPERATURE }
                       chartType={ TEMPERATURE_MULTILINE }
                       data={ [mappedTemperaturesList?.[6], mappedTemperaturesList?.[7]] }
@@ -93,9 +89,8 @@ export const TemperatureChartsContainer = ({
                       toggleInitialList={ [CANOPY_LINE, OUTSIDE_LINE] }
                       date={ date }
                       hasXAxis={ true }
-                      setDate={ setDate } /> }
+                      setDate={ setDate } />
 
-      { mappedTemperaturesList?.[8] && mappedTemperaturesList?.[9] &&
       <MultiLineChart chartName={ RAIN_HUMIDITY }
                       chartType={ TEMPERATURE_MULTILINE }
                       data={ [mappedTemperaturesList?.[8], mappedTemperaturesList?.[9]] }
@@ -117,7 +112,7 @@ export const TemperatureChartsContainer = ({
                       setActiveProbeFactor={ setActiveProbeFactor }
                       toggleInitialList={ [RAIN_LINE, HUMIDITY_LINE] }
                       date={ date }
-                      setDate={ setDate } /> }
+                      setDate={ setDate } />
     </div>
   );
 };

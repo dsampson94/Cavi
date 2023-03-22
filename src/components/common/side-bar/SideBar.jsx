@@ -91,7 +91,7 @@ SideBar.propTypes = {
 
 export default SideBar;
 
-const ClientFieldsSideBar = ({ showSideBar, mappedUserData }) => {
+const ClientFieldsSideBar = ({ showSideBar, setShowSideBar, mappedUserData }) => {
 
     let storedFavoritesList = viewFarmLocalStorageFavorites();
 
@@ -122,11 +122,13 @@ const ClientFieldsSideBar = ({ showSideBar, mappedUserData }) => {
 
           { !isEmpty(mappedFavoritesList) &&
           <SideBarList mappedUserData={ mappedFavoritesList }
+                       setShowSideBar={ setShowSideBar }
                        favoritesToggle={ favoritesToggle }
                        setFavoritesToggle={ setFavoritesToggle }
                        myFavorites /> }
 
           <SideBarList mappedUserData={ filteredSideBarData ? filteredSideBarData : mappedUserData }
+                       setShowSideBar={ setShowSideBar }
                        filteredSideBarData={ filteredSideBarData }
                        favoritesToggle={ favoritesToggle }
                        setFavoritesToggle={ setFavoritesToggle }

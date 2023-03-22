@@ -55,7 +55,7 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList, s
   const [checked, setChecked] = useState(null);
 
   useEffect(() => {
-    setHiddenLineList(activeList);
+    if (setHiddenLineList) setHiddenLineList(activeList);
   }, [checked]);
 
   const hideLineClick = (event) => {
@@ -71,13 +71,13 @@ const DailyETOCheckboxGroup = ({ chartName, hiddenLineList, setHiddenLineList, s
       <div className={ 'chart__checkbox-filter__inner' }>
 
         <CheckboxInput constant={ 'Forecast' }
-                       checked={ hiddenLineList.includes('Forecast') }
+                       checked={ hiddenLineList?.includes('Forecast') }
                        onClick={ e => hideLineClick(e) }
                        forecast />
 
         { secondaryData &&
         <CheckboxInput constant={ 'Actual' }
-                       checked={ hiddenLineList.includes('Actual') }
+                       checked={ hiddenLineList?.includes('Actual') }
                        onClick={ e => hideLineClick(e) }
                        daily
                        actual /> }
@@ -94,7 +94,7 @@ const SoilTemperaturesCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) =>
   const [checked, setChecked] = useState(null);
 
   useEffect(() => {
-    setHiddenLineList(activeList);
+    if (setHiddenLineList) setHiddenLineList(activeList);
   }, [checked]);
 
   const hideLineClick = (event) => {
@@ -110,36 +110,36 @@ const SoilTemperaturesCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) =>
       <div className={ 'chart__checkbox-filter__inner' }>
 
         <CheckboxInput constant={ LINE_100MM }
-                       checked={ hiddenLineList.includes(LINE_100MM) }
+                       checked={ hiddenLineList?.includes(LINE_100MM) }
                        onClick={ e => hideLineClick(e) }
                        mm100 />
 
         <CheckboxInput constant={ LINE_200MM }
-                       checked={ hiddenLineList.includes(LINE_200MM) }
+                       checked={ hiddenLineList?.includes(LINE_200MM) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        mm200 />
 
         <CheckboxInput constant={ LINE_300MM }
-                       checked={ hiddenLineList.includes(LINE_300MM) }
+                       checked={ hiddenLineList?.includes(LINE_300MM) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        mm300 />
 
         <CheckboxInput constant={ LINE_400MM }
-                       checked={ hiddenLineList.includes(LINE_400MM) }
+                       checked={ hiddenLineList?.includes(LINE_400MM) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        mm400 />
 
         <CheckboxInput constant={ LINE_600MM }
-                       checked={ hiddenLineList.includes(LINE_600MM) }
+                       checked={ hiddenLineList?.includes(LINE_600MM) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        mm600 />
 
         <CheckboxInput constant={ LINE_800MM }
-                       checked={ hiddenLineList.includes(LINE_800MM) }
+                       checked={ hiddenLineList?.includes(LINE_800MM) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        mm800 />
@@ -156,7 +156,7 @@ const CanopyOutsideCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
   const [checked, setChecked] = useState(null);
 
   useEffect(() => {
-    setHiddenLineList(activeList);
+    if (setHiddenLineList) setHiddenLineList(activeList);
   }, [checked]);
 
   const hideLineClick = (event) => {
@@ -172,12 +172,12 @@ const CanopyOutsideCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
       <div className={ 'chart__checkbox-filter__inner' }>
 
         <CheckboxInput constant={ CANOPY_LINE }
-                       checked={ hiddenLineList.includes(CANOPY_LINE) }
+                       checked={ hiddenLineList?.includes(CANOPY_LINE) }
                        onClick={ e => hideLineClick(e) }
                        canopy />
 
         <CheckboxInput constant={ OUTSIDE_LINE }
-                       checked={ hiddenLineList.includes(OUTSIDE_LINE) }
+                       checked={ hiddenLineList?.includes(OUTSIDE_LINE) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        outside />
@@ -195,7 +195,7 @@ const RainHumidityCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
   const [checked, setChecked] = useState(null);
 
   useEffect(() => {
-    setHiddenLineList(activeList);
+    if (setHiddenLineList) setHiddenLineList(activeList);
   }, [checked]);
 
   const hideLineClick = (event) => {
@@ -211,13 +211,13 @@ const RainHumidityCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
       <div className={ 'chart__checkbox-filter__inner' }>
 
         <CheckboxInput constant={ RAIN_LINE }
-                       checked={ hiddenLineList.includes(RAIN_LINE) }
+                       checked={ hiddenLineList?.includes(RAIN_LINE) }
                        onClick={ e => hideLineClick(e) }
                        daily
                        rain />
 
         <CheckboxInput constant={ HUMIDITY_LINE }
-                       checked={ hiddenLineList.includes(HUMIDITY_LINE) }
+                       checked={ hiddenLineList?.includes(HUMIDITY_LINE) }
                        onClick={ e => hideLineClick(e) }
                        humidity />
       </div>

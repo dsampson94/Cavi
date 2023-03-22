@@ -150,7 +150,6 @@ const FrequencyIndicator = (groupName, value) => {
   let fieldList = [];
   for (const [fieldName, color] of Object.entries(innerFields)) {
     fieldList.push({ groupName, clientName: value.iok, fieldName, color });
-    console.log(color);
   }
 
   return (

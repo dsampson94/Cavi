@@ -28,12 +28,12 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
             stroke={ isDarkMode ? 'white' : '#252529' } />
 
       { hasXAxis &&
-        <line className="x-axis__tick"
-              stroke={ isDarkMode ? 'white' : 'black' }
-              x1={ xScale(new Date()) }
-              x2={ xScale(new Date()) }
-              y1={ 1 }
-              y2={ 7 } /> }
+      <line className="x-axis__tick"
+            stroke={ isDarkMode ? 'white' : 'black' }
+            x1={ xScale(new Date()) }
+            x2={ xScale(new Date()) }
+            y1={ 1 }
+            y2={ 7 } /> }
 
       { ticks.map((date, index) => (
         <React.Fragment key={ `x-${ chartName }-${ date }-${ index }-container` }>
@@ -53,12 +53,12 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
                 y2={ -dimensions.boundedHeight + 10 } />
 
           { hasXAxis &&
-            <g className="x-axis__tick__label"
-               style={ { fontSize: 11 } }
-               transform={ `translate(${ xScale(date) - 23 }, 23)` }
-               fill={ isDarkMode ? 'white' : 'black' }>
-              <text children={ `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` } />
-            </g> }
+          <g className="x-axis__tick__label"
+             style={ { fontSize: 11 } }
+             transform={ `translate(${ xScale(date) - 23 }, 23)` }
+             fill={ isDarkMode ? 'white' : 'black' }>
+            <text children={ `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }` } />
+          </g> }
 
         </React.Fragment>
       )) }

@@ -61,8 +61,8 @@ export const daysFromToday = (daysFromToday) => {
 };
 
 export const getDaysPastDate = (days) => {
-  const dateList = new Date(new Date() - 1000 * 60 * 60 * 24 * days * 2)?.toString()?.split(' ');
-  return new Date(dateList);
+  const timestamp = new Date().getTime() - 1000 * 60 * 60 * 24 * days * 2;
+  return timestamp;
 };
 
 export const isDateBefore = (date1, date2) => {

@@ -23,8 +23,8 @@ import {
   VPD
 } from '../../../tools/general/system-variables.util';
 
-import FieldLineChartD3 from '../../common/chart/client-field/FieldLineChart.d3';
-import FieldBarAndLineChart from '../../common/chart/client-field/FIeldBarAndLineChart.d3';
+import FieldLineChartD3 from '../../common/chart/chart/FieldLineChart.d3';
+import FieldBarAndLineChart from '../../common/chart/chart/FIeldBarAndLineChart.d3';
 
 export const DeficitChartsContainer = ({
                                          mappedChartList,

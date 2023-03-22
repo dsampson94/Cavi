@@ -200,67 +200,15 @@
     }
 
     &--dailyETO {
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -9vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -13vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -14vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-top: -14vh;
-        margin-left: 1%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -14vh;
-        margin-left: 5%;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -14vh;
-        margin-left: 8%;
-      }
+      justify-content: center;
+      transform: translateY(35px);
     }
 
     &--temperatures {
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-        margin-top: -22vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-        margin-top: -27vh;
-        margin-left: util.rem(30);
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-        margin-top: -20vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-        margin-top: -24vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-        margin-top: -25vh;
-      }
-
-      @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-        margin-top: -26vh;
-      }
+      justify-content: center;
+      transform: translateY(35px);
     }
   }
-
 }
 
 .tooltip-container {

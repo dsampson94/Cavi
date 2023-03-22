@@ -14,7 +14,6 @@ import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
-import CheckboxFilter from '../components/CheckboxFilter';
 import ChartHeader from '../components/ChartHeader';
 
 const FieldLineChartD3 = ({
@@ -183,7 +182,10 @@ const FieldLineChartD3 = ({
                chartName={ chartName }
                chartType={ chartType }
                chartInfo={ chartInfo }
-               isDarkMode={ isDarkMode }>
+               isDarkMode={ isDarkMode }
+               hiddenLineList={ hiddenLineList }
+               setHiddenLineList={ setHiddenLineList }
+               secondaryData={ secondaryData }>
 
           { chartType === AGGREGATE &&
           <rect width={ '94%' }
@@ -253,11 +255,6 @@ const FieldLineChartD3 = ({
                             secondaryData={ secondaryData } />
         </Chart>
 
-        <CheckboxFilter chartName={ chartName }
-                        secondaryData={ secondaryData }
-                        hiddenLineList={ hiddenLineList }
-                        setHiddenLineList={ setHiddenLineList } />
-
         <ChartContextMenu data={ data }
                           date={ date }
                           xScale={ xScale }
@@ -277,7 +274,8 @@ const FieldLineChartD3 = ({
                           switchAtMidWidth={ true } />
       </div>
     </>
-  );
+  )
+    ;
 };
 
 export default FieldLineChartD3;

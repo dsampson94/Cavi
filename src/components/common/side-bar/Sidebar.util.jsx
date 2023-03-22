@@ -24,6 +24,7 @@ import {
 } from '../../../tools/general/system-variables.util';
 
 import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_FIELD_WEATHER_LIST } from '../../../redux/actions/client.action';
+import { SET_SOIL_TEMP_LIST } from '../../../redux/actions/field.action';
 
 import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
 
@@ -39,7 +40,8 @@ export const SideBarList = ({
                               setFavoritesToggle,
                               myFavorites,
                               myClients,
-                              myFavoritesChart
+                              myFavoritesChart,
+                              setShowSideBar
                             }) => {
 
   const history = useHistory();
@@ -49,6 +51,14 @@ export const SideBarList = ({
   const handleFavoritesClick = (groupName, clientName) => {
     addOrRemoveFarmLocalStorageFavorites(groupName, clientName);
     setFavoritesToggle(!favoritesToggle);
+  };
+
+  const handleSubHeaderClick = (history, groupName, clientName, dispatch, setShowSideBar) => {
+    // setShowSideBar(false);
+    dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
+    dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
+    dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: null });
+    history.push(`/client/${ groupName }/${ clientName }`);
   };
 
   let listItem = (filteredSideBarData ? filteredSideBarData : mappedUserData)?.map((item) => {
@@ -75,7 +85,7 @@ export const SideBarList = ({
                        }
                      })()
                    } }
-                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, dispatch) }>
+                   onClick={ () => handleSubHeaderClick(history, item.objectKey, value.iok, dispatch, setShowSideBar) }>
                 { value.iok }
               </div>
 
@@ -109,15 +119,7 @@ export const SideBarList = ({
         </div>
       </div>
     </>
-
   );
-};
-
-const handleSubHeaderClick = (history, groupName, clientName, dispatch) => {
-  dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
-  dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
-  dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: null });
-  history.push(`/client/${ groupName }/${ clientName }`);
 };
 
 export const mappedUserData = (userAccount, overview) => {
@@ -199,6 +201,8 @@ ViewDataBar.propTypes = {
 export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) => {
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const { groupName, clientName, fieldName } = useParams();
 
   return (
@@ -225,7 +229,7 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) 
               <div className="field-charts-side-bar__field-list__item"
                    key={ generateId() }>
                 <div className="field-charts-side-bar__field-list__item__container"
-                     onClick={ () => handleFieldClick(history, groupName, clientName, field, setActiveFieldName, view) }>
+                     onClick={ () => handleFieldClick(history, groupName, clientName, field, setActiveFieldName, view, dispatch) }>
 
                   <div className="field-charts-side-bar__field-list__item__container--upper"
                        style={ {
@@ -259,13 +263,16 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) 
 
 SideBarFieldList.propTypes = {};
 
-const handleFieldClick = (history, groupName, clientName, field, setActiveFieldName, view) => {
+const handleFieldClick = (history, groupName, clientName, field, setActiveFieldName, view, dispatch) => {
+
   setActiveFieldName(field.locationName);
+
   switch (view) {
     case FIELD_CHARTS :
       history.push(`/client/${ groupName }/${ clientName }/field-charts/${ field?.probeNumber }/${ field?.locationName }`);
       break;
     case FIELD_TEMPERATURES :
+      dispatch({ type: SET_SOIL_TEMP_LIST, soilTempList: null });
       history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ field?.probeNumber }/${ field?.locationName }`);
       break;
   }
