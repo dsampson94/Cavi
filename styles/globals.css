@@ -5,3 +5,7 @@
 .font-montserrat-light {
     font-family: 'Montserrat Light', sans-serif;
 }
+
+*, *::before, *::after {
+    scrollbar-width: thin;
+}

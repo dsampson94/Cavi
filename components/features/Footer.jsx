@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { socials } from './Navbar';
+import { socials } from './NavbarLeft';
 import Link from 'next/link';
 
 const navigation = {

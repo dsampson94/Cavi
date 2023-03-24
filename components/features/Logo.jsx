@@ -5,7 +5,7 @@ function Logo() {
     return <Image src={ '/cavilogo.svg' }
                   alt={ 'logo' }
                   height={ 200 }
-                  width={ 150 } />;
+                  width={ 200 } />;
 }
 
 export default React.memo(Logo);

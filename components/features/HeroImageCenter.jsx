@@ -31,7 +31,7 @@ export default function HeroImageCenter() {
                                     <ImageCarousel images={ imagesList } />
                                     <div className="absolute inset-0 bg-gray-600 mix-blend-multiply" />
                                 </div>
-                                <div className="relative pt-80 px-6 lg:px-8">
+                                <div className="relative pt-[380px] px-6 lg:px-8">
                                     <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                                         <span className="tracking-wider block text-white">The Home of Iconic Brands</span>
                                     </h1>

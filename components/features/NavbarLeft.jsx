@@ -6,12 +6,11 @@ import { useRouter } from 'next/router';
 import Logo from './Logo';
 import Link from 'next/link';
 
-function Navbar({ contactScrollToRef }) {
+function NavbarLeft({ contactScrollToRef }) {
 
     const router = useRouter();
 
     const navigation = [
-        { name: 'Home', href: '/' },
         { name: 'About', href: '/about' },
         { name: 'People', href: '/people' },
         { name: 'Businesses', href: '/businesses' },
@@ -24,7 +23,7 @@ function Navbar({ contactScrollToRef }) {
         <header className="sticky top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap">
             <Popover className="relative bg-white">
                 <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
-                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[110px] max-h-[110px] h-[110px]">
+                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[100px] max-h-[100px] h-[100px]">
                         <Link href="/">
                             <Image src={ '/cavilogo.svg' }
                                    alt={ 'cavi logo' }
@@ -51,18 +50,18 @@ function Navbar({ contactScrollToRef }) {
                             </Link>
                         )) }
 
-                        <div className="flex">
-                            { socials.map((item) => (
-                                <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500 mt-2 mr-2" target="_blank">
-                                    <span className="sr-only">{ item.name }</span>
-                                    <item.icon className="h-6 w-6" aria-hidden="true" />
-                                </a>
-                            )) }
-                            <a className="ml-8 text-sm inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-2 py-2 text-base text-white shadow-sm hover:bg-green-700"
-                               onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
-                                Contact Us
-                            </a>
-                        </div>
+                        {/*<div className="flex">*/}
+                        {/*    { socials.map((item) => (*/}
+                        {/*        <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500 mt-2 mr-2" target="_blank">*/}
+                        {/*            <span className="sr-only">{ item.name }</span>*/}
+                        {/*            <item.icon className="h-6 w-6" aria-hidden="true" />*/}
+                        {/*        </a>*/}
+                        {/*    )) }*/}
+                        {/*    <a className="ml-8 text-sm inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-2 py-2 text-base text-white shadow-sm hover:bg-green-700"*/}
+                        {/*       onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>*/}
+                        {/*        Contact Us*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
                     </Popover.Group>
                 </nav>
 
@@ -129,7 +128,7 @@ function Navbar({ contactScrollToRef }) {
     );
 }
 
-export default React.memo(Navbar);
+export default React.memo(NavbarLeft);
 
 export const socials = [
     {
