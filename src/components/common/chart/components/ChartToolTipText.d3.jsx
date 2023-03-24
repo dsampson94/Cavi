@@ -155,7 +155,7 @@ const TemperatureMultiLineText = ({
   };
 
   const getTextWidth = () => {
-    return 240;
+    return 250;
   };
 
   const renderText = (chart) => {

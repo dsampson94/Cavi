@@ -99,7 +99,9 @@ export const ActiveScreen = ({
                                updateFieldDetails,
                                setUpdatedFieldList,
                                valueToUpdate,
-                               setValueToUpdate
+                               setValueToUpdate,
+                               setSelectedFieldName,
+                               setSelectedProbeNumber
                              }) => {
   switch (activeScreen) {
     case SMS_WARNING_ROUTE:
@@ -246,11 +248,12 @@ export const ActiveScreen = ({
                updateFieldDetails={ updateFieldDetails }
                setUpdatedFieldList={ setUpdatedFieldList }
                valueToUpdate={ valueToUpdate }
-               setValueToUpdate={ setValueToUpdate } />
+               setValueToUpdate={ setValueToUpdate }
+               setSelectedFieldName={ setSelectedFieldName }
+               setSelectedProbeNumber={ setSelectedProbeNumber } />
       </div>;
   }
 };
-
 
 export const ClientDetailsView = ({ mappedDetails }) => {
 

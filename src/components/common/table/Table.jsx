@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
-import { FixedSizeList } from 'react-window';
 
 import {
   ADD_PROBE,
@@ -76,7 +75,9 @@ const Table = ({
                  setUpdatedFieldList,
                  valueToUpdate,
                  setValueToUpdate,
-                 toggleDropdowns
+                 toggleDropdowns,
+                 setSelectedFieldName,
+                 setSelectedProbeNumber
                }) => {
 
   switch (tableName) {
@@ -113,6 +114,8 @@ const Table = ({
                               setActiveTableData={ setActiveTableData }
                               setUpdatedFieldList={ setUpdatedFieldList }
                               valueToUpdate={ valueToUpdate }
+                              setSelectedFieldName={ setSelectedFieldName }
+                              setSelectedProbeNumber={ setSelectedProbeNumber }
                               setValueToUpdate={ setValueToUpdate } />;
   }
 };
@@ -389,15 +392,13 @@ const FieldSetupTable = ({
                            setValueToUpdate,
                            updateFieldDetails,
                            setActiveTableData,
-                           setUpdatedFieldList
+                           setUpdatedFieldList,
+                           setSelectedProbeNumber,
+                           setSelectedFieldName
                          }) => {
 
   const history = useHistory();
   const { groupName, clientName, activeScreen } = useParams();
-
-  const handleMouseEnter = useMemo(() => (object) => {
-    setSelectedIndex(object);
-  }, []);
 
   const buildTableHeader = () => {
     if (!activeTableData) return;
@@ -623,8 +624,11 @@ const FieldSetupTable = ({
 
       return (
         <tr className={ 'table__body__row' }
-            data-id={ object?.[''] }
-            onMouseEnter={ () => handleMouseEnter(object) }
+            data-id={ object }
+            onMouseOver={ () => {
+              setSelectedFieldName(object?.['']?.split('*_*')[0]);
+              setSelectedProbeNumber(object?.['']?.split('*_*')[1]?.slice(0, -1));
+            } }
             onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
             key={ generateId() }>
           { tableDataElements }
@@ -635,11 +639,9 @@ const FieldSetupTable = ({
     return (
       <tbody className="table__body">
       { (!isEmpty(rows)) ? rows :
-        <FixedSizeList height={ 400 } itemCount={ rows?.length } itemSize={ 50 }>
-          <tr key={ generateId() }>
-            <td>{ 'Loading...' }</td>
-          </tr>
-        </FixedSizeList> }
+        <tr key={ generateId() }>
+          <td>{ 'Loading...' }</td>
+        </tr> }
       </tbody>
     );
   };

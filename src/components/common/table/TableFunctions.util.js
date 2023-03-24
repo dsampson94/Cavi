@@ -11,7 +11,7 @@ export const validatedEndpoints = (groupName, clientName, object) => {
   let safeLocationName = object?.locationName;
   let safeProbeNumber = object?.probeNumber;
 
-  if (safeLocationName.includes('landGroup')) return null;
+  if (!safeLocationName || safeLocationName.includes('landGroup')) return null;
   return { safeGroupName, safeClientName, safeLocationName, safeProbeNumber };
 };
 

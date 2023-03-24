@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
@@ -168,7 +168,7 @@ const FieldSetupViewContainer = () => {
     }
   }, [activeScreen]);
 
-  const updateFieldDetails = (fieldDetailName, inputValue) => {
+  const updateFieldDetails = useCallback((fieldDetailName, inputValue) => {
     const user = retrieveUserLoginFromLocalStorage();
     dispatch(requestSetFieldSetup({
       username: user?.username,
@@ -180,14 +180,63 @@ const FieldSetupViewContainer = () => {
       setfield: fieldDetailName,
       setvalue: inputValue
     }));
-  };
+  }, [dispatch, groupName, clientName, selectedFieldName, selectedProbeNumber]);
 
-  const mappedFieldSetupList = () => {
-    return mapSetupList(activeScreen, generalList, probeSummaryList, probeDetailedList, sensorList, rootsList, cropFactorsList,
-      cropDetailsList, weatherStationList, irrigationSystemList, irrigationDaysList, pushWarningsList, SMSWarningsList, splitValvesList,
-      billingList, usersList, clientDetailsList, SMSRecommendationsList, MLForecastList, SASRIList, phenologicalList, mapList,
-      clientName, groupName);
-  };
+
+  const mappedFieldSetupList = useMemo(() => {
+    return mapSetupList(
+      activeScreen,
+      generalList,
+      probeSummaryList,
+      probeDetailedList,
+      sensorList,
+      rootsList,
+      cropFactorsList,
+      cropDetailsList,
+      weatherStationList,
+      irrigationSystemList,
+      irrigationDaysList,
+      pushWarningsList,
+      SMSWarningsList,
+      splitValvesList,
+      billingList,
+      usersList,
+      clientDetailsList,
+      SMSRecommendationsList,
+      MLForecastList,
+      SASRIList,
+      phenologicalList,
+      mapList,
+      clientName,
+      groupName
+    );
+  }, [
+    activeScreen,
+    generalList,
+    probeSummaryList,
+    probeDetailedList,
+    sensorList,
+    rootsList,
+    cropFactorsList,
+    cropDetailsList,
+    weatherStationList,
+    irrigationSystemList,
+    irrigationDaysList,
+    pushWarningsList,
+    SMSWarningsList,
+    splitValvesList,
+    billingList,
+    usersList,
+    clientDetailsList,
+    SMSRecommendationsList,
+    MLForecastList,
+    SASRIList,
+    phenologicalList,
+    mapList,
+    clientName,
+    groupName
+  ]);
+
 
   useEffect(() => {
     dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));
@@ -205,7 +254,7 @@ const FieldSetupViewContainer = () => {
     return [forecastList, unitList];
   }, [generalList?.gebied?.[0], generalList?.units?.[0]]);
 
-  return <FieldSetupView mappedSetupList={ mappedFieldSetupList() }
+  return <FieldSetupView mappedSetupList={ mappedFieldSetupList }
                          mappedDropdownList={ mappedDropdownList }
                          activeScreen={ activeScreen }
                          clientRequestParams={ request.clientParams }

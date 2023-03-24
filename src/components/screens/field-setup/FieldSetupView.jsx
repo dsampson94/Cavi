@@ -27,17 +27,11 @@ const FieldSetupView = ({
                         }) => {
 
   const [showSetupSideBar, setShowSetupSideBar] = useState(true);
-  const [selectedIndex, setSelectedIndex] = useState(undefined);
   const [activeTableData, setActiveTableData] = useState([]);
 
   useEffect(() => {
     setActiveTableData(mappedSetupList);
   }, [mappedSetupList]);
-
-  useEffect(() => {
-    setSelectedFieldName(selectedIndex?.field?.name);
-    setSelectedProbeNumber(selectedIndex?.['']?.split('*_*')[1]?.slice(0, -1));
-  }, [selectedIndex]);
 
   return (
     <ContentContainer view={ FIELD_SETUP }
@@ -49,8 +43,8 @@ const FieldSetupView = ({
         <ActiveScreen activeScreen={ activeScreen }
                       mappedSetupList={ mappedSetupList }
                       mappedDropdownList={ mappedDropdownList }
-                      selectedIndex={ selectedIndex }
-                      setSelectedIndex={ setSelectedIndex }
+                      setSelectedFieldName={ setSelectedFieldName }
+                      setSelectedProbeNumber={ setSelectedProbeNumber }
                       setActiveTableData={ setActiveTableData }
                       activeTableData={ activeTableData }
                       valueToUpdate={ valueToUpdate }
@@ -67,4 +61,4 @@ FieldSetupView.propTypes = {
   fieldRainData: shape({})
 };
 
-export default FieldSetupView;
+export default React.memo(FieldSetupView);
