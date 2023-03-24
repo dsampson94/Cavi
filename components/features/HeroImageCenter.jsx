@@ -53,7 +53,7 @@ export default function HeroImageCenter() {
                             <p className="tracking-wider text-center text-base font-semibold text-gray-500">
                                 Our Businesses
                             </p>
-                            <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
+                            <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5 max-h-24 min-h-24 h-24">
                                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                                     <Image src={ '/brands/dermalogica-2.png' }
                                            alt={ 'rss logo' }
