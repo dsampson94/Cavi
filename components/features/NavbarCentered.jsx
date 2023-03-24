@@ -27,8 +27,8 @@ function NavbarCentered({ contactScrollToRef }) {
             <Popover className="relative bg-white">
                 <nav className="max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                     <Popover.Group as="nav" className="hidden md:flex lg:pt-3 w-full">
-                        <div className="w-full flex justify-center pl-4">
-                            <div className="flex space-x-10 pt-10 pr-10">
+                        <div className="w-full flex justify-center pl max-h-[100px] h-[100px]">
+                            <div className="flex space-x-10 pt-10 pr-10 ">
                                 { leftNavigation.map((item) => (
                                     <Link
                                         key={ item.name }
@@ -42,7 +42,7 @@ function NavbarCentered({ contactScrollToRef }) {
                                 )) }
                             </div>
 
-                            <div className="min-w-fit flex items-center">
+                            <div className="min-w-fit flex items-center hover:bg-slate-100 cursor-pointer rounded-md">
                                 <Image
                                     src={ '/cavilogo.svg' }
                                     alt={ 'cavi logo' }
