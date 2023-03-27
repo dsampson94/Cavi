@@ -340,10 +340,10 @@ const TooltipText = ({
 
   const getYPos = (chart) => {
     if (chartName === DAILY_ETO && hiddenLineList?.includes(chart)) return {
-      rect1: (y1 - y2 < 15) ? y1 - 20 : y1 + 0,
-      text1: (y1 - y2 < 15) ? y1 - 7 : y1 + 13,
-      rect2: (y1 - y2 < 15) ? y1 + 10 : y2 - 30,
-      text2: (y1 - y2 < 15) ? y1 + 24 : y2 - 18
+      rect1: (y1 - y2 < 15) ? y1 + 40 : y1 + 0,
+      text1: (y1 - y2 < 15) ? y1 + 54 : y1 + 13,
+      rect2: (y1 - y2 < 15) ? y1 + 70 : y2 - 30,
+      text2: (y1 - y2 < 15) ? y1 + 84 : y2 - 18
     };
     else if (y1 < 40) return { rect1: y1, text1: y1 + 13 };
     else return { rect1: y1 - 20, text1: y1 - 7 };

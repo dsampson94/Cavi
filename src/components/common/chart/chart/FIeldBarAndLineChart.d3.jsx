@@ -14,7 +14,6 @@ import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Bars from '../components/Bars.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
-import ChartHeader from '../components/ChartHeader';
 
 const FieldBarAndLineChart = ({
                                 data,
@@ -53,7 +52,13 @@ const FieldBarAndLineChart = ({
   const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
   const [showSecondaryDropDown, setShowSecondaryDropDown] = useState(false);
 
-  const DIMENSIONS = { marginTop: 1, marginRight: 1, marginBottom: 1, marginLeft: 40, innerPadding: 10 };
+  const DIMENSIONS = {
+    marginTop: 0,
+    marginRight: 1,
+    marginBottom: 1,
+    marginLeft: 40,
+    innerPadding: 20
+  };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
     boundedHeight: dimensions.height - DIMENSIONS.marginTop - DIMENSIONS.marginBottom,
@@ -141,11 +146,11 @@ const FieldBarAndLineChart = ({
 
   return (
     <>
-      <ChartHeader chartName={ chartName }
-                   chartType={ chartType }
-                   isDarkMode={ isDarkMode }
-                   activeExtendedChart={ activeExtendedChart }
-                   setActiveExtendedChart={ setActiveExtendedChart } />
+      {/*<ChartHeader chartName={ chartName }*/ }
+      {/*             chartType={ chartType }*/ }
+      {/*             isDarkMode={ isDarkMode }*/ }
+      {/*             activeExtendedChart={ activeExtendedChart }*/ }
+      {/*             setActiveExtendedChart={ setActiveExtendedChart } />*/ }
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }>

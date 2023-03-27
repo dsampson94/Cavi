@@ -37,17 +37,19 @@ export const chartByName = (chartName, isDarkMode) => {
     case DEFICIT_800MM :
       return { height: '16%' };
     case AGGREGATE_TOP_SOIL :
-      return { header: 'Topsoil', height: '40%', backgroundColor: isDarkMode ? '#607CB1' : '#ABD4EF' };
+      return { height: '25%', backgroundColor: isDarkMode ? '#607CB1' : '#ABD4EF' };
     case AGGREGATE_BOTTOM_SOIL :
-      return { header: 'Bottomsoil', height: '40%', marginTop: '2.5%', backgroundColor: isDarkMode ? '#0C6921' : '#C1EAC7' };
+      return { height: '24.5%', backgroundColor: isDarkMode ? '#0C6921' : '#C1EAC7' };
     case DEFICIT_ETO:
+      return { height: '22.5%' };
+    case DAILY_ETO:
+      return { height: '23%' };
     case VOLT_READINGS:
     case FLOW_HOURLY:
     case FLOW_DAILY:
     case EC:
     case VPD:
     case ACTUAL_IRRIGATION:
-    case DAILY_ETO:
       return { header: chartName, height: '35%' };
     case SOIL_TEMPERATURE :
     case CANOPY_OUTSIDE_TEMPERATURE :

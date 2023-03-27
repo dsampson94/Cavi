@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react';
 
 import { chartByName } from '../Chart.util';
-import { EXTENDED } from '../../../../tools/general/system-variables.util';
 import CheckboxFilter from './CheckboxFilter';
 
 const ChartContext = createContext();
@@ -35,7 +34,9 @@ const Chart = ({
         ref={ svgRef }
         style={ {
           width: '100%',
-          height: '110%',
+          height: '100%',
+          paddingTop: '1px',
+          borderRadius: '12px',
           backgroundColor: chartByName(chartName, isDarkMode).backgroundColor
         } }
       >
@@ -51,24 +52,24 @@ const Chart = ({
             </clipPath>
             <clipPath id="clipAggregate">
               <rect
-                width={ dimensions.boundedWidth * 1.01 }
-                height={ dimensions.boundedHeight * 1.22 }
+                width={ dimensions.boundedWidth * 1.04 }
+                height={ dimensions.boundedHeight * 1.52 }
                 x="0"
                 y="0"
               />
             </clipPath>
             <clipPath id="clipUsage">
               <rect
-                width={ dimensions.boundedWidth * 0.94 }
-                height={ dimensions.width }
+                width={ dimensions.boundedWidth * 1.04 }
+                height={ dimensions.height * 1.395 }
                 x="0"
                 y="0"
               />
             </clipPath>
             <clipPath id="clipDaily">
               <rect
-                width={ dimensions.boundedWidth * 0.94 }
-                height={ dimensions.boundedHeight * 1.06 }
+                width={ dimensions.boundedWidth * 1.04 }
+                height={ dimensions.boundedHeight * 1.42 }
                 x="0"
                 y="0"
               />
@@ -86,14 +87,10 @@ const Chart = ({
         </g>
       </svg>
 
-      { (chartType !== EXTENDED) && (
-        <div
-          className="chart__info"
-          onContextMenu={ (event) => event.preventDefault() }
-        >
-          { chartInfo }
-        </div>
-      ) }
+      <div className="chart__info"
+           onContextMenu={ (event) => event.preventDefault() }>
+        { chartInfo }
+      </div>
     </ChartContext.Provider>
   );
 };

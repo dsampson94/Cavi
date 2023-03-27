@@ -14,7 +14,6 @@ import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
-import ChartHeader from '../components/ChartHeader';
 
 const FieldLineChartD3 = ({
                             data,
@@ -62,9 +61,9 @@ const FieldLineChartD3 = ({
   const DIMENSIONS = {
     marginTop: 0,
     marginRight: 1,
-    marginBottom: chartType === DEFICIT ? 0 : 1,
+    marginBottom: 1,
     marginLeft: 40,
-    innerPadding: chartName === DAILY_ETO ? 24 : 10
+    innerPadding: chartName === DAILY_ETO ? 30 : 20
   };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
@@ -163,15 +162,15 @@ const FieldLineChartD3 = ({
 
   return (
     <>
-      { chartType !== DEFICIT &&
-      <ChartHeader chartName={ chartName }
-                   chartType={ chartType }
-                   isDarkMode={ isDarkMode }
-                   showChartsModal={ showChartsModal }
-                   setShowChartsModal={ setShowChartsModal }
-                   activeExtendedChart={ activeExtendedChart }
-                   setActiveExtendedChart={ setActiveExtendedChart }
-      /> }
+      {/*{ chartType !== DEFICIT &&*/ }
+      {/*<ChartHeader chartName={ chartName }*/ }
+      {/*             chartType={ chartType }*/ }
+      {/*             isDarkMode={ isDarkMode }*/ }
+      {/*             showChartsModal={ showChartsModal }*/ }
+      {/*             setShowChartsModal={ setShowChartsModal }*/ }
+      {/*             activeExtendedChart={ activeExtendedChart }*/ }
+      {/*             setActiveExtendedChart={ setActiveExtendedChart }*/ }
+      {/*/> }*/ }
 
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }
@@ -188,8 +187,8 @@ const FieldLineChartD3 = ({
                secondaryData={ secondaryData }>
 
           { chartType === AGGREGATE &&
-          <rect width={ '94%' }
-                height={ '90%' }
+          <rect width={ '95.5%' }
+                height={ '100%' }
                 fill={ isDarkMode ? '#252529' : 'white' } /> }
 
           <YAxis yScale={ yScale }

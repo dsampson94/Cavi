@@ -39,7 +39,7 @@ const YAxis = ({ yScale, chartName, isDarkMode }) => {
                   opacity={ 0.8 } /> }
 
           <line className="y-axis__tick"
-                stroke={ isDarkMode ? 'grey' : '#dad9d5' }
+                stroke={ isDarkMode ? '#525252' : '#dad9d5' }
                 x2={ dimensions.boundedWidth }
                 y1={ yScale(t) }
                 y2={ yScale(t) } />

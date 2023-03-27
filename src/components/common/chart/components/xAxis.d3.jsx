@@ -38,19 +38,13 @@ const XAxis = ({ xScale, hasXAxis, chartName, isDarkMode }) => {
       { ticks.map((date, index) => (
         <React.Fragment key={ `x-${ chartName }-${ date }-${ index }-container` }>
 
+          { hasXAxis &&
           <line className="x-axis__tick"
                 stroke={ isDarkMode ? 'grey' : '#bdc3c7' }
                 x1={ xScale(date) }
                 x2={ xScale(date) }
                 y1={ 0 }
-                y2={ 10 } />
-
-          <line className="x-axis__tick"
-                stroke={ isDarkMode ? 'grey' : '#dad9d5' }
-                x1={ xScale(date) }
-                x2={ xScale(date) }
-                y1={ 0 }
-                y2={ -dimensions.boundedHeight + 10 } />
+                y2={ 10 } /> }
 
           { hasXAxis &&
           <g className="x-axis__tick__label"

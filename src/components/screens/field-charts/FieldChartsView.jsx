@@ -8,7 +8,6 @@ import { AggregateChartsContainer, DeficitChartsContainer } from './FieldChartsV
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
-import FieldChartsModal from '../../common/modal/FieldChartsModal';
 
 import './field-charts-view.scss';
 
@@ -122,8 +121,6 @@ const ClientFieldsView = ({
                                     date={ date }
                                     setDate={ setDate } />
         </div>
-
-        <div className="field-chart__lower" />
 
       </div>
 
