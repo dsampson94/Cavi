@@ -182,7 +182,6 @@ const FieldSetupViewContainer = () => {
     }));
   }, [dispatch, groupName, clientName, selectedFieldName, selectedProbeNumber]);
 
-
   const mappedFieldSetupList = useMemo(() => {
     return mapSetupList(
       activeScreen,
@@ -236,7 +235,6 @@ const FieldSetupViewContainer = () => {
     clientName,
     groupName
   ]);
-
 
   useEffect(() => {
     dispatch(requestFieldSetupList(request.fieldSetupGeneralParams, SET_FIELD_SETUP_GENERAL_LIST));

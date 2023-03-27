@@ -6,9 +6,9 @@ import { DASHBOARD, MONITOR_PROBES_VIEW } from '../../../../tools/general/system
 import ContentContainer from '../../../common/content-container/ContentContainer';
 
 import Select from '../../../common/select/Select';
-import Table from '../../../common/table/Table';
 
 import './dashboard-neglected-fields.scss';
+import { MonitorProbesTable } from '../../../common/table/MonitorProbesTable';
 
 const DashboardNeglectedFields = ({
                                     neglectedFieldsList,
@@ -34,11 +34,11 @@ const DashboardNeglectedFields = ({
 
         </div>
 
-        <Table tableName={ MONITOR_PROBES_VIEW }
-               activeTableData={ neglectedFieldsList }
-               hiddenColumns={ [] }
-               selectedIndex={ selectedIndex }
-               setSelectedIndex={ setSelectedIndex } />
+        <MonitorProbesTable tableName={ MONITOR_PROBES_VIEW }
+                            activeTableData={ neglectedFieldsList }
+                            hiddenColumns={ [] }
+                            selectedIndex={ selectedIndex }
+                            setSelectedIndex={ setSelectedIndex } />
 
       </div>
     </ContentContainer>

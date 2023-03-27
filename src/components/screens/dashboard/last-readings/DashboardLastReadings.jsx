@@ -8,12 +8,12 @@ import ContentContainer from '../../../common/content-container/ContentContainer
 
 import Select from '../../../common/select/Select';
 import Button from '../../../common/button/Button';
-import Table from '../../../common/table/Table';
 import TextInputTw from '../../../common/input/text/TextInput.tw';
 import LastReadingsSlideOverTw from '../../../common/slide-over/LastReadingsSlideOverTw';
 
 import './dashboard-last-readings.scss';
 import './../dashboard.scss';
+import { LastReadingsTable } from '../../../common/table/LastReadingsTable';
 
 const DashboardLastReadings = ({
                                  lastReadingsIrricomList,
@@ -82,11 +82,11 @@ const DashboardLastReadings = ({
         <>
           <h2 className="font-bold text-sm">{ 'Irricom Readings' }</h2>
           <div className="h-[30%] min-h-[200px] overflow-y-auto">
-            <Table tableName={ LAST_READINGS_VIEW }
-                   activeTableData={ lastReadingsIrricomList }
-                   hiddenColumns={ [] }
-                   selectedIndex={ selectedIndex }
-                   setSelectedIndex={ setSelectedIndex } />
+            <LastReadingsTable tableName={ LAST_READINGS_VIEW }
+                               activeTableData={ lastReadingsIrricomList }
+                               hiddenColumns={ [] }
+                               selectedIndex={ selectedIndex }
+                               setSelectedIndex={ setSelectedIndex } />
           </div>
         </> }
 
@@ -94,11 +94,11 @@ const DashboardLastReadings = ({
         <>
           <h2 className="font-bold text-sm mt-2">{ 'DFM or Aquacheck Handlogger Readings' }</h2>
           <div className="h-[30%] min-h-[200px] overflow-y-auto">
-            <Table tableName={ LAST_READINGS_VIEW }
-                   activeTableData={ lastReadingsReadingsList }
-                   hiddenColumns={ [] }
-                   selectedIndex={ selectedIndex }
-                   setSelectedIndex={ setSelectedIndex } />
+            <LastReadingsTable tableName={ LAST_READINGS_VIEW }
+                               activeTableData={ lastReadingsReadingsList }
+                               hiddenColumns={ [] }
+                               selectedIndex={ selectedIndex }
+                               setSelectedIndex={ setSelectedIndex } />
           </div>
         </> }
 

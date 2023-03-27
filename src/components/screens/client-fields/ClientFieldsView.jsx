@@ -9,8 +9,8 @@ import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from '.
 import { TableSearchBar } from '../../common/table/TableComponents.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
-import Table from '../../common/table/Table';
 import { Popup } from '../../common/bottom-popup/Popup';
+import { ClientFieldsTable } from '../../common/table/ClientFieldsTable';
 
 import './client-fields-view.scss';
 
@@ -52,14 +52,14 @@ const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestPar
                         setFilteredTableData={ setFilteredTableData } />
 
         <div className="client-fields__scroll">
-          <Table tableName={ CLIENT_RECOMMENDATION_VIEW }
-                 activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
-                 hiddenColumns={ ['expanded'] }
-                 selectedIndex={ selectedIndex }
-                 setSelectedIndex={ setSelectedIndex }
-                 setSelectedDropdownObject={ setSelectedDropdownObject }
-                 setActiveTableData={ setActiveTableData }
-                 toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+          <ClientFieldsTable tableName={ CLIENT_RECOMMENDATION_VIEW }
+                             activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
+                             hiddenColumns={ ['expanded'] }
+                             selectedIndex={ selectedIndex }
+                             setSelectedIndex={ setSelectedIndex }
+                             setSelectedDropdownObject={ setSelectedDropdownObject }
+                             setActiveTableData={ setActiveTableData }
+                             toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
         </div>
 
         { !isEmpty(mappedWeatherList) &&

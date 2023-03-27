@@ -171,8 +171,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             icon: ListBulletIcon
           },
           {
-            name: 'Deficit Charts',
-            description: 'View Deficit Charts',
+            name: 'Moisture Charts',
+            description: 'View Moisture Charts',
             href: `/client/${ groupName }/${ clientName }/field-charts/${ probeNumber }/${ fieldName }`,
             icon: VscGraphLine
           },

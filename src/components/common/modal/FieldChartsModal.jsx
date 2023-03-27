@@ -28,9 +28,9 @@ import {
 } from '../../../redux/actions/field.action';
 
 import Button from '../button/Button';
-import Table from '../table/Table';
 
 import './field-charts-modal.scss';
+import { FieldSetupTable } from '../table/FieldSetupTable';
 
 const FieldChartsModal = ({ setShowChartsModal }) => {
 
@@ -103,7 +103,7 @@ const FieldChartsModal = ({ setShowChartsModal }) => {
       <div className={ 'resizer' }
            style={ {
              width: width + 120,
-             height: + 480,
+             height: +480,
              left: left + 200,
              top: top - 20,
              position: 'absolute'
@@ -238,11 +238,11 @@ const ActiveTab = ({ activeTab, setActiveTableData, selectedIndex, setSelectedIn
 
   return (
     <div className="field-charts-modal__scroll">
-      <Table tableName={ FIELD_CHARTS_MODAL_VIEW }
-             activeTableData={ mappedFieldModalList() }
-             setActiveTableData={ setActiveTableData }
-             selectedIndex={ selectedIndex }
-             setSelectedIndex={ setSelectedIndex } />
+      <FieldSetupTable tableName={ FIELD_CHARTS_MODAL_VIEW }
+                       activeTableData={ mappedFieldModalList() }
+                       setActiveTableData={ setActiveTableData }
+                       selectedIndex={ selectedIndex }
+                       setSelectedIndex={ setSelectedIndex } />
     </div>
   );
 };

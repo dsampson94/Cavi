@@ -5,11 +5,11 @@ import { DASHBOARD, EXCEL_ICON, LOCATION_PIN, MONITOR_PROBES_VIEW } from '../../
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 import SVGIcon from '../../../common/SVGIcon/SVGIcon';
-import Table from '../../../common/table/Table';
 
 import Select from '../../../common/select/Select';
 
 import './dashboard-monitor.scss';
+import { MonitorProbesTable } from '../../../common/table/MonitorProbesTable';
 
 const DashboardMonitor = ({
                             monitorProbesList,
@@ -74,11 +74,11 @@ const DashboardMonitor = ({
 
         </div>
 
-        <Table tableName={ MONITOR_PROBES_VIEW }
-               activeTableData={ monitorProbesList }
-               hiddenColumns={ [] }
-               selectedIndex={ selectedIndex }
-               setSelectedIndex={ setSelectedIndex } />
+        <MonitorProbesTable tableName={ MONITOR_PROBES_VIEW }
+                            activeTableData={ monitorProbesList }
+                            hiddenColumns={ [] }
+                            selectedIndex={ selectedIndex }
+                            setSelectedIndex={ setSelectedIndex } />
       </div>
 
     </ContentContainer>

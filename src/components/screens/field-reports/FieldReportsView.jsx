@@ -8,9 +8,9 @@ import { getClassNames } from '../../../tools/general/helpers.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
-import Table from '../../common/table/Table';
 
 import './field-reports-view.scss';
+import { FieldSetupTable } from '../../common/table/FieldSetupTable';
 
 const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
 
@@ -35,12 +35,12 @@ const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
                 setActiveTableData={ setActiveTableData } />
 
         <div className="field-reports__scroll">
-          <Table tableName={ FIELD_REPORTS_VIEW }
-                 activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
-                 hiddenColumns={ ['expanded'] }
-                 selectedIndex={ selectedIndex }
-                 setSelectedIndex={ setSelectedIndex }
-                 setActiveTableData={ setActiveTableData } />
+          <FieldSetupTable tableName={ FIELD_REPORTS_VIEW }
+                           activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
+                           hiddenColumns={ ['expanded'] }
+                           selectedIndex={ selectedIndex }
+                           setSelectedIndex={ setSelectedIndex }
+                           setActiveTableData={ setActiveTableData } />
         </div>
 
       </div>
