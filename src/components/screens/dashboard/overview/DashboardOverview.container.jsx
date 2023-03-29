@@ -14,7 +14,7 @@ const DashboardOverviewContainer = () => {
 
   const dispatch = useDispatch();
 
-  const [overviewOptionSelected, setOverviewOptionSelected] = useState(chooseRandom([1, 2, 3]));
+  const [overviewOptionSelected, setOverviewOptionSelected] = useState(1);
 
   const userOverviewList = useSelector(createSelector([state => state.client], client => client?.overviewList));
   const mappedClientsList = mappedUserData(userOverviewList, true);

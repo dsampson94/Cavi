@@ -57,23 +57,11 @@ const getRainDataList = (fieldList, fieldRainData) => {
 };
 
 const getRainDataUpperList = (rainDataList) => {
-  let rainDataUpper = [];
-  for (let index in rainDataList) {
-    if (Object.keys(rainDataList[index])[0].includes('upper')) {
-      rainDataUpper.push(rainDataList[index]);
-    }
-  }
-  return rainDataUpper;
+  return rainDataList.filter(item => Object.keys(item)[0].includes('upper'));
 };
 
 const getRainDataLowerList = (rainDataList) => {
-  let rainDataLower = [];
-  for (let index in rainDataList) {
-    if (Object.keys(rainDataList[index])[0].includes('lower')) {
-      rainDataLower.push(rainDataList[index]);
-    }
-  }
-  return rainDataLower;
+  return rainDataList.filter(item => Object.keys(item)[0].includes('lower'));
 };
 
 const pushForecastRegionRow = (tableList, listItem, index, mappedList, weatherDataKeys, rainDataKeys) => {

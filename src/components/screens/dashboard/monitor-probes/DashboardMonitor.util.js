@@ -20,6 +20,7 @@ export const mappedMonitorProbesList = (obj) => {
           FW: data?.fw,
           airtime: data?.airtime?.slice(0, -1),
           volts: data?.volts,
+          voltsRed: data?.voltsRed,
           signal: data?.signal,
           active: data?.probe_status
         };

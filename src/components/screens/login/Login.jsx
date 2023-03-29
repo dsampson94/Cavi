@@ -66,7 +66,6 @@ const Login = ({ onLoginClick }) => {
         <div className="mt-6 flex border border-gray-400 rounded-lg">
           <button className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 rounded-lg">English</button>
           <button className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 rounded-lg">Spanish</button>
-          <button className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 rounded-lg">French</button>
         </div>
 
       </div>

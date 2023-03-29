@@ -7,9 +7,9 @@ import ContentContainer from '../../../common/content-container/ContentContainer
 import SVGIcon from '../../../common/SVGIcon/SVGIcon';
 
 import Select from '../../../common/select/Select';
+import { MonitorProbesTable } from '../../../common/table/MonitorProbesTable';
 
 import './dashboard-monitor.scss';
-import { MonitorProbesTable } from '../../../common/table/MonitorProbesTable';
 
 const DashboardMonitor = ({
                             monitorProbesList,
@@ -76,7 +76,7 @@ const DashboardMonitor = ({
 
         <MonitorProbesTable tableName={ MONITOR_PROBES_VIEW }
                             activeTableData={ monitorProbesList }
-                            hiddenColumns={ [] }
+                            hiddenColumns={ ['voltsRed'] }
                             selectedIndex={ selectedIndex }
                             setSelectedIndex={ setSelectedIndex } />
       </div>

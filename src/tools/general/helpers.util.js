@@ -96,3 +96,12 @@ export function capitalize(str) {
 export function isValidDate(date) {
   return date instanceof Date && !isNaN(date);
 }
+
+export const isOlderThan24Hours = (dateString) => {
+  if (!dateString) return false;
+  const currentTime = new Date();
+  const lastReading = new Date(dateString);
+  const differenceInMilliseconds = currentTime - lastReading;
+  const millisecondsIn24Hours = 24 * 60 * 60 * 1000;
+  return differenceInMilliseconds > millisecondsIn24Hours;
+};

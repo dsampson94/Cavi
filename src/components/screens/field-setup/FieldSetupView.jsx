@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { any, arrayOf, shape, string } from 'prop-types';
 import { getClassNames } from '../../../tools/general/helpers.util';
+import func from 'lodash/fp/at';
 
 import {
   ADD_FIELD_ROUTE,
@@ -20,8 +21,6 @@ import {
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import { GeneralScreen } from './components/GeneralScreen';
-
-import './field-setup-view.scss';
 import { ProbesSummaryScreen } from './components/ProbesSummaryScreen';
 import { SmsWarningScreen } from './components/SmsWarningScreen';
 import { PushWarningScreen } from './components/PushWarningScreen';
@@ -32,7 +31,8 @@ import { SmsRecommendationScreen } from './components/SmsRecommendationScreen';
 import { UsersScreen } from './components/UsersScreen';
 import { ClientDetailsScreen } from './components/ClientDetailsScreen';
 import { ProbesDetailedScreen } from './components/ProbesDetailedScreen';
-import func from 'lodash/fp/at';
+
+import './field-setup-view.scss';
 
 const FieldSetupView = ({
                           mappedSetupList,

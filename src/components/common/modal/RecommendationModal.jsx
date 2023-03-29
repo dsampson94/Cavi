@@ -11,7 +11,7 @@ import { isEmpty } from '../../../tools/general/helpers.util';
 import { requestClientFieldRainDataForChart } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
-import RecommendationBarChart from '../chart/recommendation/RecommendationBarChart';
+import RecommendationBarChart from '../chart/chart/RecommendationBarChart';
 
 import './recommendation-modal.scss';
 
@@ -21,7 +21,6 @@ const RecommendationModal = ({ activeObject, handleClose }) => {
   const { groupName, clientName } = useParams();
 
   const fieldRainDataForChart = useSelector(createSelector([state => state.client], client => client?.fieldRainDataForChart));
-
   const request = getRequestParams({ groupName, clientName, activeObject });
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const RecommendationModal = ({ activeObject, handleClose }) => {
           <button type="button"
                   className="absolute top-0 right-0 p-2 rounded-md bg-white dark:bg-dark-mode-grey
                    text-gray-400 hover:text-gray-500 focus:outline-none mt-1 mr-1"
-                  onClick={() => handleClose(false)}>
+                  onClick={ () => handleClose(false) }>
             <span className="sr-only">Close panel</span>
             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
           </button>

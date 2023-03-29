@@ -24,9 +24,8 @@ const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestPar
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
 
   useEffect(() => {
-      setActiveTableData(mappedFieldList);
-    },
-    [mappedFieldList]);
+    setActiveTableData(mappedFieldList);
+  }, [mappedFieldList]);
 
   useEffect(() => {
     if (!selectedIndex) return;

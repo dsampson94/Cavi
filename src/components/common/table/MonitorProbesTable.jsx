@@ -1,20 +1,23 @@
-import { useHistory, useParams } from 'react-router';
 import React, { useState } from 'react';
-import { generateId, getClassNames, isEmpty, removeCamelCase } from '../../../tools/general/helpers.util';
-import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+import { useHistory, useParams } from 'react-router';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid';
+
 import { arrayOf, shape, string } from 'prop-types';
+import { generateId, getClassNames, isEmpty, isOlderThan24Hours, removeCamelCase } from '../../../tools/general/helpers.util';
+import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 import './table.scss';
 
 export const MonitorProbesTable = ({
-                              tableName,
-                              activeTableData,
-                              hiddenColumns,
-                              setSelectedIndex,
-                              setSelectedDropdownObject,
-                              toggleDropdowns
-                            }) => {
+                                     tableName,
+                                     activeTableData,
+                                     hiddenColumns,
+                                     setSelectedIndex,
+                                     setSelectedDropdownObject,
+                                     toggleDropdowns
+                                   }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -78,14 +81,27 @@ export const MonitorProbesTable = ({
                   { value }
                 </div>
               </td>;
-            case 4:
             case 5:
-              return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-xs ">
-                  { value }
-                </div>
-              </td>;
+            case 6:
+              return (
+                <td key={ generateId() } className="whitespace-nowrap min-w-fit px-1">
+                  <div className={ `flex text-xs ${ isOlderThan24Hours(value) ? 'text-red-500' : '' }` }>
+                    { value }
+                  </div>
+                </td>
+              );
+            case 9:
+              const volts = Number(object.volts);
+              const voltsRed = Number(object.voltsRed);
+              const isVoltsBelowVoltsRed = !isNaN(volts) && !isNaN(voltsRed) && volts < voltsRed;
+
+              return (
+                <td key={ generateId() } className="whitespace-nowrap min-w-fit px-1">
+                  <div className={ `flex text-xs ${ isVoltsBelowVoltsRed ? 'text-red-500' : '' }` }>
+                    { value }
+                  </div>
+                </td>
+              );
             case 11:
               return <td key={ generateId() }
                          className="whitespace-nowrap min-w-fit px-1">
@@ -93,6 +109,7 @@ export const MonitorProbesTable = ({
                   { value === 'Active' ?
                     <CheckIcon className="h-6 w-6 text-green-500" /> :
                     <XMarkIcon className="h-6 w-6 text-red-500" /> }
+                  <ToolTipRelative text={ value ? value : null } />
                 </div>
               </td>;
             default:

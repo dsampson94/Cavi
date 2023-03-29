@@ -7,11 +7,7 @@ import { getRequestParams } from '../../../../redux/endpoints';
 import { mappedAdminUserList, mappedMonitorProbesList } from './DashboardMonitor.util';
 
 import DashboardMonitor from './DashboardMonitor';
-import {
-  retrieveMonitorProbeFilterSettingsFromLocalStorage,
-  retrieveUserLoginFromLocalStorage,
-  saveMonitorProbeFilterSettingsToLocalStorage
-} from '../../../../tools/storage/localStorage';
+import { retrieveMonitorProbeFilterSettingsFromLocalStorage, retrieveUserLoginFromLocalStorage, saveMonitorProbeFilterSettingsToLocalStorage } from '../../../../tools/storage/localStorage';
 
 const DashboardMonitorContainer = () => {
 
@@ -52,6 +48,8 @@ const DashboardMonitorContainer = () => {
   useEffect(() => {
     dispatch(requestClientMonitorProbesList(request.monitorProbesParams));
   }, [adminUserFilter, sortType, onlyBehind, dfm]);
+
+  console.log(monitorProbesList);
 
   return <DashboardMonitor monitorProbesList={ mappedMonitorProbesList(monitorProbesList) ?? [] }
                            adminUserList={ mappedAdminUserList(adminUserList?.data) }
