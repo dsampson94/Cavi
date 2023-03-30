@@ -88,7 +88,8 @@ export const getRequestParams = ({
                                    dfm,
                                    probeNumber,
                                    probeType,
-                                   filterNumber
+                                   filterNumber,
+                                   weatherStationName
                                  }) => {
 
   const user = retrieveUserLoginFromLocalStorage();
@@ -148,9 +149,14 @@ export const getRequestParams = ({
     clientParams: {
       ...clientParams
     },
-    weatherParams: {
+    weatherParams1: {
       ...clientParams,
       dash: 1
+    },
+    weatherParams2: {
+      ...clientParams,
+      dash: 2,
+      ws: weatherStationName
     },
     loadParams: {
       ...clientParams,

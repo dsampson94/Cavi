@@ -13,24 +13,33 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export function Popup({ mappedWeatherList }) {
+export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onWeatherObjectClick }) {
   const [show, setShow] = useState(false);
-  const [height, setHeight] = useState(60);
+  const [height, setHeight] = useState('60px');
   const [originalHeight, setOriginalHeight] = useState('auto');
 
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => setShow(true), 100);
-  }, []);
+    setShow(true);
+  }, [activeTab]);
 
   const handleClick = () => {
-    if (height === 1000) {
+    if (height === '360px') {
       setHeight(originalHeight);
     } else {
       setOriginalHeight(height);
-      setHeight(1000);
+      setHeight('360px');
     }
+  };
+
+  const handleWeatherStationClick = (weatherObj) => {
+    if (weatherObj?.value?.wsnaam) {
+      onWeatherObjectClick(weatherObj);
+      setShow(true);
+      setHeight('360px');
+      setActiveTab(1);
+    } else return null;
   };
 
   const toggleShow = () => {
@@ -40,11 +49,12 @@ export function Popup({ mappedWeatherList }) {
   const tabs = [
     {
       name: 'Dashboard',
-      component: <DashboardPopupScreen mappedWeatherList={ mappedWeatherList } />
+      component: <DashboardPopupScreen mappedWeatherList={ mappedWeatherList1 }
+                                       handleWeatherStationClick={ handleWeatherStationClick } />
     },
     {
       name: 'Unit',
-      component: <UnitPopupScreen />
+      component: <UnitPopupScreen mappedWeatherList2={ mappedWeatherList2 } />
     },
     {
       name: 'Daily Data',
@@ -69,15 +79,15 @@ export function Popup({ mappedWeatherList }) {
   ];
 
   return (
-    <>
-      <div className="top-0 left-0 w-full bg-gray-100 border-gray-500 dark:border-white border-t-2 rounded-md cursor-resize flex dark:bg-dark-mode-grey">
+    <div>
+      <div className="top-0 left-0 bg-gray-100 border-gray-500 z-40 dark:border-white border-t-2 rounded-md cursor-resize flex dark:bg-dark-mode-grey">
         <button className={ classNames(!show ? 'pb-1' : 'hover:pb-0.5', 'text-black rounded-md dark:text-white px-2 text-xs font-semibold') }
                 onClick={ toggleShow }>
           { show ? 'Hide' : 'Show Local Weather' }
         </button>
 
         { show && <>
-          { height === 1000 ? (
+          { height === '360px' ? (
             <button className="text-black rounded-md text-xs px-1 font-semibold">
               <ChevronDownIcon className="w-6 h-6 text-black dark:text-white mt-0.5 hover:pb-0.5" onClick={ handleClick } />
             </button>
@@ -89,18 +99,19 @@ export function Popup({ mappedWeatherList }) {
         </> }
       </div>
 
-      <div className={ `flex flex-col bottom-0 left-0 w-full bg-gray-100 dark:bg-dark-mode-grey slide-up px-4 ${ show ? 'show pb-4' : '' }` }
+      <div className={ `flex flex-col bottom-0 left-0 w bg-gray-100 dark:bg-dark-mode-grey slide-up px-4 ${ show ? 'show pb-4' : '' }` }
            style={ { height: show ? height : '0px', transition: 'height 0.3s' } }>
 
         { show && tabs[activeTab].component }
 
       </div>
-      { height === 1000 && show &&
-      <div className="px-1 bg-gray-200 dark:bg-transparent">
+      { height === '360px' && show &&
+      <div className=" bg-gray-200 dark:bg-transparent">
         <TabBarBottom tabs={ tabs }
                       activeTab={ activeTab }
-                      setActiveTab={ setActiveTab } />
+                      setActiveTab={ setActiveTab }
+                      onUnitClick={ onUnitClick } />
       </div> }
-    </>
+    </div>
   );
 }

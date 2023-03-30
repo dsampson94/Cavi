@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 
 import { shape } from 'prop-types';
 
-import { mapFieldTableList } from './ClientFieldsView.container.util.js';
+import { mapFieldTableList1 } from './ClientFieldsView.container.util.js';
 import { requestClientFieldWeatherList, requestFullClientFieldList } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
@@ -17,7 +17,8 @@ const ClientFieldsViewContainer = () => {
   const { groupName, clientName } = useParams();
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
-  const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.weatherList?.data));
+  const fieldWeatherList1 = useSelector(createSelector([state => state.client], client => client?.weatherList1?.data));
+  const fieldWeatherList2 = useSelector(createSelector([state => state.client], client => client?.weatherList2?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
@@ -33,19 +34,33 @@ const ClientFieldsViewContainer = () => {
 
   useEffect(() => {
     dispatch(requestFullClientFieldList(request.clientParams));
-    dispatch(requestClientFieldWeatherList(request.weatherParams));
+    dispatch(requestClientFieldWeatherList(request.weatherParams1));
   }, [groupName, clientName, reloadToggleActive]);
 
-  const mappedFieldTableList = () => {
-    return mapFieldTableList(fieldList, fieldRainData, subGroupList);
+  const onUnitClick = () => {
   };
 
-  return <ClientFieldsView mappedFieldList={ mappedFieldTableList() }
-                           mappedWeatherList={ mappedWeatherList(fieldWeatherList?.stations) }
+  const onWeatherObjectClick = (weatherObject) => {
+    dispatch(requestClientFieldWeatherList({
+      ...request.clientParams,
+      dash: 2,
+      ws: weatherObject?.value?.wsnaam
+    }));
+  };
+
+  const mappedFieldTableList1 = () => {
+    return mapFieldTableList1(fieldList, fieldRainData, subGroupList);
+  };
+
+  return <ClientFieldsView mappedFieldList={ mappedFieldTableList1() }
+                           mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
+                           fieldWeatherList2={ fieldWeatherList2 }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }
-                           hasSubGroups={ !!(subGroupList.includes(1)) } />;
+                           hasSubGroups={ !!(subGroupList.includes(1)) }
+                           onUnitClick={ onUnitClick }
+                           onWeatherObjectClick={ onWeatherObjectClick } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

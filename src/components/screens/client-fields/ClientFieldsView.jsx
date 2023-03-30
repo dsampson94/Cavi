@@ -14,7 +14,17 @@ import { ClientFieldsTable } from '../../common/table/ClientFieldsTable';
 
 import './client-fields-view.scss';
 
-const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestParams, hasSubGroups, reloadToggleActive, setReloadToggleActive }) => {
+const ClientFieldsView = ({
+                            mappedFieldList,
+                            mappedWeatherList1,
+                            mappedWeatherList2,
+                            clientRequestParams,
+                            hasSubGroups,
+                            reloadToggleActive,
+                            setReloadToggleActive,
+                            onUnitClick,
+                            onWeatherObjectClick
+                          }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [activeTableData, setActiveTableData] = useState([]);
@@ -61,8 +71,11 @@ const ClientFieldsView = ({ mappedFieldList, mappedWeatherList, clientRequestPar
                              toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
         </div>
 
-        { !isEmpty(mappedWeatherList) &&
-        <Popup mappedWeatherList={ mappedWeatherList } /> }
+        { !isEmpty(mappedWeatherList1) &&
+        <Popup mappedWeatherList1={ mappedWeatherList1 }
+               mappedWeatherList2={ mappedWeatherList2 }
+               onUnitClick={ onUnitClick }
+               onWeatherObjectClick={ onWeatherObjectClick } /> }
       </div>
     </ContentContainer>
   );

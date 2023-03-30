@@ -34,7 +34,8 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
-  SET_CLIENT_FIELD_WEATHER_LIST,
+  SET_CLIENT_FIELD_WEATHER_LIST_1,
+  SET_CLIENT_FIELD_WEATHER_LIST_2,
   SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
@@ -299,17 +300,24 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
 
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, undefined });
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, weatherList: data });
+        if (client.dash === 1) {
+          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, weatherList1: data });
+        } else if (client.dash === 2) {
+          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
+        }
+
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
     }
 
   } catch (response) {
-    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, undefined });
+    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
+    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
   } finally {
     yield put(setProgressBar(COMPLETE_PROGRESS));
