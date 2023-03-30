@@ -16,7 +16,7 @@ function classNames(...classes) {
 export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onWeatherObjectClick }) {
   const [show, setShow] = useState(false);
   const [height, setHeight] = useState('60px');
-  const [originalHeight, setOriginalHeight] = useState('auto');
+  const [originalHeight, setOriginalHeight] = useState('60px');
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -25,6 +25,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
   }, [activeTab]);
 
   const handleClick = () => {
+    setActiveTab(0);
     if (height === '360px') {
       setHeight(originalHeight);
     } else {
