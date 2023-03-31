@@ -1,30 +1,65 @@
 import React from 'react';
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
-const data = [
-  { name: 'Jan', value: 4000 },
-  { name: 'Feb', value: 3000 },
-  { name: 'Mar', value: 2000 },
-  { name: 'Apr', value: 2780 },
-  { name: 'May', value: 1890 },
-  { name: 'Jun', value: 2390 },
-  { name: 'Jul', value: 3490 }
-];
+export function WeatherPopupLineChart({ height, lines }) {
 
-export function WeatherPopupLineChart({ height }) {
+  const uniqueNames = Array.from(
+    new Set(lines.flatMap(line => line.data.map(item => item.name)))
+  );
+
+  const mergedData = uniqueNames.map(name => {
+    const dataItem = { name };
+    lines.forEach(line => {
+      const lineItem = line.data.find(item => item.name === name);
+      if (lineItem) {
+        dataItem[line.dataKey] = lineItem[line.dataKey];
+      }
+    });
+    return dataItem;
+  });
+
+  const CustomTooltipContent = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={ { textAlign: 'center', backgroundColor: 'white', border: 'none', borderRadius: '10px', padding: '1px' } }>
+          <p>
+            { `${ label }` }
+          </p>
+          { payload.map((item, index) => (
+            <p key={ `payload-${ index }` }
+               style={ { color: item.color } }>
+              { `${ item.name }: ${ item.value }` }
+            </p>
+          )) }
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <LineChart
       width={ 300 }
       height={ height }
-      data={ data }
-      margin={ { top: 20, right: 0, left: 0, bottom: 0 } }
+      data={ mergedData }
+      margin={ { top: 30, right: 0, left: 0, bottom: 0 } }
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
-      <Tooltip />
-      <Legend layout="vertical" align="center" verticalAlign="top" />
-      <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={ { r: 8 } } />
+      <Tooltip
+        content={ <CustomTooltipContent /> }
+      />
+
+      { lines.map((line, index) => (
+        <Line
+          key={ index }
+          type="monotone"
+          dataKey={ line.dataKey }
+          stroke={ line.color }
+          activeDot={ { r: 8 } }
+        />
+      )) }
     </LineChart>
   );
 }

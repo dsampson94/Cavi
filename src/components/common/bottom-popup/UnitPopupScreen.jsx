@@ -3,6 +3,7 @@ import { WeatherPopupLineChart } from '../chart/chart/WeatherPopupLineChart';
 import { WeatherPopupBarChart } from '../chart/chart/WeatherPopupBarChart';
 
 export const UnitPopupScreen = ({ mappedWeatherList2 }) => {
+
   return (
     <div className="flex flex-col md:flex-row overflow-auto">
 
@@ -13,8 +14,8 @@ export const UnitPopupScreen = ({ mappedWeatherList2 }) => {
                style={ { width: '200px', height: '200px' } }>
             <div className="flex flex-col items-center">
               <span>Current</span>
-              <span className="font-bold text-3xl">19C</span>
-              <span>C</span>
+              <span className="font-bold text-3xl">{ mappedWeatherList2?.latestData?.[0]?.temp1 }</span>
+              <span>°C</span>
             </div>
           </div>
         </div>
@@ -24,10 +25,17 @@ export const UnitPopupScreen = ({ mappedWeatherList2 }) => {
         <h1 className="text-2xl pl-20">Past 48 Hours</h1>
         <div className="flex flex-col">
           <div className="h-1/2 w-fit flex  items-center justify-center">
-            <WeatherPopupLineChart height={ 180 } />
+            <WeatherPopupLineChart height={ 190 }
+                                   lines={ [
+                                     { data: mappedWeatherList2?.temperatureLineList, dataKey: 'Temperature', color: 'blue' }
+                                   ] } />
           </div>
           <div className="h-1/2 w-fit items-center justify-center">
-            <WeatherPopupLineChart height={ 132 } />
+            <WeatherPopupLineChart height={ 160 }
+                                   lines={ [
+                                     { data: mappedWeatherList2?.radiationLineList, dataKey: 'Radiation', color: 'blue' },
+                                     { data: mappedWeatherList2?.humidityLineList, dataKey: 'Humidity', color: 'red' }
+                                   ] } />
           </div>
         </div>
       </div>
@@ -48,7 +56,11 @@ export const UnitPopupScreen = ({ mappedWeatherList2 }) => {
 
           <div className="border border-orange-500 bg-transparent flex mb-16 items-center justify-center font-bold rounded-full"
                style={ { width: '200px', height: '200px' } }>
-            Your Text Here
+            <div className="flex flex-col items-center">
+              <span>Current</span>
+              <span className="font-bold text-3xl">{ mappedWeatherList2?.latestData?.[0]?.wind1 }</span>
+              <span></span>
+            </div>
           </div>
 
           <div className="flex flex-col w-fit whitespace-nowrap pl-6 text-right">

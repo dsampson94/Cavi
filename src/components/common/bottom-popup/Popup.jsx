@@ -26,11 +26,11 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
 
   const handleClick = () => {
     setActiveTab(0);
-    if (height === '360px') {
+    if (height === '400px') {
       setHeight(originalHeight);
     } else {
       setOriginalHeight(height);
-      setHeight('360px');
+      setHeight('400px');
     }
   };
 
@@ -38,7 +38,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
     if (weatherObj?.value?.wsnaam) {
       onWeatherObjectClick(weatherObj);
       setShow(true);
-      setHeight('360px');
+      setHeight('400px');
       setActiveTab(1);
     } else return null;
   };
@@ -88,7 +88,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
         </button>
 
         { show && <>
-          { height === '360px' ? (
+          { height === '400px' ? (
             <button className="text-black rounded-md text-xs px-1 font-semibold">
               <ChevronDownIcon className="w-6 h-6 text-black dark:text-white mt-0.5 hover:pb-0.5" onClick={ handleClick } />
             </button>
@@ -106,7 +106,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
         { show && tabs[activeTab].component }
 
       </div>
-      { height === '360px' && show &&
+      { height === '400px' && show &&
       <div className=" bg-gray-200 dark:bg-transparent">
         <TabBarBottom tabs={ tabs }
                       activeTab={ activeTab }
