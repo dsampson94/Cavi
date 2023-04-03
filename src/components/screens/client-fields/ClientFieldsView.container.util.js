@@ -370,3 +370,27 @@ export const mapWeatherList2 = (apiResponse) => {
 
   return { list, temperatureLineList, radiationLineList, humidityLineList, latestData };
 };
+
+//*******************************************************************************
+
+export function mapRainfallLists(rawData) {
+  if (!rawData) return null;
+
+  const condensedList = Object.entries(rawData)
+    ?.filter(([, value]) => value.hasOwnProperty('reenmaand'))
+    ?.reduce((acc, [key, value]) => {
+      const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][new Date(key).getMonth()];
+      const lastYear = new Date(key).getFullYear() === new Date().getFullYear() - 1 ? parseInt(value?.reenmaand) : 0;
+      const thisYear = new Date(key).getFullYear() === new Date().getFullYear() ? parseInt(value?.reenmaand) : 0;
+      const existingObj = acc.find(item => item.name === monthName);
+      if (existingObj) {
+        existingObj.lastYear += lastYear;
+        existingObj.thisYear += thisYear;
+      } else {
+        acc.push({ name: monthName, lastYear, thisYear });
+      }
+      return acc;
+    }, []);
+
+  return condensedList;
+}

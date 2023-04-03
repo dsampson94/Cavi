@@ -18,6 +18,8 @@ const ClientFieldsView = ({
                             mappedFieldList,
                             mappedWeatherList1,
                             mappedWeatherList2,
+                            mappedRainfallList,
+                            mappedDailyDataList,
                             clientRequestParams,
                             hasSubGroups,
                             reloadToggleActive,
@@ -74,6 +76,8 @@ const ClientFieldsView = ({
         { !isEmpty(mappedWeatherList1) &&
         <Popup mappedWeatherList1={ mappedWeatherList1 }
                mappedWeatherList2={ mappedWeatherList2 }
+               mappedDailyDataList={ mappedDailyDataList }
+               mappedRainfallList={ mappedRainfallList }
                onUnitClick={ onUnitClick }
                onWeatherObjectClick={ onWeatherObjectClick } /> }
       </div>

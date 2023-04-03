@@ -13,7 +13,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onWeatherObjectClick }) {
+export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataList, mappedRainfallList, onUnitClick, onWeatherObjectClick }) {
   const [show, setShow] = useState(false);
   const [height, setHeight] = useState('60px');
   const [originalHeight, setOriginalHeight] = useState('60px');
@@ -55,11 +55,12 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
     },
     {
       name: 'Unit',
-      component: <UnitPopupScreen mappedWeatherList2={ mappedWeatherList2 } />
+      component: <UnitPopupScreen mappedWeatherList2={ mappedWeatherList2 }
+                                  mappedRainfallList={ mappedRainfallList } />
     },
     {
       name: 'Daily Data',
-      component: <DailyDataPopupScreen />
+      component: <DailyDataPopupScreen mappedDailyDataList={ mappedDailyDataList } />
     },
     {
       name: 'Detail',
@@ -80,7 +81,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
   ];
 
   return (
-    <div>
+    <div className="fixed bottom-0 flex-col w-full z-50 overflow-auto">
       <div className="top-0 left-0 bg-gray-100 border-gray-500 z-40 dark:border-white border-t-2 rounded-md cursor-resize flex dark:bg-dark-mode-grey">
         <button className={ classNames(!show ? 'pb-1' : 'hover:pb-0.5', 'text-black rounded-md dark:text-white px-2 text-xs font-semibold') }
                 onClick={ toggleShow }>
@@ -107,7 +108,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, onUnitClick, onW
 
       </div>
       { height === '400px' && show &&
-      <div className=" bg-gray-200 dark:bg-transparent">
+      <div className="bg-gray-200 dark:bg-transparent -mt-1">
         <TabBarBottom tabs={ tabs }
                       activeTab={ activeTab }
                       setActiveTab={ setActiveTab }
