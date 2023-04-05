@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 
 import { shape } from 'prop-types';
 
-import { mapFieldTableList1, mapRainfallLists, mapWeatherList2 } from './ClientFieldsView.container.util.js';
+import { mapDailyDataLists, mapFieldTableList1, mapRainfallLists, mapWeatherList2 } from './ClientFieldsView.container.util.js';
 import { requestClientFieldWeatherList, requestFullClientFieldList } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
@@ -52,7 +52,7 @@ const ClientFieldsViewContainer = () => {
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
                            mappedWeatherList2={ mapWeatherList2(fieldWeatherList2) }
                            mappedRainfallList={ mapRainfallLists(fieldWeatherList2) }
-    // mappedDailyDataList={ mapDailyDataLists([]) }
+                           mappedDailyDataList={ mapDailyDataLists(fieldWeatherList2) }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }

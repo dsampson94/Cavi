@@ -43,9 +43,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
     } else return null;
   };
 
-  const toggleShow = () => {
-    setShow(!show);
-  };
+  const toggleShow = () => setShow(!show);
 
   const tabs = [
     {
@@ -60,7 +58,8 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
     },
     {
       name: 'Daily Data',
-      component: <DailyDataPopupScreen mappedDailyDataList={ mappedDailyDataList } />
+      component: <DailyDataPopupScreen mappedDailyDataList={ mappedDailyDataList }
+                                       setActiveTab={ setActiveTab } />
     },
     {
       name: 'Detail',
@@ -108,7 +107,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
 
       </div>
       { height === '400px' && show &&
-      <div className="bg-gray-200 dark:bg-transparent -mt-1">
+      <div className="bg-gray-200 dark:bg-dark-mode-grey -mt-1 z-50">
         <TabBarBottom tabs={ tabs }
                       activeTab={ activeTab }
                       setActiveTab={ setActiveTab }

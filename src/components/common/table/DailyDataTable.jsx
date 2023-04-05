@@ -14,7 +14,8 @@ export const DailyDataTable = ({
                                  hiddenColumns,
                                  setSelectedIndex,
                                  setSelectedDropdownObject,
-                                 toggleDropdowns
+                                 toggleDropdowns,
+                                 setActiveTab
                                }) => {
 
   const history = useHistory();
@@ -68,6 +69,30 @@ export const DailyDataTable = ({
               return <td key={ generateId() }
                          className="whitespace-nowrap min-w-fit px-1">
                 <div className="flex text-xs">
+                  { value }
+                </div>
+              </td>;
+            case 1:
+            case 4:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs text-blue-500">
+                  { value }
+                </div>
+              </td>;
+            case 2:
+            case 5:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1">
+                <div className="flex text-xs text-red-500">
+                  { value }
+                </div>
+              </td>;
+            case 11:
+              return <td key={ generateId() }
+                         className="whitespace-nowrap min-w-fit px-1"
+                         onClick={ () => setActiveTab(3) }>
+                <div className="flex text-xs text-blue-500 underline">
                   { value }
                 </div>
               </td>;

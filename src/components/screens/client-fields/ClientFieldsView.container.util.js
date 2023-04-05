@@ -394,3 +394,32 @@ export function mapRainfallLists(rawData) {
 
   return condensedList;
 }
+
+//*******************************************************************************
+
+export function mapDailyDataLists(rawData) {
+  if (!rawData) return null;
+
+  return Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return {
+      date: `${ year }-${ month }-${ day } ${ date.toLocaleDateString('en-US', { weekday: 'short' }) }`,
+      lowTemp: data.tempmin,
+      highTemp: data.tempmaks,
+      deltaT: data.deltat,
+      lowRH: data.hummin,
+      highRN: data.hummaks,
+      avgWind: `${ data.wDisplay }-${ data.wUnit }`,
+      gust: data.gustmaks,
+      radiation: data.radmaks,
+      rain: data.rainmaks,
+      eto: data.etow,
+      [' ']: 'Details'
+    };
+  });
+}
+

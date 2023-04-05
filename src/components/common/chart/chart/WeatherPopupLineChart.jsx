@@ -57,7 +57,7 @@ export function WeatherPopupLineChart({ height, lines }) {
           type="monotone"
           dataKey={ line.dataKey }
           stroke={ line.color }
-          activeDot={ { r: 8 } }
+          dot={ false }
         />
       )) }
     </LineChart>
