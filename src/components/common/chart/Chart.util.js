@@ -13,12 +13,17 @@ import {
   DEFICIT_800MM,
   DEFICIT_ETO,
   EC,
+  ETO_WEATHER,
   FLOW_DAILY,
   FLOW_HOURLY,
+  HUMIDITY_WEATHER,
   RAIN_HUMIDITY,
+  RAIN_WEATHER,
   SOIL_TEMPERATURE,
+  TEMP_WEATHER,
   VOLT_READINGS,
-  VPD
+  VPD,
+  WIND_WEATHER
 } from '../../../tools/general/system-variables.util';
 
 export const chartByName = (chartName, isDarkMode) => {
@@ -55,6 +60,12 @@ export const chartByName = (chartName, isDarkMode) => {
     case CANOPY_OUTSIDE_TEMPERATURE :
     case RAIN_HUMIDITY :
       return { height: '33.3%' };
+    case ETO_WEATHER :
+    case TEMP_WEATHER :
+    case HUMIDITY_WEATHER :
+    case WIND_WEATHER :
+    case RAIN_WEATHER :
+      return { height: '15%' };
     default:
       return { height: '33.3%' };
   }

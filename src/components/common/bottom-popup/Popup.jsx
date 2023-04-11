@@ -13,11 +13,24 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataList, mappedRainfallList, onUnitClick, onWeatherObjectClick }) {
+export function Popup({
+                        mappedWeatherList1,
+                        mappedWeatherList2,
+                        mappedDailyDataList,
+                        mappedRainfallList,
+                        onUnitClick,
+                        onWeatherObjectClick,
+                        mappedETOWeatherPopupChartList,
+                        mapActualForecastWeatherPopupChartList,
+                        mapHumidityWeatherPopupChartList,
+                        mapWindWeatherPopupChartList,
+                        mapRainWeatherPopupChartList
+                      }) {
+
   const [show, setShow] = useState(false);
   const [height, setHeight] = useState('60px');
   const [originalHeight, setOriginalHeight] = useState('60px');
-
+  const activeHeight = '420px';
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -26,11 +39,11 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
 
   const handleClick = () => {
     setActiveTab(0);
-    if (height === '400px') {
+    if (height === activeHeight) {
       setHeight(originalHeight);
     } else {
       setOriginalHeight(height);
-      setHeight('400px');
+      setHeight(activeHeight);
     }
   };
 
@@ -38,7 +51,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
     if (weatherObj?.value?.wsnaam) {
       onWeatherObjectClick(weatherObj);
       setShow(true);
-      setHeight('400px');
+      setHeight(activeHeight);
       setActiveTab(1);
     } else return null;
   };
@@ -67,7 +80,12 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
     },
     {
       name: 'Graphs',
-      component: <GraphsPopupScreen />
+      component: <GraphsPopupScreen mappedETOWeatherPopupChartList={ mappedETOWeatherPopupChartList }
+                                    mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList }
+                                    mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList }
+                                    mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
+                                    mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList } />
+
     },
     {
       name: 'Spray Conditions',
@@ -88,7 +106,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
         </button>
 
         { show && <>
-          { height === '400px' ? (
+          { height === activeHeight ? (
             <button className="text-black rounded-md text-xs px-1 font-semibold">
               <ChevronDownIcon className="w-6 h-6 text-black dark:text-white mt-0.5 hover:pb-0.5" onClick={ handleClick } />
             </button>
@@ -106,7 +124,7 @@ export function Popup({ mappedWeatherList1, mappedWeatherList2, mappedDailyDataL
         { show && tabs[activeTab].component }
 
       </div>
-      { height === '400px' && show &&
+      { height === activeHeight && show &&
       <div className="bg-gray-200 dark:bg-dark-mode-grey -mt-1 z-50">
         <TabBarBottom tabs={ tabs }
                       activeTab={ activeTab }

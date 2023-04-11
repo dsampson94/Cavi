@@ -423,3 +423,111 @@ export function mapDailyDataLists(rawData) {
   });
 }
 
+//*******************************************************************************
+
+export function mapETOWeatherPopupChartList(rawData) {
+  if (!rawData) return null;
+
+  const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.eto
+    };
+  });
+
+  const mappedDataWeatherStation = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.etow
+    };
+  });
+
+  return [mappedDataForecast, mappedDataWeatherStation];
+
+}
+
+//*******************************************************************************
+
+export function mapActualForecastWeatherPopupChartList(rawData) {
+  if (!rawData) return null;
+
+  const mappedDataActual = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.t
+    };
+  });
+
+  const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.t
+    };
+  });
+
+  return [mappedDataActual, mappedDataForecast];
+}
+
+//*******************************************************************************
+
+export function mapHumidityWeatherPopupChartList(rawData) {
+  if (!rawData) return null;
+
+  console.log(rawData);
+
+  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.h
+    };
+  });
+
+  console.log(mappedDataHumidity);
+
+  return [mappedDataHumidity, mappedDataHumidity];
+}
+
+//*******************************************************************************
+
+export function mapWindWeatherPopupChartList(rawData) {
+  if (!rawData) return null;
+
+  console.log(rawData);
+
+  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.windmaks
+    };
+  });
+
+  console.log(mappedDataHumidity);
+
+  return [mappedDataHumidity, mappedDataHumidity];
+}
+
+//*******************************************************************************
+
+export function mapRainWeatherPopupChartList(rawData) {
+  if (!rawData) return null;
+
+  console.log(rawData);
+
+  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+    return {
+      x: dateString,
+      y: data.windmaks
+    };
+  });
+
+  console.log(mappedDataHumidity);
+
+  return [mappedDataHumidity, mappedDataHumidity];
+}
+
+
+
+
+
+
+

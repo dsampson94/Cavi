@@ -2,51 +2,47 @@ import React, { useEffect, useRef, useState } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName } from '../Chart.util';
-import { AGGREGATE, DAILY, DAILY_ETO, EXTENDED } from '../../../../tools/general/system-variables.util';
 
 import useDimensions from '../../../../tools/hooks/useDimensions';
 import useTheme from '../../../../tools/hooks/useTheme';
 
-import Chart from '../components/Chart.d3.jsx';
-import YAxis from '../components/yAxis.d3';
+import Chart from '../components/Chart.d3';
 import XAxis from '../components/xAxis.d3';
+import YAxis from '../components/yAxis.d3';
 import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
+import Bars from '../components/Bars.d3';
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
 
-const FieldLineChartD3 = ({
-                            data,
-                            secondaryData,
-                            chartName,
-                            chartType,
-                            chartInfo,
-                            hasXAxis,
-                            recommendationOffset,
-                            currentGlobalZoomState,
-                            setCurrentGlobalZoomState,
-                            currentYZoomState,
-                            setCurrentYZoomState,
-                            currentXZoomState,
-                            setCurrentXZoomState,
-                            hoverActive,
-                            setHoverActive,
-                            sharedYScaleData,
-                            yAxisShared,
-                            activeLoadPeriod,
-                            activeDataPeriod,
-                            setActiveDataPeriod,
-                            xAxisViewMode,
-                            setXAxisViewMode,
-                            activeProbeFactor,
-                            setActiveProbeFactor,
-                            activeExtendedChart,
-                            setActiveExtendedChart,
-                            showChartsModal,
-                            setShowChartsModal,
-                            date,
-                            setDate
-                          }) => {
+const WeatherPopupBarAndLineChart = ({
+                                       data,
+                                       chartName,
+                                       chartType,
+                                       chartInfo,
+                                       hasXAxis,
+                                       recommendationOffset,
+                                       currentGlobalZoomState,
+                                       setCurrentGlobalZoomState,
+                                       currentYZoomState,
+                                       setCurrentYZoomState,
+                                       currentXZoomState,
+                                       setCurrentXZoomState,
+                                       hoverActive,
+                                       setHoverActive,
+                                       activeDataPeriod,
+                                       activeLoadPeriod,
+                                       setActiveDataPeriod,
+                                       xAxisViewMode,
+                                       setXAxisViewMode,
+                                       activeProbeFactor,
+                                       setActiveProbeFactor,
+                                       activeExtendedChart,
+                                       setActiveExtendedChart,
+                                       date,
+                                       setDate,
+                                       showOnlyBars
+                                     }) => {
 
   const svgRef = useRef();
 
@@ -56,14 +52,12 @@ const FieldLineChartD3 = ({
   const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
   const [showSecondaryDropDown, setShowSecondaryDropDown] = useState(false);
 
-  const [hiddenLineList, setHiddenLineList] = useState([]);
-
   const DIMENSIONS = {
     marginTop: 0,
     marginRight: 1,
     marginBottom: 1,
     marginLeft: 40,
-    innerPadding: chartName === DAILY_ETO ? 30 : 20
+    innerPadding: 20
   };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
@@ -72,14 +66,10 @@ const FieldLineChartD3 = ({
   };
   const { boundedHeight, boundedWidth, innerPadding } = updatedDimensions;
 
-  let yAccessor = d => d?.y;
+  let yAccessor = d => d?.barY;
   let xAccessor = d => new Date(d?.x);
 
-  const activeData = yAxisShared ? (chartType !== EXTENDED) ? sharedYScaleData : data : data;
-
-  let yScale = scaleLinear().domain((chartType === EXTENDED || chartType === DAILY)
-    ? [min(activeData, yAccessor), max(activeData, yAccessor)]
-    : [max(activeData, yAccessor), min(activeData, yAccessor)]).range([boundedHeight - innerPadding, innerPadding]).nice();
+  const yScale = scaleLinear().domain([0, max(data, yAccessor) + 0.6]).range([boundedHeight, innerPadding]).nice();
 
   const activeMinDate = () => {
     if (activeDataPeriod === 'All') return min(data, xAccessor);
@@ -98,11 +88,7 @@ const FieldLineChartD3 = ({
 
   const xScale = scaleTime().domain(getXAxisViewMode()).range([0, boundedWidth - innerPadding]);
 
-  if (currentYZoomState) yScale.domain(currentYZoomState.rescaleY(yScale).domain());
   if (currentXZoomState) xScale.domain(currentXZoomState.rescaleX(xScale).domain());
-
-  const clipPath = chartName.includes('deficit') ? 'url(#clipDeficit)' :
-    chartName.includes('aggregate') ? 'url(#clipAggregate)' : 'url(#clipDaily)';
 
   const zoomMode = () => {
     switch (activeLoadPeriod) {
@@ -113,6 +99,8 @@ const FieldLineChartD3 = ({
         return 'zoom';
     }
   };
+
+  const clipPath = 'url(#clipUsage)';
 
   useEffect(() => {
     setXAxisViewMode('topBar');
@@ -136,23 +124,19 @@ const FieldLineChartD3 = ({
     const zoomGlobal = zoom().scaleExtent([0.1, 50]).on('start', () => {
       setHoverActive(false);
     }).on(zoomMode(), event => {
-      const { k: newK, x: newX, y: newY } = event.transform;
-      const { k: prevK, x: prevX, y: prevY } = currentGlobalZoomState;
+      const { k: newK, x: newX } = event.transform;
+      const { k: prevK, x: prevX } = currentGlobalZoomState;
       const point = center(event, svg);
 
       const isZoomingX = point[0] > DIMENSIONS.marginLeft + 50 && point[0] / 3 < boundedWidth + 200;
-      const isZoomingY = point[1] / 10 < boundedHeight;
 
       isZoomingX && setCurrentXZoomState(currentXZoomState.translate((newX - prevX) / prevK, 0).scale(newK / prevK));
-      isZoomingY && setCurrentYZoomState(currentYZoomState.translate(0, (newY - prevY) / prevK).scale(newK / prevK));
       setCurrentGlobalZoomState(event.transform);
     });
 
     svg.call(zoomGlobal).on('dblclick.zoom', null);
 
     selectAll('.mouse-tracker').on('dblclick ', () => {
-      setXAxisViewMode('topBar');
-      setActiveDataPeriod('All');
       svg.call(zoomGlobal.transform, zoomIdentity);
       setCurrentGlobalZoomState(zoomIdentity);
       setCurrentXZoomState(zoomIdentity);
@@ -160,51 +144,41 @@ const FieldLineChartD3 = ({
     });
   }, [boundedWidth, boundedHeight, currentXZoomState, currentYZoomState, currentGlobalZoomState, xScale, yScale]);
 
-  if (!data) return null;
-
   return (
     <>
-      {/*{ chartType !== DEFICIT &&*/ }
       {/*<ChartHeader chartName={ chartName }*/ }
       {/*             chartType={ chartType }*/ }
       {/*             isDarkMode={ isDarkMode }*/ }
-      {/*             showChartsModal={ showChartsModal }*/ }
-      {/*             setShowChartsModal={ setShowChartsModal }*/ }
       {/*             activeExtendedChart={ activeExtendedChart }*/ }
-      {/*             setActiveExtendedChart={ setActiveExtendedChart }*/ }
-      {/*/> }*/ }
+      {/*             setActiveExtendedChart={ setActiveExtendedChart } />*/ }
 
       <div ref={ wrapperRef }
-           style={ { height: chartByName(chartName).height } }
-           className={ chartName }>
+           style={ { height: chartByName(chartName).height } }>
 
         <Chart svgRef={ svgRef }
                dimensions={ updatedDimensions }
-               chartName={ chartName }
                chartType={ chartType }
-               chartInfo={ chartInfo }
-               isDarkMode={ isDarkMode }
-               hiddenLineList={ hiddenLineList }
-               setHiddenLineList={ setHiddenLineList }
-               secondaryData={ secondaryData }>
-
-          { chartType === AGGREGATE &&
-          <rect width={ '95.5%' }
-                height={ '100%' }
-                fill={ isDarkMode ? '#252529' : 'white' } /> }
+               chartName={ chartName }
+               chartInfo={ chartInfo }>
 
           <YAxis yScale={ yScale }
                  data={ data }
                  chartName={ chartName }
                  isDarkMode={ isDarkMode } />
 
+          <Bars data={ data }
+                height={ dimensions.height }
+                xScale={ xScale }
+                yScale={ yScale }
+                clipPath={ clipPath } />
+
           <XAxis xScale={ xScale }
                  hasXAxis={ hasXAxis }
                  chartName={ chartName }
                  isDarkMode={ isDarkMode } />
 
+          { !showOnlyBars &&
           <Line data={ data }
-                secondaryData={ secondaryData }
                 recommendationOffset={ recommendationOffset }
                 chartName={ chartName }
                 chartType={ chartType }
@@ -213,8 +187,7 @@ const FieldLineChartD3 = ({
                 xScale={ xScale }
                 yScale={ yScale }
                 clipPath={ clipPath }
-                isDarkMode={ isDarkMode }
-                hiddenLineList={ hiddenLineList } />
+                isDarkMode={ isDarkMode } /> }
 
           <rect className={ 'mouse-tracker' }
                 width={ dimensions.width }
@@ -237,9 +210,7 @@ const FieldLineChartD3 = ({
                            chartName={ chartName }
                            chartType={ chartType }
                            clipPath={ clipPath }
-                           xAxisViewMode={ xAxisViewMode }
-                           hiddenLineList={ hiddenLineList }
-                           secondaryData={ secondaryData } />
+                           xAxisViewMode={ xAxisViewMode } />
 
           <ChartTooltipText xAccessor={ xAccessor }
                             yAccessor={ yAccessor }
@@ -248,12 +219,9 @@ const FieldLineChartD3 = ({
                             data={ data }
                             date={ date }
                             hoverActive={ hoverActive }
-                            setHoverActive={ setHoverActive }
                             chartName={ chartName }
                             chartType={ chartType }
-                            clipPath={ clipPath }
-                            hiddenLineList={ hiddenLineList }
-                            secondaryData={ secondaryData } />
+                            clipPath={ clipPath } />
         </Chart>
 
         <ChartContextMenu data={ data }
@@ -271,12 +239,10 @@ const FieldLineChartD3 = ({
                           setXAxisViewMode={ setXAxisViewMode }
                           activeProbeFactor={ activeProbeFactor }
                           setActiveProbeFactor={ setActiveProbeFactor }
-                          activeDataPeriod={ activeDataPeriod }
                           switchAtMidWidth={ true } />
       </div>
     </>
-  )
-    ;
+  );
 };
 
-export default FieldLineChartD3;
+export default WeatherPopupBarAndLineChart;

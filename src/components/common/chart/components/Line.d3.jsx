@@ -11,8 +11,10 @@ import {
   DAILY_ETO,
   DEFICIT,
   DEFICIT_ETO,
+  ETO_WEATHER,
   EXTENDED,
   HUMIDITY_LINE,
+  HUMIDITY_WEATHER,
   LINE_100MM,
   LINE_200MM,
   LINE_300MM,
@@ -23,7 +25,9 @@ import {
   RAIN_HUMIDITY,
   RAIN_LINE,
   SOIL_TEMPERATURE,
-  TEMPERATURE_MULTILINE
+  TEMP_WEATHER,
+  TEMPERATURE_MULTILINE,
+  WEATHER_POPUP_MULTILINE
 } from '../../../../tools/general/system-variables.util';
 
 const Line = ({
@@ -60,6 +64,32 @@ const Line = ({
                              hiddenLineList={ hiddenLineList } />;
 
     case TEMPERATURE_MULTILINE:
+      return <TemperatureChartLine data={ data }
+                                   recommendationOffset={ recommendationOffset }
+                                   chartName={ chartName }
+                                   chartType={ chartType }
+                                   xAccessor={ xAccessor }
+                                   yAccessor={ yAccessor }
+                                   xScale={ xScale }
+                                   yScale={ yScale }
+                                   clipPath={ clipPath }
+                                   isDarkMode={ isDarkMode }
+                                   hiddenLineList={ hiddenLineList } />;
+
+    case WEATHER_POPUP_MULTILINE:
+      return <WeatherPopupChartLine data={ data }
+                                    recommendationOffset={ recommendationOffset }
+                                    chartName={ chartName }
+                                    chartType={ chartType }
+                                    xAccessor={ xAccessor }
+                                    yAccessor={ yAccessor }
+                                    xScale={ xScale }
+                                    yScale={ yScale }
+                                    clipPath={ clipPath }
+                                    isDarkMode={ isDarkMode }
+                                    hiddenLineList={ hiddenLineList } />;
+
+    default:
       return <TemperatureChartLine data={ data }
                                    recommendationOffset={ recommendationOffset }
                                    chartName={ chartName }
@@ -287,6 +317,88 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                   strokeWidth: '1.2px',
                   strokeLinecap: 'round'
                 } } /> }
+        </g>
+      );
+  }
+};
+
+const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, chartName, clipPath, isDarkMode, hiddenLineList }) => {
+
+  let lineGenerator = line().x(d => xScale(xAccessor(d))).y(d => yScale(yAccessor(d)));
+
+  selectAll('.line').on('contextmenu ', event => event.preventDefault());
+
+  switch (chartName) {
+    case ETO_WEATHER:
+      return (
+        <g>
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
+
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
+        </g>
+      );
+    case TEMP_WEATHER:
+      return (
+        <g>
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
+
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
+        </g>
+      );
+    case HUMIDITY_WEATHER:
+      return (
+        <g>
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[0]) }
+                clipPath={ clipPath }
+                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
+
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.2px',
+                  strokeLinecap: 'round'
+                } } />
         </g>
       );
   }

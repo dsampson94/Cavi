@@ -16,32 +16,32 @@ import Line from '../components/Line.d3';
 
 import ChartContextMenu from '../../context-menu/ChartContextMenu';
 
-const MultiLineChart = ({
-                          data,
-                          chartName,
-                          chartType,
-                          chartInfo,
-                          hasXAxis,
-                          recommendationOffset,
-                          currentGlobalZoomState,
-                          setCurrentGlobalZoomState,
-                          currentYZoomState,
-                          setCurrentYZoomState,
-                          currentXZoomState,
-                          setCurrentXZoomState,
-                          hoverActive,
-                          setHoverActive,
-                          activeLoadPeriod,
-                          activeDataPeriod,
-                          setActiveDataPeriod,
-                          xAxisViewMode,
-                          setXAxisViewMode,
-                          activeProbeFactor,
-                          setActiveProbeFactor,
-                          date,
-                          setDate,
-                          toggleInitialList
-                        }) => {
+const WeatherPopupMultiLineChart = ({
+                                      data,
+                                      chartName,
+                                      chartType,
+                                      chartInfo,
+                                      hasXAxis,
+                                      recommendationOffset,
+                                      currentGlobalZoomState,
+                                      setCurrentGlobalZoomState,
+                                      currentYZoomState,
+                                      setCurrentYZoomState,
+                                      currentXZoomState,
+                                      setCurrentXZoomState,
+                                      hoverActive,
+                                      setHoverActive,
+                                      activeLoadPeriod,
+                                      activeDataPeriod,
+                                      setActiveDataPeriod,
+                                      xAxisViewMode,
+                                      setXAxisViewMode,
+                                      activeProbeFactor,
+                                      setActiveProbeFactor,
+                                      date,
+                                      setDate,
+                                      toggleInitialList
+                                    }) => {
     const svgRef = useRef();
 
     const { isDarkMode } = useTheme(false);
@@ -52,9 +52,9 @@ const MultiLineChart = ({
     const [hiddenLineList, setHiddenLineList] = useState(toggleInitialList);
 
     const DIMENSIONS = {
-      marginTop: 3,
+      marginTop: 1,
       marginRight: 1,
-      marginBottom: 30,
+      marginBottom: 0,
       marginLeft: 40,
       innerPadding: 8
     };
@@ -236,29 +236,10 @@ const MultiLineChart = ({
           <div ref={ wrapperRef }
                style={ { height: chartByName(chartName).height } }
                className={ chartName }>
-
-            <Chart svgRef={ svgRef }
-                   dimensions={ updatedDimensions }
-                   chartName={ chartName }
-                   chartInfo={ chartInfo }
-                   isDarkMode={ isDarkMode }>
-
-              <YAxis yScale={ yScale }
-                     data={ data }
-                     chartName={ chartName }
-                     isDarkMode={ isDarkMode } />
-
-              <XAxis xScale={ xScale }
-                     hasXAxis={ hasXAxis }
-                     chartName={ chartName }
-                     isDarkMode={ isDarkMode } />
-
-            </Chart>
-
           </div> }
       </>
     );
   }
 ;
 
-export default MultiLineChart;
+export default WeatherPopupMultiLineChart;

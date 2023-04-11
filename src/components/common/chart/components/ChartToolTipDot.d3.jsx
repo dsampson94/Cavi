@@ -339,4 +339,16 @@ const TemperatureMultiLineDot = ({
               strokeWidth={ 2 }
               r={ 5 } /> }
     </>);
+  else
+    return (<>
+      { renderDot(RAIN_LINE, y1) &&
+      <circle className={ 'tool-tip-dot' }
+              clipPath={ clipPath }
+              cx={ x1 + 1.5 }
+              cy={ y1 }
+              fill={ '#0000FF' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } /> }
+    </>);
 };

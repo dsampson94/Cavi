@@ -84,6 +84,7 @@ const TemperatureMultiLineText = ({
                                     chartName
                                   }) => {
 
+  if (!data) return null;
 
   let x1;
 
@@ -313,7 +314,7 @@ const TooltipText = ({
     if (chartName.includes('deficit')) {
       return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
     } else if (chartName === DEFICIT_ETO) {
-      return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY.toFixed(3) } @ ${ hoveredObject?.x }`;
+      return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY?.toFixed(3) } @ ${ hoveredObject?.x }`;
     } else if (chartName === VOLT_READINGS) {
       return ` Volts: ${ hoveredObject?.y } @ ${ hoveredObject?.x }`;
     } else if (chartName === EC) {

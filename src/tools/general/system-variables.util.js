@@ -186,6 +186,8 @@ export const AGGREGATE = 'aggregate';
 export const EXTENDED = 'extended';
 export const DAILY = 'daily';
 export const TEMPERATURE_MULTILINE = 'temperature';
+export const WEATHER_POPUP_MULTILINE = 'weather_popup_multiline';
+export const WEATHER_POPUP_BARLINE = 'weather_popup_barline';
 
 //CHART NAMES
 export const DEFICIT_100MM = 'deficit_100mm';
@@ -221,6 +223,13 @@ export const DAILY_ETO = 'Daily ETo';
 export const SOIL_TEMPERATURE = 'soil_temperature';
 export const CANOPY_OUTSIDE_TEMPERATURE = 'canopy_outside_temperature';
 export const RAIN_HUMIDITY = 'rain_humidity';
+
+export const ETO_WEATHER = 'eto_weather';
+export const TEMP_WEATHER = 'temp_weather';
+export const HUMIDITY_WEATHER = 'humidity_weather';
+
+export const WIND_WEATHER = 'wind_weather';
+export const RAIN_WEATHER = 'rain_weather';
 
 export const CANOPY_LINE = 'Canopy Temperatures';
 export const OUTSIDE_LINE = 'Outside Temperatures';

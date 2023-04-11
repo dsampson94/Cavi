@@ -25,7 +25,12 @@ const ClientFieldsView = ({
                             reloadToggleActive,
                             setReloadToggleActive,
                             onUnitClick,
-                            onWeatherObjectClick
+                            onWeatherObjectClick,
+                            mappedETOWeatherPopupChartList,
+                            mapActualForecastWeatherPopupChartList,
+                            mapHumidityWeatherPopupChartList,
+                            mapWindWeatherPopupChartList,
+                            mapRainWeatherPopupChartList
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -79,7 +84,12 @@ const ClientFieldsView = ({
                mappedDailyDataList={ mappedDailyDataList }
                mappedRainfallList={ mappedRainfallList }
                onUnitClick={ onUnitClick }
-               onWeatherObjectClick={ onWeatherObjectClick } /> }
+               onWeatherObjectClick={ onWeatherObjectClick }
+               mappedETOWeatherPopupChartList={ mappedETOWeatherPopupChartList }
+               mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList }
+               mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList }
+               mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
+               mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList } /> }
       </div>
     </ContentContainer>
   );
