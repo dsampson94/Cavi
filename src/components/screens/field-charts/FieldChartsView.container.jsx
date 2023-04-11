@@ -3,16 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
-import {
-  ACTUAL_IRRIGATION,
-  DEFICIT_ETO,
-  EC,
-  FLOW_DAILY,
-  FLOW_HOURLY,
-  TWO_WEEKS_LABEL,
-  VOLT_READINGS,
-  VPD
-} from '../../../tools/general/system-variables.util';
+import { ACTUAL_IRRIGATION, DEFICIT_ETO, EC, FLOW_DAILY, FLOW_HOURLY, TWO_WEEKS_LABEL, VOLT_READINGS, VPD } from '../../../tools/general/system-variables.util';
 
 import {
   mapActualMottechChartLists,
@@ -62,7 +53,6 @@ const FieldChartsViewContainer = () => {
   const [activeFieldName, setActiveFieldName] = useState(fieldName);
   const [activeProbeFactor, setActiveProbeFactor] = useState(undefined);
   const [activeExtendedChart, setActiveExtendedChart] = useState(DEFICIT_ETO);
-
   const request = getRequestParams({ groupName, clientName, activeFieldName, activeLoadPeriod, activeProbeFactor });
 
   useEffect(() => {

@@ -14,8 +14,6 @@ import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Line from '../components/Line.d3';
 
-import ChartContextMenu from '../../context-menu/ChartContextMenu';
-
 const WeatherPopupMultiLineChart = ({
                                       data,
                                       chartName,
@@ -56,7 +54,7 @@ const WeatherPopupMultiLineChart = ({
       marginRight: 1,
       marginBottom: 0,
       marginLeft: 40,
-      innerPadding: 8
+      innerPadding: 10
     };
     const updatedDimensions = {
       ...DIMENSIONS, ...dimensions,
@@ -68,7 +66,12 @@ const WeatherPopupMultiLineChart = ({
     let yAccessor = d => d?.y;
     let xAccessor = d => new Date(d?.x);
 
-    let yScale = scaleLinear().domain([min(data?.[0], yAccessor), max(data?.[0], yAccessor)]).range([boundedHeight - innerPadding, innerPadding]).nice();
+    const yAxisPaddingFactor = 0.8; // Increase or decrease this value to adjust the padding
+    const yMin = min(data?.[0], yAccessor);
+    const yMax = max(data?.[0], yAccessor);
+    const yPadding = (yMax - yMin) * yAxisPaddingFactor;
+
+    let yScale = scaleLinear().domain([yMin - yPadding, yMax + yPadding]).range([boundedHeight - innerPadding, innerPadding]).nice();
 
     const activeMinDate = () => {
       if (activeDataPeriod === 'All') return min(data?.[0], xAccessor);
@@ -102,7 +105,7 @@ const WeatherPopupMultiLineChart = ({
       setCurrentGlobalZoomState(zoomIdentity);
       setCurrentXZoomState(zoomIdentity);
       setCurrentYZoomState(zoomIdentity);
-    }, [activeProbeFactor]);
+    }, []);
 
     useEffect(() => {
       const svg = select(svgRef.current);
@@ -159,6 +162,7 @@ const WeatherPopupMultiLineChart = ({
               <YAxis yScale={ yScale }
                      data={ data }
                      chartName={ chartName }
+                     chartType={ chartType }
                      isDarkMode={ isDarkMode } />
 
               <XAxis xScale={ xScale }
@@ -205,32 +209,17 @@ const WeatherPopupMultiLineChart = ({
                                 yAccessor={ yAccessor }
                                 xScale={ xScale }
                                 yScale={ yScale }
-                                data={ data }
+                                data={ data?.[0] }
                                 date={ date }
                                 hoverActive={ hoverActive }
                                 setHoverActive={ setHoverActive }
                                 chartName={ chartName }
                                 chartType={ chartType }
                                 clipPath={ clipPath }
-                                hiddenLineList={ hiddenLineList } />
+                                hiddenLineList={ hiddenLineList }
+                                secondaryData={ data?.[1] } />
             </Chart>
 
-            <ChartContextMenu data={ data }
-                              date={ date }
-                              xScale={ xScale }
-                              yScale={ yScale }
-                              xAccessor={ xAccessor }
-                              yAccessor={ yAccessor }
-                              showPrimaryDropDown={ showPrimaryDropDown }
-                              setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                              showSecondaryDropDown={ showSecondaryDropDown }
-                              setShowSecondaryDropDown={ setShowSecondaryDropDown }
-                              setHoverActive={ setHoverActive }
-                              setActiveDataPeriod={ setActiveDataPeriod }
-                              setXAxisViewMode={ setXAxisViewMode }
-                              activeProbeFactor={ activeProbeFactor }
-                              setActiveProbeFactor={ setActiveProbeFactor }
-                              switchAtMidWidth={ false } />
           </div>
           :
           <div ref={ wrapperRef }

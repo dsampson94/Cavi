@@ -431,14 +431,14 @@ export function mapETOWeatherPopupChartList(rawData) {
   const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.eto
+      y: parseInt(data.etov)
     };
   });
 
   const mappedDataWeatherStation = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.etow
+      y: parseInt(data.eto)
     };
   });
 
@@ -473,8 +473,6 @@ export function mapActualForecastWeatherPopupChartList(rawData) {
 export function mapHumidityWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  console.log(rawData);
-
   const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
@@ -497,7 +495,7 @@ export function mapWindWeatherPopupChartList(rawData) {
   const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.windmaks
+      barY: parseInt(data?.windmaks?.slice(0, -3))
     };
   });
 
@@ -516,7 +514,7 @@ export function mapRainWeatherPopupChartList(rawData) {
   const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.windmaks
+      barY: parseInt(data?.rainmaks?.slice(0, -2))
     };
   });
 

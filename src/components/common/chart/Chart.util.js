@@ -64,8 +64,9 @@ export const chartByName = (chartName, isDarkMode) => {
     case TEMP_WEATHER :
     case HUMIDITY_WEATHER :
     case WIND_WEATHER :
-    case RAIN_WEATHER :
       return { height: '15%' };
+    case RAIN_WEATHER :
+      return { height: '20%' };
     default:
       return { height: '33.3%' };
   }

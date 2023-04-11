@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CANOPY_LINE, ETO_WEATHER, HUMIDITY_WEATHER, OUTSIDE_LINE, RAIN_WEATHER, TEMP_WEATHER, WEATHER_POPUP_MULTILINE, WIND_WEATHER } from '../../../tools/general/system-variables.util';
+import { ETO_WEATHER, HUMIDITY_WEATHER, RAIN_WEATHER, TEMP_WEATHER, WEATHER_POPUP_MULTILINE, WIND_WEATHER } from '../../../tools/general/system-variables.util';
 import { zoomIdentity } from 'd3';
 import WeatherPopupMultiLineChart from '../chart/chart/WeatherPopupMultiLineChart.d3';
 import WeatherPopupBarAndLineChart from '../chart/chart/WeatherPopupBarAndLineChart.d3';
@@ -67,7 +67,7 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [CANOPY_LINE, OUTSIDE_LINE] }
+                                  toggleInitialList={ [ETO_WEATHER] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />
@@ -90,7 +90,7 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [CANOPY_LINE, OUTSIDE_LINE] }
+                                  toggleInitialList={ [TEMP_WEATHER] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />
@@ -113,14 +113,14 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [CANOPY_LINE, OUTSIDE_LINE] }
+                                  toggleInitialList={ [HUMIDITY_WEATHER] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />
 
       <WeatherPopupBarAndLineChart chartName={ WIND_WEATHER }
                                    chartType={ WEATHER_POPUP_MULTILINE }
-                                   data={ mapWindWeatherPopupChartList }
+                                   data={ mapWindWeatherPopupChartList?.[0] }
                                    hoverActive={ hoverActive }
                                    setHoverActive={ setHoverActive }
                                    currentGlobalZoomState={ currentGlobalZoomState }
@@ -144,7 +144,7 @@ export const GraphsPopupScreen = ({
 
       <WeatherPopupBarAndLineChart chartName={ RAIN_WEATHER }
                                    chartType={ WEATHER_POPUP_MULTILINE }
-                                   data={ mapRainWeatherPopupChartList }
+                                   data={ mapRainWeatherPopupChartList?.[1] }
                                    hoverActive={ hoverActive }
                                    setHoverActive={ setHoverActive }
                                    currentGlobalZoomState={ currentGlobalZoomState }
@@ -164,7 +164,9 @@ export const GraphsPopupScreen = ({
                                    setActiveExtendedChart={ setActiveExtendedChart }
                                    date={ date }
                                    setDate={ setDate }
+                                   hasXAxis={ true }
                                    showOnlyBars />
+
     </div>
   );
 };

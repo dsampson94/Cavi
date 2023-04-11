@@ -5,6 +5,7 @@ import {
   CANOPY_LINE,
   CANOPY_OUTSIDE_TEMPERATURE,
   DAILY_ETO,
+  ETO_WEATHER,
   HUMIDITY_LINE,
   LINE_100MM,
   LINE_200MM,
@@ -15,8 +16,12 @@ import {
   OUTSIDE_LINE,
   RAIN_HUMIDITY,
   RAIN_LINE,
+  RAIN_WEATHER,
   SOIL_TEMPERATURE,
-  TEMPERATURE_MULTILINE
+  TEMP_WEATHER,
+  TEMPERATURE_MULTILINE,
+  WEATHER_POPUP_MULTILINE,
+  WIND_WEATHER
 } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
@@ -56,6 +61,39 @@ const ChartTooltipDot = ({
                                       xAxisViewMode={ xAxisViewMode }
                                       hiddenLineList={ hiddenLineList }
                                       chartName={ chartName } />;
+
+    case WEATHER_POPUP_MULTILINE:
+      if (chartName === RAIN_WEATHER || chartName === WIND_WEATHER)
+        return <LineDot data={ data }
+                        date={ date }
+                        setDate={ setDate }
+                        xScale={ xScale }
+                        yScale={ yScale }
+                        xAccessor={ xAccessor }
+                        yAccessor={ yAccessor }
+                        hoverActive={ hoverActive }
+                        setHoverActive={ setHoverActive }
+                        chartName={ chartName }
+                        clipPath={ clipPath }
+                        showPrimaryDropDown={ showPrimaryDropDown }
+                        xAxisViewMode={ xAxisViewMode }
+                        hiddenLineList={ hiddenLineList }
+                        secondaryData={ secondaryData } />;
+
+      return <WeatherMultiLineDot data={ data }
+                                  date={ date }
+                                  setDate={ setDate }
+                                  xScale={ xScale }
+                                  yScale={ yScale }
+                                  xAccessor={ xAccessor }
+                                  yAccessor={ yAccessor }
+                                  hoverActive={ hoverActive }
+                                  setHoverActive={ setHoverActive }
+                                  clipPath={ clipPath }
+                                  showPrimaryDropDown={ showPrimaryDropDown }
+                                  xAxisViewMode={ xAxisViewMode }
+                                  hiddenLineList={ hiddenLineList }
+                                  chartName={ chartName } />;
 
     default:
       return <LineDot data={ data }
@@ -350,5 +388,114 @@ const TemperatureMultiLineDot = ({
               stroke={ 'white' }
               strokeWidth={ 2 }
               r={ 5 } /> }
+    </>);
+};
+
+const WeatherMultiLineDot = ({
+                               setHoverActive,
+                               setDate,
+                               xScale,
+                               xAccessor,
+                               data,
+                               date,
+                               yScale,
+                               yAccessor,
+                               hoverActive,
+                               clipPath,
+                               showPrimaryDropDown,
+                               xAxisViewMode,
+                               hiddenLineList,
+                               chartName
+                             }) => {
+
+  let x1;
+  let y1;
+
+  let x2;
+  let y2;
+
+  let dateBisector = bisector(xAccessor).center;
+
+  if (data?.[0]) {
+    x1 = xScale(xAccessor(data?.[0][Math.max(0, dateBisector(data?.[0], date))]));
+    y1 = yScale(yAccessor(data?.[0][Math.max(0, dateBisector(data?.[0], date))]));
+  }
+  if (data?.[1]) {
+    x2 = xScale(xAccessor(data?.[1][Math.max(0, dateBisector(data?.[1], date))]));
+    y2 = yScale(yAccessor(data?.[1][Math.max(0, dateBisector(data?.[1], date))]));
+  }
+
+  selectAll('.mouse-tracker').on('touchmouse mousemove', event => {
+    setHoverActive(true);
+    if (showPrimaryDropDown) return setDate(date);
+    if (xAxisViewMode === 'topBar') setDate(xScale.invert(pointer(event)[0] + 10));
+  }).on('contextmenu', (event) => {
+    if (showPrimaryDropDown) {
+      setDate(xScale.invert(pointer(event)[0] + 10));
+    }
+  }).on('mouseleave', () => {
+    setHoverActive(false);
+  });
+
+  const renderDot = (chart, show) => {
+    if (!show) return false;
+    if (!hiddenLineList?.includes(chart)) return false;
+    else return hoverActive;
+  };
+
+  if (chartName === ETO_WEATHER)
+    return (<>
+      { renderDot(ETO_WEATHER, y1) &&
+      <circle className={ 'tool-tip-dot' }
+              clipPath={ clipPath }
+              cx={ x1 + 1.5 }
+              cy={ y1 }
+              fill={ '#0000FF' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } /> }
+
+      { renderDot(ETO_WEATHER, y2) &&
+      <circle className={ 'tool-tip-dot-' }
+              clipPath={ clipPath }
+              cx={ x2 + 1.5 }
+              cy={ y2 }
+              fill={ '#f37b2c' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } /> }
+    </>);
+  else if (chartName === TEMP_WEATHER)
+    return (<>
+      { renderDot(TEMP_WEATHER, y1) &&
+      <circle className={ 'tool-tip-dot' }
+              clipPath={ clipPath }
+              cx={ x1 + 1.5 }
+              cy={ y1 }
+              fill={ '#0000FF' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } /> }
+
+      { renderDot(TEMP_WEATHER, y2) &&
+      <circle className={ 'tool-tip-dot-' }
+              clipPath={ clipPath }
+              cx={ x2 + 1.5 }
+              cy={ y2 }
+              fill={ '#f37b2c' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } /> }
+    </>);
+  else
+    return (<>
+      <circle className={ 'tool-tip-dot' }
+              clipPath={ clipPath }
+              cx={ x1 + 1.5 }
+              cy={ y1 }
+              fill={ '#0000FF' }
+              stroke={ 'white' }
+              strokeWidth={ 2 }
+              r={ 5 } />
     </>);
 };

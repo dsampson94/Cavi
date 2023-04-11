@@ -82,6 +82,22 @@ const Chart = ({
                 y="0"
               />
             </clipPath>
+            <clipPath id="weatherPopupBarAndLineTop">
+              <rect
+                width={ dimensions.boundedWidth * 0.99 }
+                height={ dimensions.boundedHeight }
+                x="0"
+                y="0"
+              />
+            </clipPath>
+            <clipPath id="weatherPopupBarAndLineBottom">
+              <rect
+                width={ dimensions.boundedWidth * 0.99 }
+                height={ dimensions.boundedHeight }
+                x="0"
+                y="0"
+              />
+            </clipPath>
           </defs>
           { children }
         </g>

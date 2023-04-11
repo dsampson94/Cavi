@@ -13,7 +13,7 @@ import Line from '../components/Line.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Bars from '../components/Bars.d3';
-import ChartContextMenu from '../../context-menu/ChartContextMenu';
+import { RAIN_WEATHER } from '../../../../tools/general/system-variables.util';
 
 const WeatherPopupBarAndLineChart = ({
                                        data,
@@ -55,9 +55,9 @@ const WeatherPopupBarAndLineChart = ({
   const DIMENSIONS = {
     marginTop: 0,
     marginRight: 1,
-    marginBottom: 1,
+    marginBottom: chartName === RAIN_WEATHER ? 25 : 0,
     marginLeft: 40,
-    innerPadding: 20
+    innerPadding: 10
   };
   const updatedDimensions = {
     ...DIMENSIONS, ...dimensions,
@@ -100,7 +100,7 @@ const WeatherPopupBarAndLineChart = ({
     }
   };
 
-  const clipPath = 'url(#clipUsage)';
+  const clipPath = chartName === RAIN_WEATHER ? 'url(#weatherPopupBarAndLineBottom)' : 'url(#weatherPopupBarAndLineTop)';
 
   useEffect(() => {
     setXAxisViewMode('topBar');
@@ -168,6 +168,7 @@ const WeatherPopupBarAndLineChart = ({
 
           <Bars data={ data }
                 height={ dimensions.height }
+                chartName={ chartName }
                 xScale={ xScale }
                 yScale={ yScale }
                 clipPath={ clipPath } />
@@ -223,23 +224,6 @@ const WeatherPopupBarAndLineChart = ({
                             chartType={ chartType }
                             clipPath={ clipPath } />
         </Chart>
-
-        <ChartContextMenu data={ data }
-                          date={ date }
-                          xScale={ xScale }
-                          yScale={ yScale }
-                          xAccessor={ xAccessor }
-                          yAccessor={ yAccessor }
-                          showPrimaryDropDown={ showPrimaryDropDown }
-                          setShowPrimaryDropDown={ setShowPrimaryDropDown }
-                          showSecondaryDropDown={ showSecondaryDropDown }
-                          setShowSecondaryDropDown={ setShowSecondaryDropDown }
-                          setHoverActive={ setHoverActive }
-                          setActiveDataPeriod={ setActiveDataPeriod }
-                          setXAxisViewMode={ setXAxisViewMode }
-                          activeProbeFactor={ activeProbeFactor }
-                          setActiveProbeFactor={ setActiveProbeFactor }
-                          switchAtMidWidth={ true } />
       </div>
     </>
   );

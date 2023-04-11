@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useDimensionsContext } from './Chart.d3';
+import { WEATHER_POPUP_MULTILINE } from '../../../../tools/general/system-variables.util';
 
-const YAxis = ({ yScale, chartName, isDarkMode }) => {
+const YAxis = ({ yScale, chartName, chartType, isDarkMode }) => {
 
   const dimensions = useDimensionsContext();
-  let ticks = yScale.ticks(5);
+  let ticks = yScale.ticks((chartType === WEATHER_POPUP_MULTILINE) ? 4 : 5);
 
   return (
     <g className="y-axis"
@@ -31,12 +32,12 @@ const YAxis = ({ yScale, chartName, isDarkMode }) => {
                 y2={ yScale(t) } />
 
           { t === 0 &&
-            <line className="y-axis__tick"
-                  stroke={ isDarkMode ? 'white' : 'black' }
-                  x2={ dimensions.boundedWidth }
-                  y1={ yScale(t) }
-                  y2={ yScale(t) }
-                  opacity={ 0.8 } /> }
+          <line className="y-axis__tick"
+                stroke={ isDarkMode ? 'white' : 'black' }
+                x2={ dimensions.boundedWidth }
+                y1={ yScale(t) }
+                y2={ yScale(t) }
+                opacity={ 0.8 } /> }
 
           <line className="y-axis__tick"
                 stroke={ isDarkMode ? '#525252' : '#dad9d5' }
