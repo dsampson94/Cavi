@@ -172,10 +172,11 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                         )) }
                                     </div>
                                 </div>
-                                <a className="flex mt-1 w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+                                <a className="flex -mt-1 w-full items-center justify-center rounded-md border border-transparent bg-blue-500 mx-12 w-64 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                                    onClick={ handleContactUsClick }>
                                     Contact Us
                                 </a>
+                                <div className="h-1"></div>
                             </div>
                         </Popover.Panel>
                     </Transition>
