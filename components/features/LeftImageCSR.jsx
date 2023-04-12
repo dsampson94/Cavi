@@ -51,22 +51,22 @@ export default function LeftImageCSR() {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col items-center p-6 justify-center mt-36 sm:flex-col lg:flex-row ">
-                <img
-                    src="/cavikids.png"
-                    alt="cavicares"
-                    className="h-72 rounded-xl shadow-xl"
-                    width={ 550 }
-                />
-                <img
-                    src="/cavikids1.png"
-                    alt="cavicares"
-                    className="h-72 rounded-xl mt-6 md:mt-0 shadow-xl sm:mt-8 lg:mt-0 lg:ml-12"
-                    width={ 550 }
-                    height={ 200 }
+            {/*<div className="flex flex-col items-center p-6 justify-center mt-36 sm:flex-col lg:flex-row ">*/}
+            {/*    <img*/}
+            {/*        src="/cavikids.png"*/}
+            {/*        alt="cavicares"*/}
+            {/*        className="h-72 rounded-xl shadow-xl"*/}
+            {/*        width={ 550 }*/}
+            {/*    />*/}
+            {/*    <img*/}
+            {/*        src="/cavikids1.png"*/}
+            {/*        alt="cavicares"*/}
+            {/*        className="h-72 rounded-xl mt-6 md:mt-0 shadow-xl sm:mt-8 lg:mt-0 lg:ml-12"*/}
+            {/*        width={ 550 }*/}
+            {/*        height={ 200 }*/}
 
-                />
-            </div>
+            {/*    />*/}
+            {/*</div>*/}
 
 
         </div>

@@ -161,8 +161,8 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                         )) }
                                     </div>
                                 </div>
-                                <a className="flex mt-1 w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700"
-                                   onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
+                                <a className="flex mt-1 w-full items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+                                   onClick={ handleContactUsClick }>
                                     Contact Us
                                 </a>
                             </div>
