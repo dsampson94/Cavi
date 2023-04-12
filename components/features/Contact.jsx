@@ -43,7 +43,7 @@ export default function Contact({ contactScrollToRef }) {
             </div>
 
             {/* Overlapping cards */ }
-            <section id="contact-info" className="relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-16 lg:px-8" aria-labelledby="contact-heading">
+            <section id="contact-info" className="relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-16 lg:px-8 md:mx-40" aria-labelledby="contact-heading">
                 <div className="bg-white br-04 rounded-2xl shadow-2xl">
                     <div className="mx-auto max-w-7xl py-16 px-6 lg:px-8">
                         <div className="mx-auto max-w-lg md:grid md:max-w-none md:grid-cols-2 md:gap-8">
@@ -59,7 +59,7 @@ export default function Contact({ contactScrollToRef }) {
                                             <a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193"
                                                target="_blank" className="text-md font-bold">11-13 St Andrews Road, Parktown, 2193, <br />
                                                 Johannesburg, Gauteng,
-                                                South Africa</a><br/>
+                                                South Africa</a><br />
                                         </div>
                                     </div>
                                     <div className="flex">
@@ -82,9 +82,12 @@ export default function Contact({ contactScrollToRef }) {
                                         </div>
                                     </div>
                                 </div>
-                                <Map lat={ -26.18239629277934 }
-                                     lon={ 28.03498248465847 }
-                                     location={ 'JHB' } />
+                                <div className="flex">
+                                    <Map lat={ -26.18239629277934 }
+                                         lon={ 28.03498248465847 }
+                                         location={ 'JHB' } />
+                                </div>
+
                             </div>
                             <div className="mt-12 sm:mt-16 md:mt-0">
                                 <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">CAPE TOWN CAVI CAMPUS</h2>
@@ -121,9 +124,11 @@ export default function Contact({ contactScrollToRef }) {
                                         </div>
                                     </div>
                                 </div>
-                                <Map lat={ -33.93434753748154 }
-                                     lon={ 18.471861071164618 }
-                                     location={ 'CPT' } />
+                                <div className="flex">
+                                    <Map lat={ -33.93434753748154 }
+                                         lon={ 18.471861071164618 }
+                                         location={ 'CPT' } />
+                                </div>
                             </div>
                         </div>
                     </div>

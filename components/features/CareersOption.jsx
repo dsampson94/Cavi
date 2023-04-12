@@ -32,10 +32,10 @@ export default function CareersOptions() {
     return (
         <div className="relative bg-white py-16 sm:py-16 lg:py-16">
             <div className="mx-auto max-w-md px-2 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
-                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                     Have you got what it takes?
                 </p>
-                <p className="mx-auto mt-12 text-2xl text-gray-500 p-2">
+                <p className="mx-auto mt-12 text-xl text-gray-500 p-2">
                     CAVI Brands is about people, and people make CAVI Brands. We are always looking to create relationships with the best candidates to augment and grow
                     our teams.
                     <br /><br />If you think we could gel, please visit our Careers pages below and submit your CV for consideration.

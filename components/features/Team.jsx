@@ -86,7 +86,7 @@ export default function Team() {
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-7xl py-12 px-6 lg:px-8 lg:py-24">
-                <p className="text-center text-3xl p-6 mb-10 -mt-6 tracking-tight sm:text-3xl">
+                <p className="text-center text-1xl p-6 mb-10 md:-mt-6 tracking-tight md:text-3xl">
                     People make CAVI Brands. We invest in the growth and development of People, and
                     we are proud to be a part of this dynamic, evolving and diverse nation.
                 </p>
