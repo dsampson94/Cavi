@@ -17,7 +17,7 @@ export default function BusinessContainer() {
                     </div>
                 </div>
                 <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5 max-h-24 min-h-24 h-24">
-                    <div className="relative w-48 ml-12 col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                    <div className="relative h-24 col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
                         <Image src={ '/brands/dermalogica-1.png' }
                                alt={ 'logo' }
                                layout="fill"
@@ -25,29 +25,33 @@ export default function BusinessContainer() {
                                className="absolute top-0 left-0 w-full h-full"
                         />
                     </div>
-                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                    <div className="relative h-24 col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
                         <Image src={ '/brands/PCG-1.png' }
-                               alt={ 'rss logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               alt={ 'logo' }
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                    <div className="relative h-24 col-span-1 p-2 flex justify-center md:col-span-2 lg:col-span-1 border border-gray-400 rounded-lg">
                         <Image src={ '/brands/Arc-1.png' }
-                               alt={ 'rss logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               alt={ 'logo' }
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="col-span-1 p-2 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1 border border-gray-400 rounded-lg">
+                    <div className="relative h-24 col-span-1 p-2 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1 border border-gray-400 rounded-lg">
                         <Image src={ '/brands/PDS-1.png' }
-                               alt={ 'rss logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               alt={ 'logo' }
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="col-span-2 p-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1 border border-gray-400 rounded-lg">
+                    <div className="relative h-24 col-span-2 p-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1 border border-gray-400 rounded-lg">
                         <Image src={ '/brands/Chanel-1.png' }
-                               alt={ 'rss logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               alt={ 'logo' }
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
                 </div>
             </div>
