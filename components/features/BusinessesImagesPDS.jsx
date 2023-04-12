@@ -6,7 +6,7 @@ export default function BusinessesImagesPDS() {
         <div className="bg-white py-12 sm:py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
-                    <div className="flex justify-center">
+                    <div className="object-contain flex justify-center">
                         <Image src={ '/brands/PDS-1.png' }
                                alt={ 'rss logo' }
                                height={ 200 }

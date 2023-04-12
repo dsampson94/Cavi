@@ -1,7 +1,6 @@
 import React from 'react';
 import Contact from '../features/Contact';
 import HeroImageCenter from '../features/HeroImageCenter';
-import Footer from '../features/Footer';
 import CenteredIconTextFeature from '../features/CenteredIconTextFeature';
 import RightImageWithText from '../features/RightImageWithText';
 import Team from '../features/Team';
@@ -14,6 +13,7 @@ import BusinessesImagesPCD from '../features/BusinessesImagesPCD';
 import BusinessesImagesPCG from '../features/BusinessesImagesPCG';
 import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
 import BusinessesImageARC from '../features/BusinessesImagesARC';
+import FooterCentered from '../features/FooterCentered';
 
 const ContentContainer = ({ view, contactScrollToRef, children }) => {
 
@@ -63,7 +63,7 @@ const HomePageContentContainer = ({ contactScrollToRef }) => {
             <HeroImageCenter />
             <CenteredIconTextFeature />
             <Contact contactScrollToRef={ contactScrollToRef } />
-            <Footer />
+            <FooterCentered />
         </div>
     );
 };
@@ -73,7 +73,7 @@ const AboutPageContentContainer = ({ contactScrollToRef }) => {
     return (
         <div className="isolate bg-white">
             <RightImageWithText />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
@@ -84,7 +84,7 @@ const PeoplePageContentContainer = ({ contactScrollToRef }) => {
     return (
         <div className="isolate bg-white">
             <Team />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
@@ -99,7 +99,7 @@ const BusinessesPageContentContainer = ({ contactScrollToRef }) => {
             <BusinessesImageARC />
             <BusinessesImagesPDS />
             <BusinessesImagesPCD />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
@@ -109,7 +109,7 @@ const BrandsPageContentContainer = ({ contactScrollToRef }) => {
     return (
         <div className="isolate bg-white">
             <LogoCloud />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
@@ -119,7 +119,7 @@ const CsrPageContentContainer = ({ contactScrollToRef }) => {
     return (
         <div className="isolate bg-white">
             <LeftImageCSR />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
@@ -129,7 +129,7 @@ const CareerPageContentContainer = ({ contactScrollToRef }) => {
     return (
         <div className="isolate bg-white">
             <CareersOptions />
-            <Footer contactScrollToRef={ contactScrollToRef } hasContactDetails />
+            <FooterCentered contactScrollToRef={ contactScrollToRef } />
         </div>
     );
 };
