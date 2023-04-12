@@ -59,6 +59,7 @@ export default function HeroImageCenter() {
                                            alt={ 'rss logo' }
                                            height={ 200 }
                                            width={ 200 }
+                                           layout="fill"
                                            objectFit="contain"
                                            className="absolute top-0 left-0 w-full h-full" />
                                 </div>
