@@ -54,36 +54,40 @@ export default function HeroImageCenter() {
                                 Our Businesses
                             </p>
                             <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5 max-h-24 min-h-24 h-24">
-                                <div className="relative w-48 h-0 pb-[50%] col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                                <div className="relative col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                                     <Image src={ '/brands/dermalogica-2.png' }
-                                           alt={ 'rss logo' }
+                                           alt={ 'logo' }
                                            layout="fill"
                                            objectFit="contain"
                                            className="absolute top-0 left-0 w-full h-full" />
                                 </div>
-                                <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                                <div className="relative col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                                     <Image src={ '/brands/PCG-1.png' }
-                                           alt={ 'rss logo' }
-                                           height={ 200 }
-                                           width={ 200 } />
+                                           alt={ 'logo' }
+                                           layout="fill"
+                                           objectFit="contain"
+                                           className="absolute top-0 left-0 w-full h-full" />
                                 </div>
-                                <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
+                                <div className="relative col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
                                     <Image src={ '/brands/Arc-1.png' }
-                                           alt={ 'rss logo' }
-                                           height={ 200 }
-                                           width={ 200 } />
+                                           alt={ 'logo' }
+                                           layout="fill"
+                                           objectFit="contain"
+                                           className="absolute top-0 left-0 w-full h-full" />
                                 </div>
-                                <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
+                                <div className="relative col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
                                     <Image src={ '/brands/PDS-2.png' }
-                                           alt={ 'rss logo' }
-                                           height={ 200 }
-                                           width={ 200 } />
+                                           alt={ 'logo' }
+                                           layout="fill"
+                                           objectFit="contain"
+                                           className="absolute top-0 left-0 w-full h-full" />
                                 </div>
-                                <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                                <div className="relative col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                                     <Image src={ '/brands/Chanel-1.png' }
-                                           alt={ 'rss logo' }
-                                           height={ 200 }
-                                           width={ 200 } />
+                                           alt={ 'logo' }
+                                           layout="fill"
+                                           objectFit="contain"
+                                           className="absolute top-0 left-0 w-full h-full" />
                                 </div>
                             </div>
                         </div>
