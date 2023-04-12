@@ -8,15 +8,14 @@ export default function LogoCloud() {
                 <p className="text-center text-base tracking-wider text-xl text-blue-500">
                     Our Beauty Brands
                 </p>
-                <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-6 lg:grid-cols-4 sm:grid-cols-3">
-                    <div className="relative w-48 h-0 pb-[50%] col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                <div className="mt-6 6 grid grid-cols-2 gap-3 md:grid-cols-6 lg:grid-cols-4 sm:grid-cols-3">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/chopard-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 }
                                layout="fill"
                                objectFit="contain"
-                               className="absolute top-0 left-0 w-full h-full" />
+                               className="absolute top-0 left-0 w-full h-full"
+                        />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Bvlgari-1.png' }

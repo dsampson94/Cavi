@@ -57,8 +57,6 @@ export default function HeroImageCenter() {
                                 <div className="relative w-48 h-0 pb-[50%] col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                                     <Image src={ '/brands/dermalogica-2.png' }
                                            alt={ 'rss logo' }
-                                           height={ 200 }
-                                           width={ 200 }
                                            layout="fill"
                                            objectFit="contain"
                                            className="absolute top-0 left-0 w-full h-full" />
