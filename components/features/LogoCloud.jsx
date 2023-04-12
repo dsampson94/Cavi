@@ -174,7 +174,7 @@ export default function LogoCloud() {
                                layout="fill"
                                className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="relative w-40 h-24 ml-32 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-40 h-24 ml-32 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/sisley-1.png' }
                                alt={ 'logo' }
                                layout="fill"
