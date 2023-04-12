@@ -35,12 +35,13 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>{'CAVI Brands'}</title>
+                <title>{ 'CAVI Brands' }</title>
             </Head>
 
-            <NavbarCentered contactScrollToRef={contactScrollToRef} showNavbar={showNavbar} />
+            <NavbarCentered contactScrollToRef={ contactScrollToRef }
+                            showNavbar={ showNavbar }/>
 
-            <Component contactScrollToRef={contactScrollToRef} {...pageProps} />
+            <Component contactScrollToRef={ contactScrollToRef } { ...pageProps } />
             <Analytics />
         </>
     );

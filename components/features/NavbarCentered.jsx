@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
-import Logo from './Logo';
 import { socials } from './NavbarLeft';
 
 function NavbarCentered({ contactScrollToRef, showNavbar }) {
@@ -126,8 +125,13 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                             className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-40"
                         >
                             <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
-                                <div className=" pt-4 flex items-center justify-between">
-                                    <Logo />
+                                <div className="pt-4 flex items-center justify-between">
+                                    <Popover.Button
+                                        as={ Link }
+                                        href={ '/' }>
+                                        <Image src="/cavilogo.svg" alt="logo" height={ 200 } width={ 200 } />
+                                    </Popover.Button>
+
                                     <div className="-mr-2">
                                         <Popover.Button
                                             className="bg-white rounded-md p-2 -translate-x-4 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -138,13 +142,18 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                 </div>
                                 <div className="px-2 pt-2 pb-3 space-y-1">
                                     { navigation.map((item) => (
-                                        <Link
+                                        <Popover.Button
                                             key={ item.name }
+                                            as={ Link }
                                             href={ item.href }
-                                            className={ `block px-3 py-2 rounded-md text-base font-medium  text-gray-700 hover:text-gray-900 hover:bg-gray-50 ${ router.pathname === item.href ? 'bg-gray-100 text-gray-900' : '' }` }
+                                            className={ `block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 ${
+                                                router.pathname === item.href
+                                                    ? 'bg-gray-100 text-gray-900'
+                                                    : ''
+                                            }` }
                                         >
                                             { item.name }
-                                        </Link>
+                                        </Popover.Button>
                                     )) }
                                 </div>
                                 <div className="px-8 py-5 ml-10">

@@ -13,10 +13,13 @@ const Pin = () => (
 const Map = ({ lat, lon, location }) => {
 
     function renderMarkers(map, maps) {
-        let marker = new maps.Marker({
-            position: { lat: lat, lng: lon },
-            map
-        });
+        let marker;
+        if (maps) {
+            marker = new maps.Marker({
+                position: { lat: lat, lng: lon },
+                map
+            });
+        }
         let infoWindow = new maps.InfoWindow({
             content: location === 'JHB' ? '<div><h3>CAVI Johannesburg Campus</h3>' +
                 '<a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193" target="_blank" class="text-blue-500 text-lg font-bold underline">Get Directions</a>'
