@@ -146,10 +146,13 @@
     width: 100%;
     font-weight: bold;
     height: util.rem(0);
-    color: red;
-    opacity: 0.5;
-    margin: 0 0 0 util.rem(48);
-    transform: translateY(util.rem(8));
+    color: cornflowerblue;
+    opacity: 0.8;
+    margin: 0 0 0 util.rem(-10);
+    text-align: right;
+    z-index: 2;
+    position: relative;
+    transform: translateY(util.rem(3));
     font-size: util.rem(13);
   }
 

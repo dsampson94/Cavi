@@ -105,9 +105,9 @@ const getViewBox = (name, tiny, chart, tall, menu, overview) => {
     case OPEN_MENU:
       return '10 -3 50 100';
     case SINGLE_DROPDOWN:
-      return '9 0 35 80';
+      return '9 1 28 70';
     case CIRCLE_DROPDOWN:
-      return '9 1 35 80';
+      return '9 1 28 70';
     case DOUBLE_DROPDOWN:
       if (tall) return '9 1 35 60';
       else return '9 8 35 70';

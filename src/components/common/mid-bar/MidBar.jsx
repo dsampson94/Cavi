@@ -289,15 +289,15 @@ const FieldChartsMidBar = ({
     <div className={ 'field-chart__top-bar' }>
       { mappedChartList && <div className="field-chart__top-bar--left">
 
-        <DropDownButton name={ SETTINGS_GEAR }
-                        className={ 'field-chart__top-bar--left__settings' }
-                        fill={ '#6E8192' }
-                        menu={ HIDDEN_MENU }
-                        menuData={ mappedMenuList }
-                        mappedFieldList={ mappedFieldList }
-                        onDivClick={ () => setShowChartsModal(!showChartsModal) }
-                        settings
-                        tiny />
+        <DropDownButton name={ SINGLE_DROPDOWN }
+                        className={ 'chart__header__zoom-options--left-top__options' }
+                        menu={ CHART_USAGE_SASRI_MENU } />
+
+        <DropDownButton name={ CIRCLE_DROPDOWN }
+                        activeExtendedChart={ activeExtendedChart }
+                        setActiveExtendedChart={ setActiveExtendedChart }
+                        className={ 'chart__header__zoom-options--left-top__options' }
+                        menu={ CHART_USAGE_MENU } />
 
         <DropDownButton name={ INFO_CIRCLE }
                         className={ 'field-chart__top-bar--left__settings' }
@@ -313,17 +313,15 @@ const FieldChartsMidBar = ({
           <SVGIcon name={ TOGGLE_YAXIS } tiny fill={ yAxisShared ? '#00B8B0' : '#0081ff' } />
         </div>
 
-        <DropDownButton name={ CIRCLE_DROPDOWN }
-                        activeExtendedChart={ activeExtendedChart }
-                        setActiveExtendedChart={ setActiveExtendedChart }
-                        className={ 'chart__header__zoom-options--left-top__options' }
-                        menu={ CHART_USAGE_MENU }
-                        left />
-
-        <DropDownButton name={ SINGLE_DROPDOWN }
-                        className={ 'chart__header__zoom-options--left-top__options' }
-                        menu={ CHART_USAGE_SASRI_MENU }
-                        left />
+        <DropDownButton name={ SETTINGS_GEAR }
+                        className={ 'field-chart__top-bar--left__settings' }
+                        fill={ '#6E8192' }
+                        menu={ HIDDEN_MENU }
+                        menuData={ mappedMenuList }
+                        mappedFieldList={ mappedFieldList }
+                        onDivClick={ () => setShowChartsModal(!showChartsModal) }
+                        settings
+                        tiny />
 
       </div> }
 

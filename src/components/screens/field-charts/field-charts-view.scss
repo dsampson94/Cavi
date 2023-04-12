@@ -13,11 +13,12 @@
 
   &__top-bar {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     margin-left: util.rem(10);
-    margin-right: util.rem(-15);
+    margin-right: util.rem(-360);
     margin-top: util.rem(-6);
     height: util.rem(0);
+    transform: translateY(2px);
     white-space: nowrap;
     user-select: none;
 

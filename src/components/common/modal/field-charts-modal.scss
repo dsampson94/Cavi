@@ -17,7 +17,6 @@
   box-shadow: util.rem(0) util.rem(0) util.rem(25) map.get(color.$colorMap, dark-mode-grey);
   margin-left: 15%;
   margin-right: 9%;
-  overflow: hidden;
 
   &__container {
     display: flex;
