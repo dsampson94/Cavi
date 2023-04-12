@@ -144,39 +144,13 @@
   &__info {
     user-select: none;
     width: 100%;
-    height: util.rem(10);
-    margin: -4.5% 0 0 6.5%;
+    font-weight: bold;
+    height: util.rem(0);
     color: red;
-    opacity: 0.3;
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-small)) {
-      margin: -18% 0 0 24%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-      font-size: util.rem(7);
-      margin: -9% 0 0 15%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-      font-size: util.rem(9);
-      margin: -7% 0 0 13%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-      font-size: util.rem(11);
-      margin: -5% 0 0 9.5%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-      font-size: util.rem(13);
-      margin: -4.5% 0 0 7.5%;
-    }
-
-    @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-      font-size: util.rem(15);
-      margin: -4% 0 0 6.5%;
-    }
+    opacity: 0.5;
+    margin: 0 0 0 util.rem(48);
+    transform: translateY(util.rem(8));
+    font-size: util.rem(13);
   }
 
   &--top {

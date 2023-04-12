@@ -164,16 +164,6 @@ const FieldLineChartD3 = ({
 
   return (
     <>
-      {/*{ chartType !== DEFICIT &&*/ }
-      {/*<ChartHeader chartName={ chartName }*/ }
-      {/*             chartType={ chartType }*/ }
-      {/*             isDarkMode={ isDarkMode }*/ }
-      {/*             showChartsModal={ showChartsModal }*/ }
-      {/*             setShowChartsModal={ setShowChartsModal }*/ }
-      {/*             activeExtendedChart={ activeExtendedChart }*/ }
-      {/*             setActiveExtendedChart={ setActiveExtendedChart }*/ }
-      {/*/> }*/ }
-
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }
            className={ chartName }>

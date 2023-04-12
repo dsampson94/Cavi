@@ -163,7 +163,7 @@ const FieldChartLine = ({
             style={ {
               display: chartType === DAILY ? hiddenLineList?.includes('Forecast') ? 'flex' : 'none' : 'flex',
               fill: 'none',
-              strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
+              strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.8px',
               strokeLinecap: 'round'
             } } />
 
@@ -175,7 +175,7 @@ const FieldChartLine = ({
             style={ {
               display: chartType === DAILY ? hiddenLineList?.includes('Actual') ? 'flex' : 'none' : 'flex',
               fill: 'none',
-              strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.2px',
+              strokeWidth: chartType === AGGREGATE ? '1.8px' : '1.8px',
               strokeLinecap: 'round'
             } } /> }
 
@@ -207,7 +207,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -218,7 +218,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -229,7 +229,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#ea3a3d' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -240,7 +240,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#47FFFF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -251,7 +251,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#1ad598' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -262,7 +262,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ 'green' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
         </g>
@@ -277,7 +277,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -288,7 +288,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
         </g>
@@ -303,7 +303,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
 
@@ -314,7 +314,7 @@ const TemperatureChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, char
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } /> }
         </g>
@@ -338,7 +338,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
 
@@ -348,7 +348,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
         </g>
@@ -362,7 +362,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
 
@@ -372,7 +372,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
         </g>
@@ -386,7 +386,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
 
@@ -396,7 +396,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                 stroke={ '#f37b2c' }
                 style={ {
                   fill: 'none',
-                  strokeWidth: '1.2px',
+                  strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
         </g>
@@ -406,7 +406,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
 
 const ReferenceLine = ({ xScale, yScale, xAccessor, clipPath, data, chartName, isDarkMode }) => {
 
-  const width = 1.5;
+  const width = 1.8;
   const opacity = isDarkMode ? 0.8 : 0.6;
 
   let idealAccessor = d => d?.ideal;

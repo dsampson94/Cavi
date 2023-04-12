@@ -24,7 +24,7 @@
     font-size: util.rem(12);
     font-weight: normal;
     margin-left: util.rem(20);
-    margin-top: util.rem(18);
+    margin-top: util.rem(25);
     min-width: util.rem(80);
     border-radius: map.get(radius.$border-radius, large);
     padding: util.rem(10);
@@ -102,7 +102,7 @@
     }
 
     &__extended {
-      margin: util.rem(-5) util.rem(-10) util.rem(-5) util.rem(-10);
+      margin: util.rem(-10) util.rem(-10) util.rem(-5) util.rem(-10);
 
       > div {
         display: flex;
@@ -116,7 +116,6 @@
         p {
           padding-left: util.rem(20);
           margin-top: util.rem(3.5);
-          transform: translateX(-15%);
         }
       }
     }

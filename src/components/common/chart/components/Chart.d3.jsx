@@ -29,6 +29,11 @@ const Chart = ({
         secondaryData={ secondaryData }
       />
 
+      <div className="chart__info"
+           onContextMenu={ (event) => event.preventDefault() }>
+        { chartInfo }
+      </div>
+
       <svg
         className="chart"
         ref={ svgRef }
@@ -103,10 +108,6 @@ const Chart = ({
         </g>
       </svg>
 
-      <div className="chart__info"
-           onContextMenu={ (event) => event.preventDefault() }>
-        { chartInfo }
-      </div>
     </ChartContext.Provider>
   );
 };

@@ -204,8 +204,8 @@ export const LINE_400MM = '400mm';
 export const LINE_600MM = '600mm';
 export const LINE_800MM = '800mm';
 
-export const AGGREGATE_TOP_SOIL = 'aggregate_0 - 400mm';
-export const AGGREGATE_BOTTOM_SOIL = 'aggregate_400 - 800mm';
+export const AGGREGATE_TOP_SOIL = 'aggregate_Top Soil Aggregate: 0 - 400mm';
+export const AGGREGATE_BOTTOM_SOIL = 'aggregate_Bottom Soil Aggregate: 400 - 800mm';
 
 export const DEFICIT_ETO = 'Deficit / ETo';
 export const VOLT_READINGS = 'Volt Readings';

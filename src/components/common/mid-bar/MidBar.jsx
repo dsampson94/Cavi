@@ -8,13 +8,18 @@ import {
   ACCURACY_ANALYSIS,
   BULLSEYE,
   CHART_TOP_BAR_MENU,
+  CHART_USAGE_MENU,
+  CHART_USAGE_SASRI_MENU,
+  CIRCLE_DROPDOWN,
   CLIENT_FIELDS_MIDBAR,
   DASHBOARD,
   DROPDOWN_ALL,
   FIELD_CHART_MIDBAR,
   FIELD_REPORTS,
   FIELD_SETUP_MIDBAR,
-  FIELD_TEMPERATURES_MIDBAR, HIDDEN_MENU, INFO_CIRCLE,
+  FIELD_TEMPERATURES_MIDBAR,
+  HIDDEN_MENU,
+  INFO_CIRCLE,
   MID_BAR_ASSISTANT,
   MID_BAR_CHART,
   MID_BAR_EMAIL_READINGS,
@@ -26,15 +31,16 @@ import {
   PREVIOUS,
   PREVIOUS_RECOMMENDATIONS,
   SETTINGS_GEAR,
+  SINGLE_DROPDOWN,
   TOGGLE_YAXIS
 } from '../../../tools/general/system-variables.util';
 
 import Button from '../button/Button';
 import DropDownButton from '../drop-down/drop-down-button/DropDownButton';
 import SVGIcon from '../SVGIcon/SVGIcon';
+import FieldChartsModal from '../modal/FieldChartsModal';
 
 import './mid-bar.scss';
-import FieldChartsModal from '../modal/FieldChartsModal';
 
 const MidBar = ({
                   view,
@@ -66,7 +72,9 @@ const MidBar = ({
                   setYAxisShared,
                   reloadToggleActive,
                   setReloadToggleActive,
-                  mappedChartList
+                  mappedChartList,
+                  activeExtendedChart,
+                  setActiveExtendedChart
                 }) => {
 
   switch (view) {
@@ -99,7 +107,9 @@ const MidBar = ({
                                 setActiveFieldName={ setActiveFieldName }
                                 yAxisShared={ yAxisShared }
                                 setYAxisShared={ setYAxisShared }
-                                mappedChartList={ mappedChartList } />;
+                                mappedChartList={ mappedChartList }
+                                activeExtendedChart={ activeExtendedChart }
+                                setActiveExtendedChart={ setActiveExtendedChart } />;
 
     case FIELD_TEMPERATURES_MIDBAR:
       return <FieldTemperaturesChartsMidBar activeDataPeriod={ activeDataPeriod }
@@ -268,7 +278,9 @@ const FieldChartsMidBar = ({
                              mappedMenuList,
                              yAxisShared,
                              setYAxisShared,
-                             mappedChartList
+                             mappedChartList,
+                             activeExtendedChart,
+                             setActiveExtendedChart
                            }) => {
 
   const [showChartsModal, setShowChartsModal] = useState(false);
@@ -283,7 +295,7 @@ const FieldChartsMidBar = ({
                         menu={ HIDDEN_MENU }
                         menuData={ mappedMenuList }
                         mappedFieldList={ mappedFieldList }
-                        onDivClick={() => setShowChartsModal(!showChartsModal)}
+                        onDivClick={ () => setShowChartsModal(!showChartsModal) }
                         settings
                         tiny />
 
@@ -300,6 +312,18 @@ const FieldChartsMidBar = ({
              onClick={ () => setYAxisShared(!yAxisShared) }>
           <SVGIcon name={ TOGGLE_YAXIS } tiny fill={ yAxisShared ? '#00B8B0' : '#0081ff' } />
         </div>
+
+        <DropDownButton name={ CIRCLE_DROPDOWN }
+                        activeExtendedChart={ activeExtendedChart }
+                        setActiveExtendedChart={ setActiveExtendedChart }
+                        className={ 'chart__header__zoom-options--left-top__options' }
+                        menu={ CHART_USAGE_MENU }
+                        left />
+
+        <DropDownButton name={ SINGLE_DROPDOWN }
+                        className={ 'chart__header__zoom-options--left-top__options' }
+                        menu={ CHART_USAGE_SASRI_MENU }
+                        left />
 
       </div> }
 

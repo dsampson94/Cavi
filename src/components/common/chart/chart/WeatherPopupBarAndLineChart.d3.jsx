@@ -146,12 +146,6 @@ const WeatherPopupBarAndLineChart = ({
 
   return (
     <>
-      {/*<ChartHeader chartName={ chartName }*/ }
-      {/*             chartType={ chartType }*/ }
-      {/*             isDarkMode={ isDarkMode }*/ }
-      {/*             activeExtendedChart={ activeExtendedChart }*/ }
-      {/*             setActiveExtendedChart={ setActiveExtendedChart } />*/ }
-
       <div ref={ wrapperRef }
            style={ { height: chartByName(chartName).height } }>
 

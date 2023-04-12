@@ -328,7 +328,7 @@ const ChartOptionRow = ({ option, setActiveExtendedChart, activeExtendedChart })
   return (
     <div onClick={ () => setActiveExtendedChart(option) }>
       <CheckboxInput checked={ activeExtendedChart === option } />
-      <p>{ option }</p>
+      <p className="min-w-fit">{ option }</p>
     </div>
   );
 };

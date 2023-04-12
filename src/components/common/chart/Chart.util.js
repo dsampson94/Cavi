@@ -55,7 +55,7 @@ export const chartByName = (chartName, isDarkMode) => {
     case EC:
     case VPD:
     case ACTUAL_IRRIGATION:
-      return { header: chartName, height: '35%' };
+      return { height: '22.5%' };
     case SOIL_TEMPERATURE :
     case CANOPY_OUTSIDE_TEMPERATURE :
     case RAIN_HUMIDITY :
