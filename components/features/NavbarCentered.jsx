@@ -127,9 +127,11 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                             <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="pt-4 flex items-center justify-between">
                                     <Popover.Button
-                                        as={ Link }
-                                        href={ '/' }>
-                                        <Image src="/cavilogo.svg" alt="logo" height={ 200 } width={ 200 } />
+                                        as={Link}
+                                        href="/"
+                                        className="outline-none border-none focus:ring-0 focus:outline-none focus:border-none focus:bg-transparent bg-transparent"
+                                    >
+                                        <Image src="/cavilogo.svg" alt="logo" height={200} width={200} />
                                     </Popover.Button>
 
                                     <div className="-mr-2">
