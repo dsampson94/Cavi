@@ -6,7 +6,7 @@ export default function BusinessContainer() {
         <div className="">
             <div className="mx-auto max-w-7xl py-12 px-6 sm:py-16 lg:px-8 lg:py-20 ">
                 <div className="mx-auto max-w-4xl text-center">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl pt-6">
                         Corporate Structure
                     </h2>
                     <div className="flex justify-center py-12">

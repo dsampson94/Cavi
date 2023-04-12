@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Popover, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
 import Logo from './Logo';
 import { socials } from './NavbarLeft';
@@ -37,7 +37,7 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                 } transition-opacity` }
             >
                 <Popover className="relative bg-white">
-                    <nav className="max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
+                    <nav className="max-w-8xl items-center justify-betweend px-6 md:justify-start md:space-x-10 lg:px-8">
                         <Popover.Group as="nav" className="hidden md:flex lg:pt-3 w-full">
                             <div className="w-full flex justify-center pl-2 max-h-[100px] h-[100px]">
                                 <div className="flex space-x-10 pt-10 pr-10 ">
@@ -54,7 +54,7 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                     )) }
                                 </div>
 
-                                <div className="min-w-fit flex items-center hover:bg-slate-100 cursor-pointer rounded-md">
+                                <div className="min-w-fit flex items-center mb-2 hover:bg-slate-100 cursor-pointer rounded-md">
                                     <Link href="/">
                                         <Image
                                             src={ '/cavilogo.svg' }
@@ -105,6 +105,13 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                             </div>
                         </Popover.Group>
                     </nav>
+                    <div className="absolute top-0 right-0 h-0 md:hidden translate-y-2 -translate-x-3">
+                        <Popover.Button
+                            className="inline-flex items-center justify-center rounded-md bg-white p-4 text-gray-950 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span className="sr-only">Open menu</span>
+                            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                        </Popover.Button>
+                    </div>
                     <Transition
                         as={ Fragment }
                         enter="duration-200 ease-out"
@@ -123,9 +130,9 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                     <Logo />
                                     <div className="-mr-2">
                                         <Popover.Button
-                                            className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                            className="bg-white rounded-md p-2 -translate-x-4 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                                             <span className="sr-only">Close menu</span>
-                                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                            <XMarkIcon className="h-6 w-6 " aria-hidden="true" />
                                         </Popover.Button>
                                     </div>
                                 </div>
@@ -140,8 +147,8 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
                                         </Link>
                                     )) }
                                 </div>
-                                <div className="px-5 py-5">
-                                    <div className="grid grid-cols-2 gap-4">
+                                <div className="px-8 py-5 ml-10">
+                                    <div className="grid grid-cols-3 gap-4">
                                         { socials.map((item) => (
                                             <a
                                                 key={ item.name }

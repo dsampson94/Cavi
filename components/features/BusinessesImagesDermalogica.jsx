@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function BusinessesImagesDermalogica() {
     return (
-        <div className="bg-white py-12 sm:py-12">
+        <div className="bg-white pt-56 pb-12 sm:py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
                     <div className="object-contain flex justify-center">
