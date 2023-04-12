@@ -29,17 +29,20 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Clear-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Coach-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full"
+                        />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Zadig.png' }
@@ -59,11 +62,13 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/laprairie-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full"
+                        />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/floral-1.png' }
@@ -77,17 +82,19 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/hermes-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Issey-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Jack-1.png' }
@@ -95,11 +102,12 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Jorgobe-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/D&G-1.png' }
@@ -107,11 +115,12 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/dermalogica-2.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Narciso-1.png' }
@@ -131,11 +140,12 @@ export default function LogoCloud() {
                                height={ 200 }
                                width={ 200 } />
                     </div>
-                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 ml-12 col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Ellis-1.png' }
                                alt={ 'logo' }
-                               height={ 200 }
-                               width={ 200 } />
+                               layout="fill"
+                               objectFit="contain"
+                               className="absolute top-0 left-0 w-full h-full" />
                     </div>
                     <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                         <Image src={ '/brands/Tommy.png' }
