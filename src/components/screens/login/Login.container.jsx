@@ -19,7 +19,9 @@ const LoginContainer = () => {
     saveUserLoginToLocalStorage(user);
   };
 
-  const onLoginClick = (user) => dispatch(requestLogin(user, () => onLoginSuccess(user)));
+  const onLoginClick = (user) => dispatch(requestLogin(user, () => {
+    onLoginSuccess(user);
+  }));
 
   return <Login onLoginClick={ onLoginClick } />;
 };

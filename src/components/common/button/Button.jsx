@@ -34,18 +34,19 @@ const Button = ({
                   tab,
                   active,
                   selected,
-                  tall
+                  tall,
+                  middatebar
                 }) => {
   return (
     <button className={ getClassNames('button',
-      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, tiny, long, medium, add, tab, active, selected }) }
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, middatebar, tiny, long, medium, add, tab, active, selected }) }
             name={ name }
             type={ type }
             onClick={ onClick }
             onMouseEnter={ onMouseEnter }
             disabled={ disabled }>
-      { !datebar && <label>{ label }</label> }
-      { datebar && <div>
+      { !datebar || !middatebar && <label>{ label }</label> }
+      { datebar || middatebar && <div>
         <div className={ 'button__label--upper' }><label>{ label }</label></div>
         <div className={ 'button__label--lower' }><label>{ lowerLabel !== 0 && lowerLabel }</label></div>
       </div> }

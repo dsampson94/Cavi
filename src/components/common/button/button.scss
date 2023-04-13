@@ -46,6 +46,32 @@
     width: util.rem(70);
   }
 
+  &--middatebar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: bold;
+    color: black;
+    white-space: pre-wrap;
+    height: util.rem(35);
+    cursor: default;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+      border: 5px black;
+    }
+
+    & label:hover {
+      cursor: default;
+      box-shadow: none;
+    }
+
+    &:active {
+      top: 0;
+    }
+  }
+
   &--datebar {
     display: flex;
     justify-content: center;
@@ -160,13 +186,12 @@
   &__label {
 
     &--upper {
-      margin-top: -10%;
+      margin-top: -8px;
       height: 50%;
     }
 
     &--lower {
       font-weight: normal;
-      margin-top: -15%;
       font-size: util.rem(8);
       height: 50%;
     }

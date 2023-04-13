@@ -309,6 +309,11 @@ html.dark {
     background-color: map.get(color.$colorMap, dark-mode-grey);
   }
 
+  .button--middatebar {
+    color: white;
+    background-color: map.get(color.$colorMap, chart-background-grey);
+  }
+
   #floating_probe {
     form input,
     form select {

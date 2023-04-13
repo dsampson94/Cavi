@@ -141,21 +141,6 @@
     }
   }
 
-  &__info {
-    user-select: none;
-    width: 100%;
-    font-weight: bold;
-    height: util.rem(0);
-    color: cornflowerblue;
-    opacity: 0.8;
-    margin: 0 0 0 util.rem(-10);
-    text-align: right;
-    z-index: 2;
-    position: relative;
-    transform: translateY(util.rem(3));
-    font-size: util.rem(13);
-  }
-
   &--top {
     background-color: map.get(color.$colorMap, chart-background-blue);
     margin-bottom: util.rem(5);

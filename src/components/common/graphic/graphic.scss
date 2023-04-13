@@ -9,6 +9,9 @@
   display: flex;
   cursor: pointer;
   justify-content: center;
+  background-color: whitesmoke;
+  border-radius: util.rem(5);
+  padding: 2px;
 
   &:active {
     position: relative;
@@ -55,7 +58,8 @@
     }
 
     &:hover {
-      background-color: map.get(color.$colorMap, blur-very-light-grey);
+      background-color: map.get(color.$colorMap, clouded-grey);
+      transition: 3s ease-out;
       border-radius: 4px;
     }
   }

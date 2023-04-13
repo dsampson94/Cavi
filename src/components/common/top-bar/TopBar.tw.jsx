@@ -44,7 +44,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, setActiveFieldName }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, setActiveFieldName, isAgent }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -131,10 +131,10 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
     });
   };
 
-  const dropDownList = () => {
+  const dropDownList = (isAgent) => {
     switch (true) {
       case location.pathname.includes('chart'):
-        return [
+        if (isAgent === 1) return [
           {
             name: 'Recommendations',
             description: 'View Recommendations List',
@@ -161,9 +161,23 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             icon: Cog8ToothIcon
           }
         ];
+        else return [
+          {
+            name: 'Recommendations',
+            description: 'View Recommendations List',
+            href: `/client/${ groupName }/${ clientName }`,
+            icon: ListBulletIcon
+          },
+          {
+            name: 'Temperatures',
+            description: 'View Temperatures Charts',
+            href: `/client/${ groupName }/${ clientName }/field-temperatures/${ probeNumber }/${ fieldName }`,
+            icon: FaThermometerHalf
+          }
+        ];
       case location.pathname.includes('report'):
       case location.pathname.includes('temperature'):
-        return [
+        if (isAgent === 1) return [
           {
             name: 'Recommendations',
             description: 'View Recommendations List',
@@ -190,6 +204,20 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             icon: Cog8ToothIcon
           }
         ];
+        else return [
+          {
+            name: 'Recommendations',
+            description: 'View Recommendations List',
+            href: `/client/${ groupName }/${ clientName }`,
+            icon: ListBulletIcon
+          },
+          {
+            name: 'Moisture Charts',
+            description: 'View Moisture Charts',
+            href: `/client/${ groupName }/${ clientName }/field-charts/${ probeNumber }/${ fieldName }`,
+            icon: VscGraphLine
+          }
+        ];
       case location.pathname.includes('setup'):
         return [
           {
@@ -213,12 +241,16 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           }
         ];
       case !location?.pathname?.includes('dashboard') && !location?.pathname?.includes('setup'):
-        return [
+        if (isAgent === 1) return [
           {
-            name: 'Download',
-            description: 'Download Recommendations List',
-            icon: FolderArrowDownIcon,
-            onClick: getPDF
+            name: 'Maps',
+            description: 'Show Probes on Google Maps',
+            icon: MapPinIcon
+          },
+          {
+            name: 'Show Weather Station Data',
+            description: 'Show Weather Station Data',
+            icon: MapPinIcon
           },
           {
             name: 'Email',
@@ -227,14 +259,10 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             onClick: getPDFAndEmail
           },
           {
-            name: 'Show Archives',
-            description: 'Show Archives',
-            icon: ArchiveBoxIcon
-          },
-          {
-            name: 'Previous Recommendations',
-            description: 'Show Previous Recommendations',
-            icon: ArrowUturnLeftIcon
+            name: 'Download',
+            description: 'Download Recommendations List',
+            icon: FolderArrowDownIcon,
+            onClick: getPDF
           },
           {
             name: 'Reports',
@@ -242,20 +270,59 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             icon: DocumentTextIcon
           },
           {
+            name: 'Previous Recommendations',
+            description: 'Show Previous Recommendations',
+            icon: ArrowUturnLeftIcon
+          },
+          {
+            name: 'Show Archives',
+            description: 'Show Archives',
+            icon: ArchiveBoxIcon
+          },
+          {
             name: 'Accuracy Analysis',
             description: 'Download Accuracy Analysis',
             icon: DocumentArrowDownIcon
-          },
-          {
-            name: 'Maps',
-            description: 'Maps',
-            icon: MapPinIcon
           },
           {
             name: 'Field Setup',
             description: 'Field Setup',
             href: `/client/${ groupName }/${ clientName }/field-setup/${ GENERAL_ROUTE }`,
             icon: Cog8ToothIcon
+          }
+        ];
+        else return [
+          {
+            name: 'Maps',
+            description: 'Show Probes on Google Maps',
+            icon: MapPinIcon
+          },
+          {
+            name: 'Email',
+            description: 'Email Recommendations',
+            icon: EnvelopeIcon,
+            onClick: getPDFAndEmail
+          },
+          {
+            name: 'Download',
+            description: 'Download Recommendations List',
+            icon: FolderArrowDownIcon,
+            onClick: getPDF
+          },
+          {
+            name: 'Reports',
+            description: 'Show Reports',
+            icon: DocumentTextIcon
+          },
+          {
+            name: 'Previous Recommendations',
+            description: 'Show Previous Recommendations',
+            icon: ArrowUturnLeftIcon
+          },
+          {
+            name: 'Show Archives',
+            description: 'Show Archives',
+            icon: ArchiveBoxIcon
           }
         ];
       default:
@@ -356,7 +423,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                   className={ classNames(isDarkMode ? 'bg-white' : 'bg-gray-700',
                     'absolute -right-12 top-full z-100 mt-3 w-screen max-w-sm overflow-hidden rounded-3xl shadow-xl ring-1 ring-gray-900/5') }>
                   <div className="p-3">
-                    { dropDownList()?.map((item) => (
+                    { dropDownList(isAgent)?.map((item) => (
                       <div key={ item.name }
                            className={ classNames(isDarkMode ? 'hover:bg-gray-200' : 'hover:bg-gray-600',
                              'group relative flex items-center gap-x-6 rounded-lg p-1 text-sm leading-6') }>

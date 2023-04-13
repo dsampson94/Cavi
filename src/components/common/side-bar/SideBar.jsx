@@ -47,7 +47,8 @@ const SideBar = ({
                    mappedFieldList,
                    setActiveLoadPeriod,
                    setActiveFieldName,
-                   view
+                   view,
+                   isAgent
                  }) => {
 
   switch (view) {
@@ -55,7 +56,8 @@ const SideBar = ({
     case CLIENT_FIELDS:
       return <ClientFieldsSideBar showSideBar={ showSideBar }
                                   setShowSideBar={ setShowSideBar }
-                                  mappedUserData={ mappedUserData } />;
+                                  mappedUserData={ mappedUserData }
+                                  isAgent={ isAgent } />;
 
     case FIELD_CHARTS:
       return <FieldChartsSideBar showSideBar={ showSideBar }
@@ -91,7 +93,7 @@ SideBar.propTypes = {
 
 export default SideBar;
 
-const ClientFieldsSideBar = ({ showSideBar, setShowSideBar, mappedUserData }) => {
+const ClientFieldsSideBar = ({ showSideBar, setShowSideBar, mappedUserData, isAgent }) => {
 
     let storedFavoritesList = viewFarmLocalStorageFavorites();
 
@@ -125,15 +127,17 @@ const ClientFieldsSideBar = ({ showSideBar, setShowSideBar, mappedUserData }) =>
                        setShowSideBar={ setShowSideBar }
                        favoritesToggle={ favoritesToggle }
                        setFavoritesToggle={ setFavoritesToggle }
-                       myFavorites /> }
+                       myFavorites
+                       isAgent={ isAgent } /> }
 
           <SideBarList mappedUserData={ filteredSideBarData ? filteredSideBarData : mappedUserData }
                        setShowSideBar={ setShowSideBar }
                        filteredSideBarData={ filteredSideBarData }
                        favoritesToggle={ favoritesToggle }
                        setFavoritesToggle={ setFavoritesToggle }
-                       myClients />
-          <SideBarButton />
+                       myClients
+                       isAgent={ isAgent } />
+          <SideBarButton isAgent={ isAgent } />
         </> }
       </div>
     );

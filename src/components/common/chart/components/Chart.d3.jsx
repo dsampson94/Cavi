@@ -29,11 +29,6 @@ const Chart = ({
         secondaryData={ secondaryData }
       />
 
-      <div className="chart__info"
-           onContextMenu={ (event) => event.preventDefault() }>
-        { chartInfo }
-      </div>
-
       <svg
         className="chart"
         ref={ svgRef }
@@ -104,7 +99,18 @@ const Chart = ({
               />
             </clipPath>
           </defs>
+
           { children }
+
+          <text
+            y="17%"
+            x="92%"
+            text-anchor="end"
+            fill={ 'cornflowerblue' }
+            onContextMenu={ (event) => event.preventDefault() }
+          >
+            { chartInfo }
+          </text>
         </g>
       </svg>
 

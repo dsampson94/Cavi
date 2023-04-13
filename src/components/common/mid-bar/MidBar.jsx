@@ -74,7 +74,8 @@ const MidBar = ({
                   setReloadToggleActive,
                   mappedChartList,
                   activeExtendedChart,
-                  setActiveExtendedChart
+                  setActiveExtendedChart,
+                  isAgent
                 }) => {
 
   switch (view) {
@@ -109,7 +110,8 @@ const MidBar = ({
                                 setYAxisShared={ setYAxisShared }
                                 mappedChartList={ mappedChartList }
                                 activeExtendedChart={ activeExtendedChart }
-                                setActiveExtendedChart={ setActiveExtendedChart } />;
+                                setActiveExtendedChart={ setActiveExtendedChart }
+                                isAgentisAgent={ isAgent } />;
 
     case FIELD_TEMPERATURES_MIDBAR:
       return <FieldTemperaturesChartsMidBar activeDataPeriod={ activeDataPeriod }
@@ -140,6 +142,9 @@ const MidBar = ({
                                  setActiveFieldName={ setActiveFieldName }
                                  yAxisShared={ yAxisShared }
                                  setYAxisShared={ setYAxisShared } />;
+
+    default:
+      return <></>;
   }
 };
 
@@ -280,14 +285,15 @@ const FieldChartsMidBar = ({
                              setYAxisShared,
                              mappedChartList,
                              activeExtendedChart,
-                             setActiveExtendedChart
+                             setActiveExtendedChart,
+                             isAgent
                            }) => {
 
   const [showChartsModal, setShowChartsModal] = useState(false);
 
   return (
     <div className={ 'field-chart__top-bar' }>
-      { mappedChartList && <div className="field-chart__top-bar--left">
+      { mappedChartList && <div className={ isAgent === 1 ? 'field-chart__top-bar--left' : 'field-chart__top-bar--left-non-agent' }>
 
         <DropDownButton name={ SINGLE_DROPDOWN }
                         className={ 'chart__header__zoom-options--left-top__options' }
@@ -313,6 +319,7 @@ const FieldChartsMidBar = ({
           <SVGIcon name={ TOGGLE_YAXIS } tiny fill={ yAxisShared ? '#00B8B0' : '#0081ff' } />
         </div>
 
+        { isAgent === 1 &&
         <DropDownButton name={ SETTINGS_GEAR }
                         className={ 'field-chart__top-bar--left__settings' }
                         fill={ '#6E8192' }
@@ -321,7 +328,7 @@ const FieldChartsMidBar = ({
                         mappedFieldList={ mappedFieldList }
                         onDivClick={ () => setShowChartsModal(!showChartsModal) }
                         settings
-                        tiny />
+                        tiny /> }
 
       </div> }
 

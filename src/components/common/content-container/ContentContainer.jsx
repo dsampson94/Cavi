@@ -26,7 +26,8 @@ const ContentContainer = ({
                             setActiveLoadPeriod,
                             setActiveFieldName,
                             showSideBar,
-                            setShowSideBar
+                            setShowSideBar,
+                            isAgent
                           }) => {
   switch (view) {
     case DASHBOARD:
@@ -34,7 +35,8 @@ const ContentContainer = ({
                                         showSideBar={ showSideBar }
                                         setShowSideBar={ setShowSideBar }
                                         clientRequestParams={ clientRequestParams }
-                                        view={ view } />;
+                                        view={ view }
+                                        isAgent={ isAgent } />;
 
     default:
       return <ClientFieldContentContainer children={ children }
@@ -44,7 +46,8 @@ const ContentContainer = ({
                                           setActiveFieldName={ setActiveFieldName }
                                           setActiveLoadPeriod={ setActiveLoadPeriod }
                                           mappedFieldList={ mappedFieldList }
-                                          view={ view } />;
+                                          view={ view }
+                                          isAgent={ isAgent } />;
 
   }
 };
@@ -55,7 +58,7 @@ ContentContainer.propTypes = {
 
 export default ContentContainer;
 
-const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar, clientRequestParams }) => {
+const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar, clientRequestParams, isAgent }) => {
 
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
@@ -131,17 +134,19 @@ const DashboardContentContainer = ({ children, view, showSideBar, setShowSideBar
       <TopBarTw showSideBar={ showSideBar }
                 setShowSideBar={ setShowSideBar }
                 clientRequestParams={ clientRequestParams }
-                view={ view } />
+                view={ view }
+                isAgent={ isAgent } />
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
                  setShowSideBar={ setShowSideBar }
                  mappedUserData={ mappedUser }
-                 view={ view } />
+                 view={ view }
+                 isAgent={ isAgent } />
 
         <div className="content-container__screen--dashboard">
 
-          <TabBarTop tabs={ tabs } />
+          { isAgent ? <TabBarTop tabs={ tabs } /> : <></> }
 
           { children }
 
@@ -163,7 +168,8 @@ const ClientFieldContentContainer = ({
                                        clientRequestParams,
                                        mappedFieldList,
                                        setActiveLoadPeriod,
-                                       setActiveFieldName
+                                       setActiveFieldName,
+                                       isAgent
                                      }) => {
 
   const userAccount = retrieveUserClientListFromLocalStorage();
@@ -175,14 +181,8 @@ const ClientFieldContentContainer = ({
       <TopBarTw showSideBar={ showSideBar }
                 setShowSideBar={ setShowSideBar }
                 clientRequestParams={ clientRequestParams }
-                view={ view } />
-
-      {/*<TopBar showSideBar={ showSideBar }*/ }
-      {/*        setShowSideBar={ setShowSideBar }*/ }
-      {/*        setActiveFieldName={ setActiveFieldName }*/ }
-      {/*        clientRequestParams={ clientRequestParams }*/ }
-      {/*        mappedFieldList={ mappedFieldList }*/ }
-      {/*        view={ view } />*/ }
+                view={ view }
+                isAgent={ isAgent } />
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
@@ -191,7 +191,8 @@ const ClientFieldContentContainer = ({
                  mappedFieldList={ mappedFieldList }
                  setActiveLoadPeriod={ setActiveLoadPeriod }
                  setActiveFieldName={ setActiveFieldName }
-                 view={ view } />
+                 view={ view }
+                 isAgent={ isAgent } />
         { children }
       </div>
     </div>

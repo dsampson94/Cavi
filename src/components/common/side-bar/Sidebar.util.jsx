@@ -41,7 +41,8 @@ export const SideBarList = ({
                               myFavorites,
                               myClients,
                               myFavoritesChart,
-                              setShowSideBar
+                              setShowSideBar,
+                              isAgent
                             }) => {
 
   const history = useHistory();
@@ -89,16 +90,18 @@ export const SideBarList = ({
                 { value.iok }
               </div>
 
-              { !myFavoritesChart &&
+
               <div className="client-fields-side-bar__list__item__subheader__icon"
                    onClick={ () => handleFavoritesClick(item.objectKey, value.iok) }>
                 <SVGIcon name={ FAVORITES_STAR } fill={ '#f37b2c' } />
-              </div> }
-
-              <div className="client-fields-side-bar__list__item__subheader__icon"
-                   onClick={ () => history.push(`/client/${ item.objectKey }/${ value.iok }/field-setup/${ GENERAL_ROUTE }`) }>
-                <SVGIcon name={ SETTINGS_GEAR } />
               </div>
+
+              { !myFavoritesChart && isAgent === 1 && <>
+                <div className="client-fields-side-bar__list__item__subheader__icon"
+                     onClick={ () => history.push(`/client/${ item.objectKey }/${ value.iok }/field-setup/${ GENERAL_ROUTE }`) }>
+                  <SVGIcon name={ SETTINGS_GEAR } />
+                </div>
+              </> }
             </div>
           );
         }) }
@@ -139,10 +142,12 @@ export const mappedUserData = (userAccount, overview) => {
   return mappedClients;
 };
 
-export const SideBarButton = () => {
-  return <div className="client-fields-side-bar__lower-button">
+export const SideBarButton = (isAgent) => {
+  return <> { isAgent === 1 &&
+  <div className="client-fields-side-bar__lower-button">
     <Button label={ 'Add new client database' } />
-  </div>;
+  </div> }
+  </>;
 };
 
 export const ViewDataBar = ({ setActiveLoadPeriod }) => {

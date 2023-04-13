@@ -9,6 +9,7 @@ import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_FIELD_WEA
 
 import ContentContainer from '../../../common/content-container/ContentContainer';
 import InputSearch from '../../../common/input-search/InputSearch';
+import { retrieveUserClientListFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 import './dashboard-overview.scss';
 
@@ -24,6 +25,8 @@ const DashboardOverview = ({
   const [showClientsSideBar, setShowClientsSideBar] = useState(true);
   const [filteredClientData, setFilteredClientData] = useState(undefined);
 
+  let isAgent = retrieveUserClientListFromLocalStorage().access.agent;
+
   const handleSubHeaderClick = (groupName, clientName) => {
     // setShowClientsSideBar(false);
     dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
@@ -35,20 +38,23 @@ const DashboardOverview = ({
   return (
     <ContentContainer view={ DASHBOARD }
                       showSideBar={ showClientsSideBar }
-                      setShowSideBar={ setShowClientsSideBar }>
+                      setShowSideBar={ setShowClientsSideBar }
+                      isAgent={ isAgent }>
 
-      <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
-                    setOverviewOptionSelected={ setOverviewOptionSelected } />
+      { isAgent ? <>
+        <ActiveHeader overviewOptionSelected={ overviewOptionSelected }
+                      setOverviewOptionSelected={ setOverviewOptionSelected } />
 
-      <InputSearch dataToFilter={ ownClientsList }
-                   setFilteredData={ setFilteredClientData }
-                   placeholder={ SEARCH_PLACEHOLDER }
-                   overview />
+        <InputSearch dataToFilter={ ownClientsList }
+                     setFilteredData={ setFilteredClientData }
+                     placeholder={ SEARCH_PLACEHOLDER }
+                     overview />
 
-      <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
-                    overviewOptionSelected={ overviewOptionSelected }
-                    setOverviewOptionSelected={ setOverviewOptionSelected }
-                    handleSubHeaderClick={ handleSubHeaderClick } />
+        <OverviewList ownClientsList={ filteredClientData ? filteredClientData : ownClientsList }
+                      overviewOptionSelected={ overviewOptionSelected }
+                      setOverviewOptionSelected={ setOverviewOptionSelected }
+                      handleSubHeaderClick={ handleSubHeaderClick } /> }
+      </> : <></> }
     </ContentContainer>
   );
 };

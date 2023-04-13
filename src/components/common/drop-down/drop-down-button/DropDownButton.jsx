@@ -22,7 +22,7 @@ import {
   VPD_OPTION
 } from '../../../../tools/general/system-variables.util';
 
-import { daysFromToday, getClassNames } from '../../../../tools/general/helpers.util';
+import { getClassNames } from '../../../../tools/general/helpers.util';
 
 import { requestLogout } from '../../../../redux/actions/auth.action';
 
@@ -161,23 +161,6 @@ const DropDownMenuFixed = ({
     history.push('/');
   };
 
-  const getTopBarValue = () => {
-    const recommendations = [];
-    mappedFieldList?.forEach(item => {
-      if (fieldName === item.fieldName.locationName) {
-        recommendations.push(item.fieldName.recommend1);
-        recommendations.push(item.fieldName.recommend2);
-        recommendations.push(item.fieldName.recommend3);
-        recommendations.push(item.fieldName.recommend4);
-        recommendations.push(item.fieldName.recommend5);
-        recommendations.push(item.fieldName.recommend6);
-        recommendations.push(item.fieldName.recommend7);
-        recommendations.push(item.fieldName.recommend8);
-      }
-    });
-    return recommendations;
-  };
-
   return (
     <div className={ getClassNames('dropdown', { hidden: menu === HIDDEN_MENU }) }
          onClick={ () => setShowPrimaryDropDown(!showPrimaryDropDown) }>
@@ -188,26 +171,6 @@ const DropDownMenuFixed = ({
 
         { menu === CHART_TOP_BAR_MENU &&
         <div>
-          { location.pathname.includes('field-charts') &&
-          <div className={ 'field-chart__top-bar--right--datebar' }>
-            <Button label={ daysFromToday(0) }
-                    lowerLabel={ getTopBarValue()[0] } datebar />
-            <Button label={ daysFromToday(1) }
-                    lowerLabel={ getTopBarValue()[1] } datebar />
-            <Button label={ daysFromToday(2) }
-                    lowerLabel={ getTopBarValue()[2] } datebar />
-            <Button label={ daysFromToday(3) }
-                    lowerLabel={ getTopBarValue()[3] } datebar />
-            <Button label={ daysFromToday(4) }
-                    lowerLabel={ getTopBarValue()[4] } datebar />
-            <Button label={ daysFromToday(5) }
-                    lowerLabel={ getTopBarValue()[5] } datebar />
-            <Button label={ daysFromToday(6) }
-                    lowerLabel={ getTopBarValue()[6] } datebar />
-            <Button label={ daysFromToday(7) }
-                    lowerLabel={ getTopBarValue()[7] } datebar spaced />
-          </div> }
-
           <div style={ { display: 'flex', textDecoration: 'underline', marginLeft: '-5px' } }>
             <div>{ 'Probes on field:' }</div>
 
