@@ -5,25 +5,25 @@ const features = [
     {
         id: 1,
         name: 'Dermalogica',
-        image: '/dermcareer.png',
+        image: '/Derm_careers.jpeg',
         link: 'https://www.dermalogica.co.za/careers'
     },
     {
         id: 2,
         name: 'PCG',
-        image: '/pcgcareer.png',
+        image: '/PCG_careers.png',
         link: 'https://pcg.co.za/careers/'
     },
     {
         id: 3,
         name: 'Chanel',
-        image: '/chanelcareer.png',
+        image: '/Chanel_careers.jpg',
         link: 'https://pcg.co.za/careers/'
     },
     {
         id: 4,
         name: 'PDS',
-        image: '/pdscareer.png',
+        image: '/PDS_careers2.jpg',
         link: 'https://pcg.co.za/careers/'
     }
 ];
@@ -40,19 +40,20 @@ export default function CareersOptions() {
                     our teams.
                     <br /><br />If you think we could gel, please visit our Careers pages below and submit your CV for consideration.
                 </p>
-                <div className=" mt-32">
+                <div className="mt-32">
                     <div className="grid grid-cols-1 sm: grid-cols-1 gap-12 sm:grid-cols-1 lg:grid-cols-4">
                         { features.map((feature) => (
                             <div key={ feature.name } className="pt-6">
                                 <div className="flow-root rounded-lg bg-gray-50 px-0 pb-0">
                                     <div className="-mt-6">
                                         <div>
-                            <span className="inline-flex items-center justify-center rounded-xl p-3 shadow-lg">
+                            <span className="inline-flex items-center flex-col hover:bg-blue-200 justify-center rounded-xl p-3 shadow-lg">
+                                <h3 className="flex mb-3  w-full justify-center rounded-lg ">Career Opportunities</h3>
                                 <a href={ feature.link } target="_blank">
                                 <Image src={ feature.image }
                                        alt={ 'cavi-image' }
-                                       className={ 'w-92 h-64 object-cover rounded-xl' }
-                                       height={ 300 }
+                                       className={ 'w-92 h-48 object-cover rounded-xl' }
+                                       height={ 250 }
                                        width={ 350 }
                                 /></a>
                             </span>
