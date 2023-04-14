@@ -335,7 +335,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
           <path className={ 'line' }
                 d={ lineGenerator(data?.[0]) }
                 clipPath={ clipPath }
-                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
+                stroke={ isDarkMode ? '#ea3a3d' : '#ea3a3d' }
                 style={ {
                   fill: 'none',
                   strokeWidth: '1.8px',
@@ -345,7 +345,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
           <path className={ 'line' }
                 d={ lineGenerator(data?.[1]) }
                 clipPath={ clipPath }
-                stroke={ '#f37b2c' }
+                stroke={ '#2AE851' }
                 style={ {
                   fill: 'none',
                   strokeWidth: '1.8px',
@@ -366,34 +366,25 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   strokeLinecap: 'round'
                 } } />
 
-          <path className={ 'line' }
-                d={ lineGenerator(data?.[1]) }
-                clipPath={ clipPath }
-                stroke={ '#f37b2c' }
-                style={ {
-                  fill: 'none',
-                  strokeWidth: '1.8px',
-                  strokeLinecap: 'round'
-                } } />
+          {/*{ data?.[1] &&*/}
+          {/*<path className={ 'line' }*/}
+          {/*      d={ lineGenerator(data?.[1]) }*/}
+          {/*      clipPath={ clipPath }*/}
+          {/*      stroke={ '#f37b2c' }*/}
+          {/*      style={ {*/}
+          {/*        fill: 'none',*/}
+          {/*        strokeWidth: '1.8px',*/}
+          {/*        strokeLinecap: 'round'*/}
+          {/*      } } /> }*/}
         </g>
       );
     case HUMIDITY_WEATHER:
       return (
         <g>
           <path className={ 'line' }
-                d={ lineGenerator(data?.[0]) }
-                clipPath={ clipPath }
-                stroke={ isDarkMode ? '#0090ff' : '#0000FF' }
-                style={ {
-                  fill: 'none',
-                  strokeWidth: '1.8px',
-                  strokeLinecap: 'round'
-                } } />
-
-          <path className={ 'line' }
                 d={ lineGenerator(data?.[1]) }
                 clipPath={ clipPath }
-                stroke={ '#f37b2c' }
+                stroke={ '#ea3a3d' }
                 style={ {
                   fill: 'none',
                   strokeWidth: '1.8px',

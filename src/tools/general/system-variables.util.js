@@ -234,8 +234,15 @@ export const RAIN_WEATHER = 'rain_weather';
 export const CANOPY_LINE = 'Canopy Temperatures';
 export const OUTSIDE_LINE = 'Outside Temperatures';
 
-export const RAIN_LINE = 'Rain';
+export const ETO_FORECAST = 'ETo Forecast';
+export const ETO_WEATHER_STATION = 'ETo Weather Station';
+
+export const ACTUAL_TEMPERATURE = 'Actual Temperature';
+export const FORECAST_TEMPERATURE = 'Forecast Temperature';
+
 export const HUMIDITY_LINE = 'Humidity';
+export const WIND_LINE = 'Wind';
+export const RAIN_LINE = 'Rain';
 
 //DROPDOWN
 export const CHART_TOP_BAR_MENU = 'chart-top_bar_menu';

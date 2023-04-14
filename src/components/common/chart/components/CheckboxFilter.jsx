@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 import {
+  ACTUAL_TEMPERATURE,
   CANOPY_LINE,
   CANOPY_OUTSIDE_TEMPERATURE,
   DAILY_ETO,
+  ETO_FORECAST,
+  ETO_WEATHER,
+  ETO_WEATHER_STATION,
+  FORECAST_TEMPERATURE,
   HUMIDITY_LINE,
+  HUMIDITY_WEATHER,
   LINE_100MM,
   LINE_200MM,
   LINE_300MM,
@@ -14,7 +20,11 @@ import {
   OUTSIDE_LINE,
   RAIN_HUMIDITY,
   RAIN_LINE,
-  SOIL_TEMPERATURE
+  RAIN_WEATHER,
+  SOIL_TEMPERATURE,
+  TEMP_WEATHER,
+  WIND_LINE,
+  WIND_WEATHER
 } from '../../../../tools/general/system-variables.util';
 
 import { getClassNames } from '../../../../tools/general/helpers.util';
@@ -40,6 +50,21 @@ const CheckboxFilter = ({ chartName, hiddenLineList, setHiddenLineList, secondar
     case RAIN_HUMIDITY:
       return <RainHumidityCheckboxGroup hiddenLineList={ hiddenLineList }
                                         setHiddenLineList={ setHiddenLineList } />;
+    case ETO_WEATHER:
+      return <WeatherETOCheckboxGroup hiddenLineList={ hiddenLineList }
+                                      setHiddenLineList={ setHiddenLineList } />;
+    case TEMP_WEATHER:
+      return <WeatherTemperatureCheckboxGroup hiddenLineList={ hiddenLineList }
+                                              setHiddenLineList={ setHiddenLineList } />;
+    case HUMIDITY_WEATHER:
+      return <WeatherHumidityCheckboxGroup hiddenLineList={ hiddenLineList }
+                                           setHiddenLineList={ setHiddenLineList } />;
+    case WIND_WEATHER:
+      return <WeatherWindCheckboxGroup hiddenLineList={ hiddenLineList }
+                                       setHiddenLineList={ setHiddenLineList } />;
+    case RAIN_WEATHER:
+      return <WeatherRainCheckboxGroup hiddenLineList={ hiddenLineList }
+                                       setHiddenLineList={ setHiddenLineList } />;
     default :
       return <></>;
   }
@@ -227,3 +252,180 @@ const RainHumidityCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
 };
 
 RainHumidityCheckboxGroup.propTypes = {};
+
+const WeatherETOCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
+
+  const [activeList] = useState([ETO_FORECAST, ETO_WEATHER_STATION]);
+  const [checked, setChecked] = useState(null);
+
+  useEffect(() => {
+    if (setHiddenLineList) setHiddenLineList(activeList);
+  }, [checked]);
+
+  const hideLineClick = (event) => {
+    if (activeList.includes(event.target.id))
+      activeList.splice(activeList.indexOf(event.target.id), 1);
+    else activeList.push(event.target.id);
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className={ getClassNames('chart__checkbox-filter', { weather: true }) }>
+
+      <div className={ 'chart__checkbox-filter__inner' }>
+
+        <CheckboxInput constant={ ETO_FORECAST }
+                       checked={ hiddenLineList?.includes(ETO_FORECAST) }
+                       onClick={ e => hideLineClick(e) }
+                       etoForecast />
+
+        <CheckboxInput constant={ ETO_WEATHER_STATION }
+                       checked={ hiddenLineList?.includes(ETO_WEATHER_STATION) }
+                       onClick={ e => hideLineClick(e) }
+                       etoWeatherStation />
+      </div>
+
+    </div>
+  );
+};
+
+WeatherETOCheckboxGroup.propTypes = {};
+
+const WeatherTemperatureCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
+
+  const [activeList] = useState([ACTUAL_TEMPERATURE, FORECAST_TEMPERATURE]);
+  const [checked, setChecked] = useState(null);
+
+  useEffect(() => {
+    if (setHiddenLineList) setHiddenLineList(activeList);
+  }, [checked]);
+
+  const hideLineClick = (event) => {
+    if (activeList.includes(event.target.id))
+      activeList.splice(activeList.indexOf(event.target.id), 1);
+    else activeList.push(event.target.id);
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className={ getClassNames('chart__checkbox-filter', { weather: true }) }>
+
+      <div className={ 'chart__checkbox-filter__inner' }>
+
+        <CheckboxInput constant={ ACTUAL_TEMPERATURE }
+                       checked={ hiddenLineList?.includes(ACTUAL_TEMPERATURE) }
+                       onClick={ e => hideLineClick(e) }
+                       actualTemperature />
+
+        <CheckboxInput constant={ FORECAST_TEMPERATURE }
+                       checked={ hiddenLineList?.includes(FORECAST_TEMPERATURE) }
+                       onClick={ e => hideLineClick(e) }
+                       forecastTemperature />
+      </div>
+
+    </div>
+  );
+};
+
+WeatherETOCheckboxGroup.propTypes = {};
+
+const WeatherHumidityCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
+
+  const [activeList] = useState([HUMIDITY_LINE]);
+  const [checked, setChecked] = useState(null);
+
+  useEffect(() => {
+    if (setHiddenLineList) setHiddenLineList(activeList);
+  }, [checked]);
+
+  const hideLineClick = (event) => {
+    if (activeList.includes(event.target.id))
+      activeList.splice(activeList.indexOf(event.target.id), 1);
+    else activeList.push(event.target.id);
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className={ getClassNames('chart__checkbox-filter', { weather: true }) }>
+
+      <div className={ 'chart__checkbox-filter__inner' }>
+
+        <CheckboxInput constant={ HUMIDITY_LINE }
+                       checked={ hiddenLineList?.includes(HUMIDITY_LINE) }
+                       onClick={ e => hideLineClick(e) }
+                       humidity2 />
+      </div>
+
+    </div>
+  );
+};
+
+WeatherHumidityCheckboxGroup.propTypes = {};
+
+const WeatherWindCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
+
+  const [activeList] = useState([WIND_LINE]);
+  const [checked, setChecked] = useState(null);
+
+  useEffect(() => {
+    if (setHiddenLineList) setHiddenLineList(activeList);
+  }, [checked]);
+
+  const hideLineClick = (event) => {
+    if (activeList.includes(event.target.id))
+      activeList.splice(activeList.indexOf(event.target.id), 1);
+    else activeList.push(event.target.id);
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className={ getClassNames('chart__checkbox-filter', { weather: true }) }>
+
+      <div className={ 'chart__checkbox-filter__inner' }>
+
+        <CheckboxInput constant={ WIND_LINE }
+                       checked={ true }
+                       onClick={ e => hideLineClick(e) }
+                       daily
+                       wind />
+      </div>
+
+    </div>
+  );
+};
+
+WeatherWindCheckboxGroup.propTypes = {};
+
+const WeatherRainCheckboxGroup = ({ hiddenLineList, setHiddenLineList }) => {
+
+  const [activeList] = useState([RAIN_LINE]);
+  const [checked, setChecked] = useState(null);
+
+  useEffect(() => {
+    if (setHiddenLineList) setHiddenLineList(activeList);
+  }, [checked]);
+
+  const hideLineClick = (event) => {
+    if (activeList.includes(event.target.id))
+      activeList.splice(activeList.indexOf(event.target.id), 1);
+    else activeList.push(event.target.id);
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className={ getClassNames('chart__checkbox-filter', { weather: true }) }>
+
+      <div className={ 'chart__checkbox-filter__inner' }>
+
+        <CheckboxInput constant={ RAIN_LINE }
+                       checked={ true }
+                       onClick={ e => hideLineClick(e) }
+                       daily
+                       rain2 />
+      </div>
+
+    </div>
+  );
+};
+
+WeatherRainCheckboxGroup.propTypes = {};

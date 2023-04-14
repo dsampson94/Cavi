@@ -156,6 +156,7 @@
     display: flex;
     position: relative;
     justify-content: center;
+    font-size: util.rem(13);
 
     &__inner {
       display: flex;
@@ -170,6 +171,12 @@
     &--temperatures {
       justify-content: center;
       transform: translateY(35px);
+    }
+
+    &--weather {
+      height: 0;
+      transform: translateY(10px);
+      justify-content: center;
     }
   }
 }

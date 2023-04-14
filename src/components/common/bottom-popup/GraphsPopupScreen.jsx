@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
-import { ETO_WEATHER, HUMIDITY_WEATHER, RAIN_WEATHER, TEMP_WEATHER, WEATHER_POPUP_MULTILINE, WIND_WEATHER } from '../../../tools/general/system-variables.util';
 import { zoomIdentity } from 'd3';
+
+import {
+  ACTUAL_TEMPERATURE,
+  ETO_FORECAST,
+  ETO_WEATHER,
+  ETO_WEATHER_STATION,
+  FORECAST_TEMPERATURE,
+  HUMIDITY_LINE,
+  HUMIDITY_WEATHER,
+  RAIN_LINE,
+  RAIN_WEATHER,
+  TEMP_WEATHER,
+  WEATHER_POPUP_MULTILINE,
+  WIND_WEATHER
+} from '../../../tools/general/system-variables.util';
+
 import WeatherPopupMultiLineChart from '../chart/chart/WeatherPopupMultiLineChart.d3';
 import WeatherPopupBarAndLineChart from '../chart/chart/WeatherPopupBarAndLineChart.d3';
 
@@ -67,7 +82,7 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [ETO_WEATHER] }
+                                  toggleInitialList={ [ETO_FORECAST, ETO_WEATHER_STATION] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />
@@ -90,7 +105,7 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [TEMP_WEATHER] }
+                                  toggleInitialList={ [ACTUAL_TEMPERATURE, FORECAST_TEMPERATURE] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />
@@ -113,7 +128,7 @@ export const GraphsPopupScreen = ({
                                   setXAxisViewMode={ setXAxisViewMode }
                                   activeProbeFactor={ activeProbeFactor }
                                   setActiveProbeFactor={ setActiveProbeFactor }
-                                  toggleInitialList={ [HUMIDITY_WEATHER] }
+                                  toggleInitialList={ [RAIN_LINE, HUMIDITY_LINE] }
                                   date={ date }
                                   hasXAxis={ false }
                                   setDate={ setDate } />

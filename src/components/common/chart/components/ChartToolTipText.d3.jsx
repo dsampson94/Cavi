@@ -334,10 +334,10 @@ const TooltipText = ({
   };
 
   const tooltipX = x1 + 20;
-  const tooltipY = y1 < 30 ? y1 : y1 - 40;
+  const tooltipY = y1 < 30 ? y1 : y1 - 30;
 
   const getTooltipContent = () => {
-    if (chartName.includes('deficit')) {
+    if (chartType === DEFICIT) {
       if (isAgent) {
         return [
           { icon: '📅', value: hoveredObject?.x },
@@ -374,7 +374,6 @@ const TooltipText = ({
         { icon: hoveredObject?.y ? 'Forecast' : '', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
         { icon: secondaryHoveredObject?.y ? 'Actual' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
       ];
-    } else if (hoveredObject?.barY && hoverActive) {
     } else {
       return [
         { icon: '📅', value: hoveredObject?.x },
