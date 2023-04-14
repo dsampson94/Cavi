@@ -45,10 +45,9 @@ export const chartByName = (chartName, isDarkMode) => {
       return { height: '25%', backgroundColor: isDarkMode ? '#607CB1' : '#ABD4EF' };
     case AGGREGATE_BOTTOM_SOIL :
       return { height: '24.5%', backgroundColor: isDarkMode ? '#0C6921' : '#C1EAC7' };
-    case DEFICIT_ETO:
-      return { height: '22.5%' };
     case DAILY_ETO:
       return { height: '23%' };
+    case DEFICIT_ETO:
     case VOLT_READINGS:
     case FLOW_HOURLY:
     case FLOW_DAILY:

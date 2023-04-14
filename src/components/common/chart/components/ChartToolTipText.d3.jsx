@@ -310,52 +310,12 @@ const TooltipText = ({
     secondaryHoveredObject = secondaryData[dateBisector(secondaryData, date)];
   }
 
-  let toolTipText = (chart) => {
-    if (chartName.includes('deficit')) {
-      return `${ hoveredObject?.y }mm ${ hoveredObject?.percent }% @ ${ hoveredObject?.temp }C @ ${ hoveredObject?.x }`;
-    } else if (chartName === DEFICIT_ETO) {
-      return ` Etc: ${ hoveredObject?.barY } Set: ${ hoveredObject?.lineY?.toFixed(3) } @ ${ hoveredObject?.x }`;
-    } else if (chartName === VOLT_READINGS) {
-      return ` Volts: ${ hoveredObject?.y } @ ${ hoveredObject?.x }`;
-    } else if (chartName === EC) {
-      return ` mS/cm: ${ hoveredObject?.y } @ ${ hoveredObject?.x }`;
-    } else if (chartName === DAILY_ETO) {
-      if (chart === 'Actual') return `Actual: ${ secondaryHoveredObject?.y }mm ${ secondaryHoveredObject?.x }`;
-      else return `Forecast: ${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
-    } else if (hoveredObject?.barY && hoverActive) {
-      return `${ hoveredObject?.barY }mm ${ hoveredObject?.x }`;
-    } else {
-      return `${ hoveredObject?.y }mm ${ hoveredObject?.x }`;
-    }
-  };
-
-  const getXPos = (chart) => {
-    if (chartName === DAILY_ETO && hiddenLineList?.includes(chart)) return {
-      rect1: x1 + 15,
-      text1: x1 + 20,
-      rect2: x2 + 15,
-      text2: x2 + 20
-    };
-    else return { rect1: x1 + 15, text1: x1 + 20 };
-  };
-
-  const getYPos = (chart) => {
-    if (chartName === DAILY_ETO && hiddenLineList?.includes(chart)) return {
-      rect1: (y1 - y2 < 15) ? y1 + 40 : y1 + 0,
-      text1: (y1 - y2 < 15) ? y1 + 54 : y1 + 13,
-      rect2: (y1 - y2 < 15) ? y1 + 70 : y2 - 30,
-      text2: (y1 - y2 < 15) ? y1 + 84 : y2 - 18
-    };
-    else if (y1 < 40) return { rect1: y1, text1: y1 + 13 };
-    else return { rect1: y1 - 20, text1: y1 - 7 };
-  };
-
   const getTextWidth = () => {
-    if (chartName === DEFICIT_ETO) return 260;
-    if (chartType === EXTENDED) return 250;
-    else if (chartType === DEFICIT) return 285;
-    else if (chartName === DAILY_ETO) return 240;
-    else return 180;
+    if (chartName === DEFICIT_ETO) return 160;
+    if (chartType === EXTENDED) return 220;
+    else if (chartType === DEFICIT) return 210;
+    else if (chartName === DAILY_ETO) return 180;
+    else return 160;
   };
 
   const renderText = (chart) => {
@@ -365,47 +325,105 @@ const TooltipText = ({
     else if (hoveredObject?.barY && hoverActive && y1) return true;
   };
 
-  return (<>
+  const tooltipX = x1 + 20;
+  const tooltipY = y1 < 30 ? y1 : y1 - 40;
+
+  const getTooltipContent = () => {
+    if (chartName.includes('deficit')) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+        { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' },
+        { icon: hoveredObject?.percent ? '💧💧' : '', value: hoveredObject?.percent ? `${ hoveredObject?.percent }%` : '' }
+      ];
+    } else if (chartName === DEFICIT_ETO) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: hoveredObject?.barY ? '💧💧' : '', value: hoveredObject?.barY ? `${ hoveredObject?.barY }%` : '' },
+        { icon: hoveredObject?.lineY ? '💧' : '', value: hoveredObject?.lineY ? `${ hoveredObject?.lineY.toFixed(2) }%` : '' }
+      ];
+    } else if (chartName === VOLT_READINGS) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' }
+      ];
+    } else if (chartName === EC) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' }
+      ];
+    } else if (chartName === DAILY_ETO) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+        { icon: '📏', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
+      ];
+    } else if (hoveredObject?.barY && hoverActive) {
+    } else {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' }
+      ];
+    }
+  };
+
+  return hoverActive && (
+    <>
       { renderText('Forecast') &&
-      <g className="tooltip-container"
-         clipPath={ clipPath }>
-        <rect className="tooltip-container__rect"
-              fill={ 'white' }
-              x={ getXPos('Forecast').rect1 }
-              y={ getYPos('Forecast').rect1 }
-              height={ 18 }
-              width={ getTextWidth() }
-              rx={ '5' }
-              ry={ '5' } />
-
-        <text className="tooltip-container__text"
-              x={ getXPos('Forecast').text1 }
-              y={ getYPos('Forecast').text1 }
-              fontSize={ '12' }
-              fontWeight={ 800 }>
-          { toolTipText('Forecast') }
-        </text>
-      </g> }
-
-      { renderText('Actual') && secondaryData &&
-      <g className="tooltip-container"
-         clipPath={ clipPath }>
-        <rect className="tooltip-container__rect"
-              fill={ 'white' }
-              x={ getXPos('Actual').rect2 }
-              y={ getYPos('Actual').rect2 }
-              height={ 18 }
-              width={ getTextWidth() }
-              rx={ '5' }
-              ry={ '5' } />
-
-        <text className="tooltip-container__text"
-              x={ getXPos('Actual').text2 }
-              y={ getYPos('Actual').text2 }
-              fontSize={ '12' }
-              fontWeight={ 800 }>
-          { toolTipText('Actual') }
-        </text>
+      <g className="tooltip-container" transform={ `translate(${ tooltipX }, ${ tooltipY })` } clipPath={ clipPath }>
+        <rect
+          className="tooltip-container__rect"
+          x="0"
+          y="0"
+          rx="20"
+          ry="20"
+          width={ getTextWidth() }
+          height="50"
+          fill="#f0f0f0"
+          stroke="none"
+          opacity={ 0.8 }
+          style={ {
+            boxShadow:
+              '13px 13px 15px rgba(0, 0, 0, 0.1), -3px -3px 5px rgba(255, 255, 255, 0.7)'
+          } }
+        />
+        { getTooltipContent()?.map((item, index) => (
+          <React.Fragment key={ index }>
+            <text
+              x={
+                index === 0
+                  ? 20
+                  : index === 2
+                    ? 93
+                    : index === 3
+                      ? 138
+                      : (index - 1) * 60 + 20
+              }
+              y={ index === 0 ? 20 : 40 }
+              font-family="sans-serif"
+              font-size="10px"
+            >
+              { item.icon }
+            </text>
+            <text
+              x={
+                index === 0
+                  ? 40
+                  : index === 2
+                    ? 104
+                    : index === 3
+                      ? 160
+                      : (index - 1) * 55 + 40
+              }
+              y={ index === 0 ? 20 : 40 }
+              font-family="monospace"
+              fontWeight={ 'bold' }
+              font-size="10px"
+            >
+              { item.value }
+            </text>
+          </React.Fragment>
+        )) }
       </g> }
     </>
   );
