@@ -45,7 +45,8 @@ export const DeficitChartsContainer = ({
                                          activeProbeFactor,
                                          setActiveProbeFactor,
                                          date,
-                                         setDate
+                                         setDate,
+                                         isAgent
                                        }) => {
 
   if (!mappedChartList) return null;

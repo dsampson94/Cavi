@@ -26,6 +26,7 @@ import {
 } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
+import { retrieveUserClientListFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 const ChartTooltipText = ({
                             data,
@@ -294,6 +295,8 @@ const TooltipText = ({
 
   let dateBisector = bisector(xAccessor).center;
 
+  let isAgent = retrieveUserClientListFromLocalStorage().access.agent;
+
   let hoveredObject = data[dateBisector(data, date)];
 
   let x1 = xScale(xAccessor(data[Math.max(0, dateBisector(data, date))]));
@@ -313,10 +316,15 @@ const TooltipText = ({
   const getTextWidth = () => {
     if (chartName === DEFICIT_ETO) return 160;
     if (chartType === EXTENDED) return 220;
-    else if (chartType === DEFICIT) return 210;
-    else if (chartName === DAILY_ETO) return 180;
-    else return 160;
+    else if (chartName === DAILY_ETO) {
+      if (!secondaryHoveredObject?.y) return 150;
+      else return 190;
+    } else if (chartType === DEFICIT) {
+      if (isAgent) return 210;
+      else return 150;
+    } else return 150;
   };
+
 
   const renderText = (chart) => {
     if (hoveredObject?.barY === -0.1) return false;
@@ -330,17 +338,25 @@ const TooltipText = ({
 
   const getTooltipContent = () => {
     if (chartName.includes('deficit')) {
-      return [
-        { icon: '📅', value: hoveredObject?.x },
-        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
-        { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' },
-        { icon: hoveredObject?.percent ? '💧💧' : '', value: hoveredObject?.percent ? `${ hoveredObject?.percent }%` : '' }
-      ];
+      if (isAgent) {
+        return [
+          { icon: '📅', value: hoveredObject?.x },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+          { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' },
+          { icon: hoveredObject?.percent ? '💧💧' : '', value: hoveredObject?.percent ? `${ hoveredObject?.percent }%` : '' }
+        ];
+      } else {
+        return [
+          { icon: '📅', value: hoveredObject?.x },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+          { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' }
+        ];
+      }
     } else if (chartName === DEFICIT_ETO) {
       return [
         { icon: '📅', value: hoveredObject?.x },
-        { icon: hoveredObject?.barY ? '💧💧' : '', value: hoveredObject?.barY ? `${ hoveredObject?.barY }%` : '' },
-        { icon: hoveredObject?.lineY ? '💧' : '', value: hoveredObject?.lineY ? `${ hoveredObject?.lineY.toFixed(2) }%` : '' }
+        { icon: hoveredObject?.barY ? 'ETc:' : '', value: hoveredObject?.barY ? `${ hoveredObject?.barY }` : '' },
+        { icon: hoveredObject?.lineY ? 'Set:' : '', value: hoveredObject?.lineY ? `${ hoveredObject?.lineY.toFixed(2) }` : '' }
       ];
     } else if (chartName === VOLT_READINGS) {
       return [
@@ -355,8 +371,8 @@ const TooltipText = ({
     } else if (chartName === DAILY_ETO) {
       return [
         { icon: '📅', value: hoveredObject?.x },
-        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
-        { icon: '📏', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
+        { icon: hoveredObject?.y ? 'Forecast' : '', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+        { icon: secondaryHoveredObject?.y ? 'Actual' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
       ];
     } else if (hoveredObject?.barY && hoverActive) {
     } else {
@@ -390,14 +406,10 @@ const TooltipText = ({
         { getTooltipContent()?.map((item, index) => (
           <React.Fragment key={ index }>
             <text
-              x={
-                index === 0
-                  ? 20
-                  : index === 2
-                    ? 93
-                    : index === 3
-                      ? 138
-                      : (index - 1) * 60 + 20
+              x={ index === 0 ? 20 :
+                index === 2 ? chartName === DAILY_ETO ? 100 : 93 :
+                  index === 3 ? 138 :
+                    (index - 1) * 60 + 20
               }
               y={ index === 0 ? 20 : 40 }
               font-family="sans-serif"
@@ -406,15 +418,11 @@ const TooltipText = ({
               { item.icon }
             </text>
             <text
-              x={
-                index === 0
-                  ? 40
-                  : index === 2
-                    ? 104
-                    : index === 3
-                      ? 160
-                      : (index - 1) * 55 + 40
-              }
+              x={ index === 0 ? 40 :
+                index === 1 ? chartName === DAILY_ETO ? 60 : 40 :
+                  index === 2 ? chartName === DEFICIT_ETO ? 112 : chartName === DAILY_ETO ? 130 : 104 :
+                    index === 3 ? 160 :
+                      (index - 1) * 55 + 40 }
               y={ index === 0 ? 20 : 40 }
               font-family="monospace"
               fontWeight={ 'bold' }
