@@ -26,7 +26,9 @@ export function Popup({
                         mapWindWeatherPopupChartList,
                         mapRainWeatherPopupChartList,
                         onWeatherPopupDailyDataDetailClick,
-                        mappedDetailsList
+                        mappedDetailsList,
+                        activeDate,
+                        setActiveDate
                       }) {
 
   const [show, setShow] = useState(false);
@@ -80,7 +82,9 @@ export function Popup({
     {
       name: 'Detail',
       component: <DetailPopupScreen mappedDetailsList={ mappedDetailsList }
-                                    setActiveTab={ setActiveTab } />
+                                    setActiveTab={ setActiveTab }
+                                    activeDate={ activeDate }
+                                    setActiveDate={ setActiveDate } />
     },
     {
       name: 'Graphs',

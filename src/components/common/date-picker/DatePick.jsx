@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import './date-pick.scss';
 
-const DatePick = ({ value, activeItem, setActiveItem }) => {
+const DatePick = ({ value, setActiveItem }) => {
 
   const [startDate, setStartDate] = useState(new Date(value));
 

@@ -4,6 +4,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
 import { shape } from 'prop-types';
+import { formatDate } from '../../../tools/general/helpers.util';
 
 import {
   mapActualForecastWeatherPopupChartList,
@@ -34,7 +35,8 @@ const ClientFieldsViewContainer = () => {
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
-  const [activeWeatherStation, setActiveWeatherStation] = useState(false);
+  const [activeWeatherStation, setActiveWeatherStation] = useState(undefined);
+  const [activeDate, setActiveDate] = useState(new Date());
 
   const request = getRequestParams({ groupName, clientName });
 
@@ -50,6 +52,17 @@ const ClientFieldsViewContainer = () => {
     dispatch(requestClientFieldWeatherList(request.weatherParams1));
   }, [groupName, clientName, reloadToggleActive]);
 
+  useEffect(() => {
+    if (activeWeatherStation) {
+      dispatch(requestClientFieldWeatherList({
+        ...request.clientParams,
+        dash: 2,
+        ws: activeWeatherStation,
+        forDate: formatDate(activeDate)
+      }));
+    }
+  }, [activeWeatherStation, activeDate]);
+
   const onUnitClick = () => {
   };
 
@@ -63,6 +76,7 @@ const ClientFieldsViewContainer = () => {
   };
 
   const onWeatherPopupDailyDataDetailClick = (date) => {
+    setActiveDate(new Date(date));
     dispatch(setDetailsList3([]));
     dispatch(requestClientFieldWeatherList({
       ...request.clientParams,
@@ -89,7 +103,9 @@ const ClientFieldsViewContainer = () => {
                            hasSubGroups={ !!(subGroupList.includes(1)) }
                            onUnitClick={ onUnitClick }
                            onWeatherObjectClick={ onWeatherObjectClick }
-                           mappedDetailsList={ mapDetailsLists(fieldWeatherList3)?.reverse() } />;
+                           mappedDetailsList={ mapDetailsLists(fieldWeatherList3)?.reverse() }
+                           activeDate={ activeDate }
+                           setActiveDate={ setActiveDate } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

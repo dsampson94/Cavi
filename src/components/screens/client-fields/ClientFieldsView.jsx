@@ -32,7 +32,9 @@ const ClientFieldsView = ({
                             mapWindWeatherPopupChartList,
                             mapRainWeatherPopupChartList,
                             onWeatherPopupDailyDataDetailClick,
-                            mappedDetailsList
+                            mappedDetailsList,
+                            activeDate,
+                            setActiveDate
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -93,7 +95,9 @@ const ClientFieldsView = ({
                mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
                mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList }
                onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
-               mappedDetailsList={ mappedDetailsList } /> }
+               mappedDetailsList={ mappedDetailsList }
+               activeDate={ activeDate }
+               setActiveDate={ setActiveDate } /> }
       </div>
     </ContentContainer>
   );
