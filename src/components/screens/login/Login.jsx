@@ -61,10 +61,12 @@ const Login = ({ onLoginClick }) => {
                  } } />
         </div>
 
-        <button className="mt-6 w-full bg-white hover:bg-blue-100 text-black dark:bg-blue-400 font-bold
+        <div className="mt-6 border-2 border-blue-600 dark:border-blue-800 rounded-lg">
+          <button className="w-full bg-white hover:bg-blue-100 text-black dark:bg-blue-400 font-bold
         py-2 rounded-lg dark:text-white" onClick={ handleLoginClick }>
-          Log in
-        </button>
+            Log in
+          </button>
+        </div>
 
         <div className="mt-6 flex border border-gray-400 ">
           <button className="flex-1 bg-white hover:bg-gray-100 text-gray-800 font-medium py-2

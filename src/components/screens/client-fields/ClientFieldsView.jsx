@@ -30,7 +30,9 @@ const ClientFieldsView = ({
                             mapActualForecastWeatherPopupChartList,
                             mapHumidityWeatherPopupChartList,
                             mapWindWeatherPopupChartList,
-                            mapRainWeatherPopupChartList
+                            mapRainWeatherPopupChartList,
+                            onWeatherPopupDailyDataDetailClick,
+                            mappedDetailsList
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -89,7 +91,9 @@ const ClientFieldsView = ({
                mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList }
                mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList }
                mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
-               mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList } /> }
+               mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList }
+               onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
+               mappedDetailsList={ mappedDetailsList } /> }
       </div>
     </ContentContainer>
   );

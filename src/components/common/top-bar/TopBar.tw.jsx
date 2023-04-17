@@ -326,7 +326,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           }
         ];
       default:
-        return [{
+        if (isAgent === 1) return [{
           name: 'Find Last Readings',
           description: 'Find Last Readings',
           href: Routes.LAST_READINGS,
@@ -340,6 +340,7 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             onClick: () => dispatch(setClientMonitorProbesList([]))
           }
         ];
+        else return [];
     }
   };
 
@@ -394,20 +395,20 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           <Popover.Group className="flex">
 
             <Popover className="relative mt-0.5 cursor-pointer">
+              { isAgent === 0 && location?.pathname?.includes('overview') ? <></> :
+                <Popover.Button
+                  className={ classNames('flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 transition duration-100',
+                    ` ${ isOpen ? 'transform rotate-90' : 'transform rotate-0' }`) }
+                  onClick={ () => setIsOpen(!isOpen) }>
 
-              <Popover.Button
-                className={ classNames('flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 transition duration-100',
-                  ` ${ isOpen ? 'transform rotate-90' : 'transform rotate-0' }`) }
-                onClick={ () => setIsOpen(!isOpen) }>
-
-                <div type="button"
-                     className="rounded-full p-2 text-[#54a4d9]">
-                  <ChevronDownIcon
-                    className={ 'h-7 w-7' }
-                    aria-hidden="true"
-                  />
-                </div>
-              </Popover.Button>
+                  <div type="button"
+                       className="rounded-full p-2 text-[#54a4d9]">
+                    <ChevronDownIcon
+                      className={ 'h-7 w-7' }
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Popover.Button> }
 
               <Transition
                 as={ Fragment }

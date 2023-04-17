@@ -24,7 +24,9 @@ export function Popup({
                         mapActualForecastWeatherPopupChartList,
                         mapHumidityWeatherPopupChartList,
                         mapWindWeatherPopupChartList,
-                        mapRainWeatherPopupChartList
+                        mapRainWeatherPopupChartList,
+                        onWeatherPopupDailyDataDetailClick,
+                        mappedDetailsList
                       }) {
 
   const [show, setShow] = useState(false);
@@ -72,11 +74,13 @@ export function Popup({
     {
       name: 'Daily Data',
       component: <DailyDataPopupScreen mappedDailyDataList={ mappedDailyDataList }
-                                       setActiveTab={ setActiveTab } />
+                                       setActiveTab={ setActiveTab }
+                                       onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick } />
     },
     {
       name: 'Detail',
-      component: <DetailPopupScreen />
+      component: <DetailPopupScreen mappedDetailsList={ mappedDetailsList }
+                                    setActiveTab={ setActiveTab } />
     },
     {
       name: 'Graphs',

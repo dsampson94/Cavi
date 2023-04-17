@@ -8,16 +8,16 @@ import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
 
 import './table.scss';
 
-export const DailyDataTable = ({
-                                 tableName,
-                                 activeTableData,
-                                 hiddenColumns,
-                                 setSelectedIndex,
-                                 setSelectedDropdownObject,
-                                 toggleDropdowns,
-                                 setActiveTab,
-                                 onWeatherPopupDailyDataDetailClick
-                               }) => {
+export const DetailTable = ({
+                              tableName,
+                              activeTableData,
+                              hiddenColumns,
+                              setSelectedIndex,
+                              setSelectedDropdownObject,
+                              toggleDropdowns,
+                              setActiveTab,
+                              onWeatherPopupDailyDataDetailClick
+                            }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -66,43 +66,9 @@ export const DailyDataTable = ({
       if (activeTableData?.length > 0) {
         tableDataElements = objectValues?.map((value, dataIndex) => {
           switch (dataIndex) {
-            case 0:
-              return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-sm">
-                  { value }
-                </div>
-              </td>;
-            case 1:
-            case 4:
-              return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-sm text-blue-500">
-                  { value }
-                </div>
-              </td>;
-            case 2:
-            case 5:
-              return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1">
-                <div className="flex text-sm text-red-500">
-                  { value }
-                </div>
-              </td>;
-            case 11:
-              return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1 z-10"
-                         onClick={ () => {
-                           onWeatherPopupDailyDataDetailClick(selectedRow?.date?.slice(0, -4)?.replaceAll('-', '/'));
-                           setActiveTab(3);
-                         } }>
-                <div className="flex text-sm text-blue-500 underline z-20 hover:text-blue-700">
-                  { value }
-                </div>
-              </td>;
             default:
               return <td key={ generateId() }
-                         className="whitespace-nowrap min-w-fit px-1">
+                         className="w-24">
                 <div className="flex text-sm">
                   { value }
                 </div>
@@ -142,7 +108,7 @@ export const DailyDataTable = ({
   );
 };
 
-DailyDataTable.propTypes = {
+DetailTable.propTypes = {
   tableName: string,
   activeTableData: arrayOf(shape({})),
   hiddenColumns: arrayOf(string)

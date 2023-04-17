@@ -8,6 +8,7 @@ import { shape } from 'prop-types';
 import {
   mapActualForecastWeatherPopupChartList,
   mapDailyDataLists,
+  mapDetailsLists,
   mapETOWeatherPopupChartList,
   mapFieldTableList1,
   mapHumidityWeatherPopupChartList,
@@ -16,7 +17,7 @@ import {
   mapWeatherList2,
   mapWindWeatherPopupChartList
 } from './ClientFieldsView.container.util.js';
-import { requestClientFieldWeatherList, requestFullClientFieldList } from '../../../redux/actions/client.action';
+import { requestClientFieldWeatherList, requestFullClientFieldList, setDetailsList3 } from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
@@ -29,9 +30,11 @@ const ClientFieldsViewContainer = () => {
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldWeatherList1 = useSelector(createSelector([state => state.client], client => client?.weatherList1?.data));
   const fieldWeatherList2 = useSelector(createSelector([state => state.client], client => client?.weatherList2?.data));
+  const fieldWeatherList3 = useSelector(createSelector([state => state.client], client => client?.weatherList3?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
+  const [activeWeatherStation, setActiveWeatherStation] = useState(false);
 
   const request = getRequestParams({ groupName, clientName });
 
@@ -51,6 +54,7 @@ const ClientFieldsViewContainer = () => {
   };
 
   const onWeatherObjectClick = (weatherObject) => {
+    setActiveWeatherStation(weatherObject?.value?.wsnaam);
     dispatch(requestClientFieldWeatherList({
       ...request.clientParams,
       dash: 2,
@@ -58,22 +62,34 @@ const ClientFieldsViewContainer = () => {
     }));
   };
 
+  const onWeatherPopupDailyDataDetailClick = (date) => {
+    dispatch(setDetailsList3([]));
+    dispatch(requestClientFieldWeatherList({
+      ...request.clientParams,
+      dash: 2,
+      ws: activeWeatherStation,
+      forDate: date
+    }));
+  };
+
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
                            mappedWeatherList2={ mapWeatherList2(fieldWeatherList2) }
                            mappedRainfallList={ mapRainfallLists(fieldWeatherList2) }
-                           mappedDailyDataList={ mapDailyDataLists(fieldWeatherList2) }
+                           mappedDailyDataList={ mapDailyDataLists(fieldWeatherList2)?.reverse() }
                            mappedETOWeatherPopupChartList={ mapETOWeatherPopupChartList(fieldWeatherList2) }
                            mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList(fieldWeatherList2) }
                            mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList(fieldWeatherList2) }
                            mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList(fieldWeatherList2) }
                            mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList(fieldWeatherList2) }
+                           onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }
                            hasSubGroups={ !!(subGroupList.includes(1)) }
                            onUnitClick={ onUnitClick }
-                           onWeatherObjectClick={ onWeatherObjectClick } />;
+                           onWeatherObjectClick={ onWeatherObjectClick }
+                           mappedDetailsList={ mapDetailsLists(fieldWeatherList3)?.reverse() } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

@@ -407,7 +407,7 @@ export function mapDailyDataLists(rawData) {
     const year = date.getFullYear();
 
     return {
-      date: `${ year }-${ month }-${ day } ${ date.toLocaleDateString('en-US', { weekday: 'short' }) }`,
+      date: `${ year }/${ month }/${ day } ${ date.toLocaleDateString('en-US', { weekday: 'short' }) }`,
       lowTemp: data.tempmin,
       highTemp: data.tempmaks,
       deltaT: data.deltat,
@@ -424,6 +424,26 @@ export function mapDailyDataLists(rawData) {
 }
 
 //*******************************************************************************
+
+export function mapDetailsLists(rawData) {
+  if (!rawData) return null;
+
+  return Object.entries(rawData)?.filter(([, data]) => data.t != null)?.map(([dateString, data]) => {
+
+    return {
+      date: `${ dateString }`,
+      temperature: data.t,
+      RH: data.h,
+      wind: data.w,
+      windDirection: data.w2,
+      rain: data.deltat,
+      radiation: data.radiation
+    };
+  });
+}
+
+//*******************************************************************************
+
 
 export function mapETOWeatherPopupChartList(rawData) {
   if (!rawData) return null;
@@ -480,8 +500,6 @@ export function mapHumidityWeatherPopupChartList(rawData) {
     };
   });
 
-  console.log(mappedDataHumidity);
-
   return [mappedDataHumidity, mappedDataHumidity];
 }
 
@@ -490,16 +508,12 @@ export function mapHumidityWeatherPopupChartList(rawData) {
 export function mapWindWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  console.log(rawData);
-
   const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
       barY: parseInt(data?.windmaks?.slice(0, -3))
     };
   });
-
-  console.log(mappedDataHumidity);
 
   return [mappedDataHumidity, mappedDataHumidity];
 }
@@ -509,16 +523,12 @@ export function mapWindWeatherPopupChartList(rawData) {
 export function mapRainWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  console.log(rawData);
-
   const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
       barY: parseInt(data?.rainmaks?.slice(0, -2))
     };
   });
-
-  console.log(mappedDataHumidity);
 
   return [mappedDataHumidity, mappedDataHumidity];
 }
