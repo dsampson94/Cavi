@@ -306,6 +306,7 @@ export const mapWeatherList2 = (apiResponse) => {
   const temperatureLineList = [];
   const radiationLineList = [];
   const humidityLineList = [];
+  const dewLineList = [];
 
   const now = new Date();
   const hours48Ago = new Date(now.getTime() - 48 * 60 * 60 * 1000);
@@ -365,11 +366,44 @@ export const mapWeatherList2 = (apiResponse) => {
         const humidityLineItem = { name: key, Humidity: obj.h };
         humidityLineList.push(humidityLineItem);
       }
+
+      if (obj.tdew) {
+        const dewLineItem = { name: key, dew: obj.tdew };
+        dewLineList.push(dewLineItem);
+      }
     }
   }
 
-  return { list, temperatureLineList, radiationLineList, humidityLineList, latestData };
+  return { list, temperatureLineList, radiationLineList, humidityLineList, dewLineList, latestData };
 };
+
+//*******************************************************************************
+
+export function mappedCurrentDashboardData(rawData) {
+  if (!rawData) return null;
+
+  const objectWithTemp24 = Object.entries(rawData)?.find(([, data]) => {
+    return data.hasOwnProperty('temp24');
+  });
+
+  if (!objectWithTemp24) return null;
+
+  const [dateString, data] = objectWithTemp24;
+
+  return {
+    date: dateString,
+    temp24: data.temp24,
+    temperature: data.t,
+    radiation: data.radiation,
+    humidity: data.h,
+    rain1: data.rain1,
+    rain24: data.rain24,
+    rain7: data.rain7,
+    wind: data.w,
+    windDirection: data.w2
+  };
+}
+
 
 //*******************************************************************************
 

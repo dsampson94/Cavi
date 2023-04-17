@@ -12,7 +12,7 @@ import {
   mapDetailsLists,
   mapETOWeatherPopupChartList,
   mapFieldTableList1,
-  mapHumidityWeatherPopupChartList,
+  mapHumidityWeatherPopupChartList, mappedCurrentDashboardData,
   mapRainfallLists,
   mapRainWeatherPopupChartList,
   mapWeatherList2,
@@ -58,7 +58,8 @@ const ClientFieldsViewContainer = () => {
         ...request.clientParams,
         dash: 2,
         ws: activeWeatherStation,
-        forDate: formatDate(activeDate)
+        forDate: formatDate(activeDate),
+        requestOption: 3
       }));
     }
   }, [activeWeatherStation, activeDate]);
@@ -82,7 +83,8 @@ const ClientFieldsViewContainer = () => {
       ...request.clientParams,
       dash: 2,
       ws: activeWeatherStation,
-      forDate: date
+      forDate: date,
+      requestOption: 3
     }));
   };
 
@@ -97,6 +99,7 @@ const ClientFieldsViewContainer = () => {
                            mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList(fieldWeatherList2) }
                            mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList(fieldWeatherList2) }
                            onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
+                           mappedCurrentDashboardData={ mappedCurrentDashboardData(fieldWeatherList2) }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }

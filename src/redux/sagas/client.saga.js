@@ -311,9 +311,8 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
         if (client.dash === 1) {
           yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, weatherList1: data });
         } else if (client.dash === 2) {
-          if (!client.forDate) {
-            yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
-          } else {
+          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
+          if (client.requestOption === 3) {
             yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, weatherList3: data });
           }
         }

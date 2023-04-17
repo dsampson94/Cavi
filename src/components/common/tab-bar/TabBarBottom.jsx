@@ -5,7 +5,7 @@ function classNames(...classes) {
 export default function TabBarBottom({ tabs, activeTab, setActiveTab, onUnitClick }) {
 
     return (
-        <div>
+        <div style={{ width: 'calc(100% - 200px)' }}>
             <div className="sm:hidden">
                 <label htmlFor="tabs" className="sr-only">
                     Select a tab

@@ -39,7 +39,7 @@ export function WeatherPopupLineChart({ height, lines }) {
 
   return (
     <LineChart
-      width={ 300 }
+      width={ 380 }
       height={ height }
       data={ mergedData }
       margin={ { top: 30, right: 0, left: 0, bottom: 0 } }
