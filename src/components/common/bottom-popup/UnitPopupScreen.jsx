@@ -26,7 +26,8 @@ export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mapped
 
       <div className="flex flex-col items-center justify-between w-[90%] pr-12 mt-6">
 
-        <h1 className="text-xl font-bold pl-20 whitespace-nowrap">Current Conditions</h1>
+        <h1 className="text-xl font-bold justify-center ml-28 whitespace-nowrap">Current Conditions</h1>
+        <p className="flex justify-center ml-28 mb-10">{ mappedCurrentDashboardData?.date }</p>
 
         <div className=" flex flex-row h-3/4 w-fit pl-24">
           <div className="flex flex-col w-fit whitespace-nowrap">
@@ -48,7 +49,7 @@ export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mapped
               </div>
             </div>
             <div className="flex justify-center items-center translate-y-2">
-              <Compass direction="S" />
+              <Compass direction={ mappedCurrentDashboardData?.windDirection } />
             </div>
           </div>
 

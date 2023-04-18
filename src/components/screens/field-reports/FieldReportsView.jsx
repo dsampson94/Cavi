@@ -7,16 +7,13 @@ import { FIELD_REPORTS, FIELD_REPORTS_VIEW } from '../../../tools/general/system
 import { getClassNames } from '../../../tools/general/helpers.util';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
-import MidBar from '../../common/mid-bar/MidBar';
+import { ReportsTable } from '../../common/table/ReportsTable';
 
 import './field-reports-view.scss';
-import { FieldSetupTable } from '../../common/table/FieldSetupTable';
 
 const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
-  const [activeTableData, setActiveTableData] = useState([]);
-  const [filteredTableData, setFilteredTableData] = useState(undefined);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
 
   return (
@@ -28,19 +25,12 @@ const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
 
       <div className={ getClassNames('field-reports', { show: showClientsSideBar }) }>
 
-        <MidBar view={ FIELD_REPORTS }
-                filteredTableData={ filteredTableData }
-                showClientsSideBar={ showClientsSideBar }
-                setFilteredTableData={ setFilteredTableData }
-                setActiveTableData={ setActiveTableData } />
-
         <div className="field-reports__scroll">
-          <FieldSetupTable tableName={ FIELD_REPORTS_VIEW }
-                           activeTableData={ (filteredTableData) ? filteredTableData : activeTableData }
-                           hiddenColumns={ ['expanded'] }
-                           selectedIndex={ selectedIndex }
-                           setSelectedIndex={ setSelectedIndex }
-                           setActiveTableData={ setActiveTableData } />
+          <ReportsTable tableName={ FIELD_REPORTS_VIEW }
+                        activeTableData={ mappedReportList }
+                        hiddenColumns={ [] }
+                        selectedIndex={ selectedIndex }
+                        setSelectedIndex={ setSelectedIndex } />
         </div>
 
       </div>

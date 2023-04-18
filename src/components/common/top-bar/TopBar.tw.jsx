@@ -176,6 +176,14 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           }
         ];
       case location.pathname.includes('report'):
+        return [
+          {
+            name: 'Recommendations',
+            description: 'View Recommendations List',
+            href: `/client/${ groupName }/${ clientName }`,
+            icon: ListBulletIcon
+          }
+        ];
       case location.pathname.includes('temperature'):
         if (isAgent === 1) return [
           {
@@ -267,7 +275,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           {
             name: 'Reports',
             description: 'Show Reports',
-            icon: DocumentTextIcon
+            icon: DocumentTextIcon,
+            href: `/client/${ groupName }/${ clientName }/field-reports`
           },
           {
             name: 'Previous Recommendations',
@@ -312,7 +321,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
           {
             name: 'Reports',
             description: 'Show Reports',
-            icon: DocumentTextIcon
+            icon: DocumentTextIcon,
+            href: `/client/${ groupName }/${ clientName }/field-reports`
           },
           {
             name: 'Previous Recommendations',

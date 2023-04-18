@@ -8,13 +8,15 @@ import { formatDate } from '../../../tools/general/helpers.util';
 
 import {
   mapActualForecastWeatherPopupChartList,
-  mapDailyDataLists,
-  mapDetailsLists,
+  mapDailyDataList,
+  mapDetailsList,
   mapETOWeatherPopupChartList,
   mapFieldTableList1,
-  mapHumidityWeatherPopupChartList, mappedCurrentDashboardData,
-  mapRainfallLists,
+  mapHumidityWeatherPopupChartList,
+  mappedCurrentDashboardData,
+  mapRainfallList,
   mapRainWeatherPopupChartList,
+  mapSprayConditionsList,
   mapWeatherList2,
   mapWindWeatherPopupChartList
 } from './ClientFieldsView.container.util.js';
@@ -32,6 +34,7 @@ const ClientFieldsViewContainer = () => {
   const fieldWeatherList1 = useSelector(createSelector([state => state.client], client => client?.weatherList1?.data));
   const fieldWeatherList2 = useSelector(createSelector([state => state.client], client => client?.weatherList2?.data));
   const fieldWeatherList3 = useSelector(createSelector([state => state.client], client => client?.weatherList3?.data));
+  const fieldWeatherList4 = useSelector(createSelector([state => state.client], client => client?.weatherList4?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
@@ -61,6 +64,14 @@ const ClientFieldsViewContainer = () => {
         forDate: formatDate(activeDate),
         requestOption: 3
       }));
+      dispatch(requestClientFieldWeatherList({
+        ...request.clientParams,
+        dash: 2,
+        ws: activeWeatherStation,
+        downloadspray: 1,
+        forDate: formatDate(activeDate),
+        requestOption: 4
+      }));
     }
   }, [activeWeatherStation, activeDate]);
 
@@ -72,7 +83,8 @@ const ClientFieldsViewContainer = () => {
     dispatch(requestClientFieldWeatherList({
       ...request.clientParams,
       dash: 2,
-      ws: weatherObject?.value?.wsnaam
+      ws: weatherObject?.value?.wsnaam,
+      requestOption: 2
     }));
   };
 
@@ -91,8 +103,8 @@ const ClientFieldsViewContainer = () => {
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
                            mappedWeatherList2={ mapWeatherList2(fieldWeatherList2) }
-                           mappedRainfallList={ mapRainfallLists(fieldWeatherList2) }
-                           mappedDailyDataList={ mapDailyDataLists(fieldWeatherList2)?.reverse() }
+                           mappedRainfallList={ mapRainfallList(fieldWeatherList2) }
+                           mappedDailyDataList={ mapDailyDataList(fieldWeatherList2)?.reverse() }
                            mappedETOWeatherPopupChartList={ mapETOWeatherPopupChartList(fieldWeatherList2) }
                            mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList(fieldWeatherList2) }
                            mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList(fieldWeatherList2) }
@@ -106,9 +118,10 @@ const ClientFieldsViewContainer = () => {
                            hasSubGroups={ !!(subGroupList.includes(1)) }
                            onUnitClick={ onUnitClick }
                            onWeatherObjectClick={ onWeatherObjectClick }
-                           mappedDetailsList={ mapDetailsLists(fieldWeatherList3)?.reverse() }
+                           mappedDetailsList={ mapDetailsList(fieldWeatherList3)?.reverse() }
                            activeDate={ activeDate }
-                           setActiveDate={ setActiveDate } />;
+                           setActiveDate={ setActiveDate }
+                           mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherList4) } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

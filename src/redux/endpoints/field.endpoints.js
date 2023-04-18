@@ -29,3 +29,9 @@ export const getSetFieldSetup = (field) => [
   getSetFieldSetupEndpoint(),
   getHttpGetOptions(field)
 ];
+
+const getSetFieldReportEndpoint = () => `${ API_HOST }/getReports.php`;
+export const getSetFieldReport = (field) => [
+  getSetFieldReportEndpoint(),
+  getHttpGetOptions(field)
+];

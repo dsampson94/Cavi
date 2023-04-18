@@ -8,6 +8,7 @@ export const SET_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set field list';
 export const SET_CLIENT_FIELD_WEATHER_LIST_1 = '[CLIENT_STORE] Set field weather list 1';
 export const SET_CLIENT_FIELD_WEATHER_LIST_2 = '[CLIENT_STORE] Set field weather list 2';
 export const SET_CLIENT_FIELD_WEATHER_LIST_3 = '[CLIENT_STORE] Set field weather list 3';
+export const SET_CLIENT_FIELD_WEATHER_LIST_4 = '[CLIENT_STORE] Set field weather list 4';
 export const SET_FULL_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set full field list (fields & rain)';
 export const SET_CLIENT_FIELD_RAIN_DATA = '[CLIENT_STORE] Set field rain data';
 export const SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART = '[CLIENT_STORE] Set field rain data for chart';

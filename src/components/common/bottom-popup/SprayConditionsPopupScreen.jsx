@@ -1,8 +1,21 @@
 import React from 'react';
+import { DetailTable } from '../table/DetailTable';
+import DatePick from '../date-picker/DatePick';
 
-export const SprayConditionsPopupScreen = ({}) => {
+export const SprayConditionsPopupScreen = ({ mappedSprayConditionsList, setActiveTab, activeDate, setActiveDate }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-full w-3/4 pr-3 md:w-full">
+    <div className="flex flex-col h-full w-full pr-48">
+      <div>
+        <h3 className="text-center mb-2 font-bold">Select Date To View Raw Readings</h3>
+        <DatePick setActiveItem={ setActiveDate }
+                  value={ activeDate } />
+      </div>
+
+      <div className="overflow-scroll">
+        <DetailTable activeTableData={ mappedSprayConditionsList }
+                     hiddenColumns={ [] }
+                     setActiveTab={ setActiveTab } />
+      </div>
     </div>
   );
 };

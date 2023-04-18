@@ -37,6 +37,7 @@ import {
   SET_CLIENT_FIELD_WEATHER_LIST_1,
   SET_CLIENT_FIELD_WEATHER_LIST_2,
   SET_CLIENT_FIELD_WEATHER_LIST_3,
+  SET_CLIENT_FIELD_WEATHER_LIST_4,
   SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
@@ -314,6 +315,8 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
           yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
           if (client.requestOption === 3) {
             yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, weatherList3: data });
+          } else if (client.requestOption === 4) {
+            yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_4, weatherList4: data });
           }
         }
 

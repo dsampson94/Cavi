@@ -4,6 +4,7 @@ import {
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
   SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
   SET_FIELD_MOTTECH_CHART_LIST,
+  SET_FIELD_REPORTS_LIST,
   SET_FIELD_SETUP_BILLING_LIST,
   SET_FIELD_SETUP_CLIENT_DETAILS_LIST,
   SET_FIELD_SETUP_CROP_DETAILS_LIST,
@@ -59,7 +60,8 @@ export const initialState = {
   fieldSetupMLForecastList: undefined,
   fieldSetupSASRIList: undefined,
   fieldSetupPhenologicalList: undefined,
-  fieldSetupMapList: undefined
+  fieldSetupMapList: undefined,
+  fieldReportsList: undefined
 };
 
 export const fieldReducer = (state = initialState, action) => {
@@ -265,6 +267,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         fieldSetupMapList
+      };
+    }
+    case SET_FIELD_REPORTS_LIST: {
+      const { fieldReportsList } = action;
+      return {
+        ...state,
+        fieldReportsList
       };
     }
     default:

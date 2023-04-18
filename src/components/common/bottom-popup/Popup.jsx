@@ -29,7 +29,8 @@ export function Popup({
                         mappedDetailsList,
                         activeDate,
                         setActiveDate,
-                        mappedCurrentDashboardData
+                        mappedCurrentDashboardData,
+                        mappedSprayConditionsList
                       }) {
 
   const [show, setShow] = useState(false);
@@ -99,7 +100,10 @@ export function Popup({
     },
     {
       name: 'Spray Conditions',
-      component: <SprayConditionsPopupScreen />
+      component: <SprayConditionsPopupScreen mappedSprayConditionsList={ mappedSprayConditionsList }
+                                             setActiveTab={ setActiveTab }
+                                             activeDate={ activeDate }
+                                             setActiveDate={ setActiveDate } />
     },
     {
       name: 'Fire Danger Index',
@@ -134,6 +138,7 @@ export function Popup({
         { show && tabs[activeTab].component }
 
       </div>
+
       { height === activeHeight && show &&
       <div className="bg-gray-200 dark:bg-dark-mode-grey -mt-1 z-50">
         <TabBarBottom tabs={ tabs }

@@ -407,7 +407,7 @@ export function mappedCurrentDashboardData(rawData) {
 
 //*******************************************************************************
 
-export function mapRainfallLists(rawData) {
+export function mapRainfallList(rawData) {
   if (!rawData) return null;
 
   const condensedList = Object.entries(rawData)
@@ -431,7 +431,7 @@ export function mapRainfallLists(rawData) {
 
 //*******************************************************************************
 
-export function mapDailyDataLists(rawData) {
+export function mapDailyDataList(rawData) {
   if (!rawData) return null;
 
   return Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
@@ -459,7 +459,7 @@ export function mapDailyDataLists(rawData) {
 
 //*******************************************************************************
 
-export function mapDetailsLists(rawData) {
+export function mapDetailsList(rawData) {
   if (!rawData) return null;
 
   return Object.entries(rawData)?.filter(([, data]) => data.t != null)?.map(([dateString, data]) => {
@@ -478,6 +478,40 @@ export function mapDetailsLists(rawData) {
 
 //*******************************************************************************
 
+export function mapSprayConditionsList(rawData) {
+  if (!rawData) return null;
+
+  return Object.entries(rawData)?.filter(([, data]) => data.t != null)?.map(([dateString, data]) => {
+
+    return {
+      date: `${ dateString }`,
+      ['Safe to Spray?']: data.t,
+      reason: data.h,
+      deltat: data.deltat,
+      temperature: data.w2,
+      wind: data.deltat,
+      rain: data.rain
+    };
+  });
+}
+
+//*******************************************************************************
+
+export function mapReportsList(rawData) {
+  if (!rawData) return null;
+
+  return Object.entries(rawData)?.map(([dateString, data]) => {
+
+    return {
+      reportDescription: data.displayname,
+      tsEnd: data.tsEnd,
+      tsStart: data.tsStart,
+      download: data.saved
+    };
+  });
+}
+
+//*******************************************************************************
 
 export function mapETOWeatherPopupChartList(rawData) {
   if (!rawData) return null;

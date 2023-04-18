@@ -27,7 +27,7 @@ const Compass = ({ direction }) => {
   const angle = windDirectionToAngle(direction);
 
   return (
-    <div className="relative w-32 h-32">
+    <div className="relative w-32 h-32 ml-3">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-24 h-24 border border-blue-500 rounded-full" />
       </div>
@@ -49,11 +49,11 @@ const Compass = ({ direction }) => {
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
-          style={{ transform: `rotate(${angle}deg)` }}
+          style={ { transform: `rotate(${ angle }deg)` } }
         >
           <svg
             className="w-8 h-8 text-blue-500"
-            style={{ transform: `rotate(${angle + 180}deg)` }}
+            style={ { transform: `rotate(${ angle + 180 }deg)` } }
             viewBox="0 0 24 24"
             fill="blue"
             xmlns="http://www.w3.org/2000/svg"
