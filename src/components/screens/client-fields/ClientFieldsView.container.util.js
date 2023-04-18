@@ -481,7 +481,26 @@ export function mapDetailsList(rawData) {
 export function mapSprayConditionsList(rawData) {
   if (!rawData) return null;
 
-  return Object.entries(rawData)?.filter(([, data]) => data.t != null)?.map(([dateString, data]) => {
+  return Object.entries(rawData?.hourly)?.map(([dateString, data]) => {
+
+    return {
+      date: `${ dateString }`,
+      ['Safe to Spray?']: data.t,
+      reason: data.h,
+      deltat: data.deltat,
+      temperature: data.w2,
+      wind: data.deltat,
+      rain: data.rain
+    };
+  });
+}
+
+//*******************************************************************************
+
+export function mapFireIndexList(rawData) {
+  if (!rawData) return null;
+
+  return Object.entries(rawData?.daily)?.map(([dateString, data]) => {
 
     return {
       date: `${ dateString }`,

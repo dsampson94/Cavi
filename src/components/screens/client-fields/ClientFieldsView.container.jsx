@@ -12,6 +12,7 @@ import {
   mapDetailsList,
   mapETOWeatherPopupChartList,
   mapFieldTableList1,
+  mapFireIndexList,
   mapHumidityWeatherPopupChartList,
   mappedCurrentDashboardData,
   mapRainfallList,
@@ -100,6 +101,8 @@ const ClientFieldsViewContainer = () => {
     }));
   };
 
+  console.log(activeWeatherStation);
+
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
                            mappedWeatherList2={ mapWeatherList2(fieldWeatherList2) }
@@ -118,10 +121,11 @@ const ClientFieldsViewContainer = () => {
                            hasSubGroups={ !!(subGroupList.includes(1)) }
                            onUnitClick={ onUnitClick }
                            onWeatherObjectClick={ onWeatherObjectClick }
-                           mappedDetailsList={ mapDetailsList(fieldWeatherList3)?.reverse() }
+                           mappedDetailsList={ mapDetailsList(fieldWeatherList2)?.reverse() }
                            activeDate={ activeDate }
                            setActiveDate={ setActiveDate }
-                           mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherList4) } />;
+                           mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherList4) }
+                           mappedFireDangerIndexList={ mapFireIndexList(fieldWeatherList4) } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

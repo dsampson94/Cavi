@@ -311,13 +311,12 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
       case responseStatus(data).SUCCESS:
         if (client.dash === 1) {
           yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, weatherList1: data });
-        } else if (client.dash === 2) {
+        } else if (client.requestOption === 2) {
           yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
-          if (client.requestOption === 3) {
-            yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, weatherList3: data });
-          } else if (client.requestOption === 4) {
-            yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_4, weatherList4: data });
-          }
+        } else if (client.requestOption === 3) {
+          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, weatherList3: data });
+        } else if (client.requestOption === 4) {
+          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_4, weatherList4: data });
         }
 
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));

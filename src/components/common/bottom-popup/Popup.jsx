@@ -30,7 +30,8 @@ export function Popup({
                         activeDate,
                         setActiveDate,
                         mappedCurrentDashboardData,
-                        mappedSprayConditionsList
+                        mappedSprayConditionsList,
+                        mappedFireDangerIndexList
                       }) {
 
   const [show, setShow] = useState(false);
@@ -107,7 +108,8 @@ export function Popup({
     },
     {
       name: 'Fire Danger Index',
-      component: <FireDangerIndexPopupScreen />
+      component: <FireDangerIndexPopupScreen mappedFireDangerIndexList={ mappedFireDangerIndexList }
+                                             setActiveTab={ setActiveTab } />
     }
   ];
 
