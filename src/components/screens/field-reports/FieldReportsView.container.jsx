@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { shape } from 'prop-types';
@@ -16,6 +16,9 @@ const FieldReportsViewContainer = () => {
   const { groupName, clientName } = useParams();
 
   const fieldReportsList = useSelector(createSelector([state => state.field], field => field?.fieldReportsList));
+  const fieldReportsDownloadPDF = useSelector(createSelector([state => state.field], field => field?.fieldReportsDownload));
+
+  const [activeFileName, setActiveFileName] = useState(false);
 
   const request = getRequestParams({ groupName, clientName });
 
@@ -26,8 +29,27 @@ const FieldReportsViewContainer = () => {
     }));
   }, []);
 
+  const handleDownloadReportClick = (fileName) => {
+    setActiveFileName(fileName);
+    dispatch(requestSetFieldReportsList({
+      ...request.clientParams,
+      action: 'downloadreport',
+      filename: fileName
+    }));
+    downloadPDF();
+  };
+
+  const downloadPDF = () => {
+    if (!fieldReportsDownloadPDF) return;
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(fieldReportsDownloadPDF);
+    link.download = `Irricheck Report ${ activeFileName }`;
+    link.click();
+  };
+
   return <FieldReportsView mappedReportList={ mapReportsList(fieldReportsList) }
-                           clientRequestParams={ request.clientParams } />;
+                           clientRequestParams={ request.clientParams }
+                           handleDownloadReportClick={ handleDownloadReportClick } />;
 };
 
 FieldReportsViewContainer.propTypes = {

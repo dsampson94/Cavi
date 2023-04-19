@@ -396,7 +396,8 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
                          history={ history }
                          location={ location }
                          isDarkMode={ isDarkMode }
-                         viewClient={ viewClient } />
+                         viewClient={ viewClient }
+                         isAgent={ isAgent } />
 
         </div>
 

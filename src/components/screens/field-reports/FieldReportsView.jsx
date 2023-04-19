@@ -11,7 +11,7 @@ import { ReportsTable } from '../../common/table/ReportsTable';
 
 import './field-reports-view.scss';
 
-const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
+const FieldReportsView = ({ mappedReportList, clientRequestParams, handleDownloadReportClick }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
@@ -30,7 +30,8 @@ const FieldReportsView = ({ mappedReportList, clientRequestParams }) => {
                         activeTableData={ mappedReportList }
                         hiddenColumns={ [] }
                         selectedIndex={ selectedIndex }
-                        setSelectedIndex={ setSelectedIndex } />
+                        setSelectedIndex={ setSelectedIndex }
+                        handleDownloadReportClick={ handleDownloadReportClick } />
         </div>
 
       </div>

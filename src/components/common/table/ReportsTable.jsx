@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router';
 
 import { arrayOf, shape, string } from 'prop-types';
 
 import { generateId, getClassNames, isEmpty, removeCamelCase } from '../../../tools/general/helpers.util';
-import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+import { hideColumnHeader } from './TableFunctions.util';
 
 import './table.scss';
 
 export const ReportsTable = ({
                                tableName,
                                activeTableData,
-                               hiddenColumns
+                               hiddenColumns,
+                               handleDownloadReportClick
                              }) => {
-
-  const history = useHistory();
-  const { groupName, clientName } = useParams();
 
   const [selectedRow, setSelectedRow] = useState(undefined);
 
@@ -60,6 +57,16 @@ export const ReportsTable = ({
       if (activeTableData?.length > 0) {
         tableDataElements = objectValues?.map((value, dataIndex) => {
           switch (dataIndex) {
+            case 3:
+              return <td key={ generateId() }
+                         className="w-24">
+                <div className="flex text-xs z-50 text-left underline text-blue-700 hover:text-blue-500"
+                     onClick={ () => {
+                       handleDownloadReportClick(objectValues[3]);
+                     } }>
+                  { value }
+                </div>
+              </td>;
             default:
               return <td key={ generateId() }
                          className="w-24">
@@ -75,8 +82,7 @@ export const ReportsTable = ({
         <>
           <tr className={ getClassNames('table__body__row',
             { header: isHeaderRow, selected: (object === selectedRow) }) }
-              onMouseDown={ () => setSelectedRow(object) }
-              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+              onMouseOver={ () => setSelectedRow(object) }
               key={ generateId() }>
             { tableDataElements }
           </tr>

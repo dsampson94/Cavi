@@ -43,6 +43,7 @@ import {
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
   SET_FIELD_FLOW_METER_HOURLY_CHART_LIST,
   SET_FIELD_MOTTECH_CHART_LIST,
+  SET_FIELD_REPORTS_DOWNLOAD,
   SET_FIELD_REPORTS_LIST,
   SET_FIELD_SETUP_BILLING_LIST,
   SET_FIELD_SETUP_CLIENT_DETAILS_LIST,
@@ -441,7 +442,14 @@ export function* performRetrieveFieldReportListRequest({ field }) {
         return;
 
       case responseStatus(data).SUCCESS:
-        yield put({ type: SET_FIELD_REPORTS_LIST, fieldReportsList: data });
+        if (field.listreports === 1) {
+          yield put({ type: SET_FIELD_REPORTS_LIST, fieldReportsList: data });
+        }
+
+        if (field.action === 'downloadreport') {
+          yield put({ type: SET_FIELD_REPORTS_DOWNLOAD, fieldReportsDownload: data });
+        }
+
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELD_CHART_LIST, SNACK_SUCCESS));
     }
 

@@ -1,4 +1,4 @@
-import { API_HOST, getHttpGetOptions } from './index';
+import { API_HOST, getHttpGetOptions, getHttpGetPDFOptions } from './index';
 
 const getFieldChartListEndpoint = () => `${ API_HOST }/getGraphs.php`;
 export const getFieldChartListRequest = (field) => [
@@ -33,5 +33,7 @@ export const getSetFieldSetup = (field) => [
 const getSetFieldReportEndpoint = () => `${ API_HOST }/getReports.php`;
 export const getSetFieldReport = (field) => [
   getSetFieldReportEndpoint(),
-  getHttpGetOptions(field)
+  (field.action === 'downloadreport' ?
+    getHttpGetPDFOptions(field) :
+    getHttpGetOptions(field))
 ];

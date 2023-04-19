@@ -4,7 +4,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function BreadCrumbsTw({ fieldName, groupName, clientName, probeNumber, location, history, isDarkMode }) {
+export default function BreadCrumbsTw({ fieldName, groupName, clientName, probeNumber, location, history, isDarkMode, isAgent }) {
 
   const activeList = () => {
     switch (true) {
@@ -46,11 +46,17 @@ export default function BreadCrumbsTw({ fieldName, groupName, clientName, probeN
             current: true
           }
         ];
+      case location.pathname.includes('report'):
+        return [
+          { name: groupName, href: `/client/${ groupName }/${ clientName }`, current: false },
+          { name: clientName, href: `/client/${ groupName }/${ clientName }`, current: false },
+          { name: 'Reports', href: `/client/${ groupName }/${ clientName }`, current: true }
+        ];
       default:
         return [
           { name: groupName, href: noOp(), current: false },
           { name: clientName, href: noOp(), current: false },
-          { name: 'Recommendations', href: `/client/${ groupName }/${ clientName }/field-setup/general`, current: true }
+          { name: 'Recommendations', href: isAgent === 1 ? `/client/${ groupName }/${ clientName }/field-setup/general` : `/client/${ groupName }/${ clientName }/field-reports`, current: true }
         ];
     }
   };
@@ -74,9 +80,9 @@ export default function BreadCrumbsTw({ fieldName, groupName, clientName, probeN
                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
               </svg> }
               <button onClick={ (event) => handleClick(event, page.href) }
-                 className={ classNames(!isDarkMode ? 'text-gray-200' : 'text-gray-800',
-                   'text-sm mt-0.5 md:text-sm font-medium cursor-pointer hover:bg-blur-very-light-grey p-1 mt-1 whitespace-nowrap rounded-lg') }
-                 aria-current={ page.current ? 'page' : undefined }>
+                      className={ classNames(!isDarkMode ? 'text-gray-200' : 'text-gray-800',
+                        'text-sm mt-0.5 md:text-sm font-medium cursor-pointer hover:bg-blur-very-light-grey p-1 mt-1 whitespace-nowrap rounded-lg') }
+                      aria-current={ page.current ? 'page' : undefined }>
                 { page.name }
               </button>
             </div>

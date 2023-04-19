@@ -524,7 +524,7 @@ export function mapReportsList(rawData) {
       reportDescription: data.displayname,
       tsEnd: data.tsEnd,
       tsStart: data.tsStart,
-      download: data.saved
+      ['File Download 📥']: data.filename
     };
   });
 }
