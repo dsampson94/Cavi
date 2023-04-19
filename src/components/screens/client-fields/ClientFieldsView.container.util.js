@@ -485,12 +485,13 @@ export function mapSprayConditionsList(rawData) {
 
     return {
       date: `${ dateString }`,
-      ['Safe to Spray?']: data.t,
-      reason: data.h,
+      ['Safe to Spray?']: data.sprayspray,
+      reason: data.sprayreason,
       deltat: data.deltat,
-      temperature: data.w2,
-      wind: data.deltat,
-      rain: data.rain
+      temperature: data.temperature,
+      humidity: data.humidity,
+      wind: data.winddisplay,
+      rain: data.reen_mm
     };
   });
 }
@@ -504,12 +505,10 @@ export function mapFireIndexList(rawData) {
 
     return {
       date: `${ dateString }`,
-      ['Safe to Spray?']: data.t,
-      reason: data.h,
-      deltat: data.deltat,
-      temperature: data.w2,
-      wind: data.deltat,
-      rain: data.rain
+      fireRisk: data.fireicon,
+      fireIndex: data.fireidx,
+      wind: data.winddisplay,
+      maxTemp: data.tempmaks
     };
   });
 }

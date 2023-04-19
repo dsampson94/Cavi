@@ -37,6 +37,11 @@ export function WeatherPopupLineChart({ height, lines }) {
     return null;
   };
 
+  const formatXAxisTick = (tickItem) => {
+    const time = new Date(tickItem).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    return time;
+  };
+
   return (
     <LineChart
       width={ 380 }
@@ -45,7 +50,7 @@ export function WeatherPopupLineChart({ height, lines }) {
       margin={ { top: 30, right: 0, left: 0, bottom: 0 } }
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="name" tickFormatter={ formatXAxisTick } />
       <YAxis />
       <Tooltip
         content={ <CustomTooltipContent /> }

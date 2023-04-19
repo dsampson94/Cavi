@@ -37,7 +37,7 @@ export function Popup({
   const [show, setShow] = useState(false);
   const [height, setHeight] = useState('60px');
   const [originalHeight, setOriginalHeight] = useState('60px');
-  const activeHeight = '420px';
+  const activeHeight = '440px';
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export function Popup({
         </> }
       </div>
 
-      <div className={ `flex flex-col bottom-0 left-0 w bg-gray-100 dark:bg-dark-mode-grey slide-up px-4 ${ show ? 'show pb-4' : '' }` }
+      <div className={ `flex flex-col bottom-0 left-0 bg-gray-100 dark:bg-dark-mode-grey slide-up px-4 ${ show ? 'show pb-4' : '' }` }
            style={ { height: show ? height : '0px', transition: 'height 0.3s' } }>
 
         { show && tabs[activeTab].component }

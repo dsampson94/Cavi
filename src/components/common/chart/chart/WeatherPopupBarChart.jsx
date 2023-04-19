@@ -5,7 +5,7 @@ export function WeatherPopupBarChart({ data }) {
   return (
     <BarChart
       width={ 380 }
-      height={ 330 }
+      height={ 350 }
       data={ data }
       margin={ { top: 50, right: 0, left: 0, bottom: 0 } }
     >

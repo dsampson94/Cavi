@@ -5,15 +5,14 @@ import Compass from '../compass/Compass';
 
 export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mappedCurrentDashboardData }) => {
 
-  console.log(mappedCurrentDashboardData);
   return (
-    <div className="grid grid-cols-1 pr-48 lg:pr-0 overflow-y-auto overflow-x-hidden h-full xl:grid-cols-3 lg:w-[80%] gap-4 w-[95%]">
+    <div className="grid grid-cols-1 pr-48 lg:pr-0 overflow-y-auto xl:overflow-y-hidden overflow-x-hidden xl:grid-cols-3 lg:w-[80%] gap-4 w-[95%]">
 
       <div className="flex flex-col items-center justify-center w-[90%]">
         <h1 className="text-xl font-bold pl-20 whitespace-nowrap">Past 48 Hours</h1>
         <div className="flex flex-col">
           <div className="flex items-center justify-center">
-            <WeatherPopupLineChart height={ 330 }
+            <WeatherPopupLineChart height={ 350 }
                                    lines={ [
                                      { data: mappedWeatherList2?.temperatureLineList, dataKey: 'Temperature', color: 'red' },
                                      { data: mappedWeatherList2?.radiationLineList, dataKey: 'Radiation', color: 'orange' },
@@ -24,12 +23,12 @@ export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mapped
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-between w-[90%] pr-12 mt-6">
+      <div className="flex flex-col items-center justify-between w-[90%] pr-12 ">
 
         <h1 className="text-xl font-bold justify-center ml-28 whitespace-nowrap">Current Conditions</h1>
         <p className="flex justify-center ml-28 mb-10">{ mappedCurrentDashboardData?.date }</p>
 
-        <div className=" flex flex-row h-3/4 w-fit pl-24">
+        <div className=" flex flex-row w-fit pl-24">
           <div className="flex flex-col w-fit whitespace-nowrap">
             <div className="">Temperature</div>
             <div className="font-bold">{ mappedCurrentDashboardData?.temp24 } C</div>
@@ -39,7 +38,7 @@ export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mapped
             <div className="font-bold">{ mappedCurrentDashboardData?.humidity } %</div>
           </div>
 
-          <div className="flex flex-col w-full h-full -mt-6">
+          <div className="flex flex-col w-full ">
             <div className="border border-orange-500 h-48 bg-transparent flex items-center justify-center font-bold rounded-full" style={ { width: '160px', height: '160px' } }>
               <div className="flex flex-col items-center">
                 <span>Current</span>

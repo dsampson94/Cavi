@@ -1,6 +1,6 @@
 import React from 'react';
-import { DetailTable } from '../table/DetailTable';
 import DatePick from '../date-picker/DatePick';
+import { SprayConditionsTable } from '../table/SprayConditionsTable';
 
 export const SprayConditionsPopupScreen = ({ mappedSprayConditionsList, setActiveTab, activeDate, setActiveDate }) => {
 
@@ -13,9 +13,9 @@ export const SprayConditionsPopupScreen = ({ mappedSprayConditionsList, setActiv
       </div>
 
       <div className="overflow-scroll">
-        <DetailTable activeTableData={ mappedSprayConditionsList }
-                     hiddenColumns={ [] }
-                     setActiveTab={ setActiveTab } />
+        <SprayConditionsTable activeTableData={ mappedSprayConditionsList }
+                              hiddenColumns={ [] }
+                              setActiveTab={ setActiveTab } />
       </div>
     </div>
   );

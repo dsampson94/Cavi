@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePick from '../date-picker/DatePick';
-import { DetailTable } from '../table/DetailTable';
+import { FireRiskIndexTable } from '../table/FireRiskIndexTable';
 
 export const FireDangerIndexPopupScreen = ({ mappedFireDangerIndexList, setActiveTab, activeDate, setActiveDate }) => {
 
@@ -13,9 +13,9 @@ export const FireDangerIndexPopupScreen = ({ mappedFireDangerIndexList, setActiv
       </div>
 
       <div className="overflow-scroll">
-        <DetailTable activeTableData={ mappedFireDangerIndexList }
-                     hiddenColumns={ [] }
-                     setActiveTab={ setActiveTab } />
+        <FireRiskIndexTable activeTableData={ mappedFireDangerIndexList }
+                            hiddenColumns={ [] }
+                            setActiveTab={ setActiveTab } />
       </div>
     </div>
   );

@@ -65,6 +65,7 @@ const ClientFieldsViewContainer = () => {
         forDate: formatDate(activeDate),
         requestOption: 3
       }));
+
       dispatch(requestClientFieldWeatherList({
         ...request.clientParams,
         dash: 2,
@@ -73,6 +74,15 @@ const ClientFieldsViewContainer = () => {
         forDate: formatDate(activeDate),
         requestOption: 4
       }));
+
+      if (!fieldWeatherList2) {
+        dispatch(requestClientFieldWeatherList({
+          ...request.clientParams,
+          dash: 2,
+          ws: activeWeatherStation,
+          requestOption: 2
+        }));
+      }
     }
   }, [activeWeatherStation, activeDate]);
 
@@ -100,8 +110,6 @@ const ClientFieldsViewContainer = () => {
       requestOption: 3
     }));
   };
-
-  console.log(activeWeatherStation);
 
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
