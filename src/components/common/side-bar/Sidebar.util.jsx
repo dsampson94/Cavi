@@ -56,9 +56,9 @@ export const SideBarList = ({
 
   const handleSubHeaderClick = (history, groupName, clientName, dispatch, setShowSideBar) => {
     // setShowSideBar(false);
-    dispatch({ type: SET_CLIENT_FIELD_LIST, fieldList: null });
-    dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, fieldRainData: null });
-    dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, weatherList: null });
+    dispatch({ type: SET_CLIENT_FIELD_LIST, undefined });
+    dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
+    dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
     history.push(`/client/${ groupName }/${ clientName }`);
   };
 

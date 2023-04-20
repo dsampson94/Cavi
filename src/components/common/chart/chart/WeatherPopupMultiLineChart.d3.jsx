@@ -34,8 +34,6 @@ const WeatherPopupMultiLineChart = ({
                                       setActiveDataPeriod,
                                       xAxisViewMode,
                                       setXAxisViewMode,
-                                      activeProbeFactor,
-                                      setActiveProbeFactor,
                                       date,
                                       setDate,
                                       toggleInitialList
@@ -45,8 +43,6 @@ const WeatherPopupMultiLineChart = ({
     const { isDarkMode } = useTheme(false);
     const [wrapperRef, dimensions] = useDimensions();
 
-    const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
-    const [showSecondaryDropDown, setShowSecondaryDropDown] = useState(false);
     const [hiddenLineList, setHiddenLineList] = useState(toggleInitialList);
 
     const DIMENSIONS = {
@@ -101,7 +97,6 @@ const WeatherPopupMultiLineChart = ({
 
     useEffect(() => {
       setXAxisViewMode('topBar');
-      setActiveDataPeriod('All');
       setCurrentGlobalZoomState(zoomIdentity);
       setCurrentXZoomState(zoomIdentity);
       setCurrentYZoomState(zoomIdentity);
@@ -146,7 +141,7 @@ const WeatherPopupMultiLineChart = ({
 
     return (
       <>
-        { !isEmpty(data?.[0]) && !isEmpty(data?.[1]) ?
+        { !isEmpty(data?.[0]) ?
           <div ref={ wrapperRef }
                style={ { height: chartByName(chartName).height } }
                className={ chartName }>
@@ -160,7 +155,6 @@ const WeatherPopupMultiLineChart = ({
                    setHiddenLineList={ setHiddenLineList }>
 
               <YAxis yScale={ yScale }
-                     data={ data }
                      chartName={ chartName }
                      chartType={ chartType }
                      isDarkMode={ isDarkMode } />

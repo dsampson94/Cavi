@@ -60,13 +60,9 @@ export const daysFromToday = (daysFromToday) => {
   return `${ dateList[0] } ${ dateList[2] }`;
 };
 
-export const getDaysPastDate = (days) => {
+export const getDaysPastDateBy2 = (days) => {
   const timestamp = new Date().getTime() - 1000 * 60 * 60 * 24 * days * 2;
   return timestamp;
-};
-
-export const isDateBefore = (date1, date2) => {
-  return date1.valueOf() < date2.valueOf();
 };
 
 export const generateId = () => `_${ Math.random().toString(36).substring(2, 9) }`;

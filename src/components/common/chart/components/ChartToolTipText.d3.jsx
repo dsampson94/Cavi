@@ -22,7 +22,8 @@ import {
   RAIN_LINE,
   SOIL_TEMPERATURE,
   TEMPERATURE_MULTILINE,
-  VOLT_READINGS
+  VOLT_READINGS,
+  WIND_WEATHER
 } from '../../../../tools/general/system-variables.util';
 
 import '../chart.scss';
@@ -374,10 +375,15 @@ const TooltipText = ({
         { icon: hoveredObject?.y ? 'Forecast' : '', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
         { icon: secondaryHoveredObject?.y ? 'Actual' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
       ];
+    } else if (chartName === WIND_WEATHER) {
+      return [
+        { icon: '📅', value: hoveredObject?.x },
+        { icon: '📏', value: `${ hoveredObject?.barY }ms` }
+      ];
     } else {
       return [
         { icon: '📅', value: hoveredObject?.x },
-        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' }
+        { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : `${ hoveredObject?.barY }mm` }
       ];
     }
   };

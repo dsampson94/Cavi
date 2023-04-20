@@ -25,7 +25,7 @@ export const UnitPopupScreen = ({ mappedWeatherList2, mappedRainfallList, mapped
 
       <div className="flex flex-col items-center justify-between w-[90%] pr-12 ">
 
-        <h1 className="text-xl font-bold justify-center ml-28 whitespace-nowrap">Current Conditions</h1>
+        <h1 className="text-xl font-bold justify-center ml-28 whitespace-nowrap mt-6">Current Conditions</h1>
         <p className="flex justify-center ml-28 mb-10">{ mappedCurrentDashboardData?.date }</p>
 
         <div className=" flex flex-row w-fit pl-24">

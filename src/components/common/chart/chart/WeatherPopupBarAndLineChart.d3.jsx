@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { max, mean, min, pointers, scaleLinear, scaleTime, select, selectAll, zoom, zoomIdentity } from 'd3';
 
 import { chartByName } from '../Chart.util';
@@ -48,9 +48,6 @@ const WeatherPopupBarAndLineChart = ({
 
   const { isDarkMode } = useTheme(false);
   const [wrapperRef, dimensions] = useDimensions();
-
-  const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
-  const [showSecondaryDropDown, setShowSecondaryDropDown] = useState(false);
 
   const DIMENSIONS = {
     marginTop: 0,
@@ -104,7 +101,6 @@ const WeatherPopupBarAndLineChart = ({
 
   useEffect(() => {
     setXAxisViewMode('topBar');
-    setActiveDataPeriod('All');
     setCurrentGlobalZoomState(zoomIdentity);
     setCurrentXZoomState(zoomIdentity);
     setCurrentYZoomState(zoomIdentity);
@@ -201,7 +197,6 @@ const WeatherPopupBarAndLineChart = ({
                            setDate={ setDate }
                            hoverActive={ hoverActive }
                            setHoverActive={ setHoverActive }
-                           showPrimaryDropDown={ showPrimaryDropDown }
                            chartName={ chartName }
                            chartType={ chartType }
                            clipPath={ clipPath }

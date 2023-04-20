@@ -2,10 +2,14 @@ import React from 'react';
 import { bisector, pointer, selectAll } from 'd3';
 
 import {
+  ACTUAL_TEMPERATURE,
   CANOPY_LINE,
   CANOPY_OUTSIDE_TEMPERATURE,
   DAILY_ETO,
+  ETO_FORECAST,
   ETO_WEATHER,
+  ETO_WEATHER_STATION,
+  FORECAST_TEMPERATURE,
   HUMIDITY_LINE,
   LINE_100MM,
   LINE_200MM,
@@ -445,29 +449,29 @@ const WeatherMultiLineDot = ({
 
   if (chartName === ETO_WEATHER)
     return (<>
-      { renderDot(ETO_WEATHER, y1) &&
+      { renderDot(ETO_FORECAST, y1) &&
       <circle className={ 'tool-tip-dot' }
               clipPath={ clipPath }
               cx={ x1 + 1.5 }
               cy={ y1 }
-              fill={ '#0000FF' }
+              fill={ '#ea3a3d' }
               stroke={ 'white' }
               strokeWidth={ 2 }
               r={ 5 } /> }
 
-      { renderDot(ETO_WEATHER, y2) &&
+      { renderDot(ETO_WEATHER_STATION, y2) &&
       <circle className={ 'tool-tip-dot-' }
               clipPath={ clipPath }
               cx={ x2 + 1.5 }
               cy={ y2 }
-              fill={ '#f37b2c' }
+              fill={ '#2AE851' }
               stroke={ 'white' }
               strokeWidth={ 2 }
               r={ 5 } /> }
     </>);
   else if (chartName === TEMP_WEATHER)
     return (<>
-      { renderDot(TEMP_WEATHER, y1) &&
+      { renderDot(ACTUAL_TEMPERATURE, y1) &&
       <circle className={ 'tool-tip-dot' }
               clipPath={ clipPath }
               cx={ x1 + 1.5 }
@@ -477,7 +481,7 @@ const WeatherMultiLineDot = ({
               strokeWidth={ 2 }
               r={ 5 } /> }
 
-      { renderDot(TEMP_WEATHER, y2) &&
+      { renderDot(FORECAST_TEMPERATURE, y2) &&
       <circle className={ 'tool-tip-dot-' }
               clipPath={ clipPath }
               cx={ x2 + 1.5 }
@@ -493,7 +497,7 @@ const WeatherMultiLineDot = ({
               clipPath={ clipPath }
               cx={ x1 + 1.5 }
               cy={ y1 }
-              fill={ '#0000FF' }
+              fill={ 'red' }
               stroke={ 'white' }
               strokeWidth={ 2 }
               r={ 5 } />

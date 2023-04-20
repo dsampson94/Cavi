@@ -20,26 +20,6 @@ import WeatherPopupMultiLineChart from '../chart/chart/WeatherPopupMultiLineChar
 import WeatherPopupBarAndLineChart from '../chart/chart/WeatherPopupBarAndLineChart.d3';
 
 export const GraphsPopupScreen = ({
-                                    // chartName,
-                                    // chartType,
-                                    // chartInfo,
-                                    // hasXAxis,
-                                    // recommendationOffset,
-                                    // currentGlobalZoomState,
-                                    // setCurrentGlobalZoomState,
-                                    // currentYZoomState,
-                                    // setCurrentYZoomState,
-                                    // currentXZoomState,
-                                    // setCurrentXZoomState,
-                                    // hoverActive,
-                                    // setHoverActive,
-                                    // activeDataPeriod,
-                                    // setActiveDataPeriod,
-                                    // xAxisViewMode,
-                                    // setXAxisViewMode,
-                                    // date,
-                                    // setDate,
-                                    // showOnlyBars,
                                     activeLoadPeriod,
                                     activeProbeFactor,
                                     setActiveProbeFactor,
@@ -49,17 +29,16 @@ export const GraphsPopupScreen = ({
                                     mapActualForecastWeatherPopupChartList,
                                     mapHumidityWeatherPopupChartList,
                                     mapWindWeatherPopupChartList,
-                                    mapRainWeatherPopupChartList
+                                    mapRainWeatherPopupChartList,
+                                    activeDataPeriod,
+                                    setActiveDataPeriod
                                   }) => {
 
-  const [showChartsSideBar, setShowChartsSideBar] = useState(true);
   const [currentGlobalZoomState, setCurrentGlobalZoomState] = useState(zoomIdentity);
   const [currentYZoomState, setCurrentYZoomState] = useState(zoomIdentity);
   const [currentXZoomState, setCurrentXZoomState] = useState(zoomIdentity);
   const [hoverActive, setHoverActive] = useState(false);
-  const [yAxisShared, setYAxisShared] = useState(false);
   const [date, setDate] = useState(null);
-  const [activeDataPeriod, setActiveDataPeriod] = useState('All');
   const [xAxisViewMode, setXAxisViewMode] = useState('topBar');
 
   return (
@@ -159,7 +138,7 @@ export const GraphsPopupScreen = ({
 
       <WeatherPopupBarAndLineChart chartName={ RAIN_WEATHER }
                                    chartType={ WEATHER_POPUP_MULTILINE }
-                                   data={ mapRainWeatherPopupChartList?.[1] }
+                                   data={ mapRainWeatherPopupChartList?.[0] }
                                    hoverActive={ hoverActive }
                                    setHoverActive={ setHoverActive }
                                    currentGlobalZoomState={ currentGlobalZoomState }

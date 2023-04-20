@@ -410,24 +410,29 @@ export function mappedCurrentDashboardData(rawData) {
 export function mapRainfallList(rawData) {
   if (!rawData) return null;
 
+  const currentYear = new Date().getFullYear();
+  const prevYear = currentYear - 1;
+
   const condensedList = Object.entries(rawData)
     ?.filter(([, value]) => value.hasOwnProperty('reenmaand'))
     ?.reduce((acc, [key, value]) => {
       const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][new Date(key).getMonth()];
-      const lastYear = new Date(key).getFullYear() === new Date().getFullYear() - 1 ? parseInt(value?.reenmaand) : 0;
-      const thisYear = new Date(key).getFullYear() === new Date().getFullYear() ? parseInt(value?.reenmaand) : 0;
+      const lastYear = new Date(key).getFullYear() === prevYear ? parseInt(value?.reenmaand) : 0;
+      const thisYear = new Date(key).getFullYear() === currentYear ? parseInt(value?.reenmaand) : 0;
       const existingObj = acc.find(item => item.name === monthName);
       if (existingObj) {
-        existingObj.lastYear += lastYear;
-        existingObj.thisYear += thisYear;
+        existingObj[prevYear] += lastYear;
+        existingObj[currentYear] += thisYear;
       } else {
-        acc.push({ name: monthName, lastYear, thisYear });
+        const newObj = { name: monthName, [prevYear]: lastYear, [currentYear]: thisYear };
+        acc.push(newObj);
       }
       return acc;
     }, []);
 
   return condensedList;
 }
+
 
 //*******************************************************************************
 
@@ -534,19 +539,23 @@ export function mapReportsList(rawData) {
 export function mapETOWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
-    return {
-      x: dateString,
-      y: parseInt(data.etov)
-    };
-  });
+  const mappedDataForecast = Object.entries(rawData)
+    ?.filter(([, data]) => data.etov != null)
+    ?.map(([dateString, data]) => {
+      return {
+        x: dateString,
+        y: parseInt(data.etov)
+      };
+    });
 
-  const mappedDataWeatherStation = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
-    return {
-      x: dateString,
-      y: parseInt(data.eto)
-    };
-  });
+  const mappedDataWeatherStation = Object.entries(rawData)
+    ?.filter(([, data]) => data.eto != null)
+    ?.map(([dateString, data]) => {
+      return {
+        x: dateString,
+        y: parseInt(data.eto)
+      };
+    });
 
   return [mappedDataForecast, mappedDataWeatherStation];
 
@@ -557,17 +566,17 @@ export function mapETOWeatherPopupChartList(rawData) {
 export function mapActualForecastWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  const mappedDataActual = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+  const mappedDataActual = Object.entries(rawData)?.filter(([, data]) => data.t != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.t
+      y: parseInt(data.t)
     };
   });
 
-  const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+  const mappedDataForecast = Object.entries(rawData)?.filter(([, data]) => data.fct != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
-      y: data.t
+      y: parseInt(data.fct)
     };
   });
 
@@ -579,7 +588,7 @@ export function mapActualForecastWeatherPopupChartList(rawData) {
 export function mapHumidityWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.h != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
       y: data.h
@@ -594,14 +603,14 @@ export function mapHumidityWeatherPopupChartList(rawData) {
 export function mapWindWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+  const mappedDataWind = Object.entries(rawData)?.filter(([, data]) => data.windmaks != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
       barY: parseInt(data?.windmaks?.slice(0, -3))
     };
   });
 
-  return [mappedDataHumidity, mappedDataHumidity];
+  return [mappedDataWind, mappedDataWind];
 }
 
 //*******************************************************************************
@@ -609,14 +618,14 @@ export function mapWindWeatherPopupChartList(rawData) {
 export function mapRainWeatherPopupChartList(rawData) {
   if (!rawData) return null;
 
-  const mappedDataHumidity = Object.entries(rawData)?.filter(([, data]) => data.eto != null)?.map(([dateString, data]) => {
+  const mappedDataRain = Object.entries(rawData)?.filter(([, data]) => data.rainmaks != null)?.map(([dateString, data]) => {
     return {
       x: dateString,
       barY: parseInt(data?.rainmaks?.slice(0, -2))
     };
   });
 
-  return [mappedDataHumidity, mappedDataHumidity];
+  return [mappedDataRain, mappedDataRain];
 }
 
 

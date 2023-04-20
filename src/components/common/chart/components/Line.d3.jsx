@@ -366,23 +366,23 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   strokeLinecap: 'round'
                 } } />
 
-          {/*{ data?.[1] &&*/}
-          {/*<path className={ 'line' }*/}
-          {/*      d={ lineGenerator(data?.[1]) }*/}
-          {/*      clipPath={ clipPath }*/}
-          {/*      stroke={ '#f37b2c' }*/}
-          {/*      style={ {*/}
-          {/*        fill: 'none',*/}
-          {/*        strokeWidth: '1.8px',*/}
-          {/*        strokeLinecap: 'round'*/}
-          {/*      } } /> }*/}
+          { data?.[1] &&
+          <path className={ 'line' }
+                d={ lineGenerator(data?.[1]) }
+                clipPath={ clipPath }
+                stroke={ '#f37b2c' }
+                style={ {
+                  fill: 'none',
+                  strokeWidth: '1.8px',
+                  strokeLinecap: 'round'
+                } } /> }
         </g>
       );
     case HUMIDITY_WEATHER:
       return (
         <g>
           <path className={ 'line' }
-                d={ lineGenerator(data?.[1]) }
+                d={ lineGenerator(data?.[0]) }
                 clipPath={ clipPath }
                 stroke={ '#ea3a3d' }
                 style={ {
@@ -390,6 +390,11 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   strokeWidth: '1.8px',
                   strokeLinecap: 'round'
                 } } />
+        </g>
+      );
+    default:
+      return (
+        <g>
         </g>
       );
   }

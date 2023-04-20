@@ -1,4 +1,4 @@
-import { getDaysPastDate } from '../../../tools/general/helpers.util';
+import { getDaysPastDateBy2 } from '../../../tools/general/helpers.util';
 
 import {
   FOUR_WEEKS_DAYS,
@@ -186,7 +186,7 @@ export const filterLoadPeriod = (mappedListToFilter, activeLoadPeriod) => {
 };
 
 const getDateFilteredList = (mappedListToFilter, activeLoadPeriod) => {
-  return mappedListToFilter?.filter(item => getDaysPastDate(activeLoadPeriod) < new Date(item?.x));
+  return mappedListToFilter?.filter(item => getDaysPastDateBy2(activeLoadPeriod) < new Date(item?.x));
 };
 
 const pushForecastRegionRow = (tableList, listItem, index, mappedList) => {

@@ -93,9 +93,9 @@ const Chart = ({
             <clipPath id="weatherPopupBarAndLineBottom">
               <rect
                 width={ dimensions.boundedWidth * 0.99 }
-                height={ dimensions.boundedHeight }
+                height={ dimensions.boundedHeight * 0.91 }
                 x="0"
-                y="0"
+                y="-3"
               />
             </clipPath>
           </defs>

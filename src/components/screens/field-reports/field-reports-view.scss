@@ -8,59 +8,13 @@
 .field-reports {
   display: flex;
   flex-direction: column;
-  margin-left: auto;
-  margin-right: 0;
   transition: 0.3s;
-  width: 99.9%;
+  width: 100%;
   height: 100%;
 
   &--show {
     transition: 0.3s;
-    width: 86%;
-  }
-
-  &__top-bar {
-    display: flex;
-    flex-direction: row;
-    margin-top: util.rem(4);
-    margin-bottom: util.rem(2);
-    height: util.rem(29);
-    margin-right: 0;
-
-    &-left {
-      display: flex;
-      flex-direction: row;
-      margin-left: util.rem(20);
-      margin-right: auto;
-      height: 100%;
-
-      &-button {
-        width: util.rem(20);
-        margin-right: util.rem(13);
-        cursor: pointer;
-      }
-
-      &-no-button {
-        width: util.rem(10);
-        margin: 0 0 util.rem(32) util.rem(12);
-      }
-
-      p {
-        margin: util.rem(6) 0 0 util.rem(-10);
-        font-size: util.rem(14);
-        font-weight: bold;
-      }
-    }
-
-    &-right {
-      display: flex;
-      margin-right: 0;
-      height: 100%;
-    }
-  }
-
-  &__search {
-    max-width: 100%;
+    width: 900%;
   }
 
   &__scroll {

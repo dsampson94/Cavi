@@ -37,7 +37,9 @@ const ClientFieldsView = ({
                             setActiveDate,
                             mappedCurrentDashboardData,
                             mappedSprayConditionsList,
-                            mappedFireDangerIndexList
+                            mappedFireDangerIndexList,
+                            activeDataPeriod,
+                            setActiveDataPeriod
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -103,7 +105,9 @@ const ClientFieldsView = ({
                setActiveDate={ setActiveDate }
                mappedCurrentDashboardData={ mappedCurrentDashboardData }
                mappedSprayConditionsList={ mappedSprayConditionsList }
-               mappedFireDangerIndexList={ mappedFireDangerIndexList } /> }
+               mappedFireDangerIndexList={ mappedFireDangerIndexList }
+               activeDataPeriod={ activeDataPeriod }
+               setActiveDataPeriod={ setActiveDataPeriod } /> }
       </div>
     </ContentContainer>
   );
