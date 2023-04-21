@@ -8,6 +8,7 @@ import { GraphsPopupScreen } from './GraphsPopupScreen';
 import { SprayConditionsPopupScreen } from './SprayConditionsPopupScreen';
 import { FireDangerIndexPopupScreen } from './FireDangerIndexPopupScreen';
 import TabBarBottom from '../tab-bar/TabBarBottom';
+import { useHistory, useParams } from 'react-router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -36,6 +37,9 @@ export function Popup({
                         setActiveDataPeriod
                       }) {
 
+  const history = useHistory();
+  const { groupName, clientName } = useParams();
+
   const [show, setShow] = useState(false);
   const [height, setHeight] = useState('60px');
   const [originalHeight, setOriginalHeight] = useState('60px');
@@ -62,7 +66,9 @@ export function Popup({
       setShow(true);
       setHeight(activeHeight);
       setActiveTab(1);
-    } else return null;
+    } else {
+      history.push(`/client/${ groupName }/${ clientName }/field-temperatures/${ weatherObj?.value?.probeno }/${ weatherObj?.value?.weerstasie }`);
+    }
   };
 
   const toggleShow = () => setShow(!show);

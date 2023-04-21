@@ -45,15 +45,13 @@ const Compass = ({ direction }) => {
       </div>
       <div
         className="absolute inset-0 flex items-center justify-center"
-        style={ { transform: `rotate(${ angle }deg)` } }
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
-          style={ { transform: `rotate(${ angle }deg)` } }
         >
           <svg
             className="w-8 h-8 text-blue-500"
-            style={ { transform: `rotate(${ angle }deg)` } }
+            style={ { transform: `rotate(${ angle - 180 }deg)` } }
             viewBox="0 0 24 24"
             fill="DodgerBlue"
             xmlns="http://www.w3.org/2000/svg"
