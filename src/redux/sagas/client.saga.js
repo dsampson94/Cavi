@@ -22,7 +22,9 @@ import {
   GET_ADMIN_USER_LIST,
   GET_CLIENT_FIELD_LIST,
   GET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
-  GET_CLIENT_FIELD_WEATHER_LIST,
+  GET_CLIENT_FIELD_WEATHER_DETAILS_LIST,
+  GET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST, GET_CLIENT_FIELD_WEATHER_LIST,
+  GET_CLIENT_FIELD_WEATHER_OBJECT_LIST,
   GET_CLIENT_LAST_READINGS_LIST,
   GET_CLIENT_MONITOR_PROBES_LIST,
   GET_CLIENT_OVERVIEW_LIST,
@@ -34,10 +36,10 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
-  SET_CLIENT_FIELD_WEATHER_LIST_1,
-  SET_CLIENT_FIELD_WEATHER_LIST_2,
-  SET_CLIENT_FIELD_WEATHER_LIST_3,
-  SET_CLIENT_FIELD_WEATHER_LIST_4,
+  SET_CLIENT_FIELD_WEATHER_DETAILS_LIST,
+  SET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST,
+  SET_CLIENT_FIELD_WEATHER_LIST,
+  SET_CLIENT_FIELD_WEATHER_OBJECT_LIST,
   SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
@@ -302,32 +304,15 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
 
     switch (data) {
       case responseStatus(data).ERROR:
-        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
-        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, undefined });
-        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, undefined });
         yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
         return;
 
       case responseStatus(data).SUCCESS:
-        if (client.dash === 1) {
-          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, weatherList1: data });
-        }
-
-        if (client.requestOption === 2) {
-          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, weatherList2: data });
-        } else if (client.requestOption === 3) {
-          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, weatherList3: data });
-        } else if (client.requestOption === 4) {
-          yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_4, weatherList4: data });
-        }
-
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST, fieldWeatherList: data });
         yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
     }
 
   } catch (response) {
-    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
-    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_2, undefined });
-    yield put({ type: SET_CLIENT_FIELD_WEATHER_LIST_3, undefined });
     yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
   } finally {
     yield put(setProgressBar(COMPLETE_PROGRESS));
@@ -336,6 +321,90 @@ export function* performRetrieveClientFieldWeatherListRequest({ client }) {
 
 export function* watchForRetrieveClientFieldWeatherListRequest() {
   yield takeLatest(GET_CLIENT_FIELD_WEATHER_LIST, performRetrieveClientFieldWeatherListRequest);
+}
+
+export function* performRetrieveClientFieldWeatherObjectListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientFieldWeatherListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_OBJECT_LIST, fieldWeatherObjectList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
+    }
+
+  } catch (response) {
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientFieldWeatherObjectListRequest() {
+  yield takeLatest(GET_CLIENT_FIELD_WEATHER_OBJECT_LIST, performRetrieveClientFieldWeatherObjectListRequest);
+}
+
+export function* performRetrieveClientFieldWeatherDetailsListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientFieldWeatherListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_DETAILS_LIST, fieldWeatherDetailsList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
+    }
+
+  } catch (response) {
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientFieldWeatherDetailsListRequest() {
+  yield takeLatest(GET_CLIENT_FIELD_WEATHER_DETAILS_LIST, performRetrieveClientFieldWeatherDetailsListRequest);
+}
+
+export function* performRetrieveClientFieldWeatherFireSprayListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getClientFieldWeatherListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST, fieldWeatherFireSprayList: data });
+        yield put(addSystemNotice(SUCCESSFULLY_RETRIEVED_FIELDS, SNACK_SUCCESS));
+    }
+
+  } catch (response) {
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_FIELDS, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForRetrieveClientFieldWeatherFireSprayListRequest() {
+  yield takeLatest(GET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST, performRetrieveClientFieldWeatherFireSprayListRequest);
 }
 
 export function* performRetrieveRainDataForChartRequest({ client }) {
@@ -438,6 +507,9 @@ export default function* clientSaga() {
     watchForRetrieveFullClientFieldListRequest(),
     watchForRetrieveClientFieldListRequest(),
     watchForRetrieveClientFieldWeatherListRequest(),
+    watchForRetrieveClientFieldWeatherObjectListRequest(),
+    watchForRetrieveClientFieldWeatherDetailsListRequest(),
+    watchForRetrieveClientFieldWeatherFireSprayListRequest(),
     watchForRetrieveRainDataForChartRequest(),
     watchForRetrieveClientPDFRequest(),
     watchForGetAdminUserListRequest()

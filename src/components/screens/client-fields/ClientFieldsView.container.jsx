@@ -21,7 +21,14 @@ import {
   mapWeatherList2,
   mapWindWeatherPopupChartList
 } from './ClientFieldsView.container.util.js';
-import { requestClientFieldWeatherList, requestFullClientFieldList, setDetailsList3 } from '../../../redux/actions/client.action';
+import {
+  requestClientFieldWeatherDetailsList,
+  requestClientFieldWeatherFireSprayList,
+  requestClientFieldWeatherList,
+  requestClientFieldWeatherObjectList,
+  requestFullClientFieldList,
+  setDetailsList3
+} from '../../../redux/actions/client.action';
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
@@ -32,10 +39,10 @@ const ClientFieldsViewContainer = () => {
   const { groupName, clientName } = useParams();
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
-  const fieldWeatherList1 = useSelector(createSelector([state => state.client], client => client?.weatherList1?.data));
-  const fieldWeatherList2 = useSelector(createSelector([state => state.client], client => client?.weatherList2?.data));
-  const fieldWeatherList3 = useSelector(createSelector([state => state.client], client => client?.weatherList3?.data));
-  const fieldWeatherList4 = useSelector(createSelector([state => state.client], client => client?.weatherList4?.data));
+  const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherList?.data));
+  const fieldWeatherObjectList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherObjectList?.data));
+  const fieldWeatherDetailsList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherDetailsList?.data));
+  const fieldWeatherFireSprayList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherFireSprayList?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
@@ -59,91 +66,66 @@ const ClientFieldsViewContainer = () => {
 
   useEffect(() => {
     if (activeWeatherStation) {
-      dispatch(requestClientFieldWeatherList({
+      dispatch(requestClientFieldWeatherDetailsList({
         ...request.clientParams,
         dash: 2,
         ws: activeWeatherStation,
-        forDate: formatDate(activeDate),
-        requestOption: 3
+        forDate: formatDate(activeDate)
       }));
 
-      if (!fieldWeatherList4) {
-        dispatch(requestClientFieldWeatherList({
-          ...request.clientParams,
-          dash: 2,
-          ws: activeWeatherStation,
-          downloadspray: 1,
-          forDate: formatDate(activeDate),
-          requestOption: 4
-        }));
-      }
+      dispatch(requestClientFieldWeatherFireSprayList({
+        ...request.clientParams,
+        dash: 2,
+        ws: activeWeatherStation,
+        downloadspray: 1,
+        forDate: formatDate(activeDate)
+      }));
 
-      if (!fieldWeatherList2) {
-        dispatch(requestClientFieldWeatherList({
-          ...request.clientParams,
-          dash: 2,
-          ws: activeWeatherStation,
-          requestOption: 2
-        }));
-      }
+      dispatch(requestClientFieldWeatherObjectList({
+        ...request.clientParams,
+        dash: 2,
+        ws: activeWeatherStation
+      }));
     }
   }, [activeWeatherStation, activeDate]);
 
-  useEffect(() => {
-    if (activeWeatherStation) {
-      dispatch(requestClientFieldWeatherList({
-        ...request.clientParams,
-        dash: 2,
-        ws: activeWeatherStation,
-        requestOption: 2
-      }));
-    }
-  }, [activeDataPeriod]);
-
   const onWeatherObjectClick = (weatherObject) => {
     setActiveWeatherStation(weatherObject?.value?.wsnaam);
-    dispatch(requestClientFieldWeatherList({
-      ...request.clientParams,
-      dash: 2,
-      ws: weatherObject?.value?.wsnaam,
-      requestOption: 2
-    }));
   };
 
   const onWeatherPopupDailyDataDetailClick = (date) => {
     setActiveDate(new Date(date));
     dispatch(setDetailsList3([]));
-    dispatch(requestClientFieldWeatherList({
+    dispatch(requestClientFieldWeatherDetailsList({
       ...request.clientParams,
       dash: 2,
       ws: activeWeatherStation,
-      forDate: date,
-      requestOption: 3
+      forDate: date
     }));
   };
 
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
-                           mappedWeatherList1={ mappedWeatherList(fieldWeatherList1?.stations) }
-                           mappedWeatherList2={ mapWeatherList2(fieldWeatherList2) }
-                           mappedRainfallList={ mapRainfallList(fieldWeatherList2) }
-                           mappedDailyDataList={ mapDailyDataList(fieldWeatherList2)?.reverse() }
-                           mappedETOWeatherPopupChartList={ mapETOWeatherPopupChartList(fieldWeatherList2, activeDataPeriod) }
-                           mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList(fieldWeatherList2, activeDataPeriod) }
-                           mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList(fieldWeatherList2, activeDataPeriod) }
-                           mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList(fieldWeatherList2, activeDataPeriod) }
-                           mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList(fieldWeatherList2, activeDataPeriod) }
+                           mappedWeatherList1={ mappedWeatherList(fieldWeatherList?.stations) }
+                           mappedWeatherList2={ mapWeatherList2(fieldWeatherObjectList) }
+                           mappedRainfallList={ mapRainfallList(fieldWeatherObjectList) }
+                           mappedDailyDataList={ mapDailyDataList(fieldWeatherObjectList)?.reverse() }
+                           mappedETOWeatherPopupChartList={ mapETOWeatherPopupChartList(fieldWeatherObjectList, activeDataPeriod) }
+                           mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList(fieldWeatherObjectList, activeDataPeriod) }
+                           mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList(fieldWeatherObjectList, activeDataPeriod) }
+                           mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList(fieldWeatherObjectList, activeDataPeriod) }
+                           mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList(fieldWeatherObjectList, activeDataPeriod) }
                            onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
-                           mappedCurrentDashboardData={ mappedCurrentDashboardData(fieldWeatherList2) }
+                           mappedCurrentDashboardData={ mappedCurrentDashboardData(fieldWeatherObjectList) }
                            clientRequestParams={ request.clientParams }
                            reloadToggleActive={ reloadToggleActive }
                            setReloadToggleActive={ setReloadToggleActive }
                            hasSubGroups={ !!(subGroupList.includes(1)) }
                            onWeatherObjectClick={ onWeatherObjectClick }
-                           mappedDetailsList={ mapDetailsList(fieldWeatherList2)?.reverse() }
+                           mappedDetailsList={ mapDetailsList(fieldWeatherObjectList)?.reverse() }
                            activeDate={ activeDate }
                            setActiveDate={ setActiveDate }
-                           mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherList4) }
-                           mappedFireDangerIndexList={ mapFireIndexList(fieldWeatherList4) }
+                           mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherFireSprayList?.hourly) }
+                           mappedFireDangerIndexList={ mapFireIndexList(fieldWeatherFireSprayList?.daily) }
                            activeDataPeriod={ activeDataPeriod }
                            setActiveDataPeriod={ setActiveDataPeriod } />;
 };

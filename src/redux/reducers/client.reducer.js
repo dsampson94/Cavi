@@ -3,10 +3,10 @@ import {
   SET_CLIENT_FIELD_LIST,
   SET_CLIENT_FIELD_RAIN_DATA,
   SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART,
-  SET_CLIENT_FIELD_WEATHER_LIST_1,
-  SET_CLIENT_FIELD_WEATHER_LIST_2,
-  SET_CLIENT_FIELD_WEATHER_LIST_3,
-  SET_CLIENT_FIELD_WEATHER_LIST_4,
+  SET_CLIENT_FIELD_WEATHER_LIST,
+  SET_CLIENT_FIELD_WEATHER_OBJECT_LIST,
+  SET_CLIENT_FIELD_WEATHER_DETAILS_LIST,
+  SET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST,
   SET_CLIENT_LAST_READINGS_LIST,
   SET_CLIENT_MONITOR_PROBES_LIST,
   SET_CLIENT_OVERVIEW_LIST,
@@ -22,10 +22,10 @@ export const initialState = {
   rawReadings: undefined,
   rawReadingsChart: undefined,
   fieldList: undefined,
-  weatherList1: undefined,
-  weatherList2: undefined,
-  weatherList3: undefined,
-  weatherList4: undefined,
+  fieldWeatherList: undefined,
+  fieldWeatherObjectList: undefined,
+  fieldWeatherDetailsList: undefined,
+  fieldWeatherFireSprayList: undefined,
   fieldRainData: undefined,
   fieldRainDataForChart: undefined,
   clientPDF: undefined,
@@ -76,32 +76,32 @@ export const clientReducer = (state = initialState, action) => {
         fieldList
       };
     }
-    case SET_CLIENT_FIELD_WEATHER_LIST_1: {
-      const { weatherList1 } = action;
+    case SET_CLIENT_FIELD_WEATHER_LIST: {
+      const { fieldWeatherList } = action;
       return {
         ...state,
-        weatherList1
+        fieldWeatherList
       };
     }
-    case SET_CLIENT_FIELD_WEATHER_LIST_2: {
-      const { weatherList2 } = action;
+    case SET_CLIENT_FIELD_WEATHER_OBJECT_LIST: {
+      const { fieldWeatherObjectList } = action;
       return {
         ...state,
-        weatherList2
+        fieldWeatherObjectList
       };
     }
-    case SET_CLIENT_FIELD_WEATHER_LIST_3: {
-      const { weatherList3 } = action;
+    case SET_CLIENT_FIELD_WEATHER_DETAILS_LIST: {
+      const { fieldWeatherDetailsList } = action;
       return {
         ...state,
-        weatherList3
+        fieldWeatherDetailsList
       };
     }
-    case SET_CLIENT_FIELD_WEATHER_LIST_4: {
-      const { weatherList4 } = action;
+    case SET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST: {
+      const { fieldWeatherFireSprayList } = action;
       return {
         ...state,
-        weatherList4
+        fieldWeatherFireSprayList
       };
     }
     case SET_CLIENT_FIELD_RAIN_DATA: {

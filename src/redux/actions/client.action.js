@@ -5,10 +5,10 @@ export const SET_CLIENT_RAW_READINGS = '[CLIENT_STORE] Set raw readings';
 export const SET_CLIENT_RAW_READINGS_CHART = '[CLIENT_STORE] Set raw readings chart';
 
 export const SET_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set field list';
-export const SET_CLIENT_FIELD_WEATHER_LIST_1 = '[CLIENT_STORE] Set field weather list 1';
-export const SET_CLIENT_FIELD_WEATHER_LIST_2 = '[CLIENT_STORE] Set field weather list 2';
-export const SET_CLIENT_FIELD_WEATHER_LIST_3 = '[CLIENT_STORE] Set field weather list 3';
-export const SET_CLIENT_FIELD_WEATHER_LIST_4 = '[CLIENT_STORE] Set field weather list 4';
+export const SET_CLIENT_FIELD_WEATHER_LIST = '[CLIENT_STORE] Set field weather list';
+export const SET_CLIENT_FIELD_WEATHER_OBJECT_LIST = '[CLIENT_STORE] Set field weather object list';
+export const SET_CLIENT_FIELD_WEATHER_DETAILS_LIST = '[CLIENT_STORE] Set field weather details list';
+export const SET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST = '[CLIENT_STORE] Set field weather fire spray list';
 export const SET_FULL_CLIENT_FIELD_LIST = '[CLIENT_STORE] Set full field list (fields & rain)';
 export const SET_CLIENT_FIELD_RAIN_DATA = '[CLIENT_STORE] Set field rain data';
 export const SET_CLIENT_FIELD_RAIN_DATA_FOR_CHART = '[CLIENT_STORE] Set field rain data for chart';
@@ -51,7 +51,7 @@ export const setClientMonitorProbesList = (client) => ({
 });
 
 export const setDetailsList3 = (client) => ({
-  type: SET_CLIENT_FIELD_WEATHER_LIST_3,
+  type: SET_CLIENT_FIELD_WEATHER_DETAILS_LIST,
   client
 });
 
@@ -70,6 +70,24 @@ export const requestClientFieldList = (client) => ({
 export const GET_CLIENT_FIELD_WEATHER_LIST = '[CLIENT_STORE] Get field weather list';
 export const requestClientFieldWeatherList = (client) => ({
   type: GET_CLIENT_FIELD_WEATHER_LIST,
+  client
+});
+
+export const GET_CLIENT_FIELD_WEATHER_OBJECT_LIST = '[CLIENT_STORE] Get field weather object list';
+export const requestClientFieldWeatherObjectList = (client) => ({
+  type: GET_CLIENT_FIELD_WEATHER_OBJECT_LIST,
+  client
+});
+
+export const GET_CLIENT_FIELD_WEATHER_DETAILS_LIST = '[CLIENT_STORE] Get field weather details list';
+export const requestClientFieldWeatherDetailsList = (client) => ({
+  type: GET_CLIENT_FIELD_WEATHER_DETAILS_LIST,
+  client
+});
+
+export const GET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST = '[CLIENT_STORE] Get field weather fire spray list';
+export const requestClientFieldWeatherFireSprayList = (client) => ({
+  type: GET_CLIENT_FIELD_WEATHER_FIRE_SPRAY_LIST,
   client
 });
 

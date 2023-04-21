@@ -73,9 +73,7 @@ export function Popup({
 
   const toggleShow = () => setShow(!show);
 
-  const handlePeriodClick = (period) => {
-    setActiveDataPeriod(period);
-  };
+  const handlePeriodClick = (period) => setActiveDataPeriod(period);
 
   const tabs = [
     {

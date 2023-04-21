@@ -23,7 +23,7 @@ import {
   TWO_WEEKS_LABEL
 } from '../../../tools/general/system-variables.util';
 
-import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_FIELD_WEATHER_LIST_1 } from '../../../redux/actions/client.action';
+import { SET_CLIENT_FIELD_LIST, SET_CLIENT_FIELD_RAIN_DATA, SET_CLIENT_FIELD_WEATHER_LIST } from '../../../redux/actions/client.action';
 import { SET_SOIL_TEMP_LIST } from '../../../redux/actions/field.action';
 
 import { addOrRemoveFarmLocalStorageFavorites } from '../../../tools/storage/localStorage';
@@ -58,7 +58,7 @@ export const SideBarList = ({
     // setShowSideBar(false);
     dispatch({ type: SET_CLIENT_FIELD_LIST, undefined });
     dispatch({ type: SET_CLIENT_FIELD_RAIN_DATA, undefined });
-    dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST_1, undefined });
+    dispatch({ type: SET_CLIENT_FIELD_WEATHER_LIST, undefined });
     history.push(`/client/${ groupName }/${ clientName }`);
   };
 

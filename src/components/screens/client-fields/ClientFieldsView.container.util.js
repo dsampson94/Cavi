@@ -486,7 +486,7 @@ export function mapDetailsList(rawData) {
 export function mapSprayConditionsList(rawData) {
   if (!rawData) return null;
 
-  return Object.entries(rawData?.hourly)?.map(([dateString, data]) => {
+  return Object.entries(rawData)?.map(([dateString, data]) => {
 
     return {
       date: `${ dateString }`,
@@ -506,7 +506,7 @@ export function mapSprayConditionsList(rawData) {
 export function mapFireIndexList(rawData) {
   if (!rawData) return null;
 
-  return Object.entries(rawData?.daily)?.map(([dateString, data]) => {
+  return Object.entries(rawData)?.map(([dateString, data]) => {
 
     return {
       date: `${ dateString }`,
