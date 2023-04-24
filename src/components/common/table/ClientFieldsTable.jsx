@@ -1,11 +1,11 @@
-import { useHistory, useParams } from 'react-router';
 import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+
 import { generateId, getClassNames, isEmpty, noOp, removeCamelCase } from '../../../tools/general/helpers.util';
-import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
-import RecommendationModal from '../modal/RecommendationModal';
 import { arrayOf, bool, func, number, shape, string } from 'prop-types';
-import ToolTipRelative from '../tool-tip/ToolTipRelative';
-import SVGIcon from '../SVGIcon/SVGIcon';
+
+import { handleRowDoubleClick, hideColumnHeader } from './TableFunctions.util';
+
 import {
   CAMERA,
   CHARTS,
@@ -24,9 +24,29 @@ import {
   WATCH
 } from '../../../tools/general/system-variables.util';
 
+import { FieldCaptureBar } from './components/FieldCaptureBar';
+import ToolTipRelative from '../tool-tip/ToolTipRelative';
+import RecommendationModal from '../modal/RecommendationModal';
+import SVGIcon from '../SVGIcon/SVGIcon';
+
 import './table.scss';
 
-export const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, setSelectedIndex, setSelectedDropdownObject, toggleDropdowns }) => {
+export const ClientFieldsTable = ({
+                                    tableName,
+                                    activeTableData,
+                                    hiddenColumns,
+                                    setSelectedIndex,
+                                    setSelectedDropdownObject,
+                                    toggleDropdowns,
+                                    captureDate,
+                                    setCaptureDate,
+                                    captureValue,
+                                    setCaptureValue,
+                                    captureType,
+                                    setCaptureType,
+                                    captureField,
+                                    setCaptureField
+                                  }) => {
 
   const history = useHistory();
   const { groupName, clientName } = useParams();
@@ -100,7 +120,16 @@ export const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, s
 
             case 5:
               return <CaptureNoteColumn dataIndex={ dataIndex }
-                                        value={ value } />;
+                                        value={ value }
+                                        object={ object }
+                                        captureDate={ captureDate }
+                                        setCaptureDate={ setCaptureDate }
+                                        captureType={ captureType }
+                                        setCaptureType={ setCaptureType }
+                                        captureValue={ captureValue }
+                                        setCaptureValue={ setCaptureValue }
+                                        captureField={ captureField }
+                                        setCaptureField={ setCaptureField } />;
             case 6:
               return <ChartColumn dataIndex={ dataIndex }
                                   value={ value } />;
@@ -242,7 +271,7 @@ export const ClientFieldsTable = ({ tableName, activeTableData, hiddenColumns, s
           { !isDropdownRow &&
           <tr className={ getClassNames('table__body__row',
             { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
-              onClick={ () => setSelectedRow(object) }
+              onMouseUp={ () => setSelectedRow(object) }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
             { tableDataElements }
@@ -450,17 +479,57 @@ LastReadingColumn.propTypes = {
   value: shape({})
 };
 
-const CaptureNoteColumn = ({ dataIndex, value }) => {
+const CaptureNoteColumn = ({
+                             dataIndex,
+                             value,
+                             object,
+                             captureDate,
+                             setCaptureDate,
+                             captureType,
+                             captureField,
+                             setCaptureField,
+                             setCaptureType,
+                             captureValue,
+                             setCaptureValue
+                           }) => {
+  const [showCaptureBar, setShowCaptureBar] = useState(false);
+
   if (value)
-    return <td onClick={ noOp() }
-               key={ generateId() }>
-      <div className={ 'table__body__row__td-container__icon-clickable' }>
-        <ToolTipRelative text={ value } />
-        <SVGIcon name={ PENCIL } />
-      </div>
-    </td>;
-  else
-    return <td key={ generateId() } />;
+    return (
+      <td key={ generateId() }
+          onMouseOver={ () => {
+            setCaptureField(object.fieldName.locationName);
+            setShowCaptureBar(true);
+          } }>
+
+        <div className="z-50 cursor-pointer"
+             onMouseDown={ (event) => {
+               event.stopPropagation();
+               setCaptureField(object.fieldName.locationName);
+               setShowCaptureBar(!showCaptureBar);
+             } }>
+          <SVGIcon name={ PENCIL } />
+
+        </div>
+        { showCaptureBar && (
+          <>
+            <ToolTipRelative text={ value } />
+            <FieldCaptureBar
+              showCaptureBar={ showCaptureBar }
+              setShowCaptureBar={ setShowCaptureBar }
+              captureDate={ captureDate }
+              setCaptureDate={ setCaptureDate }
+              captureType={ captureType }
+              setCaptureType={ setCaptureType }
+              captureValue={ captureValue }
+              setCaptureValue={ setCaptureValue }
+            />
+          </>
+        ) }
+
+      </td>
+    );
+  else return <></>;
 };
 
 CaptureNoteColumn.propTypes = {

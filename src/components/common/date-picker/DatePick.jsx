@@ -26,7 +26,7 @@ const DatePick = ({ value, setActiveItem }) => {
         setStartDate(date);
       } }
       dateFormat="yyyy/MM/dd"
-      className="w-full h-[35px] z-50 rounded-md border-0 bg-white dark:bg-clouded-grey pl-3 text-gray-900
+      className="w-[95%] h-[35px] z-50 rounded-md border-0 bg-white dark:bg-clouded-grey pl-3 text-gray-900
         shadow-sm ring-1 ring-inset ring-[#043b6e] focus:ring-1 focus:ring-inset focus:ring-[#043b6e] sm:text-sm sm:leading-6"
     />
   );

@@ -35,16 +35,18 @@ const Button = ({
                   active,
                   selected,
                   tall,
-                  middatebar
+                  middatebar,
+                  popup
                 }) => {
   return (
     <button className={ getClassNames('button',
-      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, middatebar, tiny, long, medium, add, tab, active, selected }) }
+      { disabled, login, blue, white, icon, spaced, small, chart, chartbar, datebar, middatebar, tiny, long, medium, add, tab, active, selected, popup }) }
             name={ name }
             type={ type }
             onClick={ onClick }
             onMouseEnter={ onMouseEnter }
             disabled={ disabled }>
+      { popup && <label>{ label }</label> }
       { !datebar || !middatebar && <label>{ label }</label> }
       { datebar || middatebar && <div>
         <div className={ 'button__label--upper' }><label>{ label }</label></div>

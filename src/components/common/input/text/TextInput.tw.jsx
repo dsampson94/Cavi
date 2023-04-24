@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export default function TextInputTw({ label, placeholder, activeValue, setActiveValue }) {
+export default function TextInputTw({ label, placeholder, activeValue, setActiveValue, width }) {
 
   const inputRef = useRef(null);
 
@@ -10,7 +10,7 @@ export default function TextInputTw({ label, placeholder, activeValue, setActive
 
   return (
     <div
-      className="relative m-1 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-0 focus-within:ring-blue-600 min-w-[188px]"
+      className={`relative m-1 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-0 focus-within:ring-blue-600 min-w-${width ? width : '188'}px`}
     >
       <label
         htmlFor="input"

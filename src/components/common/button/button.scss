@@ -72,6 +72,10 @@
     }
   }
 
+  &--popup {
+    margin-top: util.rem(6.5);
+  }
+
   &--datebar {
     display: flex;
     justify-content: center;

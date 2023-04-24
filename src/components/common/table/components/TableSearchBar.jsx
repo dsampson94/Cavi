@@ -2,10 +2,10 @@ import React from 'react';
 
 import { arrayOf, func, shape } from 'prop-types';
 
-import { TABLE_SEARCH_PLACEHOLDER } from '../../../tools/general/system-variables.util';
-import InputSearch from '../input-search/InputSearch';
+import { TABLE_SEARCH_PLACEHOLDER } from '../../../../tools/general/system-variables.util';
+import InputSearch from '../../input-search/InputSearch';
 
-import './table.scss';
+import '../table.scss';
 
 export const TableSearchBar = ({ mappedFieldList, setFilteredTableData }) => {
   return <div className="client-fields__search">

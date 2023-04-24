@@ -1,4 +1,5 @@
 import {
+  SET_FIELD_CAPTURE,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
@@ -34,6 +35,7 @@ import {
 
 export const initialState = {
   chartList: undefined,
+  fieldCapture: undefined,
   voltChartList: undefined,
   flowMeterDailyList: undefined,
   flowMeterHourlyList: undefined,
@@ -73,6 +75,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         chartList
+      };
+    }
+    case SET_FIELD_CAPTURE: {
+      const { fieldCapture } = action;
+      return {
+        ...state,
+        fieldCapture
       };
     }
     case SET_FIELD_VOLT_CHART_LIST: {

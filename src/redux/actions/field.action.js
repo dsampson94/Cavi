@@ -1,4 +1,5 @@
 export const SET_FIELD_CHART_LIST = '[FIELD_STORE] Set field chart list';
+export const SET_FIELD_CAPTURE = '[FIELD_STORE] Set field capture';
 export const SET_FIELD_VOLT_CHART_LIST = '[FIELD_STORE] Set field volt chart list';
 export const SET_FIELD_FLOW_METER_DAILY_CHART_LIST = '[FIELD_STORE] Set field flow meter daily chart list';
 export const SET_FIELD_FLOW_METER_HOURLY_CHART_LIST = '[FIELD_STORE] Set field flow meter chart hourly list';
@@ -60,6 +61,12 @@ export const requestFieldSetupList = (field, use) => ({
 export const REQUEST_SET_FIELD_SETUP = '[FIELD_STORE] Request set field setup';
 export const requestSetFieldSetup = (field) => ({
   type: REQUEST_SET_FIELD_SETUP,
+  field
+});
+
+export const REQUEST_SET_FIELD_CAPTURE = '[FIELD_STORE] Request set field capture';
+export const requestSetFieldCapture = (field) => ({
+  type: REQUEST_SET_FIELD_CAPTURE,
   field
 });
 

@@ -30,6 +30,12 @@ export const getSetFieldSetup = (field) => [
   getHttpGetOptions(field)
 ];
 
+const getSetFieldCaptureEndpoint = () => `${ API_HOST }/capture.php`;
+export const getSetFieldCapture = (field) => [
+  getSetFieldCaptureEndpoint(),
+  getHttpGetOptions(field)
+];
+
 const getSetFieldReportEndpoint = () => `${ API_HOST }/getReports.php`;
 export const getSetFieldReport = (field) => [
   getSetFieldReportEndpoint(),

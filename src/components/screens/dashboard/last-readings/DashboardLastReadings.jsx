@@ -45,9 +45,7 @@ const DashboardLastReadings = ({
         <div className="dashboard-last-readings__container">
 
           <TextInputTw label={ 'Probe Number' }
-                       placeholder={ 'ex. AC12345, DFM00034, 2549, 19273' }
-                       activeValue={ probeNumber }
-                       setActiveValue={ setProbeNumber } />
+                       placeholder={ 'ex. AC12345, DFM00034, 2549, 19273' } />
 
           <Select activeItem={ filterNumber }
                   setActiveItem={ setFilterNumber }

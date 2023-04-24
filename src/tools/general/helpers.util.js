@@ -110,3 +110,8 @@ export const formatDate = (timestamp) => {
 
   return `${ year }/${ month }/${ day }`;
 };
+
+export function formatDateTime(date) {
+  if (!date) return;
+  return date?.toISOString()?.replace('T', ' ')?.slice(0, 19)?.replace('-', '/')?.replace('-', '/');
+}

@@ -4,7 +4,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { useParams } from 'react-router';
 
 import { shape } from 'prop-types';
-import { formatDate } from '../../../tools/general/helpers.util';
+import { formatDate, formatDateTime } from '../../../tools/general/helpers.util';
 
 import {
   mapActualForecastWeatherPopupChartList,
@@ -21,6 +21,7 @@ import {
   mapWeatherList2,
   mapWindWeatherPopupChartList
 } from './ClientFieldsView.container.util.js';
+
 import {
   requestClientFieldWeatherDetailsList,
   requestClientFieldWeatherFireSprayList,
@@ -29,9 +30,11 @@ import {
   requestFullClientFieldList,
   setDetailsList3
 } from '../../../redux/actions/client.action';
+
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
+import { requestSetFieldCapture } from '../../../redux/actions/field.action';
 
 const ClientFieldsViewContainer = () => {
 
@@ -49,6 +52,11 @@ const ClientFieldsViewContainer = () => {
   const [activeWeatherStation, setActiveWeatherStation] = useState(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const [activeDataPeriod, setActiveDataPeriod] = useState(28);
+
+  const [captureValue, setCaptureValue] = useState('');
+  const [captureDate, setCaptureDate] = useState(new Date());
+  const [captureType, setCaptureType] = useState('Irrigation');
+  const [captureField, setCaptureField] = useState(undefined);
 
   const request = getRequestParams({ groupName, clientName });
 
@@ -104,6 +112,18 @@ const ClientFieldsViewContainer = () => {
     }));
   };
 
+  useEffect(() => {
+    if (captureField) {
+      dispatch(requestSetFieldCapture({
+        ...request.clientParams,
+        field: captureField,
+        dte: formatDateTime(activeDate),
+        text: captureValue,
+        type: captureType
+      }));
+    }
+  }, [captureValue, captureType, captureDate]);
+
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList?.stations) }
                            mappedWeatherList2={ mapWeatherList2(fieldWeatherObjectList) }
@@ -127,7 +147,15 @@ const ClientFieldsViewContainer = () => {
                            mappedSprayConditionsList={ mapSprayConditionsList(fieldWeatherFireSprayList?.hourly) }
                            mappedFireDangerIndexList={ mapFireIndexList(fieldWeatherFireSprayList?.daily) }
                            activeDataPeriod={ activeDataPeriod }
-                           setActiveDataPeriod={ setActiveDataPeriod } />;
+                           setActiveDataPeriod={ setActiveDataPeriod }
+                           captureValue={ captureValue }
+                           setCaptureValue={ setCaptureValue }
+                           captureType={ captureType }
+                           setCaptureType={ setCaptureType }
+                           captureDate={ captureDate }
+                           setCaptureDate={ setCaptureDate }
+                           captureField={ captureField }
+                           setCaptureField={ setCaptureField } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

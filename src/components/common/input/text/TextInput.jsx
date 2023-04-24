@@ -30,11 +30,12 @@ const TextInput = ({
                      defaultValue,
                      onMouseEnter,
                      onMouseOver,
-                     onDoubleClick
+                     onDoubleClick,
+                     popup
                    }) => {
 
   return (
-    <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar, centered, select, wide, input, table }) }>
+    <div className={ getClassNames('text-input', { disabled, login, left, chartbar, topbar, centered, select, wide, input, table, popup }) }>
       { label && <div className={ getClassNames('text-input__label-container', { login, left, centered }) }>
         <label>{ label }</label>
       </div> }
@@ -52,7 +53,7 @@ const TextInput = ({
              disabled={ disabled }
              type={ type }
              autoFocus={ autoFocus }
-             className={ getClassNames('text-input__input', { login, chartbar, table, select, wide, input }) } />
+             className={ getClassNames('text-input__input', { login, chartbar, table, select, wide, input, popup }) } />
     </div>
   );
 };

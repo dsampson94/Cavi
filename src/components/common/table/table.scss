@@ -57,7 +57,7 @@
 
       &:hover {
         cursor: pointer;
-        z-index: 4;
+        z-index: 1;
         position: relative;
         opacity: 1;
         border-bottom: util.rem(2) solid map.get(color.$colorMap, pulse-blue);

@@ -6,7 +6,7 @@ import { CLIENT_FIELDS, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/genera
 
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
-import { TableSearchBar } from '../../common/table/TableComponents.util';
+import { TableSearchBar } from '../../common/table/components/TableSearchBar';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import { Popup } from '../../common/bottom-popup/Popup';
@@ -39,7 +39,15 @@ const ClientFieldsView = ({
                             mappedSprayConditionsList,
                             mappedFireDangerIndexList,
                             activeDataPeriod,
-                            setActiveDataPeriod
+                            setActiveDataPeriod,
+                            captureType,
+                            setCaptureType,
+                            captureValue,
+                            setCaptureValue,
+                            captureDate,
+                            setCaptureDate,
+                            captureField,
+                            setCaptureField
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -84,7 +92,15 @@ const ClientFieldsView = ({
                              setSelectedIndex={ setSelectedIndex }
                              setSelectedDropdownObject={ setSelectedDropdownObject }
                              setActiveTableData={ setActiveTableData }
-                             toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) } />
+                             toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
+                             captureDate={ captureDate }
+                             setCaptureDate={ setCaptureDate }
+                             captureValue={ captureValue }
+                             setCaptureValue={ setCaptureValue }
+                             captureType={ captureType }
+                             setCaptureType={ setCaptureType }
+                             captureField={ captureField }
+                             setCaptureField={ setCaptureField } />
         </div>
 
         { !isEmpty(mappedWeatherList1) &&
