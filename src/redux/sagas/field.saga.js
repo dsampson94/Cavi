@@ -22,7 +22,8 @@ import {
   UNSUCCESSFULLY_RETRIEVED_FIELD_SETUP_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_SOIL_TEMP_CHART_LIST,
   UNSUCCESSFULLY_RETRIEVED_FIELD_VOLT_CHART_LIST,
-  UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST
+  UNSUCCESSFULLY_RETRIEVED_FIELD_VPD_CHART_LIST,
+  UNSUCCESSFULLY_RETRIEVED_OVERVIEW
 } from '../../tools/general/system-variables.util';
 import { generateId, getProgress } from '../../tools/general/helpers.util';
 
@@ -33,6 +34,7 @@ import {
   getExtendedChartList,
   getFieldChartListRequest,
   getFieldSetupList,
+  getQuickViewListRequest,
   getSetFieldCapture,
   getSetFieldReport,
   getSetFieldSetup
@@ -40,12 +42,15 @@ import {
 
 import { addSystemNotice, setProgressBar, setSpinnerText } from '../actions/system.action';
 import {
+  GET_QUICK_VIEW_LIST,
   REQUEST_EXTENDED_FIELD_CHART_LIST,
   REQUEST_FIELD_CHART_LIST,
   REQUEST_FIELD_SETUP_LIST,
-  REQUEST_PROBE_CALIBRATION, REQUEST_SET_FIELD_CAPTURE,
+  REQUEST_PROBE_CALIBRATION,
+  REQUEST_SET_FIELD_CAPTURE,
   REQUEST_SET_FIELD_REPORTS_LIST,
-  REQUEST_SET_FIELD_SETUP, SET_FIELD_CAPTURE,
+  REQUEST_SET_FIELD_SETUP,
+  SET_FIELD_CAPTURE,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
   SET_FIELD_FLOW_METER_DAILY_CHART_LIST,
@@ -76,8 +81,10 @@ import {
   SET_FIELD_SETUP_WEATHER_STATION_LIST,
   SET_FIELD_VOLT_CHART_LIST,
   SET_FIELD_VPD_CHART_LIST,
+  SET_QUICK_VIEW_LIST,
   SET_SOIL_TEMP_LIST
 } from '../actions/field.action';
+import { SET_ADMIN_USER_LIST } from '../actions/client.action';
 
 export function* performRetrieveFieldChartListRequest({ field }) {
   try {
@@ -503,6 +510,34 @@ export function* watchForSetFieldCaptureRequest() {
   yield takeLatest(REQUEST_SET_FIELD_CAPTURE, performFieldCaptureRequest);
 }
 
+export function* performGetQuickViewListRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getQuickViewListRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_QUICK_VIEW_LIST, undefined });
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_QUICK_VIEW_LIST, quickViewList: data });
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_ADMIN_USER_LIST, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForGetQuickViewRequest() {
+  yield takeLatest(GET_QUICK_VIEW_LIST, performGetQuickViewListRequest);
+}
+
 export default function* fieldSaga() {
   yield all([
     watchForRetrieveFieldChartListRequest(),
@@ -511,6 +546,7 @@ export default function* fieldSaga() {
     watchForRetrieveFieldSetupListRequest(),
     watchForSetFieldSetupRequest(),
     watchForRetrieveFieldReportListRequest(),
-    watchForSetFieldCaptureRequest()
+    watchForSetFieldCaptureRequest(),
+    watchForGetQuickViewRequest()
   ]);
 }

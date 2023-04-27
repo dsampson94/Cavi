@@ -52,9 +52,11 @@ const ClientFieldsView = ({
                             mappedChartList,
                             activeLoadPeriod,
                             setActiveLoadPeriod,
+                            activeFieldName,
                             setActiveFieldName,
                             activeFieldProbeNumber,
-                            setActiveFieldProbeNumber
+                            setActiveFieldProbeNumber,
+                            mappedQuickViewList
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -153,7 +155,9 @@ const ClientFieldsView = ({
                    setQuickViewIsOpen={ setQuickViewIsOpen }
                    activeLoadPeriod={ activeLoadPeriod }
                    setActiveLoadPeriod={ setActiveLoadPeriod }
-                   setActiveFieldName={ setActiveFieldName } />
+                   activeFieldName={ activeFieldName }
+                   setActiveFieldName={ setActiveFieldName }
+                   mappedQuickViewList={ mappedQuickViewList } />
       </div>
     </ContentContainer>
   );

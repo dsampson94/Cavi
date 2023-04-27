@@ -31,6 +31,7 @@ export const SET_FIELD_SETUP_PHENOLOGICAL_LIST = '[FIELD_STORE] Set field phenol
 export const SET_FIELD_SETUP_MAP_LIST = '[FIELD_STORE] Set field map list';
 export const SET_FIELD_REPORTS_LIST = '[FIELD_STORE] Set field reports list';
 export const SET_FIELD_REPORTS_DOWNLOAD = '[FIELD_STORE] Set field reports download';
+export const SET_QUICK_VIEW_LIST = '[FIELD_STORE] Set quick view list';
 
 export const REQUEST_FIELD_CHART_LIST = '[FIELD_STORE] Get field chart list';
 export const requestFieldChartList = (field) => ({
@@ -76,3 +77,8 @@ export const requestSetFieldReportsList = (field) => ({
   field
 });
 
+export const GET_QUICK_VIEW_LIST = '[FIELD_STORE] Get quick view list';
+export const requestQuickViewList = (client) => ({
+  type: GET_QUICK_VIEW_LIST,
+  client
+});

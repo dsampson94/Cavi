@@ -5,7 +5,9 @@ import useTheme from '../../../tools/hooks/useTheme';
 export const QuickView = ({
                             mappedChartList,
                             quickViewIsOpen,
-                            setQuickViewIsOpen
+                            activeFieldName,
+                            setQuickViewIsOpen,
+                            mappedQuickViewList
                           }) => {
 
   const { isDarkMode } = useTheme(false);
@@ -13,22 +15,23 @@ export const QuickView = ({
   return (
     <>
       { quickViewIsOpen &&
-      <div className="fixed top-0 left-0 z-50 w-full ml-16 h-full flex items-center justify-center"
+      <div className="fixed top-0 left-0 z-50 w-full ml-24 h-full flex items-center justify-center"
            onClick={ () => setQuickViewIsOpen(false) }>
 
-        <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-6">
+        <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl p-6">
 
-          <div className="w-full h-6 flex flex-row-reverse">
-            <button
-              className="relative top-0 right-0 w-24 text-gray-900 hover:text-gray-700 dark:text-gray-400 justify-right"
-              onClick={ () => setQuickViewIsOpen(false) }
-            >
-              X
+          <div className="-translate-y-2">
+            { activeFieldName }
+          </div>
+
+          <div className="w-full h-0 flex flex-row-reverse -translate-y-8">
+            <button className="relative top-0 right-0 w-24 text-gray-900 hover:text-gray-700 dark:text-gray-400 justify-right"
+                    onClick={ () => setQuickViewIsOpen(false) }>X
             </button>
           </div>
 
-          <div className="flex flex-row overflow-hidden w-[350px] md:w-[450px] xl:w-[850px] 2xl:w-[1200px]
-        h-[180px] md:h-[220px] xl:h-[420px] 2xl:h-[500px]">
+          <div className="flex flex-col 2xl:flex-row overflow-auto w-[350px] md:w-[800px] xl:w-[1020px] 2xl:w-[1270px]
+        h-[180px] md:h-[300px] xl:h-[370px] 2xl:h-[500px]">
 
             <div className="flex flex-col w-1/2">
               <FieldPopupLineChart height={ 80 }

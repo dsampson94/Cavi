@@ -43,3 +43,9 @@ export const getSetFieldReport = (field) => [
     getHttpGetPDFOptions(field) :
     getHttpGetOptions(field))
 ];
+
+const getQuickViewListEndpoint = () => `${ API_HOST }/getQuickview.php`;
+export const getQuickViewListRequest = (client) => [
+  getQuickViewListEndpoint(),
+  getHttpGetOptions(client)
+];

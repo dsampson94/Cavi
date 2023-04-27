@@ -34,14 +34,14 @@ import {
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
-import { requestFieldChartList, requestSetFieldCapture } from '../../../redux/actions/field.action';
+import { requestFieldChartList, requestQuickViewList, requestSetFieldCapture } from '../../../redux/actions/field.action';
 import { mapChartList } from '../field-charts/FieldChartsView.container.util';
 import { TWO_WEEKS_LABEL } from '../../../tools/general/system-variables.util';
 
 const ClientFieldsViewContainer = () => {
 
   const dispatch = useDispatch();
-  const { groupName, clientName, probeNumber } = useParams();
+  const { groupName, clientName } = useParams();
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherList?.data));
@@ -50,6 +50,7 @@ const ClientFieldsViewContainer = () => {
   const fieldWeatherFireSprayList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherFireSprayList?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
   const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
+  const fieldQuickViewList = useSelector(createSelector([state => state.field], field => field?.quickViewList?.data));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
   const [activeWeatherStation, setActiveWeatherStation] = useState(undefined);
@@ -84,6 +85,11 @@ const ClientFieldsViewContainer = () => {
         ...request.clientParams,
         field: activeFieldName ? activeFieldName : null,
         load: activeLoadPeriod ? activeLoadPeriod : null
+      }));
+      dispatch(requestQuickViewList({
+        ...request.clientParams,
+        field: activeFieldName ? activeFieldName : null,
+        quickviewtype: 'fieldsummary'
       }));
     }
   }, [activeFieldName]);
@@ -177,7 +183,10 @@ const ClientFieldsViewContainer = () => {
                            setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
                            activeLoadPeriod={ activeLoadPeriod }
                            setActiveLoadPeriod={ setActiveLoadPeriod }
-                           setActiveFieldName={ setActiveFieldName } />;
+                           activeFieldName={ activeFieldName }
+                           setActiveFieldName={ setActiveFieldName }
+                           mappedQuickViewList={ fieldQuickViewList }
+  />;
 };
 
 ClientFieldsViewContainer.propTypes = {

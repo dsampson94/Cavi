@@ -30,6 +30,7 @@ import {
   SET_FIELD_SETUP_WEATHER_STATION_LIST,
   SET_FIELD_VOLT_CHART_LIST,
   SET_FIELD_VPD_CHART_LIST,
+  SET_QUICK_VIEW_LIST,
   SET_SOIL_TEMP_LIST
 } from '../actions/field.action';
 
@@ -65,7 +66,8 @@ export const initialState = {
   fieldSetupPhenologicalList: undefined,
   fieldSetupMapList: undefined,
   fieldReportsList: undefined,
-  fieldReportsDownload: undefined
+  fieldReportsDownload: undefined,
+  quickViewList: undefined
 };
 
 export const fieldReducer = (state = initialState, action) => {
@@ -292,6 +294,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         fieldReportsDownload
+      };
+    }
+    case SET_QUICK_VIEW_LIST: {
+      const { quickViewList } = action;
+      return {
+        ...state,
+        quickViewList
       };
     }
     default:
