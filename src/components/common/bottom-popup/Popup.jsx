@@ -41,7 +41,7 @@ export function Popup({
   const { groupName, clientName } = useParams();
 
   const [show, setShow] = useState(false);
-  const [height, setHeight] = useState('60px');
+  const [height, setHeight] = useState('55px');
   const [originalHeight, setOriginalHeight] = useState('60px');
   const activeHeight = '440px';
   const [activeTab, setActiveTab] = useState(0);
@@ -125,7 +125,7 @@ export function Popup({
   ];
 
   return (
-    <div className="fixed bottom-0 flex-col w-full z-[99]">
+    <div className="fixed bottom-0 flex-col w-full z-[40]">
       <div className="top-0 left-0 bg-gray-100 border-gray-500 z-40 dark:border-white border-t-2 rounded-md cursor-resize flex dark:bg-dark-mode-grey">
         <button className={ classNames(!show ? 'pb-1' : 'hover:pb-0.5', 'text-black rounded-md dark:text-white px-2 text-xs font-semibold') }
                 onClick={ toggleShow }>

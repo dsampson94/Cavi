@@ -13,8 +13,9 @@
   user-select: none;
   height: util.rem(55);
   margin-bottom: util.rem(4);
-  border-bottom: util.rem(1) solid grey;
+  border-bottom: util.rem(2) solid grey;
   box-shadow: util.rem(0) util.rem(0) util.rem(5) map.get(color.$colorMap, dark-mode-grey);
+  background-color: #0c0a09;
   max-width: 99.99%;
   z-index: 99;
 

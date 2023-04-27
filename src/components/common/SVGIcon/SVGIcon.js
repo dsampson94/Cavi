@@ -121,7 +121,7 @@ const getViewBox = (name, tiny, chart, tall, menu, overview) => {
       else if (tiny) return '4 1 15 34';
       else return '3 -1 20 50';
     case FAVORITES_STAR:
-      return '3 6 10 80';
+      return '8 3 10 80';
     case WARNING:
       return '-5 -9 1 42';
     case DROPDOWN:

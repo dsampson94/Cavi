@@ -229,7 +229,8 @@ const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, r
     },
     ...(listItem?.showtransp === '1' ? { trans: listItem?.gw } : {}),
     ...(listItem?.showtransp === '1' ? { evap: listItem?.vw } : {}),
-    ...(listItem?.showtransp === '1' ? { total: listItem?.tw } : {})
+    ...(listItem?.showtransp === '1' ? { total: listItem?.tw } : {}),
+    captureExpanded: false
   });
 };
 

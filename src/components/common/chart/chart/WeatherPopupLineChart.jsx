@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceArea, Tooltip, XAxis, YAxis } from 'recharts';
-import { retrieveActiveThemeFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 export function WeatherPopupLineChart({ height, lines }) {
-
-  const getTheme = retrieveActiveThemeFromLocalStorage();
-  const [isDarkMode] = useState(!(getTheme === 'dark'));
 
   const isNightTime = (date) => {
     const hour = new Date(date).getHours();
@@ -33,7 +29,7 @@ export function WeatherPopupLineChart({ height, lines }) {
       const isNight = isNightTime(label);
       return (
         <div style={ { textAlign: 'left', backgroundColor: 'white', border: 'none', borderRadius: '10px', padding: '8px' } }>
-          <p style={ { fontWeight: 'bold', color: isDarkMode ? 'white' : 'black' } }>
+          <p style={ { fontWeight: 'bold', color: 'black' } }>
             { `${ label }${ isNight ? ' (Night)' : '' }` }
           </p>
           { payload.map((item, index) => (

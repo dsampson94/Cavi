@@ -60,7 +60,7 @@ export const ReportsTable = ({
             case 3:
               return <td key={ generateId() }
                          className="w-24">
-                <div className="flex text-xs z-50 text-left underline text-blue-700 hover:text-blue-500"
+                <div className="flex text-xs z-50 text-left underline font-bold text-blue-400 hover:text-blue-500"
                      onClick={ () => {
                        handleDownloadReportClick(objectValues[3]);
                      } }>

@@ -39,6 +39,17 @@ export const toggleDropdown = (mappedFieldList, filteredTableData, selectedIndex
   if (!mappedFieldList) return;
   const copyOfActiveList = [...mappedFieldList];
   mappedFieldList?.splice(selectedIndex + 1, 1,
-    { ...copyOfActiveList[selectedIndex + 1], expanded: !mappedFieldList[selectedIndex + 1].expanded });
+    { ...copyOfActiveList?.[selectedIndex + 1], expanded: !mappedFieldList?.[selectedIndex + 1].expanded });
   setActiveTableData([...mappedFieldList]);
+};
+
+export const toggleCapture = (mappedFieldList, filteredTableData, selectedCaptureObject, selectedIndex, setActiveTableData) => {
+  if (!mappedFieldList) return;
+  const currentItem = mappedFieldList?.[selectedIndex];
+  const updatedList = [...mappedFieldList];
+  // console.log({ ...currentItem, captureExpanded: !currentItem.captureExpanded });
+
+  updatedList.splice(selectedIndex, 1, { ...currentItem, captureExpanded: !currentItem.captureExpanded });
+  // console.log(updatedList);
+  setActiveTableData(updatedList);
 };

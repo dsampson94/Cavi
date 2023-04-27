@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
-import { retrieveActiveThemeFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 export function WeatherPopupBarChart({ data }) {
-
-  const getTheme = retrieveActiveThemeFromLocalStorage();
-  const [isDarkMode] = useState(!(getTheme === 'dark'));
 
   function getFullMonthName(shortMonthName) {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -23,7 +19,7 @@ export function WeatherPopupBarChart({ data }) {
       return (
         <div style={ { textAlign: 'left', backgroundColor: 'white', border: 'none', borderRadius: '10px', padding: '8px' } }>
           { fullMonthName && (
-            <p style={ { fontWeight: 'bold', color: isDarkMode ? 'white' : 'black' } }>
+            <p style={ { fontWeight: 'bold', color: 'black' } }>
               { fullMonthName }
             </p>
           ) }

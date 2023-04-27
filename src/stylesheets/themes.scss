@@ -31,6 +31,10 @@ html.light {
     @apply transition duration-1000 bg-table-yellow-dark;
   }
 
+  .top-bar {
+    @apply bg-light-mode-white
+  }
+
   .table__body__row__td--light {
     @apply transition duration-1000 bg-table-yellow-light;
   }

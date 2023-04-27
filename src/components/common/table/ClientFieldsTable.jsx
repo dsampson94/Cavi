@@ -37,6 +37,7 @@ export const ClientFieldsTable = ({
                                     hiddenColumns,
                                     setSelectedIndex,
                                     setSelectedDropdownObject,
+                                    setSelectedCaptureObject,
                                     toggleDropdowns,
                                     captureDate,
                                     setCaptureDate,
@@ -45,7 +46,14 @@ export const ClientFieldsTable = ({
                                     captureType,
                                     setCaptureType,
                                     captureField,
-                                    setCaptureField
+                                    setCaptureField,
+                                    mappedChartList,
+                                    activeLoadPeriod,
+                                    setActiveLoadPeriod,
+                                    setActiveFieldName,
+                                    setActiveFieldProbeNumber,
+                                    quickViewIsOpen,
+                                    setQuickViewIsOpen
                                   }) => {
 
   const history = useHistory();
@@ -120,6 +128,7 @@ export const ClientFieldsTable = ({
 
             case 5:
               return <CaptureNoteColumn dataIndex={ dataIndex }
+                                        rowIndex={ rowIndex }
                                         value={ value }
                                         object={ object }
                                         captureDate={ captureDate }
@@ -129,10 +138,19 @@ export const ClientFieldsTable = ({
                                         captureValue={ captureValue }
                                         setCaptureValue={ setCaptureValue }
                                         captureField={ captureField }
-                                        setCaptureField={ setCaptureField } />;
+                                        setCaptureField={ setCaptureField }
+                                        setSelectedIndex={ setSelectedIndex }
+                                        setSelectedCaptureObject={ setSelectedCaptureObject } />;
             case 6:
               return <ChartColumn dataIndex={ dataIndex }
-                                  value={ value } />;
+                                  object={ object }
+                                  mappedChartList={ mappedChartList }
+                                  activeLoadPeriod={ activeLoadPeriod }
+                                  setActiveLoadPeriod={ setActiveLoadPeriod }
+                                  setActiveFieldName={ setActiveFieldName }
+                                  value={ value }
+                                  quickViewIsOpen={ quickViewIsOpen }
+                                  setQuickViewIsOpen={ setQuickViewIsOpen } />;
             case 7:
               return <DeficitColumn dataIndex={ dataIndex }
                                     value={ value }
@@ -271,7 +289,11 @@ export const ClientFieldsTable = ({
           { !isDropdownRow &&
           <tr className={ getClassNames('table__body__row',
             { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
-              onMouseUp={ () => setSelectedRow(object) }
+              onMouseDown={ () => {
+                setActiveFieldName(object.fieldName.locationName);
+                setActiveFieldProbeNumber(object.fieldName.probeNumber);
+                setSelectedRow(object);
+              } }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
             { tableDataElements }
@@ -481,6 +503,7 @@ LastReadingColumn.propTypes = {
 
 const CaptureNoteColumn = ({
                              dataIndex,
+                             rowIndex,
                              value,
                              object,
                              captureDate,
@@ -490,42 +513,44 @@ const CaptureNoteColumn = ({
                              setCaptureField,
                              setCaptureType,
                              captureValue,
-                             setCaptureValue
+                             setCaptureValue,
+                             setSelectedIndex,
+                             setSelectedCaptureObject
                            }) => {
-  const [showCaptureBar, setShowCaptureBar] = useState(false);
 
   if (value)
     return (
       <td key={ generateId() }
-          onMouseOver={ () => {
-            setCaptureField(object.fieldName.locationName);
-            setShowCaptureBar(true);
-          } }>
+        // onMouseOver={ () => {
+        //   setSelectedIndex(rowIndex);
+        //   setSelectedCaptureObject(object);
+        //   setCaptureField(object.fieldName.locationName);
+        // } }
+      >
 
         <div className="z-50 cursor-pointer"
              onMouseDown={ (event) => {
                event.stopPropagation();
+               setSelectedIndex(rowIndex);
+               setSelectedCaptureObject(object);
                setCaptureField(object.fieldName.locationName);
-               setShowCaptureBar(!showCaptureBar);
              } }>
+
           <SVGIcon name={ PENCIL } />
 
         </div>
-        { showCaptureBar && (
-          <>
-            <ToolTipRelative text={ value } />
-            <FieldCaptureBar
-              showCaptureBar={ showCaptureBar }
-              setShowCaptureBar={ setShowCaptureBar }
-              captureDate={ captureDate }
-              setCaptureDate={ setCaptureDate }
-              captureType={ captureType }
-              setCaptureType={ setCaptureType }
-              captureValue={ captureValue }
-              setCaptureValue={ setCaptureValue }
-            />
-          </>
-        ) }
+
+        { object.captureExpanded && <>
+          <ToolTipRelative text={ value } />
+          <FieldCaptureBar
+            captureDate={ captureDate }
+            setCaptureDate={ setCaptureDate }
+            captureType={ captureType }
+            setCaptureType={ setCaptureType }
+            captureValue={ captureValue }
+            setCaptureValue={ setCaptureValue }
+          />
+        </> }
 
       </td>
     );
@@ -537,10 +562,21 @@ CaptureNoteColumn.propTypes = {
   value: string || shape({})
 };
 
-const ChartColumn = ({ dataIndex, value }) => {
+const ChartColumn = ({
+                       dataIndex,
+                       value,
+                       object,
+                       mappedChartList,
+                       quickViewIsOpen,
+                       setQuickViewIsOpen,
+                       activeLoadPeriod,
+                       setActiveLoadPeriod,
+                       setActiveFieldName
+                     }) => {
+
   if (value)
-    return <td onClick={ noOp() }
-               key={ generateId() }>
+    return <td key={ generateId() }
+               onMouseDown={ () => setQuickViewIsOpen(true) }>
       <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CHARTS } />
@@ -548,11 +584,6 @@ const ChartColumn = ({ dataIndex, value }) => {
     </td>;
   else
     return <td key={ generateId() } />;
-};
-
-ChartColumn.propTypes = {
-  dataIndex: number.isRequired,
-  value: string || shape({})
 };
 
 const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) => {

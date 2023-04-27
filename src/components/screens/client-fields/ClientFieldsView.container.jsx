@@ -34,12 +34,14 @@ import {
 import { getRequestParams } from '../../../redux/endpoints';
 
 import ClientFieldsView from './ClientFieldsView';
-import { requestSetFieldCapture } from '../../../redux/actions/field.action';
+import { requestFieldChartList, requestSetFieldCapture } from '../../../redux/actions/field.action';
+import { mapChartList } from '../field-charts/FieldChartsView.container.util';
+import { TWO_WEEKS_LABEL } from '../../../tools/general/system-variables.util';
 
 const ClientFieldsViewContainer = () => {
 
   const dispatch = useDispatch();
-  const { groupName, clientName } = useParams();
+  const { groupName, clientName, probeNumber } = useParams();
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherList?.data));
@@ -47,6 +49,7 @@ const ClientFieldsViewContainer = () => {
   const fieldWeatherDetailsList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherDetailsList?.data));
   const fieldWeatherFireSprayList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherFireSprayList?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
+  const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
   const [activeWeatherStation, setActiveWeatherStation] = useState(undefined);
@@ -58,19 +61,32 @@ const ClientFieldsViewContainer = () => {
   const [captureType, setCaptureType] = useState('Irrigation');
   const [captureField, setCaptureField] = useState(undefined);
 
+  const [activeLoadPeriod, setActiveLoadPeriod] = useState(TWO_WEEKS_LABEL);
+  const [activeFieldName, setActiveFieldName] = useState(undefined);
+  const [activeFieldProbeNumber, setActiveFieldProbeNumber] = useState(undefined);
+
   const request = getRequestParams({ groupName, clientName });
 
   const subGroupList = [];
 
   function mappedWeatherList(obj) {
-    if (!obj) return;
-    return Object.entries(obj)?.map(([key, value]) => ({ key, value }));
+    if (obj) return Object.entries(obj)?.map(([key, value]) => ({ key, value }));
   }
 
   useEffect(() => {
     dispatch(requestFullClientFieldList(request.clientParams));
     dispatch(requestClientFieldWeatherList(request.weatherParams1));
   }, [groupName, clientName, reloadToggleActive]);
+
+  useEffect(() => {
+    if (activeFieldName) {
+      dispatch(requestFieldChartList({
+        ...request.clientParams,
+        field: activeFieldName ? activeFieldName : null,
+        load: activeLoadPeriod ? activeLoadPeriod : null
+      }));
+    }
+  }, [activeFieldName]);
 
   useEffect(() => {
     if (activeWeatherStation) {
@@ -155,7 +171,13 @@ const ClientFieldsViewContainer = () => {
                            captureDate={ captureDate }
                            setCaptureDate={ setCaptureDate }
                            captureField={ captureField }
-                           setCaptureField={ setCaptureField } />;
+                           setCaptureField={ setCaptureField }
+                           mappedChartList={ mapChartList(fieldChartList, activeFieldProbeNumber) }
+                           activeFieldProbeNumber={ activeFieldProbeNumber }
+                           setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
+                           activeLoadPeriod={ activeLoadPeriod }
+                           setActiveLoadPeriod={ setActiveLoadPeriod }
+                           setActiveFieldName={ setActiveFieldName } />;
 };
 
 ClientFieldsViewContainer.propTypes = {

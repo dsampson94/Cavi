@@ -5,12 +5,13 @@ import { arrayOf, shape } from 'prop-types';
 import { CLIENT_FIELDS, CLIENT_RECOMMENDATION_VIEW } from '../../../tools/general/system-variables.util';
 
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
-import { toggleAllDropdowns, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
+import { toggleAllDropdowns, toggleCapture, toggleDropdown, toggleDropdownAfterSearch } from './ClientFieldsView.util';
 import { TableSearchBar } from '../../common/table/components/TableSearchBar';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import { Popup } from '../../common/bottom-popup/Popup';
 import { ClientFieldsTable } from '../../common/table/ClientFieldsTable';
+import { QuickView } from '../../common/quick-view/QuickView';
 
 import './client-fields-view.scss';
 
@@ -47,7 +48,13 @@ const ClientFieldsView = ({
                             captureDate,
                             setCaptureDate,
                             captureField,
-                            setCaptureField
+                            setCaptureField,
+                            mappedChartList,
+                            activeLoadPeriod,
+                            setActiveLoadPeriod,
+                            setActiveFieldName,
+                            activeFieldProbeNumber,
+                            setActiveFieldProbeNumber
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -56,6 +63,8 @@ const ClientFieldsView = ({
   const [allDropdownsExpanded, setAllDropdownsExpanded] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(undefined);
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
+  const [selectedCaptureObject, setSelectedCaptureObject] = useState(undefined);
+  const [quickViewIsOpen, setQuickViewIsOpen] = useState(false);
 
   useEffect(() => {
     setActiveTableData(mappedFieldList);
@@ -65,8 +74,12 @@ const ClientFieldsView = ({
     if (!selectedIndex) return;
     if (filteredTableData) toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
     else toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
-    setSelectedIndex(undefined);
-  });
+  }, [selectedDropdownObject]);
+
+  useEffect(() => {
+    if (!selectedIndex) return;
+    toggleCapture(mappedFieldList, filteredTableData, selectedCaptureObject, selectedIndex, setActiveTableData);
+  }, [selectedCaptureObject]);
 
   useEffect(() => {
     toggleAllDropdowns(allDropdownsExpanded, mappedFieldList, activeTableData, setActiveTableData);
@@ -91,6 +104,7 @@ const ClientFieldsView = ({
                              selectedIndex={ selectedIndex }
                              setSelectedIndex={ setSelectedIndex }
                              setSelectedDropdownObject={ setSelectedDropdownObject }
+                             setSelectedCaptureObject={ setSelectedCaptureObject }
                              setActiveTableData={ setActiveTableData }
                              toggleDropdowns={ () => setAllDropdownsExpanded(!allDropdownsExpanded) }
                              captureDate={ captureDate }
@@ -100,7 +114,15 @@ const ClientFieldsView = ({
                              captureType={ captureType }
                              setCaptureType={ setCaptureType }
                              captureField={ captureField }
-                             setCaptureField={ setCaptureField } />
+                             setCaptureField={ setCaptureField }
+                             mappedChartList={ mappedChartList }
+                             activeLoadPeriod={ activeLoadPeriod }
+                             setActiveLoadPeriod={ setActiveLoadPeriod }
+                             setActiveFieldName={ setActiveFieldName }
+                             activeFieldProbeNumber={ activeFieldProbeNumber }
+                             setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
+                             quickViewIsOpen={ quickViewIsOpen }
+                             setQuickViewIsOpen={ setQuickViewIsOpen } />
         </div>
 
         { !isEmpty(mappedWeatherList1) &&
@@ -124,6 +146,14 @@ const ClientFieldsView = ({
                mappedFireDangerIndexList={ mappedFireDangerIndexList }
                activeDataPeriod={ activeDataPeriod }
                setActiveDataPeriod={ setActiveDataPeriod } /> }
+
+
+        <QuickView mappedChartList={ mappedChartList }
+                   quickViewIsOpen={ quickViewIsOpen }
+                   setQuickViewIsOpen={ setQuickViewIsOpen }
+                   activeLoadPeriod={ activeLoadPeriod }
+                   setActiveLoadPeriod={ setActiveLoadPeriod }
+                   setActiveFieldName={ setActiveFieldName } />
       </div>
     </ContentContainer>
   );

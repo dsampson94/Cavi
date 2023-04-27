@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { zoomIdentity } from 'd3';
+import { useLocation, useParams } from 'react-router';
 
 import { arrayOf, shape } from 'prop-types';
 
 import { FIELD_CHART_MIDBAR, FIELD_CHARTS } from '../../../tools/general/system-variables.util';
 import { AggregateChartsContainer, DeficitChartsContainer } from './FieldChartsView.util';
+import { daysFromToday } from '../../../tools/general/helpers.util';
+import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
 
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
+import Button from '../../common/button/Button';
 
 import './field-charts-view.scss';
-import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
-import Button from '../../common/button/Button';
-import { daysFromToday } from '../../../tools/general/helpers.util';
-import { useLocation, useParams } from 'react-router';
 
 const ClientFieldsView = ({
                             mappedFieldList,
@@ -47,6 +47,7 @@ const ClientFieldsView = ({
   const [date, setDate] = useState(null);
   const [activeDataPeriod, setActiveDataPeriod] = useState('All');
   const [xAxisViewMode, setXAxisViewMode] = useState('topBar');
+
   let isAgent = retrieveUserClientListFromLocalStorage().access.agent;
 
   useEffect(() => {
