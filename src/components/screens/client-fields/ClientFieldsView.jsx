@@ -67,21 +67,24 @@ const ClientFieldsView = ({
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
   const [selectedCaptureObject, setSelectedCaptureObject] = useState(undefined);
   const [quickViewIsOpen, setQuickViewIsOpen] = useState(false);
+  const [rowClickId, setRowClickId] = useState('');
 
   useEffect(() => {
     setActiveTableData(mappedFieldList);
   }, [mappedFieldList]);
 
   useEffect(() => {
-    if (!selectedIndex) return;
-    if (filteredTableData) toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
-    else toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
-  }, [selectedDropdownObject]);
+    if (selectedIndex && selectedDropdownObject) {
+      if (filteredTableData) toggleDropdownAfterSearch(mappedFieldList, selectedDropdownObject, filteredTableData, selectedIndex, setFilteredTableData);
+      else toggleDropdown(mappedFieldList, filteredTableData, selectedIndex, setActiveTableData);
+    }
+  }, [selectedIndex]);
 
   useEffect(() => {
-    if (!selectedIndex) return;
-    toggleCapture(mappedFieldList, filteredTableData, selectedCaptureObject, selectedIndex, setActiveTableData);
-  }, [selectedCaptureObject]);
+    if (selectedIndex && selectedCaptureObject) {
+      toggleCapture(activeTableData, filteredTableData, selectedCaptureObject, selectedIndex, setActiveTableData);
+    }
+  }, [rowClickId]);
 
   useEffect(() => {
     toggleAllDropdowns(allDropdownsExpanded, mappedFieldList, activeTableData, setActiveTableData);
@@ -124,7 +127,8 @@ const ClientFieldsView = ({
                              activeFieldProbeNumber={ activeFieldProbeNumber }
                              setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
                              quickViewIsOpen={ quickViewIsOpen }
-                             setQuickViewIsOpen={ setQuickViewIsOpen } />
+                             setQuickViewIsOpen={ setQuickViewIsOpen }
+                             setRowClickId={ setRowClickId } />
         </div>
 
         { !isEmpty(mappedWeatherList1) &&

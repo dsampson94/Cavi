@@ -12,13 +12,12 @@ export const FieldCaptureBar = ({
                                   setCaptureDate
                                 }) => {
 
-  const transitionStyle = 'transition-all duration-300 ease-out transform';
-
-  return <>
+  return <div className="w-0 h-0">
     <div
-      className={ `flex border-2 border-gray-500 dark:border-white h-12 -mt-[38px] w-[480px] pr-2 ml-10 rounded-md z-10 absolute bg-gray-100 ${ transitionStyle }` }
+      className="flex relative border-2 border-gray-500 ml-[260px]
+      dark:border-white h-11 -mt-[30px] -translate-y-3 w-[480px] pr-2 rounded-md z-20 bg-gray-100"
     >
-      <div className="min-w-[30%] mt-1">
+      <div className="min-w-[30%] mt-1 ml-1">
         <DatePick setActiveItem={ setCaptureDate }
                   value={ captureDate } />
       </div>
@@ -39,5 +38,5 @@ export const FieldCaptureBar = ({
       <Button label={ 'Close' }
               popup />
     </div>
-  </>;
+  </div>;
 };

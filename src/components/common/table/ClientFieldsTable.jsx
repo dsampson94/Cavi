@@ -23,11 +23,10 @@ import {
   WARNING,
   WATCH
 } from '../../../tools/general/system-variables.util';
-
-import { FieldCaptureBar } from './components/FieldCaptureBar';
 import ToolTipRelative from '../tool-tip/ToolTipRelative';
 import RecommendationModal from '../modal/RecommendationModal';
 import SVGIcon from '../SVGIcon/SVGIcon';
+import { FieldCaptureBar } from './components/FieldCaptureBar';
 
 import './table.scss';
 
@@ -53,7 +52,8 @@ export const ClientFieldsTable = ({
                                     setActiveFieldName,
                                     setActiveFieldProbeNumber,
                                     quickViewIsOpen,
-                                    setQuickViewIsOpen
+                                    setQuickViewIsOpen,
+                                    setRowClickId
                                   }) => {
 
   const history = useHistory();
@@ -140,7 +140,8 @@ export const ClientFieldsTable = ({
                                         captureField={ captureField }
                                         setCaptureField={ setCaptureField }
                                         setSelectedIndex={ setSelectedIndex }
-                                        setSelectedCaptureObject={ setSelectedCaptureObject } />;
+                                        setSelectedCaptureObject={ setSelectedCaptureObject }
+                                        setRowClickId={ setRowClickId } />;
             case 6:
               return <ChartColumn dataIndex={ dataIndex }
                                   object={ object }
@@ -148,6 +149,7 @@ export const ClientFieldsTable = ({
                                   activeLoadPeriod={ activeLoadPeriod }
                                   setActiveLoadPeriod={ setActiveLoadPeriod }
                                   setActiveFieldName={ setActiveFieldName }
+                                  setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
                                   value={ value }
                                   quickViewIsOpen={ quickViewIsOpen }
                                   setQuickViewIsOpen={ setQuickViewIsOpen } />;
@@ -289,11 +291,7 @@ export const ClientFieldsTable = ({
           { !isDropdownRow &&
           <tr className={ getClassNames('table__body__row',
             { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
-              onMouseDown={ () => {
-                setActiveFieldName(object.fieldName.locationName);
-                setActiveFieldProbeNumber(object.fieldName.probeNumber);
-                setSelectedRow(object);
-              } }
+              onMouseDown={ () => setSelectedRow(object) }
               onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
               key={ generateId() }>
             { tableDataElements }
@@ -304,6 +302,17 @@ export const ClientFieldsTable = ({
               key={ generateId() }>
             { tableDataElements }
           </tr> }
+
+          { object.captureExpanded && <>
+            <FieldCaptureBar
+              captureDate={ captureDate }
+              setCaptureDate={ setCaptureDate }
+              captureType={ captureType }
+              setCaptureType={ setCaptureType }
+              captureValue={ captureValue }
+              setCaptureValue={ setCaptureValue }
+            />
+          </> }
         </>
       );
     });
@@ -515,42 +524,25 @@ const CaptureNoteColumn = ({
                              captureValue,
                              setCaptureValue,
                              setSelectedIndex,
-                             setSelectedCaptureObject
+                             setSelectedCaptureObject,
+                             setRowClickId
                            }) => {
-
   if (value)
     return (
       <td key={ generateId() }
-        // onMouseOver={ () => {
-        //   setSelectedIndex(rowIndex);
-        //   setSelectedCaptureObject(object);
-        //   setCaptureField(object.fieldName.locationName);
-        // } }
-      >
+          className="z-50 cursor-pointer"
+          onMouseUp={ () => {
+            setSelectedIndex(rowIndex);
+            setSelectedCaptureObject(object);
+            setCaptureField(object.fieldName.locationName);
+            setRowClickId(Date.now());
+          } }>
 
-        <div className="z-50 cursor-pointer"
-             onMouseDown={ (event) => {
-               event.stopPropagation();
-               setSelectedIndex(rowIndex);
-               setSelectedCaptureObject(object);
-               setCaptureField(object.fieldName.locationName);
-             } }>
-
+        <div>
           <SVGIcon name={ PENCIL } />
-
         </div>
 
-        { object.captureExpanded && <>
-          <ToolTipRelative text={ value } />
-          <FieldCaptureBar
-            captureDate={ captureDate }
-            setCaptureDate={ setCaptureDate }
-            captureType={ captureType }
-            setCaptureType={ setCaptureType }
-            captureValue={ captureValue }
-            setCaptureValue={ setCaptureValue }
-          />
-        </> }
+        <ToolTipRelative text={ value } />
 
       </td>
     );
@@ -571,12 +563,17 @@ const ChartColumn = ({
                        setQuickViewIsOpen,
                        activeLoadPeriod,
                        setActiveLoadPeriod,
-                       setActiveFieldName
+                       setActiveFieldName,
+                       setActiveFieldProbeNumber
                      }) => {
 
   if (value)
     return <td key={ generateId() }
-               onMouseDown={ () => setQuickViewIsOpen(true) }>
+               onMouseDown={ () => {
+                 setActiveFieldName(object.fieldName.locationName);
+                 setActiveFieldProbeNumber(object.fieldName.probeNumber);
+                 setQuickViewIsOpen(true);
+               } }>
       <div className={ 'table__body__row__td-container__icon-clickable' }>
         <ToolTipRelative text={ value } />
         <SVGIcon name={ CHARTS } />

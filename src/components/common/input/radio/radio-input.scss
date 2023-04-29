@@ -8,6 +8,7 @@
 .radio-input {
   display: flex;
   flex-direction: row-reverse;
+  white-space: nowrap;
   justify-content: left;
   padding: util.rem(1);
   width: 100%;

@@ -92,7 +92,7 @@ const ClientFieldsViewContainer = () => {
         quickviewtype: 'fieldsummary'
       }));
     }
-  }, [activeFieldName]);
+  }, [activeFieldName, activeLoadPeriod]);
 
   useEffect(() => {
     if (activeWeatherStation) {

@@ -6,7 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './date-pick.scss';
 
 const DatePick = ({ value, setActiveItem }) => {
-
   const [startDate, setStartDate] = useState(new Date(value));
 
   if (!isValidDate(startDate)) return null;
@@ -26,8 +25,10 @@ const DatePick = ({ value, setActiveItem }) => {
         setStartDate(date);
       } }
       dateFormat="yyyy/MM/dd"
-      className="w-[95%] h-[35px] z-50 rounded-md border-0 bg-white dark:bg-clouded-grey pl-3 text-gray-900
+      className="w-[95%] h-[35px] rounded-md border-0 bg-white dark:bg-clouded-grey pl-3 text-gray-900
         shadow-sm ring-1 ring-inset ring-[#043b6e] focus:ring-1 focus:ring-inset focus:ring-[#043b6e] sm:text-sm sm:leading-6"
+      placement="top"
+      popperPlacement="top-end"
     />
   );
 };
