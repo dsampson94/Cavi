@@ -354,7 +354,7 @@ const FieldNameColumn = ({ dataIndex, value }) => {
       case '4294901760':
         return '#FF0000';
       case '4278190335':
-        return '#0081ff';
+        return '#0090ff';
     }
   };
 
@@ -530,7 +530,7 @@ const CaptureNoteColumn = ({
   if (value)
     return (
       <td key={ generateId() }
-          className="z-50 cursor-pointer"
+          className="z-20 cursor-pointer"
           onMouseUp={ () => {
             setSelectedIndex(rowIndex);
             setSelectedCaptureObject(object);

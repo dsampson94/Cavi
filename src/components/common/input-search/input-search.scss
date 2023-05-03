@@ -11,7 +11,7 @@
   z-index: 6;
   flex-direction: row;
   margin: util.rem(4);
-  height: util.rem(25);
+  height: util.rem(30);
   border: util.rem(2) solid map.get(color.$colorMap, pulse-blue);
   border-radius: map.get(radius.$border-radius, default);
 
@@ -23,6 +23,7 @@
     position: relative;
     z-index: 6;
     width: util.rem(20);
+    cursor: pointer;
     height: 100%;
   }
 
@@ -35,7 +36,7 @@
     border: none;
     padding-top: util.rem(1);
     font-family: Aller, serif;
-    font-size: util.bu(1.3);
+    font-size: util.rem(13);
 
     input:-webkit-autofill {
       -webkit-box-shadow: inset 0 0 0 util.rem(100) map.get(color.$colorMap, autofill-blue);
@@ -56,6 +57,6 @@
   }
 
   ::placeholder {
-    font-size: util.rem(10);
+    font-size: util.rem(13);
   }
 }

@@ -148,7 +148,7 @@ const getViewBox = (name, tiny, chart, tall, menu, overview) => {
     case HARVEST_ICON:
       return '0 -4 50 60';
     case SEARCH:
-      return '-6 -5 70 75';
+      return '-4 -14 50 75';
     case DROPDOWN_ALL:
       return '1 3 18 18';
     case VERY_SATISFIED:

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FieldPopupLineChart } from '../chart/chart/FieldPopupLineChart';
 import useTheme from '../../../tools/hooks/useTheme';
 import RadioInput from '../input/radio/RadioInput';
+
+import { VscClose } from 'react-icons/vsc';
+
 import {
   FOUR_WEEKS_LABEL,
   FULL_VIEW_LABEL,
@@ -36,8 +39,9 @@ export const QuickView = ({
           </div>
 
           <div className="w-full h-0 flex flex-row-reverse -translate-y-8">
-            <button className="relative top-0 right-0 w-24 text-gray-900 hover:text-gray-700 dark:text-gray-400 justify-right"
-                    onClick={ () => setQuickViewIsOpen(false) }>X
+            <button className="relative top-0 right-0 w-2 text-gray-900 hover:text-gray-700 dark:text-gray-400 justify-right"
+                    onClick={ () => setQuickViewIsOpen(false) }>
+              <VscClose />
             </button>
 
             { mappedChartList &&
@@ -114,7 +118,7 @@ export const ViewDataRow = ({ setActiveLoadPeriod }) => {
 
   return (
     <div className="field-charts-side-bar__view-mode">
-      <div className="flex">
+      <div className="flex -mt-[2px] mr-[32px]">
         <RadioInput constant={ TWO_WEEKS_LABEL }
                     name={ RADIO_GROUP }
                     checked={ selectedPeriod === TWO_WEEKS_LABEL }

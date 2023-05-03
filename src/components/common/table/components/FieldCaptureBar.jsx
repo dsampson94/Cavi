@@ -17,7 +17,7 @@ export const FieldCaptureBar = ({
       className="flex relative border-2 border-gray-500 ml-[260px]
       dark:border-white h-11 -mt-[30px] -translate-y-3 w-[480px] pr-2 rounded-md z-20 bg-gray-100"
     >
-      <div className="min-w-[30%] mt-1 ml-1">
+      <div className="min-w-[30%] mt-0.5 ml-1">
         <DatePick setActiveItem={ setCaptureDate }
                   value={ captureDate } />
       </div>

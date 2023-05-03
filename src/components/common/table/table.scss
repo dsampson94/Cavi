@@ -271,6 +271,8 @@
           display: flex;
           white-space: nowrap;
           height: 50%;
+          font-size: util.rem(12);
+          font-weight: 500;
 
           &--deficit {
             font-weight: 500;
@@ -283,8 +285,9 @@
         &-lower {
           display: flex;
           color: map.get(color.$colorMap, grey);
-          font-size: util.rem(8.5);
+          font-size: util.rem(8.6);
           height: 50%;
+          font-weight: bold;
 
           &--deficit {
             font-weight: 500;

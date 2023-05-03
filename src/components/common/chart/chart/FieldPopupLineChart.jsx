@@ -24,16 +24,16 @@ export function FieldPopupLineChart({ height, lines, hasXAxis, chartLabel }) {
   const CustomTooltipContent = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div style={ { textAlign: 'left', backgroundColor: 'white', border: 'none', borderRadius: '10px', padding: '8px' } }>
+        <div className="text-left bg-white border-2 border-gray-300 p-1 -mt-2 ml-2 rounded-lg shadow-xl">
 
-          { payload.map((item, index) => (
+        { payload.map((item, index) => (
             <>
               <p style={ { fontWeight: 'bold', color: 'black' } }>
-                { '📅' + `${ item.payload.x }` }
+                { '📅 ' + `${ item.payload.x }` }
               </p>
               <p key={ `payload-${ index }` }
                  className="text-black">
-                { '📏' + `${ chartLabel }: ${ item.value }mm` }
+                { '📏 ' + `${ chartLabel }: ${ item.value }mm` }
               </p>
             </>
           )) }

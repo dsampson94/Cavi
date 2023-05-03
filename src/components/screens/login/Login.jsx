@@ -33,13 +33,13 @@ const Login = ({ onLoginClick }) => {
     <div className="flex h-screen w-full items-center justify-center bg-center bg-cover"
          style={ { backgroundImage: `url(${ background })` } }>
 
-      <div className="flex flex-col max-w-m xs:max-w-xs max-h-90 p-12 bg-white dark:bg-very-light-grey rounded-xl shadow-xl">
+      <div className="flex flex-col max-w-m xs:max-w-xs max-h-90 p-12 bg-white rounded-xl shadow-xl">
 
         <Graphic login graphic={ logo } />
 
         <div className="mt-6 mb-6 text-center text-black">
           <label className="text-sm font-medium" htmlFor="username">Username</label>
-          <input className="mt-2 w-full text-center border dark:text-black dark:bg-gray-300 dark:text-black border-gray-400 rounded-lg p-2
+          <input className="mt-2 w-full text-center border border-gray-400 rounded-lg p-2
           focus:outline-none focus:shadow-outline"
                  type="text"
                  id="username"
@@ -51,7 +51,7 @@ const Login = ({ onLoginClick }) => {
 
         <div className="mb-6 text-center text-black">
           <label className="text-sm font-medium" htmlFor="password">Password</label>
-          <input className="mt-2 text-center w-full border dark:bg-gray-300 dark:text-black border-gray-400 rounded-lg p-2
+          <input className="mt-2 text-center w-full border border-gray-400 rounded-lg p-2
           focus:outline-none focus:shadow-outline"
                  type="password"
                  id="password"

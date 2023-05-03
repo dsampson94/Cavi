@@ -4,12 +4,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 
-import {
-  SEARCH,
-  SNACK_CRITICAL,
-  UNSUCCESSFUL_CLIENT_SEARCH,
-  UNSUCCESSFUL_FIELD_SEARCH
-} from '../../../tools/general/system-variables.util';
+import { SEARCH, SNACK_CRITICAL, UNSUCCESSFUL_CLIENT_SEARCH, UNSUCCESSFUL_FIELD_SEARCH } from '../../../tools/general/system-variables.util';
 
 import { getClassNames, isEmpty } from '../../../tools/general/helpers.util';
 import { pushEmptyRow } from '../table/TableFunctions.util';
@@ -17,7 +12,6 @@ import { pushEmptyRow } from '../table/TableFunctions.util';
 import { addSystemNotice } from '../../../redux/actions/system.action';
 
 import SVGIcon from '../SVGIcon/SVGIcon';
-import ToolTipRelative from '../tool-tip/ToolTipRelative';
 
 import './input-search.scss';
 
@@ -41,6 +35,8 @@ const InputSearch = ({
 
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
+
+  const [showPlaceholder, setShowPlaceholder] = useState(false);
 
   useEffect(() => {
     filter();
@@ -148,15 +144,20 @@ const InputSearch = ({
 
   return (
     <div className={ getClassNames('search', { overview }) }>
-      <div className={ 'search__icon' } onClick={ () => setSearchTypeIsClient(!searchTypeIsClient) }>
-        <ToolTipRelative text={ !searchTypeIsClient ? 'Search by Client' : 'Search by Field' } />
+
+      <div className={ 'search__icon' }
+           onMouseEnter={ () => setShowPlaceholder(true) }
+           onMouseLeave={ () => setShowPlaceholder(false) }
+           onClick={ () => setSearchTypeIsClient(!searchTypeIsClient) }>
+
         <SVGIcon name={ SEARCH } fill={ !searchTypeIsClient ? '#0000FF' : '#607CB1' } />
       </div>
+
       <input autoFocus
              name={ name }
              value={ persistSearchString }
              type={ type }
-             placeholder={ placeholder }
+             placeholder={ showPlaceholder ? !searchTypeIsClient ? 'Search by Client' : 'Search by Field' : placeholder }
              className={ getClassNames('search__input', { sidebar, table }) }
              onChange={ ({ target }) => setSearchString(target.value) }
              onKeyDown={ event => {
