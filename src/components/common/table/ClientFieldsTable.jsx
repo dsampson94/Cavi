@@ -530,7 +530,6 @@ const CaptureNoteColumn = ({
   if (value)
     return (
       <td key={ generateId() }
-          className="z-20 cursor-pointer"
           onMouseUp={ () => {
             setSelectedIndex(rowIndex);
             setSelectedCaptureObject(object);

@@ -34,7 +34,7 @@ export const QuickView = ({
       <div className="fixed top-0 left-0 z-50 w-full ml-24 h-full flex items-center justify-center">
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl p-6">
 
-          <div className="-translate-y-2">
+          <div className="-translate-y-4">
             { activeFieldName }
           </div>
 

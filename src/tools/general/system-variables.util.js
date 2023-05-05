@@ -153,8 +153,8 @@ export const FIELDS_MOISTURE_QUESTION = 'Are your fields too wet or too dry curr
 export const FIELD_UP_TO_DATE_QUESTION = 'Which fields are up to date?';
 
 //RADIO LABELS
-export const TWO_WEEKS_LABEL = '2 weeks (fastest)';
-export const FOUR_WEEKS_LABEL = '4 weeks (fast)';
+export const TWO_WEEKS_LABEL = '2 weeks';
+export const FOUR_WEEKS_LABEL = '4 weeks';
 export const TWO_MONTHS_LABEL = '2 months';
 export const THREE_MONTHS_LABEL = '3 months';
 export const SIX_MONTHS_LABEL = '6 months';

@@ -42,11 +42,8 @@ export const addOrRemoveFarmLocalStorageFavorites = (groupName, clientName) => {
   let found = false;
   storedFavoritesList?.forEach((item, index) => {
     if (item === `${ groupName }/${ clientName }`) {
-      if (storedFavoritesList.length === 1) {
-        storedFavoritesList = [];
-      } else {
-        storedFavoritesList.splice(index, 1);
-      }
+      if (storedFavoritesList.length === 0) storedFavoritesList = [];
+      else storedFavoritesList.splice(index, 1);
       found = true;
     }
   });

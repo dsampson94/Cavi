@@ -37,7 +37,7 @@
     justify-content: flex-start;
     margin-top: util.rem(4);
     margin-bottom: util.rem(5);
-    padding: 0
+    padding: 0;
   }
 
   &--centered {
@@ -147,11 +147,10 @@
     }
 
     &--popup {
-      width: util.rem(80);
+      width: util.rem(100);
       margin: 0 util.rem(5) 0 0;
-      padding: util.rem(1) 0 util.rem(1) 0;
       border-radius: map.get(radius.$border-radius, small);
-      padding-left: util.rem(12);
+      font-size: util.bu(1.8);
     }
 
     &--input {
@@ -160,6 +159,6 @@
   }
 
   ::placeholder {
-    font-size: util.rem(10);
+    font-size: util.rem(12);
   }
 }

@@ -33,10 +33,12 @@ import {
 
 import { getRequestParams } from '../../../redux/endpoints';
 
-import ClientFieldsView from './ClientFieldsView';
 import { requestFieldChartList, requestQuickViewList, requestSetFieldCapture } from '../../../redux/actions/field.action';
+
 import { mapChartList } from '../field-charts/FieldChartsView.container.util';
 import { TWO_WEEKS_LABEL } from '../../../tools/general/system-variables.util';
+
+import ClientFieldsView from './ClientFieldsView';
 
 const ClientFieldsViewContainer = () => {
 
@@ -135,16 +137,16 @@ const ClientFieldsViewContainer = () => {
   };
 
   useEffect(() => {
-    if (captureField) {
+    if (captureField, captureDate, captureValue, captureType) {
       dispatch(requestSetFieldCapture({
         ...request.clientParams,
         field: captureField,
-        dte: formatDateTime(activeDate),
+        dte: formatDateTime(captureDate),
         text: captureValue,
         type: captureType
       }));
     }
-  }, [captureValue, captureType, captureDate]);
+  }, [captureType]);
 
   return <ClientFieldsView mappedFieldList={ mapFieldTableList1(fieldList, fieldRainData, subGroupList) }
                            mappedWeatherList1={ mappedWeatherList(fieldWeatherList?.stations) }
