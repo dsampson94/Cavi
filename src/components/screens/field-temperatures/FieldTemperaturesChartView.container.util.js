@@ -53,10 +53,10 @@ const mapTemperatureLists = (
           fourList?.push({ x: key, y: value?.['D4'] });
           return;
         case 'D5':
-          fiveList?.push({ x: key, y: parseInt(value?.['D5']) });
+          fiveList?.push({ x: key, y: parseFloat(value?.['D5']) });
           return;
         case 'D6':
-          sixList?.push({ x: key, y: parseInt(value?.['D6']) });
+          sixList?.push({ x: key, y: parseFloat(value?.['D6']) });
           return;
         case 't1':
           tempOneList?.push({ x: key, y: parseFloat(value?.['t1']) });
@@ -74,7 +74,7 @@ const mapTemperatureLists = (
           vpdOneList?.push({ x: key, y: parseFloat(value?.['vpd']) });
           return;
         case 'deltat':
-          deltaList?.push({ x: key, y: parseInt(value?.['deltat']) });
+          deltaList?.push({ x: key, y: parseFloat(value?.['deltat']) });
           return;
         default:
           return null;

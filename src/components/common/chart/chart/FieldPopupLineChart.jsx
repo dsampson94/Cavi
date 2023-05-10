@@ -21,7 +21,7 @@ export function FieldPopupLineChart({ height, lines, hasXAxis, chartLabel }) {
     return dataItem;
   });
 
-  const CustomTooltipContent = ({ active, payload, label }) => {
+  const CustomTooltipContent = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div className="text-left bg-white border-2 border-gray-300 p-1 -mt-2 ml-2 rounded-lg shadow-xl">
@@ -51,7 +51,7 @@ export function FieldPopupLineChart({ height, lines, hasXAxis, chartLabel }) {
 
   return (
     <LineChart
-      width={ 590 }
+      width={ 420 }
       height={ height }
       data={ mergedData }
       syncId="anyId"

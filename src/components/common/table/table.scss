@@ -73,28 +73,28 @@
         user-focus: none;
 
         @include mixin.breakpoint(map.get(config.$breakpoints, small)) {
-          max-height: util.rem(22);
-          font-size: util.rem(8);
+          max-height: util.rem(21);
+          font-size: util.rem(9);
         }
 
         @include mixin.breakpoint(map.get(config.$breakpoints, medium)) {
-          max-height: util.rem(24);
-          font-size: util.rem(10);
-        }
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
-          max-height: util.rem(26);
-          font-size: util.rem(10);
-        }
-
-        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
-          max-height: util.rem(28);
+          max-height: util.rem(23);
           font-size: util.rem(11);
         }
 
-        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
-          max-height: util.rem(30);
+        @include mixin.breakpoint(map.get(config.$breakpoints, large)) {
+          max-height: util.rem(25);
+          font-size: util.rem(11);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, x-large)) {
+          max-height: util.rem(27);
           font-size: util.rem(12);
+        }
+
+        @include mixin.breakpoint(map.get(config.$breakpoints, xx-large)) {
+          max-height: util.rem(29);
+          font-size: util.rem(13);
         }
 
         &--warning {

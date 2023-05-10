@@ -121,18 +121,20 @@ const TemperatureMultiLineText = ({
 
   let toolTipText = (chart) => {
     switch (chart) {
+      case 'DATE' :
+        return ` ${ hoveredObject1?.x }`;
       case LINE_100MM:
-        return `100mm: ${ hoveredObject1?.y?.toFixed(2) }mm  @ ${ hoveredObject1?.x }`;
+        return ` 100mm: ${ hoveredObject1?.y?.toFixed(2) }°C`;
       case LINE_200MM:
-        return `200mm: ${ hoveredObject2?.y?.toFixed(2) }mm @ ${ hoveredObject2?.x }`;
+        return ` 200mm: ${ hoveredObject2?.y?.toFixed(2) }°C`;
       case LINE_300MM:
-        return `300mm: ${ hoveredObject3?.y?.toFixed(2) }mm @ ${ hoveredObject3?.x }`;
+        return ` 300mm: ${ hoveredObject3?.y?.toFixed(2) }°C`;
       case LINE_400MM:
-        return `400mm: ${ hoveredObject4?.y?.toFixed(2) }mm @ ${ hoveredObject4?.x }`;
+        return ` 400mm: ${ hoveredObject4?.y?.toFixed(2) }°C`;
       case LINE_600MM:
-        return `600mm: ${ hoveredObject5?.y?.toFixed(2) }mm @ ${ hoveredObject5?.x }`;
+        return ` 600mm: ${ hoveredObject5?.y?.toFixed(2) }°C`;
       case LINE_800MM:
-        return `800mm: ${ hoveredObject6?.y?.toFixed(2) }mm @ ${ hoveredObject6?.x }`;
+        return ` 800mm: ${ hoveredObject6?.y?.toFixed(2) }°C`;
     }
   };
 
@@ -142,23 +144,27 @@ const TemperatureMultiLineText = ({
 
   const getYPos = (chart) => {
     switch (chart) {
+      case 'DATE' :
+        return { rect: 39, text: 52 };
       case LINE_100MM :
-        return { rect: 50, text: 63 };
+        return { rect: 59, text: 72 };
       case LINE_200MM :
-        return { rect: 70, text: 83 };
+        return { rect: 79, text: 92 };
       case LINE_300MM :
-        return { rect: 90, text: 103 };
+        return { rect: 99, text: 112 };
       case LINE_400MM :
-        return { rect: 110, text: 123 };
+        return { rect: 119, text: 132 };
       case LINE_600MM :
-        return { rect: 130, text: 143 };
+        return { rect: 139, text: 152 };
       case LINE_800MM :
-        return { rect: 150, text: 163 };
+        return { rect: 159, text: 172 };
+      default :
+        return {};
     }
   };
 
   const getTextWidth = () => {
-    return 250;
+    return 148;
   };
 
   const renderText = (chart) => {
@@ -168,6 +174,13 @@ const TemperatureMultiLineText = ({
 
   if (chartName === SOIL_TEMPERATURE)
     return (<>
+      <TextBox clipPath={ clipPath }
+               getXPos={ getXPos }
+               getYPos={ getYPos }
+               getTextWidth={ getTextWidth }
+               toolTipText={ toolTipText }
+               textBoxName={ 'DATE' } />
+
       { renderText(LINE_100MM) &&
       <TextBox clipPath={ clipPath }
                getXPos={ getXPos }
@@ -218,6 +231,14 @@ const TemperatureMultiLineText = ({
     </>);
   else if (chartName === CANOPY_OUTSIDE_TEMPERATURE)
     return (<>
+
+      <TextBox clipPath={ clipPath }
+               getXPos={ getXPos }
+               getYPos={ getYPos }
+               getTextWidth={ getTextWidth }
+               toolTipText={ toolTipText }
+               textBoxName={ 'DATE' } />
+
       { renderText(CANOPY_LINE) &&
       <TextBox clipPath={ clipPath }
                getXPos={ getXPos }
@@ -236,6 +257,14 @@ const TemperatureMultiLineText = ({
     </>);
   else if (chartName === RAIN_HUMIDITY)
     return (<>
+
+      <TextBox clipPath={ clipPath }
+               getXPos={ getXPos }
+               getYPos={ getYPos }
+               getTextWidth={ getTextWidth }
+               toolTipText={ toolTipText }
+               textBoxName={ 'DATE' } />
+
       { renderText(RAIN_LINE) &&
       <TextBox clipPath={ clipPath }
                getXPos={ getXPos }
@@ -260,21 +289,37 @@ const TextBox = ({ clipPath, getXPos, getYPos, getTextWidth, toolTipText, textBo
     <g className="tooltip-container"
        clipPath={ clipPath }>
       <rect className="tooltip-container__rect"
-            fill={ 'white' }
             x={ getXPos().rect }
             y={ getYPos(textBoxName).rect }
             height={ 18 }
             width={ getTextWidth() }
             rx={ '5' }
+            fill="#f0f0f0"
+            stroke="none"
+            opacity={ 0.9 }
+            style={ {
+              boxShadow:
+                '13px 13px 15px rgba(0, 0, 0, 0.1), -3px -3px 5px rgba(255, 255, 255, 0.7)'
+            } }
             ry={ '5' } />
 
+      { textBoxName === 'DATE' &&
       <text className="tooltip-container__text"
             x={ getXPos().text }
             y={ getYPos(textBoxName).text }
             fontSize={ '12' }
             fontWeight={ 800 }>
-        { toolTipText(textBoxName) }
-      </text>
+        { '📅' + toolTipText(textBoxName) }
+      </text> }
+
+      { textBoxName !== 'DATE' &&
+      <text className="tooltip-container__text"
+            x={ getXPos().text }
+            y={ getYPos(textBoxName).text }
+            fontSize={ '12' }
+            fontWeight={ 800 }>
+        { '📏' + toolTipText(textBoxName) }
+      </text> }
     </g>
   );
 };

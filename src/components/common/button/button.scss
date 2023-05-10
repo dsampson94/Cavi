@@ -59,12 +59,17 @@
 
     &:hover {
       background-color: transparent;
-      border: 5px black;
+      box-shadow: util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, pulse-blue),
+      inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
+      outline: none;
+      border: none;
     }
 
     & label:hover {
       cursor: default;
       box-shadow: none;
+      outline: none;
+      border: none;
     }
 
     &:active {

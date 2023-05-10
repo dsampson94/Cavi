@@ -239,6 +239,44 @@ const TemperatureMultiLineChart = ({
           <div ref={ wrapperRef }
                style={ { height: chartByName(chartName).height } }
                className={ chartName }>
+            <Chart svgRef={ svgRef }
+                   dimensions={ updatedDimensions }
+                   chartName={ chartName }
+                   chartInfo={ chartInfo }
+                   isDarkMode={ isDarkMode }
+                   hiddenLineList={ hiddenLineList }
+                   setHiddenLineList={ setHiddenLineList }>
+
+              <YAxis yScale={ yScale }
+                     data={ data }
+                     chartName={ chartName }
+                     isDarkMode={ isDarkMode } />
+
+              <XAxis xScale={ xScale }
+                     hasXAxis={ hasXAxis }
+                     chartName={ chartName }
+                     isDarkMode={ isDarkMode } />
+
+              <Line data={ data }
+                    recommendationOffset={ recommendationOffset }
+                    chartName={ chartName }
+                    chartType={ chartType }
+                    xAccessor={ xAccessor }
+                    yAccessor={ yAccessor }
+                    xScale={ xScale }
+                    yScale={ yScale }
+                    clipPath={ clipPath }
+                    isDarkMode={ isDarkMode }
+                    hiddenLineList={ hiddenLineList } />
+
+              <rect className={ 'mouse-tracker' }
+                    width={ dimensions.width }
+                    height={ dimensions.height }
+                    x={ -DIMENSIONS.marginLeft }
+                    y={ -DIMENSIONS.marginTop }
+                    fill={ 'transparent' }
+                    opacity={ 0 } />
+            </Chart>
           </div> }
       </>
     );
