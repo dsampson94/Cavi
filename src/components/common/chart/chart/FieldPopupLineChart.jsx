@@ -24,19 +24,20 @@ export function FieldPopupLineChart({ height, lines, hasXAxis, chartLabel }) {
   const CustomTooltipContent = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="text-left bg-white border-2 border-gray-300 p-1 -mt-2 ml-2 rounded-lg shadow-xl">
-
-        { payload.map((item, index) => (
-            <>
-              <p style={ { fontWeight: 'bold', color: 'black' } }>
-                { '📅 ' + `${ item.payload.x }` }
-              </p>
-              <p key={ `payload-${ index }` }
-                 className="text-black">
-                { '📏 ' + `${ chartLabel }: ${ item.value }mm` }
-              </p>
-            </>
-          )) }
+        <div>
+          <div className="text-left bg-white border-2 border-gray-300 p-1 shadow-xl select-none focus:outline-none">
+            { payload.map((item, index) => (
+              <>
+                <p style={ { fontWeight: 'bold', color: 'black' } }>
+                  { '📅 ' + `${ item.payload.x }` }
+                </p>
+                <p key={ `payload-${ index }` }
+                   className="text-black">
+                  { '📏 ' + `${ chartLabel }: ${ item.value }mm` }
+                </p>
+              </>
+            )) }
+          </div>
         </div>
       );
     }
@@ -58,9 +59,10 @@ export function FieldPopupLineChart({ height, lines, hasXAxis, chartLabel }) {
       margin={ { top: 0, right: 0, left: 0, bottom: 0 } }
     >
       <CartesianGrid
-        strokeDasharray="3 3"
+        strokeDasharray="2 2"
       />
-      { <XAxis dataKey="x" tick={ renderXAxisTick } /> }
+
+      { hasXAxis ? <XAxis dataKey="x" tick={ renderXAxisTick } /> : <XAxis dataKey="x" height={ 7 } /> }
       <YAxis reversed />
 
       <defs>

@@ -141,7 +141,8 @@ export const ClientFieldsTable = ({
                                         setCaptureField={ setCaptureField }
                                         setSelectedIndex={ setSelectedIndex }
                                         setSelectedCaptureObject={ setSelectedCaptureObject }
-                                        setRowClickId={ setRowClickId } />;
+                                        setRowClickId={ setRowClickId }
+                                        isHeaderRow={ isHeaderRow } />;
             case 6:
               return <ChartColumn dataIndex={ dataIndex }
                                   object={ object }
@@ -525,7 +526,8 @@ const CaptureNoteColumn = ({
                              setCaptureValue,
                              setSelectedIndex,
                              setSelectedCaptureObject,
-                             setRowClickId
+                             setRowClickId,
+                             isHeaderRow
                            }) => {
   if (value)
     return (
@@ -537,9 +539,9 @@ const CaptureNoteColumn = ({
             setRowClickId(Date.now());
           } }>
 
-        <div>
+        { !isHeaderRow && <div>
           <SVGIcon name={ PENCIL } />
-        </div>
+        </div> }
 
         <ToolTipRelative text={ value } />
 

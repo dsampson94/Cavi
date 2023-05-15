@@ -31,7 +31,7 @@ export const QuickView = ({
   return (
     <>
       { quickViewIsOpen &&
-      <div className="fixed top-0 left-0 z-50 w-full mt-7 ml-60 h-full flex items-center justify-center">
+      <div className="fixed top-0 left-0 z-50 w-full mt-16 ml-60 h-full flex items-center justify-center ">
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl p-4">
 
           <div className="-translate-y-4">
@@ -53,32 +53,32 @@ export const QuickView = ({
         h-[160px] md:h-[280px] xl:h-[320px] 2xl:h-[450px]">
 
             <div className="flex flex-col w-1/2">
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 73 }
                                    chartLabel={ '100mm' }
                                    lines={ [
                                      { data: mappedChartList?.[0], dataKey: 'y', color: isDarkMode ? 'white' : 'darkblue' }
                                    ] } />
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 73 }
                                    chartLabel={ '200mm' }
                                    lines={ [
                                      { data: mappedChartList?.[1], dataKey: 'y', color: isDarkMode ? 'white' : 'darkblue' }
                                    ] } />
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 73 }
                                    chartLabel={ '300mm' }
                                    lines={ [
                                      { data: mappedChartList?.[2], dataKey: 'y', color: isDarkMode ? 'white' : 'darkblue' }
                                    ] } />
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 73 }
                                    chartLabel={ '400mm' }
                                    lines={ [
                                      { data: mappedChartList?.[3], dataKey: 'y', color: isDarkMode ? 'white' : 'darkblue' }
                                    ] } />
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 73 }
                                    chartLabel={ '500mm' }
                                    lines={ [
                                      { data: mappedChartList?.[4], dataKey: 'y', color: isDarkMode ? 'white' : 'darkblue' }
                                    ] } />
-              <FieldPopupLineChart height={ 75 }
+              <FieldPopupLineChart height={ 91 }
                                    chartLabel={ '600mm' }
                                    hasXAxis
                                    lines={ [
@@ -87,13 +87,13 @@ export const QuickView = ({
             </div>
 
             <div className="flex flex-col w-1/2">
-              <FieldPopupLineChart height={ 225 }
+              <FieldPopupLineChart height={ 228 }
                                    chartLabel={ '0 - 400mm' }
                                    lines={ [
                                      { data: mappedChartList?.[6], dataKey: 'y', color: 'url(#lineGradientAggregateTop)' }
                                    ] } />
 
-              <FieldPopupLineChart height={ 225 }
+              <FieldPopupLineChart height={ 228 }
                                    chartLabel={ '400 - 800mm' }
                                    hasXAxis
                                    lines={ [

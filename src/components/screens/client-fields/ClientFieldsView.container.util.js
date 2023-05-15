@@ -75,7 +75,7 @@ const pushForecastRegionRow = (tableList, listItem, index, mappedList, weatherDa
       b: undefined,
       p: undefined,
       l: undefined,
-      c: undefined,
+      c: CAPTURE,
       q: undefined,
       deficit: undefined,
       unit: undefined,
@@ -95,7 +95,8 @@ const pushForecastRegionRow = (tableList, listItem, index, mappedList, weatherDa
       Total: undefined,
       ...(listItem?.showtransp === '1' ? { trans: undefined } : undefined),
       ...(listItem?.showtransp === '1' ? { evap: undefined } : undefined),
-      ...(listItem?.showtransp === '1' ? { total: undefined } : undefined)
+      ...(listItem?.showtransp === '1' ? { total: undefined } : undefined),
+      captureExpanded: false
     });
   }
 };
@@ -130,7 +131,8 @@ const pushLandGroupRow = (tableList, listItem, index, mappedList, weatherDataKey
       Total: undefined,
       ...(listItem?.showtransp === '1' ? { trans: undefined } : undefined),
       ...(listItem?.showtransp === '1' ? { evap: undefined } : undefined),
-      ...(listItem?.showtransp === '1' ? { total: undefined } : undefined)
+      ...(listItem?.showtransp === '1' ? { total: undefined } : undefined),
+      captureExpanded: false
     });
   }
 };
