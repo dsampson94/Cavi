@@ -1,4 +1,5 @@
 import {
+  SET_ACTIVE_IMAGE,
   SET_FIELD_CAPTURE,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
@@ -67,7 +68,8 @@ export const initialState = {
   fieldSetupMapList: undefined,
   fieldReportsList: undefined,
   fieldReportsDownload: undefined,
-  quickViewList: undefined
+  quickViewList: undefined,
+  activeImage: undefined
 };
 
 export const fieldReducer = (state = initialState, action) => {
@@ -301,6 +303,13 @@ export const fieldReducer = (state = initialState, action) => {
       return {
         ...state,
         quickViewList
+      };
+    }
+    case SET_ACTIVE_IMAGE: {
+      const { activeImage } = action;
+      return {
+        ...state,
+        activeImage
       };
     }
     default:

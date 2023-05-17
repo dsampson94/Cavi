@@ -34,6 +34,7 @@ import {
   getExtendedChartList,
   getFieldChartListRequest,
   getFieldSetupList,
+  getImageRequest,
   getQuickViewListRequest,
   getSetFieldCapture,
   getSetFieldReport,
@@ -42,6 +43,7 @@ import {
 
 import { addSystemNotice, setProgressBar, setSpinnerText } from '../actions/system.action';
 import {
+  GET_ACTIVE_IMAGE,
   GET_QUICK_VIEW_LIST,
   REQUEST_EXTENDED_FIELD_CHART_LIST,
   REQUEST_FIELD_CHART_LIST,
@@ -50,6 +52,7 @@ import {
   REQUEST_SET_FIELD_CAPTURE,
   REQUEST_SET_FIELD_REPORTS_LIST,
   REQUEST_SET_FIELD_SETUP,
+  SET_ACTIVE_IMAGE,
   SET_FIELD_CAPTURE,
   SET_FIELD_CHART_LIST,
   SET_FIELD_EC_CHART_LIST,
@@ -538,6 +541,34 @@ export function* watchForGetQuickViewRequest() {
   yield takeLatest(GET_QUICK_VIEW_LIST, performGetQuickViewListRequest);
 }
 
+export function* performGetImageRequest({ client }) {
+  try {
+    yield put(setProgressBar(getProgress()));
+
+    const [endpoint, requestOptions] = getImageRequest(client);
+    const { data } = yield call(axios, endpoint, requestOptions);
+
+    switch (data) {
+      case responseStatus(data).ERROR:
+        yield put({ type: SET_ACTIVE_IMAGE, undefined });
+        return;
+
+      case responseStatus(data).SUCCESS:
+        yield put({ type: SET_ACTIVE_IMAGE, activeImage: data });
+    }
+
+  } catch ({ response }) {
+    yield put({ type: SET_ACTIVE_IMAGE, undefined });
+    yield put(addSystemNotice(UNSUCCESSFULLY_RETRIEVED_OVERVIEW, SNACK_CRITICAL));
+  } finally {
+    yield put(setProgressBar(COMPLETE_PROGRESS));
+  }
+}
+
+export function* watchForGetImageRequest() {
+  yield takeLatest(GET_ACTIVE_IMAGE, performGetImageRequest);
+}
+
 export default function* fieldSaga() {
   yield all([
     watchForRetrieveFieldChartListRequest(),
@@ -547,6 +578,7 @@ export default function* fieldSaga() {
     watchForSetFieldSetupRequest(),
     watchForRetrieveFieldReportListRequest(),
     watchForSetFieldCaptureRequest(),
-    watchForGetQuickViewRequest()
+    watchForGetQuickViewRequest(),
+    watchForGetImageRequest()
   ]);
 }

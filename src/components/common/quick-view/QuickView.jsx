@@ -34,7 +34,7 @@ export const QuickView = ({
       <div className="fixed top-0 left-0 z-50 w-full mt-16 ml-60 h-full flex items-center justify-center ">
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl p-4">
 
-          <div className="-translate-y-4">
+          <div className="-translate-y-3">
             { activeFieldName }
           </div>
 
@@ -50,7 +50,7 @@ export const QuickView = ({
           </div>
 
           <div className="flex flex-col 2xl:flex-row overflow-auto w-[200px] md:w-[500px] xl:w-[700px] 2xl:w-[900px]
-        h-[160px] md:h-[280px] xl:h-[320px] 2xl:h-[450px]">
+        h-[160px] md:h-[280px] xl:h-[330px] 2xl:h-[460px]">
 
             <div className="flex flex-col w-1/2">
               <FieldPopupLineChart height={ 73 }

@@ -12,6 +12,7 @@ import ContentContainer from '../../common/content-container/ContentContainer';
 import { Popup } from '../../common/bottom-popup/Popup';
 import { ClientFieldsTable } from '../../common/table/ClientFieldsTable';
 import { QuickView } from '../../common/quick-view/QuickView';
+import { CenteredPhotoViewer } from '../../common/centered-photo-viewer/CenteredPhotoViewer';
 
 import './client-fields-view.scss';
 
@@ -56,7 +57,9 @@ const ClientFieldsView = ({
                             setActiveFieldName,
                             activeFieldProbeNumber,
                             setActiveFieldProbeNumber,
-                            mappedQuickViewList
+                            mappedQuickViewList,
+                            setSelectedPhotoName,
+                            fieldActiveImage
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -67,6 +70,7 @@ const ClientFieldsView = ({
   const [selectedDropdownObject, setSelectedDropdownObject] = useState(undefined);
   const [selectedCaptureObject, setSelectedCaptureObject] = useState(undefined);
   const [quickViewIsOpen, setQuickViewIsOpen] = useState(false);
+  const [imageViewerIsOpen, setImageViewerIsOpen] = useState(false);
   const [rowClickId, setRowClickId] = useState('');
 
   useEffect(() => {
@@ -128,30 +132,34 @@ const ClientFieldsView = ({
                              setActiveFieldProbeNumber={ setActiveFieldProbeNumber }
                              quickViewIsOpen={ quickViewIsOpen }
                              setQuickViewIsOpen={ setQuickViewIsOpen }
-                             setRowClickId={ setRowClickId } />
+                             setRowClickId={ setRowClickId }
+                             setSelectedPhotoName={ setSelectedPhotoName }
+                             imageViewerIsOpen={ imageViewerIsOpen }
+                             setImageViewerIsOpen={ setImageViewerIsOpen }
+                             fieldActiveImage={ fieldActiveImage } />
         </div>
 
         { !isEmpty(mappedWeatherList1) &&
-        <Popup mappedWeatherList1={ mappedWeatherList1 }
-               mappedWeatherList2={ mappedWeatherList2 }
-               mappedDailyDataList={ mappedDailyDataList }
-               mappedRainfallList={ mappedRainfallList }
-               onUnitClick={ onUnitClick }
-               onWeatherObjectClick={ onWeatherObjectClick }
-               mappedETOWeatherPopupChartList={ mappedETOWeatherPopupChartList }
-               mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList }
-               mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList }
-               mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
-               mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList }
-               onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
-               mappedDetailsList={ mappedDetailsList }
-               activeDate={ activeDate }
-               setActiveDate={ setActiveDate }
-               mappedCurrentDashboardData={ mappedCurrentDashboardData }
-               mappedSprayConditionsList={ mappedSprayConditionsList }
-               mappedFireDangerIndexList={ mappedFireDangerIndexList }
-               activeDataPeriod={ activeDataPeriod }
-               setActiveDataPeriod={ setActiveDataPeriod } /> }
+          <Popup mappedWeatherList1={ mappedWeatherList1 }
+                 mappedWeatherList2={ mappedWeatherList2 }
+                 mappedDailyDataList={ mappedDailyDataList }
+                 mappedRainfallList={ mappedRainfallList }
+                 onUnitClick={ onUnitClick }
+                 onWeatherObjectClick={ onWeatherObjectClick }
+                 mappedETOWeatherPopupChartList={ mappedETOWeatherPopupChartList }
+                 mapActualForecastWeatherPopupChartList={ mapActualForecastWeatherPopupChartList }
+                 mapHumidityWeatherPopupChartList={ mapHumidityWeatherPopupChartList }
+                 mapWindWeatherPopupChartList={ mapWindWeatherPopupChartList }
+                 mapRainWeatherPopupChartList={ mapRainWeatherPopupChartList }
+                 onWeatherPopupDailyDataDetailClick={ onWeatherPopupDailyDataDetailClick }
+                 mappedDetailsList={ mappedDetailsList }
+                 activeDate={ activeDate }
+                 setActiveDate={ setActiveDate }
+                 mappedCurrentDashboardData={ mappedCurrentDashboardData }
+                 mappedSprayConditionsList={ mappedSprayConditionsList }
+                 mappedFireDangerIndexList={ mappedFireDangerIndexList }
+                 activeDataPeriod={ activeDataPeriod }
+                 setActiveDataPeriod={ setActiveDataPeriod } /> }
 
 
         <QuickView mappedChartList={ mappedChartList }
@@ -162,6 +170,11 @@ const ClientFieldsView = ({
                    activeFieldName={ activeFieldName }
                    setActiveFieldName={ setActiveFieldName }
                    mappedQuickViewList={ mappedQuickViewList } />
+
+        <CenteredPhotoViewer imageViewerIsOpen={ imageViewerIsOpen }
+                             setImageViewerIsOpen={ setImageViewerIsOpen }
+                             activeFieldName={ activeFieldName }
+                             fieldActiveImage={ fieldActiveImage } />
       </div>
     </ContentContainer>
   );

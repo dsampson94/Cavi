@@ -150,7 +150,10 @@ const pushFieldRow = (tableList, listItem, index, mappedList, weatherDataKeys, r
       tooltip: `Click to view seperate blocks for ${ listItem?.fieldname }`,
       expanded: false
     } : undefined,
-    p: listItem?.fotots,
+    p: {
+      tooltip: listItem?.fotots,
+      photoName: listItem?.foto
+    },
     l: {
       lastReading: listItem?.last_reading,
       hasBattery: !!listItem?.foutiefbattery,

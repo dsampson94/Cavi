@@ -33,7 +33,7 @@ import {
 
 import { getRequestParams } from '../../../redux/endpoints';
 
-import { requestFieldChartList, requestQuickViewList, requestSetFieldCapture } from '../../../redux/actions/field.action';
+import { requestActiveImage, requestFieldChartList, requestQuickViewList, requestSetFieldCapture } from '../../../redux/actions/field.action';
 
 import { mapChartList } from '../field-charts/FieldChartsView.container.util';
 import { TWO_WEEKS_LABEL } from '../../../tools/general/system-variables.util';
@@ -48,11 +48,11 @@ const ClientFieldsViewContainer = () => {
   const fieldList = useSelector(createSelector([state => state.client], client => client?.fieldList?.fields));
   const fieldWeatherList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherList?.data));
   const fieldWeatherObjectList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherObjectList?.data));
-  const fieldWeatherDetailsList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherDetailsList?.data));
   const fieldWeatherFireSprayList = useSelector(createSelector([state => state.client], client => client?.fieldWeatherFireSprayList?.data));
   const fieldRainData = useSelector(createSelector([state => state.client], client => client?.fieldRainData));
   const fieldChartList = useSelector(createSelector([state => state.field], field => field?.chartList));
   const fieldQuickViewList = useSelector(createSelector([state => state.field], field => field?.quickViewList?.data));
+  const fieldActiveImage = useSelector(createSelector([state => state.field], field => field?.activeImage));
 
   const [reloadToggleActive, setReloadToggleActive] = useState(false);
   const [activeWeatherStation, setActiveWeatherStation] = useState(undefined);
@@ -63,6 +63,8 @@ const ClientFieldsViewContainer = () => {
   const [captureDate, setCaptureDate] = useState(new Date());
   const [captureType, setCaptureType] = useState('Irrigation');
   const [captureField, setCaptureField] = useState(undefined);
+
+  const [selectedPhotoName, setSelectedPhotoName] = useState(undefined);
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState(TWO_WEEKS_LABEL);
   const [activeFieldName, setActiveFieldName] = useState(undefined);
@@ -80,6 +82,10 @@ const ClientFieldsViewContainer = () => {
     dispatch(requestFullClientFieldList(request.clientParams));
     dispatch(requestClientFieldWeatherList(request.weatherParams1));
   }, [groupName, clientName, reloadToggleActive]);
+
+  useEffect(() => {
+    dispatch(requestActiveImage({ ...request.clientParams, image: selectedPhotoName }));
+  }, [selectedPhotoName]);
 
   useEffect(() => {
     if (activeFieldName) {
@@ -188,6 +194,9 @@ const ClientFieldsViewContainer = () => {
                            activeFieldName={ activeFieldName }
                            setActiveFieldName={ setActiveFieldName }
                            mappedQuickViewList={ fieldQuickViewList }
+                           selectedPhotoName={ selectedPhotoName }
+                           setSelectedPhotoName={ setSelectedPhotoName }
+                           fieldActiveImage={ fieldActiveImage }
   />;
 };
 

@@ -35,8 +35,8 @@
   &--popup {
     display: flex;
     justify-content: flex-start;
-    margin-top: util.rem(4);
-    margin-bottom: util.rem(5);
+    margin-top: util.rem(4.6);
+    margin-bottom: util.rem(5.9);
     padding: 0;
   }
 
@@ -149,7 +149,7 @@
     &--popup {
       width: util.rem(100);
       margin: 0 util.rem(5) 0 0;
-      border-radius: map.get(radius.$border-radius, small);
+      border-radius: util.rem(4);
       font-size: util.bu(1.8);
     }
 

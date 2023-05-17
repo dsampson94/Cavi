@@ -72,6 +72,13 @@ export const getHttpGetPDFOptions = (params = null, headers = null) => ({
   headers
 });
 
+export const getHttpGetImageOptions = (params = null, headers = null) => ({
+  method: GET,
+  responseType: 'arraybuffer',
+  params,
+  headers
+});
+
 export const getRequestParams = ({
                                    groupName,
                                    clientName,

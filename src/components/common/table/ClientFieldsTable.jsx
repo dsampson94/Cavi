@@ -53,7 +53,10 @@ export const ClientFieldsTable = ({
                                     setActiveFieldProbeNumber,
                                     quickViewIsOpen,
                                     setQuickViewIsOpen,
-                                    setRowClickId
+                                    setRowClickId,
+                                    setSelectedPhotoName,
+                                    imageViewerIsOpen,
+                                    setImageViewerIsOpen
                                   }) => {
 
   const history = useHistory();
@@ -121,7 +124,10 @@ export const ClientFieldsTable = ({
                                          toggleDropdowns={ toggleDropdowns } />;
             case 3:
               return <PhotoIconColumn dataIndex={ dataIndex }
-                                      value={ value } />;
+                                      value={ value }
+                                      setSelectedPhotoName={ setSelectedPhotoName }
+                                      imageViewerIsOpen={ imageViewerIsOpen }
+                                      setImageViewerIsOpen={ setImageViewerIsOpen } />;
             case 4:
               return <LastReadingColumn dataIndex={ dataIndex }
                                         value={ value } />;
@@ -290,19 +296,19 @@ export const ClientFieldsTable = ({
       return (
         <>
           { !isDropdownRow &&
-          <tr className={ getClassNames('table__body__row',
-            { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
-              onMouseDown={ () => setSelectedRow(object) }
-              onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
-              key={ generateId() }>
-            { tableDataElements }
-          </tr> }
+            <tr className={ getClassNames('table__body__row',
+              { header: isHeaderRow, hidden: !(object?.fieldName?.locationName), selected: (object === selectedRow) }) }
+                onMouseDown={ () => setSelectedRow(object) }
+                onDoubleClick={ () => handleRowDoubleClick(history, groupName, clientName, object?.fieldName) }
+                key={ generateId() }>
+              { tableDataElements }
+            </tr> }
 
           { object.expanded && isDropdownRow &&
-          <tr className={ 'table__body__row' }
-              key={ generateId() }>
-            { tableDataElements }
-          </tr> }
+            <tr className={ 'table__body__row' }
+                key={ generateId() }>
+              { tableDataElements }
+            </tr> }
 
           { object.captureExpanded && <>
             <FieldCaptureBar
@@ -326,8 +332,8 @@ export const ClientFieldsTable = ({
         </tr> }
 
       { showModal &&
-      <RecommendationModal activeObject={ hoveredRowObject }
-                           handleClose={ setShowModal } /> }
+        <RecommendationModal activeObject={ hoveredRowObject }
+                             handleClose={ setShowModal } /> }
       </tbody>
     );
   };
@@ -440,11 +446,11 @@ const DropdownIconColumn = ({
                  setSelectedDropdownObject(object);
                } }>
       { (value?.tooltip) &&
-      <div className={ 'table__body__row__td-container__icon-clickable' }>
-        <ToolTipRelative text={ value?.tooltip } />
-        <SVGIcon name={ DROPDOWN }
-                 fill={ '#53A5DF' } />
-      </div> }
+        <div className={ 'table__body__row__td-container__icon-clickable' }>
+          <ToolTipRelative text={ value?.tooltip } />
+          <SVGIcon name={ DROPDOWN }
+                   fill={ '#53A5DF' } />
+        </div> }
       <DropDown value={ value }
                 columnNumber={ 2 } />
     </td>;
@@ -461,15 +467,20 @@ DropdownIconColumn.propTypes = {
   object: shape({}).isRequired
 };
 
-const PhotoIconColumn = ({ dataIndex, value }) => {
+const PhotoIconColumn = ({ dataIndex, value, setSelectedPhotoName, setImageViewerIsOpen, imageViewerIsOpen }) => {
   if (value)
     return <td onClick={ noOp() }
-               key={ generateId() }>
-      <div className={ 'table__body__row__td-container__icon-clickable' }>
-        <ToolTipRelative text={ value } />
-        <SVGIcon name={ CAMERA }
-                 fill={ '#043b6e' } />
-      </div>
+               key={ generateId() }
+               onMouseUp={ () => {
+                 setSelectedPhotoName(value?.photoName);
+                 setImageViewerIsOpen(!imageViewerIsOpen);
+               } }>
+      { value?.tooltip &&
+        <div className={ 'table__body__row__td-container__icon-clickable' }>
+          <ToolTipRelative text={ value?.tooltip } />
+          <SVGIcon name={ CAMERA }
+                   fill={ '#043b6e' } />
+        </div> }
     </td>;
   else
     return <td key={ generateId() } />;
@@ -588,22 +599,22 @@ const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) => {
   return <td onClick={ noOp() }
              key={ generateId() }>
     { !isDropdownRow &&
-    <div className={ 'table__body__row__td-container' }
-         style={ { margin: '1px 0 1px 0' } }>
-      { value?.tooltip && <ToolTipRelative text={ value?.tooltip } /> }
-      <div className={ 'table__body__row__td-upper--deficit' }
-           style={ {
-             backgroundColor: value?.colorTop === '#F9FFFA' ? 'grey' : value?.colorTop
-           } }>
-        { value?.top }
-      </div>
-      <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
-           style={ {
-             backgroundColor: value?.colorBot === '#F9FFFA' ? 'grey' : value?.colorBot
-           } }>
-        { value?.bottom }
-      </div>
-    </div> }
+      <div className={ 'table__body__row__td-container' }
+           style={ { margin: '1px 0 1px 0' } }>
+        { value?.tooltip && <ToolTipRelative text={ value?.tooltip } /> }
+        <div className={ 'table__body__row__td-upper--deficit' }
+             style={ {
+               backgroundColor: value?.colorTop === '#F9FFFA' ? 'grey' : value?.colorTop
+             } }>
+          { value?.top }
+        </div>
+        <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
+             style={ {
+               backgroundColor: value?.colorBot === '#F9FFFA' ? 'grey' : value?.colorBot
+             } }>
+          { value?.bottom }
+        </div>
+      </div> }
   </td>;
 };
 
@@ -638,30 +649,30 @@ const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
                className={ 'table__body__row__td--dark' }>
 
       { (value?.comment) &&
-      <div className={ 'table__body__row__td-container' }>
-        <div> { (value?.data === 0) ? '' : value?.data }</div>
-        <div> { value?.comment ? value?.comment : '' }</div>
-      </div> }
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+          <div> { value?.comment ? value?.comment : '' }</div>
+        </div> }
 
       { (!value?.harvest) &&
-      <div className={ 'table__body__row__td-container' }>
-        <div> { (value?.data === 0) ? '' : value?.data }</div>
-      </div> }
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+        </div> }
 
       { (value?.harvest && (value?.data === 0)) &&
-      <div className={ 'table__body__row__td-container__icon-right' }>
-        <ToolTipRelative text={ HARVEST } />
-        <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-      </div> }
-
-      { (value?.harvest && value?.data !== 0) &&
-      <div className={ 'table__body__row__td-container' }>
-        { (value?.data === 0) ? '' : value?.data }
-        <div className={ 'table__body__row__td-container__icon' }>
+        <div className={ 'table__body__row__td-container__icon-right' }>
           <ToolTipRelative text={ HARVEST } />
           <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-        </div>
-      </div> }
+        </div> }
+
+      { (value?.harvest && value?.data !== 0) &&
+        <div className={ 'table__body__row__td-container' }>
+          { (value?.data === 0) ? '' : value?.data }
+          <div className={ 'table__body__row__td-container__icon' }>
+            <ToolTipRelative text={ HARVEST } />
+            <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
+          </div>
+        </div> }
       <DropDown value={ value }
                 columnNumber={ columnNumber } />
     </td>;
@@ -682,30 +693,30 @@ const SecondaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
                className={ 'table__body__row__td--light' }>
 
       { (value?.comment) &&
-      <div className={ 'table__body__row__td-container' }>
-        <div> { (value?.data === 0) ? '' : value?.data }</div>
-        <div> { value?.comment ? value?.comment : '' }</div>
-      </div> }
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+          <div> { value?.comment ? value?.comment : '' }</div>
+        </div> }
 
       { (!value?.harvest) &&
-      <div className={ 'table__body__row__td-container' }>
-        <div> { (value?.data === 0) ? '' : value?.data }</div>
-      </div> }
+        <div className={ 'table__body__row__td-container' }>
+          <div> { (value?.data === 0) ? '' : value?.data }</div>
+        </div> }
 
       { (value?.harvest && (value?.data === 0)) &&
-      <div className={ 'table__body__row__td-container__icon-right' }>
-        <ToolTipRelative text={ HARVEST } />
-        <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-      </div> }
-
-      { (value?.harvest && value?.data !== 0) &&
-      <div className={ 'table__body__row__td-container' }>
-        { (value?.data === 0) ? '' : value?.data }
-        <div className={ 'table__body__row__td-container__icon' }>
+        <div className={ 'table__body__row__td-container__icon-right' }>
           <ToolTipRelative text={ HARVEST } />
           <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
-        </div>
-      </div> }
+        </div> }
+
+      { (value?.harvest && value?.data !== 0) &&
+        <div className={ 'table__body__row__td-container' }>
+          { (value?.data === 0) ? '' : value?.data }
+          <div className={ 'table__body__row__td-container__icon' }>
+            <ToolTipRelative text={ HARVEST } />
+            <SVGIcon name={ HARVEST_ICON } fill={ '#C7DD9D' } />
+          </div>
+        </div> }
       <DropDown value={ value }
                 columnNumber={ columnNumber } />
     </td>;
@@ -778,11 +789,11 @@ const ForecastTimeIconsColumn = ({ dataIndex, value, isHeaderRow }) => {
                key={ generateId() }
                className={ 'table__body__row__td--fade--thin' }>
       { !value?.dropdown &&
-      <>
-        <ToolTipRelative text={ UNIT } />
-        <SVGIcon name={ RAIN_CLOUDS } fill={ '#043b6e' } tiny />
-        <SVGIcon name={ WATCH } fill={ '#043b6e' } tiny />
-      </>
+        <>
+          <ToolTipRelative text={ UNIT } />
+          <SVGIcon name={ RAIN_CLOUDS } fill={ '#043b6e' } tiny />
+          <SVGIcon name={ WATCH } fill={ '#043b6e' } tiny />
+        </>
       }
     </td>;
   else

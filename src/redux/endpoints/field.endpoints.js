@@ -1,4 +1,4 @@
-import { API_HOST, getHttpGetOptions, getHttpGetPDFOptions } from './index';
+import { API_HOST, getHttpGetImageOptions, getHttpGetOptions, getHttpGetPDFOptions } from './index';
 
 const getFieldChartListEndpoint = () => `${ API_HOST }/getGraphs.php`;
 export const getFieldChartListRequest = (field) => [
@@ -48,4 +48,10 @@ const getQuickViewListEndpoint = () => `${ API_HOST }/getQuickview.php`;
 export const getQuickViewListRequest = (client) => [
   getQuickViewListEndpoint(),
   getHttpGetOptions(client)
+];
+
+const getImageEndpoint = () => `${ API_HOST }/showimage.php`;
+export const getImageRequest = (client) => [
+  getImageEndpoint(),
+  getHttpGetImageOptions(client)
 ];

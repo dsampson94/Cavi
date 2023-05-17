@@ -32,6 +32,7 @@ export const SET_FIELD_SETUP_MAP_LIST = '[FIELD_STORE] Set field map list';
 export const SET_FIELD_REPORTS_LIST = '[FIELD_STORE] Set field reports list';
 export const SET_FIELD_REPORTS_DOWNLOAD = '[FIELD_STORE] Set field reports download';
 export const SET_QUICK_VIEW_LIST = '[FIELD_STORE] Set quick view list';
+export const SET_ACTIVE_IMAGE = '[FIELD_STORE] Set active image';
 
 export const REQUEST_FIELD_CHART_LIST = '[FIELD_STORE] Get field chart list';
 export const requestFieldChartList = (field) => ({
@@ -82,3 +83,10 @@ export const requestQuickViewList = (client) => ({
   type: GET_QUICK_VIEW_LIST,
   client
 });
+
+export const GET_ACTIVE_IMAGE = '[FIELD_STORE] Get active image';
+export const requestActiveImage = (client) => ({
+  type: GET_ACTIVE_IMAGE,
+  client
+});
+
