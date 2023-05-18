@@ -65,6 +65,7 @@ const ClientFieldsViewContainer = () => {
   const [captureField, setCaptureField] = useState(undefined);
 
   const [selectedPhotoName, setSelectedPhotoName] = useState(undefined);
+  const [photoClicked, setPhotoClicked] = useState(false);
 
   const [activeLoadPeriod, setActiveLoadPeriod] = useState(TWO_WEEKS_LABEL);
   const [activeFieldName, setActiveFieldName] = useState(undefined);
@@ -85,7 +86,7 @@ const ClientFieldsViewContainer = () => {
 
   useEffect(() => {
     dispatch(requestActiveImage({ ...request.clientParams, image: selectedPhotoName }));
-  }, [selectedPhotoName]);
+  }, [selectedPhotoName, photoClicked]);
 
   useEffect(() => {
     if (activeFieldName) {
@@ -197,6 +198,8 @@ const ClientFieldsViewContainer = () => {
                            selectedPhotoName={ selectedPhotoName }
                            setSelectedPhotoName={ setSelectedPhotoName }
                            fieldActiveImage={ fieldActiveImage }
+                           photoClicked={ photoClicked }
+                           setPhotoClicked={ setPhotoClicked }
   />;
 };
 

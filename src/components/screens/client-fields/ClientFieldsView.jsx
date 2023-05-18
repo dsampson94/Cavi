@@ -59,7 +59,9 @@ const ClientFieldsView = ({
                             setActiveFieldProbeNumber,
                             mappedQuickViewList,
                             setSelectedPhotoName,
-                            fieldActiveImage
+                            fieldActiveImage,
+                            photoClicked,
+                            setPhotoClicked
                           }) => {
 
   const [showClientsSideBar, setClientsShowSideBar] = useState(true);
@@ -93,6 +95,12 @@ const ClientFieldsView = ({
   useEffect(() => {
     toggleAllDropdowns(allDropdownsExpanded, mappedFieldList, activeTableData, setActiveTableData);
   }, [allDropdownsExpanded]);
+
+  const imageBase64 = fieldActiveImage
+    ? `data:image/jpeg;base64,${ btoa(
+      new Uint8Array(fieldActiveImage).reduce((data, byte) => data + String.fromCharCode(byte), '')
+    ) }`
+    : null;
 
   return (
     <ContentContainer view={ CLIENT_FIELDS }
@@ -136,7 +144,9 @@ const ClientFieldsView = ({
                              setSelectedPhotoName={ setSelectedPhotoName }
                              imageViewerIsOpen={ imageViewerIsOpen }
                              setImageViewerIsOpen={ setImageViewerIsOpen }
-                             fieldActiveImage={ fieldActiveImage } />
+                             fieldActiveImage={ fieldActiveImage }
+                             photoClicked={ photoClicked }
+                             setPhotoClicked={ setPhotoClicked } />
         </div>
 
         { !isEmpty(mappedWeatherList1) &&
@@ -171,10 +181,11 @@ const ClientFieldsView = ({
                    setActiveFieldName={ setActiveFieldName }
                    mappedQuickViewList={ mappedQuickViewList } />
 
-        <CenteredPhotoViewer imageViewerIsOpen={ imageViewerIsOpen }
-                             setImageViewerIsOpen={ setImageViewerIsOpen }
-                             activeFieldName={ activeFieldName }
-                             fieldActiveImage={ fieldActiveImage } />
+        { imageBase64 &&
+          <CenteredPhotoViewer imageViewerIsOpen={ imageViewerIsOpen }
+                               setImageViewerIsOpen={ setImageViewerIsOpen }
+                               activeFieldName={ activeFieldName }
+                               fieldActiveImage={ imageBase64 } /> }
       </div>
     </ContentContainer>
   );

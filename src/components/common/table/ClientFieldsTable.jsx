@@ -56,7 +56,9 @@ export const ClientFieldsTable = ({
                                     setRowClickId,
                                     setSelectedPhotoName,
                                     imageViewerIsOpen,
-                                    setImageViewerIsOpen
+                                    setImageViewerIsOpen,
+                                    photoClicked,
+                                    setPhotoClicked
                                   }) => {
 
   const history = useHistory();
@@ -127,7 +129,9 @@ export const ClientFieldsTable = ({
                                       value={ value }
                                       setSelectedPhotoName={ setSelectedPhotoName }
                                       imageViewerIsOpen={ imageViewerIsOpen }
-                                      setImageViewerIsOpen={ setImageViewerIsOpen } />;
+                                      setImageViewerIsOpen={ setImageViewerIsOpen }
+                                      photoClicked={ photoClicked }
+                                      setPhotoClicked={ setPhotoClicked } />;
             case 4:
               return <LastReadingColumn dataIndex={ dataIndex }
                                         value={ value } />;
@@ -467,11 +471,12 @@ DropdownIconColumn.propTypes = {
   object: shape({}).isRequired
 };
 
-const PhotoIconColumn = ({ dataIndex, value, setSelectedPhotoName, setImageViewerIsOpen, imageViewerIsOpen }) => {
+const PhotoIconColumn = ({ dataIndex, value, setSelectedPhotoName, setImageViewerIsOpen, imageViewerIsOpen, photoClicked, setPhotoClicked }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ generateId() }
                onMouseUp={ () => {
+                 setPhotoClicked(!photoClicked);
                  setSelectedPhotoName(value?.photoName);
                  setImageViewerIsOpen(!imageViewerIsOpen);
                } }>
