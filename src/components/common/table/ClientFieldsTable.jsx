@@ -528,18 +528,10 @@ LastReadingColumn.propTypes = {
 };
 
 const CaptureNoteColumn = ({
-                             dataIndex,
                              rowIndex,
                              value,
                              object,
-                             captureDate,
-                             setCaptureDate,
-                             captureType,
-                             captureField,
                              setCaptureField,
-                             setCaptureType,
-                             captureValue,
-                             setCaptureValue,
                              setSelectedIndex,
                              setSelectedCaptureObject,
                              setRowClickId,
@@ -572,14 +564,9 @@ CaptureNoteColumn.propTypes = {
 };
 
 const ChartColumn = ({
-                       dataIndex,
                        value,
                        object,
-                       mappedChartList,
-                       quickViewIsOpen,
                        setQuickViewIsOpen,
-                       activeLoadPeriod,
-                       setActiveLoadPeriod,
                        setActiveFieldName,
                        setActiveFieldProbeNumber
                      }) => {
@@ -630,7 +617,7 @@ DeficitColumn.propTypes = {
   isHeaderRow: bool
 };
 
-const UnitColumn = ({ dataIndex, value }) => {
+const UnitColumn = ({ value }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ generateId() }>
@@ -647,7 +634,7 @@ UnitColumn.propTypes = {
   value: string || shape({})
 };
 
-const PrimaryForecastColumn = ({ dataIndex, value, columnNumber }) => {
+const PrimaryForecastColumn = ({ value, columnNumber }) => {
   if (value)
     return <td onClick={ noOp() }
                key={ generateId() }

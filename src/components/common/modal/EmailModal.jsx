@@ -28,7 +28,7 @@ const EmailModal = ({ setShowEmailModal, emailAddress, setEmailAddress, clientRe
         </div>
         <div className={ 'email-modal__container' }>
           <div className={ 'email-modal__input' }>
-            <TextInput label={ 'Email addresses (seperate by comma):' }
+            <TextInput label={ 'Email addresses (Separate by comma):' }
                        onChange={ ({ target }) => setEmailAddress(target.value) }
                        onKeyPress={ event => {
                          if (event.key === 'Enter') submitEmailRequest();
@@ -37,10 +37,9 @@ const EmailModal = ({ setShowEmailModal, emailAddress, setEmailAddress, clientRe
 
           <div className={ 'email-modal__button' }>
             <Button label={ 'Cancel' }
-                    onClick={ () => setShowEmailModal(false) } />
+                    onClick={ () => setShowEmailModal(false) } popup />
             <Button label={ 'Ok' }
-                    onClick={ submitEmailRequest }
-            />
+                    onClick={ submitEmailRequest } popup />
           </div>
         </div>
       </div>

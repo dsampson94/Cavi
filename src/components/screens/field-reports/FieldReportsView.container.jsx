@@ -18,8 +18,6 @@ const FieldReportsViewContainer = () => {
   const fieldReportsList = useSelector(createSelector([state => state.field], field => field?.fieldReportsList));
   const fieldReportsDownloadPDF = useSelector(createSelector([state => state.field], field => field?.fieldReportsDownload));
 
-  const [activeFileName, setActiveFileName] = useState(false);
-
   const request = getRequestParams({ groupName, clientName });
 
   useEffect(() => {
@@ -30,20 +28,19 @@ const FieldReportsViewContainer = () => {
   }, []);
 
   const handleDownloadReportClick = (fileName) => {
-    setActiveFileName(fileName);
     dispatch(requestSetFieldReportsList({
       ...request.clientParams,
       action: 'downloadreport',
       filename: fileName
     }));
-    downloadPDF();
+    downloadPDF(fileName);
   };
 
-  const downloadPDF = () => {
-    if (!fieldReportsDownloadPDF) return;
+  const downloadPDF = (fileName) => {
     const link = document.createElement('a');
+    if (!fieldReportsDownloadPDF) return;
     link.href = window.URL.createObjectURL(fieldReportsDownloadPDF);
-    link.download = `Irricheck Report ${ activeFileName }`;
+    link.download = `Irricheck Report ${ fileName }`;
     link.click();
   };
 
