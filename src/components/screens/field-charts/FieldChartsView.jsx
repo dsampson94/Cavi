@@ -12,6 +12,7 @@ import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/l
 import ContentContainer from '../../common/content-container/ContentContainer';
 import MidBar from '../../common/mid-bar/MidBar';
 import Button from '../../common/button/Button';
+import FieldCommentsSlideOverTw from '../../common/slide-over/FieldCommentsSlideOverTw';
 
 import './field-charts-view.scss';
 
@@ -87,24 +88,24 @@ const ClientFieldsView = ({
 
         <div className={ 'flex w-full' }>
           { location.pathname.includes('field-charts') &&
-          <div className={ 'flex w-full h-full' }>
-            <Button label={ daysFromToday(0) }
-                    lowerLabel={ getTopBarValue()[0] } middatebar />
-            <Button label={ daysFromToday(1) }
-                    lowerLabel={ getTopBarValue()[1] } middatebar />
-            <Button label={ daysFromToday(2) }
-                    lowerLabel={ getTopBarValue()[2] } middatebar />
-            <Button label={ daysFromToday(3) }
-                    lowerLabel={ getTopBarValue()[3] } middatebar />
-            <Button label={ daysFromToday(4) }
-                    lowerLabel={ getTopBarValue()[4] } middatebar />
-            <Button label={ daysFromToday(5) }
-                    lowerLabel={ getTopBarValue()[5] } middatebar />
-            <Button label={ daysFromToday(6) }
-                    lowerLabel={ getTopBarValue()[6] } middatebar />
-            <Button label={ daysFromToday(7) }
-                    lowerLabel={ getTopBarValue()[7] } middatebar spaced />
-          </div> }
+            <div className={ 'flex w-full h-full' }>
+              <Button label={ daysFromToday(0) }
+                      lowerLabel={ getTopBarValue()[0] } middatebar />
+              <Button label={ daysFromToday(1) }
+                      lowerLabel={ getTopBarValue()[1] } middatebar />
+              <Button label={ daysFromToday(2) }
+                      lowerLabel={ getTopBarValue()[2] } middatebar />
+              <Button label={ daysFromToday(3) }
+                      lowerLabel={ getTopBarValue()[3] } middatebar />
+              <Button label={ daysFromToday(4) }
+                      lowerLabel={ getTopBarValue()[4] } middatebar />
+              <Button label={ daysFromToday(5) }
+                      lowerLabel={ getTopBarValue()[5] } middatebar />
+              <Button label={ daysFromToday(6) }
+                      lowerLabel={ getTopBarValue()[6] } middatebar />
+              <Button label={ daysFromToday(7) }
+                      lowerLabel={ getTopBarValue()[7] } middatebar spaced />
+            </div> }
         </div>
 
         <MidBar view={ FIELD_CHART_MIDBAR }

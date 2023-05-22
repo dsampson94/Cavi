@@ -102,15 +102,15 @@ const Chart = ({
 
           { children }
 
-          <text
-            y="17%"
-            x="92%"
-            text-anchor="end"
-            fill={ 'cornflowerblue' }
-            onContextMenu={ (event) => event.preventDefault() }
-          >
+          <text y="17%"
+                x="92%"
+                text-anchor="end"
+                fill="cornflowerblue"
+                className="resizableText"
+                onContextMenu={ (event) => event.preventDefault() }>
             { chartInfo }
           </text>
+
         </g>
       </svg>
 

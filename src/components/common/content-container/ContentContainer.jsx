@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { arrayOf, node, oneOfType } from 'prop-types';
 
 import { retrieveUserClientListFromLocalStorage } from '../../../tools/storage/localStorage';
@@ -10,6 +10,7 @@ import { mappedUserData } from '../side-bar/Sidebar.util';
 import TopBarTw from '../top-bar/TopBar.tw';
 import SideBar from '../side-bar/SideBar';
 import TabBarTop from '../tab-bar/TabBarTop';
+import FieldCommentsSlideOverTw from '../slide-over/FieldCommentsSlideOverTw';
 
 import { Routes } from '../../../routes';
 import { setClientMonitorProbesList } from '../../../redux/actions/client.action';
@@ -175,6 +176,8 @@ const ClientFieldContentContainer = ({
   const userAccount = retrieveUserClientListFromLocalStorage();
   const mappedUser = mappedUserData(userAccount);
 
+  const [showSlideOver, setShowSlideOver] = useState(false);
+
   return (
     <div className="content-container">
 
@@ -182,7 +185,9 @@ const ClientFieldContentContainer = ({
                 setShowSideBar={ setShowSideBar }
                 clientRequestParams={ clientRequestParams }
                 view={ view }
-                isAgent={ isAgent } />
+                isAgent={ isAgent }
+                showSlideOver={ showSlideOver }
+                setShowSlideOver={ setShowSlideOver } />
 
       <div className="content-container__screen">
         <SideBar showSideBar={ showSideBar }
@@ -194,6 +199,10 @@ const ClientFieldContentContainer = ({
                  view={ view }
                  isAgent={ isAgent } />
         { children }
+
+        <FieldCommentsSlideOverTw showSlideOver={ showSlideOver }
+                                  setShowSlideOver={ setShowSlideOver } />
+
       </div>
     </div>
   );

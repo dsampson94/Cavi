@@ -44,7 +44,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, setActiveFieldName, isAgent }) => {
+const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldList, setActiveFieldName, isAgent, setShowSlideOver }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -167,6 +167,12 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
             description: 'View Recommendations List',
             href: `/client/${ groupName }/${ clientName }`,
             icon: ListBulletIcon
+          },
+          {
+            name: 'Comments',
+            description: 'View Comments List',
+            icon: ListBulletIcon,
+            onClick: () => setShowSlideOver(true)
           },
           {
             name: 'Temperatures',
@@ -524,10 +530,10 @@ const TopBar = ({ showSideBar, setShowSideBar, clientRequestParams, mappedFieldL
         </div>
 
         { showEmailModal &&
-        <EmailModal setShowEmailModal={ setShowEmailModal }
-                    emailAddress={ emailAddress }
-                    setEmailAddress={ setEmailAddress }
-                    clientRequestParams={ clientRequestParams } /> }
+          <EmailModal setShowEmailModal={ setShowEmailModal }
+                      emailAddress={ emailAddress }
+                      setEmailAddress={ setEmailAddress }
+                      clientRequestParams={ clientRequestParams } /> }
 
       </div>
       <ProgressBar value={ progress } max={ 100 } />

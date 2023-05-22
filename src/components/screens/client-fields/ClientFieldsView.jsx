@@ -186,6 +186,7 @@ const ClientFieldsView = ({
                                setImageViewerIsOpen={ setImageViewerIsOpen }
                                activeFieldName={ activeFieldName }
                                fieldActiveImage={ imageBase64 } /> }
+
       </div>
     </ContentContainer>
   );

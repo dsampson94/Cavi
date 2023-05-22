@@ -30,7 +30,7 @@ import Button from '../../button/Button';
 import ThemeToggle from '../../theme-toggle/ThemeToggle';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import CheckboxInput from '../../input/checkbox/CheckboxInput';
-import { TopBarButtons } from '../../top-bar/TopBar';
+import { TopBarButtons } from '../../top-bar/TopBarButtons';
 
 import './drop-down-menu.scss';
 

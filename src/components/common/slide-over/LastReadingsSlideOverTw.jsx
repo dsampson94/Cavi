@@ -92,6 +92,5 @@ export default function LastReadingsSlideOverTw({ showSlideOver, setShowSlideOve
         </div>
       </Dialog>
     </Transition.Root>
-  )
-    ;
+  );
 }
