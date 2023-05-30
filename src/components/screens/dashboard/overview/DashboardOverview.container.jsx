@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { mappedUserData } from '../../../common/side-bar/Sidebar.util';
-import { chooseRandom } from '../../../../tools/general/helpers.util';
 
 import { requestClientOverviewList } from '../../../../redux/actions/client.action';
 import { getRequestParams } from '../../../../redux/endpoints';
