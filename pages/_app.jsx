@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { Analytics } from '@vercel/analytics/react';
-import NavbarCentered from '../components/features/NavbarCentered';
 
 import './../styles/globals.css';
+import NavbarLeft from '../components/features/NavbarLeft';
 
 function MyApp({ Component, pageProps }) {
     const contactScrollToRef = useRef('contactScrollToRef');
+    const brandsScrollToRef = useRef('brandsScrollToRef');
+    const businessScrollToRef = useRef('businessScrollToRef');
+    const peopleScrollToRef = useRef('peopleScrollToRef');
+
     const [showNavbar, setShowNavbar] = useState(true);
     const lastScrollRef = useRef(0);
 
@@ -38,10 +42,17 @@ function MyApp({ Component, pageProps }) {
                 <title>{ 'CAVI Brands' }</title>
             </Head>
 
-            <NavbarCentered contactScrollToRef={ contactScrollToRef }
-                            showNavbar={ showNavbar }/>
+            <NavbarLeft contactScrollToRef={ contactScrollToRef }
+                        brandsScrollToRef={ brandsScrollToRef }
+                        businessScrollToRef={ businessScrollToRef }
+                        peopleScrollToRef={ peopleScrollToRef }
+                        showNavbar={ showNavbar } />
 
-            <Component contactScrollToRef={ contactScrollToRef } { ...pageProps } />
+            <Component contactScrollToRef={ contactScrollToRef }
+                       brandsScrollToRef={ brandsScrollToRef }
+                       businessScrollToRef={ businessScrollToRef }
+                       peopleScrollToRef={ peopleScrollToRef }
+                       { ...pageProps } />
             <Analytics />
         </>
     );

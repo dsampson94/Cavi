@@ -31,7 +31,7 @@ function NavbarCentered({ contactScrollToRef, showNavbar }) {
     return (
         <>
             <header
-                className={ `sticky top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap ${
+                className={ `relative top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap ${
                     showNavbar ? 'opacity-100' : 'opacity-0'
                 } transition-opacity` }
             >

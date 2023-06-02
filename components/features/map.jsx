@@ -32,7 +32,7 @@ const Map = ({ lat, lon, location }) => {
     }
 
     return (
-        <div style={ { height: '35vh', width: '100%', padding: '24px' } }>
+        <div style={ { height: '32vh', width: '100%', padding: '24px' } }>
             <GoogleMapReact center={ { lat: lat, lng: lon } }
                             bootstrapURLKeys={ { key: GOOGLE_MAPS_API_KEY } }
                             defaultCenter={ { lat: lat, lng: lon } }

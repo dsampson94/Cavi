@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
                     <meta property="og:image:type" content="image/png" />
 
                     {/* Google Maps */ }
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2MMmQ2tPm4z0OURwhMNCNBMYlMsDTNu0"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByfbfVGCh0wursHm1aGv1TzqxXx3bpVNY"></script>
 
                     {/* Google Adsense */ }
                     {/*<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7780458585019281"*/}

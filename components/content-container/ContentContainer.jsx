@@ -1,7 +1,6 @@
 import React from 'react';
 import Contact from '../features/Contact';
 import HeroImageCenter from '../features/HeroImageCenter';
-import CenteredIconTextFeature from '../features/CenteredIconTextFeature';
 import RightImageWithText from '../features/RightImageWithText';
 import Team from '../features/Team';
 import LogoCloud from '../features/LogoCloud';
@@ -14,12 +13,16 @@ import BusinessesImagesPCG from '../features/BusinessesImagesPCG';
 import BusinessesImagesPDS from '../features/BusinessesImagesPDS';
 import BusinessesImageARC from '../features/BusinessesImagesARC';
 import FooterCentered from '../features/FooterCentered';
+import SimpleFooter from '../features/SimpleFooter';
 
-const ContentContainer = ({ view, contactScrollToRef, children }) => {
+const ContentContainer = ({ view, contactScrollToRef, businessScrollToRef, brandsScrollToRef, peopleScrollToRef, children }) => {
 
     switch (view) {
         case 'Home':
-            return <HomePageContentContainer contactScrollToRef={ contactScrollToRef }>
+            return <HomePageContentContainer contactScrollToRef={ contactScrollToRef }
+                                             businessScrollToRef={ businessScrollToRef }
+                                             brandsScrollToRef={ brandsScrollToRef }
+                                             peopleScrollToRefchildren={ peopleScrollToRef }>
                 { children }
             </HomePageContentContainer>;
         case 'About':
@@ -56,14 +59,15 @@ const ContentContainer = ({ view, contactScrollToRef, children }) => {
 
 export default ContentContainer;
 
-const HomePageContentContainer = ({ contactScrollToRef }) => {
+const HomePageContentContainer = ({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRefchildren }) => {
 
     return (
-        <div className="font-montserrat-light isolate bg-white">
-            <HeroImageCenter />
-            <CenteredIconTextFeature />
-            <Contact contactScrollToRef={ contactScrollToRef } />
-            <FooterCentered />
+        <div className="font-montserrat-light isolate bg-white overflow-x-hidden">
+            <HeroImageCenter brandsScrollToRef={ brandsScrollToRef }
+                             businessScrollToRef={ businessScrollToRef } />
+            {/*<CenteredIconTextFeature />*/ }
+            {/*<Contact contactScrollToRef={ contactScrollToRef } />*/}
+            <SimpleFooter />
         </div>
     );
 };
