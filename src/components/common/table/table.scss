@@ -190,6 +190,7 @@
               padding-top: util.rem(5);
               display: flex;
               user-focus: none;
+              user-select: none;
             }
 
             &-lower {
@@ -198,6 +199,7 @@
               padding-top: util.rem(2);
               color: map.get(color.$colorMap, climate-text-blue);
               user-focus: none;
+              user-select: none;
             }
           }
 
