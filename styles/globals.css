@@ -13,6 +13,6 @@
 @media (max-width: 640px) { /* This media query corresponds to Tailwind's 'sm' breakpoint */
     .svg-scale-down {
         margin-left: -100px;
-        transform: scale(0.3); /* Scale down to 50% of the original size */
+        transform: scale(0.25); /* Scale down to 50% of the original size */
     }
 }

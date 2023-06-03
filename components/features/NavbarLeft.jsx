@@ -1,30 +1,60 @@
 import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import Logo from './Logo';
-import Link from 'next/link';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
-function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef }) {
+function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef, setShowMenu }) {
+
+    const [scrollDirection, setScrollDirection] = useState('up');
+    const [lastScrollTop, setLastScrollTop] = useState(0);
+    const [showStickyNavbar, setShowStickyNavbar] = useState(false);
+
+    const navbarRef = useRef(null);
 
     const navigation = [
-        { name: 'About', href: '/about' },
-        { name: 'People', href: '/people' },
-        { name: 'Businesses', href: '/businesses' },
-        { name: 'Our Brands', href: '/brands' },
-        { name: 'CSR', href: '/csr' },
-        { name: 'Careers', href: '/careers' }
     ];
 
-    const dropDownOptions = [
+    const dropDownAboutOptions = [
         { name: 'Business', onClick: () => handleBusinessClick },
         { name: 'Brands', onClick: () => handleBrandsClick },
         { name: 'People', onClick: () => handlePeopleClick },
         { name: 'Social Responsibility', onClick: () => handleBrandsClick }
     ];
 
+    const dropDownCareersOptions = [
+        { name: 'Dermalogica', link: 'https://www.dermalogica.co.za/careers' },
+        { name: 'PCG', link: 'https://pcg.co.za/careers/' },
+        { name: 'Chanel', link: 'https://pcg.co.za/careers/' },
+        { name: 'PDS', link: 'https://pcg.co.za/careers/' }
+    ];
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollTop > lastScrollTop) {
+                setScrollDirection('down');
+                setShowStickyNavbar(false);
+            } else {
+                setScrollDirection('up');
+                if (currentScrollTop === 0) {
+                    setShowStickyNavbar(false);
+                } else {
+                    setShowStickyNavbar(true);
+                }
+            }
+
+            setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollTop]);
+
     const handleContactUsClick = () => {
+        setShowMenu(1);
         contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -36,150 +66,178 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
         brandsScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
-    const handlePeopleClick = async () => {
+    const handlePeopleClick = () => {
         peopleScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
-        <header className="relative top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap">
-            <Popover className="relative bg-white">
-                <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
-                    <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[70px] max-h-[70px] h-[70px]">
-                        <Link href="/">
-                            <Image src={ '/cavilogo.svg' }
-                                   alt={ 'cavi logo' }
-                                   height={ 200 }
-                                   width={ 200 }
-                                   layout="fixed" />
-                        </Link>
-                    </div>
-                    <div className="-my-2 -mr-2 md:hidden">
-                        <Popover.Button
-                            className="inline-flex items-center justify-center mt-10 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                            <span className="sr-only">Open menu</span>
-                            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                        </Popover.Button>
-                    </div>
-                    <Popover.Group className="hidden lg:flex lg:gap-x-12 mt-10">
-                        <Popover className="relative">
-                            <Popover.Button className="flex items-center gap-x-1 text-lg leading-6 text-gray-900 outline-none">
-                                About
-                                <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                            </Popover.Button>
-
-                            <Transition
-                                as={ Fragment }
-                                enter="transition ease-out duration-200"
-                                enterFrom="opacity-0 translate-y-1"
-                                enterTo="opacity-100 translate-y-0"
-                                leave="transition ease-in duration-150"
-                                leaveFrom="opacity-100 translate-y-0"
-                                leaveTo="opacity-0 translate-y-1"
-                            >
-                                <Popover.Panel
-                                    className="absolute -left-4 z-10 mt-11 overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 mt-2">
-                                    <div className="p-3">
-                                        { dropDownOptions.map((item) => (
-                                            <div
-                                                key={ item.name }
-                                                className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-gray-50"
-                                            >
-                                                <div className="flex-auto">
-                                                    <a onClick={ handleBusinessClick } className="block text-gray-900">
-                                                        { item.name }
-                                                        <span className="absolute inset-0" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        )) }
-                                    </div>
-                                </Popover.Panel>
-                            </Transition>
-                        </Popover>
-
-                        <a href="/careers" className="text-lg leading-6 text-gray-800">
-                            Careers
-                        </a>
-                        <a onClick={ handleContactUsClick } className="text-lg leading-6 text-gray-800 cursor-pointer">
-                            Contact
-                        </a>
-                    </Popover.Group>
-                </nav>
-
-                {/*<div className="flex">*/ }
-                {/*    { socials.map((item) => (*/ }
-                {/*        <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500 mt-2 mr-2" target="_blank">*/ }
-                {/*            <span className="sr-only">{ item.name }</span>*/ }
-                {/*            <item.icon className="h-6 w-6" aria-hidden="true" />*/ }
-                {/*        </a>*/ }
-                {/*    )) }*/ }
-                {/*    <a className="ml-8 text-sm inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-2 py-2 text-base text-white shadow-sm hover:bg-blue-700"*/ }
-                {/*       onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>*/ }
-                {/*        Contact Us*/ }
-                {/*    </a>*/ }
-                {/*</div>*/ }
-
-
-                <Transition
-                    as={ Fragment }
-                    enter="duration-200 ease-out"
-                    enterFrom="opacity-0 scale-95"
-                    enterTo="opacity-100 scale-100"
-                    leave="duration-100 ease-in"
-                    leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95"
-                >
-                    <Popover.Panel
-                        focus
-                        className="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
-                    >
-                        <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                            <div className="px-5 pt-5 pb-6">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <Logo />
-                                    </div>
-                                    <div className="-mr-2">
-                                        <Popover.Button
-                                            className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                                            <span className="sr-only">Close menu</span>
-                                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                        </Popover.Button>
-                                    </div>
-                                </div>
+        <>
+            <header
+                className={ `relative top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap ${ showStickyNavbar || lastScrollTop === 0 ? 'sticky top-0' : '' }` }
+                ref={ navbarRef }
+                style={ {
+                    opacity: showStickyNavbar || lastScrollTop === 0 ? 1 : 0,
+                    transition: 'opacity 0.2s ease-in-out'
+                } }
+            >
+                <Popover className="relative bg-white">
+                    <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
+                        <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[70px] max-h-[70px] h-[70px]">
+                            <div>
+                                <Image src={ '/cavilogo.svg' }
+                                       alt={ 'cavi logo' }
+                                       height={ 200 }
+                                       width={ 200 }
+                                       layout="fixed" />
                             </div>
-                            <div className="pb-6 px-5">
-                                <div className="grid grid-cols-2 gap-4">
-                                    { navigation.map((item) => (
-                                        <a
-                                            key={ item.name }
-                                            href={ item.href }
-                                            className="text-base font-medium text-gray-900 hover:text-gray-700"
-                                        >
-                                            { item.name }
-                                        </a>
-                                    )) }
+                        </div>
+                        <div className="-my-2 -mr-2 md:hidden">
+                            <Popover.Button
+                                className="inline-flex items-center justify-center mt-10 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                <span className="sr-only">Open menu</span>
+                                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                            </Popover.Button>
+                        </div>
+                        <Popover.Group className="hidden lg:flex lg:gap-x-12 mt-10">
+                            <Popover className="relative">
+                                <Popover.Button className="flex items-center gap-x-1 text-lg leading-6 text-gray-900 outline-none">
+                                    About
+                                    <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                </Popover.Button>
+
+                                <Transition
+                                    as={ Fragment }
+                                    enter="transition ease-out duration-200"
+                                    enterFrom="opacity-0 translate-y-1"
+                                    enterTo="opacity-100 translate-y-0"
+                                    leave="transition ease-in duration-150"
+                                    leaveFrom="opacity-100 translate-y-0"
+                                    leaveTo="opacity-0 translate-y-1"
+                                >
+                                    <Popover.Panel
+                                        className="absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 mt-2">
+                                        <div className="p-3">
+                                            { dropDownAboutOptions.map((item) => (
+                                                <div
+                                                    key={ item.name }
+                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-300 cursor-pointer"
+                                                >
+                                                    <div className="flex-auto">
+                                                        <a onClick={ handleBusinessClick } className="block text-gray-900">
+                                                            { item.name }
+                                                            <span className="absolute inset-0" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            )) }
+                                        </div>
+                                    </Popover.Panel>
+                                </Transition>
+                            </Popover>
+
+                            <Popover className="relative">
+                                <Popover.Button className="flex items-center gap-x-1 text-lg leading-6 text-gray-900 outline-none">
+                                    Careers
+                                    <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                </Popover.Button>
+
+                                <Transition
+                                    as={ Fragment }
+                                    enter="transition ease-out duration-200"
+                                    enterFrom="opacity-0 translate-y-1"
+                                    enterTo="opacity-100 translate-y-0"
+                                    leave="transition ease-in duration-150"
+                                    leaveFrom="opacity-100 translate-y-0"
+                                    leaveTo="opacity-0 translate-y-1"
+                                >
+                                    <Popover.Panel
+                                        className="absolute -left-4 z-10 mt-11 overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 mt-2">
+                                        <div className="p-3">
+                                            { dropDownCareersOptions.map((item) => (
+                                                <div
+                                                    key={ item.name }
+                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-300 cursor-pointer"
+                                                >
+                                                    <div className="flex-auto">
+                                                        <a href={ item.link } className="block text-gray-900">
+                                                            { item.name }
+                                                            <span className="absolute inset-0" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            )) }
+                                        </div>
+                                    </Popover.Panel>
+                                </Transition>
+                            </Popover>
+
+                            <a onClick={ handleContactUsClick } className="text-lg leading-6 text-gray-800 cursor-pointer">
+                                Contact
+                            </a>
+                        </Popover.Group>
+                    </nav>
+
+                    <Transition
+                        as={ Fragment }
+                        enter="duration-200 ease-out"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="duration-100 ease-in"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                    >
+                        <Popover.Panel
+                            focus
+                            className="absolute -mt-5 -mr-1 inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
+                        >
+                            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                                <div className="px-5 pt-5 pb-6">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <Logo />
+                                        </div>
+                                        <div className="-mr-2">
+                                            <Popover.Button
+                                                className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                                <span className="sr-only">Close menu</span>
+                                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                            </Popover.Button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="mt-6">
-                                    <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
-                                       onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
-                                        Contact Us
-                                    </a>
-                                    <div className="flex justify-center space-x-6 ">
-                                        { socials.map((item) => (
-                                            <a key={ item.name } href={ item.href } className=" text-gray-400 hover:text-gray-500 mt-4 ">
-                                                <span className="sr-only">{ item.name }</span>
-                                                <item.icon className="h-6 w-6" aria-hidden="true" />
+                                <div className="pb-6 px-5">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        { navigation.map((item) => (
+                                            <a
+                                                key={ item.name }
+                                                href={ item.href }
+                                                className="text-base font-medium text-gray-900 hover:text-gray-700"
+                                            >
+                                                { item.name }
                                             </a>
                                         )) }
                                     </div>
+                                    <div className="mt-6">
+                                        <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+                                           onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
+                                            Contact Us
+                                        </a>
+                                        <div className="flex justify-center space-x-6 ">
+                                            { socials.map((item) => (
+                                                <a key={ item.name } href={ item.href } className=" text-gray-400 hover:text-gray-500 mt-4 ">
+                                                    <span className="sr-only">{ item.name }</span>
+                                                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                                                </a>
+                                            )) }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Popover.Panel>
-                </Transition>;
-            </Popover>
-        </header>
+                        </Popover.Panel>
+                    </Transition>;
+                </Popover>
+            </header>
+        </>
     );
 };
 

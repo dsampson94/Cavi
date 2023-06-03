@@ -2,36 +2,31 @@ import React from 'react';
 import { SVGIcon } from './SVGIcon';
 
 export default function LogoCloud() {
+    const names = [
+        'Amouage', 'Bulgari', 'Chanel', 'Chopard', 'Clear', 'Coach', 'Dermalogica',
+        'Dolce', 'Elemis', 'Elie', 'Ellis', 'Floral', 'Guerlain',
+        'Hermes', 'Issey', 'Jorgobe', 'Jack', 'Prairie', 'Memo', 'Narciso',
+        'Van', 'Nesti', 'Phillip', 'Sensai', 'Tommy', 'Zadig'
+    ];
+
+    const rows = [
+        names.slice(0, 7),
+        names.slice(7, 13),
+        names.slice(13, 20),
+        names.slice(20, 26)
+    ];
 
     return (
-        <div className="mx-auto max-w-7xl pb-12 -mt-24 md:pt-8">
-            <div className="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-5 sm:grid-cols-3">
-            <SVGIcon name={ 'Chopard' } />
-                <SVGIcon name={ 'Bulgari' } />
-                <SVGIcon name={ 'Amouage' } />
-                <SVGIcon name={ 'Clear' } />
-                <SVGIcon name={ 'Coach' } />
-                <SVGIcon name={ 'Zadig' } />
-                <SVGIcon name={ 'Elemis' } />
-                <SVGIcon name={ 'Elie' } />
-                <SVGIcon name={ 'Prairie' } />
-                <SVGIcon name={ 'Floral' } />
-                <SVGIcon name={ 'Guerlain' } />
-                <SVGIcon name={ 'Hermes' } />
-                <SVGIcon name={ 'Issey' } />
-                <SVGIcon name={ 'Jack' } />
-                <SVGIcon name={ 'Jorgobe' } />
-                <SVGIcon name={ 'Dolce' } />
-                <SVGIcon name={ 'Dermalogica' } />
-                <SVGIcon name={ 'Narciso' } />
-                <SVGIcon name={ 'Memo' } />
-                <SVGIcon name={ 'Chanel' } />
-                <SVGIcon name={ 'Ellis' } />
-                <SVGIcon name={ 'Tommy' } />
-                <SVGIcon name={ 'Van' } />
-                <SVGIcon name={ 'Phillip' } />
-                <SVGIcon name={ 'Nesti' } />
-            </div>
+        <div className="flex-column mx-auto pt-12 md:pt-12 pr-10 pb-12 -mt-16 md:pt-8">
+            { rows.map((row, i) => (
+                <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
+                    { row.map((name, j) => (
+                        <div key={ j } className={ `w-full sm:w-1/${ row.length }` }>
+                            <SVGIcon name={ name } />
+                        </div>
+                    )) }
+                </div>
+            )) }
         </div>
     );
 }

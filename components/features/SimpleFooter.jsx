@@ -4,26 +4,20 @@ import Contact from './Contact';
 import Map from './map';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
-const SimpleFooter = () => {
-    const [showMenu, setShowMenu] = useState(null);
+const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
 
     const toggleMenu = (index) => {
-        if (showMenu === index) {
-            setShowMenu(null);
-        } else {
-            setShowMenu(index);
-        }
+        if (showMenu === index) setShowMenu(null);
+        else setShowMenu(index);
     };
 
     return (
-        <div className="relative flex justify-between px-10 py-2 bg-gray-800 text-white">
-            <div className="relative flex space-x-4">
+        <div className="relative flex justify-between px-3 py-2 bg-gray-800 text-white">
+            <div className="relative flex space-x-2">
                 { contacts.map((item, index) => (
                     <div key={ item.name }>
-                        <button
-                            onClick={ () => toggleMenu(index) }
-                            className="text-gray-400 hover:text-gray-500"
-                        >
+                        <button onClick={ () => toggleMenu(index) }
+                                className="text-gray-400 hover:text-gray-500">
                             <item.icon className="h-6 w-6" aria-hidden="true" />
                         </button>
                         { showMenu === index && (
@@ -34,7 +28,7 @@ const SimpleFooter = () => {
                     </div>
                 )) }
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-2" ref={ contactScrollToRef }>
                 { socials.map((item) => (
                     <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">{ item.name }</span>
