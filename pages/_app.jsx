@@ -48,6 +48,7 @@ function MyApp() {
                         businessScrollToRef={ businessScrollToRef }
                         peopleScrollToRef={ peopleScrollToRef }
                         showNavbar={ showNavbar }
+                        showMenu={ showMenu }
                         setShowMenu={ setShowMenu } />
 
             <main className="font-montserrat-light isolate bg-white overflow-x-hidden">
