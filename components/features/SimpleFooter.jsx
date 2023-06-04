@@ -43,7 +43,7 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
 export default SimpleFooter;
 
 const MapsMenu = () => (
-    <div className="absolute bottom-full w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute bottom-full w-[380px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <div className="flex-row pt-4">
 
@@ -92,7 +92,7 @@ const MapsMenu = () => (
 );
 
 const ContactMenu = () => (
-    <div className="absolute bottom-full w-[410px] md:w-[500px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute bottom-full w-[380px] md:w-[500px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
 
         <div className="flex-row p-4">
 
@@ -127,7 +127,7 @@ const ContactMenu = () => (
 );
 
 const MailMenu = () => (
-    <div className="absolute bottom-full w-[410px] p-6 md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute bottom-full w-[380px] p-6 md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
         <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAVI Email</h2>
         <div className="flex">
             <div className="flex-shrink-0">
