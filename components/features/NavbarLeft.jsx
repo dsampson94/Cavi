@@ -217,10 +217,11 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                         )) }
                                     </div>
                                     <div className="mt-6">
-                                        <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
-                                           onClick={ handleContactUsClick }>
+                                        <button
+                                            className="flex w-full items-center  justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+                                            onClick={ handleContactUsClick }>
                                             Contact Us
-                                        </a>
+                                        </button>
                                         <div className="flex justify-center space-x-6 ">
                                             { socials.map((item) => (
                                                 <a key={ item.name } href={ item.href } className=" text-gray-400 hover:text-gray-500 mt-4 ">
