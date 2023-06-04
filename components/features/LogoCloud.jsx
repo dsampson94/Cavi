@@ -38,7 +38,7 @@ export default function LogoCloud() {
             { windowWidth !== null ?
                 (windowWidth <= 768 ?
                     <img src="/logowallmobile.jpg"
-                         className="pt-10 pl-2"
+                         className="pt-10"
                          alt="Logo Cloud" /> :
                     rows.map((row, i) => (
                         <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
