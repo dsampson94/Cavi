@@ -54,7 +54,9 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
 
     const handleContactUsClick = () => {
         setShowMenu(1);
-        contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (contactScrollToRef.current) {
+            contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     const handleBusinessClick = () => {
@@ -82,12 +84,12 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                 <Popover className="relative bg-white">
                     <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                         <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 min-w-32 min-h-[90px] max-h-[70px] h-[70px]">
-                                <Image src={ '/cavilogo.svg' }
-                                       alt={ 'cavi logo' }
-                                       height={ 200 }
-                                       width={ 200 }
-                                       className="object-cover object-center translate-y-4"
-                                       layout="fixed" />
+                            <Image src={ '/cavilogo.svg' }
+                                   alt={ 'cavi logo' }
+                                   height={ 200 }
+                                   width={ 200 }
+                                   className="object-cover object-center translate-y-4"
+                                   layout="fixed" />
                         </div>
                         <div className="-my-2 -mr-2 md:hidden">
                             <Popover.Button
@@ -218,7 +220,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                     </div>
                                     <div className="mt-6">
                                         <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
-                                           onClick={ () => contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' }) }>
+                                           onClick={ handleContactUsClick }>
                                             Contact Us
                                         </a>
                                         <div className="flex justify-center space-x-6 ">

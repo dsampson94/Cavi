@@ -12,7 +12,7 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
     };
 
     return (
-        <div className="relative flex justify-between px-3 py-2 bg-gray-800 text-white">
+        <div className="relative flex justify-between px-3 py-2 bg-gray-800 text-white" ref={ contactScrollToRef }>
             <div className="relative flex space-x-2">
                 { contacts.map((item, index) => (
                     <div key={ item.name }>
@@ -28,7 +28,7 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
                     </div>
                 )) }
             </div>
-            <div className="flex space-x-2" ref={ contactScrollToRef }>
+            <div className="flex space-x-2">
                 { socials.map((item) => (
                     <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500">
                         <span className="sr-only">{ item.name }</span>
