@@ -17,11 +17,11 @@ export default function LogoCloud() {
     ];
 
     return (
-        <div className="flex flex-col mx-auto pt-12 pr-6 md:pr-10 pb-12 -mt-16 md:pt-8">
+        <div className="flex-column mx-auto pt-12 md:pt-12 pr-10 pb-12 -mt-16 md:pt-8">
             { rows.map((row, i) => (
                 <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
                     { row.map((name, j) => (
-                        <div key={ j } className={ 'w-72' }>
+                        <div key={ j } className={ `w-full sm:w-1/${ row.length } px-1` }>
                             <SVGIcon name={ name } />
                         </div>
                     )) }
