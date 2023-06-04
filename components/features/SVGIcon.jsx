@@ -5,7 +5,7 @@ export const SVGIcon = ({ name }) => {
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
-             className="text-gray-500 hover:text-blue-900 svg-scale-down -mb-24 sm:-mb-6 max-w-sm mx-auto">
+             className="text-gray-500 hover:text-blue-900 svg-scale-down -mb-24 sm:-mb-6">
             { getPath(name) }
         </svg>
     );
