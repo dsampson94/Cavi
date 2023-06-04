@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { socials } from './NavbarLeft';
 import Contact from './Contact';
 import Map from './map';
@@ -42,12 +42,12 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
 
 export default SimpleFooter;
 
-const MailMenu = () => (
-    <div className="absolute bottom-full w-[300px] md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+const MapsMenu = () => (
+    <div className="absolute bottom-full w-[410px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1">
 
         <div className="flex-row pt-4">
 
-            <h2 className="text-2xl font-bold text-gray-500 ml-11 sm:text-3xl sm:tracking-tight">JOHANNESBURG CAVI CAMPUS</h2>
+            <h2 className="text-lg font-bold text-gray-500 ml-11 sm:text-2xl sm:tracking-tight">JOHANNESBURG CAVI CAMPUS</h2>
             <div className="ml-3 text-base flex text-gray-500">
                 <div className="flex">
                     <div className="flex-shrink-0">
@@ -55,8 +55,7 @@ const MailMenu = () => (
                     </div>
                     <div className="ml-3 text-base text-gray-500">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193"
-                           target="_blank" className="text-md font-bold">11-13 St Andrews Road, Parktown, 2193, <br />
-                            Johannesburg, Gauteng,
+                           target="_blank" className="text-xs font-bold">11-13 St Andrews Road, Parktown, 2193, Johannesburg, Gauteng,
                             South Africa</a><br />
                     </div>
                 </div>
@@ -69,16 +68,16 @@ const MailMenu = () => (
 
         <div className="flex-row">
 
-            <h2 className="text-2xl font-bold text-gray-500 ml-11 sm:text-3xl sm:tracking-tight">CAPE TOWN CAVI CAMPUS</h2>
+            <h2 className="text-xl font-bold text-gray-500 ml-11 sm:text-2xl sm:tracking-tight">CAPE TOWN CAVI CAMPUS</h2>
             <div className="ml-3 text-base flex text-gray-500">
-                <div className="flex ">
+                <div className="flex">
                     <div className="flex-shrink-0">
                         <MapPinIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                     </div>
                     <div className="ml-3 text-base text-gray-500">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Black River Park+2 Fir St, Observatory, Cape Town, 7925"
-                           target="_blank" className="text-md font-bold">Unit 2D, Black River Park North,
-                            Fir Street, Observatory, 7925,<br />
+                           target="_blank" className="text-xs font-bold">Unit 2D, Black River Park North,
+                            Fir Street, Observatory, 7925,
                             Cape Town, Western Cape,
                             South Africa</a>
                     </div>
@@ -93,18 +92,18 @@ const MailMenu = () => (
 );
 
 const ContactMenu = () => (
-    <div className="absolute bottom-full w-[300px] md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute bottom-full w-[410px] md:w-[500px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
 
         <div className="flex-row p-4">
 
-            <h2 className="text-2xl font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">JOHANNESBURG CAVI CAMPUS</h2>
+            <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">JOHANNESBURG CAVI CAMPUS</h2>
             <div className="flex">
                 <div className="flex-shrink-0">
-                    <PhoneIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                    <PhoneIcon className="h-6 w-6 text-gray-400 -mt-6" aria-hidden="true" />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                     <a href="tel:+27(0)113414900"
-                       className="font-bold"
+                       className="font-bold text-md underline"
                     >+27 (0)11 341 4900</a>
                 </div>
             </div>
@@ -112,14 +111,14 @@ const ContactMenu = () => (
 
         <div className="flex-row p-4">
 
-            <h2 className="text-2xl font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAPE TOWN CAVI CAMPUS</h2>
+            <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAPE TOWN CAVI CAMPUS</h2>
             <div className="flex">
                 <div className="flex-shrink-0">
-                    <PhoneIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                    <PhoneIcon className="h-6 w-6 text-gray-400 -mt-6" aria-hidden="true" />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                     <a href="tel:+270(21)4427700"
-                       className="font-bold"
+                       className="font-bold text-md underline"
                     >+27 0(21) 442 7700</a>
                 </div>
             </div>
@@ -127,15 +126,17 @@ const ContactMenu = () => (
     </div>
 );
 
-const MapMenu = () => (
-    <div className="absolute bottom-full w-[300px] p-6 md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
-        <div className="mt-6 flex">
+const MailMenu = () => (
+    <div className="absolute bottom-full w-[410px] p-6 md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+        <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAVI Email</h2>
+        <div className="flex">
             <div className="flex-shrink-0">
-                <EnvelopeIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                <EnvelopeIcon className="h-6 w-6 text-gray-400 -mt-6" aria-hidden="true" />
             </div>
-            <div className="ml-3 text-base text-gray-500">
-                <a className="font-bold"
-                   href="mailto:info@cavibrands.co.za">info@cavibrands.co.za</a>
+            <div className="ml-4 text-base text-gray-500">
+                <a className="font-bold underline" href="mailto:info@cavibrands.co.za?subject=CAVI%20Web%20Mail">
+                    info@cavibrands.co.za
+                </a>
             </div>
         </div>
     </div>
@@ -145,7 +146,7 @@ const contacts = [
     {
         name: 'Mail',
         href: 'https://www.linkedin.com/company/cavi-brands/?originalSubdomain=za',
-        menu: <MailMenu />,
+        menu: <MapsMenu />,
         icon: () => (
             <div className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-500 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24">
@@ -171,7 +172,7 @@ const contacts = [
     {
         name: 'Map',
         href: 'https://www.instagram.com/cavibrands/',
-        menu: <MapMenu />,
+        menu: <MailMenu />,
         icon: () => (
             <div className="flex items-center justify-center h-8 w-8 rounded-full bg-blue-500 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24">

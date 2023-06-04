@@ -78,7 +78,7 @@ const VideoAndDivCarousel = ({ videosComponents, businessScrollToRef }) => {
                 ) : (
                     <div
                         key={ index }
-                        className="flex-shrink-0 px-10 py-10 cursor-pointer w-full h-full md:w-[500px] md:h-auto"
+                        className="flex-shrink-0 px-10 py-10 cursor-pointer w-full h-full md:w-[500px]"
                     >
                         { videoOrComponent }
                     </div>

@@ -13,8 +13,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
 
     const navbarRef = useRef(null);
 
-    const navigation = [
-    ];
+    const navigation = [];
 
     const dropDownAboutOptions = [
         { name: 'Business', onClick: () => handleBusinessClick },
@@ -188,10 +187,11 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                     >
                         <Popover.Panel
                             focus
-                            className="absolute -mt-5 -mr-1 inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
+                            className="fixed inset-0 z-30 overflow-y-auto"
+                            style={ { 'overflow-x': 'hidden' } }
                         >
                             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                                <div className="px-5 pt-5 pb-6">
+                                <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <Logo />
