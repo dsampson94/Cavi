@@ -43,7 +43,7 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
 export default SimpleFooter;
 
 const MapsMenu = () => (
-    <div className="absolute bottom-full w-[410px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute bottom-full w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <div className="flex-row pt-4">
 
