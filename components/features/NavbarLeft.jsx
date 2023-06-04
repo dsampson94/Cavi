@@ -54,9 +54,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
 
     const handleContactUsClick = () => {
         setShowMenu(1);
-        if (contactScrollToRef.current) {
-            contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+        contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
     const handleBusinessClick = () => {
