@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SVGIcon } from './SVGIcon';
 
 export default function LogoCloud() {
+    const [windowWidth, setWindowWidth] = useState(null);
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth);
+
+        const handleWindowResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleWindowResize);
+
+        // Clean up function
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []); // Empty dependency array means this effect runs once, on mount.
+
     const names = [
         'Amouage', 'Bulgari', 'Chanel', 'Chopard', 'Clear', 'Coach', 'Dermalogica',
         'Dolce', 'Elemis', 'Elie', 'Ellis', 'Floral', 'Guerlain',
@@ -18,15 +35,20 @@ export default function LogoCloud() {
 
     return (
         <div className="flex-column mx-auto pt-12 md:pt-12 pr-10 pb-12 -mt-16 md:pt-8">
-            { rows.map((row, i) => (
-                <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
-                    { row.map((name, j) => (
-                        <div key={ j } className={ `w-full sm:w-1/${ row.length }` }>
-                            <SVGIcon name={ name } />
+            { windowWidth !== null ?
+                (windowWidth <= 768 ?
+                    <img src="/logowallmobile.jpg"
+                         className="pt-12 pl-10"
+                         alt="Logo Cloud" /> :
+                    rows.map((row, i) => (
+                        <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
+                            { row.map((name, j) => (
+                                <div key={ j } className={ `w-full sm:w-1/${ row.length }` }>
+                                    <SVGIcon name={ name } />
+                                </div>
+                            )) }
                         </div>
-                    )) }
-                </div>
-            )) }
+                    ))) : null }
         </div>
     );
 }

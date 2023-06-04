@@ -68,7 +68,7 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
             onTouchStart={ handleStart }
             onTouchEnd={ handleEnd }
             onTouchMove={ handleMove }
-            className="overflow-x-hidden flex w-full mt-12 md:mt-24"
+            className="overflow-x-hidden flex w-full md:mt-12 md:mt-24"
         >
             <div ref={ businessScrollToRef } />
 
