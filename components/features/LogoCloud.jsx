@@ -34,11 +34,11 @@ export default function LogoCloud() {
     ];
 
     return (
-        <div className="flex-column mx-auto pt-12 md:pt-12 pr-10 pb-12 -mt-16 md:pt-8">
+        <div className="flex-column mx-auto pt-12 md:pt-12 md:pr-10 pb-12 -mt-16 md:pt-8">
             { windowWidth !== null ?
                 (windowWidth <= 768 ?
                     <img src="/logowallmobile.jpg"
-                         className="pt-12 pl-10"
+                         className="pt-10 pl-2"
                          alt="Logo Cloud" /> :
                     rows.map((row, i) => (
                         <div key={ i } className={ `flex justify-center ${ row.length === 7 ? 'w-full' : 'w-11/12 mx-auto' }` }>
