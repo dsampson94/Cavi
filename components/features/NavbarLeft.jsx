@@ -82,7 +82,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                 <Popover className="relative bg-white">
                     <nav className="flex max-w-8xl items-center justify-between pb-2 px-6 md:justify-start md:space-x-10 lg:px-8">
                         <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 mt-2 min-w-32 min-h-[70px] max-h-[70px] h-[70px]">
-                            <div>
+                            <div style={ { position: 'fixed', left: '10px' } }>
                                 <Image src={ '/cavilogo.svg' }
                                        alt={ 'cavi logo' }
                                        height={ 200 }
@@ -194,11 +194,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                 <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <Image src={ '/cavilogo.svg' }
-                                                   alt={ 'cavi logo' }
-                                                   height={ 200 }
-                                                   width={ 200 }
-                                                   layout="fixed" />
+                                            <Logo />
                                         </div>
                                         <div className="-mr-2">
                                             <Popover.Button
