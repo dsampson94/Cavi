@@ -77,11 +77,10 @@ function MyApp() {
 
             </main>
 
-            <SimpleFooter contactScrollToRef={ contactScrollToRef }
-                          showMenu={ showMenu }
+            <SimpleFooter showMenu={ showMenu }
                           setShowMenu={ setShowMenu } />
 
-
+            <div ref={ contactScrollToRef } />
             <Analytics />
         </>
     );

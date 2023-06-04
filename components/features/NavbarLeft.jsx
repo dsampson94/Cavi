@@ -54,8 +54,15 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
 
     const handleContactUsClick = () => {
         setShowMenu(1);
-        contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (contactScrollToRef.current) {
+            if (typeof contactScrollToRef.current.scrollIntoView === 'function') {
+                contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+            } else if (typeof window.scrollTo === 'function') {
+                window.scrollTo(0, contactScrollToRef.current.offsetTop);
+            }
+        }
     };
+
 
     const handleBusinessClick = () => {
         businessScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -205,31 +212,29 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                     </div>
                                 </div>
                                 <div className="pb-6 px-5">
-                                    <div className="grid grid-cols-2 gap-4">
-                                        { navigation.map((item) => (
-                                            <a
-                                                key={ item.name }
-                                                href={ item.href }
-                                                className="text-base font-medium text-gray-900 hover:text-gray-700"
-                                            >
-                                                { item.name }
+                                    {/*<div className="grid grid-cols-2 gap-4">*/ }
+                                    {/*    { navigation.map((item) => (*/ }
+                                    {/*        <a*/ }
+                                    {/*            key={ item.name }*/ }
+                                    {/*            href={ item.href }*/ }
+                                    {/*            className="text-base font-medium text-gray-900 hover:text-gray-700"*/ }
+                                    {/*        >*/ }
+                                    {/*            { item.name }*/ }
+                                    {/*        </a>*/ }
+                                    {/*    )) }*/ }
+                                    {/*</div>*/ }
+                                    <button
+                                        className="flex w-full items-center  justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
+                                        onClick={ handleContactUsClick }>
+                                        Contact Us
+                                    </button>
+                                    <div className="flex justify-center space-x-6 ">
+                                        { socials.map((item) => (
+                                            <a key={ item.name } href={ item.href } className=" text-gray-400 hover:text-gray-500 mt-4 ">
+                                                <span className="sr-only">{ item.name }</span>
+                                                <item.icon className="h-6 w-6" aria-hidden="true" />
                                             </a>
                                         )) }
-                                    </div>
-                                    <div className="mt-6">
-                                        <button
-                                            className="flex w-full items-center  justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700"
-                                            onClick={ handleContactUsClick }>
-                                            Contact Us
-                                        </button>
-                                        <div className="flex justify-center space-x-6 ">
-                                            { socials.map((item) => (
-                                                <a key={ item.name } href={ item.href } className=" text-gray-400 hover:text-gray-500 mt-4 ">
-                                                    <span className="sr-only">{ item.name }</span>
-                                                    <item.icon className="h-6 w-6" aria-hidden="true" />
-                                                </a>
-                                            )) }
-                                        </div>
                                     </div>
                                 </div>
                             </div>

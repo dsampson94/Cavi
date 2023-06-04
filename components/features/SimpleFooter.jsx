@@ -4,7 +4,7 @@ import Contact from './Contact';
 import Map from './map';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
-const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
+const SimpleFooter = ({ showMenu, setShowMenu }) => {
 
     const toggleMenu = (index) => {
         if (showMenu === index) setShowMenu(null);
@@ -12,7 +12,7 @@ const SimpleFooter = ({ contactScrollToRef, showMenu, setShowMenu }) => {
     };
 
     return (
-        <div className="relative flex justify-between px-3 py-2 bg-gray-800 text-white" ref={ contactScrollToRef }>
+        <div className="relative flex justify-between px-3 py-2 bg-gray-800 text-white">
             <div className="relative flex space-x-2">
                 { contacts.map((item, index) => (
                     <div key={ item.name }>
