@@ -69,17 +69,17 @@ const TemperatureMultiLineChart = ({
     let xAccessor = d => new Date(d?.x);
 
     let yScale = scaleLinear().domain([
-      data && data.length > 0 ? min(data[0], yAccessor) : 0,
-      data && data.length > 0 ? max(data[0], yAccessor) : 1
+      data && data.length > 0 && data[0].length > 0 ? min(data[0], yAccessor) : 0,
+      data && data.length > 0 && data[0].length > 0 ? max(data[0], yAccessor) : 1
     ]).range([boundedHeight - innerPadding, innerPadding]).nice();
 
     const activeMinDate = () => {
-      if (activeDataPeriod === 'All') return min(data?.[0], xAccessor);
-      else return new Date(max(data?.[0], xAccessor).setDate(max(data?.[0], xAccessor).getDate() - activeDataPeriod));
+      if (activeDataPeriod === 'All') return data?.[0] && data[0].length > 0 ? min(data[0], xAccessor) : new Date();
+      else return data?.[0] && data[0].length > 0 ? new Date(max(data[0], xAccessor).setDate(max(data[0], xAccessor).getDate() - activeDataPeriod)) : new Date();
     };
 
     const getXAxisViewMode = () => {
-      return [activeMinDate(), max(data?.[0], xAccessor)];
+      return [activeMinDate(), data?.[0] && data[0].length > 0 ? max(data[0], xAccessor) : new Date()];
     };
 
     const xScale = scaleTime().domain(getXAxisViewMode()).range([0, boundedWidth - innerPadding]);
