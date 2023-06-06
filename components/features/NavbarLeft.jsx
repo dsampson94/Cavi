@@ -5,11 +5,12 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Map from './map';
 
-function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef, setShowMenu, showMenu }) {
+function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef, showMenu, setShowMenu }) {
 
     const [scrollDirection, setScrollDirection] = useState('up');
     const [lastScrollTop, setLastScrollTop] = useState(0);
     const [showStickyNavbar, setShowStickyNavbar] = useState(false);
+    const [showUpperMenu, setShowUpperMenu] = useState(null);
 
     const navbarRef = useRef(null);
 
@@ -74,8 +75,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     };
 
     const toggleMenu = (index) => {
-        if (showMenu === index) setShowMenu(null);
-        else setShowMenu(index);
+        if (showUpperMenu === index) setShowUpperMenu(null);
+        else setShowUpperMenu(index);
     };
 
     return (
@@ -102,7 +103,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                             <Popover.Button
                                 className={ `inline-flex items-center justify-center mt-10 rounded-md p-2 
               ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300 bg-black' : 'text-gray-500 bg-white' } 
-              hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500` }>
+               focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500` }>
                                 <span className="sr-only">Open menu</span>
                                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                             </Popover.Button>
@@ -206,12 +207,11 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                     >
                         <Popover.Panel
                             focus
-                            className={ `fixed inset-0 z-30 overflow-y-auto ${
-                                !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white'
-                            }` }
-                            style={ { overflowX: 'hidden', maxHeight: '190px' } }
+                            className={ `fixed inset-0 z-30 overflow-y-auto rounded-xl ` }
                         >
-                            <div className="divide-y-2 divide-gray-50 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                            <div className={ `${
+                                !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white'
+                            } rounded-lg shadow-lg ring-1 ring-black ring-opacity-5` }>
                                 <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -226,7 +226,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                         </div>
                                         <div className="-mr-2">
                                             <Popover.Button
-                                                className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'black' : 'white' } p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
+                                                className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'black' : 'white' } p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
                                                     !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
                                                 }` }
                                             >
@@ -243,12 +243,16 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                                 <button
                                                     onClick={ () => toggleMenu(index) }
                                                     className={ `text-gray-400 hover:text-gray-500 ${
-                                                        !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
+                                                        showUpperMenu === index ? 'text-gray-500' : ''
                                                     }` }
                                                 >
                                                     <item.icon className="h-6 w-6" aria-hidden="true" />
                                                 </button>
-                                                { showMenu === index && <div className="absolute bottom-0 left-0">{ item.menu }</div> }
+                                                { showUpperMenu === index && (
+                                                    <div className="absolute top-full left-0">
+                                                        { item.menu }
+                                                    </div>
+                                                ) }
                                             </div>
                                         )) }
                                     </div>
@@ -274,10 +278,11 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                 </Popover>
             </header>
         </>
-    );
+    )
+        ;
 };
 
-export default React.memo(NavbarLeft);
+export default NavbarLeft;
 
 export const socials = [
     {
@@ -328,7 +333,7 @@ export const socials = [
 ];
 
 const MapsMenu = () => (
-    <div className="absolute top-full mt-4 ml-1 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 w-[390px] md:w-[500px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-2 overflow-hidden">
 
         <div className="flex-row pt-4">
 
@@ -377,7 +382,7 @@ const MapsMenu = () => (
 );
 
 const ContactMenu = () => (
-    <div className="absolute top-full mt-4 ml-1 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-2 overflow-hidden">
 
         <div className="flex-row p-4">
 
@@ -412,7 +417,7 @@ const ContactMenu = () => (
 );
 
 const MailMenu = () => (
-    <div className="absolute top-full mt-4 ml-1 p-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 p-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl -translate-x-2 mb-14 overflow-hidden">
 
         <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAVI Email</h2>
         <div className="flex">
@@ -428,7 +433,7 @@ const MailMenu = () => (
     </div>
 );
 
-export const contacts = [
+const contacts = [
     {
         name: 'Mail',
         href: 'https://www.linkedin.com/company/cavi-brands/?originalSubdomain=za',

@@ -44,7 +44,7 @@ export default function LogoCloud() {
 
     return (
         <div style={ centerStyles }>
-            <div className="flex-column md:pt-12 mt-2 -mt-12 md:pt-8">
+            <div className="flex-column md:pt-12 pb-6 md:pb-0 mt-2 md:-mt-12 md:pt-8">
                 { windowWidth !== null ? (
                     windowWidth <= 768 ? (
                         <img src="/logowallmobile.jpg" className="" alt="Logo Cloud" />
