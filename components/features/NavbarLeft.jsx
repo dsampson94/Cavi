@@ -311,7 +311,7 @@ export const socials = [
 ];
 
 const MapsMenu = () => (
-    <div className="absolute top-full mt-4 ml-2 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 ml-1 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <div className="flex-row pt-4">
 
@@ -360,7 +360,7 @@ const MapsMenu = () => (
 );
 
 const ContactMenu = () => (
-    <div className="absolute top-full mt-4 ml-2 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 ml-1 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <div className="flex-row p-4">
 
@@ -395,7 +395,7 @@ const ContactMenu = () => (
 );
 
 const MailMenu = () => (
-    <div className="absolute top-full mt-4 ml-2 p-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+    <div className="absolute top-full mt-4 ml-1 p-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAVI Email</h2>
         <div className="flex">
