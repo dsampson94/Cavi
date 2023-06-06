@@ -100,13 +100,13 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
     const handleVideoTouchStart = (e) => {
         const video = e.target;
         if (video.tagName !== 'VIDEO') return;
+
         if (currentVideo && currentVideo !== video) {
             currentVideo.pause();
         }
         setCurrentVideo(video);
 
-        // Check if the event is user initiated
-        if (e.type === 'touchstart') {
+        if (video.paused) {
             const playPromise = video.play();
 
             // Catch any error if play() is not fulfilled
@@ -114,11 +114,12 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
                 playPromise.catch((error) => {
                     console.error('Video play failed:', error);
                 });
-            } else {
-                video.pause();
             }
+        } else {
+            video.pause();
         }
     };
+
 
     return (
         <div
