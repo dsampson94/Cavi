@@ -5,8 +5,9 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
     const [dragging, setDragging] = useState(false);
     const [movedDuringDrag, setMovedDuringDrag] = useState(false);
     const carouselRef = useRef(null);
-    const [direction, setDirection] = useState(reverse ? -1 : 1); // Initialize direction based on `reverse` prop
+    const [direction, setDirection] = useState(reverse ? -1 : 1);
     const [isUnmuted, setIsUnmuted] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState(null);
 
     const handleStart = (e) => {
         e.preventDefault();
@@ -30,9 +31,40 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
         setMovedDuringDrag(false);
     };
 
+    const handleVideoPlay = (e) => {
+        const video = e.target;
+        if (video.tagName !== 'VIDEO') return;
+
+        // Check if the event is user initiated
+        if (e.type === 'mouseenter' || e.type === 'touchstart') {
+            setIsUnmuted(true);
+            if (currentVideo && currentVideo !== video) {
+                currentVideo.pause();
+            }
+            setCurrentVideo(video);
+            const playPromise = video.play();
+
+            // Catch any error if play() is not fulfilled
+            if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                    console.error('Video play failed:', error);
+                });
+            }
+        }
+    };
+
+    const handleVideoPause = (e) => {
+        const video = e.target;
+        if (video.tagName !== 'VIDEO') return;
+        setIsUnmuted(false);
+        if (currentVideo === video) {
+            setCurrentVideo(null);
+        }
+        video.pause();
+    };
+
     useEffect(() => {
         if (reverse && carouselRef.current) {
-            // Scroll to the far right
             carouselRef.current.scrollLeft = carouselRef.current.scrollWidth;
         }
     }, [reverse]);
@@ -67,13 +99,26 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
 
     const handleVideoTouchStart = (e) => {
         const video = e.target;
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
+        if (video.tagName !== 'VIDEO') return;
+        if (currentVideo && currentVideo !== video) {
+            currentVideo.pause();
+        }
+        setCurrentVideo(video);
+
+        // Check if the event is user initiated
+        if (e.type === 'touchstart') {
+            const playPromise = video.play();
+
+            // Catch any error if play() is not fulfilled
+            if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                    console.error('Video play failed:', error);
+                });
+            } else {
+                video.pause();
+            }
         }
     };
-
 
     return (
         <div
@@ -95,23 +140,15 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
                         src={ videoOrComponent }
                         className="flex-shrink-0 px-10 cursor-pointer w-full h-full md:w-[700px] md:h-auto"
                         onTouchStart={ handleVideoTouchStart }
-                        onMouseEnter={ e => {
-                            setIsUnmuted(true);
-                        } }
-                        onMouseLeave={ e => {
-                            setIsUnmuted(false);
-                        } }
+                        onMouseEnter={ handleVideoPlay }
+                        onMouseLeave={ handleVideoPause }
                     />
                 ) : (
                     <div
                         key={ index }
                         className="flex-shrink-0 px-10 py-10 cursor-pointer w-full h-full md:w-[500px] md:h-auto"
-                        onMouseEnter={ e => {
-                            setIsUnmuted(true);
-                        } }
-                        onMouseLeave={ e => {
-                            setIsUnmuted(false);
-                        } }
+                        onMouseEnter={ handleVideoPlay }
+                        onMouseLeave={ handleVideoPause }
                     >
                         { videoOrComponent }
                     </div>
