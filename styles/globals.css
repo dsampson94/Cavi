@@ -10,9 +10,43 @@
     scrollbar-width: thin;
 }
 
-@media (max-width: 640px) { /* This media query corresponds to Tailwind's 'sm' breakpoint */
+@media (max-width: 640px) {
     .svg-scale-down {
-        margin-left: -100px;
-        transform: scale(0.25); /* Scale down to 50% of the original size */
+        transform: scale(0.25);
+    }
+}
+
+@media (min-width: 640px) {
+    .svg-scale-down {
+        margin-left: -20px;
+        transform: scale(0.35);
+    }
+}
+
+@media (min-width: 768px) {
+    .svg-scale-down {
+        margin-left: -20px;
+        transform: scale(0.45);
+    }
+}
+
+@media (min-width: 1024px) {
+    .svg-scale-down {
+        margin-left: -20px;
+        transform: scale(0.55);
+    }
+}
+
+@media (min-width: 1280px) {
+    .svg-scale-down {
+        margin-left: -20px;
+        transform: scale(0.65);
+    }
+}
+
+@media (min-width: 1536px) {
+    .svg-scale-down {
+        margin-left: -20px;
+        transform: scale(0.85);
     }
 }

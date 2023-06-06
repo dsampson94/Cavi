@@ -66,13 +66,17 @@ function MyApp() {
                     </div>
                 </div>
 
-                <LogoCloud brandsScrollToRef={ brandsScrollToRef } />
+                <section ref={ brandsScrollToRef } />
 
-                <VideoCarousel videos={ videos }
-                               businessScrollToRef={ businessScrollToRef } />
+                <LogoCloud />
 
-                <VideoAndDivCarousel videosComponents={ videosComponentsSpotlight }
-                                     peopleScrollToRef={ businessScrollToRef } />
+                <section ref={ businessScrollToRef } />
+
+                <VideoCarousel videos={ videos } />
+
+                <VideoAndDivCarousel videosComponents={ videosComponentsSpotlight } reverse />
+
+                <section ref={ peopleScrollToRef } />
 
                 <VideoAndDivCarousel videosComponents={ videosComponentsLeadership } />
 

@@ -2,8 +2,9 @@ import Image from 'next/image';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Map from './map';
+import Logo from './Logo';
 
 function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef, setShowMenu, showMenu }) {
 
@@ -14,10 +15,9 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     const navbarRef = useRef(null);
 
     const dropDownAboutOptions = [
-        { name: 'Business', onClick: () => handleBusinessClick() },
         { name: 'Brands', onClick: () => handleBrandsClick() },
-        { name: 'People', onClick: () => handlePeopleClick() },
-        { name: 'Social Responsibility', onClick: () => handleBrandsClick() }
+        { name: 'Business', onClick: () => handleBusinessClick() },
+        { name: 'People', onClick: () => handlePeopleClick() }
     ];
 
 
@@ -62,7 +62,6 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
         }
     };
 
-
     const handleBusinessClick = () => {
         businessScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
@@ -75,20 +74,25 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
         peopleScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
+    const toggleMenu = (index) => {
+        if (showMenu === index) setShowMenu(null);
+        else setShowMenu(index);
+    };
+
     return (
         <>
             <header
                 className={ `relative top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap ${ showStickyNavbar || lastScrollTop === 0 ? 'sticky top-0' : '' }` }
                 ref={ navbarRef }
                 style={ {
-                    opacity: showStickyNavbar || lastScrollTop === 0 ? 1 : 0,
+                    opacity: 1,
                     transition: 'opacity 0.2s ease-in-out'
                 } }
             >
-                <Popover className="relative bg-white">
+                <Popover className={ `${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white' }` }>
                     <nav className="flex max-w-8xl items-center justify-between pb-8 px-6 md:justify-start md:space-x-10 lg:px-8">
                         <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 min-w-32 min-h-[90px] max-h-[70px] h-[70px]">
-                            <Image src={ '/cavilogo.svg' }
+                            <Image src={ !showStickyNavbar || lastScrollTop === 0 ? '/footer-logo.webp' : '/cavilogo.svg' }
                                    alt={ 'cavi logo' }
                                    height={ 200 }
                                    width={ 200 }
@@ -96,15 +100,18 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                    layout="fixed" />
                         </div>
                         <div className="-my-2 -mr-2 md:hidden">
-                            {/*<Popover.Button*/ }
-                            {/*    className="inline-flex items-center justify-center mt-10 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">*/ }
-                            {/*    <span className="sr-only">Open menu</span>*/ }
-                            {/*    <Bars3Icon className="h-6 w-6" aria-hidden="true" />*/ }
-                            {/*</Popover.Button>*/ }
+                            <Popover.Button
+                                className={ `inline-flex items-center justify-center mt-10 rounded-md p-2 
+              ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300 bg-black' : 'text-gray-500 bg-white' } 
+              hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500` }>
+                                <span className="sr-only">Open menu</span>
+                                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                            </Popover.Button>
                         </div>
                         <Popover.Group className="hidden lg:flex lg:gap-x-12 mt-10">
                             <Popover className="relative">
-                                <Popover.Button className="flex items-center gap-x-1 text-lg leading-6 text-gray-900 outline-none">
+                                <Popover.Button
+                                    className={ `flex items-center gap-x-1 text-lg leading-6 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : 'text-gray-800' } outline-none` }>
                                     About
                                     <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                                 </Popover.Button>
@@ -119,15 +126,18 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                     leaveTo="opacity-0 translate-y-1"
                                 >
                                     <Popover.Panel
-                                        className="absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 mt-2">
+                                        className={ `absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl shadow-2xl ring-1 ring-gray-900/5 mt-2 
+              ${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white' }` }>
                                         <div className="p-3">
                                             { dropDownAboutOptions.map((item) => (
                                                 <div
                                                     key={ item.name }
-                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-300 cursor-pointer"
+                                                    className={ `group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 cursor-pointer 
+                        ${ !showStickyNavbar || lastScrollTop === 0 ? 'hover:bg-gray-500' : 'hover:bg-blue-300' }` }
                                                 >
                                                     <div className="flex-auto">
-                                                        <a onClick={ handleBusinessClick } className="block text-gray-900">
+                                                        <a onClick={ item.onClick }
+                                                           className={ `block ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : 'text-gray-900' }` }>
                                                             { item.name }
                                                             <span className="absolute inset-0" />
                                                         </a>
@@ -140,7 +150,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                             </Popover>
 
                             <Popover className="relative">
-                                <Popover.Button className="flex items-center gap-x-1 text-lg leading-6 text-gray-900 outline-none">
+                                <Popover.Button
+                                    className={ `flex items-center gap-x-1 text-lg leading-6 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : 'text-gray-800' } outline-none` }>
                                     Careers
                                     <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                                 </Popover.Button>
@@ -155,7 +166,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                     leaveTo="opacity-0 translate-y-1"
                                 >
                                     <Popover.Panel
-                                        className="absolute -left-4 z-10 mt-11 overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 mt-2">
+                                        className={ `absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl shadow-2xl ring-1 ring-gray-900/5 mt-2 
+              ${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white' }` }>
                                         <div className="p-3">
                                             { dropDownCareersOptions.map((item) => (
                                                 <div
@@ -163,7 +175,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                                     className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-300 cursor-pointer"
                                                 >
                                                     <div className="flex-auto">
-                                                        <a href={ item.link } className="block text-gray-900">
+                                                        <a href={ item.link }
+                                                           className={ `block ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : 'text-gray-900' }` }>
                                                             { item.name }
                                                             <span className="absolute inset-0" />
                                                         </a>
@@ -175,69 +188,72 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                 </Transition>
                             </Popover>
 
-                            <a onClick={ () => handleContactUsClick() } className="text-lg leading-6 text-gray-800 cursor-pointer">
+                            <a onClick={ () => handleContactUsClick() }
+                               className={ `text-lg leading-6 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : 'text-gray-800' } cursor-pointer` }>
                                 Contact
                             </a>
                         </Popover.Group>
                     </nav>
 
-                    {/*<Transition*/ }
-                    {/*    as={ Fragment }*/ }
-                    {/*    enter="duration-200 ease-out"*/ }
-                    {/*    enterFrom="opacity-0 scale-95"*/ }
-                    {/*    enterTo="opacity-100 scale-100"*/ }
-                    {/*    leave="duration-100 ease-in"*/ }
-                    {/*    leaveFrom="opacity-100 scale-100"*/ }
-                    {/*    leaveTo="opacity-0 scale-95"*/ }
-                    {/*>*/ }
-                    {/*    <Popover.Panel*/ }
-                    {/*        focus*/ }
-                    {/*        className="fixed inset-0 z-30 overflow-y-auto"*/ }
-                    {/*        style={ { 'overflow-x': 'hidden' } }*/ }
-                    {/*    >*/ }
-                    {/*        <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">*/ }
-                    {/*            <div className="px-5 pt-2 pb-6">*/ }
-                    {/*                <div className="flex items-center justify-between">*/ }
-                    {/*                    <div>*/ }
-                    {/*                        <Logo />*/ }
-                    {/*                    </div>*/ }
-                    {/*                    <div className="-mr-2">*/ }
-                    {/*                        <Popover.Button*/ }
-                    {/*                            className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">*/ }
-                    {/*                            <span className="sr-only">Close menu</span>*/ }
-                    {/*                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />*/ }
-                    {/*                        </Popover.Button>*/ }
-                    {/*                    </div>*/ }
-                    {/*                </div>*/ }
-                    {/*            </div>*/ }
-                    {/*            <div className="relative flex justify-between px-3 py-2 text-white">*/ }
-                    {/*                <div className="relative flex space-x-2">*/ }
-                    {/*                    { contacts.map((item, index) => (*/ }
-                    {/*                        <div key={ item.name }>*/ }
-                    {/*                            <button onClick={ () => toggleMenu(index) }*/ }
-                    {/*                                    className="text-gray-400 hover:text-gray-500">*/ }
-                    {/*                                <item.icon className="h-6 w-6" aria-hidden="true" />*/ }
-                    {/*                            </button>*/ }
-                    {/*                            { showMenu === index && (*/ }
-                    {/*                                <div className="absolute bottom-0 left-0">*/ }
-                    {/*                                    { item.menu }*/ }
-                    {/*                                </div>*/ }
-                    {/*                            ) }*/ }
-                    {/*                        </div>*/ }
-                    {/*                    )) }*/ }
-                    {/*                </div>*/ }
-                    {/*                <div className="flex space-x-2">*/ }
-                    {/*                    { socials.map((item) => (*/ }
-                    {/*                        <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500">*/ }
-                    {/*                            <span className="sr-only">{ item.name }</span>*/ }
-                    {/*                            <item.icon className="h-6 w-6" aria-hidden="true" />*/ }
-                    {/*                        </a>*/ }
-                    {/*                    )) }*/ }
-                    {/*                </div>*/ }
-                    {/*            </div>*/ }
-                    {/*        </div>*/ }
-                    {/*    </Popover.Panel>*/ }
-                    {/*</Transition>;*/ }
+
+                    <Transition
+                        as={ Fragment }
+                        enter="duration-200 ease-out"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="duration-100 ease-in"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                    >
+                        <Popover.Panel
+                            focus
+                            className={ `fixed inset-0 z-30 overflow-y-auto` }
+                            style={ { 'overflow-x': 'hidden' } }
+                        >
+
+                            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                                <div className="px-5 pt-2 pb-6">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <Logo />
+                                        </div>
+                                        <div className="-mr-2">
+                                            <Popover.Button
+                                                className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                                <span className="sr-only">Close menu</span>
+                                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                            </Popover.Button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="relative flex justify-between px-3 py-2 text-white">
+                                    <div className="relative flex space-x-2">
+                                        { contacts.map((item, index) => (
+                                            <div key={ item.name }>
+                                                <button onClick={ () => toggleMenu(index) }
+                                                        className="text-gray-400 hover:text-gray-500">
+                                                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                                                </button>
+                                                { showMenu === index && (
+                                                    <div className="absolute bottom-0 left-0">
+                                                        { item.menu }
+                                                    </div>
+                                                ) }
+                                            </div>
+                                        )) }
+                                    </div>
+                                    <div className="flex space-x-2">
+                                        { socials.map((item) => (
+                                            <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500">
+                                                <span className="sr-only">{ item.name }</span>
+                                                <item.icon className="h-6 w-6" aria-hidden="true" />
+                                            </a>
+                                        )) }
+                                    </div>
+                                </div>
+                            </div>
+                        </Popover.Panel>
+                    </Transition>;
                 </Popover>
             </header>
         </>
@@ -307,7 +323,7 @@ const MapsMenu = () => (
                     </div>
                     <div className="ml-3 text-base text-gray-500">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=CAVI Brands+Oakhurst Building, 11-13 Saint Andrew Road, Parktown, Johannesburg, 2193"
-                           target="_blank" className="text-xs font-bold">11-13 St Andrews Road, Parktown, 2193, Johannesburg, Gauteng,
+                           target="_blank" className="text-xs font-bold whitespace-normal break-words">11-13 St Andrews Road, Parktown, 2193, Johannesburg, Gauteng,
                             South Africa</a><br />
                     </div>
                 </div>
@@ -328,7 +344,7 @@ const MapsMenu = () => (
                     </div>
                     <div className="ml-3 text-base text-gray-500">
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Black River Park+2 Fir St, Observatory, Cape Town, 7925"
-                           target="_blank" className="text-xs font-bold">Unit 2D, Black River Park North,
+                           target="_blank" className="text-xs font-bold whitespace-normal break-words">Unit 2D, Black River Park North,
                             Fir Street, Observatory, 7925,
                             Cape Town, Western Cape,
                             South Africa</a>
@@ -344,7 +360,7 @@ const MapsMenu = () => (
 );
 
 const ContactMenu = () => (
-    <div className="absolute top-full mt-2 w-[380px] md:w-[500px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute top-full mt-4 ml-2 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
 
         <div className="flex-row p-4">
 
@@ -379,7 +395,8 @@ const ContactMenu = () => (
 );
 
 const MailMenu = () => (
-    <div className="absolute top-full mt-2 w-[380px] p-6 md:w-[550px] bg-white rounded-xl shadow-2xl mb-14 -translate-x-1">
+    <div className="absolute top-full mt-4 ml-2 p-4 w-[390px] md:w-[500px] bg-white pr-4 rounded-xl shadow-2xl mb-14 -translate-x-1 overflow-hidden">
+
         <h2 className="text-lg font-bold text-gray-500 ml-10 sm:text-2xl sm:tracking-tight">CAVI Email</h2>
         <div className="flex">
             <div className="flex-shrink-0">
