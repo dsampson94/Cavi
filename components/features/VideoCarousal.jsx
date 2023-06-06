@@ -55,7 +55,6 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
 
     const handleVideoTouchStart = (e) => {
         const video = e.target;
-        video.muted = !video.muted;
         setIsUnmuted(!video.muted); // set isUnmuted to the opposite of the new muted state
     };
 
@@ -82,11 +81,9 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
                         src={ video }
                         className="flex-shrink-0 px-10 cursor-pointer w-92 h-full md:w-[700px]"
                         onMouseEnter={ e => {
-                            e.target.muted = false;
                             setIsUnmuted(true); // set isUnmuted to true when mouse enters
                         } }
                         onMouseLeave={ e => {
-                            e.target.muted = true;
                             setIsUnmuted(false); // set isUnmuted to false when mouse leaves
                         } }
                         onTouchStart={ handleVideoTouchStart }
