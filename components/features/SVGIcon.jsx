@@ -2,14 +2,22 @@
 import React from 'react';
 
 export const SVGIcon = ({ name }) => {
+    const iconStyles = {
+        width: '220px', // Adjust the width value as needed
+        height: '150px' // Adjust the height value as needed
+    };
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg"
-             className="text-gray-500 hover:text-blue-900 svg-scale-down -mb-24 sm:-mb-6">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-gray-500 hover:text-blue-900 svg-scale-down"
+            style={ iconStyles }
+        >
             { getPath(name) }
         </svg>
     );
 };
+
 
 const getPath = (name) => {
     switch (name) {
