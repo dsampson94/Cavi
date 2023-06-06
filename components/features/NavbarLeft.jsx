@@ -210,6 +210,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                             focus
                             className={ `fixed inset-0 z-30 overflow-y-auto max-h-screen` }
                             style={ { 'overflow-x': 'hidden', maxHeight: 'calc(100vh - 2rem)' } }
+                        >
 
                             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div className="px-5 pt-2 pb-6">
