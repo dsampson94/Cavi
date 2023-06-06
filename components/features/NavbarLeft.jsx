@@ -208,8 +208,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                     >
                         <Popover.Panel
                             focus
-                            className={ `fixed inset-0 z-30 overflow-y-auto max-h-screen` }
-                            style={ { 'overflow-x': 'hidden', maxHeight: 'calc(100vh - 2rem)' } }
+                            className={ `fixed inset-0 z-30 overflow-y-auto` }
+                            style={ { 'overflow-x': 'hidden', maxHeight: '190px' } }
                         >
 
                             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
