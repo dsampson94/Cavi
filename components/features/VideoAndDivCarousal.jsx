@@ -67,8 +67,13 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
 
     const handleVideoTouchStart = (e) => {
         const video = e.target;
-        video.muted = !video.muted;
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
     };
+
 
     return (
         <div
