@@ -4,7 +4,6 @@ import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Map from './map';
-import Logo from './Logo';
 
 function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef, peopleScrollToRef, setShowMenu, showMenu }) {
 
@@ -195,7 +194,6 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                         </Popover.Group>
                     </nav>
 
-
                     <Transition
                         as={ Fragment }
                         enter="duration-200 ease-out"
@@ -208,44 +206,61 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                     >
                         <Popover.Panel
                             focus
-                            className={ `fixed inset-0 z-30 overflow-y-auto` }
-                            style={ { 'overflow-x': 'hidden', maxHeight: '190px' } }
+                            className={ `fixed inset-0 z-30 overflow-y-auto ${
+                                !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white'
+                            }` }
+                            style={ { overflowX: 'hidden', maxHeight: '190px' } }
                         >
-
-                            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                            <div className="divide-y-2 divide-gray-50 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <Logo />
+                                            <Image
+                                                src={ !showStickyNavbar || lastScrollTop === 0 ? '/footer-logo.webp' : '/cavilogo.svg' }
+                                                alt="cavi logo"
+                                                height={ 200 }
+                                                width={ 200 }
+                                                className="object-cover object-center mr-1"
+                                                layout="fixed"
+                                            />
                                         </div>
                                         <div className="-mr-2">
                                             <Popover.Button
-                                                className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                                className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'black' : 'white' } p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
+                                                    !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
+                                                }` }
+                                            >
                                                 <span className="sr-only">Close menu</span>
                                                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="relative flex justify-between px-3 py-2 text-white">
+                                <div className="relative flex justify-between px-3 py-2">
                                     <div className="relative flex space-x-2">
                                         { contacts.map((item, index) => (
                                             <div key={ item.name }>
-                                                <button onClick={ () => toggleMenu(index) }
-                                                        className="text-gray-400 hover:text-gray-500">
+                                                <button
+                                                    onClick={ () => toggleMenu(index) }
+                                                    className={ `text-gray-400 hover:text-gray-500 ${
+                                                        !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
+                                                    }` }
+                                                >
                                                     <item.icon className="h-6 w-6" aria-hidden="true" />
                                                 </button>
-                                                { showMenu === index && (
-                                                    <div className="absolute bottom-0 left-0">
-                                                        { item.menu }
-                                                    </div>
-                                                ) }
+                                                { showMenu === index && <div className="absolute bottom-0 left-0">{ item.menu }</div> }
                                             </div>
                                         )) }
                                     </div>
                                     <div className="flex space-x-2">
                                         { socials.map((item) => (
-                                            <a key={ item.name } href={ item.href } className="text-gray-400 hover:text-gray-500">
+                                            <a
+                                                key={ item.name }
+                                                href={ item.href }
+                                                className={ `text-gray-400 hover:text-gray-500 ${
+                                                    !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
+                                                }` }
+                                            >
                                                 <span className="sr-only">{ item.name }</span>
                                                 <item.icon className="h-6 w-6" aria-hidden="true" />
                                             </a>
@@ -254,7 +269,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                 </div>
                             </div>
                         </Popover.Panel>
-                    </Transition>;
+                    </Transition>
+
                 </Popover>
             </header>
         </>
