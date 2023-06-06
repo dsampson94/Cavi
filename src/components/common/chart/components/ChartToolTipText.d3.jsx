@@ -388,14 +388,14 @@ const TooltipText = ({
       if (isAgent) {
         return [
           { icon: '📅', value: hoveredObject?.x },
-          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y?.toFixed(2) }mm` : '' },
           { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' },
           { icon: hoveredObject?.percent ? '💧💧' : '', value: hoveredObject?.percent ? `${ hoveredObject?.percent }%` : '' }
         ];
       } else {
         return [
           { icon: '📅', value: hoveredObject?.x },
-          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y?.toFixed(2) }mm` : '' },
           { icon: hoveredObject?.temp ? '🌡️' : '', value: hoveredObject?.temp ? `${ hoveredObject?.temp }C` : '' }
         ];
       }
@@ -419,7 +419,7 @@ const TooltipText = ({
       return [
         { icon: '📅', value: hoveredObject?.x },
         { icon: hoveredObject?.y ? 'Forecast' : '', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : '' },
-        { icon: secondaryHoveredObject?.y ? 'Actual' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
+        { icon: secondaryHoveredObject?.y ? 'Actual' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y.toFixed(2) }mm` : '' }
       ];
     } else if (chartName === WIND_WEATHER) {
       return [
@@ -431,7 +431,7 @@ const TooltipText = ({
         return [
           { icon: '📅', value: hoveredObject?.x },
           { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : `${ hoveredObject?.barY }mm` },
-          { icon: secondaryHoveredObject?.y ? '📏' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
+          { icon: secondaryHoveredObject?.y ? '📏' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y.toFixed(2) }mm` : '' }
         ];
       } else {
         return [

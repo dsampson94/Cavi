@@ -165,6 +165,7 @@
 
           &__battery-text {
             font-weight: bold;
+            white-space: nowrap;
             transform: translateY(80%);
             padding: 0 util.rem(2) 0 util.rem(2);
             font-size: util.rem(10);

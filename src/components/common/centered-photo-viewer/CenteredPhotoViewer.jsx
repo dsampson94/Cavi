@@ -62,10 +62,10 @@ export const CenteredPhotoViewer = ({
     <>
       { imageViewerIsOpen && fieldActiveImage && isImageLoaded && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center"
+             style={ { transform: 'scale(0.8)', transformOrigin: 'center' } } // 0.8 can be any value less than 1
              onMouseMove={ onMouseMove }
-             onMouseUp={ onMouseUp }
-             onClick={ handleClose }>
-          <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl h-auto w-[500px] p-4 mt-20 relative"
+             onMouseUp={ onMouseUp }>
+          <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl w-[500px] p-4 -mt-6 relative"
                style={ { transform: `scale(${ zoom })`, transformOrigin: 'center', position: 'absolute', left: `${ pos.x }px`, top: `${ pos.y }px` } }
                onMouseDown={ onMouseDown }
                onClick={ (e) => e.stopPropagation() }>
@@ -80,6 +80,7 @@ export const CenteredPhotoViewer = ({
 
             <img src={ fieldActiveImage }
                  alt={ activeFieldName }
+                 style={ { transform: 'scale(0.99)', transformOrigin: 'center' } } // 0.8 can be any value less than 1
                  onWheel={ handleZoom } />
 
           </div>

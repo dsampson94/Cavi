@@ -238,12 +238,12 @@ export const SideBarFieldList = ({ mappedFieldList, setActiveFieldName, view }) 
 
                   <div className="field-charts-side-bar__field-list__item__container--upper"
                        style={ {
-                         backgroundColor: field?.colorTop === '#F9FFFA' ? 'lightgrey' : field?.colorTop
+                         backgroundColor: field?.colorTop === '#F9FFFA' ? '#a1c98a' : field?.colorTop
                        } } />
 
                   <div className="field-charts-side-bar__field-list__item__container--lower"
                        style={ {
-                         backgroundColor: field?.colorBot === '#F9FFFA' ? 'lightgrey' : field?.colorBot
+                         backgroundColor: field?.colorBot === '#F9FFFA' ? '#a1c98a' : field?.colorBot
                        } } />
 
                   <div className={ getClassNames('field-charts-side-bar__field-list__item__container--text',

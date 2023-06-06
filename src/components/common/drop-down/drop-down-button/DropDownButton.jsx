@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 import { bool } from 'prop-types';
 
@@ -144,8 +144,6 @@ const DropDownMenuFixed = ({
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const { fieldName } = useParams();
 
   const [showPrimaryDropDown, setShowPrimaryDropDown] = useState(false);
   const [showText, setShowText] = useState(false);
@@ -216,7 +214,8 @@ const DropDownMenuFixed = ({
         </div> }
 
         { menu === CHART_USAGE_SASRI_MENU &&
-        <div>
+        <div className={ 'dropdown__popup__extended' }
+             style={ { padding: '10px' } }>
           <div>{ 'SASRI parameters:' }</div>
         </div> }
 

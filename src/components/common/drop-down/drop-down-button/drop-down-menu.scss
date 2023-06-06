@@ -102,12 +102,14 @@
     }
 
     &__extended {
-      margin: util.rem(-10) util.rem(-10) util.rem(-5) util.rem(-10);
+      margin: util.rem(-10) util.rem(-10) util.rem(-10) util.rem(-10);
+      border-radius: map.get(radius.$border-radius, large);
 
       > div {
         display: flex;
         flex-direction: row;
-        max-height: util.rem(32);
+        max-height: util.rem(36);
+        border-radius: map.get(radius.$border-radius, large);
 
         &:hover {
           background-color: map.get(color.$colorMap, row-hover-blue);
@@ -115,7 +117,6 @@
 
         p {
           padding-left: util.rem(20);
-          margin-top: util.rem(3.5);
         }
       }
     }

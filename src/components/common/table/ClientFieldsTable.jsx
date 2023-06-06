@@ -496,37 +496,24 @@ PhotoIconColumn.propTypes = {
   value: string || shape({})
 };
 
-const LastReadingColumn = ({ dataIndex, value }) => {
-  if (value)
-    return <td onClick={ noOp() }
-               key={ generateId() }>
-      <div className={ 'table__body__row__td-container__icon-clickable' }
-           style={ { color: '#0090ff' } }>
-        <ToolTipRelative text={ value?.tooltip } />
+const LastReadingColumn = ({ value }) => {
+  if (!value) return <td key={ generateId() } />;
 
-        { (value?.hasBattery) && <>
-          <p className={ 'table__body__row__td-container__battery-text' }>
-            {
-              value?.lastReading.includes('1970/')
-                ? '---'
-                : (value?.lastReading.includes('now')
-                  ? <span className="text-xs">{value?.lastReading}</span>
-                  : value?.lastReading)
-            }
-          </p>
+  const reading = value?.lastReading.includes('1970/') ? '---' : value?.lastReading;
 
-          <SVGIcon name={ LOW_BATTERY } fill={ 'orange' } />
-        </> }
+  return (
+    <td onClick={ noOp() } key={ generateId() }>
+      <div className="table__body__row__td-container__icon-clickable" style={ { color: '#0090ff' } }>
+        { !value?.lastReading.includes('now') && <ToolTipRelative text={ value?.tooltip } /> }
 
-        { !(value?.hasBattery) && <>
-          <p className={ 'table__body__row__td-container__text' }>
-            { (value?.lastReading.includes('1970/')) ? '---' : value?.lastReading }
-          </p>
-        </> }
+        <p className={ value?.hasBattery ? 'table__body__row__td-container__battery-text' : 'table__body__row__td-container__text' }>
+          { reading }
+        </p>
+
+        { value?.hasBattery && !value?.lastReading.includes('now') && <SVGIcon name={ LOW_BATTERY } fill="orange" /> }
       </div>
-    </td>;
-  else
-    return <td key={ generateId() } />;
+    </td>
+  );
 };
 
 LastReadingColumn.propTypes = {
@@ -603,13 +590,13 @@ const DeficitColumn = ({ dataIndex, value, isDropdownRow, isHeaderRow }) => {
       { value?.tooltip && <ToolTipRelative text={ value?.tooltip } /> }
       <div className={ 'table__body__row__td-upper--deficit' }
            style={ {
-             backgroundColor: value?.colorTop === '#F9FFFA' ? 'grey' : value?.colorTop
+             backgroundColor: value?.colorTop === '#F9FFFA' ? '#a1c98a' : value?.colorTop
            } }>
         { value?.top }
       </div>
       <div className={ (isHeaderRow) ? 'table__body__row__td-lower' : 'table__body__row__td-lower--deficit' }
            style={ {
-             backgroundColor: value?.colorBot === '#F9FFFA' ? 'grey' : value?.colorBot
+             backgroundColor: value?.colorBot === '#F9FFFA' ? '#a1c98a' : value?.colorBot
            } }>
         { value?.bottom }
       </div>

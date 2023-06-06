@@ -226,6 +226,21 @@ html.dark {
     }
   }
 
+  .dropdown__popup__extended {
+    background-color: map.get(color.$colorMap, dark-mode-grey);
+    color: map.get(color.$colorMap, white);
+    box-shadow: util.rem(1) util.rem(1) util.rem(14) map.get(color.$colorMap, grey),
+    inset util.rem(1) util.rem(1) util.rem(1) map.get(color.$colorMap, blur-lighter);
+    border: util.rem(1.2) solid map.get(color.$colorMap, white);
+
+    > div {
+
+      &:hover {
+        background-color: map.get(color.$colorMap, grey);
+      }
+    }
+  }
+
   .button--tab {
     background-color: map.get(color.$colorMap, dark-mode-grey);
     color: map.get(color.$colorMap, white);
