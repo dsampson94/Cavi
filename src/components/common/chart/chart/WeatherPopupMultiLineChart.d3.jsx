@@ -62,20 +62,20 @@ const WeatherPopupMultiLineChart = ({
     let yAccessor = d => d?.y;
     let xAccessor = d => new Date(d?.x);
 
-    const yAxisPaddingFactor = 0.8; // Increase or decrease this value to adjust the padding
-    const yMin = min(data?.[0], yAccessor);
-    const yMax = max(data?.[0], yAccessor);
+    const yAxisPaddingFactor = 0.8;
+    const yMin = Array.isArray(data?.[0]) ? min(data?.[0], yAccessor) : null;
+    const yMax = Array.isArray(data?.[0]) ? max(data?.[0], yAccessor) : null;
     const yPadding = (yMax - yMin) * yAxisPaddingFactor;
 
     let yScale = scaleLinear().domain([yMin - yPadding, yMax + yPadding]).range([boundedHeight - innerPadding, innerPadding]).nice();
 
     const activeMinDate = () => {
-      if (activeDataPeriod === 'All') return min(data?.[0], xAccessor);
-      else return new Date(max(data?.[0], xAccessor).setDate(max(data?.[0], xAccessor).getDate() - activeDataPeriod));
+      if (activeDataPeriod === 'All') return Array.isArray(data?.[0]) ? min(data?.[0], xAccessor) : null;
+      else return new Date(Array.isArray(data?.[0]) ? max(data?.[0], xAccessor).setDate(max(data?.[0], xAccessor).getDate() - activeDataPeriod) : null);
     };
 
     const getXAxisViewMode = () => {
-      return [activeMinDate(), max(data?.[0], xAccessor)];
+      return [activeMinDate(), Array.isArray(data?.[0]) ? max(data?.[0], xAccessor) : null];
     };
 
     const xScale = scaleTime().domain(getXAxisViewMode()).range([0, boundedWidth - innerPadding]);

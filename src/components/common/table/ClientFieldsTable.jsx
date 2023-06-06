@@ -506,8 +506,15 @@ const LastReadingColumn = ({ dataIndex, value }) => {
 
         { (value?.hasBattery) && <>
           <p className={ 'table__body__row__td-container__battery-text' }>
-            { (value?.lastReading.includes('1970/')) ? '---' : value?.lastReading }
+            {
+              value?.lastReading.includes('1970/')
+                ? '---'
+                : (value?.lastReading.includes('now')
+                  ? <span className="text-xs">{value?.lastReading}</span>
+                  : value?.lastReading)
+            }
           </p>
+
           <SVGIcon name={ LOW_BATTERY } fill={ 'orange' } />
         </> }
 

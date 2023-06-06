@@ -136,6 +136,7 @@ const TemperatureMultiLineChart = ({
       svg.call(zoomGlobal).on('dblclick.zoom', null);
 
       selectAll('.mouse-tracker').on('dblclick ', () => {
+        setXAxisViewMode('topBar');
         setActiveDataPeriod('All');
         svg.call(zoomGlobal.transform, zoomIdentity);
         setCurrentGlobalZoomState(zoomIdentity);
