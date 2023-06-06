@@ -155,6 +155,7 @@
   &__checkbox-filter {
     display: flex;
     position: relative;
+    z-index: 10;
     justify-content: center;
     font-size: util.rem(13);
 
@@ -184,6 +185,8 @@
 .tooltip-container {
 
   &__rect {
+    position: relative;
+    z-index: 100;
     border-radius: map.get(radius.$border-radius, large);
     -webkit-filter: drop-shadow(util.rem(1) util.rem(1) util.rem(1) rgba(0, 0, 0, .7));
     filter: drop-shadow(util.rem(1) util.rem(1) util.rem(1) rgba(0, 0, 0, .7));

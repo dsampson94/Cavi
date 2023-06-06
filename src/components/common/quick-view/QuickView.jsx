@@ -31,7 +31,7 @@ export const QuickView = ({
   return (
     <>
       { quickViewIsOpen &&
-      <div className="fixed top-0 left-0 z-50 w-full mt-16 ml-60 h-full flex items-center justify-center ">
+      <div className="fixed top-0 left-0 z-50 w-full mt-6 ml-60 h-full flex items-center justify-center ">
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-2xl p-4">
 
           <div className="-translate-y-3">

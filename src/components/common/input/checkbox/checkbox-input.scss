@@ -271,6 +271,19 @@
       }
     }
 
+    &--forecastTemperature{
+      border: util.rem(1.2) solid map.get(color.$colorMap, black);
+
+      &:checked {
+        animation: ripple 0.2s linear forwards;
+        color: map.get(color.$colorMap, tertiary-orange);
+      }
+
+      &:hover {
+        border: util.rem(2) solid map.get(color.$colorMap, tertiary-orange);
+      }
+    }
+
     &--humidity2{
       border: util.rem(1.2) solid map.get(color.$colorMap, black);
 

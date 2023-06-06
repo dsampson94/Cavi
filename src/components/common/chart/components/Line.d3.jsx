@@ -2,6 +2,7 @@ import React from 'react';
 import { line, selectAll } from 'd3';
 
 import {
+  ACTUAL_TEMPERATURE,
   AGGREGATE,
   AGGREGATE_BOTTOM_SOIL,
   AGGREGATE_TOP_SOIL,
@@ -10,9 +11,9 @@ import {
   DAILY,
   DAILY_ETO,
   DEFICIT,
-  DEFICIT_ETO,
-  ETO_WEATHER,
-  EXTENDED,
+  DEFICIT_ETO, ETO_FORECAST,
+  ETO_WEATHER, ETO_WEATHER_STATION,
+  EXTENDED, FORECAST_TEMPERATURE,
   HUMIDITY_LINE,
   HUMIDITY_WEATHER,
   LINE_100MM,
@@ -332,6 +333,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
     case ETO_WEATHER:
       return (
         <g>
+          { hiddenLineList.includes(ETO_FORECAST) &&
           <path className={ 'line' }
                 d={ lineGenerator(data?.[0]) }
                 clipPath={ clipPath }
@@ -340,8 +342,9 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   fill: 'none',
                   strokeWidth: '1.8px',
                   strokeLinecap: 'round'
-                } } />
+                } } /> }
 
+          { hiddenLineList.includes(ETO_WEATHER_STATION) &&
           <path className={ 'line' }
                 d={ lineGenerator(data?.[1]) }
                 clipPath={ clipPath }
@@ -350,12 +353,13 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   fill: 'none',
                   strokeWidth: '1.8px',
                   strokeLinecap: 'round'
-                } } />
+                } } /> }
         </g>
       );
     case TEMP_WEATHER:
       return (
         <g>
+          { hiddenLineList.includes(ACTUAL_TEMPERATURE) &&
           <path className={ 'line' }
                 d={ lineGenerator(data?.[0]) }
                 clipPath={ clipPath }
@@ -364,9 +368,9 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   fill: 'none',
                   strokeWidth: '1.8px',
                   strokeLinecap: 'round'
-                } } />
+                } } /> }
 
-          { data?.[1] &&
+          { data?.[1] && hiddenLineList.includes(FORECAST_TEMPERATURE) &&
           <path className={ 'line' }
                 d={ lineGenerator(data?.[1]) }
                 clipPath={ clipPath }
@@ -381,6 +385,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
     case HUMIDITY_WEATHER:
       return (
         <g>
+          { hiddenLineList.includes(HUMIDITY_LINE) &&
           <path className={ 'line' }
                 d={ lineGenerator(data?.[0]) }
                 clipPath={ clipPath }
@@ -389,7 +394,7 @@ const WeatherPopupChartLine = ({ xAccessor, xScale, yAccessor, yScale, data, cha
                   fill: 'none',
                   strokeWidth: '1.8px',
                   strokeLinecap: 'round'
-                } } />
+                } } /> }
         </g>
       );
     default:

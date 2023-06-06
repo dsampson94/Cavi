@@ -13,6 +13,7 @@ import XAxis from '../components/xAxis.d3';
 import ChartTooltipDot from '../components/ChartToolTipDot.d3';
 import ChartTooltipText from '../components/ChartToolTipText.d3';
 import Line from '../components/Line.d3';
+import { ETO_WEATHER } from '../../../../tools/general/system-variables.util';
 
 const WeatherPopupMultiLineChart = ({
                                       data,

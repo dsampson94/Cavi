@@ -9,6 +9,7 @@ import {
   DEFICIT,
   DEFICIT_ETO,
   EC,
+  ETO_WEATHER,
   EXTENDED,
   HUMIDITY_LINE,
   LINE_100MM,
@@ -21,13 +22,14 @@ import {
   RAIN_HUMIDITY,
   RAIN_LINE,
   SOIL_TEMPERATURE,
+  TEMP_WEATHER,
   TEMPERATURE_MULTILINE,
   VOLT_READINGS,
   WIND_WEATHER
 } from '../../../../tools/general/system-variables.util';
+import { retrieveUserClientListFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 import '../chart.scss';
-import { retrieveUserClientListFromLocalStorage } from '../../../../tools/storage/localStorage';
 
 const ChartTooltipText = ({
                             data,
@@ -371,7 +373,6 @@ const TooltipText = ({
     } else return 150;
   };
 
-
   const renderText = (chart) => {
     if (hoveredObject?.barY === -0.1) return false;
     if (chartName === DAILY_ETO) return !!(hiddenLineList?.includes(chart) && hoverActive && hoveredObject?.y);
@@ -425,6 +426,19 @@ const TooltipText = ({
         { icon: '📅', value: hoveredObject?.x },
         { icon: '📏', value: `${ hoveredObject?.barY }ms` }
       ];
+    } else if (chartName === ETO_WEATHER || chartName === TEMP_WEATHER) {
+      if (secondaryData) {
+        return [
+          { icon: '📅', value: hoveredObject?.x },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : `${ hoveredObject?.barY }mm` },
+          { icon: secondaryHoveredObject?.y ? '📏' : '', value: secondaryHoveredObject?.y ? `${ secondaryHoveredObject?.y }mm` : '' }
+        ];
+      } else {
+        return [
+          { icon: '📅', value: hoveredObject?.x },
+          { icon: '📏', value: hoveredObject?.y ? `${ hoveredObject?.y }mm` : `${ hoveredObject?.barY }mm` }
+        ];
+      }
     } else {
       return [
         { icon: '📅', value: hoveredObject?.x },
@@ -480,6 +494,7 @@ const TooltipText = ({
             >
               { item.value }
             </text>
+
           </React.Fragment>
         )) }
       </g> }
