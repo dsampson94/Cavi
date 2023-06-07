@@ -77,8 +77,8 @@
 
   &__list {
     display: flex;
-    overflow: scroll;
     flex-direction: column;
+    overflow-x: hidden;
 
     &__item {
       display: flex;

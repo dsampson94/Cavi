@@ -8,6 +8,7 @@
 .field-temperatures {
   display: flex;
   flex-direction: column;
+  margin-right: util.rem(12);
   width: 100%;
   overflow: hidden;
 
