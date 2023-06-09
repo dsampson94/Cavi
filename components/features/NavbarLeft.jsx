@@ -243,16 +243,14 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                             } rounded-lg shadow-lg ring-1 ring-black ring-opacity-5` }>
                                 <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
-                                        <div>
-                                            <Image
-                                                src={ '/cavilogo.svg' }
-                                                alt="cavi logo"
-                                                height={ 200 }
-                                                width={ 200 }
-                                                className="object-cover object-center mr-1"
-                                                layout="fixed"
-                                            />
-                                        </div>
+                                        <Image
+                                            src={ '/cavilogo.svg' }
+                                            alt="cavi logo"
+                                            height={ 200 }
+                                            width={ 200 }
+                                            className="object-cover object-center mr-1"
+                                            layout="fixed"
+                                        />
                                         <div className="-mr-2">
                                             <Popover.Button
                                                 className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'white' : 'white' } p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
