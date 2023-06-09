@@ -44,10 +44,10 @@ export default function LogoCloud() {
 
     return (
         <div style={ centerStyles }>
-            <div className="flex-column md:pt-12 pb-6 md:pb-0 mt-2 md:-mt-12 md:pt-8">
+            <div className="flex-column md:pt-12 pb-6 md:pb-0 mt-2 md:mt-24 md:pt-8">
                 { windowWidth !== null ? (
                     windowWidth <= 768 ? (
-                        <img src="/logowallmobile.jpg" className="" alt="Logo Cloud" />
+                        <img src="/logowallmobile.jpg" className="flex pt-6 mb-6" alt="Logo Cloud" />
                     ) : (
                         <div className="flex flex-wrap justify-center">
                             { rows.map((row, i) => (

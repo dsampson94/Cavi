@@ -82,14 +82,15 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     return (
         <>
             <header
-                className={ `relative top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap ${ showStickyNavbar || lastScrollTop === 0 ? 'sticky top-0' : '' }` }
+                className={ `top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap 
+                ${ showStickyNavbar || lastScrollTop === 0 ? 'sticky top-0' : '' } transition-colors duration-200` }
                 ref={ navbarRef }
                 style={ {
                     opacity: 1,
-                    transition: 'opacity 0.2s ease-in-out'
+                    transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
                 } }
             >
-                <Popover className={ `${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white' }` }>
+                <Popover className={ `${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-transparent absolute w-full' : 'bg-white' } transition-colors duration-200` }>
                     <nav className="flex max-w-8xl items-center justify-between pb-8 px-6 md:justify-start md:space-x-10 lg:px-8">
                         <div className="flex justify-start min-w-fit lg:w-0 lg:flex-1 min-w-32 min-h-[90px] max-h-[70px] h-[70px]">
                             <Image src={ !showStickyNavbar || lastScrollTop === 0 ? '/footer-logo.webp' : '/cavilogo.svg' }
@@ -101,9 +102,8 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                         </div>
                         <div className="-my-2 -mr-2 md:hidden">
                             <Popover.Button
-                                className={ `inline-flex items-center justify-center mt-10 rounded-md p-2 
-              ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300 bg-black' : 'text-gray-500 bg-white' } 
-               focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500` }>
+                                className={ `inline-flex items-center justify-center mt-10 rounded-md p-2 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300 bg-transparent' :
+                                    'text-gray-500 bg-white' } focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500` }>
                                 <span className="sr-only">Open menu</span>
                                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                             </Popover.Button>
@@ -132,8 +132,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                             { dropDownAboutOptions.map((item) => (
                                                 <div
                                                     key={ item.name }
-                                                    className={ `group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 cursor-pointer 
-                        ${ !showStickyNavbar || lastScrollTop === 0 ? 'hover:bg-gray-500' : 'hover:bg-blue-300' }` }
+                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-500 cursor-pointer"
                                                 >
                                                     <div className="flex-auto">
                                                         <a onClick={ item.onClick }
@@ -172,7 +171,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                             { dropDownCareersOptions.map((item) => (
                                                 <div
                                                     key={ item.name }
-                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-300 cursor-pointer"
+                                                    className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-500 cursor-pointer"
                                                 >
                                                     <div className="flex-auto">
                                                         <a href={ item.link }
@@ -210,13 +209,13 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                             className={ `fixed inset-0 z-30 overflow-y-auto rounded-xl ` }
                         >
                             <div className={ `${
-                                !showStickyNavbar || lastScrollTop === 0 ? 'bg-black' : 'bg-white'
+                                !showStickyNavbar || lastScrollTop === 0 ? 'bg-white' : 'bg-white'
                             } rounded-lg shadow-lg ring-1 ring-black ring-opacity-5` }>
                                 <div className="px-5 pt-2 pb-6">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <Image
-                                                src={ !showStickyNavbar || lastScrollTop === 0 ? '/footer-logo.webp' : '/cavilogo.svg' }
+                                                src={ '/cavilogo.svg' }
                                                 alt="cavi logo"
                                                 height={ 200 }
                                                 width={ 200 }
@@ -226,7 +225,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                         </div>
                                         <div className="-mr-2">
                                             <Popover.Button
-                                                className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'black' : 'white' } p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
+                                                className={ `inline-flex mt-3 mr-1 items-center justify-center rounded-md bg-${ !showStickyNavbar || lastScrollTop === 0 ? 'white' : 'white' } p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 ${
                                                     !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-300' : ''
                                                 }` }
                                             >
@@ -235,6 +234,85 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                                             </Popover.Button>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 p-4 ml-12 -mt-6">
+                                    <Popover className="relative">
+                                        <Popover.Button
+                                            className={ `flex items-center gap-x-1 text-lg leading-6 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-800' : 'text-gray-800' } outline-none` }>
+                                            About
+                                            <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                        </Popover.Button>
+
+                                        <Transition
+                                            as={ Fragment }
+                                            enter="transition ease-out duration-200"
+                                            enterFrom="opacity-0 translate-y-1"
+                                            enterTo="opacity-100 translate-y-0"
+                                            leave="transition ease-in duration-150"
+                                            leaveFrom="opacity-100 translate-y-0"
+                                            leaveTo="opacity-0 translate-y-1"
+                                        >
+                                            <Popover.Panel
+                                                className={ `absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl shadow-2xl ring-1 ring-gray-900/5 mt-2 
+              ${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-white' : 'bg-white' }` }>
+                                                <div className="p-3">
+                                                    { dropDownAboutOptions.map((item) => (
+                                                        <div
+                                                            key={ item.name }
+                                                            className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-500 cursor-pointer"
+                                                        >
+                                                            <div className="flex-auto">
+                                                                <a onClick={ item.onClick }
+                                                                   className={ `block ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-800' : 'text-gray-900' }` }>
+                                                                    { item.name }
+                                                                    <span className="absolute inset-0" />
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    )) }
+                                                </div>
+                                            </Popover.Panel>
+                                        </Transition>
+                                    </Popover>
+
+                                    <Popover className="relative">
+                                        <Popover.Button
+                                            className={ `flex items-center gap-x-1 text-lg leading-6 ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-800' : 'text-gray-800' } outline-none` }>
+                                            Careers
+                                            <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                                        </Popover.Button>
+
+                                        <Transition
+                                            as={ Fragment }
+                                            enter="transition ease-out duration-200"
+                                            enterFrom="opacity-0 translate-y-1"
+                                            enterTo="opacity-100 translate-y-0"
+                                            leave="transition ease-in duration-150"
+                                            leaveFrom="opacity-100 translate-y-0"
+                                            leaveTo="opacity-0 translate-y-1"
+                                        >
+                                            <Popover.Panel
+                                                className={ `absolute -left-4 z-10 mt-12 overflow-hidden rounded-3xl shadow-2xl ring-1 ring-gray-900/5 mt-2 
+              ${ !showStickyNavbar || lastScrollTop === 0 ? 'bg-white' : 'bg-white' }` }>
+                                                <div className="p-3">
+                                                    { dropDownCareersOptions.map((item) => (
+                                                        <div
+                                                            key={ item.name }
+                                                            className="group relative flex items-center gap-x-6 rounded-lg p-2 text-sm leading-6 hover:bg-blue-500 cursor-pointer"
+                                                        >
+                                                            <div className="flex-auto">
+                                                                <a href={ item.link }
+                                                                   className={ `block ${ !showStickyNavbar || lastScrollTop === 0 ? 'text-gray-900' : 'text-gray-900' }` }>
+                                                                    { item.name }
+                                                                    <span className="absolute inset-0" />
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    )) }
+                                                </div>
+                                            </Popover.Panel>
+                                        </Transition>
+                                    </Popover>
                                 </div>
                                 <div className="relative flex justify-between px-3 py-2">
                                     <div className="relative flex space-x-2">
@@ -278,8 +356,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
                 </Popover>
             </header>
         </>
-    )
-        ;
+    );
 };
 
 export default NavbarLeft;
@@ -473,4 +550,14 @@ const contacts = [
             </div>
         )
     }
+];
+
+
+const navigation = [
+    { name: 'About', href: '/about' },
+    { name: 'People', href: '/people' },
+    { name: 'Businesses', href: '/businesses' },
+    { name: 'Our Brands', href: '/brands' },
+    { name: 'CSR', href: '/csr' },
+    { name: 'Careers', href: '/careers' }
 ];

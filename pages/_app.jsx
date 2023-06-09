@@ -54,13 +54,12 @@ function MyApp() {
             <main className="font-montserrat-light isolate bg-white overflow-x-hidden">
 
                 {/* Hero card */ }
-                <div className="relative shadow-2xl h-screen -mt-28">
+                <div className="relative shadow-2xl h-screen -mt-28 md:-mt-28">
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                         <div className="sm:overflow-hidden sm:rounded-2xl">
                             <div className="absolute inset-0 w-full h-full">
                                 <HeroVideoPlayer videoSrc={ '/placeholder/herovid.mp4' } />
-                                <div className="absolute inset-0 bg-gray-400 mix-blend-multiply" />
                             </div>
                         </div>
                     </div>

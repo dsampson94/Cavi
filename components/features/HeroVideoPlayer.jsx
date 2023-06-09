@@ -11,13 +11,9 @@ const HeroVideoPlayer = ({ videoSrc }) => {
 
     return (
         <video
-            ref={videoRef}
+            ref={ videoRef }
             src={ videoSrc }
-            style={ {
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-            } }
+            className="w-full h-screen md:h-[120%] object-cover"
             loop
             muted
         />
