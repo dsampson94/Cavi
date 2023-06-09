@@ -63,16 +63,46 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     };
 
     const handleBusinessClick = () => {
-        businessScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        const scrollToOptions = {
+            top: businessScrollToRef.current.offsetTop,
+            behavior: 'smooth'
+        };
+
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo(scrollToOptions);
+        } else {
+            window.scrollTo(scrollToOptions.top, 0);
+        }
     };
 
     const handleBrandsClick = () => {
-        brandsScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        const scrollToOptions = {
+            top: brandsScrollToRef.current.offsetTop,
+            behavior: 'smooth'
+        };
+
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo(scrollToOptions);
+        } else {
+            window.scrollTo(scrollToOptions.top, 0);
+        }
     };
 
     const handlePeopleClick = () => {
-        peopleScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+        const scrollToOptions = {
+            top: peopleScrollToRef.current.offsetTop,
+            behavior: 'smooth'
+        };
+
+        // Check if the 'scrollTo' method is supported
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo(scrollToOptions);
+        } else {
+            // Fallback for older browsers/devices
+            window.scrollTo(scrollToOptions.top, 0);
+        }
     };
+
 
     const toggleMenu = (index) => {
         if (showUpperMenu === index) setShowUpperMenu(null);
