@@ -20,13 +20,36 @@ export default function LogoCloud() {
         };
     }, []);
 
-    const names = [
-        'Amouage', 'Bulgari', 'Chanel', 'Chopard', 'Clear', 'Coach', 'Dermalogica',
-        'Dolce', 'Elemis', 'Elie', 'Ellis', 'Floral', 'Guerlain',
-        'Hermes', 'Issey', 'Jorgobe', 'Jack', 'Prairie', 'Memo', 'Narciso',
-        'Van', 'Nesti', 'Phillip', 'Sensai', 'Tommy', 'Zadig'
-    ];
+    const brands = {
+        'Amouage': 'https://www.amouage.com/',
+        'Bulgari': 'https://www.bulgari.com/',
+        'Chanel': 'https://www.chanel.com/',
+        'Chopard': 'https://www.chopard.com/',
+        'Clear': 'https://www.clearhaircare.com/',
+        'Coach': 'https://www.coach.com/',
+        'Dermalogica': 'https://www.dermalogica.com/',
+        'Dolce': 'https://www.dolcegabbana.com/',
+        'Elemis': 'https://www.elemis.com/',
+        'Elie': 'https://www.eliesaab.com/',
+        'Ellis': 'https://www.ellisfaas.com/',
+        'Floral': 'https://www.floralstreet.com/',
+        'Guerlain': 'https://www.guerlain.com/',
+        'Hermes': 'https://www.hermes.com/',
+        'Issey': 'https://www.isseymiyake.com/',
+        'Jorgobe': 'https://jorgobeshop.com/',
+        'Jack': 'https://jackperfume.co.uk/',
+        'Prairie': 'https://www.laprairie.com/',
+        'Memo': 'https://www.memofragrances.com/',
+        'Narciso': 'https://www.narcisorodriguez.com/',
+        'Van': 'https://www.vancleefarpels.com/',
+        'Nesti': 'https://nestidante.com/',
+        'Phillip': 'https://www.philipp plein.com/',
+        'Sensai': 'https://www.sensai-cosmetics.com/',
+        'Tommy': 'https://usa.tommy.com/',
+        'Zadig': 'https://www.zadig-et-voltaire.com/'
+    };
 
+    const names = Object.keys(brands);
     const rows = [
         names.slice(0, 7),
         names.slice(7, 13),
@@ -57,8 +80,10 @@ export default function LogoCloud() {
                                         row.length === 7 ? 'w-full' : 'w-11/12'
                                     }` }
                                 >
-                                    { row.map((name, j) => (
-                                        <SVGIcon name={ name } />
+                                    { row.map(name => (
+                                        <a href={ brands[name] } target="_blank" rel="noreferrer">
+                                            <SVGIcon name={ name } />
+                                        </a>
                                     )) }
                                 </div>
                             )) }

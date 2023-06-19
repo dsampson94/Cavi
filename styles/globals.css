@@ -6,8 +6,26 @@
     font-family: 'Montserrat Light', sans-serif;
 }
 
-*, *::before, *::after {
+/* This is for Firefox */
+* {
     scrollbar-width: thin;
+}
+
+/* This is for Chrome, Safari and Edge */
+*::-webkit-scrollbar {
+    width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: lightgrey;
 }
 
 @media (max-width: 640px) {
