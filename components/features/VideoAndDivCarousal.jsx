@@ -131,7 +131,7 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
             onMouseUp={ handleEnd }
             onMouseLeave={ handleEnd }
             onMouseMove={ handleMove }
-            className="overflow-x-hidden flex flex-col w-full mt-12 md:mt-48 mb-24 md:mb-32 md:flex-row"
+            className="overflow-x-hidden flex flex-col w-full mt-12 md:mt-24 mb-24 md:mb-32 md:flex-row"
         >
 
             { videosComponents.map((videoOrComponent, index) =>

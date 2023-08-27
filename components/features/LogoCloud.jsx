@@ -59,37 +59,46 @@ export default function LogoCloud() {
 
     const centerStyles = {
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
-        padding: '0 10px'
     };
 
     return (
-        <div style={ centerStyles }>
-            <div className="flex-column md:pt-12 pb-6 md:pb-0 mt-2 md:mt-24 md:pt-8">
-                { windowWidth !== null ? (
-                    windowWidth <= 768 ? (
-                        <img src="/logowallmobile.jpg" className="flex pt-6 mb-6" alt="Logo Cloud" />
-                    ) : (
-                        <div className="flex flex-wrap justify-center">
-                            { rows.map((row, i) => (
-                                <div
-                                    key={ i }
-                                    className={ `flex justify-center ${
-                                        row.length === 7 ? 'w-full' : 'w-11/12'
-                                    }` }
-                                >
-                                    { row.map(name => (
-                                        <a href={ brands[name] } target="_blank" rel="noreferrer">
-                                            <SVGIcon name={ name } />
-                                        </a>
-                                    )) }
-                                </div>
-                            )) }
-                        </div>
-                    )
-                ) : null }
+        <div style={ {
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '6vh 10px 0 10px'
+        } }>
+
+            <h1 className="pt-64 text-2xl text-center tracking-wide">Our Brands</h1>
+
+            <div style={ centerStyles }>
+
+                <div className="flex-column ">
+                    { windowWidth !== null ? (
+                        windowWidth <= 768 ? (
+                            <img src="/logowallmobile.jpg" className="flex pt-6 mb-6" alt="Logo Cloud" />
+                        ) : (
+                            <div className="flex flex-wrap justify-center">
+                                { rows.map((row, i) => (
+                                    <div
+                                        key={ i }
+                                        className={ `flex justify-center ${
+                                            row.length === 7 ? 'w-full' : 'w-11/12'
+                                        }` }
+                                    >
+                                        { row.map(name => (
+                                            <a href={ brands[name] } target="_blank" rel="noreferrer">
+                                                <SVGIcon name={ name } />
+                                            </a>
+                                        )) }
+                                    </div>
+                                )) }
+                            </div>
+                        )
+                    ) : null }
+                </div>
             </div>
         </div>
     );

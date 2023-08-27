@@ -17,9 +17,9 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     const dropDownAboutOptions = [
         { name: 'Brands', onClick: () => handleBrandsClick() },
         { name: 'Business', onClick: () => handleBusinessClick() },
-        { name: 'People', onClick: () => handlePeopleClick() }
+        { name: 'People', onClick: () => handlePeopleClick() },
+        { name: 'Corporate Social Responsibility', onClick: () => handleCSRClick() }
     ];
-
 
     const dropDownCareersOptions = [
         { name: 'Dermalogica', link: 'https://www.dermalogica.co.za/careers' },
@@ -53,12 +53,28 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
 
     const handleContactUsClick = () => {
         setShowMenu(1);
-        if (contactScrollToRef.current) {
-            if (typeof contactScrollToRef.current.scrollIntoView === 'function') {
-                contactScrollToRef.current.scrollIntoView({ behavior: 'smooth' });
-            } else if (typeof window.scrollTo === 'function') {
-                window.scrollTo(0, contactScrollToRef.current.offsetTop);
-            }
+        const scrollToOptions = {
+            top: contactScrollToRef.current.offsetTop,
+            behavior: 'smooth'
+        };
+
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo(scrollToOptions);
+        } else {
+            window.scrollTo(scrollToOptions.top, 0);
+        }
+    };
+
+    const handleCSRClick = () => {
+        const scrollToOptions = {
+            top: contactScrollToRef.current.offsetTop,
+            behavior: 'smooth'
+        };
+
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo(scrollToOptions);
+        } else {
+            window.scrollTo(scrollToOptions.top, 0);
         }
     };
 
@@ -112,7 +128,7 @@ function NavbarLeft({ contactScrollToRef, brandsScrollToRef, businessScrollToRef
     return (
         <>
             <header
-                className={ `top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap 
+                className={ `top-0 z-50 shadow-xl br-04 rounded-2xl whitespace-nowrap
                 ${ showStickyNavbar || lastScrollTop === 0 ? 'sticky top-0' : '' } transition-colors duration-200` }
                 ref={ navbarRef }
                 style={ {

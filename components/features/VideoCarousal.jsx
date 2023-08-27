@@ -6,7 +6,9 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
     const [movedDuringDrag, setMovedDuringDrag] = useState(false);
     const carouselRef = useRef(null);
     const [direction, setDirection] = useState(1);
-    const [isUnmuted, setIsUnmuted] = useState(false); // new state for checking if any video is unmuted
+    const [isUnmuted, setIsUnmuted] = useState(false);
+    const [activeVideo, setActiveVideo] = useState(null);
+    const [expandText, setExpandText] = useState(false);
 
     const handleStart = (e) => {
         e.preventDefault();
@@ -17,14 +19,31 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
 
     const handleEnd = (e) => {
         if (dragging && !movedDuringDrag && Math.abs(startPosition - (e.clientX || e.changedTouches?.[0].clientX)) < 5) {
-            if (e.target.paused) {
-                e.target.play();
-            } else {
-                e.target.pause();
+            const videoElement = e.target.closest('video');
+            if (videoElement) {
+                if (videoElement.paused) {
+                    videoElement.play();
+                } else {
+                    videoElement.pause();
+                }
             }
         }
         setDragging(false);
         setMovedDuringDrag(false);
+    };
+
+
+    const handleMove = (e) => {
+        if (!dragging) return;
+        setMovedDuringDrag(true);
+        const newScrollLeft = carouselRef.current.scrollLeft - (e.clientX || e.touches?.[0].clientX) + startPosition;
+        carouselRef.current.scrollLeft = newScrollLeft;
+        setStartPosition(e.clientX || e.touches?.[0].clientX);
+    };
+
+    const handleVideoTouchStart = (e) => {
+        const video = e.target;
+        setIsUnmuted(!video.muted);
     };
 
     useEffect(() => {
@@ -44,54 +63,59 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
         };
     }, [direction, isUnmuted]);
 
-    const handleMove = (e) => {
-        if (!dragging) return;
-        setMovedDuringDrag(true);
-        const newScrollLeft =
-            carouselRef.current.scrollLeft - (e.clientX || e.touches?.[0].clientX) + startPosition;
-        carouselRef.current.scrollLeft = newScrollLeft;
-        setStartPosition(e.clientX || e.touches?.[0].clientX);
-    };
-
-    const handleVideoTouchStart = (e) => {
-        const video = e.target;
-        setIsUnmuted(!video.muted); // set isUnmuted to the opposite of the new muted state
-    };
-
     return (
         <>
-            <div ref={ businessScrollToRef } />
-
+            <div ref={businessScrollToRef} />
             <div
-                ref={ carouselRef }
-                onMouseDown={ handleStart }
-                onMouseUp={ handleEnd }
-                onMouseLeave={ handleEnd }
-                onMouseMove={ handleMove }
-                onTouchStart={ handleStart }
-                onTouchEnd={ handleEnd }
-                onTouchMove={ handleMove }
+                ref={carouselRef}
+                onMouseDown={handleStart}
+                onMouseUp={handleEnd}  // Add this line
+                onMouseLeave={handleEnd}
+                onMouseMove={handleMove}
+                onTouchStart={handleStart}
+                onTouchEnd={handleEnd}  // Also add this for touch events
+                onTouchMove={handleMove}
                 className="overflow-x-hidden flex w-full md:mt-12 md:mt-24"
             >
-                <div ref={ businessScrollToRef } />
-
-                { videos.map((video, index) => (
-                    <video
-                        key={ index }
-                        src={ video }
-                        className="flex-shrink-0 px-10 cursor-pointer w-92 h-full md:w-[700px]"
-                        onMouseEnter={ e => {
-                            setIsUnmuted(true); // set isUnmuted to true when mouse enters
-                        } }
-                        onMouseLeave={ e => {
-                            setIsUnmuted(false); // set isUnmuted to false when mouse leaves
-                        } }
-                        onTouchStart={ handleVideoTouchStart }
-                        autoPlay
-                        loop
-                        muted
-                    />
-                )) }
+                {videos.map((video, index) => (
+                    <div
+                        key={index}
+                        className="relative flex-shrink-0 w-92 h-[620px] md:w-[600px] overflow-hidden mx-12"
+                        onMouseEnter={() => {
+                            setActiveVideo(index);
+                        }}
+                        onMouseLeave={() => {
+                            setActiveVideo(null);
+                        }}
+                    >
+                        <video
+                            src={video.src}
+                            className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+                            onTouchStart={handleVideoTouchStart}
+                            autoPlay
+                            loop
+                            muted
+                        />
+                        <div
+                            className={`absolute inset-0 bg-black p-4 transition-all duration-300 flex flex-col justify-end ${activeVideo === index ? 'bg-opacity-60' : 'bg-opacity-0'}`}>
+                            <div className={`${expandText === index ? '' : 'line-clamp-2'} transition-all text-white text-lg`}>
+                                {video.text}
+                            </div>
+                            <button
+                                onClick={() => {
+                                    if (expandText === index) {
+                                        setExpandText(null);
+                                    } else {
+                                        setExpandText(index);
+                                    }
+                                }}
+                                className="mt-2 text-white underline cursor-pointer"
+                            >
+                                {expandText === index ? 'Read Less' : 'Read More'}
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </>
     );

@@ -1,27 +1,6 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid';
-
-const features = [
-    {
-        name: 'Push to deploy.',
-        description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: CloudArrowUpIcon
-    },
-    {
-        name: 'SSL certificates.',
-        description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: LockClosedIcon
-    },
-    {
-        name: 'Database backups.',
-        description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-        icon: ServerIcon
-    }
-];
-
 export default function LeftImageCSR() {
     return (
-        <div className="overflow-hidden bg-white pt-24 sm:pt-32">
+        <div className="overflow-hidden bg-white pt-48 mt-12 sm:pt-24 mb-48">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                     <div className="lg:ml-auto lg:pt-4 lg:pl-4">
@@ -51,24 +30,6 @@ export default function LeftImageCSR() {
                     </div>
                 </div>
             </div>
-            {/*<div className="flex flex-col items-center p-6 justify-center mt-36 sm:flex-col lg:flex-row ">*/}
-            {/*    <img*/}
-            {/*        src="/cavikids.png"*/}
-            {/*        alt="cavicares"*/}
-            {/*        className="h-72 rounded-xl shadow-xl"*/}
-            {/*        width={ 550 }*/}
-            {/*    />*/}
-            {/*    <img*/}
-            {/*        src="/cavikids1.png"*/}
-            {/*        alt="cavicares"*/}
-            {/*        className="h-72 rounded-xl mt-6 md:mt-0 shadow-xl sm:mt-8 lg:mt-0 lg:ml-12"*/}
-            {/*        width={ 550 }*/}
-            {/*        height={ 200 }*/}
-
-            {/*    />*/}
-            {/*</div>*/}
-
-
         </div>
     );
 }
