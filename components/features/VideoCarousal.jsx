@@ -80,7 +80,7 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
                 {videos.map((video, index) => (
                     <div
                         key={index}
-                        className="relative flex-shrink-0 w-92 h-[620px] md:w-[600px] overflow-hidden mx-12"
+                        className="relative flex-shrink-0 w-[600px] h-[620px] overflow-hidden mx-12"
                         onMouseEnter={() => {
                             setActiveVideo(index);
                         }}
@@ -101,6 +101,7 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
                             <div className={`${expandText === index ? '' : 'line-clamp-2'} transition-all text-white text-lg`}>
                                 {video.text}
                             </div>
+                            {video.text &&
                             <button
                                 onClick={() => {
                                     if (expandText === index) {
@@ -112,7 +113,7 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
                                 className="mt-2 text-white underline cursor-pointer"
                             >
                                 {expandText === index ? 'Read Less' : 'Read More'}
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 ))}

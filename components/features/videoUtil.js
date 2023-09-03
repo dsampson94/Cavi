@@ -7,7 +7,6 @@ export const videos = [
     },
     {
         src: '/vids/ChanelCard.mp4',
-        text: ''
     },
     {
         src: '/vids/PcgCard.mp4',
@@ -17,7 +16,6 @@ export const videos = [
     },
     {
         src: '/vids/PdsCard.mp4',
-        text: ''
     },
     {
         src: '/vids/DermalogicaCard.mp4',
@@ -30,7 +28,6 @@ export const videos = [
     },
     {
         src: '/vids/ChanelCard.mp4',
-        text: ''
     },
     {
         src: '/vids/PcgCard.mp4',
@@ -40,7 +37,6 @@ export const videos = [
     },
     {
         src: '/vids/PdsCard.mp4',
-        text: ''
     },
     {
         src: '/vids/DermalogicaCard.mp4',

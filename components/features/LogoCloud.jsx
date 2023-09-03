@@ -71,7 +71,7 @@ export default function LogoCloud() {
             padding: '6vh 10px 0 10px'
         } }>
 
-            <h1 className="pt-64 text-2xl text-center tracking-wide">Our Brands</h1>
+            <h1 className="md:pt-64 pt-0 text-2xl text-center tracking-wide">Our Brands</h1>
 
             <div style={ centerStyles }>
 

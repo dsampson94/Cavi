@@ -65,7 +65,7 @@ function MyApp() {
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                         <div className="sm:overflow-hidden sm:rounded-2xl">
                             <div className="absolute inset-0 w-full h-full">
-                                <HeroVideoPlayer videoSrc={ '/vids/HeroVid.mp4' } />
+                                <HeroVideoPlayer videoSrc={ '/vids/Header.mp4' } />
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ function MyApp() {
 
                 <LogoCloud />
 
-                <h1 className="mt-28 ml-2 text-2xl tracking-wide text-center">Our Businesses</h1>
+                <h1 className="md:mt-28 mt-12 mb-12 ml-2 text-2xl tracking-wide text-center">Our Businesses</h1>
 
                 <section ref={ businessScrollToRef } />
 
