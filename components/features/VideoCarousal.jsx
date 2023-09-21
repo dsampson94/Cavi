@@ -26,19 +26,14 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
     };
   }, [direction, isUnmuted, expandText]);
 
-  const handleVideoTouchStart = (e) => {
-    const video = e.target;
-    setIsUnmuted(!video.muted);
-  };
-
   const handleDragStart = (e) => {
-    setStartPosition(e.touches[0].clientX);
+    setStartPosition(e.clientX || e.touches[0].clientX);
     setDragging(true);
   };
 
   const handleDragMove = (e) => {
     if (dragging) {
-      const newPos = e.touches[0].clientX;
+      const newPos = e.clientX || e.touches[0].clientX;
       const diff = startPosition - newPos;
       carouselRef.current.scrollLeft += diff;
       setStartPosition(newPos);
@@ -49,6 +44,11 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
     setDragging(false);
   };
 
+  const handleVideoTouchStart = (e) => {
+    const video = e.target;
+    setIsUnmuted(!video.muted);
+  };
+
   return (
     <>
       <div ref={businessScrollToRef} />
@@ -57,6 +57,10 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
         onTouchStart={handleDragStart}
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
         className="overflow-x-hidden flex w-full md:mt-12 mt-6"
       >
         {videos.map((video, index) => (

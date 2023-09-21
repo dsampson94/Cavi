@@ -44,6 +44,7 @@ export default function LogoCloud () {
     'Phillip': 'https://www.philipp plein.com/',
     'Sensai': 'https://www.sensai-cosmetics.com/',
     'Tommy': 'https://usa.tommy.com/',
+    'e': '',
     'Zadig': 'https://www.zadig-et-voltaire.com/',
   }
 
@@ -52,15 +53,11 @@ export default function LogoCloud () {
   const mobileBreakpoint = 768
   let rows
   if (windowWidth <= mobileBreakpoint) {
-    rows = [
-      names.slice(0, 4),
-      names.slice(4, 7),
-      names.slice(7, 11),
-      names.slice(11, 14),
-      names.slice(14, 18),
-      names.slice(18, 21),
-      names.slice(21, 25),
-    ]
+    const itemsPerRow = 3;
+    const numRows = Math.ceil(names.length / itemsPerRow);
+    rows = Array.from({ length: numRows }, (_, i) =>
+      names.slice(i * itemsPerRow, (i + 1) * itemsPerRow)
+    );
   } else if (windowWidth <= laptopBreakpoint) {
     rows = [
       names.slice(0, 4),
@@ -102,7 +99,6 @@ export default function LogoCloud () {
       </h1>
 
       <div style={centerStyles}>
-
         <div className="flex-column ">
           {windowWidth !== null ? (
             <div className="flex flex-wrap justify-center">
@@ -113,15 +109,22 @@ export default function LogoCloud () {
                     row.length === 7 ? 'w-full' : 'w-11/12'
                   }`}
                 >
-                  {row.map(name => (
-                    <a href={brands[name]}
-                       target="_blank"
-                       className={windowWidth <= mobileBreakpoint &&
-                       (row.length === 3 || row.length === 4  ) ? '-m-14' : 'm-0'}
-                       rel="noreferrer">
-                      <SVGIcon name={name}/>
-                    </a>
-                  ))}
+                  {row.map(name => {
+                    // Conditionally render 'e' for mobile
+                    if (name === 'e' && windowWidth > mobileBreakpoint) {
+                      return null;
+                    }
+                    return (
+                      <a
+                        href={brands[name]}
+                        target="_blank"
+                        className={windowWidth <= mobileBreakpoint ? '-m-14' : 'm-0'}
+                        rel="noreferrer"
+                      >
+                        <SVGIcon name={name} />
+                      </a>
+                    );
+                  })}
                 </div>
               ))}
             </div>
@@ -129,5 +132,5 @@ export default function LogoCloud () {
         </div>
       </div>
     </div>
-  )
+  );
 }

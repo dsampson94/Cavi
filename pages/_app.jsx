@@ -88,13 +88,16 @@ function MyApp () {
 
         <VideoCarousel videos={videos}/>
 
-        <h1 className="mt-28 ml-2 text-2xl tracking-wide text-center">Our
+        <h1 className="mt-20 ml-2 text-2xl tracking-wide text-center">Our
           Team</h1>
 
         <VideoAndDivCarousel videosComponents={videosComponentsSpotlight}
                              reverse/>
 
         <section ref={peopleScrollToRef}/>
+
+        <h1 className="mt-20 ml-2 text-2xl tracking-wide text-center">Our
+          Leadership</h1>
 
         <VideoAndDivCarousel videosComponents={videosComponentsLeadership}/>
 

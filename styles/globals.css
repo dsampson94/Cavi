@@ -30,7 +30,7 @@
 
 @media (max-width: 640px) {
     .svg-scale-down {
-        transform: scale(0.25);
+        transform: scale(0.38);
     }
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 
 export const SVGIcon = ({ name }) => {
     const iconStyles = {
-        width: '220px', // Adjust the width value as needed
+        width: '240px', // Adjust the width value as needed
         height: '150px' // Adjust the height value as needed
     };
 
