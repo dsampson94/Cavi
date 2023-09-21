@@ -50,7 +50,7 @@ export const videosComponentsSpotlight = [
     '/vids/Staffvid-CS.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4">
         <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">
-            Spotlight on our Team Players
+            Charl Stoltz
         </h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
@@ -62,7 +62,7 @@ export const videosComponentsSpotlight = [
     ,
     '/vids/Staffvid-Ym.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Spotlight on our Team Players</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Yvonne Moshogi</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">People make CAVI Brands
             We invest in the growth and developement of people
@@ -70,7 +70,7 @@ export const videosComponentsSpotlight = [
     </div>,
     '/vids/Staffvid-Mdv.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Spotlight on our Team Players</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500"></h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">People make CAVI Brands
             We invest in the growth and developement of people
@@ -80,7 +80,7 @@ export const videosComponentsSpotlight = [
 
 export const videosComponentsLeadership = [
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Maria Lambros</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Maria is a beauty and fashion retail expert. She brings more than 30 years of beauty and fashion experience to the CAVI Brands Group,
@@ -90,7 +90,7 @@ export const videosComponentsLeadership = [
     </div>,
     '/vids/Staffvid-Ml.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Joanne Wilson</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Joanne is a seasoned retailer, with over 25 years working for Woolworths South Africa. She has strong business acumen and is passionate about
@@ -99,7 +99,7 @@ export const videosComponentsLeadership = [
     </div>,
     '/vids/Staffvid-Jw.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Esté van Straaten</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Esté is a Chartered Accountant, having completed her articles at Deloitte in Cape Town. After secondment time in the United States, Esté worked for
@@ -109,7 +109,7 @@ export const videosComponentsLeadership = [
     </div>,
     '/vids/Staffvid-Evs.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Michael Ten Hope</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Michael is a successful, results-driven entrepreneur with a passion for excellence.
@@ -118,7 +118,7 @@ export const videosComponentsLeadership = [
     </div>,
     '/vids/Staffvid-Mth.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Cherie Ten Hope</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Cherie has a passion for brands and is recognised for having a deep understanding of the professional skin care channel to market.
@@ -126,7 +126,7 @@ export const videosComponentsLeadership = [
     </div>,
     '/vids/Staffvid-CTH.mp4',
     <div className="flex flex-col justify-center h-full ml-2 mr-4 text-right">
-        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Our Leadership</h2>
+        <h2 className="text-sm md:text-2xl font-semibold mb-4 text-gray-500">Michael Pfaff</h2>
         <hr className="border-blue-500 border-2" />
         <p className="mt-4 text-xs md:text-xl text-gray-500">
             Michael is a highly regarded investment banker, and is a co-founder of Candur Active Value Investments “(CAVI)”.

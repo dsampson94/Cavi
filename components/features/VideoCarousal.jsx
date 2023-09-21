@@ -90,7 +90,7 @@ const VideoCarousel = ({ videos, businessScrollToRef }) => {
               <div
                 className={`${
                   expandText === index ? '' : 'line-clamp-2'
-                } transition-all text-white text-sm md:text-lg`}
+                } transition-all text-white text-xs md:text-lg`}
               >
                 {video.text}
               </div>

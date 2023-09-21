@@ -35,7 +35,6 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
         const video = e.target;
         if (video.tagName !== 'VIDEO') return;
 
-        // Check if the event is user initiated
         if (e.type === 'mouseenter' || e.type === 'touchstart') {
             setIsUnmuted(true);
             if (currentVideo && currentVideo !== video) {
@@ -44,7 +43,6 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
             setCurrentVideo(video);
             const playPromise = video.play();
 
-            // Catch any error if play() is not fulfilled
             if (playPromise !== undefined) {
                 playPromise.catch((error) => {
                     console.error('Video play failed:', error);
@@ -109,7 +107,6 @@ const VideoAndDivCarousel = ({ videosComponents, reverse }) => {
         if (video.paused) {
             const playPromise = video.play();
 
-            // Catch any error if play() is not fulfilled
             if (playPromise !== undefined) {
                 playPromise.catch((error) => {
                     console.error('Video play failed:', error);
